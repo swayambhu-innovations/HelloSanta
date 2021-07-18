@@ -1,3 +1,29 @@
-<p>
-  ap-dashboard works!
-</p>
+<ion-content>
+  <ion-label>Dashboard</ion-label>
+  <ion-row>
+    <ion-col>
+      <ion-card>
+        <ion-label class="featureCardTitle">Total Orders</ion-label><br>
+        <ion-label class="featureCardNumber">{{totalOrders}}K</ion-label>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card>
+        <ion-label class="featureCardTitle">Total Orders</ion-label><br>
+        <ion-label class="featureCardNumber">{{totalCancelled}}</ion-label>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card>
+        <ion-label class="featureCardTitle">Total Orders</ion-label><br>
+        <ion-label class="featureCardNumber">{{totalItems}}</ion-label>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card>
+        <ion-label class="featureCardTitle">Total Orders</ion-label><br>
+        <ion-label class="featureCardNumber">{{growthRate}}</ion-label>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

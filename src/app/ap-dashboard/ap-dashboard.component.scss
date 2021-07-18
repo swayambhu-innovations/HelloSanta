@@ -1,0 +1,44 @@
+ion-content{
+    --padding-start:20px;
+}
+ion-content > ion-label{
+    font-size:30px;
+    color:rgb(92, 92, 92);
+}
+ion-row:nth-child(1) > ion-card{
+    border-radius: 20px;
+    width:fit-content;
+    height:200px;
+}
+ion-row > ion-col:nth-child(1) > ion-card{
+    background:linear-gradient(120deg,#FF796A,#ff6655);
+    box-shadow: 5px 5px 20px #FF796A;
+}
+ion-row > ion-col:nth-child(2) > ion-card{
+    background:linear-gradient(120deg,#FF6584,#ff5174);
+    box-shadow: 5px 5px 20px #FF6584;
+}
+ion-row > ion-col:nth-child(3) > ion-card{
+    background:linear-gradient(120deg,#FCD17A,#ffc95e);
+    box-shadow: 5px 5px 20px #FCD17A;
+    color:rgb(61, 61, 61);
+}
+ion-row > ion-col:nth-child(4) > ion-card{
+    background:linear-gradient(120deg,#6AB9FF,#3aa3ff);
+    box-shadow: 5px 5px 20px #6AB9FF;
+}
+ion-row > ion-col > ion-card {
+    height:200px;
+    
+    border-radius: 20px;
+    padding:10px 10px;
+}
+.featureCardTitle{
+    font-size: 40px;
+    color:white;
+}
+.featureCardNumber{
+    font-size:70px;
+    color:white;
+}
+
