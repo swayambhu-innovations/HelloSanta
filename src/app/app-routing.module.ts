@@ -13,6 +13,14 @@ import { APOrdersComponent } from './ap-orders/ap-orders.component';
 import { APProductsComponent } from './ap-products/ap-products.component';
 import { APUsersComponent } from './ap-users/ap-users.component';
 import { APVendorsComponent } from './ap-vendors/ap-vendors.component';
+import { VendorPanelComponent } from './vendor-panel/vendor-panel.component';
+import { VPDashboardComponent } from './vp-dashboard/vp-dashboard.component';
+import { VPFeedbackComponent } from './vp-feedback/vp-feedback.component';
+import { VPIssuesComponent } from './vp-issues/vp-issues.component';
+import { VPOrdersComponent } from './vp-orders/vp-orders.component';
+import { VPProductsComponent } from './vp-products/vp-products.component';
+import { VPProfileComponent } from './vp-profile/vp-profile.component';
+import { VPReviewsComponent } from './vp-reviews/vp-reviews.component';
 
 const routes: Routes = [
   {
@@ -36,6 +44,19 @@ const routes: Routes = [
       {path:'Feedback',component:APFeedbackComponent},
       {path:'Analytics',component:APAnalyticsComponent},
       {path:'LoginAccess',component:APLoginAccessComponent},
+    ]
+  },
+  {
+    path:"VendorPanel",
+    component:VendorPanelComponent,
+    children:[
+      {path:'Dashboard',component:VPDashboardComponent},
+      {path:'Order',component:VPOrdersComponent},
+      {path:'Products',component:VPProductsComponent},
+      {path:'Issues',component:VPIssuesComponent},
+      {path:'Reviews',component:VPReviewsComponent},
+      {path:'Feedback',component:VPFeedbackComponent},
+      {path:'Profile',component:VPProfileComponent},
     ]
   }
 ];
