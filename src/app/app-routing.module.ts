@@ -1,15 +1,20 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { APDashboardComponent } from './ap-dashboard/ap-dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'AdminPanel/Dashboard',
     pathMatch: 'full'
   },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    path:"AdminPanel",
+    component:AdminPanelComponent,
+    children:[
+      {path:'Dashboard',component:APDashboardComponent}
+    ]
   }
 ];
 
