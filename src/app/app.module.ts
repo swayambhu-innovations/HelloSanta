@@ -18,10 +18,14 @@ import { APAnalyticsComponent } from './ap-analytics/ap-analytics.component';
 import { APCustomizeComponent } from './ap-customize/ap-customize.component';
 import { APComplainsComponent } from './ap-complains/ap-complains.component';
 import { APBLogComponent } from './ap-blog/ap-blog.component';
+import { VendorPanelComponent } from './vendor-panel/vendor-panel.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AdminPanelComponent,
+    VendorPanelComponent,
     APDashboardComponent,
     APVendorsComponent,
     APProductsComponent,
@@ -34,7 +38,7 @@ import { APBLogComponent } from './ap-blog/ap-blog.component';
     APAnalyticsComponent,
     APCustomizeComponent,
     APComplainsComponent,
-    APBLogComponent
+    APBLogComponent,
   ],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
