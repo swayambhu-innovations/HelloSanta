@@ -1,3 +1,42 @@
-<p>
-  ap-orders works!
-</p>
+<ion-content>
+  <ion-label>Orders</ion-label>
+  <ion-card>
+    <ion-label>Latest Orders</ion-label>
+    <ion-list>
+      <ion-item *ngFor="let order of orders">
+        <ion-label>{{order.name}}</ion-label>
+        <ion-label>{{order.price}}</ion-label>
+        <ion-label>{{order.orderDate}}</ion-label>
+        <ion-chip color="primary" outline="true">
+          <ion-icon name="at-circle-outline"></ion-icon>
+          <ion-label>{{order.status}}</ion-label>
+          <ion-icon name="stats-chart"></ion-icon>
+        </ion-chip>
+        <ion-label>{{order.deliveryDate}}</ion-label>
+        <ion-button color="primary">
+          More Info
+        </ion-button>
+        <ion-button color="danger">
+          Reject Order
+        </ion-button>
+        <ion-button color="warning">
+          Hold Order
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  <ion-card>
+    <ion-label>Old Orders</ion-label>
+    <ion-list>
+      <ion-item *ngFor="let order of orders">
+        <ion-label>{{order.name}}</ion-label>
+        <ion-label>{{order.price}}</ion-label>
+        <ion-label>{{order.orderDate}}</ion-label>
+        <ion-label>{{order.deliveryDate}}</ion-label>
+        <ion-button>
+          More Info
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>
