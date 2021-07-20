@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
+
+body {
+  font-family: Lato, sans-serif;
+}
+
+footer {
+  width:100vw;
+  height: auto;
+  position:fixed;
+  bottom:0px;
+}
+footer div {
+  background-color:#675CE0;
+  margin: 0px 0px 0px 0px;
+  padding:0px;
+  color: #fff;
+  text-align:center;
+
+}
+footer .content {
+  background-color:#9081FF;
+  width: 100vw;
+  height: 100px;
+  margin: 0px 0px 0px 0px;
+  padding:0px;
+  color: #fff;
+  text-align:center;
+}
+svg {
+  width:100vw;
+  height: auto;
+}
+footer .lovebysanta{
+  width: 100vw;
+  height: 100px;
+}
+
+img{
+  background-color:#9081FF;
+}
+
+
+
