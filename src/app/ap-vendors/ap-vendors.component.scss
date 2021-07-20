@@ -1,0 +1,50 @@
+ion-list > ion-item > ion-card > ion-row {
+    align-items: center;
+    padding-left: 20px;
+}
+ion-list > ion-item > ion-card{
+    box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    border-radius: 20px;
+}
+ion-list > ion-item {
+    --inner-padding-end: 0px;
+    --padding-start: 0px;
+}
+ion-list > ion-item > ion-card > ion-row > ion-avatar {
+    margin-right: 20px;
+}
+ion-list > ion-item > ion-card > ion-row > ion-col > ion-title{
+    font-size:30px;
+    color:var(--ion-color-primary)
+}
+
+.costContainer{
+    height: max-content;
+}
+.costContainer > ion-row{
+    height:100%;
+    min-width: 25vw;
+}
+.lightTop{
+    background: #ADA2FF;
+    color:white;
+    padding:10px;
+    width: 50%;
+    font-size: 20px;
+    height:100%;
+}
+.darkTop{
+    background: #9081FF;
+    color:white;
+    padding:10px;
+    width: 50%;
+    font-size: 20px;
+    height:100%;
+}
+
+
+
+
+
+
