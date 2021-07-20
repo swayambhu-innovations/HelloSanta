@@ -22,7 +22,6 @@ img {
   background-color: rgb(84, 105, 212); /* Green */
   border: none;
   border-radius: 10px;
-  border: 2px solid black;
   color: white;
   padding: 15px 60px;
   text-align: center;
@@ -131,7 +130,6 @@ a {
 }
 
 .formbg {
-  border: 2px solid black;
   margin: 0px auto;
   width: 100%;
   max-width: 448px;
@@ -171,7 +169,6 @@ label {
   width: 100%;
   min-height: 44px;
   border: unset;
-  border: 2px solid black;
   border-radius: 4px;
   outline-color: rgb(84 105 212 / 0.5);
   background-color: rgb(255, 255, 255);
