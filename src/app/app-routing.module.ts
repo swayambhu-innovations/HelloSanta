@@ -21,12 +21,27 @@ import { VPOrdersComponent } from './vp-orders/vp-orders.component';
 import { VPProductsComponent } from './vp-products/vp-products.component';
 import { VPProfileComponent } from './vp-profile/vp-profile.component';
 import { VPReviewsComponent } from './vp-reviews/vp-reviews.component';
+import {HomeComponent} from "./home/home.component";
+import {AuthSignUpComponent} from "./auth-sign-up/auth-sign-up.component";
+import {AuthLoginComponent} from "./auth-login/auth-login.component";
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'AdminPanel/Dashboard',
+    redirectTo: 'Home',
     pathMatch: 'full'
+  },
+  {
+    path:"Home",
+    component:HomeComponent,
+  },
+  {
+    path:"login",
+    component:AuthLoginComponent,
+  },
+  {
+    path:"signup",
+    component:AuthSignUpComponent,
   },
   {
     path:"AdminPanel",
