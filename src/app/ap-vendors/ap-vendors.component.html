@@ -1,3 +1,40 @@
-<p>
-  ap-vendors works!
-</p>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of vendors">
+      <ion-card>
+        <ion-row>
+          <ion-avatar >
+            <img [src]="item.image" />
+          </ion-avatar>
+          <ion-col class="textHolder">
+            <ion-title>{{item.name}}</ion-title>
+            <p>{{item.description}}</p>
+          </ion-col>
+          <div class="costContainer">
+            <ion-row>
+              <div class="lightTop">
+                <ion-label>Total Products</ion-label>
+                <ion-label>{{item.totalProducts}}</ion-label>
+              </div>
+              <div class="darkTop">
+                <ion-label>Total Cancelled</ion-label>
+                <ion-label>{{item.totalCancelled}}</ion-label>
+              </div>
+            </ion-row>
+            <ion-row>
+              <div class="darkTop">
+                <ion-label>Total Sold</ion-label>
+                <ion-label>{{item.totalSold}}</ion-label>
+              </div>
+              <div class="lightTop">
+                <ion-label>Total Returned</ion-label>
+                <ion-label>{{item.totalReturned}}</ion-label>
+              </div>
+            </ion-row>
+          </div>
+        </ion-row>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+  
+</ion-content>
