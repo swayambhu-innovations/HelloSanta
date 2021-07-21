@@ -1,0 +1,39 @@
+
+ion-card{
+    padding: 20px;
+    border-radius: 25px;
+    border: 4px solid #ADA2FF;
+    text-align: center;
+    box-shadow: 10px 20px 20px #ada2ff5b;
+    width: min-content;
+    --hidden-visibility:none;
+    transition: all 0.5s ease-in-out;
+}
+ion-card:hover{
+    --hidden-visibility:block;
+}
+ion-avatar, img{
+    margin-left: auto;
+    margin-right: auto;
+}
+.userName{
+    color:#6D5DE3;
+    font-size: 18px;
+    font-weight: 500;
+}
+.fullName{
+    color:#6AB9FF;
+    font-size: 14px;
+}
+.email{
+    color:#6AB9FF;
+    font-size: 14px;
+}
+p{
+    font-size: 12px;
+}
+ion-row{
+    transition: display 0.5s ease-in-out;
+    display:var(--hidden-visibility);
+    justify-content: space-around;
+}

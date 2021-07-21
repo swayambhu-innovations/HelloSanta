@@ -1,0 +1,13 @@
+<ion-content>
+    <ion-row uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100">
+      <div *ngFor="let item of users">
+        <app-user-card
+        [avatar]="item.avatar"
+        [userEmail]="item.userEmail"
+        [userName]="item.userName"
+        [fullName]="item.fullName"
+        [description]="item.description"
+        ></app-user-card>
+      </div>
+    </ion-row>
+</ion-content>

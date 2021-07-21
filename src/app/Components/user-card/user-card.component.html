@@ -1,0 +1,20 @@
+<ion-card>
+  <ion-avatar>
+    <img [src]="avatar" />
+  </ion-avatar>
+  <ion-label class="userName">{{userName}}</ion-label><br>
+  <ion-label class="fullName">{{fullName}}</ion-label><br>
+  <ion-label class="email">{{userEmail}}</ion-label><br>
+  <hr class="uk-divider-icon">
+  <ion-text>
+    <p>{{description}}</p>
+  </ion-text>
+  <ion-row>
+    <ion-button color="danger">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+    <ion-button color="warning">
+      <ion-icon name="mail"></ion-icon>
+    </ion-button>
+  </ion-row>
+</ion-card>
