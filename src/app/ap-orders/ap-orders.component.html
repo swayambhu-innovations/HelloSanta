@@ -2,7 +2,7 @@
   <ion-label>Orders</ion-label>
   <ion-card>
     <ion-label>Latest Orders</ion-label>
-    <ion-list>
+    <ion-list uk-scrollspy="target: > ion-item; cls: uk-animation-fade; delay: 100">
       <ion-item *ngFor="let order of orders">
         <ion-label>{{order.name}}</ion-label>
         <ion-label>{{order.price}}</ion-label>
@@ -27,7 +27,7 @@
   </ion-card>
   <ion-card>
     <ion-label>Old Orders</ion-label>
-    <ion-list>
+    <ion-list uk-scrollspy="target: > ion-item; cls: uk-animation-fade; delay: 100">
       <ion-item *ngFor="let order of orders">
         <ion-label>{{order.name}}</ion-label>
         <ion-label>{{order.price}}</ion-label>

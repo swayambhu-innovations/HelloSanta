@@ -1,0 +1,57 @@
+<ion-card *ngIf="totalCancelled > 300" style="border: 5px solid #FF6584;">
+  <ion-row>
+    <img [src]="image">
+    <div class="dataContainer">
+      <div>
+        <ion-label class="title">Sales/Cancelled</ion-label><br>
+        <ion-label class="data">{{totalSales}}/{{totalCancelled}}</ion-label>
+      </div>
+      <div>
+        <ion-label class="title">Price</ion-label><br>
+        <ion-label class="data">{{price}}</ion-label>
+      </div>
+    </div>
+  </ion-row>
+  <ion-label class="mainTitle">{{name}}</ion-label>
+  <ion-text>
+    <p>{{description}}</p>
+  </ion-text>
+</ion-card>
+<ion-card *ngIf="totalCancelled < 300 && totalCancelled > 200" style="border: 5px solid #FCD17A;">
+  <ion-row>
+    <img [src]="image">
+    <div class="dataContainer">
+      <div>
+        <ion-label class="title">Sales/Cancelled</ion-label><br>
+        <ion-label class="data">{{totalSales}}/{{totalCancelled}}</ion-label>
+      </div>
+      <div>
+        <ion-label class="title">Price</ion-label><br>
+        <ion-label class="data">{{price}}</ion-label>
+      </div>
+    </div>
+  </ion-row>
+  <ion-label class="mainTitle">{{name}}</ion-label>
+  <ion-text>
+    <p>{{description}}</p>
+  </ion-text>
+</ion-card>
+<ion-card *ngIf="totalCancelled < 100" style="border: 5px solid #6AB9FF;">
+  <ion-row>
+    <img [src]="image">
+    <div class="dataContainer">
+      <div>
+        <ion-label class="title">Sales/Cancelled</ion-label><br>
+        <ion-label class="data">{{totalSales}}/{{totalCancelled}}</ion-label>
+      </div>
+      <div>
+        <ion-label class="title">Price</ion-label><br>
+        <ion-label class="data">{{price}}</ion-label>
+      </div>
+    </div>
+  </ion-row>
+  <ion-label class="mainTitle">{{name}}</ion-label>
+  <ion-text>
+    <p>{{description}}</p>
+  </ion-text>
+</ion-card>

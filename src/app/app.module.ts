@@ -20,6 +20,10 @@ import { APComplainsComponent } from './ap-complains/ap-complains.component';
 import { APBLogComponent } from './ap-blog/ap-blog.component';
 import { VendorPanelComponent } from './vendor-panel/vendor-panel.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { ProductComponent } from './Components/product/product.component';
+import { HomeComponent } from './home/home.component';
+import { FooterComponent } from './Components/footer/footer.component';
+import { HeaderComponent } from './Components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,10 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     APCustomizeComponent,
     APComplainsComponent,
     APBLogComponent,
+    ProductComponent,
+    HomeComponent,
+    FooterComponent,
+    HeaderComponent,
   ],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],

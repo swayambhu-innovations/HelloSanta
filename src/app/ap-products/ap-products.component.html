@@ -1,3 +1,15 @@
-<p>
-  ap-products works!
-</p>
+<ion-content>
+  <ion-row uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100">
+    <div *ngFor="let item of products">
+      <app-product 
+      [totalCancelled]="item.totalCancelled"
+      [image]="item.image"
+      [description]="item.description"
+      [name]="item.name"
+      [price]="item.price"
+      [totalSales]="item.totalSales"
+      
+      ></app-product>
+    </div>
+  </ion-row>
+</ion-content>
