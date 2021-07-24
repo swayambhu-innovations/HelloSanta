@@ -1,3 +1,14 @@
-<p>
-  ap-complains works!
-</p>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let complain of complains">
+      <app-error-card
+      [type]="complain.type"
+      [date]="complain.date"
+      [title]="complain.title"
+      [description]="complain.description"
+      [orderID]="complain.orderID"
+      [username]="complain.username"
+      ></app-error-card>
+    </ion-item>
+  </ion-list>
+</ion-content>

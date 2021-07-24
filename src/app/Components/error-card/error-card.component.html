@@ -1,0 +1,27 @@
+<ion-card>
+  <div>
+    <i class="iconCard">
+      <ion-icon name="warning" color="warning" *ngIf="type=='warning'"></ion-icon>
+      <ion-icon name="information-circle" color="primary" *ngIf="type=='info'"></ion-icon>
+      <ion-icon name="nuclear" color="danger" *ngIf="type=='danger'"></ion-icon>
+    </i>
+    <div class="data">
+      <h2>{{title}}</h2>
+      <p>{{description}}</p>
+    </div>
+    <ion-col class="shortData">
+      <p><strong>Date: </strong>{{date}}</p>
+      <p><strong>Order Id: </strong>{{orderID}}</p>
+      <p><strong>Username: </strong>{{username}}</p>
+    </ion-col>
+      <ion-button class="removal">
+        REQUEST<br>REMOVAL
+      </ion-button>
+      <ion-button class="page">
+        ADD TO<br>PAGE
+      </ion-button>
+      <ion-button class="request">
+        REVIEW<br>REQUEST
+      </ion-button>
+    </div>
+</ion-card>

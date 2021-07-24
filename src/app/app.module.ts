@@ -25,6 +25,7 @@ import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { UserCardComponent } from './Components/user-card/user-card.component';
+import { ErrorCardComponent } from './Components/error-card/error-card.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { UserCardComponent } from './Components/user-card/user-card.component';
     FooterComponent,
     HeaderComponent,
     UserCardComponent,
+    ErrorCardComponent,
   ],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],

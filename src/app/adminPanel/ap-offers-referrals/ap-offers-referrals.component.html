@@ -1,3 +1,68 @@
-<p>
-  ap-offers-referrals works!
-</p>
+<ion-content>
+  <div>
+    <div>
+      <h1>Offer And Referrals</h1>
+      <p><span class="highNumber">25K +</span><br>Referrals</p>
+    </div>
+    <div>
+      <button>Create Offer</button>
+      <button>Add Referral</button>
+      <button>Manage Offers</button>
+    </div>
+  </div>
+  <ion-row>
+    <div class="offers">
+      <div class="OfferHeader">Offers Currently Live</div>
+      <table>
+        <thead class="offerth">
+          <tr>
+            <th>Id</th>
+            <th>Offer Name</th>
+            <th>Offer Code</th>
+            <th>Offer Discount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let offer of offers">
+            <td>
+              <ion-label>{{offer.offerId}}</ion-label>
+            </td>
+            <td>
+              <ion-label>{{offer.offerName}}</ion-label>
+            </td>
+            <td>
+              <ion-label>{{offer.offerCode}}</ion-label>
+            </td>
+            <td>
+              <ion-label>{{offer.offerDiscount}}</ion-label>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="referrals">
+      <div class="ReferralHeader">Most Popular Referrers</div>
+      <table>
+        <thead class="referth">
+          <th>Referrers Name</th>
+          <th>Referred Date</th>
+          <th>Total Refers</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let refer of referrals; let i = index">
+            <td>
+              <img class="avatar" src="{{refer.image}}?img={{i+1}}" />
+              <ion-label>{{refer.name}}</ion-label>
+            </td>
+            <td>
+              <ion-label>{{refer.referDate}}</ion-label>
+            </td>
+            <td>
+              <ion-label>{{refer.totalRefers}}</ion-label>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ion-row>
+</ion-content>
