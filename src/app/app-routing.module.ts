@@ -21,9 +21,29 @@ import { VPOrdersComponent } from './vendorPanel/vp-orders/vp-orders.component';
 import { VPProductsComponent } from './vendorPanel/vp-products/vp-products.component';
 import { VPProfileComponent } from './vendorPanel/vp-profile/vp-profile.component';
 import { VPReviewsComponent } from './vendorPanel/vp-reviews/vp-reviews.component';
-import {HomeComponent} from "./home/home.component";
 import {AuthSignUpComponent} from "./auth-sign-up/auth-sign-up.component";
 import {AuthLoginComponent} from "./auth-login/auth-login.component";
+import { HomeComponent } from './home/home.component';
+import { SetupComponent } from './setup/setup.component';
+import { ProfileComponent } from './profile/profile.component';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
+import { OrdersComponent } from './orders/orders.component';
+import { DigitalartworksComponent } from './digitalartworks/digitalartworks.component';
+import { HandmadeartworksComponent } from './handmadeartworks/handmadeartworks.component';
+import { TrackorderComponent } from './trackorder/trackorder.component';
+import { CartComponent } from './cart/cart.component';
+import { HelpComponent } from './help/help.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { DisclaimerComponent } from './disclaimer/disclaimer.component';
+import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
+import { TermsandconditionsComponent } from './termsandconditions/termsandconditions.component';
+import { RefundandreturnComponent } from './refundandreturn/refundandreturn.component';
+import { BloghomeComponent } from './bloghome/bloghome.component';
+import { BlogComponent } from './blog/blog.component';
+import { BuyagainComponent } from './buyagain/buyagain.component';
+import { AccountComponent } from './account/account.component';
+import { SingleproductComponent } from './singleproduct/singleproduct.component';
 
 const routes: Routes = [
   {
@@ -31,18 +51,30 @@ const routes: Routes = [
     redirectTo: 'Home',
     pathMatch: 'full'
   },
-  {
-    path:"Home",
-    component:HomeComponent,
-  },
-  {
-    path:"login",
-    component:AuthLoginComponent,
-  },
-  {
-    path:"signup",
-    component:AuthSignUpComponent,
-  },
+  {path:'Home', component:HomeComponent},
+  {path:'login', component:AuthLoginComponent},
+  {path:'signin', component:AuthSignUpComponent},
+  {path:'setup', component:SetupComponent},
+  {path:'profile', component:ProfileComponent},
+  {path:'feedback', component: FeedbackComponent},
+  {path:'wishlist', component:WishlistComponent},
+  {path:'orders', component:OrdersComponent},
+  {path:'digitalart', component:DigitalartworksComponent},
+  {path:'handmadeart', component:HandmadeartworksComponent},
+  {path:'trackorder', component:TrackorderComponent},
+  {path:'cart', component:CartComponent},
+  {path:'help', component:HelpComponent},
+  {path:'checkout', component:CheckoutComponent},
+  {path:'disclaimer', component:DisclaimerComponent},
+  {path:'privacypolicy', component:PrivacypolicyComponent},
+  {path:'termsandconditions', component:TermsandconditionsComponent},
+  {path:'refund', component:RefundandreturnComponent},
+  {path:'bloghome', component:BloghomeComponent},
+  {path:'blog', component:BlogComponent},
+  {path:'buyagain', component:BuyagainComponent},
+  {path:'account', component:AccountComponent},
+  {path:'product', component:SingleproductComponent},
+
   {
     path:"AdminPanel",
     component:AdminPanelComponent,

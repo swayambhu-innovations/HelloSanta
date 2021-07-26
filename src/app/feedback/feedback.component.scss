@@ -1,0 +1,84 @@
+
+.inner-box{
+    height: auto;
+    width: 80vw;
+    font-family: Poppins;
+    text-align: left;
+    font-size: 20px;
+    margin:10%;
+    padding: 50px;
+    background: rgba(255, 255, 255, .7);
+    box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
+    border-radius: 50px;
+    border: 5px solid #9081FF;
+  }
+  
+  
+  button{
+    background-color: #ADA2FF; /* Green */
+    border-radius: 10px;
+    border: 5px solid #9081FF;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 25px;
+    cursor: pointer;
+  }
+  #subject{
+    outline: none;
+    height: 20vh;
+    width: 50vw;
+    position: relative;
+    display: block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, .7);
+    box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
+    border-radius: 50px;
+    border: 5px solid #9081FF;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  
+  .rate {
+    height: 46px;
+    padding-top: 100px;
+  
+  }
+  .rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+  }
+  .rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:50px;
+    color:#ccc;
+  }
+  .rate:not(:checked) > label:before {
+    content: '★ ';
+  }
+  .rate > input:checked ~ label {
+    color: #ffc700;
+  }
+  .rate:not(:checked) > label:hover,
+  .rate:not(:checked) > label:hover ~ label {
+    color: #deb217;
+  }
+  .rate > input:checked + label:hover,
+  .rate > input:checked + label:hover ~ label,
+  .rate > input:checked ~ label:hover,
+  .rate > input:checked ~ label:hover ~ label,
+  .rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+  }
+  
+  /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
+  

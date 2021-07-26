@@ -1,0 +1,59 @@
+#side-nav-container {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 50px;
+    padding: 1em;
+}
+
+#logout {
+    display: flex;
+    padding: .5em;
+    align-items: center;
+    border-bottom: 3px solid #ADA2FF;
+}
+
+#logout-link {
+    color: #FF877A;
+    font-family: 'Poppins';
+    font-size: 1.75rem;
+    margin-left: .5em;
+}
+
+#side-nav-ul {
+    list-style: none;
+}
+
+.side-nav-li {
+    padding: .5em 1em;
+    margin: 1em 0;
+    color: #ADA2FF;
+    border-radius: 20px 0 0 20px;
+}
+
+.active {
+    background-color: #ADA2FF;
+    color: #FFF;
+}
+
+.side-nav-a {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    color: inherit;
+    justify-content: space-between;
+    font-family: 'Poppins';
+}
+
+.side-nav-li:hover {
+    background-color: #ADA2FF;
+    color: #FFF;
+}
+
+.side-nav-a:hover, .side-nav-a:focus {
+    text-decoration: none;
+}
+
+.circular-profile-pic {
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}

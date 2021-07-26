@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+#container {
+    width: 95%;
+    margin: 3em auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+app-sidenav {
+    width: 20%;
+}
+
+#profile-container {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 50px;
+    width: 78%;
+    padding: 4em;
+}
+
+#img-name-and-email {
+    display: flex;
+    align-items: center;
+    font-family: 'Raleway';
+}
+
+.circular-profile-pic {
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+#name-and-email {
+    margin-left: 1em;
+}
+
+#name {
+    font-size: 2rem;
+    color: #6D5CE5;
+    margin: 0;
+}
+
+#email {
+    color: #ADA2FF;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+#edit-form {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 1em;
+}
+
+.form-input-div {
+    margin: .75em;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    font-size: 1.1rem;
+    font-family: 'Poppins';
+    color: #6D5CE5;
+    font-weight: 700;
+}
+
+.form-input {
+    border: 1px solid #ADA2FF;
+    font-size: 1rem;
+    padding: .25em .5em;
+    font-family: 'Poppins';
+    background-color: #f2f1ff;
+    color: #6D5CE5;
+}

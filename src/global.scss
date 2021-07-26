@@ -27,3 +27,10 @@
 *{
     font-family: 'Poppins', sans-serif;
 }
+
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%; /* set height to 100% of viewport*/
+    -webkit-tap-highlight-color: transparent;
+  }

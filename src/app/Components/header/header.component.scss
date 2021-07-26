@@ -7,7 +7,7 @@
 
 .header a {
   float: left;
-  color: black;
+  color: #6D5DE3;
   text-align: center;
   padding: 15px;
   text-decoration: none;
@@ -44,8 +44,9 @@ img {
 
 /* styling search bar */
 .search input[type=text]{
-  width:700px;
-  height:45px;
+  width:47vw;
+  height:7vh;
+  background-color: white;
   border-radius:25px;
   border: none;
   font-size: 20px;
@@ -55,6 +56,7 @@ img {
 .search{
   float:left;
   margin:7px;
+  color: white;
   padding-top: 20px;
   padding-right: 50px;
   padding-left: 100px;
@@ -66,13 +68,14 @@ img {
   float: right;
   padding: 10px 10px;
   margin-right: 16px;
-  font-size: 20px;
+  font-size: 25px;
   border-radius:25px;
   border: none;
   cursor: pointer;
 }
 
 .nav{
+  color: #6D5DE3;
   border:1px solid #ccc;
   border-width:1px 0;
   list-style:none;

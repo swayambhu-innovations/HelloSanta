@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 1440 320"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="wavey.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     id="namedview6"
+     showgrid="false"
+     inkscape:zoom="0.84375"
+     inkscape:cx="720"
+     inkscape:cy="160"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4"
+     inkscape:document-rotation="0" />
+  <path
+     fill="#9081ff"
+     fill-opacity="1"
+     d="m 1.1851852,250.20721 26.6999998,8.74981 c 26.6,8.91412 80.300005,26.16727 133.300005,26.29051 53.3,-0.12324 107,-17.37639 160,-21.89506 53.3,-4.51869 107,4.51867 160,10.96806 53.3,6.69587 107,10.80376 160,13.14525 53.3,2.17719 107,2.17719 160,0 53.3,-2.34149 107,-6.44938 160,-17.54069 53.30001,-11.09131 107.00001,-28.34445 160.00001,-28.46769 53.3,0.12324 107,17.37638 160,24.07224 53.3,6.4494 107,2.3415 133,0 l 27,-2.17717 v 65.72626 h -26.7 c -26.6,0 -80.3,0 -133.3,0 -53.3,0 -107,0 -160,0 -53.3,0 -107,0 -160.00001,0 -53.3,0 -107,0 -160,0 -53.3,0 -107,0 -160,0 -53.3,0 -107,0 -160,0 -53.3,0 -107,0 -160,0 -53.3,0 -107,0 -160,0 -53.3,0 -107.000005,0 -133.000005,0 H 1.1851852 Z"
+     id="path2"
+     style="stroke-width:0.640929" />
+</svg>

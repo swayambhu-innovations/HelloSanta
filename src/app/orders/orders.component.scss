@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+#container {
+    width: 95%;
+    margin: 3em auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+app-sidenav {
+    width: 20%;
+}
+
+#orders-container {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 50px;
+    width: 78%;
+    padding: 4em;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.order-card, .order-img {
+    border-radius: 20px;
+}
+
+.order-card {
+    width: 19%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    color: #ADA2FF;
+    margin: 1em;
+}
+
+.order-details {
+    padding: 1em;
+}
+
+.order-title {
+    color: #6D5CE5;
+    font-family: 'Poppins';
+    font-weight: 700;
+    margin: 0;
+    font-size: .85rem;
+}
+
+.order-price-and-date {
+    display: flex;
+    justify-content: space-between;
+    font-size: .85rem;
+    font-family: 'Poppins';
+}
+
+.order-price {
+    margin-right: 1em;
+    color: #5AC179;
+}
+
+.order-date {
+    color: #FFAB00;
+}
