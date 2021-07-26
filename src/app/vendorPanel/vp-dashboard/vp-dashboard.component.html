@@ -1,3 +1,48 @@
-<p>
-  vp-dashboard works!
-</p>
+<ion-content>
+  <ion-label>Dashboard</ion-label>
+  <ion-row>
+    <ion-col>
+      <ion-card>
+        <ion-label class="featureCardTitle">Total Orders</ion-label><br>
+        <ion-label class="featureCardNumber">{{totalOrders}}K</ion-label>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card>
+        <ion-label class="featureCardTitle">Total Orders</ion-label><br>
+        <ion-label class="featureCardNumber">{{totalCancelled}}</ion-label>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card>
+        <ion-label class="featureCardTitle">Total Orders</ion-label><br>
+        <ion-label class="featureCardNumber">{{totalItems}}</ion-label>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card>
+        <ion-label class="featureCardTitle">Total Orders</ion-label><br>
+        <ion-label class="featureCardNumber">{{growthRate}}</ion-label>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-card>
+    <ion-label>Latest Orders</ion-label>
+    <ion-list>
+      <ion-item *ngFor="let order of orders">
+        <ion-label>{{order.name}}</ion-label>
+        <ion-label>{{order.price}}</ion-label>
+        <ion-label>{{order.orderDate}}</ion-label>
+        <ion-chip color="primary" outline="true">
+          <ion-icon name="at-circle-outline"></ion-icon>
+          <ion-label>{{order.status}}</ion-label>
+          <ion-icon name="stats-chart"></ion-icon>
+        </ion-chip>
+        <ion-label>{{order.deliveryDate}}</ion-label>
+        <ion-button shape="round">
+          More Info
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>

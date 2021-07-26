@@ -27,28 +27,40 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { AccordionComponent } from './Components/accordion/accordion.component';
-import { HomeComponent } from './home/home.component';
-import { SetupComponent } from './setup/setup.component';
-import { ProfileComponent } from './profile/profile.component';
-import { FeedbackComponent } from './feedback/feedback.component';
-import { WishlistComponent } from './wishlist/wishlist.component';
-import { OrdersComponent } from './orders/orders.component';
-import { DigitalartworksComponent } from './digitalartworks/digitalartworks.component';
-import { HandmadeartworksComponent } from './handmadeartworks/handmadeartworks.component';
-import { TrackorderComponent } from './trackorder/trackorder.component';
-import { CartComponent } from './cart/cart.component';
-import { HelpComponent } from './help/help.component';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { DisclaimerComponent } from './disclaimer/disclaimer.component';
-import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
-import { TermsandconditionsComponent } from './termsandconditions/termsandconditions.component';
-import { RefundandreturnComponent } from './refundandreturn/refundandreturn.component';
-import { BloghomeComponent } from './bloghome/bloghome.component';
-import { BlogComponent } from './blog/blog.component';
-import { BuyagainComponent } from './buyagain/buyagain.component';
-import { AccountComponent } from './account/account.component';
-import { SingleproductComponent } from './singleproduct/singleproduct.component';
-
+import { HomeComponent } from './customerPanel/home/home.component';
+import { SetupComponent } from './customerPanel/setup/setup.component';
+import { ProfileComponent } from './customerPanel/profile/profile.component';
+import { FeedbackComponent } from './customerPanel/feedback/feedback.component';
+import { WishlistComponent } from './customerPanel/wishlist/wishlist.component';
+import { OrdersComponent } from './customerPanel/orders/orders.component';
+import { DigitalartworksComponent } from './customerPanel/digitalartworks/digitalartworks.component';
+import { HandmadeartworksComponent } from './customerPanel/handmadeartworks/handmadeartworks.component';
+import { TrackorderComponent } from './customerPanel/trackorder/trackorder.component';
+import { CartComponent } from './customerPanel/cart/cart.component';
+import { HelpComponent } from './customerPanel/help/help.component';
+import { CheckoutComponent } from './customerPanel/checkout/checkout.component';
+import { DisclaimerComponent } from './customerPanel/disclaimer/disclaimer.component';
+import { PrivacypolicyComponent } from './customerPanel/privacypolicy/privacypolicy.component';
+import { TermsandconditionsComponent } from './customerPanel/termsandconditions/termsandconditions.component';
+import { RefundandreturnComponent } from './customerPanel/refundandreturn/refundandreturn.component';
+import { BloghomeComponent } from './customerPanel/bloghome/bloghome.component';
+import { BlogComponent } from './customerPanel/blog/blog.component';
+import { BuyagainComponent } from './customerPanel/buyagain/buyagain.component';
+import { AccountComponent } from './customerPanel/account/account.component';
+import { SingleproductComponent } from './customerPanel/singleproduct/singleproduct.component';
+import { AngularFireStorageModule } from '@angular/fire/storage'
+import { AngularFireModule } from "@angular/fire";
+import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { AuthLoginComponent } from './customerPanel/auth-login/auth-login.component';
+import { AuthSignUpComponent } from './customerPanel/auth-sign-up/auth-sign-up.component';
+import { environment } from 'src/environments/environment';
+import { VPDashboardComponent } from './vendorPanel/vp-dashboard/vp-dashboard.component';
+import { VPReviewsComponent } from './vendorPanel/vp-reviews/vp-reviews.component';
+import { VPProfileComponent } from './vendorPanel/vp-profile/vp-profile.component';
+import { VPProductsComponent } from './vendorPanel/vp-products/vp-products.component';
+import { VPOrdersComponent } from './vendorPanel/vp-orders/vp-orders.component';
+import { VPIssuesComponent } from './vendorPanel/vp-issues/vp-issues.component';
+import { VPFeedbackComponent } from './vendorPanel/vp-feedback/vp-feedback.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +79,13 @@ import { SingleproductComponent } from './singleproduct/singleproduct.component'
     APCustomizeComponent,
     APComplainsComponent,
     APBLogComponent,
+    VPDashboardComponent,
+    VPReviewsComponent,
+    VPProfileComponent,
+    VPProductsComponent,
+    VPOrdersComponent,
+    VPIssuesComponent,
+    VPFeedbackComponent,
     ProductComponent,
     HomeComponent,
     FooterComponent,
@@ -95,9 +114,18 @@ import { SingleproductComponent } from './singleproduct/singleproduct.component'
     BuyagainComponent,
     AccountComponent,
     SingleproductComponent,
+    AuthLoginComponent,
+    AuthSignUpComponent,
   ],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+  ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
