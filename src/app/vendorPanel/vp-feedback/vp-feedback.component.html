@@ -1,3 +1,11 @@
-<p>
-  vp-feedback works!
-</p>
+<ion-content>
+  <ion-list>
+    <div *ngFor="let feedback of feedbacks">
+      <app-feedback-card
+      title="Nothing is a test not a text"
+      description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tincidunt commodo. Nunc justo nisi, vestibulum facilisis porta vestibulum, ultrices volutpat arcu. Quisque nec dui mattis, fringilla magna in, vulputate enim. Fusce ut euismod ligula, id laoreet ex."
+      image="https://i.pravatar.cc/200"
+      ></app-feedback-card>
+    </div>
+  </ion-list>
+</ion-content>

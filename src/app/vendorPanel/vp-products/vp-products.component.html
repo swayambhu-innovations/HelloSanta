@@ -1,3 +1,21 @@
-<p>
-  vp-products works!
-</p>
+<ion-content>
+  <ion-card>
+    <ion-row class="header">
+      <h1>Your Products</h1>
+      <ion-button>
+        Add New Product
+      </ion-button>
+    </ion-row>
+  </ion-card>
+  <ion-row uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100" class="main">
+    <div *ngFor="let product of products">
+      <app-vpproduct-card
+      [image]="product.image"
+      [name]="product.name"
+      [description]="product.description"
+      [id]="product.id"
+      [price]="product.price"
+      ></app-vpproduct-card>
+    </div>
+  </ion-row>
+</ion-content>

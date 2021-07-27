@@ -1,0 +1,27 @@
+<ion-card>
+  <ul uk-accordion>
+    <li>
+      <a class="uk-accordion-title" href="#">
+        <ion-row>
+          <h2>Order with {{items.length}} items ordered on {{purchaseDate}}.</h2>
+          <p class="price">{{price}}</p>
+          <p class="orderDate">{{purchaseDate}}</p>
+          <p class="deliveryDate">{{deliveryDate}}</p>
+        </ion-row>
+      </a>
+      <div class="uk-accordion-content">
+        <p>{{description}}</p>
+        <ion-card>
+          <ul class="uk-list uk-list-striped">
+            <li *ngFor="let item of items">
+              {{item.name}}&nbsp;&nbsp;&nbsp;
+              {{item.price}}&nbsp;&nbsp;&nbsp;
+              {{item.quantity}}&nbsp;&nbsp;&nbsp;
+              {{item.size}}&nbsp;&nbsp;&nbsp;
+            </li>
+          </ul>
+        </ion-card>
+      </div>
+    </li>
+  </ul>
+</ion-card>

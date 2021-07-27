@@ -1,0 +1,19 @@
+<ion-card>
+  <ion-row>
+    <ion-avatar class="uk-flex-first">
+      <img [src]="image" />
+    </ion-avatar>
+    <div class="data uk-width-1-2">
+      <h3>{{title}}</h3>
+      <p>{{description}}</p>
+    </div>
+    <ion-chip color="primary">
+      <ion-label>Size</ion-label>
+    </ion-chip>
+    <div class="actions">
+      <button>Resolve</button>
+      <button>Report</button>
+      <button>Remove</button>
+    </div>
+  </ion-row>
+</ion-card>

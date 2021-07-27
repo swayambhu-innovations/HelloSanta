@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { VPReviewsComponent } from './vp-reviews.component';
+import { FeedbackCardComponent } from './feedback-card.component';
 
-describe('VPReviewsComponent', () => {
-  let component: VPReviewsComponent;
-  let fixture: ComponentFixture<VPReviewsComponent>;
+describe('FeedbackCardComponent', () => {
+  let component: FeedbackCardComponent;
+  let fixture: ComponentFixture<FeedbackCardComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ VPReviewsComponent ],
+      declarations: [ FeedbackCardComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(VPReviewsComponent);
+    fixture = TestBed.createComponent(FeedbackCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

@@ -1,3 +1,9 @@
-<p>
-  vp-orders works!
-</p>
+<ion-content>
+  <ion-list>
+    <div>
+      <app-vporders-summary-card *ngFor="let order of orders" [price]="order.price" [description]="order.description"
+        [items]="order.items" [deliveryDate]="order.deliveryDate" [purchaseDate]="order.purchaseDate">
+      </app-vporders-summary-card>
+    </div>
+  </ion-list>
+</ion-content>

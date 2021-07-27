@@ -11,7 +11,6 @@ export class VendorPanelComponent implements OnInit {
     { title: 'Orders', url: '/VendorPanel/Order', icon: 'cube' },
     { title: 'Products', url: '/VendorPanel/Products', icon: 'grid' },
     { title: 'Issues', url: '/VendorPanel/Issues', icon: 'bug' },
-    { title: 'Reviews', url: '/VendorPanel/Reviews', icon: 'chatbubbles' },
     { title: 'Feedback', url: '/VendorPanel/Feedback', icon: 'chatbox' },
     { title: 'Profile', url: '/VendorPanel/Profile', icon: 'person' },
   ];

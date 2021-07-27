@@ -55,12 +55,19 @@ import { AuthLoginComponent } from './customerPanel/auth-login/auth-login.compon
 import { AuthSignUpComponent } from './customerPanel/auth-sign-up/auth-sign-up.component';
 import { environment } from 'src/environments/environment';
 import { VPDashboardComponent } from './vendorPanel/vp-dashboard/vp-dashboard.component';
-import { VPReviewsComponent } from './vendorPanel/vp-reviews/vp-reviews.component';
 import { VPProfileComponent } from './vendorPanel/vp-profile/vp-profile.component';
 import { VPProductsComponent } from './vendorPanel/vp-products/vp-products.component';
 import { VPOrdersComponent } from './vendorPanel/vp-orders/vp-orders.component';
 import { VPIssuesComponent } from './vendorPanel/vp-issues/vp-issues.component';
 import { VPFeedbackComponent } from './vendorPanel/vp-feedback/vp-feedback.component';
+import { FeedbackCardComponent } from './Components/feedback-card/feedback-card.component';
+import { IssuesCardComponent } from './Components/issues-card/issues-card.component';
+import { RatingModule } from 'ng-starrating';
+import { VPOrdersSummaryCardComponent } from './Components/vporders-summary-card/vporders-summary-card.component';
+import { VPProductCardComponent } from './Components/vpproduct-card/vpproduct-card.component';
+import { AuthService } from './services/auth.service';
+import { DataProvider } from './providers/data.provider';
+import { LoginGuard } from './guards/login-guard.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,7 +87,6 @@ import { VPFeedbackComponent } from './vendorPanel/vp-feedback/vp-feedback.compo
     APComplainsComponent,
     APBLogComponent,
     VPDashboardComponent,
-    VPReviewsComponent,
     VPProfileComponent,
     VPProductsComponent,
     VPOrdersComponent,
@@ -116,17 +122,27 @@ import { VPFeedbackComponent } from './vendorPanel/vp-feedback/vp-feedback.compo
     SingleproductComponent,
     AuthLoginComponent,
     AuthSignUpComponent,
+    FeedbackCardComponent,
+    IssuesCardComponent,
+    VPOrdersSummaryCardComponent,
+    VPProductCardComponent,
   ],
   entryComponents: [],
   imports: [
     BrowserModule,
+    RatingModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    AuthService,
+    DataProvider,
+    LoginGuard,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

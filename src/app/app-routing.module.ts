@@ -20,7 +20,6 @@ import { VPIssuesComponent } from './vendorPanel/vp-issues/vp-issues.component';
 import { VPOrdersComponent } from './vendorPanel/vp-orders/vp-orders.component';
 import { VPProductsComponent } from './vendorPanel/vp-products/vp-products.component';
 import { VPProfileComponent } from './vendorPanel/vp-profile/vp-profile.component';
-import { VPReviewsComponent } from './vendorPanel/vp-reviews/vp-reviews.component';
 import {AuthSignUpComponent} from "./customerPanel/auth-sign-up/auth-sign-up.component";
 import {AuthLoginComponent} from "./customerPanel/auth-login/auth-login.component";
 import { HomeComponent } from './customerPanel/home/home.component';
@@ -101,7 +100,6 @@ const routes: Routes = [
       {path:'Order',component:VPOrdersComponent},
       {path:'Products',component:VPProductsComponent},
       {path:'Issues',component:VPIssuesComponent},
-      {path:'Reviews',component:VPReviewsComponent},
       {path:'Feedback',component:VPFeedbackComponent},
       {path:'Profile',component:VPProfileComponent},
     ]

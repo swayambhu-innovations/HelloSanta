@@ -33,4 +33,7 @@ html, body {
     width: 100%;
     height: 100%; /* set height to 100% of viewport*/
     -webkit-tap-highlight-color: transparent;
-  }
+}
+.star::before{
+    content: url('/assets/star.svg') !important;
+}

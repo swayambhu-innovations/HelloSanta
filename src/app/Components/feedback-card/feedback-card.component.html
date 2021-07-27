@@ -1,0 +1,12 @@
+<ion-card>
+  <ion-row>
+    <ion-avatar class="uk-flex-first">
+      <img [src]="image" />
+    </ion-avatar>
+    <div class="data uk-width-1-2">
+      <h3>{{title}}</h3>
+      <p>{{description}}</p>
+    </div>
+    <star-rating [value]="3" [totalstars]="5" checkedcolor="#fcba03" uncheckedcolor="grey" size="24px" [readonly]="true"></star-rating>
+  </ion-row>
+</ion-card>

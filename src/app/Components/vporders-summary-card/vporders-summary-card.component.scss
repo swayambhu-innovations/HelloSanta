@@ -1,0 +1,23 @@
+ion-row{
+    justify-content: space-between;
+    align-items: center;
+}
+.price{
+    color:#6AB9FF;
+}
+.orderDate{
+    color:#FF6584
+}
+.deliveryDate{
+    color:#ff9253
+}
+ion-card{
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow:5px 2px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s ease-in-out;
+}
+ion-card:hover{
+    box-shadow:5px 10px 20px #ada2ff4b;
+    border:2px solid var(--ion-color-primary);
+}

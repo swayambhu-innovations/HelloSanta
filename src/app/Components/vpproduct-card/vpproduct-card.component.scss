@@ -1,0 +1,60 @@
+img{
+    width:300px;
+    height:200px;
+    border-radius: 20px;
+    box-shadow: 0px 5px 20px rgba(0,0,0,0.3);
+}
+ion-card{
+    width:300px;
+    padding: 0%;
+}
+h2{
+    width:fit-content
+}
+ion-card{
+    box-shadow:10px 5px 20px rgba(0,0,0,0.2);
+    transition: all 1s ease-in-out;
+}
+ion-card:hover{
+    box-shadow:10px 5px 20px rgba(0,0,0,0.5);
+}
+.content,ion-card{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    display:flex;
+    flex-direction: column;
+}
+.description{
+    padding:20px;
+}
+button{
+    padding:10px;
+    font-size: 18px;
+    box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
+}
+button:hover{
+    box-shadow:10px 5px 20px var(--background);
+}
+.moreInfo{
+    z-index:3;
+    color:white;
+    background:#6AB9FF;
+    --background:#6abaff70;
+}
+.deleteProduct{
+    z-index:2;
+    color:white;
+    background:#FF6584;
+    --background:#ff658459;
+}
+.editProduct{
+    z-index:1;
+    color: white;
+    background:#FCD17A;
+    --background:#fcd17a7c;
+}
+
+
+
+
+
