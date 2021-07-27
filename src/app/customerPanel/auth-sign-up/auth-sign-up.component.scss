@@ -208,10 +208,14 @@ input[type="submit"] {
   align-items: center;
   margin: 0;
 }
-a.ssolink {
+.ssolink {
   display: block;
   text-align: center;
+}
+.ssolink > ion-icon{
   font-weight: 600;
+  font-size: 40px; 
+  color: #FFC332;
 }
 .footer-link span {
   font-size: 14px;
