@@ -37,3 +37,17 @@ html, body {
 .star::before{
     content: url('/assets/star.svg') !important;
 }
+button{
+    background:transparent;
+    margin: 0%;
+    padding:0%;
+}
+li{
+    list-style: none;
+}
+input{
+    border:none;
+}
+input:focus{
+    border: none;
+}

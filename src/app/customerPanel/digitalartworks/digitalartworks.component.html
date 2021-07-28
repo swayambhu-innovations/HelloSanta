@@ -1,88 +1,149 @@
 <ion-content>
-  <app-header ></app-header>
-  <img class="first" src="assets/img1.png">
-  <img class="second" src="assets/img2.png">
-  <img class="third" src="assets/img3.png">
-  <img class="fourth" src="assets/img4.png">
-  <div class="fourthbox">
-    <p class="firstheading">Digital
-      <br>
-      Artworks</p>
-    <p class="heading-discription"> developing technologies, everything
-      is getting digitized, Lorem ipsum dolor sit
-      amet, consectetur adipiscing elit.
-      Curabitur cursus tincidunt commodo.
-      Nunc justo nisi, vestibulum facilisis porta
-      vestibulum, ultrices volutpat arcu.
-      Quisque nec dui mattis, fringilla magna
-      in, vulputate enim. Fusce ut euismod
-      ligula, id laoreet ex.</p>
-  
+  <app-header></app-header>
+  <div class="headerContainer">
+    <div class="distImages">
+      <img class="first" src="assets/img1.png">
+      <img class="second" src="assets/img2.png">
+      <img class="third" src="assets/img3.png">
+      <img class="fourth" src="assets/img4.png">
+    </div>
+    <div class="fourthbox">
+      <p class="firstheading">Digital
+        <br>
+        Artworks
+      </p>
+      <p class="heading-discription"> developing technologies, everything
+        is getting digitized, Lorem ipsum dolor sit
+        amet, consectetur adipiscing elit.
+        Curabitur cursus tincidunt commodo.
+        Nunc justo nisi, vestibulum facilisis porta
+        vestibulum, ultrices volutpat arcu.
+        Quisque nec dui mattis, fringilla magna
+        in, vulputate enim. Fusce ut euismod
+        ligula, id laoreet ex.</p>
+
+    </div>
   </div>
-  <div id="container2">
-    <section id="orders-container">
-      <div class="order-card" *ngFor="let product of products">
-        <img src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-             alt="[[ Same as the product name ]]" class="order-img">
-        <div class="order-details">
-          <h4 class="order-title">Digital Caricature</h4>
-          <p class="order-description">Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Curabitur cursus tincidunt
-            commodo. Nunc justo nisi, vestibulum.</p>
-          <div class="order-price-and-add-to-cart">
-            <p class="order-price">₹2300</p>
-            <button class="order-add-to-cart">Add to Cart</button>
+  <div class="headerContainer">
+    <div class="searchbox">
+      <ion-row>
+        <input type="search" class="searchInput" placeholder="Search Anything ...">
+        <ion-icon name="search" style="color: #FF6584;font-size: 28px;
+            padding-left: 1%;font-weight: bold;"></ion-icon>
+      </ion-row>
+      <div class="search-inner-box">
+        <h3 style="color: tomato;text-align: center;font-weight: bold;">Price Filters</h3>
+        <br>
+        <ion-list class="list">
+          <ion-radio-group name="price" value="MinToMax">
+            <ion-list-header>
+              <ion-label>Price Options</ion-label>
+            </ion-list-header>
+            <ion-item class="listoptions">
+              <ion-label>Minimum to Maximum</ion-label>
+              <ion-radio slot="start" color="primary" value="MinToMax"></ion-radio>
+            </ion-item>
+            <ion-item class="listoptions">
+              <ion-label>500-1000</ion-label>
+              <ion-radio slot="start" color="primary" value="500-1000"></ion-radio>
+            </ion-item>
+            <ion-item class="listoptions">
+              <ion-label>1000-5000</ion-label>
+              <ion-radio slot="start" color="primary" value="1000-5000"></ion-radio>
+            </ion-item>
+            <ion-item class="listoptions">
+              <ion-label>5000-10000</ion-label>
+              <ion-radio slot="start" color="primary" value="5000-10000"></ion-radio>
+            </ion-item>
+            <ion-item class="listoptions">
+              <ion-label>Above 10000</ion-label>
+              <ion-radio slot="start" color="primary" value="Above10000"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+      </div>
+      <div class="search-inner-box">
+        <h3 style="color: tomato;text-align: center;font-weight: bold;">Price Filters</h3>
+        <br>
+        <ion-list class="list">
+          <ion-radio-group name="price" value="MinToMax">
+            <ion-list-header>
+              <ion-label>Price Options</ion-label>
+            </ion-list-header>
+            <ion-item class="listoptions">
+              <ion-label>Minimum to Maximum</ion-label>
+              <ion-radio slot="start" color="primary" value="MinToMax"></ion-radio>
+            </ion-item>
+            <ion-item class="listoptions">
+              <ion-label>500-1000</ion-label>
+              <ion-radio slot="start" color="primary" value="500-1000"></ion-radio>
+            </ion-item>
+            <ion-item class="listoptions">
+              <ion-label>1000-5000</ion-label>
+              <ion-radio slot="start" color="primary" value="1000-5000"></ion-radio>
+            </ion-item>
+            <ion-item class="listoptions">
+              <ion-label>5000-10000</ion-label>
+              <ion-radio slot="start" color="primary" value="5000-10000"></ion-radio>
+            </ion-item>
+            <ion-item class="listoptions">
+              <ion-label>Above 10000</ion-label>
+              <ion-radio slot="start" color="primary" value="Above10000"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+      </div>
+      <div class="search-inner-box">
+        <h3 style="color: tomato;text-align: center;font-weight:bold">Price Filters</h3>
+        <br>
+        <ion-list class="list">
+          <ion-radio-group name="price" value="MinToMax">
+            <ion-list-header>
+              <ion-label>Price Options</ion-label>
+            </ion-list-header>
+            <ion-item class="listoptions">
+              <ion-label>Minimum to Maximum</ion-label>
+              <ion-radio slot="start" color="primary" value="MinToMax"></ion-radio>
+            </ion-item>
+            <ion-item class="listoptions">
+              <ion-label>500-1000</ion-label>
+              <ion-radio slot="start" color="primary" value="500-1000"></ion-radio>
+            </ion-item>
+            <ion-item class="listoptions">
+              <ion-label>1000-5000</ion-label>
+              <ion-radio slot="start" color="primary" value="1000-5000"></ion-radio>
+            </ion-item>
+            <ion-item class="listoptions">
+              <ion-label>5000-10000</ion-label>
+              <ion-radio slot="start" color="primary" value="5000-10000"></ion-radio>
+            </ion-item>
+            <ion-item class="listoptions">
+              <ion-label>Above 10000</ion-label>
+              <ion-radio slot="start" color="primary" value="Above10000"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+      </div>
+    </div>
+    <div id="container2">
+      <section id="orders-container">
+        <div class="order-card" *ngFor="let product of products">
+          <img
+            src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+            alt="[[ Same as the product name ]]" class="order-img">
+          <div class="order-details">
+            <h4 class="order-title">Digital Caricature</h4>
+            <p class="order-description">Lorem ipsum dolor sit amet, consectetur
+              adipiscing elit. Curabitur cursus tincidunt
+              commodo. Nunc justo nisi, vestibulum.</p>
+            <div class="order-price-and-add-to-cart">
+              <p class="order-price">₹2300</p>
+              <button class="order-add-to-cart"><a href="https://www.google.co.in/"></a>Add to Cart</button>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  </div>
-  <div class="searchbox">
-    <input type="search" style="margin-top:6%;
-    padding-left: 6%;
-    width: 80%;
-    border-radius: 6px;
-    margin-left: 4%;
-    background-color: white;">
-  
-    <ion-icon name="search" style="color: #FF6584;font-size: 28px;
-      padding-left: 1%;font-weight: bold;"></ion-icon>
-    <hr style="border: 2px solid #6D5DE3;
-      border-radius: 9px;
-      background-color: #6D5DE3;
-      width: 50%;
-      padding-left: 27%;
-      margin-left: 7%;">
-    <div class="search-inner-box">
-      <h3 style="color: tomato;text-align: center;font-weight: bold;">Price Filters</h3>
-      <br>
-      <ul class="list">
-        <li class="listoptions"><input type="radio">Minimum to Maximum</li>
-        <li class="listoptions"><input type="radio">Maximum to Minimum</li>
-        <li class="listoptions"><input type="radio">500-1000</li>
-        <li class="listoptions"><input type="radio">1000-5000</li>
-        <li class="listoptions"><input type="radio">5000-10000</li>
-        <li class="listoptions"><input type="radio">Above 10000</li>
-      </ul>
-    </div>
-    <div class="search-inner-box">
-      <h3 style="color: tomato;text-align: center;font-weight: bold;">Price Filters</h3>
-      <br>
-      <ul style="padding-left: 2%;margin-top: -5%;">
-        <li class="listoptions"><input type="radio">Minimum to Maximum</li>
-        <li class="listoptions"><input type="radio">Maximum to Minimum</li>
-        <li class="listoptions"><input type="radio">500-1000</li>
-      </ul>
-    </div>
-    <div class="search-inner-box">
-      <h3 style="color: tomato;text-align: center;font-weight:bold">Price Filters</h3>
-      <br>
-      <ul style="padding-left: 2%;margin-top: -5%;">
-        <li class="listoptions"><input type="radio">Minimum to Maximum</li>
-        <li class="listoptions"><input type="radio">Maximum to Minimum</li>
-        <li class="listoptions"><input type="radio">500-1000</li>
-      </ul>
+      </section>
     </div>
   </div>
-  <app-footer ></app-footer>
+  <app-footer></app-footer>
 </ion-content>

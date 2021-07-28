@@ -69,7 +69,6 @@
 }
 div > ul{
   position: relative;
-
   z-index:1;
   background-color: white;
   display:flex;
@@ -123,7 +122,9 @@ ion-icon[name="close"]{
   bottom:20px;
   left:20px;
 }
-
+// .nav{
+//   border-bottom:1px solid #aa86ff;
+// }
 
 
 
