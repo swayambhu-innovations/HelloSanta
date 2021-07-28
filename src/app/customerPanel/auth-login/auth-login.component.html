@@ -9,7 +9,7 @@
               <div class="formbg-inner padding-horizontal--48">
                 <a href="http://hellosanta.in/" rel="dofollow"><img src="assets/logo.png"></a>
                 <span class="padding-bottom--15">Log-in to your account</span>
-                <form id="stripe-login">
+                <form id="stripe-login" method="POST">
                   <div class="field padding-bottom--24">
                     <label for="email">Email</label>
                     <input type="email" name="email">
@@ -29,14 +29,14 @@
                     </label>
                   </div>
                   <button class="button">Login</button>
-                  <div class="field" style="">
-                    <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
-                      <button class="ssolink" href="#"><ion-icon name="logo-google" ></ion-icon></button>
-                      <button class="ssolink" href="#"><ion-icon name="logo-facebook" ></ion-icon></button>
-                      <button class="ssolink" href="#"><ion-icon name="logo-apple" ></ion-icon></button>
-                    </div>
-                  </div>
                 </form>
+                <div class="field">
+                  <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
+                    <button class="ssolink" (click)="authService.GoogleAuth()"><ion-icon name="logo-google" ></ion-icon></button>
+                    <button class="ssolink" ><ion-icon name="logo-facebook" ></ion-icon></button>
+                    <button class="ssolink" ><ion-icon name="logo-apple" ></ion-icon></button>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="footer-link padding-top--24">
