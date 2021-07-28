@@ -10,5 +10,5 @@ export class SingleproductComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {}
-
+products=[1,2,3,4]
 }
