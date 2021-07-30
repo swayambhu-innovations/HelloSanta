@@ -127,20 +127,8 @@
     </div>
     <div id="container2">
       <section id="orders-container">
-        <div class="order-card" *ngFor="let product of products">
-          <img
-            src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-            alt="[[ Same as the product name ]]" class="order-img">
-          <div class="order-details">
-            <h4 class="order-title">Digital Caricature</h4>
-            <p class="order-description">Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Curabitur cursus tincidunt
-              commodo. Nunc justo nisi, vestibulum.</p>
-            <div class="order-price-and-add-to-cart">
-              <p class="order-price">₹2300</p>
-              <button class="order-add-to-cart"><a href="https://www.google.co.in/"></a>Add to Cart</button>
-            </div>
-          </div>
+        <div class="product-row">
+          <app-product-full-card *ngFor="let product of products" [img]="product.img" [productTitle]="product.name" [productDescription]="product.description" [price]="product.price" ></app-product-full-card>
         </div>
       </section>
     </div>

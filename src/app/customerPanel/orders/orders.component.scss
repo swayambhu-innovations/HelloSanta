@@ -26,42 +26,9 @@ app-sidenav {
     flex-wrap: wrap;
     align-items: flex-start;
 }
-
-.order-card, .order-img {
-    border-radius: 20px;
-}
-
-.order-card {
-    width: 19%;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    color: #ADA2FF;
-    margin: 1em;
-}
-
-.order-details {
-    padding: 1em;
-}
-
-.order-title {
-    color: #6D5CE5;
-    font-family: 'Poppins';
-    font-weight: 700;
-    margin: 0;
-    font-size: .85rem;
-}
-
-.order-price-and-date {
-    display: flex;
-    justify-content: space-between;
-    font-size: .85rem;
-    font-family: 'Poppins';
-}
-
-.order-price {
-    margin-right: 1em;
-    color: #5AC179;
-}
-
-.order-date {
-    color: #FFAB00;
+.product-row{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
 }

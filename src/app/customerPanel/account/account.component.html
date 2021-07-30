@@ -32,65 +32,8 @@
           </div>
         </div>
         <div id="latest-orders">
-          <div class="latest-order-card">
-            <img
-              src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-              alt="[[ Same as the product name ]]" class="latest-order-img">
-            <div class="latest-order-details">
-              <h4 class="latest-order-title">Digital Caricature</h4>
-              <div class="latest-order-price-and-date">
-                <p class="latest-order-price">₹2300</p>
-                <p class="latest-order-date">09-2020</p>
-              </div>
-            </div>
-          </div>
-          <div class="latest-order-card">
-            <img
-              src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-              alt="[[ Same as the product name ]]" class="latest-order-img">
-            <div class="latest-order-details">
-              <h4 class="latest-order-title">Digital Caricature</h4>
-              <div class="latest-order-price-and-date">
-                <p class="latest-order-price">₹2300</p>
-                <p class="latest-order-date">09-2020</p>
-              </div>
-            </div>
-          </div>
-          <div class="latest-order-card">
-            <img
-              src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-              alt="[[ Same as the product name ]]" class="latest-order-img">
-            <div class="latest-order-details">
-              <h4 class="latest-order-title">Digital Caricature</h4>
-              <div class="latest-order-price-and-date">
-                <p class="latest-order-price">₹2300</p>
-                <p class="latest-order-date">09-2020</p>
-              </div>
-            </div>
-          </div>
-          <div class="latest-order-card">
-            <img
-              src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-              alt="[[ Same as the product name ]]" class="latest-order-img">
-            <div class="latest-order-details">
-              <h4 class="latest-order-title">Digital Caricature</h4>
-              <div class="latest-order-price-and-date">
-                <p class="latest-order-price">₹2300</p>
-                <p class="latest-order-date">09-2020</p>
-              </div>
-            </div>
-          </div>
-          <div class="latest-order-card">
-            <img
-              src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-              alt="[[ Same as the product name ]]" class="latest-order-img">
-            <div class="latest-order-details">
-              <h4 class="latest-order-title">Digital Caricature</h4>
-              <div class="latest-order-price-and-date">
-                <p class="latest-order-price">₹2300</p>
-                <p class="latest-order-date">09-2020</p>
-              </div>
-            </div>
+          <div class="product-row">
+            <app-small-product-card *ngFor="let product of products" [img]="product.img" [productTitle]="product.name" [price]="product.price" [date]="product.date"></app-small-product-card>
           </div>
         </div>
       </section>

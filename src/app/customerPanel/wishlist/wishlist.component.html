@@ -1,57 +1,12 @@
 <ion-content>
-    <app-header></app-header>
-    <main id="container">
-      <app-sidenav activeLinkID="wishlist"></app-sidenav>
-      <section id="orders-container">
-        <div class="order-card">
-          <img
-            src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-            alt="[[ Same as the product name ]]" class="order-img">
-          <div class="order-details">
-            <h4 class="order-title">Digital Caricature</h4>
-            <p class="order-description">Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Curabitur cursus tincidunt
-              commodo. Nunc justo nisi, vestibulum.</p>
-          </div>
-          <div class="order-price-and-btns">
-            <p class="order-price">₹2300</p>
-            <button class="order-remove">Remove</button>
-            <button class="order-view">View Page</button>
-          </div>
-        </div>
-        <div class="order-card">
-          <img
-            src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-            alt="[[ Same as the product name ]]" class="order-img">
-          <div class="order-details">
-            <h4 class="order-title">Digital Caricature</h4>
-            <p class="order-description">Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Curabitur cursus tincidunt
-              commodo. Nunc justo nisi, vestibulum.</p>
-          </div>
-          <div class="order-price-and-btns">
-            <p class="order-price">₹2300</p>
-            <button class="order-remove">Remove</button>
-            <button class="order-view">View Page</button>
-          </div>
-        </div>
-        <div class="order-card">
-          <img
-            src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-            alt="[[ Same as the product name ]]" class="order-img">
-          <div class="order-details">
-            <h4 class="order-title">Digital Caricature</h4>
-            <p class="order-description">Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Curabitur cursus tincidunt
-              commodo. Nunc justo nisi, vestibulum.</p>
-          </div>
-          <div class="order-price-and-btns">
-            <p class="order-price">₹2300</p>
-            <button class="order-remove">Remove</button>
-            <button class="order-view">View Page</button>
-          </div>
-        </div>
-      </section>
-    </main>
-    <app-footer></app-footer>
+  <app-header></app-header>
+  <main id="container">
+    <app-sidenav activeLinkID="wishlist"></app-sidenav>
+    <section id="orders-container">
+      <div class="product-row">
+        <app-wide-product-card *ngFor="let order of orders" [img]="order.img" [orderTitle]="order.name" [orderDescription]="order.description" [orderprice]="order.price" ></app-wide-product-card>
+      </div>
+    </section>
+  </main>
+  <app-footer></app-footer>
 </ion-content>

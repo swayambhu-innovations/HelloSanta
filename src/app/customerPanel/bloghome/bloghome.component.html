@@ -16,127 +16,13 @@
         Quisque nec dui mattis, fringilla magna
         in, vulputate enim. Fusce ut euismod
         ligula, id laoreet ex.</p>
-    
+        <button class="button"><a href="/blog">Read more</a></button>
     </div>
-    <main id="container">
-      <section id="orders-container">
-        <h1 style="font-family: Poppins;text-align: center;padding: 80px;font-weight: bold;font-size: 50px">-------------Read More Blogs-------------</h1>
-        <div class="order-card">
-          <img src="assets/yellow.png"
-               alt="[[ Same as the product name ]]" class="order-img">
-          <div class="order-details">
-            <h4 class="order-title">Digital Caricature</h4>
-            <p class="order-description">Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Curabitur cursus tincidunt
-              commodo. Nunc justo nisi, vestibulum.</p>
-            <div class="order-price-and-add-to-cart">
-              <button class="order-add-to-cart">Read More</button>
-            </div>
-          </div>
-        </div>
-        <div class="order-card">
-          <img src="assets/yellow.png"
-               alt="[[ Same as the product name ]]" class="order-img">
-          <div class="order-details">
-            <h4 class="order-title">Digital Caricature</h4>
-            <p class="order-description">Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Curabitur cursus tincidunt
-              commodo. Nunc justo nisi, vestibulum.</p>
-            <div class="order-price-and-add-to-cart">
-              <button class="order-add-to-cart">Read More</button>
-            </div>
-          </div>
-        </div>
-        <div class="order-card">
-          <img src="assets/yellow.png"
-               alt="[[ Same as the product name ]]" class="order-img">
-          <div class="order-details">
-            <h4 class="order-title">Digital Caricature</h4>
-            <p class="order-description">Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Curabitur cursus tincidunt
-              commodo. Nunc justo nisi, vestibulum.</p>
-            <div class="order-price-and-add-to-cart">
-              <button class="order-add-to-cart">Read More</button>
-            </div>
-          </div>
-        </div>
-        <div class="order-card">
-          <img src="assets/yellow.png"
-               alt="[[ Same as the product name ]]" class="order-img">
-          <div class="order-details">
-            <h4 class="order-title">Digital Caricature</h4>
-            <p class="order-description">Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Curabitur cursus tincidunt
-              commodo. Nunc justo nisi, vestibulum.</p>
-            <div class="order-price-and-add-to-cart">
-              <button class="order-add-to-cart">Read More</button>
-            </div>
-          </div>
-        </div>
-        <div class="order-card">
-          <img src="assets/yellow.png"
-               alt="[[ Same as the product name ]]" class="order-img">
-          <div class="order-details">
-            <h4 class="order-title">Digital Caricature</h4>
-            <p class="order-description">Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Curabitur cursus tincidunt
-              commodo. Nunc justo nisi, vestibulum.</p>
-            <div class="order-price-and-add-to-cart">
-              <button class="order-add-to-cart">Read More</button>
-            </div>
-          </div>
-        </div>
-        <div class="order-card">
-          <img src="assets/yellow.png"
-               alt="[[ Same as the product name ]]" class="order-img">
-          <div class="order-details">
-            <h4 class="order-title">Digital Caricature</h4>
-            <p class="order-description">Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Curabitur cursus tincidunt
-              commodo. Nunc justo nisi, vestibulum.</p>
-            <div class="order-price-and-add-to-cart">
-              <button class="order-add-to-cart">Read More</button>
-            </div>
-          </div>
-        </div>
-        <div class="order-card">
-          <img src="assets/yellow.png"
-               alt="[[ Same as the product name ]]" class="order-img">
-          <div class="order-details">
-            <h4 class="order-title">Digital Caricature</h4>
-            <p class="order-description">Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Curabitur cursus tincidunt
-              commodo. Nunc justo nisi, vestibulum.</p>
-            <div class="order-price-and-add-to-cart">
-              <button class="order-add-to-cart">Read More</button>
-            </div>
-          </div>
-        </div>
-        <div class="order-card">
-          <img src="assets/yellow.png"
-               alt="[[ Same as the product name ]]" class="order-img">
-          <div class="order-details">
-            <h4 class="order-title">Digital Caricature</h4>
-            <p class="order-description">Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Curabitur cursus tincidunt
-              commodo. Nunc justo nisi, vestibulum.</p>
-            <div class="order-price-and-add-to-cart">
-              <button class="order-add-to-cart">Read More</button>
-            </div>
-          </div>
-        </div>
-        <div class="order-card">
-          <img src="assets/yellow.png"
-               alt="[[ Same as the product name ]]" class="order-img">
-          <div class="order-details">
-            <h4 class="order-title">Digital Caricature</h4>
-            <p class="order-description">Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Curabitur cursus tincidunt
-              commodo. Nunc justo nisi, vestibulum.</p>
-            <div class="order-price-and-add-to-cart">
-              <button class="order-add-to-cart">Read More</button>
-            </div>
-          </div>
+    <main id="blog">
+      <section id="blog-container">
+        <h1 style="font-family: Poppins;text-align: center;padding-top: 10px;padding-bottom: 20px;font-weight: bold;font-size: 3rem;color: #FF6584">Read More Blogs</h1>
+        <div class="product-row">
+          <app-blog-card *ngFor="let blog of blogs" [blogimg]="blog.img" [blogTitle]="blog.name" [blogDescription]="blog.description" ></app-blog-card>
         </div>
       </section>
     </main>

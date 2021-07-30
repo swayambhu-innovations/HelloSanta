@@ -1,102 +1,60 @@
 <ion-content>
-  <app-header></app-header>
+    <app-header></app-header>
 
-  <div class="uk-panel" >
-    <div class="inner-box" align="center">
-  <main id="container">
-      <h2 id="checkout-title">Checkout</h2>
-      <section id="orders-card">
-          <div class="order-card">
-              <img src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                  alt="[[ Same as the product name ]]" class="order-img">
-              <div class="order-details">
-                  <h4 class="order-title">Digital Caricature</h4>
-                  <p class="order-description">Lorem ipsum dolor sit amet, consectetur
-                      adipiscing elit. Curabitur cursus tincidunt
-                      commodo. Nunc justo nisi, vestibulum.</p>
-              </div>
-              <div class="order-price-and-btns">
-                  <p class="order-price">₹2300</p>
-                  <button class="order-remove">Remove</button>
-                  <button class="order-view">View Product</button>
-              </div>
+    <div class="uk-panel" >
+      <div class="inner-box" align="center">
+    <main id="container">
+        <h2 id="checkout-title">Checkout</h2>
+        <section id="orders-card">
+          <div class="product-row">
+            <app-wide-product-card *ngFor="let order of orders" [img]="order.img" [orderTitle]="order.name" [orderDescription]="order.description" [orderprice]="order.price" ></app-wide-product-card>
           </div>
-          <div class="order-card">
-              <img src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                  alt="[[ Same as the product name ]]" class="order-img">
-              <div class="order-details">
-                  <h4 class="order-title">Digital Caricature</h4>
-                  <p class="order-description">Lorem ipsum dolor sit amet, consectetur
-                      adipiscing elit. Curabitur cursus tincidunt
-                      commodo. Nunc justo nisi, vestibulum.</p>
-              </div>
-              <div class="order-price-and-btns">
-                  <p class="order-price">₹2300</p>
-                  <button class="order-remove">Remove</button>
-                  <button class="order-view">View Product</button>
-              </div>
-          </div>
-          <div class="order-card">
-              <img src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                  alt="[[ Same as the product name ]]" class="order-img">
-              <div class="order-details">
-                  <h4 class="order-title">Digital Caricature</h4>
-                  <p class="order-description">Lorem ipsum dolor sit amet, consectetur
-                      adipiscing elit. Curabitur cursus tincidunt
-                      commodo. Nunc justo nisi, vestibulum.</p>
-              </div>
-              <div class="order-price-and-btns">
-                  <p class="order-price">₹2300</p>
-                  <button class="order-remove">Remove</button>
-                  <button class="order-view">View Product</button>
-              </div>
-          </div>
-      </section>
-      <section id="orders-table-container">
-          <table id="orders-table">
-              <thead id="orders-table-head">
-                  <tr>
-                      <th>Product Name</th>
-                      <th>Quantity</th>
-                      <th>Price</th>
-                      <th>Total Price</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                      <td>Random product with data</td>
-                      <td>Quantity</td>
-                      <td>Price</td>
-                      <td>Total Price</td>
-                  </tr>
-                  <tr>
-                      <td>Random product with data</td>
-                      <td>Quantity</td>
-                      <td>Price</td>
-                      <td>Total Price</td>
-                  </tr>
-                  <tr>
-                      <td>Random product with data</td>
-                      <td>Quantity</td>
-                      <td>Price</td>
-                      <td>Total Price</td>
-                  </tr>
-              </tbody>
-              <tfoot>
-                  <tr>
-                      <td></td>
-                      <td></td>
-                      <td>Grand Total</td>
-                      <td>3500</td>
-                  </tr>
-              </tfoot>
-          </table>
-      </section>
-    <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" style="text-align: center;margin-left: 30%">
-    <label for="vehicle1" >Send a copy of invoice to email after payment.</label><br>
-    <div align="center"><button>Checkout To buy</button></div>
-  </main>
+        </section>
+        <section id="orders-table-container">
+            <table id="orders-table">
+                <thead id="orders-table-head">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Random product with data</td>
+                        <td>Quantity</td>
+                        <td>Price</td>
+                        <td>Total Price</td>
+                    </tr>
+                    <tr>
+                        <td>Random product with data</td>
+                        <td>Quantity</td>
+                        <td>Price</td>
+                        <td>Total Price</td>
+                    </tr>
+                    <tr>
+                        <td>Random product with data</td>
+                        <td>Quantity</td>
+                        <td>Price</td>
+                        <td>Total Price</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Grand Total</td>
+                        <td>3500</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+      <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" style="text-align: center;margin-left: 30%">
+      <label for="vehicle1" >Send a copy of invoice to email after payment.</label><br>
+      <div align="center"><button>Checkout To buy</button></div>
+    </main>
+      </div>
     </div>
-  </div>
-  <app-footer></app-footer>
+    <app-footer></app-footer>
 </ion-content>

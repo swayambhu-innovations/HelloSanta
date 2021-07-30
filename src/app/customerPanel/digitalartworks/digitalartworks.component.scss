@@ -122,51 +122,9 @@ ion-row{
   justify-content: space-evenly;
   align-items: flex-start;
 }
-
-.order-card, .order-img {
-  border-radius: 20px;
-}
-
-.order-card {
-  width: 30%;
-  margin: 1em 0.5em;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-.order-details {
-  color: #FFAB00;
-  padding: 1em;
-}
-
-.order-title {
-  font-family: 'Poppins';
-  font-size: 1.5rem;
-  color: #FFAB00;
-}
-
-.order-price-and-add-to-cart {
+.product-row{
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: 'Poppins';
-  font-size: 1.25rem;
-}
-
-.order-price {
-  margin-right: 1em;
-  color: #5AC179;
-}
-
-.order-add-to-cart {
-  background-color: #ADA2FF; /* Green */
-  border-radius: 10px;
-  border: 5px solid #9081FF;
-  color: white;
-  margin: 0 0 0 0;
-  padding: 5px 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 15px;
-  cursor: pointer;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
 }

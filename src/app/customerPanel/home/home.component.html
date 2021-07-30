@@ -1,149 +1,111 @@
 <ion-content>
-        <app-header ></app-header>
-        <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="autoplay: true;autoplay-interval: 1000;pause-on-hover: true;ratio: 12:3; animation: push">
-        
-          <ul class="uk-slideshow-items">
-            <li>
-              <img src="assets/image1.png" alt="" uk-cover>
-            </li>
-            <li>
-              <img src="assets/image2.png" alt="" uk-cover>
-            </li>
-            <li>
-              <img src="assets/image3.png" alt="" uk-cover>
-            </li>
-          </ul>
-        
-          <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
-          <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+  <app-header ></app-header>
+  <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="autoplay: true;autoplay-interval: 1000;pause-on-hover: true;ratio: 12:3; animation: push">
+  
+    <ul class="uk-slideshow-items">
+      <li>
+        <img src="assets/image1.png" alt="" uk-cover>
+      </li>
+      <li>
+        <img src="assets/image2.png" alt="" uk-cover>
+      </li>
+      <li>
+        <img src="assets/image3.png" alt="" uk-cover>
+      </li>
+    </ul>
+  
+    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+  </div>
+  <h1 style="font-family: Poppins;text-align: center;padding: 40px;font-weight: bold;font-size: 3.5rem">We offer <span class="text_1" style="font-family: Poppins;text-align: center;color: #FF6584;font-weight: bold;font-size: 2.5rem">PERSONAL GIFT MASTER</span><span class="text_2" style="font-family: Poppins;text-align: center;color: #7E6DFF;font-weight: bold;font-size: 2.5rem">FREE DELIVERY</span> ,here at Hello Santa</h1>
+  <div class="uk-panel" style="padding-top: 50px">
+    <img src="assets/Union.png" alt="">
+    <div class="uk-position-center uk-panel">
+      <section id="orders-container1">
+        <h1 style="font-family: Poppins;text-align: center;padding: 80px;font-weight: bold;font-size: 50px; color: white">Our <span style="color: #F3F692">Beloved</span> Range of <span style="color: #F3F692">Handmade</span> Artwork Products</h1>
+        <div class="product-row">
+          <app-category-card *ngFor="let category of categories" [img]="category.img" [categoryTitle]="category.name" ></app-category-card>
         </div>
-        <h1 style="font-family: Poppins;text-align: center;padding: 80px;font-weight: bold;font-size: 50px">We offer Free Delivery here at Hello Santa</h1>
-        <div class="uk-panel">
-          <img src="assets/Union.png" alt="">
-          <div class="uk-position-center uk-panel">
-            <div class="uk-flex">
-              <div class="uk-card uk-card-default uk-card-body" style="border-radius: 50%;height: 150px;width: 150px;font-size: 20px;font-family: Raleway;">Random</div>
-              <div class="uk-card uk-card-default uk-card-body uk-margin-left" style="border-radius: 50%;height: 150px;width: 150px;font-size: 20px;font-family: Raleway;">Random</div>
-              <div class="uk-card uk-card-default uk-card-body uk-margin-left" style="border-radius: 50%;height: 150px;width: 150px;font-size: 20px;font-family: Raleway;">Random</div>
-              <div class="uk-card uk-card-default uk-card-body uk-margin-left" style="border-radius: 50%;height: 150px;width: 150px;font-size: 20px;font-family: Raleway;">Random</div>
-              <div class="uk-card uk-card-default uk-card-body uk-margin-left" style="border-radius: 50%;height: 150px;width: 150px;font-size: 20px;font-family: Raleway;">Random</div>
-              <div class="uk-card uk-card-default uk-card-body uk-margin-left" style="border-radius: 50%;height: 150px;width: 150px;font-size: 20px;font-family: Raleway;">Random</div>
-              <div class="uk-card uk-card-default uk-card-body uk-margin-left" style="border-radius: 50%;height: 150px;width: 150px;font-size: 20px;font-family: Raleway;">Random</div>
-            </div>
-          </div>
+      </section>
+    </div>
+  </div>
+  <div class="uk-panel" style="padding-top: 50px">
+    <img src="assets/imagecard.png" alt="">
+    <div class="uk-position-center uk-panel"></div>
+  </div>
+  <div class="uk-panel" style="padding-top: 50px">
+  <div id="blog">
+    <section id="blog-container">
+      <h1 style="font-family: Poppins;text-align: center;padding-top: 10px;padding-bottom: 20px;font-weight: bold;font-size: 3rem;color: #FF6584">Read More Blogs</h1>
+      <div class="product-row">
+        <app-blog-card *ngFor="let blog of blogs" [blogimg]="blog.img" [blogTitle]="blog.name" [blogDescription]="blog.description" ></app-blog-card>
+      </div>
+    </section>
+  </div>
+  </div>
+  <div class="uk-panel" style="padding-top: 50px">
+    <img src="assets/Component.png" alt="">
+    <div class="uk-position-center uk-panel"></div>
+  </div>
+  <div class="uk-panel" style="padding-top: 50px">
+    <img src="assets/Union1.png" alt="">
+    <div class="uk-position-center uk-panel">
+      <section id="orders-container2">
+        <h1 style="font-family: Poppins;text-align: center;padding: 80px;font-weight: bold;font-size: 50px;color: #7E6DFF">Our <span style="color: #FF6584">Beloved</span> Range of <span style="color: #FF6584">Digital</span> Artwork Products</h1>
+        <div class="product-row1">
+          <app-category-card *ngFor="let othercategory of othercategories" [img]="othercategory.img" [categoryTitle]="othercategory.name" ></app-category-card>
         </div>
-        <div class="uk-panel" style="padding-top: 50px">
-          <img src="assets/Component.png" alt="">
-          <div class="uk-position-center uk-panel"></div>
+      </section>
+    </div>
+  </div>
+  <div class="uk-panel" >
+    <div class="box">
+      <div class="inner-box" align="center">
+        <div class="uk-position-center uk-panel">
+          <h1 style="font-family: Poppins;text-align: center;font-weight: bolder;font-size: 50px;color: #6D5DE3;padding-top: 5%;padding-bottom: 2%">Looking for something <u style="color: #FF6584">Unique?</u></h1>
+          <hr style="background-color: #6D5DE3;width: 50vw;height: 5px;margin: auto;">
+          <h1 style="font-family: Poppins;text-align: center;font-weight: bolder;font-size: 1.8rem;color: #ADA2FF;padding-top: 3%;">Have some <u style="color: #FF6584">Unique?</u> products or custom designs on your <u style="color: #FF6584">mind</u></h1>
+          <h1 style="font-family: Poppins;text-align: center;font-weight: bold;font-size: 1.8rem;color: #ADA2FF;padding-bottom: 3%">Or confused about the right choice of gift.</h1>
+          <hr style="background-color: #6D5DE3;width: 70vw;height: 2px;margin: auto;">
+          <div align="center"><button><a href="/helppage">Tell us about it</a></button></div>
         </div>
-        <div class="uk-panel" style="padding-top: 50px">
-          <img src="assets/Union1.png" alt="">
-          <div class="uk-position-center uk-panel">
-            <div class="uk-flex">
-              <div class="uk-card uk-card-default uk-card-body" style="border-radius: 50%;height: 150px;width: 150px;font-size: 20px;font-family: Raleway;">Random</div>
-              <div class="uk-card uk-card-default uk-card-body uk-margin-left" style="border-radius: 50%;height: 150px;width: 150px;font-size: 20px;font-family: Raleway;">Random</div>
-              <div class="uk-card uk-card-default uk-card-body uk-margin-left" style="border-radius: 50%;height: 150px;width: 150px;font-size: 20px;font-family: Raleway;">Random</div>
-              <div class="uk-card uk-card-default uk-card-body uk-margin-left" style="border-radius: 50%;height: 150px;width: 150px;font-size: 20px;font-family: Raleway;">Random</div>
-              <div class="uk-card uk-card-default uk-card-body uk-margin-left" style="border-radius: 50%;height: 150px;width: 150px;font-size: 20px;font-family: Raleway;">Random</div>
-              <div class="uk-card uk-card-default uk-card-body uk-margin-left" style="border-radius: 50%;height: 150px;width: 150px;font-size: 20px;font-family: Raleway;">Random</div>
-              <div class="uk-card uk-card-default uk-card-body uk-margin-left" style="border-radius: 50%;height: 150px;width: 150px;font-size: 20px;font-family: Raleway;">Random</div>
-            </div>
-          </div>
-        </div>
-        <div class="uk-panel" >
-          <div class="box">
-            <div class="inner-box" align="center">
-              <div class="uk-position-center uk-panel">
-                <h1 style="font-family: Poppins;text-align: center;font-weight: bolder;font-size: 50px;color: #6D5DE3;padding-top: 5%;padding-bottom: 2%">Looking for something Unique ?</h1>
-                <hr style="background-color: #6D5DE3;width: 50vw;height: 5px;margin: auto;">
-                <h1 style="font-family: Poppins;text-align: center;font-weight: bolder;font-size: 35px;color: #6D5DE3;padding-top: 3%;">Have some Unique products or custom designs on your mind</h1>
-                <h1 style="font-family: Poppins;text-align: center;font-weight: bold;font-size: 25px;color: #ADA2FF;padding-bottom: 3%">Or confused about the right choice of gift.</h1>
-                <hr style="background-color: #6D5DE3;width: 70vw;height: 2px;margin: auto;">
-                <div align="center"><button>Tell us about it</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="uk-panel" >
+    <div class="box2">
+        <div class="uk-position-center uk-panel">
+          <div id="container3">
+            <section id="orders-container3">
+              <h1 style="font-family: Poppins;text-align: center;padding-top: 10px;padding-bottom: 20px;font-weight: bold;font-size: 3rem">Recommended Products</h1>
+              <div class="product-row2">
+                <app-product-full-card *ngFor="let product of products" [img]="product.img" [productTitle]="product.name" [productDescription]="product.description" [price]="product.price" ></app-product-full-card>
               </div>
-            </div>
+            </section>
           </div>
         </div>
-        <div class="uk-panel" >
-          <div class="box2">
-            <div class="inner-box2" align="center">
-              <div class="uk-position-center uk-panel">
-                <div class="container">
-                  <div class="headings">
-                    <h4>related products</h4>
-                    <h1>People usually go crazy for these four</h1>
-                  </div>
-                  <div class="cards">
-                    <div class="card">
-                      <div class="card__ima">
-                        <img src="https://assets.codepen.io/2709552/1.jpg" alt="drink1" />
-                        <span class="card__tag">$25</span>
-                      </div>
-                      <header class="card__header">
-                        <h3>Moscow Mule</h3>
-                        <p>Straight from Russia, golden cups with its drink</p>
-                      </header>
-                      <a href="#" class="card__btn">Buy Now</a>
-                    </div>
-                    <div class="card">
-                      <div class="card__ima">
-                        <img src="https://assets.codepen.io/2709552/2.jpg" alt="drink2" />
-                        <span class="card__tag">$12</span>
-                      </div>
-                      <header class="card__header">
-                        <h3>Red Drink</h3>
-                        <p>Strawberry juice with sliced oranges</p>
-                      </header>
-                      <a href="#" class="card__btn">Buy Now</a>
-                    </div>
-                    <div class="card">
-                      <div class="card__ima">
-                        <img src="https://assets.codepen.io/2709552/3.jpg" alt="drink3" />
-                        <span class="card__tag">$35</span>
-                      </div>
-                      <header class="card__header">
-                        <h3>Lemon Tea</h3>
-                        <p>Lemons straight from Singapore Top tea</p>
-                      </header>
-                      <a href="#" class="card__btn">Buy Now</a>
-                    </div>
-                    <div class="card">
-                      <div class="card__ima">
-                        <img src="https://assets.codepen.io/2709552/4.jpg" alt="drink4" />
-                        <span class="card__tag">$32</span>
-                      </div>
-                      <header class="card__header">
-                        <h3>Morning Covfefe</h3>
-                        <p>You know.The day starter for everyone</p>
-                      </header>
-                      <a href="#" class="card__btn">Buy Now</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      </div>
+  </div>
+  <div class="uk-panel" style="padding-top: 50px">
+    <img src="assets/Promo.png" alt="">
+    <div class="uk-position-center uk-panel"></div>
+  </div>
+  <div class="uk-panel" >
+    <div class="box3">
+      <div class="inner-box3" align="center">
+          <div class="uk-position-center-left uk-panel" style="width: 32vw;height: auto;">
+            <a href="#"><img src="assets/Group20.png" alt=""></a>
           </div>
-        </div>
-        <div class="uk-panel" style="padding-top: 50px">
-          <img src="assets/Promo.png" alt="">
-          <div class="uk-position-center uk-panel"></div>
-        </div>
-        <div class="uk-panel" >
-          <div class="box3">
-            <div class="inner-box3" align="center">
-                <div class="uk-position-center-left uk-panel" style="width: 32vw;height: auto;">
-                  <a href="#"><img src="assets/Group20.png" alt=""></a>
-                </div>
-                <div class="uk-position-center uk-panel" style="width: 32vw;height: auto;">
-                  <a href="#"><img src="assets/Group19.png" alt=""></a>
-                </div>
-                <div class="uk-position-center-right uk-panel" style="width: 32vw;height: auto;">
-                  <a href="#"><img src="assets/Group18.png" alt=""></a>
-                </div>
-            </div>
+          <div class="uk-position-center uk-panel" style="width: 32vw;height: auto;">
+            <a href="#"><img src="assets/Group19.png" alt=""></a>
           </div>
-        
-        </div>
-        <app-accordion></app-accordion>
-        <app-footer ></app-footer>
+          <div class="uk-position-center-right uk-panel" style="width: 32vw;height: auto;">
+            <a href="#"><img src="assets/Group18.png" alt=""></a>
+          </div>
+      </div>
+    </div>
+  
+  </div>
+  <app-accordion></app-accordion>
+  <app-footer ></app-footer>
 </ion-content>
