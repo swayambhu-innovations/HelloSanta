@@ -1,0 +1,13 @@
+<div class="order-card">
+  <img [src]="img"
+       alt="{{orderTitle}}" class="order-img">
+  <div class="order-details">
+    <h4 class="order-title">{{orderTitle}}</h4>
+    <p class="order-description">{{orderDescription}}</p>
+  </div>
+  <div class="order-price-and-btns">
+    <p class="order-price">Price: ₹{{orderprice}}</p>
+    <button class="order-remove">Remove</button>
+    <button class="order-view">View Product</button>
+  </div>
+</div>

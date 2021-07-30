@@ -1,0 +1,65 @@
+
+.order-card, .order-img {
+  border-radius: 20px;
+}
+
+.order-card {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background-color: #F6F6F6;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 2em;
+}
+
+
+.order-img {
+  width: 20%;
+  display: block;
+  margin: 1em;
+}
+
+.order-details {
+  color: #6D5DE3;
+  padding: 1em;
+}
+
+.order-title {
+  font-family: 'Poppins';
+  font-size: 1.5rem;
+  color: #6D5DE3;
+}
+
+.order-price-and-btns {
+  margin: 1em;
+}
+
+.order-price {
+  color: #5AC179;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  text-align: center;
+}
+
+.order-remove, .order-view {
+  border-radius: 20px;
+  border-width: 2px;
+  border-style: solid;
+  padding: .25em .5em;
+  font-weight: 700;
+  width: 100%;
+  margin: .25em 0;
+}
+
+.order-remove {
+  background-color: #FFF2F5;
+  color: #FF6584;
+  border: 2px solid #FF6584;
+}
+
+.order-view {
+  background-color: #E5F3FF;
+  color: #6AB9FF;
+  border: 2px solid #6AB9FF;
+}

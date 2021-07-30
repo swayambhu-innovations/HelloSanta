@@ -26,6 +26,11 @@ import { ErrorCardComponent } from './Components/error-card/error-card.component
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { ProductFullCardComponent } from './components/product-full-card/product-full-card.component';
+import { CategoryCardComponent } from './components/category-card/category-card.component';
+import { WideProductCardComponent } from './components/wide-product-card/wide-product-card.component';
+import { SmallProductCardComponent } from './components/small-product-card/small-product-card.component';
+import { BlogCardComponent } from './components/blog-card/blog-card.component';
 import { AccordionComponent } from './Components/accordion/accordion.component';
 import { HomeComponent } from './customerPanel/home/home.component';
 import { SetupComponent } from './customerPanel/setup/setup.component';
@@ -68,6 +73,7 @@ import { VPProductCardComponent } from './Components/vpproduct-card/vpproduct-ca
 import { AuthService } from './services/auth.service';
 import { DataProvider } from './providers/data.provider';
 import { LoginGuard } from './guards/login-guard.guard';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -99,6 +105,11 @@ import { LoginGuard } from './guards/login-guard.guard';
     UserCardComponent,
     ErrorCardComponent,
     SidenavComponent,
+    ProductFullCardComponent,
+    CategoryCardComponent,
+    WideProductCardComponent,
+    SmallProductCardComponent,
+    BlogCardComponent,
     AccordionComponent,
     SetupComponent,
     ProfileComponent,
