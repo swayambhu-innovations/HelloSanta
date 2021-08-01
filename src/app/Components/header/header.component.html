@@ -27,10 +27,10 @@
       <li><button uk-toggle="target: #offcanvas-push"><ion-icon name="menu"></ion-icon></button></li>
     </div>
     <li><a href="/">Home</a></li>
-    <li><a href="/about/">Shop</a></li>
-    <li><a href="/work/">Wishlist</a></li>
-    <li><a href="/clients/">Blog</a></li>
-    <li><a href="/contact/">Contact</a></li>
+    <li><a href="/handmadeart/">Handmade Products</a></li>
+    <li><a href="/digitalart/">Digital Products</a></li>
+    <li><a href="/blog/">Blog</a></li>
+    <li><a href="/help/">Contact</a></li>
     <li><a href="/AdminPanel/Dashboard">Admin Panel</a></li>
     <li><a href="/VendorPanel/Dashboard">Vendor Panel</a></li>
   </ul>
@@ -47,10 +47,22 @@
         <li><a href="">Products</a></li>
         <li><a href="">Cart</a></li>
       </ul>
-      <button class="bottomAvatar">
+      <button class="bottomAvatar" (click)="authService.SignOut()">
         <ion-avatar>
           <img [src]="image" />
         </ion-avatar>
       </button>
   </div>
+</div>
+<div class="headerMobile">
+  <button>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <button>
+    <ion-icon name="home"></ion-icon>
+  </button>
+  <img src="./assets/logo-light.png" alt="Hello Santa Logo">
+  <button>
+    <ion-icon name="search"></ion-icon>
+  </button>
 </div>

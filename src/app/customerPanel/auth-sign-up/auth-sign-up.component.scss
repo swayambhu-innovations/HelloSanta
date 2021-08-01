@@ -1,20 +1,13 @@
 img.bg {
-  /* Set rules to fill background */
-  min-height: 100%;
-  min-width: 1024px;
-
-  /* Set up proportionate scaling */
   width: 100%;
   height: auto;
-
-  /* Set up positioning */
   position: fixed;
   top: 0;
   left: 0;
 }
 
 img {
-  padding-bottom: 10px;
+  // padding-bottom: 10px;
   width: 300px;
 }
 
@@ -22,7 +15,6 @@ img {
   background-color: #FF6584; /* Green */
   border: none;
   border-radius: 10px;
-  border: 2px solid black;
   color: white;
   padding: 15px 60px;
   text-align: center;
@@ -41,19 +33,14 @@ img {
   word-wrap: break-word;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Ubuntu,sans-serif;
 }
-body {
-  min-height: 100%;
-  background-color: #ffffff;
-}
-h1 {
-  letter-spacing: -1px;
-}
+
 a {
   color: #5469d4;
   text-decoration: unset;
+  text-align: center;
 }
 .login-root {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.404);
   display: flex;
   width: 100%;
   min-height: 100vh;
@@ -62,9 +49,7 @@ a {
 .flex-flex {
   display: flex;
 }
-.align-center {
-  align-items: center;
-}
+
 .center-center {
   align-items: center;
   justify-content: center;
@@ -76,38 +61,7 @@ a {
   -ms-flex-direction: column;
   flex-direction: column;
 }
-.loginbackground-gridContainer {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: [start] 1fr [left-gutter] (86.6px)[16] [left-gutter] 1fr [end];
-  grid-template-columns: [start] 1fr [left-gutter] repeat(16,86.6px) [left-gutter] 1fr [end];
-  -ms-grid-rows: [top] 1fr [top-gutter] (64px)[8] [bottom-gutter] 1fr [bottom];
-  grid-template-rows: [top] 1fr [top-gutter] repeat(8,64px) [bottom-gutter] 1fr [bottom];
-  justify-content: center;
-  margin: 0 -2%;
-  transform: rotate(-12deg) skew(-12deg);
-}
-.box-divider--light-all-2 {
-  box-shadow: inset 0 0 0 2px #e3e8ee;
-}
-.box-background--blue {
-  background-color: #5469d4;
-}
-.box-background--white {
-  background-color: #ffffff;
-}
-.box-background--blue800 {
-  background-color: #212d63;
-}
-.box-background--gray100 {
-  background-color: #e3e8ee;
-}
-.box-background--cyan200 {
-  background-color: #7fd3ed;
-}
-.padding-top--64 {
-  padding-top: 64px;
-}
+
 .padding-top--24 {
   padding-top: 24px;
 }
@@ -117,13 +71,11 @@ a {
 .padding-bottom--24 {
   padding-bottom: 24px;
 }
-.padding-horizontal--48 {
-  padding: 48px;
-}
+
 .padding-bottom--15 {
   padding-bottom: 15px;
+  color:#FF6584;
 }
-
 
 .flex-justifyContent--center {
   -ms-flex-pack: center;
@@ -131,11 +83,12 @@ a {
 }
 
 .formbg {
-  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
   margin: 0px auto;
-  width: 100%;
-  max-width: 448px;
-  background: #FFFFFF;
+  width: fit-content;
+  max-width: fit-content;
+  background: #ffffff91;
   opacity: 80%;
   box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
   border-radius: 25px;
@@ -146,34 +99,24 @@ span {
   line-height: 28px;
   color: #1a1f36;
 }
-label {
-  margin-bottom: 10px;
-}
-.reset-pass a,label {
-  font-size: 14px;
-  font-weight: 600;
-  display: block;
-}
+
 .reset-pass > a {
   text-align: right;
   margin-bottom: 10px;
 }
-.grid--50-50 {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  align-items: center;
-}
 
-.field input {
+
+input {
   font-size: 16px;
   line-height: 28px;
   padding: 8px 16px;
-  width: 100%;
+  min-width: 200px;
   min-height: 44px;
-  border: unset;
-  border: 2px solid black;
-  border-radius: 4px;
-  outline-color: rgb(84 105 212 / 0.5);
+  outline: none;
+  font-weight: 600;
+  color:#FF6584;
+  border: solid 1px white;
+  border-radius: 20px;
   background-color: rgb(255, 255, 255);
   box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
   rgba(0, 0, 0, 0) 0px 0px 0px 0px,
@@ -183,18 +126,9 @@ label {
   rgba(0, 0, 0, 0) 0px 0px 0px 0px,
   rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
-
-input[type="submit"] {
-  background-color: rgb(84, 105, 212);
-  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0.12) 0px 1px 1px 0px,
-  rgb(84, 105, 212) 0px 0px 0px 1px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
-  font-weight: 600;
-  cursor: pointer;
+input:active,input:focus{
+  border:2px solid #FF6584; 
+  outline: none;
 }
 .field-checkbox input {
   width: 20px;
@@ -203,11 +137,7 @@ input[type="submit"] {
   box-shadow: unset;
   min-height: unset;
 }
-.field-checkbox label {
-  display: flex;
-  align-items: center;
-  margin: 0;
-}
+
 .ssolink {
   display: block;
   text-align: center;
@@ -215,7 +145,7 @@ input[type="submit"] {
 .ssolink > ion-icon{
   font-weight: 600;
   font-size: 40px; 
-  color: #FFC332;
+  color: #FF6584;
 }
 .footer-link span {
   font-size: 14px;
@@ -226,47 +156,39 @@ input[type="submit"] {
   font-weight: 600;
   margin: 0 10px;
 }
-
-.animationRightLeft {
-  animation: animationRightLeft 2s ease-in-out infinite;
+.disabled{
+  opacity: 0.5;
 }
-.animationLeftRight {
-  animation: animationLeftRight 2s ease-in-out infinite;
+form{
+  display: flex;
+  flex-direction: column;
+  padding-left:50px;
+  padding-top: 10px;
+  padding-right: 50px;
+  justify-content: space-evenly;
+  height:400px;
 }
-.tans3s {
-  animation: animationLeftRight 3s ease-in-out infinite;
+.field{
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
 }
-.tans4s {
-  animation: animationLeftRight 4s ease-in-out infinite;
+.uk-divider-icon::after, .uk-divider-icon::before {
+  border-bottom: 1px solid #FF6584 !important;
 }
-
-@keyframes animationLeftRight {
-  0% {
-    transform: translateX(0px);
-  }
-  50% {
-    transform: translateX(1000px);
-  }
-  100% {
-    transform: translateX(0px);
-  }
+.uk-divider-icon{
+  background-image:url("/assets/circle.svg")
 }
-
-@keyframes animationRightLeft {
-  0% {
-    transform: translateX(0px);
-  }
-  50% {
-    transform: translateX(-1000px);
-  }
-  100% {
-    transform: translateX(0px);
-  }
+.avatar{
+  border-radius:50px;
+  width:100px;
+  height:100px;
+  margin: 0 auto;
+  object-fit: cover;
+  box-shadow:5px 10px 20px rgba(0, 0, 0, 0.3);
 }
 
-@media screen and (max-width: 1024px) { /* Specific to this particular image */
-  img.bg {
-    left: 50%;
-    margin-left: -512px;   /* 50% */
-  }
+.dialog{
+  height:300px;
 }
+

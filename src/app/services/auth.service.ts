@@ -1,5 +1,3 @@
-
-
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { NavigationExtras, Router } from "@angular/router";
@@ -13,6 +11,7 @@ import { User, access } from './DataStructures';
 import { ToastController } from '@ionic/angular';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { auditTime, filter, finalize, last, switchMap, take, tap } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -81,7 +80,7 @@ export class AuthService {
       })
   }
   // Sign up with email/password
-  SignUp(email:string, password:string,name:string,photo:string) {
+  SignUp(email:string, password:string,name:string,photo:string,dob?:Date) {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
       .then(async (result:any) => {
         console.log("Starting email verification")
@@ -91,10 +90,10 @@ export class AuthService {
         console.log("Starting file upload ")
         this.uploadFile(photo,result.user.uid).subscribe((imageUrl)=>{
           console.log("Completed the imageurl ",imageUrl)
-          this.SetUserData(result.user,name,imageUrl);
+          this.SetUserData({user:result.user,displayName:name,photo:imageUrl,dob:dob});
           let today = new Date();
           var currentAccess:access={
-            accessLevel:'Unregistered',
+            accessLevel:'Customer',
           }
           localStorage.setItem("localItem",JSON.stringify({
             uid:result.user.uid,
@@ -105,7 +104,7 @@ export class AuthService {
             isAdmin:false,
             firstLogin:today.toLocaleDateString("en-US",AuthService.dateOptions).toString(),
             data:result.user.data || [],
-            post:"Unregistered",
+            post:"Customer",
             presentToday:this.formatPresentToday(true),
             access:currentAccess,
           }))
@@ -132,7 +131,7 @@ export class AuthService {
     })
   }
 
-  // Reset Forggot password
+  // Reset Forgot password
   ForgotPassword(passwordResetEmail:any) {
     return this.afAuth.sendPasswordResetEmail(passwordResetEmail)
     .then(() => {
@@ -161,16 +160,20 @@ export class AuthService {
   }
   isUserAdmin(){
     console.log("IS admin fired",this.userId)
-    this.afs.collection("users").doc(this.userData.uid).valueChanges().toPromise().then(
-      (value)=>{
-        console.log(value)
-        console.log("--")
-      }
-    )
+    this.afs.collection("users").doc(this.userId).valueChanges().subscribe((value) => {
+      console.log(value);
+    })
+    console.log("-Ended-")
   }
-
+  isAdmin():string{
+    const user = JSON.parse(localStorage.getItem('localitem') || '{}');
+    return user.post.toString();
+  }
   GoogleAuth() {
-    return this.AuthLogin(new firebase.auth.GoogleAuthProvider());
+    let provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/user.birthday.read')
+    provider.addScope('https://www.googleapis.com/auth/user.gender.read')
+    return this.AuthLogin(provider);
   }  
 
   getUserData() {
@@ -204,10 +207,25 @@ export class AuthService {
   AuthLogin(provider:any) {
     return this.afAuth.signInWithPopup(provider)
     .then((result:any) => {
-      this.SetUserData(result.user);
-      // window.alert("Auhtorisation successful ");
-      this.presentToast("Auhtorisation Successful")
-      this.router.navigate[""]
+      fetch(
+        `https://people.googleapis.com/v1/people/${result.additionalUserInfo.profile.id}?personFields=birthdays,genders&access_token=${result.credential.accessToken}`
+      ).then(response => {
+        response.json().then((value) => {
+          var date = new Date((
+            value.birthdays[0].date.year+
+            "-"+value.birthdays[0].date.month+
+            "-"+value.birthdays[0].date.day).toString()
+          );
+          this.SetUserData({user:result.user,dob:date});
+          console.log(date);
+        });
+        // window.alert("Auhtorisation successful ");
+        this.presentToast("Auhtorisation Successful")
+        this.router.navigate[""]
+      }).catch((error:any) =>{
+        this.presentToast(error)
+      })
+      console.log(result.user)
     }).catch((error:any) => {
       this.presentToast(error);
     })
@@ -222,11 +240,17 @@ export class AuthService {
       return "0-"+(today.toLocaleDateString("en-US",AuthService.dateOptions).toString())
     }
   }
-  SetUserData(user:any,displayName?: string,photo?: string) {
+  SetUserData(
+    {
+      user,
+      displayName,
+      photo,
+      dob
+    }:NamedParameters) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     // console.log("SetUSerData",user,displayName,photo)
     var currentAccess:access={
-      accessLevel:'Unregistered',
+      accessLevel:'Customer',
     }
     let today  = new Date();
     if (displayName!=undefined || photo!=undefined){
@@ -238,14 +262,20 @@ export class AuthService {
         photoURL: photo,
         emailVerified: user.emailVerified,
         isAdmin:false,
-        leaveTaken:0,
-        totalProjects:0,
-        completedProjects:0,
         firstLogin:today.toLocaleDateString("en-US",AuthService.dateOptions).toString(),
         data:user.data || [],
-        post:"Unregistered",
-        presentToday:this.formatPresentToday(true),
         access:currentAccess,
+        cartItems:user.cartItems || [],
+        currentOrder:user.currentOrder || [],
+        dob:user.dob || dob,
+        friends:user.friends || [],
+        orders:user.orders || [],
+        referred:user.referred || [],
+        refferres:user.refferres || [],
+        totalCashback:user.totalCashback || 0.0,
+        totalOrders: user.totalOrders || 0,
+        totalSalesPoints:user.totalSales || 0,
+        wishlist: user.wishlist || [],
       }
     }else{
       console.log("Set data false")
@@ -256,14 +286,20 @@ export class AuthService {
         photoURL: user.photoURL,
         emailVerified: user.emailVerified,
         isAdmin:false,
-        totalProjects:0,
-        completedProjects:0,
-        leaveTaken:0,
         firstLogin:today.toLocaleDateString("en-US",AuthService.dateOptions).toString(),
         data:user.data || [],
-        post:"Unregistered",
-        presentToday:this.formatPresentToday(true),
         access:currentAccess,
+        cartItems:user.cartItems || [],
+        currentOrder:user.currentOrder || [],
+        dob:user.dob || dob,
+        friends:user.friends || [],
+        orders:user.orders || [],
+        referred:user.referred || [],
+        refferres:user.refferres || [],
+        totalCashback:user.totalCashback || 0.0,
+        totalOrders: user.totalOrders || 0,
+        totalSalesPoints:user.totalSales || 0,
+        wishlist: user.wishlist || [],
       }
     }
     return userRef.set(userData, {
@@ -276,9 +312,15 @@ export class AuthService {
     // window.alert("Signing Out")
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      localStorage.removeItem('fireUser')
+      localStorage.removeItem('localItem')
       this.router.navigate(['Login']);
     })  
   }
 
+}
+interface NamedParameters{
+  user:any,
+  displayName?: string,
+  photo?: string,
+  dob?:Date
 }

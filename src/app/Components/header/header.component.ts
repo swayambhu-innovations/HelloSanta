@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataProvider } from 'src/app/providers/data.provider';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -6,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  image="https://i.pravatar.cc/300"
-  constructor() { }
+  image=""
+  constructor(public authService:AuthService,public dataProvider:DataProvider) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.image=this.authService.getUserPhoto()
+    this.authService.isUserAdmin();
+  }
 
 }

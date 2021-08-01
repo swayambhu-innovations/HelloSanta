@@ -18,7 +18,7 @@ export class LoginGuard implements CanActivate {
       }
       return true;
     }
-    this.router.navigate(['/Login'])
+    this.router.navigate(['/login'])
     return false;
   }
 }

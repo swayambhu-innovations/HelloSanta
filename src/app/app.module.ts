@@ -73,7 +73,9 @@ import { VPProductCardComponent } from './Components/vpproduct-card/vpproduct-ca
 import { AuthService } from './services/auth.service';
 import { DataProvider } from './providers/data.provider';
 import { LoginGuard } from './guards/login-guard.guard';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { VerifyEmailComponent } from './customerPanel/verify-email/verify-email.component';
+import { SetupModalStepOneComponent } from './modals/setup-modal-step-one/setup-modal-step-one.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -137,10 +139,13 @@ import { LoginGuard } from './guards/login-guard.guard';
     IssuesCardComponent,
     VPOrdersSummaryCardComponent,
     VPProductCardComponent,
+    VerifyEmailComponent,
+    SetupModalStepOneComponent,
   ],
   entryComponents: [],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     RatingModule,
     IonicModule.forRoot(),
     AppRoutingModule,

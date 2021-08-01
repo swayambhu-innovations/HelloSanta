@@ -43,6 +43,9 @@ import { BlogComponent } from './customerPanel/blog/blog.component';
 import { BuyagainComponent } from './customerPanel/buyagain/buyagain.component';
 import { AccountComponent } from './customerPanel/account/account.component';
 import { SingleproductComponent } from './customerPanel/singleproduct/singleproduct.component';
+import { LoginGuard } from './guards/login-guard.guard'
+import { VerifyEmailComponent } from './customerPanel/verify-email/verify-email.component';
+import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 
 const routes: Routes = [
   {
@@ -52,7 +55,7 @@ const routes: Routes = [
   },
   {path:'Home', component:HomeComponent},
   {path:'login', component:AuthLoginComponent},
-  {path:'signin', component:AuthSignUpComponent},
+  {path:'signup', component:AuthSignUpComponent},
   {path:'setup', component:SetupComponent},
   {path:'profile', component:ProfileComponent},
   {path:'feedback', component: FeedbackComponent},
@@ -63,7 +66,12 @@ const routes: Routes = [
   {path:'trackorder', component:TrackorderComponent},
   {path:'cart', component:CartComponent},
   {path:'help', component:HelpComponent},
-  {path:'checkout', component:CheckoutComponent},
+  {path: 'blog', component:BlogComponent},
+  {path:'checkout',
+   component:CheckoutComponent,
+   canActivate:[LoginGuard],
+   data: { authGuardPipe: redirectLoggedInTo(['/Login']), "route":"checkout" },
+  },
   {path:'disclaimer', component:DisclaimerComponent},
   {path:'privacypolicy', component:PrivacypolicyComponent},
   {path:'termsandconditions', component:TermsandconditionsComponent},
@@ -73,9 +81,12 @@ const routes: Routes = [
   {path:'buyagain', component:BuyagainComponent},
   {path:'account', component:AccountComponent},
   {path:'product', component:SingleproductComponent},
+  {path:"verifyEmail", component:VerifyEmailComponent},
 
   {
     path:"AdminPanel",
+    canActivate:[LoginGuard],
+    data: { authGuardPipe: redirectLoggedInTo(['/Login']), "route":"checkout" },
     component:AdminPanelComponent,
     children:[
       {path:'Dashboard',component:APDashboardComponent},
@@ -94,6 +105,8 @@ const routes: Routes = [
   },
   {
     path:"VendorPanel",
+    canActivate:[LoginGuard],
+    data: { authGuardPipe: redirectLoggedInTo(['/Login']), "route":"checkout" },
     component:VendorPanelComponent,
     children:[
       {path:'Dashboard',component:VPDashboardComponent},

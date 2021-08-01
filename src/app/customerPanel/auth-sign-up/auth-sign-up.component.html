@@ -1,57 +1,56 @@
-<ion-content>
+<ion-content [ngStyle]="{'filter': (dataProvider.showOverlay) ? 'blur(10px)' : 'blur(0px)' }">
   <img src="../../assets/flowers.png" class="bg">
-    <div class="login-root">
-      <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
-        <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
-        </div>
-        <div class="formbg-outer">
-          <div class="formbg">
-            <div class="formbg-inner padding-horizontal--48">
-              <a href="http://hellosanta.in/" rel="dofollow"><img src="assets/logo.png"></a>
-              <span class="padding-bottom--15">Sign-in to your account</span>
-              <form id="stripe-login">
-                <div class="field padding-bottom--24">
-                  <label for="Name">Name</label>
-                  <input type="Name" name="Name">
-                </div>
-                <div class="field padding-bottom--24">
-                  <label for="email">Email</label>
-                  <input type="email" name="email">
-                </div>
-                <div class="field padding-bottom--24">
-                  <div class="grid--50-50">
-                    <label for="password">Password</label>
-                    <div class="reset-pass">
-                      <a href="#">Forgot your password?</a>
-                    </div>
-                  </div>
-                  <input type="password" name="password">
-                </div>
-                <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
-                  <label for="checkbox">
-                    <input type="checkbox" name="checkbox"> Stay signed in for a week
-                  </label>
-                </div>
-                <button class="button">Continue</button>
-                <div class="field" style="">
-                    <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
-                      <button class="ssolink" href="#"><ion-icon name="logo-google" ></ion-icon></button>
-                      <button class="ssolink" href="#"><ion-icon name="logo-facebook" ></ion-icon></button>
-                      <button class="ssolink" href="#"><ion-icon name="logo-apple" ></ion-icon></button>
-                  </div>
-                </div>
-              </form>
-            </div>
+  <div class="login-root">
+    <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+      <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
+      </div>
+      <div class="formbg-outer">
+        <div class="formbg">
+          <a href="http://hellosanta.in/" rel="dofollow"><img src="assets/logo.png"></a>
+          <span class="padding-bottom--15" style="text-align:center;">Create your account</span>
+          <img class="avatar" *ngIf="img1" [src]="img1">
+          <button (click)="presentModal()">Present Modal</button>
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" action="">
+            <input type="file" accept=".jpg,.png,.jpeg" placeholder="Image" required #photo
+              (change)="fileChange($event)" formControlName="photo">
+
+            <input type="text" autocomplete="name" autofocus placeholder="Full Name" inputmode="text" required
+              formControlName="name" #name>
+
+            <input type="text" autocomplete="username" placeholder="Email Address" inputmode="text" required #email
+              formControlName="email">
+
+            <input type="password" autocomplete="password" placeholder="Password" inputmode="text" required #password
+              formControlName="password">
+
+            <input type="password" autocomplete="password" placeholder="Password" inputmode="text" required
+              #confirmPassword formControlName="confirmPassword">
+
+            <button [disabled]="isLoading || !form.valid" [ngClass]="isLoading || !form.valid ? 'disabled' : ''"
+              class="button" type="submit">Continue</button>
+          </form>
+          <hr class="uk-divider-icon">
+          <div class="field">
+            <button class="ssolink" href="#" (click)="authService.GoogleAuth()">
+              <ion-icon name="logo-google"></ion-icon>
+            </button>
+            <button class="ssolink" href="#">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </button>
+            <button class="ssolink" href="#">
+              <ion-icon name="logo-apple"></ion-icon>
+            </button>
           </div>
-          <div class="footer-link padding-top--24">
-            <span>Already have an account? <a href="/loginpage">login</a></span>
-            <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
-              <span><a href="#">© Hello Santa</a></span>
-              <span><a href="#">Contact</a></span>
-              <span><a href="#">Privacy & terms</a></span>
-            </div>
+        </div>
+        <div class="footer-link padding-top--24">
+          <span>Already have an account? <a href="/loginpage">login</a></span>
+          <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
+            <span><a href="#">© Hello Santa</a></span>
+            <span><a href="#">Contact</a></span>
+            <span><a href="#">Privacy & terms</a></span>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </ion-content>
