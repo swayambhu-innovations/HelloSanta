@@ -22,7 +22,6 @@ img {
   background-color: #FFC550; /* Green */
   border: none;
   border-radius: 25px;
-  border: 2px solid black;
   color: black;
   padding: 15px 60px;
   text-align: center;
@@ -269,4 +268,64 @@ input[type="submit"] {
     left: 50%;
     margin-left: -512px;   /* 50% */
   }
+}
+.box-root{
+  margin-top: 100px;
+}
+@media only screen and (max-width:500px){
+  img{
+    width:200px;
+  }
+  .bg{
+    object-position: 30% 20%;
+    object-fit: cover;
+    height:100vh !important;
+    margin-bottom: 0% !important;
+  }
+  .login-root{
+    // width:80vw;
+    margin: 0 auto;
+  }
+  input{
+    min-width: 50px;
+    max-width:200px;
+    box-shadow:5px 10px 20px rgba(0, 0, 0, 0.075);
+    border:2px solid #FF6584;
+  }
+  .formbg{
+    padding-top:5px;
+    width:300px;
+    background: #ffffffec;
+  }
+  form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  form > input:nth-child(1){
+    font-size: 15px;
+  }
+  .button{
+    margin:0%;
+  }
+
+}
+#overlay{
+  // display: none;
+  position: absolute;
+  top:0%;
+  left:0%;
+  width: 100vw;
+  height:100vh;
+  overflow: hidden;
+  z-index: 1;
+}
+#overlay > *{
+  position: relative;
+  top:50%;
+  left:50%;
+  width: 100px;
+  height:100px;
+  transform: translate(-50%,-50%);
 }

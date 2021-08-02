@@ -205,29 +205,40 @@ export class AuthService {
 
   // Auth logic to run auth providers
   AuthLogin(provider:any) {
+    this.homeDataProvider.showOverlay=true;
     return this.afAuth.signInWithPopup(provider)
     .then((result:any) => {
       fetch(
         `https://people.googleapis.com/v1/people/${result.additionalUserInfo.profile.id}?personFields=birthdays,genders&access_token=${result.credential.accessToken}`
       ).then(response => {
         response.json().then((value) => {
-          var date = new Date((
-            value.birthdays[0].date.year+
-            "-"+value.birthdays[0].date.month+
-            "-"+value.birthdays[0].date.day).toString()
-          );
-          this.SetUserData({user:result.user,dob:date});
-          console.log(date);
+          if (value.birthdays!=undefined){
+            var date = new Date((
+              value.birthdays[0].date.year+
+              "-"+value.birthdays[0].date.month+
+              "-"+value.birthdays[0].date.day).toString()
+            );
+            this.SetUserData({user:result.user,dob:date});
+            console.log(date);
+          }else{
+            this.presentToast("Oops we don't know your birthday or your gender.");
+            this.SetUserData({user:result.user});
+          }
+          
         });
         // window.alert("Auhtorisation successful ");
         this.presentToast("Auhtorisation Successful")
         this.router.navigate[""]
+        this.homeDataProvider.showOverlay=false;
+        console.log("Auth successful");
       }).catch((error:any) =>{
         this.presentToast(error)
+        this.homeDataProvider.showOverlay=false;
       })
       console.log(result.user)
     }).catch((error:any) => {
       this.presentToast(error);
+      this.homeDataProvider.showOverlay=false;
     })
   }
   
@@ -267,7 +278,7 @@ export class AuthService {
         access:currentAccess,
         cartItems:user.cartItems || [],
         currentOrder:user.currentOrder || [],
-        dob:user.dob || dob,
+        dob:user.dob || dob || undefined,
         friends:user.friends || [],
         orders:user.orders || [],
         referred:user.referred || [],

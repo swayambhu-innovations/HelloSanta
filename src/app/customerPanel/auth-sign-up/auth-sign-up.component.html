@@ -2,8 +2,6 @@
   <img src="../../assets/flowers.png" class="bg">
   <div class="login-root">
     <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
-      <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
-      </div>
       <div class="formbg-outer">
         <div class="formbg">
           <a href="http://hellosanta.in/" rel="dofollow"><img src="assets/logo.png"></a>
@@ -13,19 +11,14 @@
           <form [formGroup]="form" (ngSubmit)="onSubmit()" action="">
             <input type="file" accept=".jpg,.png,.jpeg" placeholder="Image" required #photo
               (change)="fileChange($event)" formControlName="photo">
-
             <input type="text" autocomplete="name" autofocus placeholder="Full Name" inputmode="text" required
               formControlName="name" #name>
-
             <input type="text" autocomplete="username" placeholder="Email Address" inputmode="text" required #email
               formControlName="email">
-
             <input type="password" autocomplete="password" placeholder="Password" inputmode="text" required #password
               formControlName="password">
-
             <input type="password" autocomplete="password" placeholder="Password" inputmode="text" required
               #confirmPassword formControlName="confirmPassword">
-
             <button [disabled]="isLoading || !form.valid" [ngClass]="isLoading || !form.valid ? 'disabled' : ''"
               class="button" type="submit">Continue</button>
           </form>
@@ -43,7 +36,7 @@
           </div>
         </div>
         <div class="footer-link padding-top--24">
-          <span>Already have an account? <a href="/loginpage">login</a></span>
+          <span>Already have an account? <a href="/login">login</a></span>
           <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
             <span><a href="#">© Hello Santa</a></span>
             <span><a href="#">Contact</a></span>
@@ -54,3 +47,6 @@
     </div>
   </div>
 </ion-content>
+<div id="overlay" *ngIf="dataProvider.showOverlay">
+  <ion-spinner name="crescent" color="tertiary"></ion-spinner>
+</div>

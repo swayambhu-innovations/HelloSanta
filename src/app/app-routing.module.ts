@@ -48,12 +48,7 @@ import { VerifyEmailComponent } from './customerPanel/verify-email/verify-email.
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'Home',
-    pathMatch: 'full'
-  },
-  {path:'Home', component:HomeComponent},
+  {path:'', component:HomeComponent},
   {path:'login', component:AuthLoginComponent},
   {path:'signup', component:AuthSignUpComponent},
   {path:'setup', component:SetupComponent},
