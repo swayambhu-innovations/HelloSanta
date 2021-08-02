@@ -19,3 +19,15 @@
   font-size: 1.2rem;
   color: #FFAB00;
 }
+
+@media only screen and (max-width: 600px) {
+  .category-card {
+    width: 100px;
+  }
+  .category-title {
+    font-size: 0.5rem;
+  }
+  .category-details {
+    padding: 0.2rem;
+  }
+}

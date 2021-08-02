@@ -1,18 +1,11 @@
 
-.box{
-  right: 50%;
-  left: 50%;
-  height: 100vh;
-  align-items: center;
-}
 .inner-box{
   height: 70vh;
   width: 80vw;
-  position: relative;
-  display: block;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  font-family: Poppins;
+  text-align: center;
+  padding: 50px;
+  margin: 5% 10%;
   background: rgba(255, 255, 255, .7);
   box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
   border-radius: 50px;
@@ -20,45 +13,11 @@
   align-items: center;
 }
 
-.box2{
-  right: 50%;
-  left: 50%;
-  height: 100vh;
-  align-items: center;
-}
+
 .inner-box2{
-  height: 100vh;
-  width: 85vw;
-  position: relative;
-  display: block;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, .7);
-  box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
-  border-radius: 50px;
-  align-items: center;
-}
-
-
-.box3{
-  right: 50%;
-  left: 50%;
-  height: 80vh;
-  align-items: center;
-}
-.inner-box3{
   height: auto;
   width: 85vw;
-  position: relative;
-  display: block;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, .7);
-  box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
-  border-radius: 50px;
-  align-items: center;
+  margin: 18% 8% 15% 8%;
 }
 
 button{
@@ -85,6 +44,14 @@ button{
   align-items: flex-start;
 }
 
+.handmade{
+  font-family: Poppins;
+  text-align: center;
+  padding: 80px;
+  font-weight: bold;
+  font-size: 50px;
+  color: white
+}
 
 .product-row{
   display: flex;
@@ -122,16 +89,20 @@ button{
   align-items: flex-start;
 }
 
+.digital{
+  font-family: Poppins;
+  text-align: center;
+  padding: 80px;
+  font-weight: bold;
+  font-size: 3.5rem;
+  color: #7E6DFF
+}
+
 .product-row1{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: flex-start;
-}
-
-#container3 {
-  width: 95%;
-  margin: 4em auto;
 }
 
 #container3 {
@@ -176,4 +147,38 @@ a{
   animation-duration: 20s;
   animation-timing-function: steps(25, end);
   animation-iteration-count: infinite;
+}
+.text_1::after, .text_2::after {
+  position: absolute;
+  right: 0;
+  animation: caret infinite;
+  animation-duration: 1s;
+  animation-timing-function: steps(1, end);
+}
+
+@keyframes text2 {
+  0%, 50%, 100% {
+    width: 0;
+  }
+
+  60%, 90% {
+    width: 7em;
+  }
+}
+@keyframes text1 {
+  0%, 50%, 100% {
+    width: 0;
+  }
+  10%, 40% {
+    width: 11.5em;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .digital{
+    font-size: 1.5rem;
+  }  
+  .handmade{
+    font-size: 1.5rem;
+  }
 }

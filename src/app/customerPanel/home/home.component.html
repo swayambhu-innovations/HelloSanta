@@ -22,7 +22,7 @@
     <img src="assets/Union.png" alt="">
     <div class="uk-position-center uk-panel">
       <section id="orders-container1">
-        <h1 style="font-family: Poppins;text-align: center;padding: 80px;font-weight: bold;font-size: 50px; color: white">Our <span style="color: #F3F692">Beloved</span> Range of <span style="color: #F3F692">Handmade</span> Artwork Products</h1>
+        <h1 class="handmade">Our <span style="color: #F3F692">Beloved</span> Range of <span style="color: #F3F692">Handmade</span> Artwork Products</h1>
         <div class="product-row">
           <app-category-card *ngFor="let category of categories" [img]="category.img" [categoryTitle]="category.name" ></app-category-card>
         </div>
@@ -51,16 +51,14 @@
     <img src="assets/Union1.png" alt="">
     <div class="uk-position-center uk-panel">
       <section id="orders-container2">
-        <h1 style="font-family: Poppins;text-align: center;padding: 80px;font-weight: bold;font-size: 50px;color: #7E6DFF">Our <span style="color: #FF6584">Beloved</span> Range of <span style="color: #FF6584">Digital</span> Artwork Products</h1>
+        <h1 class="digital">Our <span style="color: #FF6584">Beloved</span> Range of <span style="color: #FF6584">Digital</span> Artwork Products</h1>
         <div class="product-row1">
           <app-category-card *ngFor="let othercategory of othercategories" [img]="othercategory.img" [categoryTitle]="othercategory.name" ></app-category-card>
         </div>
       </section>
     </div>
   </div>
-  <div class="uk-panel" >
-    <div class="box">
-      <div class="inner-box" align="center">
+  <div class="uk-panel inner-box" >
         <div class="uk-position-center uk-panel">
           <h1 style="font-family: Poppins;text-align: center;font-weight: bolder;font-size: 50px;color: #6D5DE3;padding-top: 5%;padding-bottom: 2%">Looking for something <u style="color: #FF6584">Unique?</u></h1>
           <hr style="background-color: #6D5DE3;width: 50vw;height: 5px;margin: auto;">
@@ -69,30 +67,22 @@
           <hr style="background-color: #6D5DE3;width: 70vw;height: 2px;margin: auto;">
           <div align="center"><button><a href="/helppage">Tell us about it</a></button></div>
         </div>
-      </div>
-    </div>
   </div>
   <div class="uk-panel" >
-    <div class="box2">
-        <div class="uk-position-center uk-panel">
-          <div id="container3">
-            <section id="orders-container3">
-              <h1 style="font-family: Poppins;text-align: center;padding-top: 10px;padding-bottom: 20px;font-weight: bold;font-size: 3rem">Recommended Products</h1>
-              <div class="product-row2">
-                <app-product-full-card *ngFor="let product of products" [img]="product.img" [productTitle]="product.name" [productDescription]="product.description" [price]="product.price" ></app-product-full-card>
-              </div>
-            </section>
-          </div>
-        </div>
+      <div id="container3">
+      <section id="orders-container3">
+     <h1 style="font-family: Poppins;text-align: center;padding-top: 10px;padding-bottom: 20px;font-weight: bold;font-size: 3rem">Recommended Products</h1>
+     <div class="product-row2">
+       <app-product-full-card *ngFor="let product of products" [img]="product.img" [productTitle]="product.name" [productDescription]="product.description" [price]="product.price" ></app-product-full-card>
+     </div>
+      </section>
       </div>
   </div>
   <div class="uk-panel" style="padding-top: 50px">
     <img src="assets/Promo.png" alt="">
     <div class="uk-position-center uk-panel"></div>
   </div>
-  <div class="uk-panel" >
-    <div class="box3">
-      <div class="inner-box3" align="center">
+  <div class="uk-panel inner-box2">
           <div class="uk-position-center-left uk-panel" style="width: 32vw;height: auto;">
             <a href="#"><img src="assets/Group20.png" alt=""></a>
           </div>
@@ -102,9 +92,6 @@
           <div class="uk-position-center-right uk-panel" style="width: 32vw;height: auto;">
             <a href="#"><img src="assets/Group18.png" alt=""></a>
           </div>
-      </div>
-    </div>
-  
   </div>
   <app-accordion></app-accordion>
   <app-footer ></app-footer>
