@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { FilterModalComponent } from 'src/app/modals/filter-modal/filter-modal.component';
+import { SortModalComponent } from 'src/app/modals/sort-modal/sort-modal.component';
 
 @Component({
   selector: 'app-digitalartworks',
@@ -7,8 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DigitalartworksComponent implements OnInit {
 
-  constructor() { }
-
+  screenwidth=window.innerWidth
+  constructor(public modalController: ModalController) { }
+  async presentFilter() {
+    const modal = await this.modalController.create({
+      component: FilterModalComponent,
+    });
+    return await modal.present();
+  }
+  async presentsort() {
+    const modal = await this.modalController.create({
+      component: SortModalComponent,
+    });
+    return await modal.present();
+  }
   ngOnInit() {}
   products=[
     {
@@ -66,4 +81,5 @@ export class DigitalartworksComponent implements OnInit {
       "price":"2300",
     },
   ]
+
 }

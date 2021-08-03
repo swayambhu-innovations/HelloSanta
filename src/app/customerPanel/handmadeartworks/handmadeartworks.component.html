@@ -1,7 +1,7 @@
 <ion-content>
   <app-header></app-header>
   <div class="headerContainer">
-    <div class="distImages">
+    <div class="distImages" *ngIf="screenwidth>600">
       <img class="first" src="assets/img1.png">
       <img class="second" src="assets/img2.png">
       <img class="third" src="assets/img3.png">
@@ -24,8 +24,16 @@
 
     </div>
   </div>
-  <div class="headerContainer">
-    <div class="searchbox">
+  <ion-toolbar *ngIf="screenwidth<600">
+<ion-button (click)="presentFilter()" expand="full" fill="clear" slot="start">
+  Filter&nbsp;&nbsp;&nbsp;<ion-icon name="filter-circle"></ion-icon>
+</ion-button>
+<ion-button (click)="presentsort()" expand="full" fill="clear" slot="end">
+  Sort&nbsp;&nbsp;&nbsp;<ion-icon name="funnel"></ion-icon>
+</ion-button>
+  </ion-toolbar>
+  <div class="headerContainer" >
+    <div class="searchbox" *ngIf="screenwidth>600">
       <ion-row>
         <input type="search" class="searchInput" placeholder="Search Anything ...">
         <ion-icon name="search" style="color: #FF6584;font-size: 28px;
@@ -125,6 +133,7 @@
         </ion-list>
       </div>
     </div>
+
     <div id="container2">
       <section id="orders-container">
         <div class="product-row">

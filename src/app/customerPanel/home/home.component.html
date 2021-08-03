@@ -1,6 +1,6 @@
 <ion-content>
   <app-header ></app-header>
-  <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="autoplay: true;autoplay-interval: 1000;pause-on-hover: true;ratio: 12:3; animation: push">
+  <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="autoplay: true;autoplay-interval: 1000;pause-on-hover: true;ratio: 12:3; animation: push" *ngIf="screenwidth>600">
   
     <ul class="uk-slideshow-items">
       <li>
@@ -17,13 +17,32 @@
     <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
     <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
   </div>
-  <h1 style="font-family: Poppins;text-align: center;padding: 40px;font-weight: bold;font-size: 3.5rem">We offer <span class="text_1" style="font-family: Poppins;text-align: center;color: #FF6584;font-weight: bold;font-size: 2.5rem">PERSONAL GIFT MASTER</span><span class="text_2" style="font-family: Poppins;text-align: center;color: #7E6DFF;font-weight: bold;font-size: 2.5rem">FREE DELIVERY</span> ,here at Hello Santa</h1>
-  <div class="uk-panel" style="padding-top: 50px">
+
+  <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="autoplay: true;autoplay-interval: 1000;pause-on-hover: true;min-height: 400; max-height: 800; animation: push" *ngIf="screenwidth<600">
+
+    <ul class="uk-slideshow-items">
+        <li>
+            <img src="assets/2.png" alt="" uk-cover>
+        </li>
+        <li>
+            <img src="assets/4.png" alt="" uk-cover>
+        </li>
+        <li>
+            <img src="assets/6.png" alt="" uk-cover>
+        </li>
+    </ul>
+
+    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+</div>
+  <h1 class="headingtitle" *ngIf="screenwidth>600">We offer <span class="text_1">PERSONAL GIFT MASTER</span><span class="text_2">FREE DELIVERY</span> ,here at Hello Santa</h1>
+  <h1 class="headingtitle1" *ngIf="screenwidth<600">Look for <span style="color: #FF6584;">gifts</span> for your loved ones ,here at<br><span style="color: #7E6DFF;font-size: 3.5rem;"> Hello Santa</span></h1> 
+  <div class="uk-panel">
     <img src="assets/Union.png" alt="">
     <div class="uk-position-center uk-panel">
       <section id="orders-container1">
-        <h1 class="handmade">Our <span style="color: #F3F692">Beloved</span> Range of <span style="color: #F3F692">Handmade</span> Artwork Products</h1>
-        <div class="product-row">
+        <h1 class="handmade"><a href="/handmadeart"><span style="color: #F3F692">Beloved</span> Range of <span style="color: #F3F692">Handmade</span> Artwork Products</a></h1>
+        <div class="product-row" *ngIf="screenwidth>600">
           <app-category-card *ngFor="let category of categories" [img]="category.img" [categoryTitle]="category.name" ></app-category-card>
         </div>
       </section>
@@ -36,7 +55,8 @@
   <div class="uk-panel" style="padding-top: 50px">
   <div id="blog">
     <section id="blog-container">
-      <h1 style="font-family: Poppins;text-align: center;padding-top: 10px;padding-bottom: 20px;font-weight: bold;font-size: 3rem;color: #FF6584">Read More Blogs</h1>
+      <h1 class="blogs">Read More Blogs</h1>
+      <br>
       <div class="product-row">
         <app-blog-card *ngFor="let blog of blogs" [blogimg]="blog.img" [blogTitle]="blog.name" [blogDescription]="blog.description" ></app-blog-card>
       </div>
@@ -51,8 +71,8 @@
     <img src="assets/Union1.png" alt="">
     <div class="uk-position-center uk-panel">
       <section id="orders-container2">
-        <h1 class="digital">Our <span style="color: #FF6584">Beloved</span> Range of <span style="color: #FF6584">Digital</span> Artwork Products</h1>
-        <div class="product-row1">
+        <h1 class="digital"><a href="/digitalart">Our <span style="color: #FF6584">Beloved</span> Range of <span style="color: #FF6584">Digital</span> Artwork Products</a></h1>
+        <div class="product-row1" *ngIf="screenwidth>600">
           <app-category-card *ngFor="let othercategory of othercategories" [img]="othercategory.img" [categoryTitle]="othercategory.name" ></app-category-card>
         </div>
       </section>
@@ -60,18 +80,18 @@
   </div>
   <div class="uk-panel inner-box" >
         <div class="uk-position-center uk-panel">
-          <h1 style="font-family: Poppins;text-align: center;font-weight: bolder;font-size: 50px;color: #6D5DE3;padding-top: 5%;padding-bottom: 2%">Looking for something <u style="color: #FF6584">Unique?</u></h1>
-          <hr style="background-color: #6D5DE3;width: 50vw;height: 5px;margin: auto;">
-          <h1 style="font-family: Poppins;text-align: center;font-weight: bolder;font-size: 1.8rem;color: #ADA2FF;padding-top: 3%;">Have some <u style="color: #FF6584">Unique?</u> products or custom designs on your <u style="color: #FF6584">mind</u></h1>
-          <h1 style="font-family: Poppins;text-align: center;font-weight: bold;font-size: 1.8rem;color: #ADA2FF;padding-bottom: 3%">Or confused about the right choice of gift.</h1>
-          <hr style="background-color: #6D5DE3;width: 70vw;height: 2px;margin: auto;">
-          <div align="center"><button><a href="/helppage">Tell us about it</a></button></div>
+          <h1 class="boxtext1">Looking for something <u style="color: #FF6584">Unique?</u></h1>
+          <hr class="boxline1">
+          <h1 class="boxtext2">Have some <u style="color: #FF6584">Unique?</u> products or custom designs on your <u style="color: #FF6584">mind</u></h1>
+          <h1 class="boxtext3">Or confused about the right choice of gift.</h1>
+          <hr class="boxline2">
+          <div align="center"><button class="boxbutton"><a href="/helppage">Tell us about it</a></button></div>
         </div>
   </div>
   <div class="uk-panel" >
       <div id="container3">
       <section id="orders-container3">
-     <h1 style="font-family: Poppins;text-align: center;padding-top: 10px;padding-bottom: 20px;font-weight: bold;font-size: 3rem">Recommended Products</h1>
+     <h1 class="recommend">Recommended Products</h1>
      <div class="product-row2">
        <app-product-full-card *ngFor="let product of products" [img]="product.img" [productTitle]="product.name" [productDescription]="product.description" [price]="product.price" ></app-product-full-card>
      </div>

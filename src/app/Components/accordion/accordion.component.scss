@@ -22,7 +22,7 @@ background-color: #6D5DE3
     border-radius: 10px;
     border-width:1px ;
     padding-top: 20px;
-    width: 50vw;
+    width: 60vw;
   
   }
   .accordiontext{
@@ -35,13 +35,21 @@ background-color: #6D5DE3
   @media only screen and (max-width: 600px) {
 .title{
   font-size: 1.8rem;
-  padding-right: 80px;
-  padding-left: 80px;
+  padding-right: 40px;
+  padding-left: 40px;
 }
  .line{
-width: 200px;
+width: 80vw;
  }
  .inner-box4{
-   margin-bottom: 10%;
+   width: 95vw;
+   margin:5% 2.5% 10%;
  }
+
+li{
+  width: 85vw;
+}
+.accordiontext{
+  width: 50vw;
+}
   }
