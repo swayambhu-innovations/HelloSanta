@@ -7,7 +7,7 @@
     </button>
   </div>
   <div class="headButtons">
-    <button>
+    <button *ngIf="authService.isJustLoggedIn">
       <ion-avatar>
         <img [src]="image" />
       </ion-avatar>
