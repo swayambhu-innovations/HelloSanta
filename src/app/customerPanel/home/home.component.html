@@ -56,7 +56,6 @@
   <div id="blog">
     <section id="blog-container">
       <h1 class="blogs">Read More Blogs</h1>
-      <br>
       <div class="product-row">
         <app-blog-card *ngFor="let blog of blogs" [blogimg]="blog.img" [blogTitle]="blog.name" [blogDescription]="blog.description" ></app-blog-card>
       </div>
