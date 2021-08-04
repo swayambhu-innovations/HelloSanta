@@ -4,8 +4,8 @@
 }
 
 .order-card {
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  background-color: #F6F6F6;
+  box-shadow: rgba(59, 59, 59, 0.2) 0px 2px 8px 0px;
+  background-color: #eeeeee;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -63,3 +63,48 @@
   color: #6AB9FF;
   border: 2px solid #6AB9FF;
 }
+
+@media only screen and (max-width: 600px) {
+  .order-card {
+    display: block;
+    width: 325px;
+    margin: 0.5em ;
+    padding: 5%;
+  }
+  .order-img {
+    width: 100%;
+    display: block;
+    margin: 0em;
+  }
+  .order-details {
+    color: #6D5DE3;
+    padding: 0.3em;
+  }
+  
+  .order-title {
+    font-family: 'Poppins';
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #6D5DE3;
+  }
+  
+  .order-price-and-btns {
+    margin: 1em;
+  }
+  
+  .order-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: -30px;
+  }
+  
+  .order-remove, .order-view {
+    border-radius: 20px;
+    border-width: 2px;
+    border-style: solid;
+    padding: .5em .5em;
+    font-weight: 700;
+    width: 45%;
+    margin: .25em 0.25em;
+  }
+  }

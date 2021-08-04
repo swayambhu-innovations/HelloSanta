@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./trackorder.component.scss'],
 })
 export class TrackorderComponent implements OnInit {
-
+  screenwidth=window.innerWidth
   constructor() { }
 
   ngOnInit() {}

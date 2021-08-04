@@ -1,7 +1,7 @@
 <ion-content>
   <app-header></app-header>
   <main id="container">
-      <app-sidenav activeLinkID="account"></app-sidenav>
+      <app-sidenav activeLinkID="account" *ngIf="screenwidth>600"></app-sidenav>
       <section id="profile-container">
           <div id="img-name-and-email">
               <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
@@ -65,6 +65,7 @@
                   <input type="text" class="form-input" id="languages">
               </div>
           </form>
+          <button class="button1"><a href="/home">Submit</a></button>
       </section>
   </main>
   <app-footer></app-footer>

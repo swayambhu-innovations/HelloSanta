@@ -59,6 +59,22 @@ app-sidenav {
     margin-top: 1em;
 }
 
+.button1{
+    background-color: #ADA2FF; /* Green */
+    border-radius: 10px;
+    border: 5px solid #9081FF;
+    color: white;
+    padding: 5px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 3%;
+    margin-left: 40%;
+    font-family: Poppins;
+    font-size: 1.3rem;
+    cursor: pointer;
+  }
+
 .form-input-div {
     margin: .75em;
     width: 45%;
@@ -81,3 +97,41 @@ app-sidenav {
     background-color: #f2f1ff;
     color: #6D5CE5;
 }
+
+a{
+    color: white;
+  }
+
+@media only screen and (max-width: 600px) {
+    #profile-container {
+        width: 98%;
+        padding: 1em;
+    }
+    .form-input-div {
+        margin: .75em;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .form-label {
+        font-size: 1.1rem;
+        font-family: 'Poppins';
+        color: #6D5CE5;
+        font-weight: 700;
+    }
+    
+    .form-input {
+        border: 1px solid #ADA2FF;
+        font-size: 1rem;
+        padding: .25em .5em;
+        font-family: 'Poppins';
+        background-color: #f2f1ff;
+        color: #6D5CE5;
+    }
+    .button1{
+        padding: 5px 20px;
+        font-size: 1rem;
+        margin-left: 35%;
+      }
+  }
