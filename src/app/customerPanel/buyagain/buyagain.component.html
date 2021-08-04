@@ -1,8 +1,9 @@
 <ion-content>
   <app-header></app-header>
   <main id="container">
-      <app-sidenav activeLinkID="buy-again"></app-sidenav>
+      <app-sidenav activeLinkID="buy-again" *ngIf="screenwidth>600"></app-sidenav>
       <section id="orders-container">
+        <h2 id="your-cart-title">Buy Again</h2>
         <div class="product-row">
           <app-product-full-card *ngFor="let product of products" [img]="product.img" [productTitle]="product.name" [productDescription]="product.description" [price]="product.price" ></app-product-full-card>
         </div>

@@ -39,3 +39,37 @@
   margin-top: 0.5rem;
   color: #FFAB00;
 }
+@media only screen and (max-width: 600px) {
+  .latest-order-card {
+    width: 130px;
+    margin: 1em 0.2em;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    color: #ADA2FF;
+  }
+  
+  .latest-order-details {
+    padding: 1em;
+  }
+  
+  .latest-order-title {
+    font-weight: 300;
+    font-size: .85rem;
+  }
+  
+  .latest-order-price-and-date {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    font-family: 'Poppins';
+  }
+  
+  .latest-order-price {
+    margin-right: 0.3rem;
+    color: #5AC179;
+  }
+  
+  .latest-order-date {
+    font-size: 0.7rem;
+
+  }
+  }
