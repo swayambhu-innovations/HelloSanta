@@ -32,4 +32,9 @@ export class InventoryService {
       const userRef: AngularFirestoreDocument<any> = this.afs.collection('users').doc(this.authService.userId);
       userRef.set(Data,{merge:true});
     }
+    addProduct(category,subCategory,productID,data){
+      
+      const productRef: AngularFirestoreDocument<any> = this.afs.doc(`products/${category}/categories/${subCategory}/products/${productID}`);
+      productRef.set(data,{merge:true});
+    }
 }

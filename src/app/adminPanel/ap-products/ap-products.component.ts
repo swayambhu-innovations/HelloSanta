@@ -1,11 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AddProductModalComponent } from 'src/app/modals/add-product-modal/add-product-modal.component';
+import { ModalController } from '@ionic/angular';
 @Component({
   selector: 'app-ap-products',
   templateUrl: './ap-products.component.html',
   styleUrls: ['./ap-products.component.scss'],
 })
 export class APProductsComponent implements OnInit {
+  constructor(public modalController: ModalController) { }
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: AddProductModalComponent,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
+  }
+
+  addProducts(){
+    this.presentModal()
+    console.log('add products');
+  }
+
   products=[
     {
       "totalCancelled":20,
@@ -64,7 +80,7 @@ export class APProductsComponent implements OnInit {
       "totalSales":"294"
     },
   ]
-  constructor() { }
+  
 
   ngOnInit() {}
 

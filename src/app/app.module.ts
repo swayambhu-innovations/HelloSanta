@@ -76,6 +76,7 @@ import { LoginGuard } from './guards/login-guard.guard';
 import { ReactiveFormsModule } from '@angular/forms';
 import { VerifyEmailComponent } from './customerPanel/verify-email/verify-email.component';
 import { SetupModalStepOneComponent } from './modals/setup-modal-step-one/setup-modal-step-one.component';
+import { AddProductModalComponent } from './modals/add-product-modal/add-product-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -141,6 +142,7 @@ import { SetupModalStepOneComponent } from './modals/setup-modal-step-one/setup-
     VPProductCardComponent,
     VerifyEmailComponent,
     SetupModalStepOneComponent,
+    AddProductModalComponent,
   ],
   entryComponents: [],
   imports: [

@@ -77,8 +77,6 @@ export class AuthSignUpComponent implements OnInit {
         }
     }
   }
-
-
   onSubmit() {
     if (this.form.status == "VALID") {
       this.form.disable(); // disable the form if it's valid to disable multiple submissions

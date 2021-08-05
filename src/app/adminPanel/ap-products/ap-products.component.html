@@ -1,5 +1,13 @@
 <ion-content>
-  <ion-row uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100">
+  <ion-toolbar>
+    <ion-title>Products</ion-title>
+    <ion-button (click)="addProducts()" shape="round" slot="start">
+      Add Products
+    </ion-button>
+    <ion-label slot="end">Pretty View</ion-label>
+    <ion-toggle slot="end" checked #switch></ion-toggle>
+  </ion-toolbar>
+  <ion-row uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100" *ngIf="switch.checked">
     <div *ngFor="let item of products">
       <app-product 
       [totalCancelled]="item.totalCancelled"
@@ -8,8 +16,18 @@
       [name]="item.name"
       [price]="item.price"
       [totalSales]="item.totalSales"
-      
       ></app-product>
     </div>
+  </ion-row>
+  <ion-row uk-scrollspy="target: > ion-item; cls: uk-animation-fade; delay: 50" *ngIf="!switch.checked">
+    <ion-item *ngFor="let item of products">
+      <ion-img size="small" [src]="item.image"></ion-img>&nbsp;&nbsp;&nbsp;&nbsp;
+      <ion-label color="secondary">{{item.name}}</ion-label>
+      <ion-label>{{item.description}}</ion-label>&nbsp;&nbsp;&nbsp;&nbsp;
+      <ion-label color="success"><strong>Total Sales: &nbsp;</strong>{{item.totalSales}}</ion-label>
+      <ion-chip color="primary">
+        <ion-label><strong>Price:&nbsp;</strong>&#8377;&nbsp;{{item.price}}</ion-label>
+      </ion-chip>
+    </ion-item>
   </ion-row>
 </ion-content>

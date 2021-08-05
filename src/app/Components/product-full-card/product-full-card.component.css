@@ -42,7 +42,7 @@
   border-radius: 10px;
   border: 5px solid #9081FF;
   color: white;
-  margin: 0 0 0 10px;
+  margin-left:10px;
   padding: 3px 10px;
   text-decoration: none;
   display: inline-block;
@@ -54,11 +54,10 @@
   border-radius: 10px;
   border: 5px solid #FFAC03;
   color: #FFB010;
-  margin: 0 0 0 0;
-  padding: 15px 15px;
+  padding: 12px 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   cursor: pointer;
 }

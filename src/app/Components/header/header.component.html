@@ -12,12 +12,18 @@
         <img [src]="image" />
       </ion-avatar>
     </button>
-    <button class="onlyIcon">
+    <button class="onlyIcon" *ngIf="authService.isJustLoggedIn">
       <ion-icon name="cart"></ion-icon>
     </button>
-    <button class="onlyIcon">
+    <button class="onlyIcon" *ngIf="authService.isJustLoggedIn">
       <ion-icon name="calendar-number"></ion-icon>
     </button>
+    <ion-button href="./login/" *ngIf="!authService.isJustLoggedIn">
+      Log In
+    </ion-button>
+    <ion-button href="./signup/" *ngIf="!authService.isJustLoggedIn">
+      Register
+    </ion-button>
   </div>
 </div>
 
@@ -35,7 +41,7 @@
     <li><a href="/VendorPanel/Dashboard">Vendor Panel</a></li>
   </ul>
 </div>
-<div id="offcanvas-push" uk-offcanvas="mode: push; overlay: true">
+<div id="offcanvas-push" uk-offcanvas="overlay: true">
   <div class="uk-offcanvas-bar">
       <button class="uk-offcanvas-close" type="button" ><ion-icon name="close"></ion-icon></button>
       <ul>
@@ -47,15 +53,25 @@
         <li><a href="">Products</a></li>
         <li><a href="">Cart</a></li>
       </ul>
-      <button class="bottomAvatar" (click)="authService.SignOut()">
-        <ion-avatar>
-          <img [src]="image" />
-        </ion-avatar>
-      </button>
+      <div class="bottomAvatar">
+        <ion-row>
+          <button (click)="authService.SignOut()" *ngIf="authService.isJustLoggedIn">
+            <ion-avatar>
+              <img [src]="image" />
+            </ion-avatar>
+          </button>
+          <ion-button href="./login/" *ngIf="!authService.isJustLoggedIn">
+            Log In
+          </ion-button>
+          <ion-button href="./signup/" *ngIf="!authService.isJustLoggedIn">
+            Register
+          </ion-button>
+        </ion-row>
+      </div>
   </div>
 </div>
 <div class="headerMobile">
-  <button   uk-toggle="target: #offcanvas-push">
+  <button uk-toggle="target: #offcanvas-push">
     <ion-icon name="menu"></ion-icon>
   </button>
   <img src="./assets/logo-light.svg" alt="Hello Santa Logo">
