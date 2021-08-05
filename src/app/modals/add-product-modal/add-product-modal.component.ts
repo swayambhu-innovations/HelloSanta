@@ -17,7 +17,7 @@ import { InventoryService } from 'src/app/services/inventory.service';
   styleUrls: ['./add-product-modal.component.scss'],
 })
 export class AddProductModalComponent implements OnInit {
-  customSelections = [];
+  customSelections = {};
   form: FormGroup;
   productName: FormControl = new FormControl('', [Validators.required,Validators.minLength(5)]);
   productDescription: FormControl = new FormControl('', [Validators.required,Validators.minLength(200),Validators.maxLength(1000)]);
@@ -31,7 +31,6 @@ export class AddProductModalComponent implements OnInit {
   totalStock: FormControl = new FormControl('', [Validators.required,Validators.min(5)]);
   customisationsCount: FormControl = new FormControl('', [Validators.required,Validators.min(1)]);
   isLoading: boolean = false;
-  file:any;
   customTypeChanged(value,item) {
     console.log(value);
   }
@@ -55,6 +54,7 @@ export class AddProductModalComponent implements OnInit {
     var image = document.getElementById(count) as HTMLImageElement;
     image.src = URL.createObjectURL(event.target.files[0]);
     this.fileChange(event);
+    this.customSelections[count]=event;
   }
   uploadFile(file,userName) { 
     const filePath =userName.toString()+"."+file.name.split('.').pop().toString();
@@ -74,9 +74,8 @@ export class AddProductModalComponent implements OnInit {
     return list;
   }
   fileChange(event) {
-    let fileList: FileList = event.target.files;  
-    this.file = fileList[0];
-    console.log("this.file",this.file);
+    let fileList: FileList = event.target.files;
+    return fileList[0];
   }
   async addProduct() {
     let dict = [];
@@ -88,13 +87,14 @@ export class AddProductModalComponent implements OnInit {
         let values = [];
         let cout = (document.getElementById("imgInput"+i) as HTMLInputElement).value
         for (let x = 0; x < +cout; x++) {
-          let image = (document.getElementById("image"+i.toString()+x.toString()) as HTMLImageElement);
-          console.log("image",image);
           let imageTitle = (document.getElementById("imgTitle"+i.toString()+x.toString()) as HTMLInputElement).value;
-          
-          values.push({
-            "image":image,
-            "imageTitle":imageTitle
+          let fileName = imageTitle.replace(/ /g, "_");
+          let fileEv = this.fileChange(this.customSelections["image"+i.toString()+x.toString()]);
+          this.uploadFile(fileEv,fileName).subscribe((imageUrl)=>{
+            values.push({
+              "image":imageUrl,
+              "imageTitle":imageTitle
+            })
           })
         }
         dict.push({ "type":"imgSel","length":values.length,"values":values});
@@ -144,6 +144,7 @@ export class AddProductModalComponent implements OnInit {
       customisationsCount: this.form.get('customisationsCount')!.value,
       extraData:dict
     }
+    console.log(this.customSelections)
     let res = await this.presentContinueAlert();
     if (res=='cancel'){
       this.authService.presentToast("Cancelled the operation")

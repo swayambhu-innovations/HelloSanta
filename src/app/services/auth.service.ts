@@ -73,6 +73,7 @@ export class AuthService {
         this.ngZone.run(() => {
           this.presentToast("Sign In successful")
           this.homeDataProvider.showOverlay=false;
+          this.router.navigate([""]);
         });
         this.router.navigate([""]);
       }).catch((error:any) => {
@@ -224,11 +225,10 @@ export class AuthService {
             this.presentToast("Oops we don't know your birthday or your gender.");
             this.SetUserData({user:result.user});
           }
-          
         });
         // window.alert("Auhtorisation successful ");
         this.presentToast("Auhtorisation Successful")
-        this.router.navigate[""]
+        this.router.navigate([""])
         this.homeDataProvider.showOverlay=false;
         console.log("Auth successful");
       }).catch((error:any) =>{

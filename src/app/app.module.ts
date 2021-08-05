@@ -77,6 +77,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { VerifyEmailComponent } from './customerPanel/verify-email/verify-email.component';
 import { SetupModalStepOneComponent } from './modals/setup-modal-step-one/setup-modal-step-one.component';
 import { AddProductModalComponent } from './modals/add-product-modal/add-product-modal.component';
+import { SearchComponent } from './modals/search/search.component';
+import { SortModalComponent } from './modals/sort-modal/sort-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -143,6 +145,8 @@ import { AddProductModalComponent } from './modals/add-product-modal/add-product
     VerifyEmailComponent,
     SetupModalStepOneComponent,
     AddProductModalComponent,
+    SearchComponent,
+    SortModalComponent,
   ],
   entryComponents: [],
   imports: [

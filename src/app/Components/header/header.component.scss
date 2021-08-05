@@ -75,7 +75,11 @@ div > ul{
   display:flex;
   justify-content: space-around;
   align-items: center;
-  height:50px;
+  height:40px;
+  padding:10px;
+  margin-bottom:0px !important;
+  border-bottom: 2px solid var(--ion-color-primary);
+  justify-items: center;
 }
 li{
   font-weight: 500;
