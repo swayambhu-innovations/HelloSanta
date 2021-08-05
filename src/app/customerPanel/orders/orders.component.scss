@@ -12,6 +12,17 @@
     justify-content: space-between;
 }
 
+#your-cart-title {
+    font-size: 2.5rem;
+    text-align: center;
+    font-family: 'Poppins';
+    margin-top: 1em;
+    text-decoration: underline;
+    margin-bottom: 1em;
+    color: #6D5DE3;
+    font-weight: 700;
+}
+
 app-sidenav {
     width: 20%;
 }
@@ -32,3 +43,10 @@ app-sidenav {
   justify-content: space-evenly;
   align-items: flex-start;
 }
+@media only screen and (max-width: 600px) {
+    #orders-container {
+        width: 98%;
+        padding: 1em;
+    }
+
+  }

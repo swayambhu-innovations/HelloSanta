@@ -50,3 +50,34 @@ a{
   font-size: 1.2rem;
   cursor: pointer;
 }
+@media only screen and (max-width: 600px) {
+  .blog-card {
+    width: 160px;
+    margin: 0.5em 0.25em;
+  }
+  .blog-details {
+    padding: 1em;
+  }
+  
+  .blog-title {
+    font-size: 1rem;
+    margin-top: 0%;
+  }
+
+  .blog-description{
+    font-size: 0.6rem;
+    margin-top: 5px;
+  }
+  
+  .blog-button {
+    font-size: 1rem;
+  }
+  
+  .read-more-button {
+    margin: 0 0 0 10px;
+    padding: 5px 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 2px solid #9081FF;
+  }
+  }

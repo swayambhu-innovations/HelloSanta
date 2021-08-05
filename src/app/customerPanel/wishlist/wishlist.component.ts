@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./wishlist.component.scss'],
 })
 export class WishlistComponent implements OnInit {
-
+  screenwidth=window.innerWidth
   constructor() { }
 
   ngOnInit() {}

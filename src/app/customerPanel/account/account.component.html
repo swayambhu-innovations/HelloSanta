@@ -1,7 +1,7 @@
 <ion-content>
     <app-header></app-header>
     <main id="container">
-      <app-sidenav activeLinkID="account"></app-sidenav>
+      <app-sidenav activeLinkID="account" *ngIf="screenwidth>600"></app-sidenav>
       <section id="account-container">
         <div id="img-name-and-email">
           <img
@@ -19,7 +19,7 @@
             <p class="card-number">12</p>
           </div>
           <div class="statistic-card" id="referrals-card">
-            <p class="card-title">Referrals</p>
+            <p class="card-title"> Total Referrals</p>
             <p class="card-number">42</p>
           </div>
           <div class="statistic-card" id="total-cashback-card">

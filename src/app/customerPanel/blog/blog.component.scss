@@ -14,6 +14,15 @@
 
   }
 
+  .heading{
+    font-family: Poppins;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 35px;
+    color: #6D5DE3;
+    padding-top: 3%;
+    padding-bottom: 2%;
+  }
 
   .button1{
     background-color: #ADA2FF; /* Green */
@@ -86,3 +95,33 @@
  a{
    color: white;
  }
+ @media only screen and (max-width: 600px){
+  .heading{
+    font-size: 19px;
+  }
+  .inner-box{
+    margin: 2.5%;
+    padding: 5%;
+    font-size: 15px; 
+    width: 92%; 
+  }
+  .button1{
+    padding: 5px 20px;
+    font-size: 1rem;
+  }
+
+  .button2{
+    padding: 5px 20px;
+    font-size: 1rem;
+  }
+
+  .button3{
+    padding: 5px 20px;
+    font-size: 1rem;
+  }
+
+  .button4{
+    padding: 5px 20px;
+    font-size: 1rem;
+  }
+  }

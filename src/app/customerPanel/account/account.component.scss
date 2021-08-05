@@ -122,3 +122,31 @@ app-sidenav {
   justify-content: space-evenly;
   align-items: flex-start;
 }
+@media only screen and (max-width: 600px) {
+    #account-container {
+        width: 98%;
+        padding: 1em;
+    }
+
+    .statistic-card {
+        padding: 1em 0.2em;
+        font-size: 1.25rem;
+        width: 23%;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+    
+    
+    .card-title {
+        font-size: 0.6rem;
+        margin-right: 0.2em;
+    }
+    
+    .card-number {
+        font-size: 0.8rem;
+
+    }
+    
+    #latest-orders {
+        padding: 2em;
+    }
+  }

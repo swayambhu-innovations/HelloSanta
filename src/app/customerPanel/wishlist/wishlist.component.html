@@ -1,8 +1,9 @@
 <ion-content>
   <app-header></app-header>
   <main id="container">
-    <app-sidenav activeLinkID="wishlist"></app-sidenav>
+    <app-sidenav activeLinkID="wishlist" *ngIf="screenwidth>600"></app-sidenav>
     <section id="orders-container">
+      <h2 id="your-cart-title">Your Wishlist</h2>
       <div class="product-row">
         <app-wide-product-card *ngFor="let order of orders" [img]="order.img" [orderTitle]="order.name" [orderDescription]="order.description" [orderprice]="order.price" ></app-wide-product-card>
       </div>
