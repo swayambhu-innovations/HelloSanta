@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./singleproduct.component.scss'],
 })
 export class SingleproductComponent implements OnInit {
-
+    screenwidth=window.innerWidth
   constructor() { }
 
   ngOnInit(): void {

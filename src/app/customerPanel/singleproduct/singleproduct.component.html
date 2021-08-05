@@ -24,7 +24,7 @@
                         class="product-feature-button">Handmade</button><button class="product-feature-button">With
                         Frame</button>
                 </div>
-                <p id="product-price">2500</p>
+                <p id="product-price">Price: ₹2500</p>
                 <div id="product-action-buttons">
                     <button id="product-buy-now" class=
                     product-action-button>Buy Now</button>
@@ -53,7 +53,7 @@
     </section>
   <div id="container2">
     <section id="orders-container">
-      <h1 style="font-family: Poppins;text-align: center;padding: 80px;font-weight: bold;font-size: 50px">More Products like This</h1>
+      <h1 class="headingproducts">More Products like This</h1>
       <div class="product-row">
         <app-product-full-card *ngFor="let product of products" [img]="product.img" [productTitle]="product.name" [productDescription]="product.description" [price]="product.price" ></app-product-full-card>
       </div>
