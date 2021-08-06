@@ -7,12 +7,12 @@
     </button>
   </div>
   <div class="headButtons">
-    <button *ngIf="authService.isJustLoggedIn">
+    <button *ngIf="authService.isJustLoggedIn" (click)="presentUserinfo($event)" >
       <ion-avatar>
         <img [src]="image" />
       </ion-avatar>
     </button>
-    <button class="onlyIcon" *ngIf="authService.isJustLoggedIn">
+    <button class="onlyIcon" *ngIf="authService.isJustLoggedIn"  (click)="presentCartinfo($event)">
       <ion-icon name="cart"></ion-icon>
     </button>
     <button class="onlyIcon" *ngIf="authService.isJustLoggedIn">
