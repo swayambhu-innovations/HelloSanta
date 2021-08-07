@@ -79,6 +79,8 @@ import { SetupModalStepOneComponent } from './modals/setup-modal-step-one/setup-
 import { AddProductModalComponent } from './modals/add-product-modal/add-product-modal.component';
 import { SearchComponent } from './modals/search/search.component';
 import { SortModalComponent } from './modals/sort-modal/sort-modal.component';
+import { CartinfoComponent } from './popovers/cartinfo/cartinfo.component';
+import { UserinfoComponent } from './popovers/userinfo/userinfo.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -147,6 +149,8 @@ import { SortModalComponent } from './modals/sort-modal/sort-modal.component';
     AddProductModalComponent,
     SearchComponent,
     SortModalComponent,
+    UserinfoComponent,
+    CartinfoComponent,
   ],
   entryComponents: [],
   imports: [
