@@ -1,6 +1,6 @@
 <ion-content>
   <app-header ></app-header>
-  <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="autoplay: true;autoplay-interval: 1000;pause-on-hover: true;ratio: 12:3; animation: push" *ngIf="screenwidth>600">
+  <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="autoplay: true;autoplay-interval: 5000;pause-on-hover: true;ratio: 12:3; animation: push" *ngIf="screenwidth>600">
   
     <ul class="uk-slideshow-items">
       <li>
@@ -18,7 +18,7 @@
     <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
   </div>
 
-  <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="autoplay: true;autoplay-interval: 1000;pause-on-hover: true;min-height: 400; max-height: 800; animation: push" *ngIf="screenwidth<600">
+  <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="autoplay: true;autoplay-interval: 5000;pause-on-hover: true;min-height: 400; max-height: 800; animation: push" *ngIf="screenwidth<600">
 
     <ul class="uk-slideshow-items">
         <li>
@@ -43,7 +43,7 @@
       <section id="orders-container1">
         <h1 class="handmade"><a href="/handmadeart"><span style="color: #F3F692">Beloved</span> Range of <span style="color: #F3F692">Handmade</span> Artwork Products</a></h1>
         <div class="product-row" *ngIf="screenwidth>600">
-          <app-category-card *ngFor="let category of categories" [img]="category.img" [categoryTitle]="category.name" ></app-category-card>
+          <app-category-card *ngFor="let othercategory of othercategories" [img]="othercategory.img" [categoryTitle]="othercategory.name" ></app-category-card>
         </div>
       </section>
     </div>
@@ -72,7 +72,7 @@
       <section id="orders-container2">
         <h1 class="digital"><a href="/digitalart">Our <span style="color: #FF6584">Beloved</span> Range of <span style="color: #FF6584">Digital</span> Artwork Products</a></h1>
         <div class="product-row1" *ngIf="screenwidth>600">
-          <app-category-card *ngFor="let othercategory of othercategories" [img]="othercategory.img" [categoryTitle]="othercategory.name" ></app-category-card>
+          <app-category-card *ngFor="let category of categories" [img]="category.img" [categoryTitle]="category.name" ></app-category-card>
         </div>
       </section>
     </div>

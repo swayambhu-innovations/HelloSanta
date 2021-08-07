@@ -84,16 +84,8 @@ categories=[
     "img":"https://source.unsplash.com/940x650",
     "name":"DigitalArtWork Product",
   },
-  {
-    "img":"https://source.unsplash.com/940x650",
-    "name":"DigitalArtWork Product",
-  },
 ]
   othercategories=[
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"Handmade ArtWork Product",
-    },
     {
       "img":"https://source.unsplash.com/940x650",
       "name":"Handmade ArtWork Product",
