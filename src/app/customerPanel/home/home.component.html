@@ -1,7 +1,7 @@
 <ion-content>
   <app-header ></app-header>
   <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="autoplay: true;autoplay-interval: 5000;pause-on-hover: true;ratio: 12:3; animation: push" *ngIf="screenwidth>600">
-  
+
     <ul class="uk-slideshow-items">
       <li>
         <img src="assets/image1.png" alt="" uk-cover>
@@ -13,7 +13,7 @@
         <img src="assets/image3.png" alt="" uk-cover>
       </li>
     </ul>
-  
+
     <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
     <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
   </div>
@@ -36,7 +36,7 @@
     <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
 </div>
   <h1 class="headingtitle" *ngIf="screenwidth>600">We offer <span class="text_1">PERSONAL GIFT MASTER</span><span class="text_2">FREE DELIVERY</span> ,here at Hello Santa</h1>
-  <h1 class="headingtitle1" *ngIf="screenwidth<600">Look for <span style="color: #FF6584;">gifts</span> for your loved ones ,here at<br><span style="color: #7E6DFF;font-size: 3.5rem;"> Hello Santa</span></h1> 
+  <h1 class="headingtitle1" *ngIf="screenwidth<600">Look for <span style="color: #FF6584;">gifts</span> for your loved ones ,here at<br><span style="color: #7E6DFF;font-size: 3.5rem;"> Hello Santa</span></h1>
   <div class="uk-panel">
     <img src="assets/Union.png" alt="">
     <div class="uk-position-center uk-panel">
@@ -56,7 +56,7 @@
     <img src="assets/Union1.png" alt="">
     <div class="uk-position-center uk-panel">
       <section id="orders-container2">
-        <h1 class="digital"><a href="/digitalart">Our <span style="color: #FF6584">Beloved</span> Range of <span style="color: #FF6584">Digital</span> Products</a></h1>
+        <h1 class="digital"><a href="/digitalart">Our <span style="color: #FF6584">Meow</span> Range of <span style="color: #FF6584">Digital</span> Products</a></h1>
         <div class="product-row1" *ngIf="screenwidth>600">
           <app-category-card *ngFor="let category of categories" [img]="category.img" [categoryTitle]="category.name" ></app-category-card>
         </div>
