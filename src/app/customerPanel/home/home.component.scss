@@ -1,11 +1,11 @@
 
 .inner-box{
   height: 70vh;
-  width: 80vw;
   font-family: Poppins;
   text-align: center;
   padding: 50px;
-  margin: 5% 10%;
+  width: 85%;
+  margin: 5% auto;
   background: rgba(255, 255, 255, .7);
   box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
   border-radius: 50px;
@@ -16,8 +16,8 @@
 
 .inner-box2{
   height: auto;
-  width: 85vw;
-  margin: 18% 8% 15% 8%;
+  width: 100%;
+  margin: 18% 0% 15% 0%;
 }
 
 button{
@@ -81,11 +81,10 @@ button{
 #blog-container {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 50px;
-  width: 100%;
+  width: 90%;
+  margin: 0% auto;
+  height: fit-content;
   padding: 1em;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
   align-items: flex-start;
 }
 
@@ -189,10 +188,9 @@ padding-bottom: 3%;
 #orders-container3 {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 50px;
-  width: 100%;
+  width: 90%;
+  margin: 0% auto;
   padding: 1em;
-  display: flex;
-  flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: flex-start;
 }
@@ -308,7 +306,12 @@ a{
    width: 80vw;
    height: 2px;
   }
-  
+  #orders-container1 {
+    margin-bottom: 0px;
+  }
+  #orders-container2 {
+    margin-bottom: 0px;
+  }
   .boxbutton{
     margin: 3%;
     padding: 5px 20px;

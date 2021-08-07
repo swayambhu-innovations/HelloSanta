@@ -16,13 +16,13 @@
 
 .blog-title {
   font-family: 'Poppins';
-  font-size: 1.5rem;
-  color: #FFAB00;
+  font-size: 1.2rem;
+  color: #5c5b5a;
 }
 .blog-description{
   font-family: 'Poppins';
-  font-size: 1rem;
-  color: #FF6584;
+  font-size: 0.8rem;
+  color: #777777;
 }
 
 a{
