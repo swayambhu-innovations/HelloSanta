@@ -15,6 +15,7 @@ export class ProductFullCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.productDescription=this.productDescription.substring(0, 120);
   }
 
 }
