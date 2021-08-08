@@ -63,9 +63,18 @@ footer .lovebysanta{
   color: white;
 }
 
+.footer-left > h3{
+  margin-top: 30px;
+}
+
+.links{
+  margin-top: -60px;
+margin-bottom: -25px;
+}
+
 .footer-left .customerslinks{
-  padding-top: 10px;
-  padding-left: 100px;
+  padding-top: 50px;
+  padding-left: 110px;
   font-family: Raleway;
 }
 .footer-left .footer-icons a {
@@ -189,7 +198,7 @@ footer .lovebysanta{
     width: 100%;
     height:90vh;
     align-items: center;
-  } 
+  }
   ul{
     color:white;
     padding-left: 0%;
@@ -204,5 +213,5 @@ footer .lovebysanta{
   footer.mobile > div > div > div > a > ion-icon{
     color:white;
     font-size: 40px;
-  } 
+  }
 }

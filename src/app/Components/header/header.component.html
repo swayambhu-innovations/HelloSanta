@@ -1,5 +1,5 @@
 <div class="header">
-  <a href="/" class="logo"><img src="assets/logo.png" alt="Paris"></a>
+  <a href="/" class="logo"><img src="assets/logo.svg" alt="Hello Santa"></a>
   <div class="search">
     <input type="text" placeholder=" Search Anything..." name="search">
     <button>
@@ -17,6 +17,9 @@
     </button>
     <button class="onlyIcon" *ngIf="authService.isJustLoggedIn">
       <ion-icon name="calendar-number"></ion-icon>
+    </button>
+    <button class="onlyIcon" *ngIf="authService.isJustLoggedIn">
+      <ion-icon name="wallet"></ion-icon>
     </button>
     <ion-button href="./login/" *ngIf="!authService.isJustLoggedIn">
       Log In
@@ -39,6 +42,7 @@
     <li><a href="/help/">Contact</a></li>
     <li><a href="/AdminPanel/Dashboard">Admin Panel</a></li>
     <li><a href="/VendorPanel/Dashboard">Vendor Panel</a></li>
+    <li><a href="/wishlist">Wishlist</a></li>
   </ul>
 </div>
 <div id="offcanvas-push" uk-offcanvas="overlay: true">

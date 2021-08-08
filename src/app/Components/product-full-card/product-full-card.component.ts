@@ -13,7 +13,7 @@ export class ProductFullCardComponent implements OnInit {
     "                  commodo. Nunc justo nisi, vestibulum."
   @Input() price:string = "2300"
   constructor() { }
-  textlength=120;
+  textlength=70;
   ngOnInit(): void {
     if ( this.productDescription.length>=this.textlength){
       this.productDescription =  this.productDescription.substring(0,this.textlength) +"...";
