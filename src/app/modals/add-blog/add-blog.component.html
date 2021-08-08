@@ -1,0 +1,61 @@
+<ion-content>
+  <ion-toolbar>
+    <ion-title>Add blog</ion-title>
+  </ion-toolbar>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Check these out to get you going.</ion-card-subtitle>
+      <ion-card-title>How to create a blog.</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      If you want to create a blog from scratch you can use two different methods.
+      <ul>
+        <li>Create your blog in word or <a href="https://docs.google.com">google docs</a> and convert them to html <a
+            href="https://wordtohtml.net/">here</a>.</li>
+        <li>Create your blog from scratch at any of these websites and then paste theri code in the below line.</li>
+        <ol>
+          <li><a href="https://froala.com/online-html-editor/">https://froala.com/online-html-editor/</a></li>
+          <li><a href="https://html-online.com/editor/">https://html-online.com/editor/</a></li>
+          <li><a href="https://onlinehtmleditor.dev/">https://onlinehtmleditor.dev/</a></li>
+        </ol>
+      </ul>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <form [formGroup]="form" (ngSubmit)="addBlog()" method="POST">
+      <img id="blogImage">
+      <ion-item>
+        <ion-label position="floating">Blog Image (Click to select)</ion-label>
+        <ion-input formControlName="blogImage" type="file"(change)="loadFile($event,'blogImage')" accept="image/png, image/jpeg" placeholder="Blog Image"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Blog Content (HTML ONLY)</ion-label>
+        <ion-textarea formControlName="blogContent"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Blog Title</ion-label>
+        <ion-input formControlName="blogName" type="text" placeholder="Blog Title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Blog Excerpt</ion-label>
+        <ion-input  formControlName="blogExcerpt"type="text" placeholder="Blog Excerpt"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Blog Tags (Seperate by commas)</ion-label>
+        <ion-input formControlName="blogTags" type="text" placeholder="Blog Tags"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Blog Date</ion-label>
+        <ion-datetime formControlName="blogDate" display-timezone="utc"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Publish it instantly</ion-label>
+        <ion-checkbox color="danger" slot="start" ></ion-checkbox>
+      </ion-item>
+      <br>
+      <ion-button type="submit" expand="full" fill="solid" size="default" [disabled]="isLoading || !form.valid">
+        Upload
+      </ion-button>
+    </form>
+  </ion-card>
+</ion-content>

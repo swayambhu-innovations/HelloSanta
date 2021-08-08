@@ -3,10 +3,16 @@ img{
     margin-left: -20px;
     width:200px;
     border-top-left-radius: 20px;
+    height:150px;
+    object-fit: contain;
 }
 ion-card{
     width: 350px;
-    height:270px
+    height:min-content;
+    transition: height 0.3s ease-in-out;
+}
+ion-card:hover{
+    --buttonDisplay:fit-content;
 }
 ion-row{
     flex-wrap: nowrap;
@@ -33,12 +39,26 @@ ion-card{
 .dataContainer{
     margin-left: 20px;
 }
-
-
-
-
-
-
+ion-row{
+    justify-content: space-evenly;
+}
+ion-row > button > ion-icon{
+    color: #FF6584;
+}
+ion-row > button > *{
+    font-size:25px;
+}
+ion-row > button{
+    padding:10px;
+    border-radius:20px;
+    transition:all 0.5s ease-in-out;
+}
+ion-row > button:hover{
+    box-shadow: 5px 5px 15px rgba(255, 131, 131, 0.2);
+}
+p{
+    margin-bottom: 0px;
+}
 
 
 

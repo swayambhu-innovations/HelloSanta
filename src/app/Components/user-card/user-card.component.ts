@@ -20,5 +20,8 @@ export class UserCardComponent implements OnInit {
     }
 
   }
+  sendMsg(){
+    alert('You need to disable this user from firebase console.')
+  }
 
 }

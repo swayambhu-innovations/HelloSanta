@@ -15,8 +15,37 @@ ion-item:hover{
 ion-toolbar{
     box-shadow:2px 1px 5px rgba(0,0,0,0.3)
 }
-
-
+#overlay {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1;
+}
+#overlay > * {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    transform: translate(-50%, -50%);
+}
+button > ion-icon{
+    color: #FF6584;
+}
+button > *{
+    font-size:25px;
+}
+button{
+    padding:10px;
+    border-radius:20px;
+    transition:all 0.5s ease-in-out;
+}
+button:hover{
+    box-shadow: 5px 5px 15px rgba(255, 131, 131, 0.2);
+}
 
 
 

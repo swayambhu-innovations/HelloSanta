@@ -18,6 +18,7 @@ import { auditTime, filter, finalize, last, switchMap, take, tap } from 'rxjs/op
 
 export class AuthService {
   userData: any; // Save logged in user data
+  userAccessLevel: string;
   previousTotalUsers:number=0;
   userFireData:Observable<any>;
   uploadPercent: Observable<number>;
@@ -34,7 +35,26 @@ export class AuthService {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.userData = user;
+
         // alert("This is data user "+JSON.stringify(user));
+        this.afs.doc(`users/${this.userData.uid}`).valueChanges().subscribe((value:any)=>{
+          let level:any = JSON.stringify(value.access.accessLevel);
+          if (level=='"Admin"'){
+            
+            localStorage.setItem("cache26328",JSON.stringify({"data":"fds7f6d7s8fysd89ffbSDSfydsfu9sdfsdg4t4s4t4"}))
+
+          } else if (level=='"Vendor"'){
+            
+            localStorage.setItem("cache26328",JSON.stringify({"data":"dshdjhsusd9f87ds98fndsfnsduf4389t948nutfdsf"}))
+
+          } else if (level=='"Customer"'){
+            
+            localStorage.setItem("cache26328",JSON.stringify({"data":"jfdjffue98eru98fu98jawejiqioepwqnfidscnufde"}))
+
+          } else {
+            console.log("Now access level found for level ",level);
+          }
+        });
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user') || '{}');
       } else {
@@ -42,10 +62,11 @@ export class AuthService {
         JSON.parse(localStorage.getItem('user') || '{}');
       }
     })
+    
   }
   public static dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit' } as const;
   uploadFile(file,userName) {
-    const filePath =userName.toString()+"."+file.name.split('.').pop().toString();
+    const filePath ="userAvatarImages/"+userName.toString()+"."+file.name.split('.').pop().toString();
     console.log("Starting file upload",filePath)
     const fileRef = this.storage.ref(filePath); 
     const task = this.storage.upload(filePath, file);
@@ -249,6 +270,16 @@ export class AuthService {
     }else{
       let today  = new Date();
       return "0-"+(today.toLocaleDateString("en-US",AuthService.dateOptions).toString())
+    }
+  }
+  get getCurrenAccessLevel():string{
+    let dt = JSON.parse(localStorage.getItem('cache26328') || '{}');
+    if (dt.data=="fds7f6d7s8fysd89ffbSDSfydsfu9sdfsdg4t4s4t4"){
+      return 'Admin'
+    } else if (dt.data=="dshdjhsusd9f87ds98fndsfnsduf4389t948nutfdsf"){
+      return 'Vendor'
+    } else {
+      return 'Customer'
     }
   }
   SetUserData(

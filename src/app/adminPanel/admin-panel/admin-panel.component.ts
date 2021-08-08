@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataProvider } from 'src/app/providers/data.provider';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class AdminPanelComponent implements OnInit {
     { title: 'Login/Access', url: '/AdminPanel/LoginAccess', icon: 'key' },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() { }
+  constructor(public dataProvider: DataProvider) { }
   ngOnInit() {}
 
 }

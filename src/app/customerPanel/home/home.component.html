@@ -31,7 +31,6 @@
             <img src="assets/6.png" alt="" uk-cover>
         </li>
     </ul>
-
     <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
     <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
 </div>
@@ -75,7 +74,7 @@
       <div id="container3">
       <section id="orders-container3">
      <h1 class="recommend">Recommended Products</h1>
-     <div class="product-row2">
+     <div class="product-row2" >
        <app-product-full-card *ngFor="let product of products" [img]="product.img" [productTitle]="product.name" [productDescription]="product.description" [price]="product.price" ></app-product-full-card>
      </div>
       </section>

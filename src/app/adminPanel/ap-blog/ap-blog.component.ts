@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AddBlogComponent } from 'src/app/modals/add-blog/add-blog.component';
+import { ModalController } from '@ionic/angular';
 @Component({
   selector: 'app-ap-blog',
   templateUrl: './ap-blog.component.html',
@@ -7,8 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class APBLogComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(public modalController: ModalController) { }
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: AddBlogComponent,
+    });
+    return await modal.present();
+  }
   ngOnInit() {}
 
 }

@@ -1,34 +1,4 @@
-<!-- <ion-app>
-  <ion-toolbar>
-    <div class="header uk-flex uk-flex-between">
-      <img src="./assets/logo.png" alt="Hello Santa Logo">
-      <div class="actions uk-flex uk-flex-between">
-        <div class="profilePicture">
-          <img src="https://i.pravatar.cc/50" alt="">
-        </div>
-        <div class="notification">
-          <i class="ri-notification-fill"></i>
-        </div>
-      </div>
-    </div>
-  </ion-toolbar>
-  <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content" type="overlay">
-      <ion-content>
-        <ion-list id="inbox-list">
-          <ion-menu-toggle auto-hide="false" menu="p.icon" *ngFor="let p of appPages; let i = index">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
-              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
-    <ion-router-outlet id="main-content"></ion-router-outlet>
-  </ion-split-pane>
-</ion-app> -->
-<ion-app>
+<ion-app [ngStyle]="{'filter': (dataProvider.showOverlay) ? 'blur(10px)' : 'blur(0px)' }">
   <app-header></app-header>
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
@@ -46,3 +16,7 @@
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>
+<div id="overlay" *ngIf="dataProvider.showOverlay">
+  <ion-spinner name="crescent" color="tertiary"></ion-spinner>
+  <p class="uk-text-center">Status: {{dataProvider.overlayStatus}}</p>
+</div>

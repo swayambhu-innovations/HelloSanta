@@ -46,6 +46,7 @@ import { SingleproductComponent } from './customerPanel/singleproduct/singleprod
 import { LoginGuard } from './guards/login-guard.guard'
 import { VerifyEmailComponent } from './customerPanel/verify-email/verify-email.component';
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
+import { AdminPanelGuard } from './guards/admin-panel.guard';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -80,7 +81,7 @@ const routes: Routes = [
 
   {
     path:"AdminPanel",
-    canActivate:[LoginGuard],
+    canActivate:[AdminPanelGuard],
     data: { authGuardPipe: redirectLoggedInTo(['/Login']), "route":"checkout" },
     component:AdminPanelComponent,
     children:[

@@ -7,7 +7,7 @@
         <ion-label class="data">{{totalSales}}/{{totalCancelled}}</ion-label>
       </div>
       <div>
-        <ion-label class="title">Price</ion-label><br>
+        <ion-label class="title">Base Price</ion-label><br>
         <ion-label class="data">{{price}}</ion-label>
       </div>
     </div>
@@ -26,7 +26,7 @@
         <ion-label class="data">{{totalSales}}/{{totalCancelled}}</ion-label>
       </div>
       <div>
-        <ion-label class="title">Price</ion-label><br>
+        <ion-label class="title">Base Price</ion-label><br>
         <ion-label class="data">{{price}}</ion-label>
       </div>
     </div>
@@ -45,7 +45,7 @@
         <ion-label class="data">{{totalSales}}/{{totalCancelled}}</ion-label>
       </div>
       <div>
-        <ion-label class="title">Price</ion-label><br>
+        <ion-label class="title">Base Price</ion-label><br>
         <ion-label class="data">{{price}}</ion-label>
       </div>
     </div>
@@ -54,4 +54,12 @@
   <ion-text>
     <p>{{description}}</p>
   </ion-text>
+  <ion-row>
+    <button (click)="deleteItem()">
+      <ion-icon name="trash"></ion-icon>
+    </button>
+    <button (click)="editItem()">
+      <ion-icon name="create"></ion-icon>
+    </button>
+  </ion-row>
 </ion-card>

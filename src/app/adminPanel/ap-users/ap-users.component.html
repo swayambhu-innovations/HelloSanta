@@ -1,13 +1,42 @@
 <ion-content>
-    <ion-row uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100">
+  <ion-toolbar>
+    <ion-title>Products</ion-title>
+    <ion-label slot="end">Pretty View</ion-label>
+    <ion-toggle slot="end" checked #switch></ion-toggle>
+  </ion-toolbar>
+    <ion-row uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100" *ngIf="switch.checked">
       <div *ngFor="let item of users">
         <app-user-card
-        [avatar]="item.avatar"
-        [userEmail]="item.userEmail"
-        [userName]="item.userName"
-        [fullName]="item.fullName"
-        [description]="item.description"
+        [avatar]="item.photoURL"
+        [userEmail]="item.email"
+        [userName]="item.uid"
+        [fullName]="item.displayName"
+        [description]="''"
         ></app-user-card>
       </div>
+    </ion-row>
+    <ion-row *ngIf="!switch.checked">
+      <ion-list>
+        <ion-item >
+            <ion-label style="font-size: 20px;">User Name</ion-label>
+            <ion-label style="font-size: 18px;">User Email</ion-label>
+            <ion-label>User Id</ion-label>
+        </ion-item>
+        <ion-item *ngFor="let item of users">
+          <ion-avatar slot="start">
+            <img [src]="item.photoURL" />
+          </ion-avatar>
+            <ion-label color="primary" style="font-size: 20px;">{{item.displayName}}</ion-label>
+            <ion-label color="secondary" style="font-size: 18px;">{{item.email}}</ion-label>
+            <ion-label color="danger">{{item.uid}}</ion-label>
+            <p style="font-size: 12px;color:darkgray;margin-top: 0px;"></p> 
+          <ion-button color="danger" (click)="sendMsg()" expand="block" fill="clear" shape="round">
+            <ion-icon name="close-circle"></ion-icon>
+          </ion-button>
+          <ion-button color="primary" href="mailto:{{item.userEmail}}" expand="block" fill="clear" shape="round">
+            <ion-icon name="mail"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
     </ion-row>
 </ion-content>

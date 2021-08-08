@@ -2,8 +2,8 @@
   <div class="header">
     <ion-title>Add A Product</ion-title>
   </div>
-  <form [formGroup]="form" (ngSubmit)="addProduct()" method="POST">
-    <ion-input type="number" required="true" placeholder="Total product images." id="mainProdImage" value=2 min=2 max=10
+  <form [formGroup]="form" (ngSubmit)="editProduct()" method="POST">
+    <ion-input type="number" required="true" placeholder="Total product images." formControlName="productImagesCount" id="mainProdImage" value=2 min=2 max=10
       #mainImgCount></ion-input>
     <ion-card *ngFor="let prodImg of genList(mainImgCount.value)">
       <img id="productImage{{prodImg}}">
@@ -36,20 +36,6 @@
       </ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Product Id</ion-label>
-      <ion-input type="text" placeholder="Product Id" required="true" formControlName="productId"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Product Category</ion-label>
-      <ion-input type="text" placeholder="Product Category" required="true" formControlName="productCategory">
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Product Subcategory</ion-label>
-      <ion-input type="text" placeholder="Product Sub Category" required="true" formControlName="productSubcategory">
-      </ion-input>
-    </ion-item>
-    <ion-item>
       <ion-label position="floating">Vendor Id</ion-label>
       <ion-input type="text" placeholder="Vendor id" required="true" formControlName="vendorId"></ion-input>
     </ion-item>
@@ -57,7 +43,7 @@
       <ion-label position="floating">Total Stock</ion-label>
       <ion-input type="number" placeholder="Total Stock" required="true" formControlName="totalStock"></ion-input>
     </ion-item>
-    <ion-item>
+    <!-- <ion-item>
       <ion-label position="floating">Customisations</ion-label>
       <ion-input type="number" min=0 max=10 value=0 id="customsCount" placeholder="Customisation Count"
         formControlName="customisationsCount" #customs required="true"></ion-input>
@@ -189,7 +175,7 @@
           </ion-item>
         </ion-card-content>
       </ion-card>
-    </ion-card>
+    </ion-card> -->
     <ion-row class="header">
       <ion-button type="reset" [disabled]="isLoading || !form.valid">
         Reset

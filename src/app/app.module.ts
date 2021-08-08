@@ -81,6 +81,9 @@ import { SearchComponent } from './modals/search/search.component';
 import { SortModalComponent } from './modals/sort-modal/sort-modal.component';
 import { CartinfoComponent } from './popovers/cartinfo/cartinfo.component';
 import { UserinfoComponent } from './popovers/userinfo/userinfo.component';
+import { FilterModalComponent } from './modals/filter-modal/filter-modal.component';
+import { AddBlogComponent } from './modals/add-blog/add-blog.component';
+import { EditProductComponent } from './modals/edit-product/edit-product.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -151,6 +154,9 @@ import { UserinfoComponent } from './popovers/userinfo/userinfo.component';
     SortModalComponent,
     UserinfoComponent,
     CartinfoComponent,
+    FilterModalComponent,
+    AddBlogComponent,
+    EditProductComponent,
   ],
   entryComponents: [],
   imports: [

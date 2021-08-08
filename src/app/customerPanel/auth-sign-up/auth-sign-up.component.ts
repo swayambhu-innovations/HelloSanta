@@ -46,7 +46,6 @@ export class AuthSignUpComponent implements OnInit {
     return await modal.present();
   }
 
-
    fileChange(event) {
     if (event.target.files && event.target.files[0]) {
       let reader = new FileReader();

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import * as AOS from 'aos';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,7 +9,7 @@ export class HomeComponent implements OnInit {
 screenwidth=window.innerWidth
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {AOS.init();}
   products=[
     {
       "img":"https://source.unsplash.com/940x650",

@@ -16,7 +16,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.image = this.authService.getUserPhoto()
-    this.authService.isUserAdmin();
   }
 
   async presentUserinfo(ev: any) {

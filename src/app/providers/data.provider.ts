@@ -6,5 +6,6 @@ export class DataProvider {
     public verifyEmail:boolean=false;
     public showOverlay:boolean=false;
     public accessLevel:number=-1;
+    public overlayStatus:string = "Loading...";
     public constructor() { }
 }

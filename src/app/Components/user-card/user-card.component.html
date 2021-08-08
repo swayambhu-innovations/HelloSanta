@@ -10,10 +10,10 @@
     <p>{{description}}</p>
   </ion-text>
   <ion-row>
-    <ion-button color="danger">
+    <ion-button (click)="sendMsg()" color="danger">
       <ion-icon name="close"></ion-icon>
     </ion-button>
-    <ion-button color="warning">
+    <ion-button href="mailto:{{userEmail}}" color="warning">
       <ion-icon name="mail"></ion-icon>
     </ion-button>
   </ion-row>
