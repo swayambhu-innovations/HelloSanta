@@ -1,6 +1,8 @@
 <ion-content>
-  <app-header ></app-header>
-  <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="autoplay: true;autoplay-interval: 5000;pause-on-hover: true;ratio: 12:3; animation: push" *ngIf="screenwidth>600">
+  <app-header></app-header>
+  <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1"
+    uk-slideshow="autoplay: true;autoplay-interval: 5000;pause-on-hover: true;ratio: 12:3; animation: push"
+    *ngIf="screenwidth>600">
 
     <ul class="uk-slideshow-items">
       <li>
@@ -14,96 +16,116 @@
       </li>
     </ul>
 
-    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
-    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
+      uk-slideshow-item="previous"></a>
+    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
+      uk-slideshow-item="next"></a>
   </div>
 
-  <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="autoplay: true;autoplay-interval: 5000;pause-on-hover: true;min-height: 400; max-height: 800; animation: push" *ngIf="screenwidth<600">
+  <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1"
+    uk-slideshow="autoplay: true;autoplay-interval: 5000;pause-on-hover: true;min-height: 400; max-height: 800; animation: push"
+    *ngIf="screenwidth<600">
 
     <ul class="uk-slideshow-items">
-        <li>
-            <img src="assets/2.png" alt="" uk-cover>
-        </li>
-        <li>
-            <img src="assets/4.png" alt="" uk-cover>
-        </li>
-        <li>
-            <img src="assets/6.png" alt="" uk-cover>
-        </li>
+      <li>
+        <img src="assets/2.png" alt="" uk-cover>
+      </li>
+      <li>
+        <img src="assets/4.png" alt="" uk-cover>
+      </li>
+      <li>
+        <img src="assets/6.png" alt="" uk-cover>
+      </li>
     </ul>
-    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
-    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
-</div>
-  <h1 class="headingtitle" *ngIf="screenwidth>600">We offer <span class="text_1">PERSONAL GIFT MASTER</span><span class="text_2">FREE DELIVERY</span> ,here at Hello Santa</h1>
-  <h1 class="headingtitle1" *ngIf="screenwidth<600">Look for <span style="color: #FF6584;">gifts</span> for your loved ones ,here at<br><span style="color: #7E6DFF;font-size: 3.5rem;"> Hello Santa</span></h1>
+    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
+      uk-slideshow-item="previous"></a>
+    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
+      uk-slideshow-item="next"></a>
+  </div>
+  <h1 class="headingtitle" *ngIf="screenwidth>600">We offer <span class="text_1">PERSONAL GIFT MASTER</span><span
+      class="text_2">FREE DELIVERY</span> ,here at Hello Santa</h1>
+  <h1 class="headingtitle1" *ngIf="screenwidth<600">Look for <span style="color: #FF6584;">gifts</span> for your loved
+    ones ,here at<br><span style="color: #7E6DFF;font-size: 3.5rem;"> Hello Santa</span></h1>
   <div class="uk-panel">
     <img style="width: 100%" src="assets/Union.png" alt="">
     <div class="uk-position-center uk-panel">
       <section id="orders-container1">
-        <h1 class="handmade"><a href="/handmadeart">Our <span style="color: #F3F692">Beloved</span> Range of <span style="color: #F3F692">Handmade</span> Products</a></h1>
+        <h1 class="handmade"><a href="/handmadeart">Our <span style="color: #F3F692">Beloved</span> Range of <span
+              style="color: #F3F692">Handmade</span> Products</a></h1>
         <div class="product-row" *ngIf="screenwidth>600">
-          <app-category-card *ngFor="let othercategory of othercategories" [img]="othercategory.img" [categoryTitle]="othercategory.name" ></app-category-card>
+          <app-category-card *ngFor="let othercategory of allHandmadeProds" [img]="othercategory.productImages[0].image"
+            [categoryTitle]="othercategory.productName"></app-category-card>
         </div>
       </section>
     </div>
   </div>
   <div class="uk-panel uk-align-center" style="padding-top: 50px">
-    <img  style="width: 90%;height: auto;margin: 0% 5%" src="assets/Component.png" alt="">
+    <img style="width: 90%;height: auto;margin: 0% 5%" src="assets/Component.png" alt="">
   </div>
   <div class="uk-panel" style="padding-top: 50px">
     <img style="width: 100%" src="assets/Union1.png" alt="">
     <div class="uk-position-center uk-panel">
       <section id="orders-container2">
-        <h1 class="digital"><a href="/digitalart">Our <span style="color: #FF6584">Beloved</span> Range of <span style="color: #FF6584">Digital</span> Products</a></h1>
+        <h1 class="digital"><a href="/digitalart">Our <span style="color: #FF6584">Beloved</span> Range of <span
+              style="color: #FF6584">Digital</span> Products</a></h1>
         <div class="product-row1" *ngIf="screenwidth>600">
-          <app-category-card *ngFor="let category of categories" [img]="category.img" [categoryTitle]="category.name" ></app-category-card>
+          <app-category-card *ngFor="let category of allDigitalProds" [img]="category.productImages[0].image" [categoryTitle]="category.productName">
+          </app-category-card>
         </div>
       </section>
     </div>
   </div>
-  <div class="uk-panel inner-box" >
-        <div class="uk-position-center uk-panel">
-          <h1 class="boxtext1">Looking for something <span style="color: #FF6584">Unique</span>?</h1>
-          <hr class="boxline1">
-          <h1 class="boxtext2">Have some <span style="color: #FF6584">Unique</span> products or custom designs on your mind?</h1>
-          <h1 class="boxtext3">Or confused about the right choice of gift?</h1>
-          <div align="center"><button class="boxbutton"><a href="/helppage">Tell us about it</a></button></div>
-        </div>
+  <div class="uk-panel inner-box">
+    <div class="uk-position-center uk-panel">
+      <h1 class="boxtext1">Looking for something <span style="color: #FF6584">Unique</span>?</h1>
+      <hr class="boxline1">
+      <h1 class="boxtext2">Have some <span style="color: #FF6584">Unique</span> products or custom designs on your mind?
+      </h1>
+      <h1 class="boxtext3">Or confused about the right choice of gift?</h1>
+      <div align="center"><button class="boxbutton"><a href="/helppage">Tell us about it</a></button></div>
+    </div>
   </div>
-  <div class="uk-panel" >
-      <div id="container3">
+  <div class="uk-panel">
+    <div id="container3">
       <section id="orders-container3">
-     <h1 class="recommend">Recommended Products</h1>
-     <div class="product-row2" >
-       <app-product-full-card *ngFor="let product of products" [img]="product.img" [productTitle]="product.name" [productDescription]="product.description" [price]="product.price" ></app-product-full-card>
-     </div>
+        <h1 class="recommend">Recommended Products</h1>
+        <div class="product-row2" class="uk-slider-container">
+          <ul class="uk-slider-items uk-child-width-1-4" uk-slider="autoplay: true">
+            <li *ngFor="let product of allRecommendedProds">
+              <app-product-full-card [img]="product.productImages[0].image" [productTitle]="product.productName"
+            [productDescription]="product.productDescription" [price]="product.productPrice"></app-product-full-card>
+            </li>
+          </ul>
+          
+        </div>
       </section>
-      </div>
+    </div>
   </div>
   <div class="uk-panel " style="padding-top: 50px">
     <img class="promobox uk-align-center" src="assets/Promo.png" alt="">
   </div>
   <div class="uk-panel" style="padding-top: 50px">
-  <div id="blog">
-    <section id="blog-container">
-      <h1 class="blogs">Read More Blogs</h1>
-      <div class="product-row">
-        <app-blog-card *ngFor="let blog of blogs" [blogimg]="blog.img" [blogTitle]="blog.name" [blogDescription]="blog.description" ></app-blog-card>
-      </div>
-    </section>
-  </div>
+    <div id="blog">
+      <section id="blog-container">
+        <h1 class="blogs">Read More Blogs</h1>
+        <div class="product-row">
+          <app-blog-card *ngFor="let blog of blogs" [blogimg]="blog.img" [blogTitle]="blog.name"
+            [blogDescription]="blog.description"></app-blog-card>
+        </div>
+      </section>
+    </div>
   </div>
   <div class="uk-panel inner-box2 uk-align-center">
-          <div class=" uk-panel" >
-            <a href="#"><img src="assets/Group20.png" alt=""></a>
-          </div>
-          <div class=" uk-panel" >
-            <a href="#"><img src="assets/Group19.png" alt=""></a>
-          </div>
-          <div class=" uk-panel" >
-            <a href="#"><img src="assets/Group18.png" alt=""></a>
-          </div>
+    <div class=" uk-panel">
+      <a href="#"><img src="assets/Group20.png" alt=""></a>
+    </div>
+    <div class=" uk-panel">
+      <a href="#"><img src="assets/Group19.png" alt=""></a>
+    </div>
+    <div class=" uk-panel">
+      <a href="#"><img src="assets/Group18.png" alt=""></a>
+    </div>
   </div>
   <app-accordion></app-accordion>
-  <app-footer ></app-footer>
+  <app-footer></app-footer>
 </ion-content>
