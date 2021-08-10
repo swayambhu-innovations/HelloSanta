@@ -1,0 +1,39 @@
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Category Options</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>New Category</ion-label>
+      <ion-input type="text" placeholder="Awesome Input" #category></ion-input>
+      <ion-button shape="round" (click)="addCategory(category.value)">
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-card>
+        <ion-list>
+          <ion-item *ngFor="let category of allCategories">
+            <ion-label>{{category}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card>
+    </ion-item>
+    <ion-item>
+      <ion-label>New Sub-Category</ion-label>
+      <ion-input type="text" placeholder="Awesome Input" #subcategory></ion-input>
+      <ion-button shape="round" (click)="addSubCategory(subcategory.value)">
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-card>
+        <ion-list>
+          <ion-item *ngFor="let category of allSubCategories">
+            <ion-label>{{category}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+</ion-content>

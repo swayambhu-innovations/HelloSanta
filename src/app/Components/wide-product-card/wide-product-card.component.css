@@ -63,7 +63,17 @@
   color: #6AB9FF;
   border: 2px solid #6AB9FF;
 }
-
+ion-button{
+  --background:transparent;
+  --box-shadow:none;
+}
+ion-card{
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  display: flex;
+  flex-wrap: nowrap;
+}
 @media only screen and (max-width: 600px) {
   .order-card {
     display: block;

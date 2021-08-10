@@ -25,10 +25,13 @@
   padding: 1em;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: flex-start;
+  flex-direction: column;
 }
-
+#orders-container > div{
+    width:100%;
+}
 
 .product-row{
   display: flex;
@@ -48,6 +51,7 @@
     width: 50%;
     display: flex;
     margin-right: 1em;
+    padding:20px;
 }
 
 #product-images-list {
@@ -64,12 +68,13 @@
     object-fit: cover;
     margin-bottom: .5em;
     border-radius: 25px;
+    box-shadow: 5px 2px 20px rgba(0, 0, 0, 0.2);
 }
 
 #product-image-preview {
     display: block;
     width: 70%;
-    object-fit: cover;
+    object-fit: contain;
     max-height: 500px;
     border-radius: 25px;
 }
@@ -222,7 +227,43 @@
     font-weight: 700;
     margin: 1em 0;
 }
-
+ion-spinner{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#product-name> span{
+    font-size: 17px;
+    line-height:0.4px;
+    color: rgba(0, 0, 0, 0.671);
+    margin-bottom: 10px;
+}
+.textSel > span:nth-child(1){
+    font-size: 20px;
+    color:var(--ion-color-primary)
+}
+.textSel > span:nth-child(1){
+    font-size: 15px;
+    color:var(--ion-color-success)
+}
+.selectionPrice{
+    color: var(--ion-color-success);
+}
+.selectionTitle{
+    color: var(--ion-color-primary);
+    font-size: 20px;
+}
+.selectionChoiceCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:100px;
+    height:80px;
+    text-align:center;
+    margin-left: 10px;
+}
 @media only screen and (max-width: 600px) {
     #container2 {
       margin-top: 50px;

@@ -9,6 +9,7 @@ import {
 import { AuthService } from 'src/app/services/auth.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { last, switchMap } from 'rxjs/operators';
+import { DataProvider } from 'src/app/providers/data.provider';
 @Component({
   selector: 'app-add-blog',
   templateUrl: './add-blog.component.html',
@@ -20,6 +21,7 @@ export class AddBlogComponent implements OnInit {
     private formbuilder: FormBuilder,
     private authService: AuthService,
     private storage: AngularFireStorage,
+    public dataProvider: DataProvider,
   ) {
     this.form = this.formbuilder.group({
       blogName:this.blogName,
@@ -53,7 +55,7 @@ export class AddBlogComponent implements OnInit {
   blogTags: FormControl = new FormControl('', [
     Validators.required,
     Validators.minLength(5),
-    Validators.pattern('[a-zA-Z ]*'),
+    Validators.pattern('[a-zA-Z,0-9 ]*'),
   ]);
   blogDate: FormControl = new FormControl('', [Validators.required]);
   blogContent: FormControl = new FormControl('', [
@@ -81,7 +83,7 @@ export class AddBlogComponent implements OnInit {
     var image = document.getElementById(count) as HTMLImageElement;
     image.src = URL.createObjectURL(event.target.files[0]);
     if (event.target.files[0].size > 1000000) {
-      this.authService.presentToast('File is greater than 500 KB');
+      this.authService.presentToast('File is greater than 1 MB');
       event.target.value = '';
     } else {
       image.src = URL.createObjectURL(event.target.files[0]);
@@ -89,24 +91,36 @@ export class AddBlogComponent implements OnInit {
     }
   }
   addBlog() {
+    this.dataProvider.showOverlay=true;
+    this.form.disable()
     this.isLoading=true;
+    this.dataProvider.overlayStatus="Uploading blog image ...";
     let file= this.getFileFromEvent(this.imageEvent);
-    let blogName = this.form.get('blogname')!.value.replaceAll(" ","");
+    console.log(file)
+    let blogName = this.form.get('blogName')!.value.replaceAll(" ","");
     let fileName=`blogImages/${blogName}/`+ blogName + file.name;
-    this.uploadFile(this.imageEvent,fileName).subscribe((value)=>{
+
+    this.uploadFile(file,fileName).subscribe((value)=>{
+
+    this.dataProvider.overlayStatus="Setting data fields ...";
       let data = {
         blogImage: value,
-        blogTitle: this.blogName,
-        blogExcerpt: this.blogExcerpt,
-        blogContent: this.blogContent,
-        blogTags: this.blogTags,
-        blogDate: this.blogDate,
-        blogId: this.blogId,
-        isPublished:this.blogPublish,
+        blogTitle: this.form.get('blogName')!.value,
+        blogExcerpt: this.form.get('blogExcerpt')!.value,
+        blogContent: this.form.get('blogContent')!.value,
+        blogTags: this.form.get('blogTags')!.value.toString().split(','),
+        blogDate: this.form.get('blogDate')!.value,
+        blogId: this.form.get('blogId')!.value,
+        isPublished:false,
         lastEdit:[],
       }
+      this.dataProvider.overlayStatus="Uploading data to database...";
+      console.log(data);
       this.inventoryService.addBlog(data);
       this.isLoading=false;
+      this.form.enable()
+      this.authService.presentToast('Blog added successfully');
+      this.dataProvider.showOverlay=false;
     })
   }
   ngOnInit() {}

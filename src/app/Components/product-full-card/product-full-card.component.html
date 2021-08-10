@@ -1,12 +1,14 @@
-<div class="order-card">
-  <img [src]="img"
+<ion-card class="order-card">
+  <ion-card class="order-details" href="./product?category={{this.category}}&subcategory={{this.subcategory}}&productId={{this.productId}}">
+    <img [src]="img"
        alt="{{productTitle}}" class="order-img">
-  <div class="order-details">
-    <h4 class="order-title">{{productTitle}}</h4>
-    <p class="order-description">{{productDescription}}</p>
-    <div class="order-price-and-add-to-cart">
-      <p class="order-price">Starting at: <br><span>₹{{price}}</span></p>
-      <button class="order-add-to-cart"><ion-icon name="heart"></ion-icon></button>
+    <div>
+      <h4 class="order-title">{{productTitle}}</h4>
+      <p class="order-description">{{productDescription}}</p>
     </div>
+  </ion-card>
+  <div class="order-price-and-add-to-cart">
+    <p class="order-price">Starting at: <br><span>₹{{price}}</span></p>
+    <button (click)="addToWishlist()" class="order-add-to-cart"><ion-icon name="heart"></ion-icon></button>
   </div>
-</div>
+</ion-card>

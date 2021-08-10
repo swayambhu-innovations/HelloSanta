@@ -73,7 +73,7 @@ const routes: Routes = [
   {path:'termsandconditions', component:TermsandconditionsComponent},
   {path:'refund', component:RefundandreturnComponent},
   {path:'bloghome', component:BloghomeComponent},
-  {path:'blog', component:BlogComponent},
+  {path:'post', component:BlogComponent},
   {path:'buyagain', component:BuyagainComponent},
   {path:'account', component:AccountComponent},
   {path:'product', component:SingleproductComponent},

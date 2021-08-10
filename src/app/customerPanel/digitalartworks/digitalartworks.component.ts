@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { ModalController } from '@ionic/angular';
 import { FilterModalComponent } from 'src/app/modals/filter-modal/filter-modal.component';
 import { SortModalComponent } from 'src/app/modals/sort-modal/sort-modal.component';
@@ -11,7 +12,7 @@ import { SortModalComponent } from 'src/app/modals/sort-modal/sort-modal.compone
 export class DigitalartworksComponent implements OnInit {
 
   screenwidth=window.innerWidth
-  constructor(public modalController: ModalController) { }
+  constructor(public modalController: ModalController,private afs: AngularFirestore) { }
   async presentFilter() {
     const modal = await this.modalController.create({
       component: FilterModalComponent,
@@ -24,7 +25,43 @@ export class DigitalartworksComponent implements OnInit {
     });
     return await modal.present();
   }
-  ngOnInit() {}
+  allDigitalProds= [];
+  specifiedDigitalProds={};
+  ngOnInit() {
+    this.afs.collection('data').doc("productData").valueChanges().subscribe((value:any)=>{
+      this.allDigitalProds=[];
+      value.categories.forEach((element:any) => {
+        if (element.category=="Digital Artworks"){
+        // console.log(value.categories.indexOf(element),"indexof")
+        if (value.categories.indexOf(element)==0){
+          // console.log("removing elements");
+          this.allDigitalProds.length=0;
+          // console.log(this.allProds.length)
+        }
+        this.afs.collection('products').doc('Digital Artworks')
+        .collection('categories')
+        .doc(element.subCategory)
+        .collection('products').valueChanges().subscribe((proddata)=>{
+          this.specifiedDigitalProds[element.category] = proddata;
+          proddata.forEach((product:any) => {
+            let unknown = 0;
+            this.allDigitalProds.forEach((oldProduct:any) => {
+              if (product.productId==oldProduct.productId) {
+                console.log("already exists");
+                unknown++;
+              }
+            })
+            if (unknown==0) {
+              this.allDigitalProds.push(product);
+            }
+          })
+        })
+      } else {
+        console.log("Digital category found",element.category)
+      }
+      })
+    });
+  }
   products=[
     {
       "img":"https://source.unsplash.com/940x650",

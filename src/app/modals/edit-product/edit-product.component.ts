@@ -19,8 +19,6 @@ import { InventoryService } from 'src/app/services/inventory.service';
 })
 export class EditProductComponent implements OnInit {
   @Input() productId: string;
-  @Input() productCategory: string;
-  @Input() productSubcategory: string;
   prodImagesBackend = [];
   customSelections = {};
   prodImagesEvents = {};
@@ -139,208 +137,6 @@ export class EditProductComponent implements OnInit {
       this.dataProvider.showOverlay = true;
       this.form.disable();
       this.isLoading = true;
-      // let value = this.form.get('productName')!.value.replace(' ', '_');
-      // let x = document.getElementById('mainProdImage') as HTMLInputElement;
-      // for (let imgc = 0; imgc < +x.value; imgc++) {
-      //   let fileEv = this.fileChange(
-      //     this.prodImagesEvents['productImage' + imgc.toString()]
-      //   );
-      //   this.dataProvider.overlayStatus =
-      //     'Uploading file ' + fileEv.name.toString() + '...';
-      //   const imgFile = await this.uploadFile(
-      //     fileEv,
-      //     `products/${value}/image_${imgc}_${fileEv.name}`
-      //   ).toPromise();
-      //   console.log(imgFile);
-      //   prodList.push({
-      //     image: imgFile,
-      //     imageName: this.form.get('productName')!.value.replace(' ', '_'),
-      //   });
-      // }
-      // for (let i = 0; i < this.form.get('customisationsCount')!.value; i++) {
-      //   let sel = (document.getElementById('radio' + i) as HTMLInputElement)
-      //     .value;
-      //   if (sel == 'imgSel') {
-      //     let values = [];
-      //     let cout = (
-      //       document.getElementById('imgInput' + i) as HTMLInputElement
-      //     ).value;
-      //     for (let x = 0; x < +cout; x++) {
-      //       let imageTitle = (
-      //         document.getElementById(
-      //           'imgTitle' + i.toString() + x.toString()
-      //         ) as HTMLInputElement
-      //       ).value;
-      //       let fileName = imageTitle.replace(' ', '_');
-      //       let fileEv = this.fileChange(
-      //         this.customSelections['image' + i.toString() + x.toString()]
-      //       );
-      //       let priceAddon = (
-      //         document.getElementById(
-      //           'priceImageAddon' + i.toString() + x.toString()
-      //         ) as HTMLInputElement
-      //       ).value;
-      //       this.dataProvider.overlayStatus =
-      //         'Uploading file ' + fileEv.name.toString() + '...';
-      //       const file = await this.uploadFile(
-      //         fileEv,
-      //         `products/${value}/optionImages/${fileName}_${x}_${fileEv.name}`
-      //       ).toPromise();
-      //       console.log(file);
-      //       values.push({
-      //         image: file,
-      //         imageTitle: imageTitle,
-      //         priceAddon: priceAddon,
-      //       });
-      //     }
-      //     let sectionTitle = (
-      //       document.getElementById(
-      //         'sectionImgTitle' + i.toString()
-      //       ) as HTMLInputElement
-      //     ).value;
-      //     dict.push({
-      //       type: 'imgSel',
-      //       length: values.length,
-      //       title: sectionTitle,
-      //       values: values,
-      //     });
-      //   } else if (sel == 'textSel') {
-      //     let values = [];
-      //     let cout = (
-      //       document.getElementById('textInput' + i) as HTMLInputElement
-      //     ).value;
-      //     for (let x = 0; x < +cout; x++) {
-      //       let textTitle = (
-      //         document.getElementById(
-      //           'textSel' + i.toString() + x.toString()
-      //         ) as HTMLInputElement
-      //       ).value;
-      //       let priceAddon = (
-      //         document.getElementById(
-      //           'textPriceAddon' + i.toString() + x.toString()
-      //         ) as HTMLInputElement
-      //       ).value;
-      //       values.push({
-      //         title: textTitle,
-      //         priceAddon: priceAddon,
-      //       });
-      //     }
-      //     let sectionTitle = (
-      //       document.getElementById(
-      //         'sectionTextTitle' + i.toString()
-      //       ) as HTMLInputElement
-      //     ).value;
-      //     dict.push({
-      //       type: 'textSel',
-      //       length: values.length,
-      //       values: values,
-      //       title: sectionTitle,
-      //     });
-      //   } else if (sel == 'numberSel') {
-      //     let values = [];
-      //     let cout = (
-      //       document.getElementById('numInput' + i) as HTMLInputElement
-      //     ).value;
-      //     for (let x = 0; x < +cout; x++) {
-      //       let numTitle = (
-      //         document.getElementById(
-      //           'numSel' + i.toString() + x.toString()
-      //         ) as HTMLInputElement
-      //       ).value;
-      //       let priceAddon = (
-      //         document.getElementById(
-      //           'numberPriceAddon' + i.toString() + x.toString()
-      //         ) as HTMLInputElement
-      //       ).value;
-      //       values.push({
-      //         title: numTitle,
-      //         priceAddon: priceAddon,
-      //       });
-      //     }
-      //     let sectionTitle = (
-      //       document.getElementById(
-      //         'sectionNumTitle' + i.toString()
-      //       ) as HTMLInputElement
-      //     ).value;
-      //     dict.push({
-      //       type: 'numberSel',
-      //       length: values.length,
-      //       values: values,
-      //       title: sectionTitle,
-      //     });
-      //   } else if (sel == 'extraInfo') {
-      //     let values = [];
-      //     let cout = (
-      //       document.getElementById('extraInput' + i) as HTMLInputElement
-      //     ).value;
-      //     for (let x = 0; x < +cout; x++) {
-      //       let extraTitle = (
-      //         document.getElementById(
-      //           'extraSel' + i.toString() + x.toString()
-      //         ) as HTMLInputElement
-      //       ).value;
-      //       values.push({
-      //         title: extraTitle,
-      //       });
-      //     }
-      //     let sectionTitle = (
-      //       document.getElementById(
-      //         'sectionExtraTitle' + i.toString()
-      //       ) as HTMLInputElement
-      //     ).value;
-      //     dict.push({
-      //       type: 'extraInfo',
-      //       length: values.length,
-      //       values: values,
-      //       title: sectionTitle,
-      //     });
-      //   } else if (sel == 'faceInput') {
-      //     let inputTitle = (
-      //       document.getElementById(
-      //         'faceInputTitle' + i.toString()
-      //       ) as HTMLInputElement
-      //     ).value;
-      //     let perPrice = (
-      //       document.getElementById(
-      //         'faceInputTitle' + i.toString()
-      //       ) as HTMLInputElement
-      //     ).value;
-      //     let values = [{ inputTitle: inputTitle, priceAddon: perPrice }];
-      //     dict.push({
-      //       type: 'faceInput',
-      //       length: values.length,
-      //       values: values,
-      //     });
-      //   }
-      // }
-      // this.dataProvider.overlayStatus = 'Checking Data ...';
-      // let allConditionsFalse = true;
-      // while (allConditionsFalse == true) {
-      //   let counter = 0;
-      //   prodList.forEach((prod) => {
-      //     if (
-      //       prod == [] ||
-      //       prod.image == null ||
-      //       prod.image == '' ||
-      //       prod.image == undefined
-      //     ) {
-      //       console.log('image is null');
-      //     } else if (
-      //       prod != [] &&
-      //       prod.image != null &&
-      //       prod.image != '' &&
-      //       prod.image != undefined
-      //     ) {
-      //       counter++;
-      //     }
-      //   });
-      //   console.log('counter', counter);
-      //   if (prodList.length == counter) {
-      //     allConditionsFalse = false;
-      //     console.log('allConditionsFalse');
-      //   }
-      // }
-
       this.dataProvider.overlayStatus = 'Curating data fields ...';
       let val = (document.getElementById('mainProdImage') as HTMLInputElement)
         .value;
@@ -375,8 +171,6 @@ export class EditProductComponent implements OnInit {
       };
       this.dataProvider.overlayStatus = 'Uploading Data ...';
       await this.inventory.editProduct(
-        this.productCategory,
-        this.productSubcategory,
         this.productId,
         data
       );
@@ -439,10 +233,6 @@ export class EditProductComponent implements OnInit {
     this.form.disable();
     this.afs
       .collection<any>('products')
-      .doc(this.productCategory)
-      .collection('categories')
-      .doc(this.productSubcategory)
-      .collection('products')
       .doc(this.productId)
       .valueChanges()
       .subscribe(async (value) => {
@@ -464,52 +254,6 @@ export class EditProductComponent implements OnInit {
             ) as HTMLImageElement
           ).src = image.image;
         }
-        // await this.delay(7000);
-        // for (let x= 0; x < value.extraData.length; x++) {
-        //   console.log(x,"current trigger")
-        //   console.log("radio"+x.toString());
-        //   while (document.getElementById('radio'+x.toString())){
-        //     console.log("radio"+x.toString(),"not found");
-        //   }
-        //   console.log("Found element");
-        //   (document.getElementById('radio'+x.toString()) as HTMLInputElement).value = value.extraData[x].type;
-        //   if (value.extraData[x].type == 'imageSel') {
-        //     (document.getElementById('imgInput'+x.toString()) as HTMLInputElement).value = value.extraData[x].length;
-        //     (document.getElementById('sectionImgTitle'+x.toString()) as HTMLInputElement).value = value.extraData[x].title;
-        //     for (let inlength=0; inlength < value.extraData[x].length; inlength++) {
-        //       (document.getElementById('image'+x.toString()+inlength.toString()) as HTMLImageElement).src = value.extraData[x].values[inlength].image;
-        //       (document.getElementById('imgTitle'+x.toString()+inlength.toString()) as HTMLInputElement).value = value.extraData[x].values[inlength].imageTitle;
-        //       (document.getElementById('priceImageAddon'+x.toString()+inlength.toString()) as HTMLInputElement).value = value.extraData[x].values[inlength].priceAddon;
-        //     }
-        //   }
-        //   else if (value.extraData[x].type == 'textSel') {
-        //     (document.getElementById('textInput'+x.toString()) as HTMLInputElement).value = value.extraData[x].length;
-        //     (document.getElementById('sectionTextTitle'+x.toString()) as HTMLInputElement).value = value.extraData[x].title;
-        //     for (let inlength=0; inlength < value.extraData[x].length; inlength++) {
-        //       (document.getElementById('textSel'+x.toString()+inlength.toString()) as HTMLInputElement).value = value.extraData[x].values[inlength].title;
-        //       (document.getElementById('textPriceAddon'+x.toString()+inlength.toString()) as HTMLInputElement).value = value.extraData[x].values[inlength].priceAddon;
-        //     }
-        //   }
-        //   else if (value.extraData[x].type == 'numberSel') {
-        //     (document.getElementById('numInput'+x.toString()) as HTMLInputElement).value = value.extraData[x].length;
-        //     (document.getElementById('sectionNumTitle'+x.toString()) as HTMLInputElement).value = value.extraData[x].title;
-        //     for (let inlength=0; inlength < value.extraData[x].length; inlength++) {
-        //       (document.getElementById('numSel'+x.toString()+inlength.toString()) as HTMLInputElement).value = value.extraData[x].values[inlength].title;
-        //       (document.getElementById('numberPriceAddon'+x.toString()+inlength.toString()) as HTMLInputElement).value = value.extraData[x].values[inlength].priceAddon;
-        //     }
-        //   }
-        //   else if (value.extraData[x].type == 'extraInfo') {
-        //     (document.getElementById('extraInput'+x.toString()) as HTMLInputElement).value = value.extraData[x].length;
-        //     (document.getElementById('sectionExtraTitle'+x.toString()) as HTMLInputElement).value = value.extraData[x].title;
-        //     for (let inlength=0; inlength < value.extraData[x].length; inlength++) {
-        //       (document.getElementById('extraSel'+x.toString()+inlength.toString()) as HTMLInputElement).value = value.extraData[x].values[inlength].title;
-        //     }
-        //   }
-        //   else if (value.extraData[x].type == 'faceInput') {
-        //     (document.getElementById('faceInputTitle'+x.toString()) as HTMLInputElement).value = value.extraData[x].inputTitle;
-        //     (document.getElementById('faceInputPrice'+x.toString()) as HTMLInputElement).value = value.extraData[x].priceAddon;
-        //   }
-        // }
       });
     this.form.enable();
   }

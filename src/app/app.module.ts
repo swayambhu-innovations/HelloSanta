@@ -84,6 +84,9 @@ import { UserinfoComponent } from './popovers/userinfo/userinfo.component';
 import { FilterModalComponent } from './modals/filter-modal/filter-modal.component';
 import { AddBlogComponent } from './modals/add-blog/add-blog.component';
 import { EditProductComponent } from './modals/edit-product/edit-product.component';
+import { SpecificProductsComponent } from './popovers/specific-products/specific-products.component';
+import { EditBlogComponent } from './modals/edit-blog/edit-blog.component';
+import { AddCategoriesComponent } from './modals/add-categories/add-categories.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -157,6 +160,9 @@ import { EditProductComponent } from './modals/edit-product/edit-product.compone
     FilterModalComponent,
     AddBlogComponent,
     EditProductComponent,
+    SpecificProductsComponent,
+    EditBlogComponent,
+    AddCategoriesComponent,
   ],
   entryComponents: [],
   imports: [

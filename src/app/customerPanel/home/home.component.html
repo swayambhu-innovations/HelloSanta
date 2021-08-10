@@ -54,7 +54,7 @@
               style="color: #F3F692">Handmade</span> Products</a></h1>
         <div class="product-row" *ngIf="screenwidth>600">
           <app-category-card *ngFor="let othercategory of allHandmadeProds" [img]="othercategory.productImages[0].image"
-            [categoryTitle]="othercategory.productName"></app-category-card>
+            [categoryTitle]="othercategory.productName" [category]="othercategory.productCategory" [subcategory]="othercategory.productSubcategory" [productId]="othercategory.productId"></app-category-card>
         </div>
       </section>
     </div>
@@ -69,7 +69,8 @@
         <h1 class="digital"><a href="/digitalart">Our <span style="color: #FF6584">Beloved</span> Range of <span
               style="color: #FF6584">Digital</span> Products</a></h1>
         <div class="product-row1" *ngIf="screenwidth>600">
-          <app-category-card *ngFor="let category of allDigitalProds" [img]="category.productImages[0].image" [categoryTitle]="category.productName">
+          <app-category-card *ngFor="let category of allDigitalProds" [img]="category.productImages[0].image"
+            [categoryTitle]="category.productName">
           </app-category-card>
         </div>
       </section>
@@ -89,14 +90,43 @@
     <div id="container3">
       <section id="orders-container3">
         <h1 class="recommend">Recommended Products</h1>
-        <div class="product-row2" class="uk-slider-container">
+        <ion-row>
+          <ion-button class="products" (click)="recommendedSelection=0" >
+            Recommended Products
+          </ion-button>
+          <ion-button class="products" (click)="recommendedSelection=1" >
+            Santa's Choice
+          </ion-button>
+          <ion-button class="products" (click)="recommendedSelection=2" >
+            Featured Product
+          </ion-button>
+        </ion-row>
+        <div class="product-row2" class="uk-slider-container" *ngIf="recommendedSelection==0">
           <ul class="uk-slider-items uk-child-width-1-4" uk-slider="autoplay: true">
             <li *ngFor="let product of allRecommendedProds">
               <app-product-full-card [img]="product.productImages[0].image" [productTitle]="product.productName"
-            [productDescription]="product.productDescription" [price]="product.productPrice"></app-product-full-card>
+                [productDescription]="product.productDescription" [price]="product.productPrice" [category]="product.productCategory" [subcategory]="product.productSubcategory" [productId]="product.productId">
+              </app-product-full-card>
             </li>
           </ul>
-          
+        </div>
+        <div class="product-row2" class="uk-slider-container" *ngIf="recommendedSelection==1">
+          <ul class="uk-slider-items uk-child-width-1-4" uk-slider="autoplay: true">
+            <li *ngFor="let product of allSantasChoiceProds">
+              <app-product-full-card [img]="product.productImages[0].image" [productTitle]="product.productName"
+                [productDescription]="product.productDescription" [price]="product.productPrice" [category]="product.productCategory" [subcategory]="product.productSubcategory" [productId]="product.productId">
+              </app-product-full-card>
+            </li>
+          </ul>
+        </div>
+        <div class="product-row2" class="uk-slider-container" *ngIf="recommendedSelection==2">
+          <ul class="uk-slider-items uk-child-width-1-4" uk-slider="autoplay: true">
+            <li *ngFor="let product of allFeaturedProds">
+              <app-product-full-card [img]="product.productImages[0].image" [productTitle]="product.productName"
+                [productDescription]="product.productDescription" [price]="product.productPrice" [category]="product.productCategory" [subcategory]="product.productSubcategory" [productId]="product.productId">
+              </app-product-full-card>
+            </li>
+          </ul>
         </div>
       </section>
     </div>

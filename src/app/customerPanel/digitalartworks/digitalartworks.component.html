@@ -137,7 +137,7 @@
     <div id="container2">
       <section id="orders-container">
         <div class="product-row">
-          <app-product-full-card *ngFor="let product of products" [img]="product.img" [productTitle]="product.name" [productDescription]="product.description" [price]="product.price" ></app-product-full-card>
+          <app-product-full-card *ngFor="let product of allDigitalProds" [img]="product.productImages[0].image" [productTitle]="product.productName" [productDescription]="product.seoDescription" [price]="product.productPrice" ></app-product-full-card>
         </div>
       </section>
     </div>

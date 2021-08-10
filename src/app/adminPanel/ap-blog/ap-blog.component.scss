@@ -64,7 +64,16 @@ ion-toolbar{
 ion-button{
     --background:#FF6584;
 }
-
-
+ion-spinner{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+h1{
+    position: relative;
+    top: 40%;
+    transform:translateY(-70%);
+}
 
 

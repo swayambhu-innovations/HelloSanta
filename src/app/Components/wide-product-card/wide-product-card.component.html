@@ -7,7 +7,7 @@
   </div>
   <div class="order-price-and-btns">
     <p class="order-price">Price: ₹{{orderprice}}</p>
-    <button class="order-remove">Remove</button>
-    <button class="order-view">View Product</button>
+    <ion-button class="order-remove" (click)="removeFromWishlist()">Remove</ion-button>
+    <ion-button class="order-view" href="./product?category={{this.category}}&subcategory={{this.subcategory}}&productId={{this.productId}}">View Product</ion-button>
   </div>
 </div>

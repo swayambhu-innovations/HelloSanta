@@ -178,7 +178,18 @@ padding-bottom: 3%;
  font-weight: bold;
  font-size: 3rem;
 }
-
+.products{
+  background-color: #ADA2FF; /* Green */
+  border-radius: 10px;
+  color: white;
+  margin: 2%;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  cursor: pointer
+}
 #container3 {
   width: 95%;
   margin: 3em auto;

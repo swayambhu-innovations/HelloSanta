@@ -17,19 +17,30 @@
   color: #5c5b5a;
   padding: 1em;
 }
+.order-details > div {
+  padding-left:10px;
+  padding-right:10px;
+}
 
 .order-title {
   font-family: 'Poppins';
   font-size: 1.5rem;
   color: #777777;
 }
-
+.order-details{
+  box-shadow:none;
+  margin: 0%;
+  padding-left:10px;
+  padding-right:10px;
+}
 .order-price-and-add-to-cart {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-family: 'Poppins';
   font-size: 1.25rem;
+  padding-left:20px;
+  padding-right:20px;
 }
 
 .order-price {
@@ -55,7 +66,9 @@
   font-size: 2.5rem;
   cursor: pointer;
 }
+.order-details{
 
+}
 @media only screen and (max-width: 600px) {
   .order-card {
     width: 160px;
@@ -79,6 +92,7 @@
     margin-top: -25px;
     margin-bottom: -15px;
     font-size: 1rem;
+    
   }
 
   .order-price {

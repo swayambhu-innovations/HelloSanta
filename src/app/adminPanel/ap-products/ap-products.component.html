@@ -1,8 +1,19 @@
 <ion-content>
   <ion-toolbar>
-    <ion-title>Products</ion-title>
     <ion-button (click)="addProducts()" shape="round" slot="start">
       Add Products
+    </ion-button>
+    <ion-button (click)="presentCategory()" shape="round" color="success" slot="start">
+      Add Categories
+    </ion-button>
+    <ion-button (click)="inventoryService.clearRecommendations()" color="danger" shape="round" slot="end">
+      Clear Recommendation
+    </ion-button>
+    <ion-button (click)="inventoryService.clearFeatured()" color="danger" shape="round" slot="end">
+      Clear Featured
+    </ion-button>
+    <ion-button (click)="inventoryService.clearSantasChoice()" color="danger" shape="round" slot="end">
+      Clear Santa's choice
     </ion-button>
     <ion-label slot="end">Pretty View</ion-label>
     <ion-toggle slot="end" checked #switch></ion-toggle>
@@ -17,8 +28,6 @@
       [price]="item.productPrice"
       [totalSales]="item.totalSales"
       [id]="item.productId"
-      [category]="item.productCategory"
-      [subcategory]="item.productSubcategory"
       ></app-product>
     </div>
   </ion-row>
@@ -31,11 +40,14 @@
       <ion-chip color="primary">
         <ion-label><strong>Price:&nbsp;</strong>&#8377;&nbsp;{{item.productPrice}}</ion-label>
       </ion-chip>
-      <button slot="end" (click)="deleteItem()">
+      <button slot="end" (click)="deleteItem(item.productId)">
         <ion-icon name="trash"></ion-icon>
       </button>
-      <button slot="end" (click)="editItem()">
+      <button slot="end" (click)="presentEditProductModal(item.productId)">
         <ion-icon name="create"></ion-icon>
+      </button>
+      <button (click)="presentSpecificProductsPop($event,item.productId)">
+        <ion-icon name="albums"></ion-icon>
       </button>
     </ion-item>
   </ion-row>

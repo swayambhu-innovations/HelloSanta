@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
   selector: 'app-product-full-card',
@@ -12,8 +13,19 @@ export class ProductFullCardComponent implements OnInit {
     "                  adipiscing elit. Curabitur cursus tincidunt\n" +
     "                  commodo. Nunc justo nisi, vestibulum."
   @Input() price:string = "2300"
-  constructor() { }
+  @Input() category:string;
+  @Input() subcategory:string;
+  @Input() productId:string
+  constructor(public inventoryService: InventoryService) { }
   textlength=70;
+  addToWishlist(){
+    let data = {
+      productId: this.productId,
+      category: this.category,
+      subcategory: this.subcategory
+    }
+    this.inventoryService.addToWishlist(data);
+  }
   ngOnInit(): void {
     if ( this.productDescription.length>=this.textlength){
       this.productDescription =  this.productDescription.substring(0,this.textlength) +"...";

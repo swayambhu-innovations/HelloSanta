@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
   selector: 'app-wide-product-card',
@@ -12,8 +13,18 @@ export class WideProductCardComponent implements OnInit {
     "                  adipiscing elit. Curabitur cursus tincidunt\n" +
     "                  commodo. Nunc justo nisi, vestibulum."
   @Input() orderprice:string = "2300"
-  constructor() { }
-
+  @Input() category:string;
+  @Input() subcategory:string;
+  @Input() productId:string
+  constructor(public inventoryService: InventoryService) { }
+  removeFromWishlist(){
+    let data = {
+      productId: this.productId,
+      category: this.category,
+      subcategory: this.subcategory
+    }
+    this.inventoryService.removeFromWishlist(data);
+  }
   ngOnInit(): void {
   }
 

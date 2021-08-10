@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -8,153 +9,53 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SingleproductComponent implements OnInit {
   screenwidth = window.innerWidth;
-    category:string;
-    subcategory:string;
+    category=[];
+    subcategory=[];
     productId:string;
-  constructor(private activatedRoute: ActivatedRoute) {
+    selectedImage:string;
+    productData:any;
+    selectedExtraType:string;
+    selectedExtraTitle:string;
+    recommendationProducts=[];
+  constructor(private activatedRoute: ActivatedRoute,public afs: AngularFirestore,) {
     this.activatedRoute.queryParams.subscribe(params => {
-        this.category = params['category'];
-        this.subcategory = params['subcategory']
         this.productId = params['productId'];
     });
   }
-
-  ngOnInit(): void {
-    const product_filters = document.getElementById(
-      'product-filters'
-    ) as HTMLElement;
-    const product_types_container = document.getElementById(
-      'product-types-container'
-    ) as HTMLElement;
-    const product_types_title = document.getElementById(
-      'product-types-title'
-    ) as HTMLElement;
-    const product_types = document.getElementById(
-      'product-types'
-    ) as HTMLElement;
-
-    product_filters?.addEventListener(
-      'click',
-      (event) => {
-        const targ = event.target as HTMLElement;
-        if (targ.classList.contains('product-filter')) {
-          const filter_id = targ.id;
-          const filter_type = filter_id.substring(0, filter_id.indexOf('-'));
-
-          var n = 0,
-            type_image_links: string[] = [],
-            type_names: string[] = [];
-
-          switch (filter_type) {
-            case 'size':
-              n = 4;
-              type_image_links = [
-                'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-                'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-                'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-                'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-              ];
-              type_names = [
-                'type Option 1',
-                'type Option 2',
-                'type Option 3',
-                'type Option 4',
-              ];
-              break;
-
-            case 'frame':
-              n = 4;
-              type_image_links = [
-                'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-                'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-                'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-                'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-              ];
-              type_names = [
-                'Frame Option 1',
-                'Frame Option 2',
-                'Frame Option 3',
-                'Frame Option 4',
-              ];
-              break;
-
-            case 'color':
-              n = 4;
-              type_image_links = [
-                'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-                'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-                'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-                'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-              ];
-              type_names = [
-                'Color Option 1',
-                'Color Option 2',
-                'Color Option 3',
-                'Color Option 4',
-              ];
-              break;
-              type_image_links = [
-                'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-                'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-                'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-                'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-              ];
-              type_names = [
-                'Color Option 1',
-                'Color Option 2',
-                'Color Option 3',
-                'Color Option 4',
-              ];
-              break;
-
-            case 'quantity':
-              n = 4;
-              n = 4;
-              type_image_links = [
-                'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-                'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-                'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-                'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-              ];
-              type_names = [
-                'Frame Option 1',
-                'Frame Option 2',
-                'Frame Option 3',
-                'Frame Option 4',
-              ];
-              break;
-          }
-
-          product_types.innerHTML = '';
-
-          for (var i = 0; i < n; i++) {
-            product_types.innerHTML +=
-              `
-                    <div class="product-type" style="width: 140px;
-                    margin: 0 .5em;">
-                        <img src="` +
-              type_image_links[i] +
-              `" class="product-type-image">
-                        <p class="product-type-name" style="text-align: center;
-                        margin-top: .5em;
-                        font-size: 1.1rem;
-                        font-family: 'Poppins';">` +
-              type_names[i] +
-              `</p>
-                    </div>
-                `;
-          }
-
-          product_types_title.innerHTML =
-            filter_type.charAt(0).toUpperCase() +
-            filter_type.substring(1) +
-            ' Types';
-
-          product_types_container.style.display = 'block';
-        }
-      },
-      false
-    );
+  genList(value){
+      let randomList = [];
+      for (let i = 1; i < value+1; i++) {
+          randomList.push(i);
+      }
+      return randomList;
+  }
+  ngOnInit() {
+    this.afs.collection('products').doc(this.productId).valueChanges().subscribe((value)=>{
+        console.log(value);
+        this.productData=value;
+        this.selectedImage=this.productData.productImages[0].image;
+        this.selectedExtraType=this.productData.extraData[0].type;
+        this.selectedExtraTitle=this.productData.extraData[0].title;
+        this.category=this.productData.productCategory;
+        this.subcategory=this.productData.productSubcategory;
+    })
+    this.afs
+        .collection('products').valueChanges().subscribe((proddata:any)=>{
+          proddata.forEach((product:any) => {
+            console.log(proddata);
+            let unknown = 0;
+            this.recommendationProducts.forEach((oldProduct:any) => {
+              if (product.productId==oldProduct.productId) {
+                console.log("already exists");
+                unknown++;
+              }
+            })
+            if (unknown==0 && this.category.some(ct => product.productCategory.includes(ct))) {
+              this.recommendationProducts.push(product);
+            }
+          })
+          console.log(this.recommendationProducts);
+        })
   }
   products = [
     {

@@ -40,14 +40,31 @@
       <ion-input type="text" placeholder="Product Id" required="true" formControlName="productId"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Product Category</ion-label>
-      <ion-input type="text" placeholder="Product Category" required="true" formControlName="productCategory">
-      </ion-input>
+      <ion-label>Select Categories</ion-label>
+      <ion-card class="longList">
+        <ion-card-header>
+          <ion-card-title>Select Categories</ion-card-title>
+        </ion-card-header>
+        <ion-list>
+          <ion-item *ngFor="let category of allCategories">
+            <ion-label>{{category}}</ion-label>
+            <ion-checkbox color="primary" slot="start" (ionChange)="addToCatgories(category,$event)"></ion-checkbox>
+          </ion-item>
+        </ion-list>
+      </ion-card>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Product Subcategory</ion-label>
-      <ion-input type="text" placeholder="Product Sub Category" required="true" formControlName="productSubcategory">
-      </ion-input>
+      <ion-card class="longList">
+        <ion-card-header>
+          <ion-card-title>Select Subcategories</ion-card-title>
+        </ion-card-header>
+        <ion-list>
+          <ion-item *ngFor="let category of allSubCategories">
+            <ion-label>{{category}}</ion-label>
+            <ion-checkbox color="primary" (ionChange)="addToSubcatgories(category,$event)" slot="start"></ion-checkbox>
+          </ion-item>
+        </ion-list>
+      </ion-card>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Vendor Id</ion-label>
@@ -86,6 +103,10 @@
         <ion-item class="listoptions">
           <ion-label>Face Count</ion-label>
           <ion-radio slot="start" color="primary" value="faceInput"></ion-radio>
+        </ion-item>
+        <ion-item class="listoptions">
+          <ion-label>Size Options</ion-label>
+          <ion-radio slot="start" color="primary" value="sizeInput"></ion-radio>
         </ion-item>
       </ion-radio-group>
       <br>
@@ -187,6 +208,49 @@
             <ion-label position="floating">Per Face Price</ion-label>
             <ion-input required="true" type="number" min=0 value=0 id="faceInputPrice{{item}}"></ion-input>
           </ion-item>
+        </ion-card-content>
+      </ion-card>
+      <ion-card *ngIf="option.value=='sizeInput'">
+        <h3>Size Selection</h3>
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="floating">Title</ion-label>
+            <ion-input required="true" type="text" value="Sizes" id="sizeInputTitle{{item}}"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Total Sizes</ion-label>
+            <ion-input required="true" type="number" value="0" id="sizeInputCount{{item}}" #sizesCounter></ion-input>
+          </ion-item>
+          <ion-card *ngFor="let sizesIndex of genList(sizesCounter.value)">
+            <ion-item>
+              <ion-label position="floating">Size Name</ion-label>
+              <ion-input required="true" type="text" id="sizeInputText{{item}}{{sizesIndex}}"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Size Addon</ion-label>
+              <ion-input required="true" type="number" value="0" id="sizeInputAddon{{item}}{{sizesIndex}}"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">A Price</ion-label>
+              <ion-input required="true" type="number" value="0" id="sizeInputAPrice{{item}}{{sizesIndex}}"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Margin</ion-label>
+              <ion-input required="true" type="number" value="0" id="sizeInputMargin{{item}}{{sizesIndex}}"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Hours</ion-label>
+              <ion-input required="true" type="number" value="0" id="sizeInputHours{{item}}{{sizesIndex}}"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Price Per Hour</ion-label>
+              <ion-input required="true" type="number" value="0" id="sizeInputPPH{{item}}{{sizesIndex}}"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Size factor</ion-label>
+              <ion-input required="true" type="number" value="0" id="sizeInputSizeFactor{{item}}{{sizesIndex}}"></ion-input>
+            </ion-item>
+          </ion-card>
         </ion-card-content>
       </ion-card>
     </ion-card>

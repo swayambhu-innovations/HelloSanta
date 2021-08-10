@@ -51,24 +51,78 @@ export class InventoryService {
         }
       })
     }
-    addProduct(category,subCategory,productID,data){
-      const productRef: AngularFirestoreDocument<any> = this.afs.doc(`products/${category}/categories/${subCategory}/products/${productID}`);
+    addProduct(productID,data){
+      const productRef: AngularFirestoreDocument<any> = this.afs.doc(`products/${productID}`);
       let statement = productRef.set(data,{merge:true});
-      this.checkCategory(category,subCategory);
       return statement;
     }
-    editProduct(category,subCategory,productID,data){
-      const productRef: AngularFirestoreDocument<any> = this.afs.doc(`products/${category}/categories/${subCategory}/products/${productID}`);
+    clearRecommendations(){
+      const productRef: AngularFirestoreDocument<any> = this.afs.doc(`specificSelectedProducts/products`);
+      productRef.update({
+        recommendedProducts:firebase.firestore.FieldValue.delete()
+      });
+      this.authService.presentToast("Cleared recommendation list");
+
+    }
+    clearFeatured(){
+      const productRef: AngularFirestoreDocument<any> = this.afs.doc(`specificSelectedProducts/products`);
+      productRef.update({
+        featuredProducts:firebase.firestore.FieldValue.delete()
+      });
+      this.authService.presentToast("Cleared featured list");
+    }
+    clearSantasChoice(){
+      const productRef: AngularFirestoreDocument<any> = this.afs.doc(`specificSelectedProducts/products`);
+      productRef.update({
+        santasChoice:firebase.firestore.FieldValue.delete()
+      });
+      this.authService.presentToast("Cleared santa's choice list");
+
+    }
+    addToWishlist(data){
+      const productRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${this.authService.userId}`);
+      let statement = productRef.update({
+        wishlist:firebase.firestore.FieldValue.arrayUnion(data)
+      });
+      return statement;
+    }
+    addToRecommendations(data){
+      const productRef: AngularFirestoreDocument<any> = this.afs.doc(`specificSelectedProducts/products`);
+      let statement = productRef.update({
+        recommendedProducts:firebase.firestore.FieldValue.arrayUnion(data)
+      });
+      return statement;
+    }
+    addToSantasChoice(data){
+      const productRef: AngularFirestoreDocument<any> = this.afs.doc(`specificSelectedProducts/products`);
+      let statement = productRef.update({
+        santasChoice:firebase.firestore.FieldValue.arrayUnion(data)
+      });
+      return statement;
+    }
+    addToFeaturedProducts(data){
+      const productRef: AngularFirestoreDocument<any> = this.afs.doc(`specificSelectedProducts/products`);
+      let statement = productRef.update({
+        featuredProducts:firebase.firestore.FieldValue.arrayUnion(data)
+      });
+      return statement;
+    }
+    removeFromWishlist(data){
+      const productRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${this.authService.userId}`);
+      let statement = productRef.update({
+        wishlist:firebase.firestore.FieldValue.arrayRemove(data)
+      });
+      return statement;
+    }
+    editProduct(productID,data){
+      const productRef: AngularFirestoreDocument<any> = this.afs.doc(`products/${productID}`);
       let statement = productRef.update(data);
       return statement;
     }
     getAllProducts(){
       this.afs.collection('data').doc("productData").valueChanges().subscribe((value:any)=>{
         value.categories.forEach((element:any) => {
-          this.afs.collection('products').doc(element.category)
-          .collection('categories')
-          .doc(element.subCategory)
-          .collection('products').valueChanges().subscribe((value)=>{
+          this.afs.collection('products').valueChanges().subscribe((value)=>{
             console.log("data=> ",value);
           })
         })
@@ -77,5 +131,22 @@ export class InventoryService {
     addBlog(data) {
       const blogRef: AngularFirestoreDocument<any> = this.afs.doc(`blog/${data.blogId}`);
       blogRef.set(data,{merge:true});
+    }
+    editBlog(data,blogId) {
+      const blogRef: AngularFirestoreDocument<any> = this.afs.doc(`blog/${blogId}`);
+      blogRef.set(data,{merge:true});
+    }
+    deletBlog(blogId) {
+      const blogRef: AngularFirestoreDocument<any> = this.afs.doc(`blog/${blogId}`);
+      blogRef.delete();
+    }
+    getSingleBlog(blogId){
+      return this.afs.doc(`blog/${blogId}`).valueChanges();
+    }
+    publishBlog(blogId){
+      const blogRef: AngularFirestoreDocument<any> = this.afs.doc(`blog/${blogId}`);
+      blogRef.update({
+        isPublished:true
+      });
     }
 }

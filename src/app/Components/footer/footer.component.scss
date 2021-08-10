@@ -172,6 +172,9 @@ margin-bottom: -25px;
 .desktop{
   display:block;
 }
+li{
+  list-style: none !important;
+}
 @media (max-width: 767px) {
   /* Target devices narrower than 768px. */
   h4{

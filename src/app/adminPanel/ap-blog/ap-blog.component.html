@@ -5,31 +5,23 @@
       Add Blog
     </ion-button>
   </ion-toolbar>
-  <div class="blog">
+  <div class="blog" *ngIf="blogs!=undefined && blogs.length > 0 && blogs.length>=1">
     <h1>Latest BLOG</h1>
     <ion-row>
-      <img src="/assets/sunset.jpg" class="topBlogImage">
+      <img [src]="blogs[0].blogImage" class="topBlogImage">
       <div>
-        <h2>A sophisticated blog title</h2>
+        <h2>{{blogs[0].blogTitle}}</h2>
         <ion-row>
-          <button class="blogTag">
-            Tech
-          </button>
-          <button class="blogTag">
-            Tech
-          </button>
-          <button class="blogTag">
-            Tech
-          </button>
+          <ion-chip color="danger" outline="true" class="blogTag" *ngFor="let tag of blogs[0].blogTags">
+            {{tag}}
+          </ion-chip>
         </ion-row>
-        <ion-label class="blogDate">20-09-2021</ion-label>
-        <p class="blogDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tincidunt
-          commodo. Nunc justo nisi, vestibulum facilisis porta vestibulum, ultrices volutpat arcu. Quisque nec dui
-          mattis, fringilla magna in, vulputate enim. Fusce ut euismod ligula, id laoreet ex. </p>
+        <ion-label class="blogDate">{{blogs[0].blogDate.toString().split('T')[0]}}</ion-label>
+        <p class="blogDescription">{{blogs[0].blogExcerpt}}</p>
       </div>
     </ion-row>
   </div>
-  <div class="blogList">
+  <div class="blogList" *ngIf="blogs!=undefined && blogs!=[] && blogs.length>=1">
     <h1>All POSTS</h1>
     <div class="mainTable">
       <table>
@@ -44,77 +36,31 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr *ngFor="let blog of blogs">
             <td>
-              <img src="/assets/sunset.jpg" class="thumbnailImage" alt="">
+              <img [src]="blog.blogImage" class="thumbnailImage" alt="">
             </td>
             <td class="mainData">
-              <ion-label>Another sophisticated post title</ion-label><br>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tincidunt commodo. Nunc justo
-                nisi, vestibulum facilisis porta vestibulum, ultrices volutpat arcu. Quisque nec dui mattis, fringilla
-                magna in, vulputate enim. Fusce ut euismod ligula, id laoreet ex. </p>
+              <ion-label>{{blog.blogTitle}}</ion-label><br>
+              <p>{{blog.blogExcerpt}}</p>
             </td>
             <td>
-              <ion-label>20-09-2021</ion-label>
+              <ion-label>{{blog.blogDate.toString().split('T')[0]}}</ion-label>
             </td>
             <td>
-              <button class="editButton"><ion-icon name="brush"></ion-icon></button>
+              <button class="editButton" (click)="editBlog(blog.blogId)"><ion-icon name="brush"></ion-icon></button>
             </td>
             <td>
-              <button class="removeButton"><ion-icon name="close-circle"></ion-icon></button>
+              <button class="removeButton" (click)="deleteBlog(blog.blogId)"><ion-icon name="close-circle"></ion-icon></button>
             </td>
             <td>
-              <button class="publishButton"><ion-icon name="cloud-upload"></ion-icon></button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img src="/assets/sunset.jpg" class="thumbnailImage" alt="">
-            </td>
-            <td class="mainData">
-              <ion-label>Another sophisticated post title</ion-label><br>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tincidunt commodo. Nunc justo
-                nisi, vestibulum facilisis porta vestibulum, ultrices volutpat arcu. Quisque nec dui mattis, fringilla
-                magna in, vulputate enim. Fusce ut euismod ligula, id laoreet ex. </p>
-            </td>
-            <td>
-              <ion-label>20-09-2021</ion-label>
-            </td>
-            <td>
-              <button class="editButton"><ion-icon name="brush"></ion-icon></button>
-            </td>
-            <td>
-              <button class="removeButton"><ion-icon name="close-circle"></ion-icon></button>
-            </td>
-            <td>
-              <button class="publishButton"><ion-icon name="cloud-upload"></ion-icon></button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img src="/assets/sunset.jpg" class="thumbnailImage" alt="">
-            </td>
-            <td class="mainData">
-              <ion-label>Another sophisticated post title</ion-label><br>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tincidunt commodo. Nunc justo
-                nisi, vestibulum facilisis porta vestibulum, ultrices volutpat arcu. Quisque nec dui mattis, fringilla
-                magna in, vulputate enim. Fusce ut euismod ligula, id laoreet ex. </p>
-            </td>
-            <td>
-              <ion-label>20-09-2021</ion-label>
-            </td>
-            <td>
-              <button class="editButton"><ion-icon name="brush"></ion-icon></button>
-            </td>
-            <td>
-              <button class="removeButton"><ion-icon name="close-circle"></ion-icon></button>
-            </td>
-            <td>
-              <button class="publishButton"><ion-icon name="cloud-upload"></ion-icon></button>
+              <button class="publishButton" (click)="publishBlog(blog.blogId)"><ion-icon name="cloud-upload"></ion-icon></button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
+  <ion-spinner *ngIf="blogs==undefined"></ion-spinner>
+  <h1 *ngIf="blogs.length<1" class="uk-align-center uk-text-center">No data available for blogs</h1>
 </ion-content>

@@ -1,64 +1,108 @@
 <ion-content>
-  <app-header></app-header>
-<main id="container">
-    <section id="product">
-        <div id="product-images-and-details">
-            <div id="product-images">
-                <div id="product-images-list">
-                    <img src="https://images.pexels.com/photos/8817871/pexels-photo-8817871.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                        alt="Prodcuct Image Description" class="product-images-list-item">
-                    <img src="https://images.pexels.com/photos/8817871/pexels-photo-8817871.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                        alt="Prodcuct Image Description" class="product-images-list-item">
-                    <img src="https://images.pexels.com/photos/8817871/pexels-photo-8817871.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                        alt="Prodcuct Image Description" class="product-images-list-item">
-                    <img src="https://images.pexels.com/photos/8817871/pexels-photo-8817871.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                        alt="Prodcuct Image Description" class="product-images-list-item">
+    <app-header></app-header>
+    <main id="container">
+        <section id="product" *ngIf="productData">
+            <div id="product-images-and-details">
+                <div id="product-images">
+                    <div id="product-images-list">
+                        <img [src]="item.image" (click)="selectedImage=item.image" class="product-images-list-item"
+                            [alt]="item.imageName" *ngFor="let item of productData.productImages">
+                    </div>
+                    <img [src]="selectedImage" alt="Product Image Description" id="product-image-preview">
                 </div>
-                <img src="https://images.pexels.com/photos/8817871/pexels-photo-8817871.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                    alt="Product Image Description" id="product-image-preview">
-            </div>
-            <div id="product-details">
-                <h2 id="product-name">The product name with a small description</h2>
-                <div id="product-feature-buttons">
-                    <button class="product-feature-button">09-06-2021</button><button
-                        class="product-feature-button">Handmade</button><button class="product-feature-button">With
-                        Frame</button>
-                </div>
-                <p id="product-price">Price: ₹2500</p>
-                <div id="product-action-buttons">
-                    <button id="product-buy-now" class=
-                    product-action-button>Buy Now</button>
-                    <button id="product-add-to-cart" class=
-                    product-action-button>Add to Cart</button>
-                </div>
-                <div id="product-filters">
-                    <button id="size-filter" class="product-filter">Sizes</button>
-                    <button id="frame-filter" class="product-filter">Frames</button>
-                    <button id="color-filter" class="product-filter">Colors</button>
-                    <button id="quantity-filter" class="product-filter">Quantity</button>
-                </div>
-                <div id="product-types-container">
-                    <h4 id="product-types-title"></h4>
-                    <div id="product-types">
+                <div id="product-details">
+                    <h2 id="product-name">{{productData.productName}}<br><span>{{productData.shortDescription}}</span>
+                    </h2>
+                    <div id="product-feature-buttons">
+                        <button class="product-feature-button" *ngFor="let catText of category">{{catText}}</button>
+                        <button class="product-feature-button" *ngFor="let subcatText of subcategory">{{subcatText}}</button>
+                    </div>
+                    <p id="product-price">Price: &#8377; {{productData.productPrice}}</p>
+                    <div id="product-action-buttons">
+                        <button id="product-buy-now" class=product-action-button>Buy Now</button>
+                        <button id="product-add-to-cart" class=product-action-button>Add to Cart</button>
+                    </div>
+                    <div id="product-filters">
+                        <button class="product-filter"
+                            (click)="selectedExtraType=extra.type;selectedExtraTitle=extra.title"
+                            *ngFor="let extra of productData.extraData">
+                            <span *ngIf="extra.type=='faceInput'">Image Faces</span>
+                            <span *ngIf="extra.type=='extraInfo'">Extra Info</span>
+                            <span *ngIf="extra.type!='faceInput' && extra.type!='extraInfo'">{{extra.title}}</span>
+                        </button>
+                    </div>
+                    <div *ngIf="selectedExtraType=='imgSel'">
+                        <div *ngFor="let extra of productData.extraData">
+                            <ion-row *ngIf="extra.title==selectedExtraTitle">
+                                <ion-card *ngFor="let single of extra.values">
+                                    <ion-avatar>
+                                        <img [src]="" />
+                                    </ion-avatar>
+                                </ion-card>
+                            </ion-row>
+                        </div>
+                    </div>
+                    <div *ngIf="selectedExtraType=='textSel'">
+                        <div *ngFor="let extra of productData.extraData">
+                            <ion-row *ngIf="extra.title==selectedExtraTitle">
+                                <ion-card class="selectionChoiceCard" *ngFor="let single of extra.values">
+                                    <span class="selectionTitle">{{single.title}}</span><br>
+                                    <span class="selectionPrice"> &#8377;{{single.priceAddon}}</span>
+                                </ion-card>
+                            </ion-row>
+                        </div>
+                    </div>
+                    <div *ngIf="selectedExtraType=='numSel'">
+                        <div *ngFor="let extra of productData.extraData">
+                            <ion-row *ngIf="extra.title==selectedExtraTitle">
+                                <ion-card class="selectionChoiceCard" *ngFor="let single of extra.values">
+                                    <span class="selectionTitle">{{single.title}}</span><br>
+                                    <span class="selectionPrice"> &#8377;{{single.priceAddon}}</span>
+                                </ion-card>
+                            </ion-row>
+                        </div>
+                    </div>
+                    <div *ngIf="selectedExtraType=='faceInput'">
+                        <div *ngFor="let extra of productData.extraData">
+                            <ion-row *ngIf="extra.title==selectedExtraTitle">
+                                <ion-card class="selectionChoiceCard" *ngFor="let single of genList(4)">
+                                    <span class="selectionTitle">{{single}}</span>
+                                    <!-- <span> &#8377;{{single.priceAddon}}</span> -->
+                                </ion-card>
+                            </ion-row>
+                        </div>
+                    </div>
+                    <div *ngIf="selectedExtraType=='extraInfo'">
+                        <div *ngFor="let extra of productData.extraData">
+                            <ion-row *ngIf="extra.title==selectedExtraTitle">
+                                <ion-card class="selectionChoiceCard" style="width:400px;" *ngFor="let single of extra.values">
+                                    <ion-textarea placeholder="Extra Info"></ion-textarea>
+                                </ion-card>
+                            </ion-row>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div id="product-description">
+                <h4 id="product-description-title">Description</h4>
+                <div [innerHTML]="productData.productDescription"></div>
+            </div>
+        </section>
+        <ion-spinner *ngIf="!productData"></ion-spinner>
+        <div id="container2">
+            <section id="orders-container" *ngIf="recommendationProducts!=[]">
+                <div>
+                    <h1 class="headingproducts uk-text-center">More Products like This</h1>
+                    <div class="product-row uk-text-center uk-align-center">
+                        <app-product-full-card *ngFor="let product of recommendationProducts"
+                            [img]="product.productImages[0].image" [productTitle]="product.productName"
+                            [productDescription]="product.seoDescription" [price]="product.productPrice">
+                        </app-product-full-card>
+                    </div>
+                </div>
+            </section>
+            <ion-spinner *ngIf="recommendationProducts==[]"></ion-spinner>
         </div>
-        <div id="product-description">
-            <h4 id="product-description-title">Description</h4>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat quos ipsum, dolores aspernatur dolor doloribus sapiente et debitis libero qui, totam recusandae commodi architecto, eos eligendi minima dolore a temporibus.</p>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat quos ipsum, dolores aspernatur dolor doloribus sapiente et debitis libero qui, totam recusandae commodi architecto, eos eligendi minima dolore a temporibus.</p>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat quos ipsum, dolores aspernatur dolor doloribus sapiente et debitis libero qui, totam recusandae commodi architecto, eos eligendi minima dolore a temporibus.</p>
-        </div>
-    </section>
-  <div id="container2">
-    <section id="orders-container">
-      <h1 class="headingproducts">More Products like This</h1>
-      <div class="product-row">
-        <app-product-full-card *ngFor="let product of products" [img]="product.img" [productTitle]="product.name" [productDescription]="product.description" [price]="product.price" ></app-product-full-card>
-      </div>
-    </section>
-  </div>
-</main>
-<app-footer></app-footer>
+    </main>
+    <app-footer></app-footer>
 </ion-content>

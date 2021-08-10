@@ -75,18 +75,17 @@
 div > ul{
   position: relative;
   z-index:1;
-  background-color: #fdfaf2;
   display:flex;
   justify-content: space-around;
   align-items: center;
   height:50px;
   padding:10px;
   margin-bottom:0px !important;
-  box-shadow:10px 1px 10px rgba(0,0,0,0.2);
   justify-items: center;
 }
 li{
   font-weight: 500;
+  list-style: none !important;
 }
 .nav > li > a:hover{
 text-decoration: none;
