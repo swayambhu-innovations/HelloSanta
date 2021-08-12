@@ -4,8 +4,8 @@
         <app-sidenav activeLinkID="your-orders" *ngIf="screenwidth>600"></app-sidenav>
         <section id="orders-container">
           <h2 id="your-cart-title">Your Orders</h2>
-          <div class="product-row">
-            <app-small-product-card *ngFor="let product of products" [img]="product.img" [productTitle]="product.name" [price]="product.price" [date]="product.date"></app-small-product-card>
+          <div class="product-row" *ngIf="liveOrders.length>0">
+            <app-small-product-card *ngFor="let product of liveOrders" [img]="product.productImage" [productTitle]="product.productName" [price]="product.productPrice" [date]="product.purchaseDate"></app-small-product-card>
           </div>
         </section>
     </main>

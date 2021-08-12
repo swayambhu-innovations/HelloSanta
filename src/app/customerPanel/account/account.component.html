@@ -5,35 +5,35 @@
       <section id="account-container">
         <div id="img-name-and-email">
           <img
-            src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+            [src]="userImage"
             alt="Profile Pic" class="circular-profile-pic" style="width:100px;height:100px">
           <div id="name-and-email">
-            <h2 id="name">Satyajeet Ray</h2>
-            <p id="email">username@host.com</p>
+            <h2 id="name">{{userName}}</h2>
+            <p id="email">{{userEmail}}</p>
             <a href="profilepage">Edit Profile</a>
           </div>
         </div>
         <div id="statistic-cards">
           <div class="statistic-card" id="total-orders-card">
             <p class="card-title">Total Orders</p>
-            <p class="card-number">12</p>
+            <p class="card-number">{{totalOrders}}</p>
           </div>
           <div class="statistic-card" id="referrals-card">
             <p class="card-title"> Total Referrals</p>
-            <p class="card-number">42</p>
+            <p class="card-number">{{totalRefers}}</p>
           </div>
           <div class="statistic-card" id="total-cashback-card">
             <p class="card-title">Total Cashback</p>
-            <p class="card-number">12</p>
+            <p class="card-number">{{totalCashback}}</p>
           </div>
           <div class="statistic-card" id="total-orders-2-card">
-            <p class="card-title">Total Orders</p>
-            <p class="card-number">12</p>
+            <p class="card-title">Total Sales</p>
+            <p class="card-number">{{totalSales}}</p>
           </div>
         </div>
-        <div id="latest-orders">
+        <div id="latest-orders" *ngIf="liveOrders.length>0">
           <div class="product-row">
-            <app-small-product-card *ngFor="let product of products" [img]="product.img" [productTitle]="product.name" [price]="product.price" [date]="product.date"></app-small-product-card>
+            <app-small-product-card *ngFor="let product of liveOrders" [img]="product.productImage" [productTitle]="product.productName" [price]="product.productPrice" [date]="product.purchaseDate"></app-small-product-card>
           </div>
         </div>
       </section>

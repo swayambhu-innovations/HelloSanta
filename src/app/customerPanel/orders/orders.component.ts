@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-orders',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrdersComponent implements OnInit {
   screenwidth=window.innerWidth
-  constructor() { }
+  constructor(public authService: AuthService,public afs: AngularFirestore) { }
+  liveOrders=[];
+  ngOnInit() {
+    this.afs.collection('users').doc(this.authService.userId).valueChanges().subscribe((value:any)=>{
+      this.liveOrders=value.currentOrder;
+    })
+  }
 
-  ngOnInit() {}
   products=[
     {
       "img":"https://source.unsplash.com/940x650",
