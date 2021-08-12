@@ -12,7 +12,7 @@ ion-row{
     color:#ff9253
 }
 ion-card{
-    padding: 20px;
+    padding: 10px;
     border-radius: 20px;
     box-shadow:5px 2px 20px rgba(0, 0, 0, 0.2);
     transition: all 0.5s ease-in-out;
@@ -20,4 +20,7 @@ ion-card{
 ion-card:hover{
     box-shadow:5px 10px 20px #ada2ff4b;
     border:2px solid var(--ion-color-primary);
+}
+ul,div,p{
+    margin:0% !important;
 }

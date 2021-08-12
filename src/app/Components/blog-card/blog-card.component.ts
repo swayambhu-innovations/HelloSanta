@@ -11,6 +11,7 @@ export class BlogCardComponent implements OnInit {
   @Input() blogDescription:string = "Lorem ipsum dolor sit amet, consectetur\n" +
     "                  adipiscing elit. Curabitur cursus tincidunt\n" +
     "                  commodo. Nunc justo nisi, vestibulum."
+  @Input() blogId:string;
   constructor() { }
 
   ngOnInit(): void {

@@ -26,96 +26,24 @@ screenwidth=window.innerWidth
   allHandmadeProds=[]
   specifiedHandmadeProds={}
   ngOnInit() {
-    this.afs.collection('data').doc("productData").valueChanges().subscribe((value:any)=>{
-      this.allHandmadeProds=[];
-      value.categories.forEach((element:any) => {
-        if (element.category=="Manual Artworks"){
-        // console.log(value.categories.indexOf(element),"indexof")
-        if (value.categories.indexOf(element)==0){
-          // console.log("removing elements");
-          this.allHandmadeProds.length=0;
-          // console.log(this.allProds.length)
-        }
-        this.afs.collection('products').doc('Manual Artworks')
-        .collection('categories')
-        .doc(element.subCategory)
-        .collection('products').valueChanges().subscribe((proddata)=>{
-          this.specifiedHandmadeProds[element.category] = proddata;
-          proddata.forEach((product:any) => {
-            let unknown = 0;
-            this.allHandmadeProds.forEach((oldProduct:any) => {
-              if (product.productId==oldProduct.productId) {
-                console.log("already exists");
-                unknown++;
-              }
-            })
-            if (unknown==0) {
-              this.allHandmadeProds.push(product);
+    this.afs
+      .collection('products')
+      .valueChanges()
+      .subscribe((proddata) => {
+        console.log('products data digital', proddata);
+        proddata.forEach((product: any) => {
+          let unknown = 0;
+          this.allHandmadeProds.forEach((oldProduct: any) => {
+            if (product.productId == oldProduct.productId) {
+              console.log('already exists');
+              unknown++;
             }
-          })
-        })
-      } else {
-        console.log("Digital category found",element.category)
-      }
-      })
-    });
+          });
+          if (unknown == 0 && product.productCategory.includes('Handmade Products')) {
+            this.allHandmadeProds.push(product);
+          }
+        });
+      });
   }
-
-  products=[
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"ArtWork Product",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-      "price":"2300",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"ArtWork Product",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-      "price":"2300",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"ArtWork Product",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-      "price":"2300",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"ArtWork Product",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-      "price":"2300",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"ArtWork Product",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-      "price":"2300",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"ArtWork Product",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-      "price":"2300",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"ArtWork Product",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-      "price":"2300",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"ArtWork Product",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-      "price":"2300",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"ArtWork Product",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-      "price":"2300",
-    },
-  ]
 
 }

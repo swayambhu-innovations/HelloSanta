@@ -1,4 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { ModalController, PopoverController } from '@ionic/angular';
+import { ExtraPendingProductInfoComponent } from 'src/app/popovers/extra-pending-product-info/extra-pending-product-info.component';
+import { PendingProductEditModalComponent } from 'src/app/modals/pending-product-edit-modal/pending-product-edit-modal.component';
 
 @Component({
   selector: 'app-vpproduct-card',
@@ -11,8 +15,31 @@ export class VPProductCardComponent implements OnInit {
   @Input() description: string;
   @Input() id: string;
   @Input() price: string;
-  constructor() { }
-  
+  constructor(public afs: AngularFirestore,public modalController: ModalController,private popoverController: PopoverController) { }
+  async moreInfo(){
+    const modal = await this.popoverController.create({
+      component: ExtraPendingProductInfoComponent,
+      componentProps: {
+        productId: this.id,
+      }
+    });
+    return await modal.present();
+  }
+  async presentEditProductModal(id) {
+    const modal = await this.modalController.create({
+      component: PendingProductEditModalComponent,
+      componentProps: {
+        productId: id,
+      }
+    });
+    return await modal.present();
+  }
+  deleteItem(id){
+    console.log("deleting");
+    const productRef: AngularFirestoreDocument<any> = this.afs.doc(`products/${id}`);
+    productRef.delete();
+    console.log("deleted");
+  }
   ngOnInit() {}
 
 }

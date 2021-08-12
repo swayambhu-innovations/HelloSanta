@@ -34,11 +34,7 @@
   </ion-toolbar>
   <div class="headerContainer" >
     <div class="searchbox" *ngIf="screenwidth>600">
-      <ion-row>
-        <input type="search" class="searchInput" placeholder="Search Anything ...">
-        <ion-icon name="search" style="color: #FF6584;font-size: 28px;
-            padding-left: 1%;font-weight: bold;"></ion-icon>
-      </ion-row>
+      <ion-searchbar type="search" class="searchInput" animated placeholder="Search ..." placeholder="Search Anything ..."></ion-searchbar>
       <div class="search-inner-box">
         <h3 style="color: tomato;text-align: center;font-weight: bold;">Price Filters</h3>
         <br>

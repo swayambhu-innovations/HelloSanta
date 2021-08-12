@@ -42,9 +42,21 @@ export class AuthService {
           if (level=='"Admin"'){
             
             localStorage.setItem("cache26328",JSON.stringify({"data":"fds7f6d7s8fysd89ffbSDSfydsfu9sdfsdg4t4s4t4"}))
-
           } else if (level=='"Vendor"'){
-            
+            if (value.access.levelData==undefined){
+              let data = {
+                accessLevel: value.access.accessLevel,
+                levelData: {
+                  totalCancelled: 0,
+                  totalProducts: 0,
+                  totalReturned: 0,
+                  totalSold: 0,
+                  totalOrders: 0,
+                },
+              }
+              this.afs.doc(`users/${this.userData.uid}`).set({access:data},{merge:true})
+            }
+
             localStorage.setItem("cache26328",JSON.stringify({"data":"dshdjhsusd9f87ds98fndsfnsduf4389t948nutfdsf"}))
 
           } else if (level=='"Customer"'){

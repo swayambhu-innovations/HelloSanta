@@ -1,20 +1,18 @@
 <ion-content>
-  <ion-card>
-    <ion-row class="header">
-      <h1>Your Products</h1>
-      <ion-button>
-        Add New Product
-      </ion-button>
-    </ion-row>
-  </ion-card>
+  <ion-toolbar>
+    <ion-title>Your Products</ion-title>
+    <ion-button (click)="presentModal()" shape="round" slot="end">
+      Add Products
+    </ion-button>
+  </ion-toolbar>
   <ion-row uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100" class="main">
-    <div *ngFor="let product of products">
+    <div *ngFor="let product of allProds">
       <app-vpproduct-card
-      [image]="product.image"
-      [name]="product.name"
-      [description]="product.description"
-      [id]="product.id"
-      [price]="product.price"
+      [image]="product.productImages[0].image"
+      [name]="product.productName"
+      [description]="product.seoDescription"
+      [id]="product.productId"
+      [price]="product.productPrice"
       ></app-vpproduct-card>
     </div>
   </ion-row>

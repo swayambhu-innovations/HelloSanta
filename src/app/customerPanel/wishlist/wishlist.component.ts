@@ -16,19 +16,12 @@ export class WishlistComponent implements OnInit {
     this.afs.collection('users').doc(this.authService.userId).valueChanges().subscribe((value:any)=>{
       this.wishlist=[];
       value.wishlist.forEach((element:any) => {
-        // console.log(value.categories.indexOf(element),"indexof")
         if (value.wishlist.indexOf(element)==0){
-          // console.log("removing elements");
           this.wishlist.length=0;
-          // console.log(this.allProds.length)
         }
-        this.afs.collection('products').doc(element.category)
-        .collection('categories')
-        .doc(element.subcategory)
-        .collection('products').doc(element.productId).valueChanges().subscribe((proddata)=>{
+        this.afs.collection('products').doc(element.productId).valueChanges().subscribe((proddata:any)=>{
           let unknown=0
           this.wishlist.forEach((elem:any) => {
-            console.log(elem.productId,proddata.productId,elem.subcategory==proddata.subcategory)
             if (proddata.productId==elem.productId) {
               console.log("already exists");
               unknown++;

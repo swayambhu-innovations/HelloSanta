@@ -5,8 +5,8 @@
       <h2>{{name}}</h2>
       <p>{{description}}</p>
     </div>
-    <button class="moreInfo">More Info</button>
-    <button class="deleteProduct">Delete Product</button>
-    <button class="editProduct">edit Product</button>
+    <button class="moreInfo" (click)="moreInfo()">More Info</button>
+    <button class="deleteProduct" (click)="deleteItem(id)">Delete Product</button>
+    <button class="editProduct" (click)="presentEditProductModal(id)">edit Product</button>
   </div>
 </ion-card>

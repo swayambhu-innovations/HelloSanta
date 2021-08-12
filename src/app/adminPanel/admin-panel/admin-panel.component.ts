@@ -13,6 +13,7 @@ export class AdminPanelComponent implements OnInit {
     { title: 'Orders', url: '/AdminPanel/Order', icon: 'cube' },
     { title: 'Vendors', url: '/AdminPanel/Vendors', icon: 'people' },
     { title: 'Products', url: '/AdminPanel/Products', icon: 'grid' },
+    { title: 'Pending Products', url: '/AdminPanel/PendingProducts', icon: 'golf' },
     { title: 'Users', url: '/AdminPanel/Users', icon: 'people-circle' },
     { title: 'Customize', url: '/AdminPanel/Customize', icon: 'cog' },
     { title: 'Complains', url: '/AdminPanel/Complains', icon: 'warning' },

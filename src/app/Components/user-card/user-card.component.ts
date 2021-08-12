@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
+import { UserPromotionComponent } from 'src/app/popovers/user-promotion/user-promotion.component';
 
 @Component({
   selector: 'app-user-card',
@@ -12,7 +14,21 @@ export class UserCardComponent implements OnInit {
   @Input() fullName:string ="";
   @Input() description:string ="";
   textlength:number=150;
-  constructor() { }
+  constructor(public popoverController: PopoverController) { }
+  async presentPopover(ev: any,userid) {
+    const popover = await this.popoverController.create({
+      component: UserPromotionComponent,
+      event: ev,
+      translucent: true,
+      componentProps:{
+        userid:userid
+      }
+    });
+    await popover.present();
+
+    const { role } = await popover.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
 
   ngOnInit() {
     if (this.description.length>=this.textlength){

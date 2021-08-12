@@ -28,39 +28,24 @@ export class DigitalartworksComponent implements OnInit {
   allDigitalProds= [];
   specifiedDigitalProds={};
   ngOnInit() {
-    this.afs.collection('data').doc("productData").valueChanges().subscribe((value:any)=>{
-      this.allDigitalProds=[];
-      value.categories.forEach((element:any) => {
-        if (element.category=="Digital Artworks"){
-        // console.log(value.categories.indexOf(element),"indexof")
-        if (value.categories.indexOf(element)==0){
-          // console.log("removing elements");
-          this.allDigitalProds.length=0;
-          // console.log(this.allProds.length)
-        }
-        this.afs.collection('products').doc('Digital Artworks')
-        .collection('categories')
-        .doc(element.subCategory)
-        .collection('products').valueChanges().subscribe((proddata)=>{
-          this.specifiedDigitalProds[element.category] = proddata;
-          proddata.forEach((product:any) => {
-            let unknown = 0;
-            this.allDigitalProds.forEach((oldProduct:any) => {
-              if (product.productId==oldProduct.productId) {
-                console.log("already exists");
-                unknown++;
-              }
-            })
-            if (unknown==0) {
-              this.allDigitalProds.push(product);
+    this.afs
+      .collection('products')
+      .valueChanges()
+      .subscribe((proddata) => {
+        console.log('products data digital', proddata);
+        proddata.forEach((product: any) => {
+          let unknown = 0;
+          this.allDigitalProds.forEach((oldProduct: any) => {
+            if (product.productId == oldProduct.productId) {
+              console.log('already exists');
+              unknown++;
             }
-          })
-        })
-      } else {
-        console.log("Digital category found",element.category)
-      }
-      })
-    });
+          });
+          if (unknown == 0 && product.productCategory.includes('Digital Artworks')) {
+            this.allDigitalProds.push(product);
+          }
+        });
+      });
   }
   products=[
     {

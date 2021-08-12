@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { ModalController, PopoverController } from '@ionic/angular';
+import { AddCategoriesComponent } from 'src/app/modals/add-categories/add-categories.component';
+import { EditProductComponent } from 'src/app/modals/edit-product/edit-product.component';
+import { PendingProductModalComponent } from 'src/app/modals/pending-product-modal/pending-product-modal.component';
+import { SpecificProductsComponent } from 'src/app/popovers/specific-products/specific-products.component';
+import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
   selector: 'app-vp-products',
@@ -6,59 +13,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vp-products.component.scss'],
 })
 export class VPProductsComponent implements OnInit {
-  products=[
-    {
-      "image":"https://source.unsplash.com/random/1080x720",
-      "name":"Abstract Art",
-      "price":"2500",
-      "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tincidunt commodo. Nunc justo nisi, vestibulum facilisis porta vestibulum, ultrices volutpat arcu. Quisque",
-      "id":"USKDU438974827",
-    },
-    {
-      "image":"https://source.unsplash.com/random/1080x720",
-      "name":"Abstract Art",
-      "price":"2500",
-      "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tincidunt commodo. Nunc justo nisi, vestibulum facilisis porta vestibulum, ultrices volutpat arcu. Quisque",
-      "id":"USKDU438974827",
-    },
-    {
-      "image":"https://source.unsplash.com/random/1080x720",
-      "name":"Abstract Art",
-      "price":"2500",
-      "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tincidunt commodo. Nunc justo nisi, vestibulum facilisis porta vestibulum, ultrices volutpat arcu. Quisque",
-      "id":"USKDU438974827",
-    },
-    {
-      "image":"https://source.unsplash.com/random/1080x720",
-      "name":"Abstract Art",
-      "price":"2500",
-      "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tincidunt commodo. Nunc justo nisi, vestibulum facilisis porta vestibulum, ultrices volutpat arcu. Quisque",
-      "id":"USKDU438974827",
-    },
-    {
-      "image":"https://source.unsplash.com/random/1080x720",
-      "name":"Abstract Art",
-      "price":"2500",
-      "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tincidunt commodo. Nunc justo nisi, vestibulum facilisis porta vestibulum, ultrices volutpat arcu. Quisque",
-      "id":"USKDU438974827",
-    },
-    {
-      "image":"https://source.unsplash.com/random/1080x720",
-      "name":"Abstract Art",
-      "price":"2500",
-      "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tincidunt commodo. Nunc justo nisi, vestibulum facilisis porta vestibulum, ultrices volutpat arcu. Quisque",
-      "id":"USKDU438974827",
-    },
-    {
-      "image":"https://source.unsplash.com/random/1080x720",
-      "name":"Abstract Art",
-      "price":"2500",
-      "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tincidunt commodo. Nunc justo nisi, vestibulum facilisis porta vestibulum, ultrices volutpat arcu. Quisque",
-      "id":"USKDU438974827",
-    },
-  ];
-  constructor() { }
-
-  ngOnInit() {}
+  constructor(
+    public modalController: ModalController,
+    public inventoryService: InventoryService,
+    public afs: AngularFirestore,
+    public popoverController: PopoverController
+  ) {}
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: PendingProductModalComponent,
+    });
+    return await modal.present();
+  }
+  
+  deleteItem(id){
+    console.log("deleting");
+    const productRef: AngularFirestoreDocument<any> = this.afs.doc(`pendingProducts/${id}`);
+    productRef.delete();
+    console.log("deleted");
+  }
+  
+  editItem(){
+    this.presentModal()
+  }
+  allProducts = {};
+  allProds = [];
+  ngOnInit() {
+    this.afs
+      .collection('pendingProducts')
+      .valueChanges()
+      .subscribe((proddata) => {
+        this.allProds=proddata
+      });
+  }
 
 }

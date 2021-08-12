@@ -2,14 +2,10 @@
     justify-content:space-between;
     align-items: center;
 }
-ion-card{
-    padding:10px;
-    border-radius:15px;
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
-}
-ion-card > ion-row > h1{
-    margin:0%;
-}
 .main{
     justify-content: space-around;
 }
+ion-toolbar{
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+}
+

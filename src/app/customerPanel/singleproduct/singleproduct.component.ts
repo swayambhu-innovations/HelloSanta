@@ -50,7 +50,7 @@ export class SingleproductComponent implements OnInit {
                 unknown++;
               }
             })
-            if (unknown==0 && this.category.some(ct => product.productCategory.includes(ct))) {
+            if (unknown==0 && (this.category.some(ct => product.productCategory.includes(ct)) || this.subcategory.some(ct => product.productSubcategory.includes(ct)))) {
               this.recommendationProducts.push(product);
             }
           })

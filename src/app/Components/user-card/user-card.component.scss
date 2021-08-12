@@ -6,11 +6,7 @@ ion-card{
     text-align: center;
     box-shadow: 10px 20px 20px #ada2ff5b;
     width: min-content;
-    --hidden-visibility:none;
     transition: all 0.5s ease-in-out;
-}
-ion-card:hover{
-    --hidden-visibility:block;
 }
 ion-avatar, img{
     margin-left: auto;
@@ -34,6 +30,5 @@ p{
 }
 ion-row{
     transition: display 0.5s ease-in-out;
-    display:var(--hidden-visibility);
     justify-content: space-around;
 }

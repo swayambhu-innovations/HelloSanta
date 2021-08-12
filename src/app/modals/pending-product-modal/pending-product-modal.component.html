@@ -1,0 +1,264 @@
+<ion-content>
+  <div class="header">
+    <ion-title>Add A Product</ion-title>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="addProduct()" method="POST">
+    <ion-input type="number" required="true" placeholder="Total product images." id="mainProdImage" value=2 min=2 max=10
+      #mainImgCount></ion-input>
+    <ion-card *ngFor="let prodImg of genList(mainImgCount.value)">
+      <img id="productImage{{prodImg}}">
+      <br>
+      <ion-input type="file" required="true" accept="image/png, image/jpeg"
+        (change)="loadProdImage($event,'productImage'+prodImg.toString())"></ion-input>
+    </ion-card>
+    <ion-item>
+      <ion-label position="floating">Product Name</ion-label>
+      <ion-input type="text" placeholder="Product Name" required="true" formControlName="productName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Product description</ion-label>
+      <ion-textarea placeholder="Product Description" required="true" spellcheck formControlName="productDescription">
+      </ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Short Description</ion-label>
+      <ion-textarea placeholder="Short Description" required="true" spellcheck formControlName="shortDescription">
+      </ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">SEO Description</ion-label>
+      <ion-textarea placeholder="SEO Description" required="true" spellcheck formControlName="seoDescription">
+      </ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Product Price</ion-label>
+      <ion-input type="number" min=0 value=0 placeholder="Product Price" required="true" formControlName="productPrice">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-card class="longList">
+        <ion-card-header>
+          <ion-card-title>Select Categories</ion-card-title>
+        </ion-card-header>
+        <ion-list>
+          <ion-item *ngFor="let category of allCategories">
+            <ion-label>{{category}}</ion-label>
+            <ion-checkbox color="primary" slot="start" (ionChange)="addToCatgories(category,$event)"></ion-checkbox>
+          </ion-item>
+        </ion-list>
+      </ion-card>
+    </ion-item>
+    <ion-item>
+      <ion-card class="longList">
+        <ion-card-header>
+          <ion-card-title>Select Subcategories</ion-card-title>
+        </ion-card-header>
+        <ion-list>
+          <ion-item *ngFor="let category of allSubCategories">
+            <ion-label>{{category}}</ion-label>
+            <ion-checkbox color="primary" (ionChange)="addToSubcatgories(category,$event)" slot="start"></ion-checkbox>
+          </ion-item>
+        </ion-list>
+      </ion-card>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Vendor Id</ion-label>
+      <ion-input type="text" placeholder="Vendor id" required="true" formControlName="vendorId"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Total Stock</ion-label>
+      <ion-input type="number" placeholder="Total Stock" required="true" formControlName="totalStock"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Customisations</ion-label>
+      <ion-input type="number" min=0 max=10 value=0 id="customsCount" placeholder="Customisation Count"
+        formControlName="customisationsCount" #customs required="true"></ion-input>
+    </ion-item>
+    <ion-card *ngFor="let item of genList(customs.value)">
+      <ion-radio-group name="price" value="imgSel" id="radio{{item}}" #option required="true">
+        <ion-list-header>
+          <ion-label>Price Options</ion-label>
+        </ion-list-header>
+        <ion-item class="listoptions">
+          <ion-label>Image Options</ion-label>
+          <ion-radio slot="start" color="primary" value="imgSel"></ion-radio>
+        </ion-item>
+        <ion-item class="listoptions">
+          <ion-label>Text Input</ion-label>
+          <ion-radio slot="start" color="primary" value="textSel"></ion-radio>
+        </ion-item>
+        <ion-item class="listoptions">
+          <ion-label>Number Selection</ion-label>
+          <ion-radio slot="start" color="primary" value="numberSel"></ion-radio>
+        </ion-item>
+        <ion-item class="listoptions">
+          <ion-label>Extra Description</ion-label>
+          <ion-radio slot="start" color="primary" value="extraInfo"></ion-radio>
+        </ion-item>
+        <ion-item class="listoptions">
+          <ion-label>Face Count</ion-label>
+          <ion-radio slot="start" color="primary" value="faceInput"></ion-radio>
+        </ion-item>
+        <ion-item class="listoptions">
+          <ion-label>Size Options</ion-label>
+          <ion-radio slot="start" color="primary" value="sizeInput"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+      <br>
+      <ion-card *ngIf="option.value=='imgSel'">
+        <h3>Image Selection</h3>
+        <ion-card-content>
+          <ion-input id="imgInput{{item}}" type="number" min=1 max=10 value=1 name="selImgCount" required="true"
+            placeholder="Images Count" #imageCount></ion-input>
+          <ion-item>
+            <ion-label>Section Title</ion-label>
+            <ion-input type="text" placeholder="Section Title" required="true" id="sectionImgTitle{{item}}"></ion-input>
+          </ion-item>
+          <ion-card *ngFor="let imgIndex of genList(imageCount.value)">
+            <img id="image{{item}}{{imgIndex}}" width="300">
+            <input required="true" accept="image/png, image/jpg, image/jpeg"
+              (change)="loadFile($event,'image'+item.toString()+imgIndex.toString())" type="file">
+            <br>
+            <ion-item>
+              <ion-label position="floating">Image Title</ion-label>
+              <ion-input required="true" type="text" placeholder="Image Title" id="imgTitle{{item}}{{imgIndex}}">
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Price Addon</ion-label>
+              <ion-input type="number" placeholder="Price Addon" id="priceImageAddon{{item}}{{imgIndex}}"></ion-input>
+            </ion-item>
+          </ion-card>
+        </ion-card-content>
+      </ion-card>
+      <ion-card *ngIf="option.value=='textSel'">
+        <h3>Text Selection</h3>
+        <ion-card-content>
+          <ion-input id="textInput{{item}}" type="number" min=1 max=10 value=1 name="selImgCount" required="true"
+            placeholder="Texts Count" #imageCount></ion-input>
+          <ion-item>
+            <ion-label>Section Title</ion-label>
+            <ion-input type="text" placeholder="Section Title" required="true" id="sectionTextTitle{{item}}">
+            </ion-input>
+          </ion-item>
+          <ion-card *ngFor="let textIndex of genList(imageCount.value)">
+            <ion-item>
+              <ion-label position="floating">Title</ion-label>
+              <ion-input required="true" type="text" id="textSel{{item}}{{textIndex}}"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Price Addon</ion-label>
+              <ion-input type="number" placeholder="Price Addon" id="textPriceAddon{{item}}{{textIndex}}"></ion-input>
+            </ion-item>
+          </ion-card>
+        </ion-card-content>
+      </ion-card>
+      <ion-card *ngIf="option.value=='numberSel'">
+        <h3>Number Selection</h3>
+        <ion-card-content>
+          <ion-input id="numInput{{item}}" type="number" min=1 max=10 value=1 name="selImgCount" required="true"
+            placeholder="Images Count" #imageCount></ion-input>
+          <ion-item>
+            <ion-label>Section Title</ion-label>
+            <ion-input type="text" placeholder="Section Title" required="true" id="sectionNumTitle{{item}}"></ion-input>
+          </ion-item>
+          <ion-card *ngFor="let numIndex of genList(imageCount.value)">
+            <ion-item>
+              <ion-label position="floating">Number Text</ion-label>
+              <ion-input required="true" type="text" id="numSel{{item}}{{numIndex}}"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Price Addon</ion-label>
+              <ion-input type="number" placeholder="Price Addon" id="numberPriceAddon{{item}}{{numIndex}}"></ion-input>
+            </ion-item>
+          </ion-card>
+        </ion-card-content>
+      </ion-card>
+      <ion-card *ngIf="option.value=='extraInfo'">
+        <h3>Extra Selection</h3>
+        <ion-card-content>
+          <ion-input id="extraInput{{item}}" type="number" min=1 max=10 value=1 name="selImgCount" required="true"
+            placeholder="Images Count" #imageCount></ion-input>
+          <ion-item>
+            <ion-label>Section Title</ion-label>
+            <ion-input type="text" placeholder="Section Title" required="true" id="sectionExtraTitle{{item}}">
+            </ion-input>
+          </ion-item>
+          <ion-card *ngFor="let extraIndex of genList(imageCount.value)">
+            <ion-item>
+              <ion-label position="floating">Extra Info Title</ion-label>
+              <ion-input required="true" type="text" id="extraSel{{item}}{{extraIndex}}"></ion-input>
+            </ion-item>
+          </ion-card>
+        </ion-card-content>
+      </ion-card>
+      <ion-card *ngIf="option.value=='faceInput'">
+        <h3>Face Selection</h3>
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="floating">Title</ion-label>
+            <ion-input required="true" type="text" value="How many faces ?" id="faceInputTitle{{item}}"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Per Face Price</ion-label>
+            <ion-input required="true" type="number" min=0 value=0 id="faceInputPrice{{item}}"></ion-input>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+      <ion-card *ngIf="option.value=='sizeInput'">
+        <h3>Size Selection</h3>
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="floating">Title</ion-label>
+            <ion-input required="true" type="text" value="Sizes" id="sizeInputTitle{{item}}"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Total Sizes</ion-label>
+            <ion-input required="true" type="number" value="0" id="sizeInputCount{{item}}" #sizesCounter></ion-input>
+          </ion-item>
+          <ion-card *ngFor="let sizesIndex of genList(sizesCounter.value)">
+            <ion-item>
+              <ion-label position="floating">Size Name</ion-label>
+              <ion-input required="true" type="text" id="sizeInputText{{item}}{{sizesIndex}}"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Size Addon</ion-label>
+              <ion-input required="true" type="number" value="0" id="sizeInputAddon{{item}}{{sizesIndex}}"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">A Price</ion-label>
+              <ion-input required="true" type="number" value="0" id="sizeInputAPrice{{item}}{{sizesIndex}}"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Margin</ion-label>
+              <ion-input required="true" type="number" value="0" id="sizeInputMargin{{item}}{{sizesIndex}}"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Hours</ion-label>
+              <ion-input required="true" type="number" value="0" id="sizeInputHours{{item}}{{sizesIndex}}"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Price Per Hour</ion-label>
+              <ion-input required="true" type="number" value="0" id="sizeInputPPH{{item}}{{sizesIndex}}"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Size factor</ion-label>
+              <ion-input required="true" type="number" value="0" id="sizeInputSizeFactor{{item}}{{sizesIndex}}"></ion-input>
+            </ion-item>
+          </ion-card>
+        </ion-card-content>
+      </ion-card>
+    </ion-card>
+    <ion-row class="header">
+      <ion-button type="reset" [disabled]="isLoading || !form.valid">
+        Reset
+      </ion-button>
+      <ion-button (click)="checkFields()">
+        Check Form
+      </ion-button>
+      <ion-button type="submit" [disabled]="isLoading || !form.valid">
+        Finish
+      </ion-button>
+    </ion-row>
+  </form>
+</ion-content>

@@ -64,12 +64,21 @@
   margin-left: 1.5rem;
 }
 .searchInput{
-  width: 80%;
+  width: 95%;
   background-color: white;
 }
 input:focus{
   border:none;
 }
+ion-searchbar{
+  --box-shadow: 0 3px 20px rgba(0, 0, 0, .2);
+  --border-radius: 13px;
+  --placeholder-color: tomato;
+  --icon-color:tomato;
+  --width: 100%;
+  margin: 0 10px;
+}
+
 ion-row{
   box-shadow:10px 10px 20px rgba(0, 0, 0, 0.3);
   border: 2px solid var(--ion-color-primary);
@@ -87,7 +96,8 @@ ion-row{
   background-color: #ffffff;    width: 93%;
   border-radius: 10px;
   box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
-  margin-left: 2%;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 5%;
   padding-top: 3%;
   padding-bottom: 3%;

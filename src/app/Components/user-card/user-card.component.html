@@ -16,5 +16,8 @@
     <ion-button href="mailto:{{userEmail}}" color="warning">
       <ion-icon name="mail"></ion-icon>
     </ion-button>
+    <ion-button (click)="presentPopover($event,userName)" color="primary">
+      <ion-icon name="git-compare"></ion-icon>
+    </ion-button>
   </ion-row>
 </ion-card>

@@ -27,7 +27,6 @@ export class AddBlogComponent implements OnInit {
       blogName:this.blogName,
       blogContent: this.blogContent,
       blogImage: this.blogImage,
-      blogId: this.blogId,
       blogExcerpt: this.blogExcerpt,
       blogTags: this.blogTags,
       blogDate: this.blogDate,
@@ -41,11 +40,6 @@ export class AddBlogComponent implements OnInit {
     Validators.required,
     Validators.minLength(5),
     Validators.pattern('[a-zA-Z ]*'),
-  ]);
-  blogId: FormControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(5),
-    Validators.pattern('[a-zA-Z0-9]*'),
   ]);
   blogExcerpt: FormControl = new FormControl('', [
     Validators.required,
@@ -110,7 +104,6 @@ export class AddBlogComponent implements OnInit {
         blogContent: this.form.get('blogContent')!.value,
         blogTags: this.form.get('blogTags')!.value.toString().split(','),
         blogDate: this.form.get('blogDate')!.value,
-        blogId: this.form.get('blogId')!.value,
         isPublished:false,
         lastEdit:[],
       }

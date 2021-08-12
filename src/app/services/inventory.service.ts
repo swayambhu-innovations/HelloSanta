@@ -10,17 +10,48 @@ import { AngularFireStorage } from '@angular/fire/storage';
 // import { ProductCatelogue } from '../home/home.component';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
+import { AlertController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
 export class InventoryService {
   userData: Observable<any>;
   allProducts: Observable<any>;
+  alertData:any;
   constructor(public afs: AngularFirestore,
     private storage: AngularFireStorage,
-    private authService: AuthService) { 
+    private authService: AuthService, private alertController: AlertController) { 
       this.userData=this.afs.collection<any>('users').valueChanges();
       this.allProducts = this.afs.collection<any>('product').valueChanges();
+    }
+    async presentProdId(){
+      const alert = await this.alertController.create({
+        header: 'Product Id',
+        inputs:[
+          {
+            name:"ProductId",
+            type:"text",
+            placeholder:"Enter Product Id",
+          }
+        ],
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {
+              console.log('Confirm Cancel');
+            }
+          }, {
+            text: 'Ok',
+            handler: (alertData) => {
+              console.log(alertData.ProductId)
+              this.alertData= alertData.ProductId;
+            }
+          }
+        ]
+      });
+      await alert.present();
     }
     getAllUsers(){
       return this.userData;
@@ -51,10 +82,22 @@ export class InventoryService {
         }
       })
     }
-    addProduct(productID,data){
-      const productRef: AngularFirestoreDocument<any> = this.afs.doc(`products/${productID}`);
-      let statement = productRef.set(data,{merge:true});
-      return statement;
+    addPendingProduct(data){
+      this.afs.collection("pendingProducts").add(data).then((docRef)=> {
+        const productRef = this.afs.doc(`pendingProducts/${docRef.id}`);
+        productRef.update({productId:docRef.id});
+      }).catch((error) => {
+        this.authService.presentToast("Error: "+error.toString());
+      })
+    } 
+    addProduct(value){
+      this.afs.collection('products').add(value).then((docRef)=> {
+        const productRef = this.afs.doc(`products/${docRef.id}`);
+        let statement = productRef.update({productId:docRef.id});
+        return statement;
+      }).catch((error) => {
+        this.authService.presentToast("Error: "+error.toString());
+      });
     }
     clearRecommendations(){
       const productRef: AngularFirestoreDocument<any> = this.afs.doc(`specificSelectedProducts/products`);
@@ -62,7 +105,6 @@ export class InventoryService {
         recommendedProducts:firebase.firestore.FieldValue.delete()
       });
       this.authService.presentToast("Cleared recommendation list");
-
     }
     clearFeatured(){
       const productRef: AngularFirestoreDocument<any> = this.afs.doc(`specificSelectedProducts/products`);
@@ -77,7 +119,6 @@ export class InventoryService {
         santasChoice:firebase.firestore.FieldValue.delete()
       });
       this.authService.presentToast("Cleared santa's choice list");
-
     }
     addToWishlist(data){
       const productRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${this.authService.userId}`);
@@ -87,6 +128,7 @@ export class InventoryService {
       return statement;
     }
     addToRecommendations(data){
+      console.log(data);
       const productRef: AngularFirestoreDocument<any> = this.afs.doc(`specificSelectedProducts/products`);
       let statement = productRef.update({
         recommendedProducts:firebase.firestore.FieldValue.arrayUnion(data)
@@ -114,10 +156,28 @@ export class InventoryService {
       });
       return statement;
     }
+    editPendingProduct(productID,data){
+      const productRef: AngularFirestoreDocument<any> = this.afs.doc(`pendingProducts/${productID}`);
+      let statement = productRef.update(data);
+      return statement;
+    }
     editProduct(productID,data){
       const productRef: AngularFirestoreDocument<any> = this.afs.doc(`products/${productID}`);
       let statement = productRef.update(data);
       return statement;
+    }
+    publishItem(id){
+      console.log("Fired pubilsh,",id)
+      this.afs.doc(`pendingProducts/${id}`).valueChanges().subscribe((value:any)=>{
+        this.afs.collection(`products`).add(value).then((docRef)=> {
+          const productRef = this.afs.doc(`products/${docRef.id}`);
+          let statement = productRef.update({productId:docRef.id});
+          const blogRef: AngularFirestoreDocument<any> = this.afs.doc(`pendingProducts/${id}`);
+          blogRef.delete();
+        }).catch((error) => {
+          this.authService.presentToast("Error: "+error.toString());
+        });
+      })
     }
     getAllProducts(){
       this.afs.collection('data').doc("productData").valueChanges().subscribe((value:any)=>{
@@ -129,8 +189,13 @@ export class InventoryService {
       });
     }
     addBlog(data) {
-      const blogRef: AngularFirestoreDocument<any> = this.afs.doc(`blog/${data.blogId}`);
-      blogRef.set(data,{merge:true});
+      this.afs.collection(`blog`).add(data).then((docRef)=> {
+        const productRef = this.afs.doc(`blog/${docRef.id}`);
+        productRef.update({blogId:docRef.id});
+        this.authService.presentToast("Blog added");
+      }).catch((error) => {
+        this.authService.presentToast("Error: "+error.toString());
+      });
     }
     editBlog(data,blogId) {
       const blogRef: AngularFirestoreDocument<any> = this.afs.doc(`blog/${blogId}`);
@@ -148,5 +213,29 @@ export class InventoryService {
       blogRef.update({
         isPublished:true
       });
+    }
+    promoteTo(access,userId){
+      if (access=="Admin"){
+        this.afs.doc(`users/${userId}`).update({
+          access:{accessLevel:'Admin'}
+        });
+      } else if(access=='Vendor') {
+        this.afs.doc(`users/${userId}`).update({
+          access:{
+            accessLevel:'Vendor',
+            levelData: {
+              totalCancelled: 0,
+              totalProducts: 0,
+              totalReturned: 0,
+              totalSold: 0,
+              totalOrders: 0,
+            },
+          }
+        });
+      } else if(access=='Customer') {
+        this.afs.doc(`users/${userId}`).update({
+          access:{accessLevel:'Customer',}
+        });
+      }
     }
 }

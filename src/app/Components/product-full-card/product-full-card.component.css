@@ -66,9 +66,7 @@
   font-size: 2.5rem;
   cursor: pointer;
 }
-.order-details{
 
-}
 @media only screen and (max-width: 600px) {
   .order-card {
     width: 160px;

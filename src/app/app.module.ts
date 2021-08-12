@@ -87,6 +87,12 @@ import { EditProductComponent } from './modals/edit-product/edit-product.compone
 import { SpecificProductsComponent } from './popovers/specific-products/specific-products.component';
 import { EditBlogComponent } from './modals/edit-blog/edit-blog.component';
 import { AddCategoriesComponent } from './modals/add-categories/add-categories.component';
+import { PendingProductsComponent } from './adminPanel/pending-products/pending-products.component';
+import { PendingProductModalComponent } from './modals/pending-product-modal/pending-product-modal.component';
+import { PendingProductEditModalComponent } from './modals/pending-product-edit-modal/pending-product-edit-modal.component';
+import { ExtraPendingProductInfoComponent } from './popovers/extra-pending-product-info/extra-pending-product-info.component';
+import { ExtraProductInfoComponent } from './modals/extra-product-info/extra-product-info.component';
+import { UserPromotionComponent } from './popovers/user-promotion/user-promotion.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -163,6 +169,12 @@ import { AddCategoriesComponent } from './modals/add-categories/add-categories.c
     SpecificProductsComponent,
     EditBlogComponent,
     AddCategoriesComponent,
+    PendingProductsComponent,
+    PendingProductModalComponent,
+    PendingProductEditModalComponent,
+    ExtraPendingProductInfoComponent,
+    ExtraProductInfoComponent,
+    UserPromotionComponent,
   ],
   entryComponents: [],
   imports: [

@@ -15,13 +15,11 @@
         <img src="assets/image3.png" alt="" uk-cover>
       </li>
     </ul>
-
     <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
       uk-slideshow-item="previous"></a>
     <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
       uk-slideshow-item="next"></a>
   </div>
-
   <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1"
     uk-slideshow="autoplay: true;autoplay-interval: 5000;pause-on-hover: true;min-height: 400; max-height: 800; animation: push"
     *ngIf="screenwidth<600">
@@ -139,8 +137,8 @@
       <section id="blog-container">
         <h1 class="blogs">Read More Blogs</h1>
         <div class="product-row">
-          <app-blog-card *ngFor="let blog of blogs" [blogimg]="blog.img" [blogTitle]="blog.name"
-            [blogDescription]="blog.description"></app-blog-card>
+          <app-blog-card *ngFor="let blog of blogs" [blogimg]="blog.blogImage" [blogTitle]="blog.blogTitle"
+            [blogDescription]="blog.blogExcerpt" [blogId]="blog.blogId"></app-blog-card>
         </div>
       </section>
     </div>

@@ -47,6 +47,7 @@ import { LoginGuard } from './guards/login-guard.guard'
 import { VerifyEmailComponent } from './customerPanel/verify-email/verify-email.component';
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { AdminPanelGuard } from './guards/admin-panel.guard';
+import { PendingProductsComponent } from './adminPanel/pending-products/pending-products.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -97,6 +98,7 @@ const routes: Routes = [
       {path:'Feedback',component:APFeedbackComponent},
       {path:'Analytics',component:APAnalyticsComponent},
       {path:'LoginAccess',component:APLoginAccessComponent},
+      {path:'PendingProducts', component: PendingProductsComponent}
     ]
   },
   {

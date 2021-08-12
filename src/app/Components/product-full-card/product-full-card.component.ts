@@ -21,8 +21,6 @@ export class ProductFullCardComponent implements OnInit {
   addToWishlist(){
     let data = {
       productId: this.productId,
-      category: this.category,
-      subcategory: this.subcategory
     }
     this.inventoryService.addToWishlist(data);
   }

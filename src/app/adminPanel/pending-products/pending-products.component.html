@@ -1,0 +1,20 @@
+<ion-content>
+  <ion-toolbar>
+    <ion-label slot="end">Pretty View</ion-label>
+    <ion-toggle slot="end" checked #switch></ion-toggle>
+  </ion-toolbar>
+  <ion-row uk-scrollspy="target: > ion-item; cls: uk-animation-fade; delay: 50">
+    <ion-item *ngFor="let item of allProds">
+      <ion-img size="small" [src]="item.productImages[0].image"></ion-img>&nbsp;&nbsp;&nbsp;&nbsp;
+      <ion-label color="secondary">{{item.productName}}</ion-label>
+      <ion-label>{{item.seoDescription}}</ion-label>&nbsp;&nbsp;&nbsp;&nbsp;
+      <ion-label color="success"><strong>Total Sales: &nbsp;</strong>{{item.totalSales}}</ion-label>
+      <ion-chip color="primary">
+        <ion-label><strong>Price:&nbsp;</strong>&#8377;&nbsp;{{item.productPrice}}</ion-label>
+      </ion-chip>
+      <button slot="end" (click)="inventoryService.publishItem(item.productId)">
+        <ion-icon name="push"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-row>
+</ion-content>

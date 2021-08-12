@@ -50,10 +50,6 @@ export class AddProductModalComponent implements OnInit {
     Validators.maxLength(160),
   ]);
   productPrice: FormControl = new FormControl('', [Validators.required]);
-  productId: FormControl = new FormControl('', [
-    Validators.required,
-    Validators.pattern('[a-zA-Z0-9]*'),
-  ]);
   vendorId: FormControl = new FormControl('', [
     Validators.required,
     Validators.pattern('[a-zA-Z0-9]*'),
@@ -426,7 +422,6 @@ export class AddProductModalComponent implements OnInit {
           shortDescription: this.form.get('shortDescription')!.value,
           seoDescription: this.form.get('seoDescription')!.value,
           productPrice: this.form.get('productPrice')!.value,
-          productId: this.form.get('productId')!.value,
           productCategory: this.formCategories,
           productSubcategory: this.formSubcategories,
           vendorId: this.form.get('vendorId')!.value,
@@ -439,7 +434,7 @@ export class AddProductModalComponent implements OnInit {
         };
         await this.delay(1000);
         this.dataProvider.overlayStatus = 'Uploading Data ...';
-        await this.inventory.addProduct(data.productId, data);
+        await this.inventory.addProduct(data);
         this.dataProvider.overlayStatus = 'Uploaded Data Successfully';
         this.authService.presentToast('Added the data successfully');
         this.isLoading = false;
@@ -518,7 +513,6 @@ export class AddProductModalComponent implements OnInit {
       shortDescription: this.shortDescription,
       seoDescription: this.seoDescription,
       productPrice: this.productPrice,
-      productId: this.productId,
       vendorId: this.vendorId,
       totalStock: this.totalStock,
       customisationsCount: this.customisationsCount,

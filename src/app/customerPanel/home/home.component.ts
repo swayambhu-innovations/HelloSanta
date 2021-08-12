@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   allSantasChoiceProds = [];
   allFeaturedProds = [];
   allProducts = [];
+  blogs = [];
   recommendedSelection = 0;
   shuffle(array) {
     var currentIndex = array.length,
@@ -50,11 +51,18 @@ export class HomeComponent implements OnInit {
               unknown++;
             }
           });
-          if (unknown == 0 && product.productCategory.includes('Handmade Products')) {
+          if (unknown == 0 && product.productCategory.includes('Handmade Products') && this.allHandmadeProds.length <=5) {
             this.allHandmadeProds.push(product);
           }
         });
       });
+    this.afs.collection('blog').valueChanges().subscribe((blogdata) => {
+      this.blogs=[]
+      console.log(blogdata)
+      blogdata.forEach((blog: any) => {
+        this.blogs.push(blog);
+      })
+    })
     this.afs
       .collection('products')
       .valueChanges()
@@ -68,7 +76,7 @@ export class HomeComponent implements OnInit {
               unknown++;
             }
           });
-          if (unknown == 0 && product.productCategory.includes('Digital Products')) {
+          if (unknown == 0 && product.productCategory.includes('Digital Artworks')) {
             this.allDigitalProds.push(product);
           }
         });
@@ -164,33 +172,6 @@ export class HomeComponent implements OnInit {
       description:
         'Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.',
       price: '2300',
-    },
-  ];
-
-  blogs = [
-    {
-      img: 'https://source.unsplash.com/940x650',
-      name: 'A blog to read',
-      description:
-        'Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.',
-    },
-    {
-      img: 'https://source.unsplash.com/940x650',
-      name: 'A blog to read',
-      description:
-        'Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.',
-    },
-    {
-      img: 'https://source.unsplash.com/940x650',
-      name: 'A blog to read',
-      description:
-        'Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.',
-    },
-    {
-      img: 'https://source.unsplash.com/940x650',
-      name: 'A blog to read',
-      description:
-        'Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.',
     },
   ];
   categories = [

@@ -1,0 +1,10 @@
+<ion-content>
+  <ion-card>
+    <ion-chip color="primary" outline="true" *ngIf="status">
+      <ion-label>Accepted</ion-label>
+    </ion-chip>
+    <ion-chip color="danger" outline="true" *ngIf="!status">
+      <ion-label>Pending</ion-label>
+    </ion-chip>
+  </ion-card>
+</ion-content>

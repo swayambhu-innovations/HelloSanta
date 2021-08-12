@@ -1,17 +1,5 @@
-<ion-app>
-  <ion-toolbar>
-    <div class="header uk-flex uk-flex-between">
-      <a href="."><img src="./assets/logo.png" alt="Hello Santa Logo"></a>
-      <div class="actions uk-flex uk-flex-between">
-        <div class="profilePicture">
-          <img src="https://i.pravatar.cc/50" alt="">
-        </div>
-        <div class="notification">
-          <i class="ri-notification-fill"></i>
-        </div>
-      </div>
-    </div>
-  </ion-toolbar>
+<ion-app [ngStyle]="{'filter': (dataProvider.showOverlay) ? 'blur(10px)' : 'blur(0px)' }">
+  <app-header></app-header>
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
@@ -28,3 +16,7 @@
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>
+<div id="overlay" *ngIf="dataProvider.showOverlay">
+  <ion-spinner name="crescent" color="tertiary"></ion-spinner>
+  <p class="uk-text-center">Status: {{dataProvider.overlayStatus}}</p>
+</div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
   selector: 'app-bloghome',
@@ -7,69 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BloghomeComponent implements OnInit {
   screenwidth=window.innerWidth
-  constructor() { }
+  constructor(private inventoryService: InventoryService,public afs: AngularFirestore) { }
+  blogs=[]
+  ngOnInit() {
+    this.afs.collection('blog').valueChanges().subscribe((data) => {
+      this.blogs=data;
+    })
+  }
 
-  ngOnInit() {}
-  blogs=[
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"A blog to read",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"A blog to read",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"A blog to read",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"A blog to read",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"A blog to read",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"A blog to read",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"A blog to read",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"A blog to read",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"A blog to read",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"A blog to read",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"A blog to read",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"A blog to read",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-    },
-  ]
 }

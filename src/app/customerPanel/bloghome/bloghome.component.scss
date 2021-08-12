@@ -5,18 +5,23 @@
   justify-content: space-between;
 }
 
-.pageheading{
- font-family: Poppins;
- text-align: center;
- font-weight: bolder;
- font-size: 200px;
- text-shadow: 0 15px 20px rgba(0, 0, 0, .5);
- padding-top: 7%;
-padding-bottom: 5%;
+.pageheading {
+  font-family: Poppins;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 200px;
+  text-shadow: 0 15px 20px rgba(0, 0, 0, 0.5);
+  padding-top: 7%;
+  width: 100%;
+  padding-bottom: 5%;
 }
 #blog-container {
+  width: 100%;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 50px;
+}
+
+.product-row {
   width: 100%;
   padding: 4em;
   display: flex;
@@ -25,17 +30,10 @@ padding-bottom: 5%;
   align-items: flex-start;
 }
 
-.product-row{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: flex-start;
-}
-
-.button{
-  background-color: #ADA2FF; /* Green */
+.button {
+  background-color: #ada2ff; /* Green */
   border-radius: 10px;
-  border: 5px solid #9081FF;
+  border: 5px solid #9081ff;
   color: white;
   padding: 5px 40px;
   text-align: center;
@@ -44,73 +42,70 @@ padding-bottom: 5%;
   font-size: 25px;
   cursor: pointer;
 }
-a{
+a {
   color: white;
 }
-.fourthbox{
+.fourthbox {
   background-color: white;
   width: 45%;
   height: 60%;
   margin-left: 57%;
   margin-top: 4%;
 }
-.img{
+.img {
   float: left;
   width: 45%;
   margin-left: 5%;
   margin-top: 3%;
 }
-.firstheading{
+.firstheading {
   font-size: 48px;
-  font-family: 'Segoe Print';
-  color: #6D5DE3
-
+  font-family: "Segoe Print";
+  color: #6d5de3;
 }
-.heading-discription{
+.heading-discription {
   font-size: 1.2rem;
   font-family: Raleway;
   margin-right: 3%;
   width: 80%;
-  color: #FF6584;
-
+  color: #ff6584;
 }
 @media only screen and (max-width: 600px) {
-  .pageheading{
+  .pageheading {
     font-size: 4rem;
-   }
-   .fourthbox{
+  }
+  .fourthbox {
     background-color: white;
     width: 45%;
     height: 10%;
     margin-left: 57%;
     margin-top: 4%;
   }
-  .img{
+  .img {
     width: 40%;
     margin-left: 5%;
     margin-top: 3%;
   }
-  .firstheading{
+  .firstheading {
     font-size: 1.5rem;
-  
   }
-  .heading-discription{
+  .heading-discription {
     font-size: 1rem;
     margin-top: 10%;
     margin-left: 5%;
     margin-right: 5%;
     width: 90%;
   }
-  .button{
-  padding: 5px 20px;
-  margin: 0% 0% 0% 35%;
-  font-size: 1rem;
-}
-#blog-container {
-  width: 95%;
-  margin: 2.5%;
-  padding: 0.5em;
-  display: block;
-  flex-wrap: wrap;
-}
+  .button {
+    padding: 5px 20px;
+    margin: 0% 0% 0% 35%;
+    font-size: 1rem;
+  }
+  #blog-container {
+    width: 95%;
+    margin: 2.5%;
+    padding: 0.5em;
+    display: block;
+    flex-wrap: wrap;
+  }
 }
