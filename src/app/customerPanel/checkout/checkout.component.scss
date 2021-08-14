@@ -1,3 +1,8 @@
+.home{
+  margin: 0 auto;
+  min-width: 978px;
+  max-width: 1920px;
+}
 * {
     margin: 0;
     padding: 0;
@@ -49,6 +54,20 @@ button{
 
 }
 
+ion-card{
+  height: fit-content;
+  width: 80%;
+  font-family: Poppins;
+  text-align: left;
+  font-size: 20px;
+  padding: 50px;
+  margin: 5% 10%;
+  background: rgba(255, 255, 255, .7);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
+  border-radius: 50px;
+  border: 5px solid #9081FF;
+}
+
 .product-row{
   display: flex;
   flex-wrap: wrap;
@@ -78,7 +97,7 @@ button{
   #orders-table-container{
     overflow: scroll;
   }
-  
+
 #orders-table {
   font-size: 0.75rem;
 

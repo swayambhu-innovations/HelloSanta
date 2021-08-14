@@ -19,6 +19,7 @@
   box-shadow:10px 5px 20px rgba(0,0,0,0.1);
   border-radius:10px;
   border:2px solid var(--ion-color-primary);
+  display: flex;
 }
 .search > input{
   min-width:400px;
@@ -26,7 +27,7 @@
   // max-width: 60vw
   background-color: #fdfaf2;
   height:50px;
-  border-radius:50px;
+  border-radius:10px;
   padding:5px;
 }
 .search > input:active{
@@ -34,7 +35,6 @@
 }
 .search > button > ion-icon{
   font-size:20px;
-  margin-top: -3px;
   margin-right: 5px;
   vertical-align: middle;
   margin-left: 20px;
@@ -82,10 +82,12 @@ div > ul{
   padding:10px;
   margin-bottom:0px !important;
   justify-items: center;
+  background-color: #fdfaf2;
 }
 li{
   font-weight: 500;
   list-style: none !important;
+
 }
 .nav > li > a:hover{
 text-decoration: none;
