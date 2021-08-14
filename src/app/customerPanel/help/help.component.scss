@@ -40,7 +40,14 @@
   border-radius: 25px;
   border: 5px solid #9081FF;
 }
-
+.union{
+  padding-top: 50px;
+  font-family: Poppins;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 4rem;
+  color: #6D5DE3;
+}
 #subject{
   outline: none;
   height: 60vh;
@@ -57,6 +64,65 @@
   outline: none;
 }
 
+.insta{
+  width: 500px;
+  height: auto;
+}
+.whatsapp{
+  width: 400px;
+  height: auto;
+}
+.linkedin{
+  width: 350px;
+  height: auto;
+}
+.facebook{
+  width: 300px;
+  height: auto;
+}
+.twitter{
+  width: 500px;
+  height: auto;
+}
+
+@media only screen and (max-width: 1366px) {
+  .inner-box3{
+    height: auto;
+    width: 60vw;
+    font-family: Poppins;
+    text-align: left;
+    font-size: 20px;
+    margin:2% 20% 5% 20%;
+    padding: 50px;
+    background: rgba(255, 255, 255, .7);
+    box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
+    border-radius: 25px;
+    border: 5px solid #9081FF;
+  }
+  .union{
+    font-size: 3rem;
+  }
+  .insta{
+    width: 400px;
+    height: auto;
+  }
+  .whatsapp{
+    width: 230px;
+    height: auto;
+  }
+  .linkedin{
+    width: 250px;
+    height: auto;
+  }
+  .facebook{
+    width: 200px;
+    height: auto;
+  }
+  .twitter{
+    width: 400px;
+    height: auto;
+  }
+}
 @media only screen and (max-width: 600px) {
   .inner-box3{
     height: auto;
@@ -71,5 +137,25 @@
     border-radius: 25px;
     border: 5px solid #9081FF;
   }
- 
+
+  .insta{
+    width: 300px;
+    height: auto;
+  }
+  .whatsapp{
+    width: 300px;
+    height: auto;
+  }
+  .linkedin{
+    width: 200px;
+    height: auto;
+  }
+  .facebook{
+    width: 200px;
+    height: auto;
+  }
+  .twitter{
+    width: 300px;
+    height: auto;
+  }
 }
