@@ -68,7 +68,7 @@
               style="color: #FF6584">Digital</span> Products</a></h1>
         <div class="product-row1" *ngIf="screenwidth>600">
           <app-category-card *ngFor="let category of allDigitalProds" [img]="category.productImages[0].image"
-            [categoryTitle]="category.productName">
+            [categoryTitle]="category.productName" [productId]="category.productId">
           </app-category-card>
         </div>
       </section>

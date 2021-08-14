@@ -93,6 +93,8 @@ import { PendingProductEditModalComponent } from './modals/pending-product-edit-
 import { ExtraPendingProductInfoComponent } from './popovers/extra-pending-product-info/extra-pending-product-info.component';
 import { ExtraProductInfoComponent } from './modals/extra-product-info/extra-product-info.component';
 import { UserPromotionComponent } from './popovers/user-promotion/user-promotion.component';
+import { AddOfferComponent } from './modals/add-offer/add-offer.component';
+import { AddReferralComponent } from './modals/add-referral/add-referral.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -175,6 +177,8 @@ import { UserPromotionComponent } from './popovers/user-promotion/user-promotion
     ExtraPendingProductInfoComponent,
     ExtraProductInfoComponent,
     UserPromotionComponent,
+    AddOfferComponent,
+    AddReferralComponent,
   ],
   entryComponents: [],
   imports: [

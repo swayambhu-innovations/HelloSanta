@@ -17,10 +17,10 @@
                         <button class="product-feature-button" *ngFor="let catText of category">{{catText}}</button>
                         <button class="product-feature-button" *ngFor="let subcatText of subcategory">{{subcatText}}</button>
                     </div>
-                    <p id="product-price">Price: &#8377; {{productData.productPrice}}</p>
+                    <p id="product-price">Price: &#8377; {{productPrice}}</p>
                     <div id="product-action-buttons">
-                        <button id="product-buy-now" class=product-action-button>Buy Now</button>
-                        <button id="product-add-to-cart" class=product-action-button>Add to Cart</button>
+                        <button id="product-buy-now" class=product-action-button (click)="buyNow()">Buy Now</button>
+                        <button id="product-add-to-cart" class=product-action-button (click)="addToCart()">Add to Cart</button>
                     </div>
                     <div id="product-filters">
                         <button class="product-filter"
@@ -34,41 +34,52 @@
                     <div *ngIf="selectedExtraType=='imgSel'">
                         <div *ngFor="let extra of productData.extraData">
                             <ion-row *ngIf="extra.title==selectedExtraTitle">
-                                <ion-card *ngFor="let single of extra.values">
-                                    <ion-avatar>
-                                        <img [src]="" />
-                                    </ion-avatar>
-                                </ion-card>
+                                <ion-radio-group [name]="extra.title" [value]="extrasData['imgSel'+extra.title]" required (ionChange)="updateData($event,'imgSel'+extra.title)" id="imgSel{{extra.title}}">
+                                    <ion-card class="selectionChoiceCard" *ngFor="let single of extra.values" id="selImg{{single.imageTitle}}{{extra.title}}">
+                                        <img [src]="single.image"/>
+                                        <ion-label class="uk-align-center uk-text-center">{{single.imageTitle}}</ion-label>
+                                        <ion-label class="uk-align-center uk-text-center">&#8377;{{single.priceAddon}}</ion-label>
+                                        <ion-radio [value]="single"></ion-radio>
+                                    </ion-card>
+                                </ion-radio-group>
                             </ion-row>
                         </div>
                     </div>
                     <div *ngIf="selectedExtraType=='textSel'">
                         <div *ngFor="let extra of productData.extraData">
                             <ion-row *ngIf="extra.title==selectedExtraTitle">
-                                <ion-card class="selectionChoiceCard" *ngFor="let single of extra.values">
-                                    <span class="selectionTitle">{{single.title}}</span><br>
-                                    <span class="selectionPrice"> &#8377;{{single.priceAddon}}</span>
-                                </ion-card>
+                                <ion-radio-group required [value]="extrasData['textSel'+extra.title]" (ionChange)="updateData($event,'textSel'+extra.title)" id="textSel{{extra.title}}">
+                                    <ion-card class="selectionChoiceCard" *ngFor="let single of extra.values">
+                                        <span class="selectionTitle">{{single.title}}</span><br>
+                                        <span class="selectionPrice"> &#8377;{{single.priceAddon}}</span>
+                                        <ion-radio [value]="single"></ion-radio>
+                                    </ion-card>
+                                </ion-radio-group>
                             </ion-row>
                         </div>
                     </div>
-                    <div *ngIf="selectedExtraType=='numSel'">
+                    <div *ngIf="selectedExtraType=='numberSel'">
                         <div *ngFor="let extra of productData.extraData">
                             <ion-row *ngIf="extra.title==selectedExtraTitle">
-                                <ion-card class="selectionChoiceCard" *ngFor="let single of extra.values">
-                                    <span class="selectionTitle">{{single.title}}</span><br>
-                                    <span class="selectionPrice"> &#8377;{{single.priceAddon}}</span>
-                                </ion-card>
+                                <ion-radio-group required [value]="extrasData['numberSel'+extra.title]" (ionChange)="updateData($event,'numberSel'+extra.title)" id="numberSel{{extra.title}}">
+                                    <ion-card class="selectionChoiceCard" *ngFor="let single of extra.values">
+                                        <span class="selectionTitle">{{single.title}}</span><br>
+                                        <span class="selectionPrice"> &#8377;{{single.priceAddon}}</span>
+                                        <ion-radio [value]="single"></ion-radio>
+                                    </ion-card>
+                                </ion-radio-group>
                             </ion-row>
                         </div>
                     </div>
                     <div *ngIf="selectedExtraType=='faceInput'">
                         <div *ngFor="let extra of productData.extraData">
                             <ion-row *ngIf="extra.title==selectedExtraTitle">
-                                <ion-card class="selectionChoiceCard" *ngFor="let single of genList(4)">
-                                    <span class="selectionTitle">{{single}}</span>
-                                    <!-- <span> &#8377;{{single.priceAddon}}</span> -->
-                                </ion-card>
+                                <ion-radio-group [value]="extrasData['faceInput']" (ionChange)="updateData($event,'faceInput')" id="faceInput{{extra.title}}">
+                                    <ion-card class="selectionChoiceCard" *ngFor="let single of genList(4)">
+                                        <span class="selectionTitle">{{single}}</span>
+                                        <ion-radio [value]="single"></ion-radio>
+                                    </ion-card>
+                                </ion-radio-group>
                             </ion-row>
                         </div>
                     </div>
@@ -78,6 +89,18 @@
                                 <ion-card class="selectionChoiceCard" style="width:400px;" *ngFor="let single of extra.values">
                                     <ion-textarea placeholder="Extra Info"></ion-textarea>
                                 </ion-card>
+                            </ion-row>
+                        </div>
+                    </div>
+                    <div *ngIf="selectedExtraType=='sizeSel'">
+                        <div *ngFor="let extra of productData.extraData">
+                            <ion-row *ngIf="extra.title==selectedExtraTitle">
+                                <ion-radio-group [value]="extrasData['sizeSel']" [name]="extra.title" required (ionChange)="updateData($event,'sizeSel')" id="sizeSel{{extra.title}}">
+                                    <ion-card class="selectionChoiceCard" *ngFor="let single of extra.values">
+                                        <ion-label class="selectionTitle">{{single.sizeInputText}}</ion-label>
+                                        <ion-radio [value]="single"></ion-radio>
+                                    </ion-card>
+                                </ion-radio-group>
                             </ion-row>
                         </div>
                     </div>

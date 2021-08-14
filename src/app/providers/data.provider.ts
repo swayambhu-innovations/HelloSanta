@@ -7,5 +7,6 @@ export class DataProvider {
     public showOverlay:boolean=false;
     public accessLevel:number=-1;
     public overlayStatus:string = "Loading...";
+    public checkOutdata:any;
     public constructor() { }
 }

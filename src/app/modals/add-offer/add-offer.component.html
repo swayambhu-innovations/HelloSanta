@@ -1,0 +1,50 @@
+<ion-content>
+  <ion-card-header>
+    <ion-card-subtitle>Create your offer here</ion-card-subtitle>
+    <ion-card-title>Fill Details</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <form [formGroup]="form" (ngSubmit)="publishOffer()" method="POST">
+      <ion-list>
+        <ion-item>
+          <ion-label>Offer Name</ion-label>
+          <ion-input type="text" formControlName="offerName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-radio-group name="offerType" value="flat" formControlName="offerType">
+            <ion-list-header>
+              <ion-label>Offer Type</ion-label>
+            </ion-list-header>
+            <ion-item>
+              <ion-label>Flat Cut</ion-label>
+              <ion-radio value="flat"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Percent Cut</ion-label>
+              <ion-radio value="percent"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-item>
+        <ion-item>
+          <ion-label>Offer Cost</ion-label>
+          <ion-input type="number" placeholder="Offer Cost" required formControlName="offerCost"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Offer Code</ion-label>
+          <ion-input type="text" placeholder="Offer Code" required formControlName="offerCode"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Minimum Price In INR</ion-label>
+          <ion-input type="number" placeholder="Minimum price in INR" required formControlName="minimumPrice"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Minimum Products</ion-label>
+          <ion-input type="number" placeholder="Minimum Products" required formControlName="minimumProducts"></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="full" fill="solid" shape="solid" type="submit">
+        Create Offer and publish
+      </ion-button>
+    </form>
+  </ion-card-content>
+</ion-content>

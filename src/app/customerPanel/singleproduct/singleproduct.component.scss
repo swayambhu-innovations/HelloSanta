@@ -260,9 +260,23 @@ ion-spinner{
     justify-content: center;
     align-items: center;
     width:100px;
-    height:80px;
+    height:150px;
     text-align:center;
     margin-left: 10px;
+}
+.selectionChoiceCard > img {
+    width:auto;
+    height:60px;
+}
+.cc-selector input{
+    margin:0;padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+}
+ion-radio-group{
+    display: flex;
+    flex-direction: row;
 }
 @media only screen and (max-width: 600px) {
     #container2 {

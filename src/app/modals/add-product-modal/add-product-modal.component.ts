@@ -194,11 +194,34 @@ export class AddProductModalComponent implements OnInit {
                 fileEv,
                 `products/${value}/optionImages/${fileName}_${x}_${fileEv.name}`
               ).toPromise();
-              console.log(file);
+              let width = (
+                document.getElementById(
+                  'priceImageWidth' + i.toString() + x.toString()
+                ) as HTMLInputElement
+              ).value;
+              let height = (
+                document.getElementById(
+                  'priceImageHeight' + i.toString() + x.toString()
+                ) as HTMLInputElement
+              ).value;
+              let breadth = (
+                document.getElementById(
+                  'priceImageBreadth' + i.toString() + x.toString()
+                ) as HTMLInputElement
+              ).value;
+              let weight = (
+                document.getElementById(
+                  'priceImageWeight' + i.toString() + x.toString()
+                ) as HTMLInputElement
+              ).value;
               values.push({
                 image: file,
                 imageTitle: imageTitle,
                 priceAddon: priceAddon,
+                width: width,
+                height: height,
+                breadth: breadth,
+                weight: weight,
               });
             }
             let sectionTitle = (
@@ -228,9 +251,33 @@ export class AddProductModalComponent implements OnInit {
                   'textPriceAddon' + i.toString() + x.toString()
                 ) as HTMLInputElement
               ).value;
+              let width = (
+                document.getElementById(
+                  'textPriceWidth' + i.toString() + x.toString()
+                ) as HTMLInputElement
+              ).value;
+              let height = (
+                document.getElementById(
+                  'textPriceHeight' + i.toString() + x.toString()
+                ) as HTMLInputElement
+              ).value;
+              let breadth = (
+                document.getElementById(
+                  'textPriceBreadth' + i.toString() + x.toString()
+                ) as HTMLInputElement
+              ).value;
+              let weight = (
+                document.getElementById(
+                  'textPriceWeight' + i.toString() + x.toString()
+                ) as HTMLInputElement
+              ).value;
               values.push({
                 title: textTitle,
                 priceAddon: priceAddon,
+                width: width,
+                height: height,
+                breadth: breadth,
+                weight: weight,
               });
             }
             let sectionTitle = (
@@ -260,9 +307,33 @@ export class AddProductModalComponent implements OnInit {
                   'numberPriceAddon' + i.toString() + x.toString()
                 ) as HTMLInputElement
               ).value;
+              let width = (
+                document.getElementById(
+                  'numberPriceWidth' + i.toString() + x.toString()
+                ) as HTMLInputElement
+              ).value;
+              let height = (
+                document.getElementById(
+                  'numberPriceHeight' + i.toString() + x.toString()
+                ) as HTMLInputElement
+              ).value;
+              let breadth = (
+                document.getElementById(
+                  'numberPriceBreadth' + i.toString() + x.toString()
+                ) as HTMLInputElement
+              ).value;
+              let weight = (
+                document.getElementById(
+                  'numberPriceWeight' + i.toString() + x.toString()
+                ) as HTMLInputElement
+              ).value;
               values.push({
                 title: numTitle,
                 priceAddon: priceAddon,
+                width: width,
+                height: height,
+                breadth: breadth,
+                weight: weight,
               });
             }
             let sectionTitle = (
@@ -367,6 +438,26 @@ export class AddProductModalComponent implements OnInit {
                   'sizeInputSizeFactor' + i.toString() + sizesIndex.toString()
                 ) as HTMLInputElement
               ).value;
+              let width = (
+                document.getElementById(
+                  'sizeInputWidth' + i.toString() + x.toString()
+                ) as HTMLInputElement
+              ).value;
+              let height = (
+                document.getElementById(
+                  'sizeInputHeight' + i.toString() + x.toString()
+                ) as HTMLInputElement
+              ).value;
+              let breadth = (
+                document.getElementById(
+                  'sizeInputBreadth' + i.toString() + x.toString()
+                ) as HTMLInputElement
+              ).value;
+              let weight = (
+                document.getElementById(
+                  'sizeInputWeight' + i.toString() + x.toString()
+                ) as HTMLInputElement
+              ).value;
               values.push({
                 sizeInputText: sizeInputText,
                 sizeInputAddon: sizeInputAddon,
@@ -375,6 +466,10 @@ export class AddProductModalComponent implements OnInit {
                 sizeInputHours: sizeInputHours,
                 sizeInputPPH: sizeInputPPH,
                 sizeInputFactor: sizeInputFactor,
+                width: width,
+                height: height,
+                breadth: breadth,
+                weight: weight,
               });
             }
             console.log({
@@ -383,6 +478,7 @@ export class AddProductModalComponent implements OnInit {
               values: values,
             });
             dict.push({
+              type:'sizeSel',
               title: sizeTitle,
               sizesCount: values.length,
               values: values,

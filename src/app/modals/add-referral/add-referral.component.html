@@ -1,0 +1,36 @@
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="publishReferral()" method="POST">
+    <ion-list>
+      <ion-item>
+        <ion-card>
+          <ion-list>
+            <ion-radio-group name="vendorsList" formControlName="vendor">
+                <ion-item *ngFor="let vendor of vendors">
+                  <ion-radio [value]="vendor.uid" slot="start"></ion-radio>
+                  <ion-avatar>
+                    <img [src]="vendor.photo" />
+                  </ion-avatar>
+                  <ion-label color="primary">{{vendor.name}}</ion-label>
+                </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </ion-card>
+      </ion-item>
+      <ion-item>
+        <ion-label>Referral Id</ion-label>
+        <ion-input type="text" placeholder="referral Id" required="true" formControlName="referralId"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>New User Reward Points </ion-label>
+        <ion-input type="number" placeholder="Reward Points" required="true" formControlName="newUserPoints"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Referrer Reward Points </ion-label>
+        <ion-input type="number" placeholder="Referrer Reward Points" required="true" formControlName="oldUserPoints"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="full" fill="solid" shape="solid" type="submit">
+      Create Offer and publish
+    </ion-button>
+  </form>
+</ion-content>

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { ModalController } from '@ionic/angular';
+import { AddOfferComponent } from 'src/app/modals/add-offer/add-offer.component';
+import { AddReferralComponent } from 'src/app/modals/add-referral/add-referral.component';
 
 @Component({
   selector: 'app-ap-offers-referrals',
@@ -6,44 +10,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ap-offers-referrals.component.scss'],
 })
 export class APOffersReferralsComponent implements OnInit {
-  offers=[
-    {
-      "offerId":"IODP4239847",
-      "offerName":"10% Off",
-      "offerCode":"GET10",
-      "offerDiscount":"10%"
-    },
-    {
-      "offerId":"IODP4239847",
-      "offerName":"10% Off",
-      "offerCode":"GET10",
-      "offerDiscount":"10%"
-    },
-    {
-      "offerId":"IODP4239847",
-      "offerName":"10% Off",
-      "offerCode":"GET10",
-      "offerDiscount":"10%"
-    },
-    {
-      "offerId":"IODP4239847",
-      "offerName":"10% Off",
-      "offerCode":"GET10",
-      "offerDiscount":"10%"
-    },
-    {
-      "offerId":"IODP4239847",
-      "offerName":"10% Off",
-      "offerCode":"GET10",
-      "offerDiscount":"10%"
-    },
-    {
-      "offerId":"IODP4239847",
-      "offerName":"10% Off",
-      "offerCode":"GET10",
-      "offerDiscount":"10%"
-    },
-  ];
+  manageOffers=false;
+  async showOfferModal() {
+    const modal = await this.modalController.create({
+      component: AddOfferComponent,
+    });
+    return await modal.present();
+  }
+  async showReferralModal() {
+    const modal = await this.modalController.create({
+      component: AddReferralComponent,
+    });
+    return await modal.present();
+  }
+  offers=[]
   referrals=[
     {
       "image":"https://i.pravatar.cc/250",
@@ -82,6 +62,10 @@ export class APOffersReferralsComponent implements OnInit {
       "totalRefers":"532",
     },
   ]
-  constructor() { }
-  ngOnInit() {}
+  constructor(public modalController: ModalController,private afs: AngularFirestore) { }
+  ngOnInit() {
+    this.afs.collection('offers').valueChanges().subscribe(data => {
+      this.offers=data
+    })
+  }
 }
