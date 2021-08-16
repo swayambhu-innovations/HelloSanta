@@ -22,6 +22,7 @@
                         <button id="product-buy-now" class=product-action-button (click)="buyNow()">Buy Now</button>
                         <button id="product-add-to-cart" class=product-action-button (click)="addToCart()">Add to Cart</button>
                     </div>
+                    <div></div>
                     <div id="product-filters">
                         <button class="product-filter"
                             (click)="selectedExtraType=extra.type;selectedExtraTitle=extra.title"
@@ -61,7 +62,7 @@
                     <div *ngIf="selectedExtraType=='numberSel'">
                         <div *ngFor="let extra of productData.extraData">
                             <ion-row *ngIf="extra.title==selectedExtraTitle">
-                                <ion-radio-group required [value]="extrasData['numberSel'+extra.title]" (ionChange)="updateData($event,'numberSel'+extra.title)" id="numberSel{{extra.title}}">
+                                <ion-radio-group required [value]="extrasData['numberSel']" (ionChange)="updateData($event,'numberSel')" id="numberSel{{extra.title}}">
                                     <ion-card class="selectionChoiceCard" *ngFor="let single of extra.values">
                                         <span class="selectionTitle">{{single.title}}</span><br>
                                         <span class="selectionPrice"> &#8377;{{single.priceAddon}}</span>

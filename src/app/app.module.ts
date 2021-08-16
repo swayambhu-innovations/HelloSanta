@@ -4,6 +4,8 @@ import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
+import { HttpClientModule} from '@angular/common/http';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { APVendorsComponent } from './adminPanel/ap-vendors/ap-vendors.component';
@@ -182,6 +184,7 @@ import { AddReferralComponent } from './modals/add-referral/add-referral.compone
   ],
   entryComponents: [],
   imports: [
+    HttpClientModule,
     BrowserModule,
     ReactiveFormsModule,
     RatingModule,

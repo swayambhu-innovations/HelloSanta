@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataProvider } from 'src/app/providers/data.provider';
 import { AuthService } from 'src/app/services/auth.service';
 import { InventoryService } from 'src/app/services/inventory.service';
@@ -28,7 +28,8 @@ export class SingleproductComponent implements OnInit {
     public afs: AngularFirestore,
     private authService: AuthService,
     private dataProvider: DataProvider,
-    private inventoryService: InventoryService) {
+    private inventoryService: InventoryService,
+    private router: Router,) {
     this.activatedRoute.queryParams.subscribe(params => {
         this.productId = params['productId'];
     });
@@ -41,10 +42,15 @@ export class SingleproductComponent implements OnInit {
     return randomList;
   }
   buyNow() {
-    this.dataProvider.checkOutdata={
-      productData:this.productData.productId,
-      extrasData:this.extrasData,
-      price:this.productPrice,
+    if (Object.keys(this.extrasData).length==this.productData.extraData.length-1){
+      this.dataProvider.checkOutdata=[{
+        productData:this.productData.productId,
+        extrasData:this.extrasData,
+        price:this.productPrice,
+      }]
+      this.router.navigate(['checkout'])
+    }else{
+      this.authService.presentToast('Please select all the extras options.')
     }
     
   }
