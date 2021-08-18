@@ -1,0 +1,108 @@
+<ion-content>
+  <app-header ></app-header>
+  <h1 style="font-family: Poppins;text-align: center;padding-top: 80px;font-weight: bolder;font-size: 50px;color: #6D5DE3">Custom request Form</h1>
+  <div class="uk-panel" >
+    <div class="inner-box" align="center">
+      <div align="center">
+        <h1 style="font-family: Poppins;text-align: center;font-weight: bolder;font-size: 30px;color: #6D5DE3">Choose a product category</h1>
+        <ion-list>
+          <ion-list-header>
+            <ion-label>
+              Select Category
+            </ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-label>Hair Color</ion-label>
+            <ion-select value="brown" okText="Okay" cancelText="Dismiss">
+              <ion-select-option value="brown">Brown</ion-select-option>
+              <ion-select-option value="blonde">Blonde</ion-select-option>
+              <ion-select-option value="black">Black</ion-select-option>
+              <ion-select-option value="red">Red</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+        </ion-list>
+        <hr style="border: 2px solid #6D5DE3;border-radius: 10px;background-color: #6D5DE3;width: 1000px;">
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <textarea id="subject" name="subject" placeholder="Provide a discription of your custom request" style="height:400px"></textarea>
+      <ion-item style="width: 900px;margin: 4% 17.5%">
+        <ion-label position="floating" style="text-align: center">
+          Post a price quotation
+        </ion-label>
+        <ion-input type="text" placeholder="Your price" formControlName="price" required style="text-align: center"></ion-input>
+      </ion-item>
+      <ion-card>
+        <h1 style="text-align: center">
+          Your info
+        </h1>
+        <ion-list>
+          <form >
+            <ion-item>
+              <ion-label position="floating">
+                Your Full Name
+              </ion-label>
+              <ion-input type="text" placeholder="Your Name" formControlName="fullName" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">
+                Your Email
+              </ion-label>
+              <ion-input type="text" placeholder="Enter Your Email" formControlName="email" required>
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">
+                Your Phone number
+              </ion-label>
+              <ion-input type="integer" placeholder="Enter Your Phone number" formControlName="phoneNumber"
+                         required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">
+                delivery address(including house number)
+              </ion-label>
+              <ion-input type="text" placeholder="delivery address(including house number)"
+                         formControlName="addressLine1" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">
+                city
+              </ion-label>
+              <ion-input type="text" placeholder="enter your city" required formControlName="city">
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">
+                Pincode
+              </ion-label>
+              <ion-input type="text" placeholder="Enter Your Pincode" required formControlName="pincode">
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">
+                State
+              </ion-label>
+              <ion-input type="text" placeholder="Enter Your State" required formControlName="state">
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">
+                Country
+              </ion-label>
+              <ion-input type="text" placeholder="Enter Your country" required formControlName="country">
+              </ion-input>
+            </ion-item>
+          </form>
+        </ion-list>
+      </ion-card>
+      <h1 style="font-family: Poppins;text-align: center;font-weight: bolder;font-size: 30px;color: #6D5DE3">Submit your request</h1>
+      <div align="center"><button>Submit</button></div>
+    </div>
+  </div>
+  <app-accordion></app-accordion>
+  <app-footer ></app-footer>
+</ion-content>

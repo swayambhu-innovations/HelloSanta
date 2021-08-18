@@ -43,7 +43,8 @@ import { BlogComponent } from './customerPanel/blog/blog.component';
 import { BuyagainComponent } from './customerPanel/buyagain/buyagain.component';
 import { AccountComponent } from './customerPanel/account/account.component';
 import { SingleproductComponent } from './customerPanel/singleproduct/singleproduct.component';
-import { LoginGuard } from './guards/login-guard.guard'
+import { CustomproductComponent } from './customerPanel/Customproduct/Customproduct.component';
+import { LoginGuard } from './guards/login-guard.guard';
 import { VerifyEmailComponent } from './customerPanel/verify-email/verify-email.component';
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { AdminPanelGuard } from './guards/admin-panel.guard';
@@ -78,6 +79,7 @@ const routes: Routes = [
   {path:'buyagain', component:BuyagainComponent},
   {path:'account', component:AccountComponent},
   {path:'product', component:SingleproductComponent},
+  {path:'customorder', component:CustomproductComponent},
   {path:"verifyEmail", component:VerifyEmailComponent},
 
   {
