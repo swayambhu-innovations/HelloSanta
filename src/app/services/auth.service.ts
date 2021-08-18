@@ -35,7 +35,9 @@ export class AuthService {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.userData = user;
-
+        this.afs.collection('users').doc(user.uid).valueChanges().subscribe((value:any)=>{
+          localStorage.setItem('localUserData', JSON.stringify(value))
+        })
         // alert("This is data user "+JSON.stringify(user));
         this.afs.doc(`users/${this.userData.uid}`).valueChanges().subscribe((value:any)=>{
           let level:any = JSON.stringify(value.access.accessLevel);
@@ -215,25 +217,19 @@ export class AuthService {
   }
 
   getUserEmail(){
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const user = JSON.parse(localStorage.getItem('localUserData') || '{}');
     return (user !== null && user.email !== false) ? user.email : "";
   }
 
   getUserName(){
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const user = JSON.parse(localStorage.getItem('localUserData') || '{}');
     let username = (user !== null && user.displayName !== "") ? user.displayName : "Anonymous";
-    if ((username==null || username=="" || username==undefined) && localStorage.getItem('localItem')!=null){
-      username=JSON.parse(localStorage.getItem('localItem'))["displayName"]
-    }
     return username
   }
 
   getUserPhoto(){
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const user = JSON.parse(localStorage.getItem('localUserData') || '{}');
     let photo = (user !== null && user.photoURL !== "") ? user.photoURL : "";
-    if ((photo=="" || photo==null || photo==undefined )&& localStorage.getItem('localItem')!=null){
-      photo = JSON.parse(localStorage.getItem('localItem'))['photoURL']
-    }
     return photo
   }
 
@@ -319,6 +315,7 @@ export class AuthService {
         firstLogin:today.toLocaleDateString("en-US",AuthService.dateOptions).toString(),
         data:user.data || [],
         access:currentAccess,
+        isReferrer:user.isRefferrer || false,
         cartItems:user.cartItems || [],
         currentOrder:user.currentOrder || [],
         dob:user.dob || dob || undefined,
@@ -345,6 +342,7 @@ export class AuthService {
         data:user.data || [],
         access:currentAccess,
         cartItems:user.cartItems || [],
+        isReferrer:user.isRefferrer || false,
         currentOrder:user.currentOrder || [],
         dob:user.dob || dob,
         friends:user.friends || [],

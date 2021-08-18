@@ -25,8 +25,97 @@ export class DigitalartworksComponent implements OnInit {
     });
     return await modal.present();
   }
-  allDigitalProds= [];
-  specifiedDigitalProds={};
+  allDigitalProds:any;
+  copyArray=[];
+  categories=[];
+  subcategories=[];
+  filters= {};
+  resetFilter(){
+    this.filters={};
+    this.allDigitalProds=this.copyArray;
+    (document.getElementById('priceFilter') as HTMLIonRadioGroupElement).value='';
+    (document.getElementById('categoryFilter') as HTMLIonRadioGroupElement).value='';
+    (document.getElementById('subcategoryFilter') as HTMLIonRadioGroupElement).value='';
+  }
+  filter(event,type){
+    this.filters[type]= event.detail.value;
+    this.allDigitalProds=[];
+    this.copyArray.forEach((item)=>{
+      this.allDigitalProds.push(item);
+    })
+    for (let i in this.filters){
+      if (i=='price'){
+        this.priceChange(this.filters[i]);
+      } else if (i=='subcategory'){
+        this.subCategoryChange(this.filters[i]);
+      } else if (i=='category'){
+        this.categoryChange(this.filters[i]);
+      }
+    }
+  }
+  subCategoryChange(value){
+    this.allDigitalProds.forEach((item)=>{
+      if (item.productSubcategory.includes(value)==false){
+        this.allDigitalProds.splice(this.allDigitalProds.indexOf(item),1);
+      }
+    })
+  }
+  categoryChange(value){
+    this.allDigitalProds.forEach((item)=>{
+      if (item.productCategory.includes(value)==false){
+        this.allDigitalProds.splice(this.allDigitalProds.indexOf(item),1);
+      }
+    })
+  }
+  priceChange(value){
+    if (value=='MinToMax'){
+      let tempList = [];
+      for (let i; i<this.allDigitalProds; i++) {
+        let min_idx=i;
+        for (let j=1; j<this.allDigitalProds.length; j++) {
+          if (this.allDigitalProds[i].productPrice<this.allDigitalProds[j].productPrice) {
+            min_idx=j;
+          }
+        }
+        let temp=this.allDigitalProds[i];
+        this.allDigitalProds[i]=this.allDigitalProds[min_idx];
+        this.allDigitalProds[min_idx]=temp;
+      }
+    }
+    else if (value=='500-1000'){
+      let tempList = [];
+      for (let i of this.allDigitalProds) {
+        if (i.productPrice>=500 && i.productPrice<=1000) {
+          tempList.push(i);
+        }
+      }
+      this.allDigitalProds=tempList;
+    } else if (value=='1000-5000'){
+      let tempList = [];
+      for (let i of this.allDigitalProds) {
+        if (i.productPrice>=1000 && i.productPrice<=5000) {
+          tempList.push(i);
+        }
+      }
+      this.allDigitalProds=tempList;
+    } else if (value=='5000-10000'){
+      let tempList = [];
+      for (let i of this.allDigitalProds) {
+        if (i.productPrice>=5000 && i.productPrice<=10000) {
+          tempList.push(i);
+        }
+      }
+      this.allDigitalProds=tempList;
+    } else if (value=='Above10000'){
+      let tempList = [];
+      for (let i of this.allDigitalProds) {
+        if (i.productPrice>10000) {
+          tempList.push(i);
+        }
+      }
+      this.allDigitalProds=tempList;
+    }
+  }
   ngOnInit() {
     this.afs
       .collection('products')
@@ -35,6 +124,9 @@ export class DigitalartworksComponent implements OnInit {
         console.log('products data digital', proddata);
         proddata.forEach((product: any) => {
           let unknown = 0;
+          if (this.allDigitalProds==undefined){
+            this.allDigitalProds=[]
+          }
           this.allDigitalProds.forEach((oldProduct: any) => {
             if (product.productId == oldProduct.productId) {
               console.log('already exists');
@@ -43,9 +135,16 @@ export class DigitalartworksComponent implements OnInit {
           });
           if (unknown == 0 && product.productCategory.includes('Digital Artworks')) {
             this.allDigitalProds.push(product);
+            this.copyArray.push(product);
           }
         });
       });
+    this.afs.collection('data').doc('category').ref.get().then((value:any)=>{
+      if (value.exists){
+        this.categories=value.data().categories;
+        this.subcategories=value.data().subCategories;
+      }
+    })
   }
   products=[
     {

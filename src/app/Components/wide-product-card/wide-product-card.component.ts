@@ -16,6 +16,7 @@ export class WideProductCardComponent implements OnInit {
   @Input() category:string;
   @Input() subcategory:string;
   @Input() productId:string
+  @Input() extras:any;
   constructor(public inventoryService: InventoryService) { }
   removeFromWishlist(){
     let data = {

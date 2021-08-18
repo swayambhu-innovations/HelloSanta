@@ -1,15 +1,16 @@
 {
   "name": "HelloSanta",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Kumar Saptam",
+  "homepage": "https://sapython.me/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "ionic build --prod && firebase deploy --only hosting"
   },
   "private": true,
   "dependencies": {

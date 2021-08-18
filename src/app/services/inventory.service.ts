@@ -332,12 +332,61 @@ export class InventoryService {
       .collection('users')
       .doc(this.authService.userId)
       .update({
-        cartItem: firebase.firestore.FieldValue.arrayUnion(data),
+        cartItems: firebase.firestore.FieldValue.arrayUnion(data),
       })
       .then((docRef) => {
         this.authService.presentToast('Added to cart');
-      }).catch((error) => {
+      })
+      .catch((error) => {
         this.authService.presentToast('Error: ' + error.toString());
       });
+  }
+  makeid(length) {
+    var result = '';
+    var characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+  optInreferral() {
+    let key = this.makeid(10);
+    let userData = this.afs
+      .collection('users')
+      .ref.doc(this.authService.userId)
+      .get()
+      .then((data: any) => {
+        if (data.exists) {
+          if (data.data().referralCode != undefined) {
+            this.authService.presentToast('You have already opted in enabling referral');
+            this.afs
+              .collection(`referrals`)
+              .doc(this.authService.userId).set({ userId: this.authService.userId, code: data.data().referralCode});
+          } else {
+            this.afs
+              .collection('users')
+              .doc(this.authService.userId)
+              .update({ referralCode: key });
+            this.afs
+              .collection(`referrals`)
+              .doc(this.authService.userId).set({ userId: this.authService.userId, code: key, isOptedIn: true});
+            this.authService.presentToast('You are opted in with a new key.');
+          }
+        }
+      });
+    this.afs.collection('users').doc(this.authService.userId).update({
+      isReferrer: true,
+    });
+  }
+  optOutReferral(){
+    this.afs.collection('users').doc(this.authService.userId).update({
+      isReferrer: false,
+    });
+    this.afs
+    .collection(`referrals`)
+    .doc(this.authService.userId).set({isOptedIn: false});
+    this.authService.presentToast('You have opted out');
   }
 }

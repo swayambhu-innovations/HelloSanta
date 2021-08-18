@@ -1,0 +1,22 @@
+<ion-content>
+  <app-header></app-header>
+  <main id="container">
+      <app-sidenav activeLinkID="referrals" *ngIf="screenwidth>600"></app-sidenav>
+      <section id="orders-container">
+        <h2 id="your-cart-title">Referral</h2>
+        <ion-item>
+          <ion-label>Signup For Referral</ion-label>
+          <ion-toggle color="primary" mode="ios" slot="end" (ionChange)="referralState($event)" #referralToggle></ion-toggle>
+        </ion-item>
+        <ion-list>
+          <ion-item *ngFor="let user of users">
+            <ion-avatar>
+              <img [src]="user.photoURL" />
+            </ion-avatar>
+            <ion-label>{{user.displayName}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </section>
+  </main>
+  <app-footer></app-footer>
+</ion-content>

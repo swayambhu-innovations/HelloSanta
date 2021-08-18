@@ -97,6 +97,8 @@ import { ExtraProductInfoComponent } from './modals/extra-product-info/extra-pro
 import { UserPromotionComponent } from './popovers/user-promotion/user-promotion.component';
 import { AddOfferComponent } from './modals/add-offer/add-offer.component';
 import { AddReferralComponent } from './modals/add-referral/add-referral.component';
+import { UserReferralComponent } from './customerPanel/user-referral/user-referral.component';
+import { SearchResultComponent } from './popovers/search-result/search-result.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -181,6 +183,8 @@ import { AddReferralComponent } from './modals/add-referral/add-referral.compone
     UserPromotionComponent,
     AddOfferComponent,
     AddReferralComponent,
+    UserReferralComponent,
+    SearchResultComponent,
   ],
   entryComponents: [],
   imports: [

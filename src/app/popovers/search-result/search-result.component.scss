@@ -1,0 +1,11 @@
+ion-spinner{
+    color:var(--ion-color-primary);
+    height:30px;
+    width:30px;
+    left:50%;
+    margin-top: 60px;
+    transform:translate(-50%);
+}
+ion-content{
+    height:200px;
+}

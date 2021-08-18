@@ -440,22 +440,22 @@ export class AddProductModalComponent implements OnInit {
               ).value;
               let width = (
                 document.getElementById(
-                  'sizeInputWidth' + i.toString() + x.toString()
+                  'sizeInputWidth' + i.toString() + sizesIndex.toString()
                 ) as HTMLInputElement
               ).value;
               let height = (
                 document.getElementById(
-                  'sizeInputHeight' + i.toString() + x.toString()
+                  'sizeInputHeight' + i.toString() + sizesIndex.toString()
                 ) as HTMLInputElement
               ).value;
               let breadth = (
                 document.getElementById(
-                  'sizeInputBreadth' + i.toString() + x.toString()
+                  'sizeInputBreadth' + i.toString() + sizesIndex.toString()
                 ) as HTMLInputElement
               ).value;
               let weight = (
                 document.getElementById(
-                  'sizeInputWeight' + i.toString() + x.toString()
+                  'sizeInputWeight' + i.toString() + sizesIndex.toString()
                 ) as HTMLInputElement
               ).value;
               values.push({

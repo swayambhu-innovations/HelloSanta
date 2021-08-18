@@ -48,6 +48,7 @@ import { VerifyEmailComponent } from './customerPanel/verify-email/verify-email.
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { AdminPanelGuard } from './guards/admin-panel.guard';
 import { PendingProductsComponent } from './adminPanel/pending-products/pending-products.component';
+import { UserReferralComponent } from './customerPanel/user-referral/user-referral.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -58,6 +59,7 @@ const routes: Routes = [
   {path:'feedback', component: FeedbackComponent},
   {path:'wishlist', component:WishlistComponent},
   {path:'orders', component:OrdersComponent},
+  {path:'referral', component:UserReferralComponent},
   {path:'digitalart', component:DigitalartworksComponent},
   {path:'handmadeart', component:HandmadeartworksComponent},
   {path:'trackorder', component:TrackorderComponent},
@@ -79,7 +81,6 @@ const routes: Routes = [
   {path:'account', component:AccountComponent},
   {path:'product', component:SingleproductComponent},
   {path:"verifyEmail", component:VerifyEmailComponent},
-
   {
     path:"AdminPanel",
     canActivate:[AdminPanelGuard],

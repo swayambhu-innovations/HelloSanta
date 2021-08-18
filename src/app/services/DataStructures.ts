@@ -22,6 +22,7 @@ export interface User {
     firstLogin:string,
     access:access,
     cartItems:[],
+    isReferrer:boolean,
     totalSalesPoints:number,
     referred:[],
     referrer:{},

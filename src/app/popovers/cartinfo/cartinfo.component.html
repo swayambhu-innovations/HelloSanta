@@ -4,14 +4,17 @@
       <ion-row>
         <ion-col>
           <ion-thumbnail>
-            <img src="assets/2.png" />
+            <img [src]="product.productImages[0].image" />
           </ion-thumbnail>
         </ion-col>
         <ion-col>
-          <ion-label>productname</ion-label>
-          <ion-label>Price = 2300</ion-label>
+          <ion-label>{{product.productName}}</ion-label>
+          <ion-label color="success">&#8377;{{product.productPrice}}</ion-label>
         </ion-col>
       </ion-row>
+    </ion-item>
+    <ion-item button href="./cart">
+      <ion-label>Open Cart</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

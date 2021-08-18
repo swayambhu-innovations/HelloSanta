@@ -147,23 +147,23 @@
             </ion-item>
             <ion-item>
               <ion-label>Price Addon</ion-label>
-              <ion-input type="number" placeholder="Price Addon" id="priceImageAddon{{item}}{{imgIndex}}"></ion-input>
+              <ion-input type="number" placeholder="Price Addon" value="0" id="priceImageAddon{{item}}{{imgIndex}}"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Product Base Width</ion-label>
-              <ion-input type="number" placeholder="Base width" id="priceImageWidth{{item}}{{imgIndex}}"></ion-input>
+              <ion-input type="number" placeholder="Base width" value="0" id="priceImageWidth{{item}}{{imgIndex}}"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Product Base Height</ion-label>
-              <ion-input type="number" placeholder="Base height" id="priceImageHeight{{item}}{{imgIndex}}"></ion-input>
+              <ion-input type="number" placeholder="Base height" value="0" id="priceImageHeight{{item}}{{imgIndex}}"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Product Base Breadth</ion-label>
-              <ion-input type="number" placeholder="Base Breadth" id="priceImageBreadth{{item}}{{imgIndex}}"></ion-input>
+              <ion-input type="number" placeholder="Base Breadth" value="0" id="priceImageBreadth{{item}}{{imgIndex}}"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Product Base Weight</ion-label>
-              <ion-input type="number" placeholder="Weight in KG" id="priceImageWeight{{item}}{{imgIndex}}"></ion-input>
+              <ion-input type="number" placeholder="Weight in KG" value="0" id="priceImageWeight{{item}}{{imgIndex}}"></ion-input>
             </ion-item>
           </ion-card>
         </ion-card-content>
@@ -185,23 +185,23 @@
             </ion-item>
             <ion-item>
               <ion-label>Price Addon</ion-label>
-              <ion-input type="number" placeholder="Price Addon" id="textPriceAddon{{item}}{{textIndex}}"></ion-input>
+              <ion-input type="number" placeholder="Price Addon" value="0" id="textPriceAddon{{item}}{{textIndex}}"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Product Base Width</ion-label>
-              <ion-input type="number" placeholder="Base width" id="textPriceWidth{{item}}{{textIndex}}"></ion-input>
+              <ion-input type="number" placeholder="Base width" value="0" id="textPriceWidth{{item}}{{textIndex}}"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Product Base Height</ion-label>
-              <ion-input type="number" placeholder="Base height" id="textPriceHeight{{item}}{{textIndex}}"></ion-input>
+              <ion-input type="number" placeholder="Base height" value="0" id="textPriceHeight{{item}}{{textIndex}}"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Product Base Breadth</ion-label>
-              <ion-input type="number" placeholder="Base Breadth" id="textPriceBreadth{{item}}{{textIndex}}"></ion-input>
+              <ion-input type="number" placeholder="Base Breadth" value="0" id="textPriceBreadth{{item}}{{textIndex}}"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Product Base Weight</ion-label>
-              <ion-input type="number" placeholder="Weight in KG" id="textPriceWeight{{item}}{{textIndex}}"></ion-input>
+              <ion-input type="number" placeholder="Weight in KG" value="0" id="textPriceWeight{{item}}{{textIndex}}"></ion-input>
             </ion-item>
           </ion-card>
         </ion-card-content>
@@ -226,19 +226,19 @@
             </ion-item>
             <ion-item>
               <ion-label position="floating">Product Base Width</ion-label>
-              <ion-input type="number" placeholder="Base width" id="numberPriceWidth{{item}}{{numIndex}}"></ion-input>
+              <ion-input type="number" placeholder="Base width" value="0" id="numberPriceWidth{{item}}{{numIndex}}"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Product Base Height</ion-label>
-              <ion-input type="number" placeholder="Base height" id="numberPriceHeight{{item}}{{numIndex}}"></ion-input>
+              <ion-input type="number" placeholder="Base height" value="0" id="numberPriceHeight{{item}}{{numIndex}}"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Product Base Breadth</ion-label>
-              <ion-input type="number" placeholder="Base Breadth" id="numberPriceBreadth{{item}}{{numIndex}}"></ion-input>
+              <ion-input type="number" placeholder="Base Breadth" value="0" id="numberPriceBreadth{{item}}{{numIndex}}"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Product Base Weight</ion-label>
-              <ion-input type="number" placeholder="Weight in KG" id="numberPriceWeight{{item}}{{numIndex}}"></ion-input>
+              <ion-input type="number" placeholder="Weight in KG" value="0" id="numberPriceWeight{{item}}{{numIndex}}"></ion-input>
             </ion-item>
           </ion-card>
         </ion-card-content>
@@ -288,7 +288,7 @@
           <ion-card *ngFor="let sizesIndex of genList(sizesCounter.value)">
             <ion-item>
               <ion-label position="floating">Size Name</ion-label>
-              <ion-input required="true" type="text" id="sizeInputText{{item}}{{sizesIndex}}"></ion-input>
+              <ion-input required="true" type="text" value="Sizes" id="sizeInputText{{item}}{{sizesIndex}}"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Size Addon</ion-label>
@@ -316,19 +316,19 @@
             </ion-item>
             <ion-item>
               <ion-label position="floating">Product Base Width</ion-label>
-              <ion-input type="number" placeholder="Base width" id="sizeInputWidth{{item}}{{sizesIndex}}"></ion-input>
+              <ion-input type="number" placeholder="Base width" value="0" id="sizeInputWidth{{item}}{{sizesIndex}}"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Product Base Height</ion-label>
-              <ion-input type="number" placeholder="Base height" id="sizeInputHeight{{item}}{{sizesIndex}}"></ion-input>
+              <ion-input type="number" placeholder="Base height" value="0" id="sizeInputHeight{{item}}{{sizesIndex}}"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Product Base Breadth</ion-label>
-              <ion-input type="number" placeholder="Base Breadth" id="sizeInputBreadth{{item}}{{sizesIndex}}"></ion-input>
+              <ion-input type="number" placeholder="Base Breadth" value="0" id="sizeInputBreadth{{item}}{{sizesIndex}}"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Product Base Weight</ion-label>
-              <ion-input type="number" placeholder="Weight in KG" id="sizeInputWeight{{item}}{{sizesIndex}}"></ion-input>
+              <ion-input type="number" placeholder="Weight in KG" value="0" id="sizeInputWeight{{item}}{{sizesIndex}}"></ion-input>
             </ion-item>
           </ion-card>
         </ion-card-content>

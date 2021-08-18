@@ -4,37 +4,30 @@
       <app-sidenav activeLinkID="account" *ngIf="screenwidth>600"></app-sidenav>
       <section id="profile-container">
           <div id="img-name-and-email">
-              <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+              <img [src]="authService.getUserPhoto()"
                   alt="Profile Pic" class="circular-profile-pic" style="width:100px;height:100px">
               <div id="name-and-email">
                   <h2 id="name">{{userName}}</h2>
                   <p id="email">{{userEmail}}</p>
               </div>
           </div>
+          <h5>Just change the required fields, it will be updated automatically.</h5>
           <form action="" id="edit-form">
               <div class="form-input-div">
-                  <label for="first-name" class="form-label">First Name</label>
-                  <input type="text" class="form-input" id="first-name">
-              </div>
-              <div class="form-input-div">
-                  <label for="last-name" class="form-label">Last Name</label>
-                  <input type="text" class="form-input" id="last-name">
-              </div>
-              <div class="form-input-div">
-                  <label for="username" class="form-label">Username</label>
-                  <input type="text" class="form-input" id="username">
+                  <label for="first-name" class="form-label">Full Name</label>
+                  <input type="text" class="form-input" (change)="changeField($event,'firstName')" id="first-name">
               </div>
               <div class="form-input-div">
                   <label for="date-of-birth" class="form-label">Date of Birth</label>
-                  <input type="date" class="form-input" id="date-of-birth">
+                  <input type="date" class="form-input" (change)="changeField($event,'dob')" id="date-of-birth">
               </div>
               <div class="form-input-div">
                   <label for="mobile" class="form-label">Mobile Number</label>
-                  <input type="tel" class="form-input" id="mobile">
+                  <input type="tel" class="form-input" (change)="changeField($event,'mobile')" id="mobile">
               </div>
               <div class="form-input-div">
                   <label for="gender" class="form-label">Gender</label>
-                  <select class="form-input" id="gender">
+                  <select class="form-input" id="gender" (change)="changeField($event,'gender')">
                       <option value="M">Male</option>
                       <option value="F">Female</option>
                       <option value="O">Others</option>
@@ -42,30 +35,9 @@
               </div>
               <div class="form-input-div">
                   <label for="country" class="form-label">Country</label>
-                  <input type="text" class="form-input" id="country">
-              </div>
-              <div class="form-input-div">
-                  <label for="facebook" class="form-label">Facebook</label>
-                  <input type="url" class="form-input" id="facebook">
-              </div>
-              <div class="form-input-div">
-                  <label for="instagram" class="form-label">Instagram</label>
-                  <input type="url" class="form-input" id="instagram">
-              </div>
-              <div class="form-input-div">
-                  <label for="twitter" class="form-label">Twitter</label>
-                  <input type="url" class="form-input" id="twitter">
-              </div>
-              <div class="form-input-div">
-                  <label for="youtube" class="form-label">Youtube</label>
-                  <input type="url" class="form-input" id="youtube">
-              </div>
-              <div class="form-input-div">
-                  <label for="languages" class="form-label">Languages Spoken</label>
-                  <input type="text" class="form-input" id="languages">
+                  <input type="text" class="form-input" (change)="changeField($event,'country')" id="country">
               </div>
           </form>
-          <button class="button1"><a href="/home">Submit</a></button>
       </section>
   </main>
   <app-footer></app-footer>

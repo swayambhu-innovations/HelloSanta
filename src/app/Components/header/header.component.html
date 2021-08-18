@@ -1,9 +1,9 @@
 <div class="header">
   <a href="/" class="logo"><img src="assets/logo.svg" alt="Hello Santa"></a>
   <div class="search">
-    <input type="text" placeholder=" Search Anything..." name="search">
+    <input type="text" placeholder=" Search Anything..." name="search" id="searchInput" (change)="presentSearchResult($event)">
     <button>
-      <ion-icon name="search" style="font-size:30px;"></ion-icon>
+      <ion-icon name="search" style="font-size:30px;" ></ion-icon>
     </button>
   </div>
   <div class="headButtons">
@@ -12,7 +12,8 @@
         <img [src]="image" />
       </ion-avatar>
     </button>
-    <button class="onlyIcon" *ngIf="authService.isJustLoggedIn"  (click)="presentCartinfo($event)">
+    <button class="onlyIcon" *ngIf="authService.isJustLoggedIn" (click)="presentCartinfo($event)">
+      <ion-badge style="margin-bottom:4px;" *ngIf="cartItems.length > 0">{{cartItems.length}}</ion-badge>
       <ion-icon name="cart"></ion-icon>
     </button>
     <button class="onlyIcon" *ngIf="authService.isJustLoggedIn">
@@ -58,11 +59,14 @@
       </ul>
       <div class="bottomAvatar">
         <ion-row>
-          <button (click)="authService.SignOut()" *ngIf="authService.isJustLoggedIn">
+          <button *ngIf="authService.isJustLoggedIn">
             <ion-avatar>
               <img [src]="image" />
             </ion-avatar>
           </button>
+          <ion-button (click)="authService.SignOut()" *ngIf="authService.isJustLoggedIn">
+            Log Out
+          </ion-button>
           <ion-button href="./login/" *ngIf="!authService.isJustLoggedIn">
             Log In
           </ion-button>

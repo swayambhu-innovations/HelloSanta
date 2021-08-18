@@ -101,6 +101,8 @@ ion-row{
   margin-top: 5%;
   padding-top: 3%;
   padding-bottom: 3%;
+  max-height: 500px;
+  overflow-y: auto;
 }
 .list{
   padding-left: 2%;
@@ -110,7 +112,7 @@ ion-row{
 .listoptions{
   color: tomato;
   font-size: 13px;
-  color:tomato
+  color:tomato;
 }
 
 #container2 {
@@ -129,6 +131,7 @@ ion-row{
   padding: 1em;
   display: flex;
   flex-wrap: wrap;
+  min-height: 500px;
   justify-content: space-evenly;
   align-items: flex-start;
 }
@@ -139,7 +142,13 @@ ion-row{
   justify-content: space-evenly;
   align-items: flex-start;
 }
-
+ion-spinner{
+  width:70px;
+  height:70px;
+  position: relative;
+  top:calc(250px - 70px);
+  // transform:translateY(-250px)
+}
 @media only screen and (max-width: 600px) {
 .fourthbox{
   margin-top: 50px;

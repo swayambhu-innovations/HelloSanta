@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-cart',
@@ -7,33 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
   screenwidth=window.innerWidth
-  constructor() { }
-
-  ngOnInit() {}
-  orders=[
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"ArtWork Product",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-      "price":"2300",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"ArtWork Product",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-      "price":"2300",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"ArtWork Product",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-      "price":"2300",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"ArtWork Product",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-      "price":"2300",
-    },
-  ]
+  constructor(private afs: AngularFirestore,private authService: AuthService) { }
+  cartItems=[]
+  ngOnInit() {
+    this.afs.collection('users').doc(this.authService.userId).valueChanges().subscribe((doc:any) => {
+      if (doc){
+        console.log('doc data', doc);
+        doc.cartItems.forEach((item:any) => {
+          console.log('item', item)
+          this.afs.collection('products').doc(item.productData).valueChanges().subscribe((doc:any) => {
+            doc['options']=item.extraData;
+            this.cartItems.push(doc);
+          })
+        })
+      } else {
+        console.log('no user data');
+      }
+    })
+  }
 }
