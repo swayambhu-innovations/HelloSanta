@@ -23,6 +23,7 @@ export class SingleproductComponent implements OnInit {
     recommendationProducts=[];
     extrasData:any={};
     priceList={};
+    displayPrice=0;
   constructor(
     private activatedRoute: ActivatedRoute,
     public afs: AngularFirestore,
@@ -71,7 +72,7 @@ export class SingleproductComponent implements OnInit {
     return Math.ceil(x/5)*5;
   }
   calculatePrice(){
-    this.productPrice=this.productData.productPrice;
+    this.productPrice=0;
     for (let key in this.extrasData) {
       let currentValue=0;
       console.log("key",key);
@@ -116,6 +117,7 @@ export class SingleproductComponent implements OnInit {
         console.log(value);
         this.productData=value;
         this.productPrice=value.productPrice;
+        this.displayPrice=value.productPrice;
         this.selectedImage=this.productData.productImages[0].image;
         this.selectedExtraType=this.productData.extraData[0].type;
         this.selectedExtraTitle=this.productData.extraData[0].title;
