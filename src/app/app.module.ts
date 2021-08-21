@@ -55,7 +55,8 @@ import { BlogComponent } from './customerPanel/blog/blog.component';
 import { BuyagainComponent } from './customerPanel/buyagain/buyagain.component';
 import { AccountComponent } from './customerPanel/account/account.component';
 import { SingleproductComponent } from './customerPanel/singleproduct/singleproduct.component';
-import { AngularFireStorageModule } from '@angular/fire/storage'
+import { CustomproductComponent } from './customerPanel/Customproduct/Customproduct.component';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AuthLoginComponent } from './customerPanel/auth-login/auth-login.component';
@@ -100,6 +101,7 @@ import { AddReferralComponent } from './modals/add-referral/add-referral.compone
 import { UserReferralComponent } from './customerPanel/user-referral/user-referral.component';
 import { SearchResultComponent } from './popovers/search-result/search-result.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalenderComponent } from './customerPanel/calender/calender.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -157,6 +159,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BuyagainComponent,
     AccountComponent,
     SingleproductComponent,
+    CustomproductComponent,
     AuthLoginComponent,
     AuthSignUpComponent,
     FeedbackCardComponent,
@@ -186,6 +189,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AddReferralComponent,
     UserReferralComponent,
     SearchResultComponent,
+    CalenderComponent,
   ],
   entryComponents: [],
   imports: [

@@ -1,0 +1,60 @@
+
+.inner-box{
+  height: auto;
+  width: 80vw;
+  font-family: Poppins;
+  text-align: left;
+  font-size: 20px;
+  margin:2.5% 10%;
+  padding: 50px;
+  background: rgba(255, 255, 255, .7);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
+  border-radius: 50px;
+  border: 5px solid #9081FF;
+}
+
+button{
+  background-color: #ADA2FF; /* Green */
+  border-radius: 10px;
+  border: 5px solid #9081FF;
+  color: white;
+  padding: 5px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  cursor: pointer;
+}
+#subject{
+  outline: none;
+  height:400;
+  width: 50vw;
+  margin: 0% 16%;
+  background: rgba(255, 255, 255, .7);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
+  border-radius: 50px;
+  border: 5px solid #9081FF;
+  align-items: center;
+  padding: 20px;
+}
+
+ion-card{
+  height: fit-content;
+  width: 80%;
+  font-family: Poppins;
+  text-align: left;
+  font-size: 20px;
+  padding: 50px;
+  margin: 5% 10%;
+  background: rgba(255, 255, 255, .7);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
+  border-radius: 50px;
+  border: 5px solid #9081FF;
+}
+
+.orderbutton{
+
+}
+ion-content> div {
+  text-align: center;
+}
