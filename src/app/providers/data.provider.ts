@@ -8,5 +8,6 @@ export class DataProvider {
     public accessLevel:number=-1;
     public overlayStatus:string = "Loading...";
     public checkOutdata:any;
+    public shippingData:any;
     public constructor() { }
 }

@@ -28,6 +28,7 @@ export class AddProductModalComponent implements OnInit {
   allCategories = [];
   formCategories = [];
   formSubcategories = [];
+  mainCategorySelected:{}={};
   form: FormGroup;
   productName: FormControl = new FormControl('', [
     Validators.required,
@@ -66,6 +67,14 @@ export class AddProductModalComponent implements OnInit {
   formulaBvalue: FormControl = new FormControl('', [Validators.required]);
   formulaCvalue: FormControl = new FormControl('', [Validators.required]);
   isLoading: boolean = false;
+  changeCategoryType(value,main,type){
+    this.mainCategorySelected[main] = [];
+    console.log(this.mainCategorySelected);
+  }
+  addTocategory(event,index,type){
+    this.mainCategorySelected[type][index] = event.detail.value;
+    console.log(this.mainCategorySelected);
+  }
   customTypeChanged(value, item) {
     console.log(value);
   }

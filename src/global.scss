@@ -56,5 +56,11 @@ input:focus{
 .searchResult .popover-content{
     width:770px;
 }
-
-
+.addProductModal .modal-wrapper{
+    --width:60vw;
+}
+@media screen and (max-width: 500px){
+    .addProductModal .modal-wrapper{
+        --width:100vw;
+    }
+}

@@ -16,6 +16,10 @@ export class PaymentService {
     return window;
   }
 
+  checkShipmentDetail(shipmentId){
+    return this.http.post(environment.cloudFunctions.checkOrderShipment, {shipmentId:shipmentId});
+  }
+  
   createOrder(orderDetails) {
     return this.http.post(environment.cloudFunctions.createOrder, orderDetails);
   }

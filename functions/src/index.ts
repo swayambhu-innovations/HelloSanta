@@ -1,6 +1,6 @@
 const functions = require('firebase-functions');
 const Razorpay = require('razorpay');
-const nodefetch = require('node-fetch');
+
 const admin = require('firebase-admin');
 admin.initializeApp();
 // // Start writing Firebase Functions
@@ -51,69 +51,114 @@ exports.capturePayments = functions.https.onRequest((req: any, res: any) => {
 });
 
 exports.shipOrder = functions.https.onRequest((req: any, res: any) => {
-  let shipCredentials = {
-    email: 'hellosantaapi@gmail.com',
-    password: 'Poiuy@09876',
-  };
-  var date = new Date();
-  var orderDate =
-    date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-  let orderID = req.body.order_id;
-  let pickup_location = '';
-  let company_name = 'Hello Santa';
-  let billing_customer_name = req.body.billing_customer_name;
-  let billing_city = req.body.billing_city;
-  let billing_pincode = req.body.billing_pincode;
-  let billing_state = req.body.billing_state;
-  let billing_country = req.body.billing_country;
-  let billing_email = req.body.billing_email;
-  let billing_phone = req.body.billing_phone;
-  let orderItems = req.body.orderItems;
-  let payment_method = req.body.payment_method;
-  let sub_total = req.body.sub_total;
-  let length = req.body.length;
-  let breadth = req.body.breadth;
-  let height = req.body.height;
-  let weight = req.body.weight;
-  let shiprocketBody = {
-    order_id: orderID,
-    order_date: orderDate,
-    pickup_location: pickup_location,
-    company_name: company_name,
-    billing_customer_name: billing_customer_name,
-    billing_city: billing_city,
-    billing_pincode: billing_pincode,
-    billing_state: billing_state,
-    billing_country: billing_country,
-    billing_email: billing_email,
-    billing_phone: billing_phone,
-    shipping_is_billing:true,
-    order_items: orderItems,
-    payment_method: payment_method,
-    sub_total: sub_total,
-    length: length,
-    breadth: breadth,
-    height: height,
-    weight: weight,
-  }
-  nodefetch('https://apiv2.shiprocket.in/v1/external/auth/login', {
-    body: JSON.stringify(shipCredentials),
-    headers: { 'Content-Type': 'application/json' },
-  }).then((res: any) => { 
-    let token = res.json();
-    nodefetch('https://apiv2.shiprocket.in/v1/external/orders/create/adhoc', {
+  return cors(req, res, () => {
+    console.log('request body', req.body, typeof req.body);
+    var date = new Date();
+    var orderDate =
+      date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    var compliedRes = req.body;
+    let shiprocketBody = {
+      order_id: compliedRes.order_id,
+      order_date: orderDate,
+      pickup_location: 'Primary',
+      company_name: 'Hello Santa',
+      billing_customer_name: compliedRes.billing_customer_name,
+      billing_last_name: compliedRes.billing_last_name,
+      billing_city: compliedRes.billing_city,
+      billing_pincode: compliedRes.billing_pincode,
+      billing_state: compliedRes.billing_state,
+      billing_country: compliedRes.billing_country,
+      billing_email: compliedRes.billing_email,
+      billing_phone: compliedRes.billing_phone,
+      billing_address: compliedRes.billing_address,
+      shipping_is_billing: true,
+      order_items: compliedRes.order_items,
+      payment_method: compliedRes.payment_method,
+      sub_total: compliedRes.sub_total,
+      length: compliedRes.length,
+      breadth: compliedRes.breadth,
+      height: compliedRes.height,
+      weight: compliedRes.weight,
+    };
+    var options = {
       method: 'POST',
-      body: JSON.stringify(shiprocketBody),
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token.token },
-    })
-      .then((res: any) => {
-        res ? res.status(200).send({
-          res: res,
-          req: req.body,
-          body: shiprocketBody,
-        })
-        : res.status(500).send(res)
-      })
-      
+      url: 'https://apiv2.shiprocket.in/v1/external/auth/login',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: 'hellosantaapi@gmail.com',
+        password: 'Poiuy@09876',
+      }),
+    };
+    console.log('shiprocket data', shiprocketBody);
+    request(options, function (error: any, authResponse: any) {
+      if (error) throw new Error(error);
+      var response = JSON.parse(authResponse.body);
+      console.log('authApi', response, typeof response.body);
+      var authApiKey = response.token;
+      console.log('authApiKey', authApiKey);
+      var shipoptions = {
+        method: 'POST',
+        url: 'https://apiv2.shiprocket.in/v1/external/orders/create/adhoc',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + authApiKey,
+        },
+        body: JSON.stringify(shiprocketBody),
+      };
+      request(shipoptions, function (error: any, shipResponse: any) {
+        if (error) throw new Error(error);
+        console.log(shipResponse.body);
+        shipResponse 
+          ? res.status(200).send({
+              res: shipResponse,
+              req: req.body,
+              body:shipResponse.body,
+            })
+          : res.status(500).send(error);
+      });
     });
+  });
 });
+
+exports.checkOrderShipment = functions.https.onRequest((req: any, res: any) => {
+  return cors(req, res, () => {
+    var authOptions = {
+      method: 'POST',
+      url: 'https://apiv2.shiprocket.in/v1/external/auth/login',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: 'hellosantaapi@gmail.com',
+        password: 'Poiuy@09876',
+      }),
+    };
+    request(authOptions, function (error: any, authResponse: any) {
+      if (error) throw new Error(error);
+      var response = JSON.parse(authResponse.body);
+      var options = {
+        'method': 'GET',
+        'url': 'https://apiv2.shiprocket.in/v1/external/shipments/'+req.body.shipmentId,
+        'headers': {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+response.token,
+        }
+      };
+      request(options, function (error:any, response:any) {
+        if (error) throw new Error(error);
+        response 
+          ? res.status(200).send({
+            res: response,
+            req: req.body,
+            body:response.body,
+          })
+        : res.status(500).send(error);
+      });
+    })
+  });
+});
+
+
+

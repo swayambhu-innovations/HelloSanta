@@ -99,6 +99,7 @@ import { AddOfferComponent } from './modals/add-offer/add-offer.component';
 import { AddReferralComponent } from './modals/add-referral/add-referral.component';
 import { UserReferralComponent } from './customerPanel/user-referral/user-referral.component';
 import { SearchResultComponent } from './popovers/search-result/search-result.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -197,6 +198,7 @@ import { SearchResultComponent } from './popovers/search-result/search-result.co
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

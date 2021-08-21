@@ -42,7 +42,6 @@ export class AuthService {
         this.afs.doc(`users/${this.userData.uid}`).valueChanges().subscribe((value:any)=>{
           let level:any = JSON.stringify(value.access.accessLevel);
           if (level=='"Admin"'){
-            
             localStorage.setItem("cache26328",JSON.stringify({"data":"fds7f6d7s8fysd89ffbSDSfydsfu9sdfsdg4t4s4t4"}))
           } else if (level=='"Vendor"'){
             if (value.access.levelData==undefined){
@@ -96,7 +95,7 @@ export class AuthService {
   async presentToast(message,duration?) {
     const toast = await this.toastController.create({
       message: message,
-      duration: 2000
+      duration: duration || 2000,
     });
     toast.present();
   }
@@ -241,18 +240,32 @@ export class AuthService {
       fetch(
         `https://people.googleapis.com/v1/people/${result.additionalUserInfo.profile.id}?personFields=birthdays,genders&access_token=${result.credential.accessToken}`
       ).then(response => {
-        response.json().then((value) => {
+        response.json().then(async (value) => {
           if (value.birthdays!=undefined){
             var date = new Date((
               value.birthdays[0].date.year+
               "-"+value.birthdays[0].date.month+
               "-"+value.birthdays[0].date.day).toString()
             );
-            this.SetUserData({user:result.user,dob:date});
+            await this.afs.collection("users").doc(result.user.uid).ref.get().then((doc)=>{
+              if (!doc.exists){
+                this.SetUserData({
+                  user:result.user,
+                  dob:date,
+                });
+              }
+            });
+            
             console.log(date);
           }else{
             this.presentToast("Oops we don't know your birthday or your gender.");
-            this.SetUserData({user:result.user});
+            await this.afs.collection("users").doc(result.user.uid).ref.get().then((doc)=>{
+              if (!doc.exists){
+                this.SetUserData({
+                  user:result.user,
+                });
+              }
+            });
           }
         });
         // window.alert("Auhtorisation successful ");
@@ -366,8 +379,9 @@ export class AuthService {
     // window.alert("Signing Out")
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      localStorage.removeItem('localItem')
-      this.router.navigate(['Login']);
+      localStorage.removeItem('localUserData')
+      localStorage.removeItem('cache26328');
+      this.router.navigate(['login']);
     })  
   }
 

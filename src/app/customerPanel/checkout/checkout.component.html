@@ -9,7 +9,7 @@
             <div class="product-row">
               <app-wide-product-card *ngFor="let order of orders" [img]="order.productImages[0].image"
                 [orderTitle]="order.productName" [orderDescription]="order.seoDescription"
-                [orderprice]="order.finalPrice"></app-wide-product-card>
+                [orderprice]="order.productPrice"></app-wide-product-card>
             </div>
           </section>
           <section id="orders-table-container">
@@ -25,7 +25,7 @@
               <tbody>
                 <tr *ngFor="let order of orders">
                   <td>{{order.productName}}</td>
-                  <td>{{order.selections.numberSel.title}}</td>
+                  <td>1</td>
                   <td>{{order.productPrice}}</td>
                   <td>{{order.finalPrice}}</td>
                 </tr>
@@ -48,9 +48,15 @@
               <form [formGroup]="form" (ngSubmit)="proceedToPay($event)" method="POST">
                 <ion-item>
                   <ion-label position="floating">
-                    Your Full Name
+                    Your First Name
                   </ion-label>
-                  <ion-input type="text" placeholder="Your Name" formControlName="fullName" required></ion-input>
+                  <ion-input type="text" placeholder="Your Name" formControlName="firstName" required></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">
+                    Your Last Name
+                  </ion-label>
+                  <ion-input type="text" placeholder="Your Name" formControlName="lastName" required></ion-input>
                 </ion-item>
                 <ion-item>
                   <ion-label position="floating">

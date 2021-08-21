@@ -15,6 +15,7 @@
         <ion-list>
           <ion-item *ngFor="let category of allCategories">
             <ion-label>{{category}}</ion-label>
+            <button (click)="deleteCategory(category)"><ion-icon slot="end" name="trash-bin"></ion-icon></button>
           </ion-item>
         </ion-list>
       </ion-card>
@@ -31,6 +32,7 @@
         <ion-list>
           <ion-item *ngFor="let category of allSubCategories">
             <ion-label>{{category}}</ion-label>
+            <button (click)="deleteSubCategory(category)"><ion-icon slot="end" name="trash-bin"></ion-icon></button>
           </ion-item>
         </ion-list>
       </ion-card>

@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataProvider } from 'src/app/providers/data.provider';
 import { AuthService } from 'src/app/services/auth.service';
 import { PaymentService } from 'src/app/services/payment.service';
@@ -23,10 +24,12 @@ export class CheckoutComponent implements OnInit {
     private paymentService: PaymentService,
     private changeRef: ChangeDetectorRef,
     private authService: AuthService,
-    private formbuilder: FormBuilder
+    private formbuilder: FormBuilder,
+    private router: Router,
   ) {
     this.form = this.formbuilder.group({
-      fullName: this.fullName,
+      firstName: this.firstName,
+      lastName: this.lastName,
       email: this.email,
       phoneNumber: this.phoneNumber,
       addressLine1: this.addressLine1,
@@ -37,7 +40,12 @@ export class CheckoutComponent implements OnInit {
     });
   }
   form: FormGroup;
-  fullName: FormControl = new FormControl('', [
+  firstName: FormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(5),
+    Validators.pattern('[a-zA-Z ]*'),
+  ]);
+  lastName: FormControl = new FormControl('', [
     Validators.required,
     Validators.minLength(5),
     Validators.pattern('[a-zA-Z ]*'),
@@ -84,10 +92,19 @@ export class CheckoutComponent implements OnInit {
   WindowRef: any;
   processingPayment: boolean;
   paymentResponse: any = {};
+  orderItems = [];
 
   get grandTotal(): number {
     var total = 0;
     this.orders.forEach((order) => {
+      total += order.productPrice;
+    });
+    return total;
+  }
+  get grandHeight():number{
+    var total = 0;
+    this.orders.forEach((order) => {
+      
       total += order.finalPrice;
     });
     return total;
@@ -97,8 +114,14 @@ export class CheckoutComponent implements OnInit {
       var docRef = this.afs.collection('products').ref.doc(prod.productData);
       docRef.get().then((data) => {
         if (data.exists) {
-          console.log('Document data:', data.data());
-          let dat = data.data();
+          console.log('Document data:', data  );
+          let dat:any = data.data();
+          this.orderItems.push({
+            name:dat.productName,
+            sku:prod.productData,
+            units:1,
+            selling_price:500,
+          })
           dat['finalPrice'] = prod.price;
           dat['selections'] = prod.extrasData;
           this.orders.push(dat);
@@ -112,6 +135,7 @@ export class CheckoutComponent implements OnInit {
   proceedToPay($event) {
     this.processingPayment = true;
     this.payableAmount = this.grandTotal * 100;
+    console.log('payable amount', this.payableAmount);
     this.initiatePaymentModal($event);
   }
 
@@ -159,7 +183,7 @@ export class CheckoutComponent implements OnInit {
         ref.handlePayment(response);
       },
       prefill: {
-        name: this.form.get('fullName')!.value,
+        name: this.form.get('firstName')!.value.toString()+this.form.get('lastName')!.value.toString(),
         email: this.form.get('email')!.value,
         contact: this.form.get('phoneNumber')!.value,
       },
@@ -180,6 +204,38 @@ export class CheckoutComponent implements OnInit {
           this.paymentResponse = res;
           this.changeRef.detectChanges();
           console.log('success response', this.paymentResponse);
+          let shippingDetail = {
+            order_id: `Order#${Math.floor(Math.random() * 5123435345 * 43) + 10}`,
+            billing_customer_name:this.form.get('firstName')!.value,
+            billing_last_name:this.form.get('lastName')!.value,
+            billing_city: this.form.get('city')!.value,
+            billing_pincode: this.form.get('pincode')!.value,
+            billing_state: this.form.get('state')!.value,
+            billing_country: this.form.get('country')!.value,
+            billing_email: this.form.get('email')!.value,
+            billing_phone: this.form.get('phoneNumber')!.value,
+            billing_address: this.form.get('addressLine1')!.value,
+            order_items:this.orderItems,
+            payment_method: 'Prepaid',
+            sub_total:this.grandTotal,
+            length:1,
+            height:1,
+            weight:1,
+            breadth:1,
+          }
+          console.log('shippingDetail',shippingDetail);
+          this.paymentService.shipOrder(shippingDetail).subscribe((res)=>{
+            console.log('shipping Confirmed Detail',res);
+            this.authService.presentToast('Order Placed Successfully');
+            this.dataProvider.shippingData=res["shipment_id"];
+            this.router.navigate(['trackorder']);
+          },
+          (error)=>{
+            this.paymentResponse= error;
+            this.authService.presentToast(error.message+"\nPlease contact hello santa for to complete your order",7000);
+            console.log('Error occured while completing shipment')
+          }
+          )
         },
         (error) => {
           this.paymentResponse = error;

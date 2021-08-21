@@ -43,7 +43,8 @@ export class SingleproductComponent implements OnInit {
     return randomList;
   }
   buyNow() {
-    if (Object.keys(this.extrasData).length==this.productData.extraData.length-1){
+    if (Object.keys(this.extrasData).length==this.productData.extraData.length-2){
+      alert("Add to cart product price"+this.productPrice.toString());
       this.dataProvider.checkOutdata=[{
         productData:this.productData.productId,
         extrasData:this.extrasData,
@@ -98,6 +99,7 @@ export class SingleproductComponent implements OnInit {
     let gstplatformValue = this.productPrice+((this.productPrice+(this.productPrice/100)*12)/100)*3;
     console.log(gstplatformValue);
     this.productPrice=this.round5(gstplatformValue)
+    console.log("Calculated price ==> ",this.productPrice);
   }
   updateData(event,data){
     let dat = event.detail.value;

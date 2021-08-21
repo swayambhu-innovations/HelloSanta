@@ -22,6 +22,7 @@ export class APProductsComponent implements OnInit {
   async presentModal() {
     const modal = await this.modalController.create({
       component: AddProductModalComponent,
+      cssClass:"addProductModal"
     });
     return await modal.present();
   }
