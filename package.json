@@ -27,6 +27,8 @@
     "@ionic/angular": "^5.5.2",
     "aos": "^2.3.4",
     "firebase": "^8.8.0",
+    "ion2-calendar": "^3.0.0-rc.0",
+    "moment": "^2.29.1",
     "ng-starrating": "^1.0.20",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

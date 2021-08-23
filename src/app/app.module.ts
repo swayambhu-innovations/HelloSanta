@@ -57,8 +57,8 @@ import { AccountComponent } from './customerPanel/account/account.component';
 import { SingleproductComponent } from './customerPanel/singleproduct/singleproduct.component';
 import { CustomproductComponent } from './customerPanel/Customproduct/Customproduct.component';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFireModule } from "@angular/fire";
-import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AuthLoginComponent } from './customerPanel/auth-login/auth-login.component';
 import { AuthSignUpComponent } from './customerPanel/auth-sign-up/auth-sign-up.component';
 import { environment } from 'src/environments/environment';
@@ -76,7 +76,7 @@ import { VPProductCardComponent } from './Components/vpproduct-card/vpproduct-ca
 import { AuthService } from './services/auth.service';
 import { DataProvider } from './providers/data.provider';
 import { LoginGuard } from './guards/login-guard.guard';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { VerifyEmailComponent } from './customerPanel/verify-email/verify-email.component';
 import { SetupModalStepOneComponent } from './modals/setup-modal-step-one/setup-modal-step-one.component';
 import { AddProductModalComponent } from './modals/add-product-modal/add-product-modal.component';
@@ -102,6 +102,10 @@ import { UserReferralComponent } from './customerPanel/user-referral/user-referr
 import { SearchResultComponent } from './popovers/search-result/search-result.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalenderComponent } from './customerPanel/calender/calender.component';
+import { CalendarModule } from 'ion2-calendar';
+import {MatStepperModule} from '@angular/material/stepper';
+import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
@@ -190,6 +194,7 @@ import { CalenderComponent } from './customerPanel/calender/calender.component';
     UserReferralComponent,
     SearchResultComponent,
     CalenderComponent,
+
   ],
   entryComponents: [],
   imports: [
@@ -203,12 +208,20 @@ import { CalenderComponent } from './customerPanel/calender/calender.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     BrowserAnimationsModule,
+    CalendarModule,
+    FormsModule,
+    MatStepperModule,
+    MatIconModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthService,
     DataProvider,
     LoginGuard,
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: { displayDefaultIndicatorType: false }
+    },
   ],
   bootstrap: [AppComponent],
 })

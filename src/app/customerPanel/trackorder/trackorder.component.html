@@ -1,36 +1,30 @@
 <ion-content>
     <app-header></app-header>
-    <div class="uk-panel" >
-      <div class="inner-box" align="center">
-        <h1 class="track">Track Your Orders</h1>
-        <div class="vtl">
-          <div class="event">
-            <strong class="edate">Order Placed</strong>
-            <p class="etxt">Evil Cates invaded planet Doge.</p>
-          </div>
-          <div class="event">
-            <strong class="edate">Order Confirmed</strong>
-            <p class="etxt">Cates ate Doge food.</p>
-          </div>
-          <div class="event">
-            <strong class="edate">Order Shipped</strong>
-            <p class="etxt">Cates took over the Doge beds.</p>
-          </div>
-          <div class="event">
-            <strong class="edate">Order out for delivery</strong>
-            <p class="etxt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse cupiditate voluptate facere iusto quaerat vitae excepturi, accusantium ut aliquam repellat atque nesciunt nostrum similique. Inventore nostrum ut, nobis porro sapiente.
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore error excepturi veniam nemo repellendus, distinctio soluta vitae at sit saepe. Optio eaque quia excepturi adipisci pariatur totam, atque odit fugiat.</p>
-            <div class="uk-position-center-right uk-panel">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d57026.71374978921!2d88.42389600000001!3d26.707028!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDQyJzI1LjMiTiA4OMKwMjUnMjYuMCJF!5e0!3m2!1sen!2sus!4v1627203635781!5m2!1sen!2sus" width="400px" height="300px" style="border:0;border-radius: 25px;padding-right: 50px" allowfullscreen="" loading="lazy" *ngIf="screenwidth>600"></iframe>
-            </div>
-          </div>
-            <div class="event">
-            <strong class="edate">Order Delivered</strong>
-            <p class="etxt">Hoomans to the rescue.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="inner-box">
+  <mat-stepper orientation="vertical" [linear]="isLinear" #stepper >
+    <mat-step label="Order Placed" state="complete" [stepControl]="" #step1>
+      <p>Your order has been Placed</p>
+    </mat-step>
+    <mat-step label="Order Confirmed" state="cancel"  #step2 >
+      <p>Your order has been confirmed</p>
+    </mat-step>
+    <mat-step label="Order Status" state="inprocess" #step3>
+      <p>Your order Status</p>
+    </mat-step>
+    <mat-step label="Order Delivered" state="inprocess" #step4>
+      <p>Your order has been delivered</p>
+    </mat-step>
+    <ng-template matStepperIcon="complete">
+      <mat-icon>check_circle</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="cancel">
+      <mat-icon>cancel</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="inprocess">
+      <mat-icon>published_with_changes</mat-icon>
+    </ng-template>
+  </mat-stepper>
+  </div>
     <app-accordion></app-accordion>
     <app-footer ></app-footer>
 </ion-content>

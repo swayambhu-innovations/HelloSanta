@@ -50,7 +50,7 @@ import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectL
 import { AdminPanelGuard } from './guards/admin-panel.guard';
 import { PendingProductsComponent } from './adminPanel/pending-products/pending-products.component';
 import { UserReferralComponent } from './customerPanel/user-referral/user-referral.component';
-
+import { CalenderComponent } from './customerPanel/calender/calender.component';
 const routes: Routes = [
   {path:'', component:HomeComponent},
   {path:'login', component:AuthLoginComponent},
@@ -61,6 +61,7 @@ const routes: Routes = [
   {path:'wishlist', component:WishlistComponent},
   {path:'orders', component:OrdersComponent},
   {path:'referral', component:UserReferralComponent},
+  {path:'calender', component:CalenderComponent},
   {path:'digitalart', component:DigitalartworksComponent},
   {path:'handmadeart', component:HandmadeartworksComponent},
   {path:'trackorder', component:TrackorderComponent},
@@ -82,6 +83,7 @@ const routes: Routes = [
   {path:'account', component:AccountComponent},
   {path:'product', component:SingleproductComponent},
   {path:'customorder', component:CustomproductComponent},
+
   {path:"verifyEmail", component:VerifyEmailComponent},
   {
     path:"AdminPanel",

@@ -1,10 +1,10 @@
 .inner-box{
     height: auto;
-    width: 80vw;
+    width: 60vw;
     font-family: Poppins;
     text-align: left;
     font-size: 20px;
-    margin:10%;
+    margin:5% 20%;
     padding: 50px;
     background: rgba(255, 255, 255, .7);
     box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
@@ -12,82 +12,13 @@
     border: 5px solid #9081FF;
   }
 
-  .track{
-    font-family: Poppins;
-    text-align: center;
-    padding-top: 20px;
-    padding-bottom: 40px;
-    font-weight: bolder;
-    font-size: 3rem;
-    color: #6D5DE3;
-  }
-  /* (A) "SET" THE TIMELINE CONTAINER */
-  .vtl {
-    /* (A1) RELATIVE POSITION NECESSARY TO PROPERLY POSITION TIMELINE LATER */
-    position: relative;
-    /* (A2) RESERVE MORE SPACE TO THE LEFT FOR THE TIMELINE */
-    padding: 10px 10px 10px 50px;
-    /* (A3) OPTIONAL WIDTH RESTRICTION */
-    max-width: 70vw;
-  }
-  
-  /* (B) DRAW TIMELINE USING ::BEFORE */
-  .vtl::before {
-    /* (B1) DRAW THE TIMELINE */
-    content: '';
-    width: 5px;
-    background-color: #ADA2FF;
-    /* (B2) POSITION IT TO THE LEFT */
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 20px;
-  }
-  
-  /* (C) STYLES FOR THE EVENTS */
-  div.event {
-    padding: 20px 30px;
-    background-color: #eae7fc;
-    position: relative;
-    border-radius: 6px;
-    margin-bottom: 10px;
-  }
-  
-  /* (D) STYLES FOR THE DATE & TEXT */
-  strong.edate {
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #6D5DE3;
-  }
-  p.etxt {
-    margin: 10px 40% 0 0;
-    color: #222;
-  }
-  
-  /* (E) ADD "SPEECH BUBBLE TRIANGLE" TO THE EVENTS */
-  div.event::before {
-    content: '';
-    border: 10px solid transparent;
-    border-right-color: #eae7fc;
-    border-left: 0;
-    position: absolute;
-    top: 20%;
-    left: -10px;
-  }
-  
-  /* (F) ADD A CIRCLE ON THE TIMELINE TO INDICATE AN EVENT */
-  div.event::after {
-    content: '';
-    background: #fff;
-    border: 5px solid #ADA2FF;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    position: absolute;
-    top: 20%;
-    left: -44px;
-  }
-  
+.mat-stepper-vertical {
+  margin-top: 8px;
+}
+
+.mat-form-field {
+  margin-top: 16px;
+}
 
   @media only screen and (max-width: 600px) {
     .inner-box{
@@ -96,50 +27,5 @@
       margin: 5%;
       border: 4px solid #9081FF;
     }
-    .track{
-      font-size: 2rem;
-      padding-bottom: 10px;
-    }
-    .vtl {
-      position: relative;
-      /* (A2) RESERVE MORE SPACE TO THE LEFT FOR THE TIMELINE */
-      padding: 5px 5px 5px 5px;
-      /* (A3) OPTIONAL WIDTH RESTRICTION */
-      max-width:100%;
-    }
-    .vtl::before {
-      top: 0;
-      bottom: 0;
-      left: -9%;
-    }
-    div.event {
-      padding: 10px 5px;
-      background-color: #eae7fc;
-      position: relative;
-      border-radius: 6px;
-      margin-bottom: 20px;
-    }
-    
-    /* (D) STYLES FOR THE DATE & TEXT */
-    strong.edate {
-      font-size: 1.1em;
-      font-weight: bold;
-      color: #6D5DE3;
-    }
-    p.etxt {
-      margin: 10px 5% 0 0;
-      font-size: 0.9rem;
-      color: #222;
-    }
-    div.event::after {
-      content: '';
-      background: #fff;
-      border: 5px solid #ADA2FF;
-      width: 12.5px;
-      height: 12.5px;
-      border-radius: 50%;
-      position: absolute;
-      top: 20%;
-      left: -38px;
-    }
+
   }

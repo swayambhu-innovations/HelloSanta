@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataProvider } from 'src/app/providers/data.provider';
 import { AuthService } from 'src/app/services/auth.service';
 import { PaymentService } from 'src/app/services/payment.service';
-
+import { MatStepper } from '@angular/material/stepper';
 @Component({
   selector: 'app-trackorder',
   templateUrl: './trackorder.component.html',
   styleUrls: ['./trackorder.component.scss'],
 })
 export class TrackorderComponent implements OnInit {
+  // @ViewChild("step1") stepper:MatStepper;
+  // @ViewChild("step2") stepper:MatStepper;
+  // @ViewChild("step3") stepper:MatStepper;
+  // @ViewChild("step4") stepper:MatStepper;
+  orderPlaced:boolean=true;
+  orderConfirmed:boolean=false;
+  orderStatus:any;
+  orderDelivered:boolean;
+  isLinear = false;
   screenwidth=window.innerWidth;
   shippingId:string;
   shipmentOrderData:{}={};
@@ -38,5 +47,8 @@ export class TrackorderComponent implements OnInit {
       console.log(this.shippingId,shipmentID);
     }
   }
-
+// next(){
+//     this.orderConfirmed=true;
+//     stepper.next()
+// }
 }
