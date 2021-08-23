@@ -1,33 +1,11 @@
 <ion-content>
   <app-header ></app-header>
-  <h1 style="font-family: Poppins;text-align: center;padding-top: 80px;font-weight: bolder;font-size: 50px;color: #6D5DE3">Feedback Form</h1>
-  <div class="uk-panel" >
-      <div class="inner-box" align="center">
-        <div align="center">
-          <input type="text" id="fname" name="fname" value="" placeholder="Any problem you faced" style="outline: none;background-color: white;">
-          <hr style="border: 3px solid #6D5DE3;border-radius: 10px;background-color: #6D5DE3;width: 40vw">
-        </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <textarea id="subject" name="subject" placeholder="Any problem you faced" style="height:200px"></textarea>
-        <h1 style="font-family: Poppins;text-align: center;font-weight: bolder;font-size: 30px;color: #6D5DE3">How would you rate the experience?</h1>
-        <div class="rate uk-position-center">
-          <input type="radio" id="star5" name="rate" value="5" />
-          <label for="star5" title="text">5 stars</label>
-          <input type="radio" id="star4" name="rate" value="4" />
-          <label for="star4" title="text">4 stars</label>
-          <input type="radio" id="star3" name="rate" value="3" />
-          <label for="star3" title="text">3 stars</label>
-          <input type="radio" id="star2" name="rate" value="2" />
-          <label for="star2" title="text">2 stars</label>
-          <input type="radio" id="star1" name="rate" value="1" />
-          <label for="star1" title="text">1 star</label>
-        </div>
-        <div align="center"><button>Submit</button></div>
-    </div>
-  </div>
+  <ion-card class="uk-align-center uk-text-center rating">
+    <form action="">
+        <star-rating [value]="0" [totalstars]="5" checkedcolor="goldenrod" [size]="starsize" >
+        </star-rating>
+    </form>
+  </ion-card>
   <app-accordion></app-accordion>
   <app-footer ></app-footer>
 </ion-content>
