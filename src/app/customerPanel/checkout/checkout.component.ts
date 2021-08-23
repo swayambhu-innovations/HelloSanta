@@ -9,9 +9,10 @@ import {
 import { Router } from '@angular/router';
 import { DataProvider } from 'src/app/providers/data.provider';
 import { AuthService } from 'src/app/services/auth.service';
+import { InventoryService } from 'src/app/services/inventory.service';
 import { PaymentService } from 'src/app/services/payment.service';
 import { environment } from 'src/environments/environment';
-
+import firebase from 'firebase/app';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -25,6 +26,7 @@ export class CheckoutComponent implements OnInit {
     private changeRef: ChangeDetectorRef,
     private authService: AuthService,
     private formbuilder: FormBuilder,
+    private inventoryService: InventoryService,
     private router: Router,
   ) {
     this.form = this.formbuilder.group({
@@ -166,6 +168,7 @@ export class CheckoutComponent implements OnInit {
           error
         );
         this.authService.presentToast(error.message);
+        this.processingPayment = false;
       }
     );
   }
@@ -224,11 +227,17 @@ export class CheckoutComponent implements OnInit {
             breadth:1,
           }
           console.log('shippingDetail',shippingDetail);
-          this.paymentService.shipOrder(shippingDetail).subscribe((res)=>{
+          this.paymentService.shipOrder(shippingDetail).subscribe((res: any)=>{
             console.log('shipping Confirmed Detail',res);
             this.authService.presentToast('Order Placed Successfully');
-            this.dataProvider.shippingData=res["shipment_id"];
-            this.router.navigate(['trackorder']);
+            let currentOrder = {
+              shippingDetail:res.body,
+              products:this.orders,
+              orderStage:"live",
+            }
+            this.inventoryService.updateUserData({orders:firebase.firestore.FieldValue.arrayUnion(currentOrder)});
+            this.dataProvider.shippingData=currentOrder.shippingDetail.shipment_id.toString();
+            this.router.navigateByUrl('trackorder?shippingId='+currentOrder.shippingDetail.shipment_id.toString());
           },
           (error)=>{
             this.paymentResponse= error;

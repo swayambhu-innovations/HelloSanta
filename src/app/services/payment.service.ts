@@ -31,4 +31,8 @@ export class PaymentService {
   shipOrder(orderDetails) {
     return this.http.post(environment.cloudFunctions.shipOrder, orderDetails);
   }
+
+  cancelOrderShipment(shipmentIds){
+    return this.http.post(environment.cloudFunctions.cancelOrderShipment, shipmentIds);
+  }
 }

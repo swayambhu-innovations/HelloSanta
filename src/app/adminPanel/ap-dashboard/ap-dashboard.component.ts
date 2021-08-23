@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-ap-dashboard',
@@ -9,74 +11,23 @@ export class APDashboardComponent implements OnInit {
   totalOrders: number=24;
   totalCancelled: number=352;
   totalItems: number=450;
-  growthRate: number=45;  
-  constructor() { } 
-  orders=[
-    {
-      "name":"Complete Painting",
-      'price':"2500",
-      "orderDate":"21-04-21",
-      "status":"Pending",
-      "deliveryDate":"31-04-21"
-    },
-    {
-      "name":"Complete Painting",
-      'price':"2500",
-      "orderDate":"21-04-21",
-      "status":"Pending",
-      "deliveryDate":"31-04-21"
-    },
-    {
-      "name":"Complete Painting",
-      'price':"2500",
-      "orderDate":"21-04-21",
-      "status":"Pending",
-      "deliveryDate":"31-04-21"
-    },
-    {
-      "name":"Complete Painting",
-      'price':"2500",
-      "orderDate":"21-04-21",
-      "status":"Pending",
-      "deliveryDate":"31-04-21"
-    },
-    {
-      "name":"Complete Painting",
-      'price':"2500",
-      "orderDate":"21-04-21",
-      "status":"Pending",
-      "deliveryDate":"31-04-21"
-    },
-    {
-      "name":"Complete Painting",
-      'price':"2500",
-      "orderDate":"21-04-21",
-      "status":"Pending",
-      "deliveryDate":"31-04-21"
-    },
-    {
-      "name":"Complete Painting",
-      'price':"2500",
-      "orderDate":"21-04-21",
-      "status":"Pending",
-      "deliveryDate":"31-04-21"
-    },
-    {
-      "name":"Complete Painting",
-      'price':"2500",
-      "orderDate":"21-04-21",
-      "status":"Pending",
-      "deliveryDate":"31-04-21"
-    },
-    {
-      "name":"Complete Painting",
-      'price':"2500",
-      "orderDate":"21-04-21",
-      "status":"Pending",
-      "deliveryDate":"31-04-21"
-    },
-    
-  ];
-  ngOnInit() {}
-
+  growthRate: number=45; 
+  loading:boolean = true;
+  liveOrders=[];
+  constructor(private afs: AngularFirestore,private authService: AuthService,) { } 
+  ngOnInit() {
+    this.afs.collection('users').doc(this.authService.userId).ref.get().then((value:any)=>{
+      value.data().orders.forEach((order:any)=>{
+        let productsData=[];
+        order.products.forEach((product:any)=>{
+          this.afs.collection('products').doc(product.productId).ref.get().then((productValue:any)=>{
+            productsData.push(productValue.data());
+            this.loading=false;
+          })
+        })
+        this.liveOrders.push({products:productsData,shippingDetail:order.shippingDetail})
+      });
+      console.log(this.liveOrders);
+    })
+  }
 }

@@ -106,7 +106,7 @@ span {
 }
 
 
-input {
+input , .input {
   font-size: 16px;
   line-height: 28px;
   padding: 8px 16px;
@@ -125,6 +125,9 @@ input {
   rgba(0, 0, 0, 0) 0px 0px 0px 0px,
   rgba(0, 0, 0, 0) 0px 0px 0px 0px,
   rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+}
+.input{
+  border-radius: 40px;
 }
 input:active,input:focus{
   border:2px solid #FF6584; 

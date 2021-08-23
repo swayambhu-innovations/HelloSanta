@@ -1,8 +1,6 @@
 const functions = require('firebase-functions');
 const Razorpay = require('razorpay');
 
-const admin = require('firebase-admin');
-admin.initializeApp();
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
 //
@@ -110,11 +108,13 @@ exports.shipOrder = functions.https.onRequest((req: any, res: any) => {
       request(shipoptions, function (error: any, shipResponse: any) {
         if (error) throw new Error(error);
         console.log(shipResponse.body);
+        let shipResponseBody = JSON.parse(shipResponse.body);
+        shipResponseBody['orderDate']=orderDate;
         shipResponse 
           ? res.status(200).send({
               res: shipResponse,
               req: req.body,
-              body:shipResponse.body,
+              body:shipResponseBody,
             })
           : res.status(500).send(error);
       });
@@ -148,6 +148,49 @@ exports.checkOrderShipment = functions.https.onRequest((req: any, res: any) => {
       };
       request(options, function (error:any, response:any) {
         if (error) throw new Error(error);
+        response 
+          ? res.status(200).send({
+            res: response,
+            req: req.body,
+            body:response.body,
+          })
+        : res.status(500).send(error);
+      });
+    })
+  });
+});
+
+exports.cancelOrderShipment = functions.https.onRequest((req: any, res: any) => {
+  return cors(req, res, () => {
+    var authOptions = {
+      method: 'POST',
+      url: 'https://apiv2.shiprocket.in/v1/external/auth/login',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: 'hellosantaapi@gmail.com',
+        password: 'Poiuy@09876',
+      }),
+    };
+    request(authOptions, function (error: any, authResponse: any) {
+      if (error) throw new Error(error);
+      var response = JSON.parse(authResponse.body);
+      console.log('authApi', response, req.body.ids,typeof req.body.ids);
+      var options = {
+        'method': 'POST',
+        'url': 'https://apiv2.shiprocket.in/v1/external/orders/cancel',
+        'headers': {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+response.token,
+        },
+        body:JSON.stringify({
+          ids:req.body.ids,
+        })
+      };
+      request(options, function (error:any, response:any) {
+        if (error) throw new Error(error);
+        console.log("response",response)
         response 
           ? res.status(200).send({
             res: response,

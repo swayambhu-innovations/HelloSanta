@@ -14,6 +14,7 @@ export const environment = {
     capturePayment: 'http://localhost:5001/hellosanta-fc366/us-central1/createOrder',
     shipOrder:'http://localhost:5001/hellosanta-fc366/us-central1/shipOrder',
     checkOrderShipment:'http://localhost:5001/hellosanta-fc366/us-central1/checkOrderShipment',
+    cancelOrderShipment:'http://localhost:5001/hellosanta-fc366/us-central1/cancelOrderShipment',
   },
   RAZORPAY_KEY_ID: 'rzp_test_1GPCwB7UYA1pfl'
 };

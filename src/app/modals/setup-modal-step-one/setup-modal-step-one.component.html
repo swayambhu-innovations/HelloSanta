@@ -2,9 +2,9 @@
   <h1>When is your birthday. <span>To give you offers.</span></h1>
   <ion-item>
     <ion-label>When were you born.</ion-label>
-    <ion-datetime display-format="DD.MM.YYYY" [min]="minimumDate" [max]="maximumDate" #date></ion-datetime>
-    <ion-button (click)="setDOB(date.value)" expand="block" shape="round">
-      Submit
-    </ion-button>
+    <ion-datetime display-format="DD.MM.YYYY" required placeholder="date" [min]="minimumDate" [max]="maximumDate" #date></ion-datetime>
   </ion-item>
+  <ion-button (click)="setDOB(date.value)" expand="block" shape="round">
+    Submit
+  </ion-button>
 </ion-card>

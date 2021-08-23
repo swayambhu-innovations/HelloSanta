@@ -106,6 +106,9 @@ import { CalendarModule } from 'ion2-calendar';
 import {MatStepperModule} from '@angular/material/stepper';
 import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
 import {MatIconModule} from '@angular/material/icon';
+import { ApDashboardOrderItemComponent } from './Components/ap-dashboard-order-item/ap-dashboard-order-item.component';
+import { ShippingDetailPopComponent } from './popovers/shipping-detail-pop/shipping-detail-pop.component';
+import { ApOrdersOptionsItemComponent } from './Components/ap-orders-options-item/ap-orders-options-item.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -195,6 +198,9 @@ import {MatIconModule} from '@angular/material/icon';
     SearchResultComponent,
     CalenderComponent,
 
+    ApDashboardOrderItemComponent,
+    ShippingDetailPopComponent,
+    ApOrdersOptionsItemComponent,
   ],
   entryComponents: [],
   imports: [

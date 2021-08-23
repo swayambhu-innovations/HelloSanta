@@ -3,40 +3,31 @@
   <ion-card>
     <ion-label>Latest Orders</ion-label>
     <ion-list uk-scrollspy="target: > ion-item; cls: uk-animation-fade; delay: 100">
-      <ion-item *ngFor="let order of orders">
-        <ion-label>{{order.name}}</ion-label>
-        <ion-label>{{order.price}}</ion-label>
-        <ion-label>{{order.orderDate}}</ion-label>
-        <ion-chip color="primary" outline="true">
-          <ion-icon name="at-circle-outline"></ion-icon>
-          <ion-label>{{order.status}}</ion-label>
-          <ion-icon name="stats-chart"></ion-icon>
-        </ion-chip>
-        <ion-label>{{order.deliveryDate}}</ion-label>
-        <ion-button color="primary">
-          More Info
-        </ion-button>
-        <ion-button color="danger">
-          Reject Order
-        </ion-button>
-        <ion-button color="warning">
-          Hold Order
-        </ion-button>
-      </ion-item>
+      <div *ngFor="let order of liveOrders">
+        <app-ap-orders-options-item *ngFor="let product of order.products"
+        [name]="product.productName"
+        [price]="product.productPrice"
+        [orderDate]="order.shippingDetail.orderDate"
+        [status]="order.shippingDetail.status_code"
+        [moreInfo]="order.shippingDetail"
+        [productId]="product.productId"
+        >
+        </app-ap-orders-options-item>
+      </div>
     </ion-list>
   </ion-card>
   <ion-card>
     <ion-label>Old Orders</ion-label>
     <ion-list uk-scrollspy="target: > ion-item; cls: uk-animation-fade; delay: 100">
-      <ion-item *ngFor="let order of orders">
-        <ion-label>{{order.name}}</ion-label>
-        <ion-label>{{order.price}}</ion-label>
-        <ion-label>{{order.orderDate}}</ion-label>
-        <ion-label>{{order.deliveryDate}}</ion-label>
-        <ion-button>
-          More Info
-        </ion-button>
-      </ion-item>
+      <div *ngFor="let order of oldOrders">
+        <app-ap-dashboard-order-item *ngFor="let product of order.products"
+        [name]="product.productName" 
+        [price]="product.productPrice"
+        [orderDate]="order.shippingDetail.orderDate"
+        [status]="order.shippingDetail.status"
+        [moreInfo]="order.shippingDetail">
+        </app-ap-dashboard-order-item>
+      </div>
     </ion-list>
   </ion-card>
 </ion-content>
