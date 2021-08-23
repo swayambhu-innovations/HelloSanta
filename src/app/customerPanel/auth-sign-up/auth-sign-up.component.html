@@ -9,8 +9,11 @@
           <img class="avatar" *ngIf="img1" [src]="img1">
           <button (click)="presentModal()">Present Modal</button>
           <form [formGroup]="form" (ngSubmit)="onSubmit()" action="">
-            <input type="file" accept=".jpg,.png,.jpeg" placeholder="Image" required #photo
+            <div class="input">
+              <ion-label>Avatar</ion-label>
+              <input type="file" accept=".jpg,.png,.jpeg" placeholder="Avatar" required #photo
               (change)="fileChange($event)" formControlName="photo">
+            </div>
             <input type="text" autocomplete="name" autofocus placeholder="Full Name" inputmode="text" required
               formControlName="name" #name>
             <input type="text" autocomplete="username" placeholder="Email Address" inputmode="text" required #email
@@ -19,6 +22,7 @@
               formControlName="password">
             <input type="password" autocomplete="password" placeholder="Password" inputmode="text" required
               #confirmPassword formControlName="confirmPassword">
+            <input type="text" placeholder="referralCode" name="referCode" formControlName="referralCode">
             <button [disabled]="isLoading || !form.valid" [ngClass]="isLoading || !form.valid ? 'disabled' : ''"
               class="button" type="submit">Continue</button>
           </form>

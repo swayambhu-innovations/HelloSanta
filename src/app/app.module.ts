@@ -102,6 +102,9 @@ import { UserReferralComponent } from './customerPanel/user-referral/user-referr
 import { SearchResultComponent } from './popovers/search-result/search-result.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalenderComponent } from './customerPanel/calender/calender.component';
+import { ApDashboardOrderItemComponent } from './Components/ap-dashboard-order-item/ap-dashboard-order-item.component';
+import { ShippingDetailPopComponent } from './popovers/shipping-detail-pop/shipping-detail-pop.component';
+import { ApOrdersOptionsItemComponent } from './Components/ap-orders-options-item/ap-orders-options-item.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -190,6 +193,9 @@ import { CalenderComponent } from './customerPanel/calender/calender.component';
     UserReferralComponent,
     SearchResultComponent,
     CalenderComponent,
+    ApDashboardOrderItemComponent,
+    ShippingDetailPopComponent,
+    ApOrdersOptionsItemComponent,
   ],
   entryComponents: [],
   imports: [

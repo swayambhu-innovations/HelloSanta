@@ -10,6 +10,7 @@ export class SmallProductCardComponent implements OnInit {
   @Input() productTitle:string = "ArtWork Product"
   @Input() price:string = "2300"
   @Input() date:string = "22/06/2021"
+  @Input() productId:string = "";
   constructor() { }
 
   ngOnInit(): void {

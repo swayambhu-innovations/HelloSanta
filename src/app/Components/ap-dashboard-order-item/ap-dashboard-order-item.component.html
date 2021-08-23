@@ -1,0 +1,13 @@
+<ion-item >
+  <ion-label>{{name}}</ion-label>
+  <ion-label>{{price}}</ion-label>
+  <ion-label>{{orderDate}}</ion-label>
+  <ion-chip color="primary" outline="true">
+    <ion-icon name="at-circle-outline"></ion-icon>
+    <ion-label>{{status}}</ion-label>
+    <ion-icon name="stats-chart"></ion-icon>
+  </ion-chip>
+  <ion-button shape="round" (click)="presentPopover($event)">
+    More Info
+  </ion-button>
+</ion-item>

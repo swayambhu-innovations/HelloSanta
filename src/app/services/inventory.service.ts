@@ -360,7 +360,7 @@ export class InventoryService {
       .then((data: any) => {
         if (data.exists) {
           if (data.data().referralCode != undefined) {
-            this.authService.presentToast('You have already opted in enabling referral');
+            this.authService.presentToast('You are opted in with old key');
             this.afs
               .collection(`referrals`)
               .doc(this.authService.userId).set({ userId: this.authService.userId, code: data.data().referralCode});
@@ -388,5 +388,14 @@ export class InventoryService {
     .collection(`referrals`)
     .doc(this.authService.userId).set({isOptedIn: false});
     this.authService.presentToast('You have opted out');
+  }
+  getUserInfo(){
+    return this.afs.collection('users').doc(this.authService.userId);
+  }
+  completeReferral(referrerUid,referredUid,code){
+
+  }
+  updateUserData(data){
+    return this.afs.collection('users').doc(this.authService.userId).set(data,{merge:true});
   }
 }

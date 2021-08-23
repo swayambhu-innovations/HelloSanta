@@ -115,7 +115,7 @@ export class AuthService {
       })
   }
   // Sign up with email/password
-  SignUp(email:string, password:string,name:string,photo:string,dob?:Date) {
+  SignUp(email:string, password:string,name:string,photo:string,dob?:Date,referralCode?:string) {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
       .then(async (result:any) => {
         console.log("Starting email verification")
@@ -125,7 +125,7 @@ export class AuthService {
         console.log("Starting file upload ")
         this.uploadFile(photo,result.user.uid).subscribe((imageUrl)=>{
           console.log("Completed the imageurl ",imageUrl)
-          this.SetUserData({user:result.user,displayName:name,photo:imageUrl,dob:dob});
+          this.SetUserData({user:result.user,displayName:name,photo:imageUrl,dob:dob,referralCode:referralCode});
           let today = new Date();
           var currentAccess:access={
             accessLevel:'Customer',
@@ -308,7 +308,8 @@ export class AuthService {
       user,
       displayName,
       photo,
-      dob
+      dob,
+      referralCode,
     }:NamedParameters) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     // console.log("SetUSerData",user,displayName,photo)
@@ -337,7 +338,7 @@ export class AuthService {
         referred:user.referred || [],
         referrer:user.refferrer || [],
         referral:user.referral || {},
-        totalCashback:user.totalCashback || 0.0,
+        totalCashback:51,
         totalOrders: user.totalOrders || 0,
         totalSalesPoints:user.totalSales || 0,
         wishlist: user.wishlist || [],
@@ -363,16 +364,26 @@ export class AuthService {
         referred:user.referred || [],
         referrer:user.refferrer || [],
         referral:user.referral || {},
-        totalCashback:user.totalCashback || 0.0,
+        totalCashback:51,
         totalOrders: user.totalOrders || 0,
         totalSalesPoints:user.totalSales || 0,
         wishlist: user.wishlist || [],
       }
     }
-    return userRef.set(userData, {
+    if (referralCode!=undefined){
+      this.afs.collection('users').valueChanges().subscribe((result:any)=>{
+        result.forEach((val:any)=>{
+          if (referralCode==val.referralCode){
+            this.afs.collection('users').doc(val.uid).update({totalCashback:firebase.firestore.FieldValue.increment(10)})
+          }
+        })
+      })
+    }
+    userRef.set(userData, {
       merge: true
     })
-    
+    this.presentToast("Successfully added user");
+    this.router.navigate([""])
   }
 
   SignOut() {
@@ -390,5 +401,6 @@ interface NamedParameters{
   user:any,
   displayName?: string,
   photo?: string,
-  dob?:Date
+  dob?:Date,
+  referralCode?:string,
 }

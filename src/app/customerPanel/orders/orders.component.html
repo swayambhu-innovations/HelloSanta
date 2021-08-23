@@ -1,13 +1,20 @@
 <ion-content>
-    <app-header></app-header>
-    <main id="container">
-        <app-sidenav activeLinkID="your-orders" *ngIf="screenwidth>600"></app-sidenav>
-        <section id="orders-container">
-          <h2 id="your-cart-title">Your Orders</h2>
-          <div class="product-row" *ngIf="liveOrders.length>0">
-            <app-small-product-card *ngFor="let product of liveOrders" [img]="product.productImage" [productTitle]="product.productName" [price]="product.productPrice" [date]="product.purchaseDate"></app-small-product-card>
-          </div>
-        </section>
-    </main>
-    <app-footer></app-footer>
+  <app-header></app-header>
+  <main id="container">
+    <app-sidenav activeLinkID="your-orders" *ngIf="screenwidth>600"></app-sidenav>
+    <section id="orders-container">
+      <h2 id="your-cart-title">Your Orders</h2>
+      <div class="product-row" *ngIf="!loading">
+        <div *ngFor="let product of liveOrders">
+          <app-small-product-card [img]="orderProducts.productImages[0].image"
+          [productTitle]="orderProducts.productName" [price]="orderProducts.productPrice" [productId]="orderProducts.productId"
+          [date]="product.shippingDetail.orderDate" *ngFor="let orderProducts of product.products"></app-small-product-card>
+        </div>
+      </div>
+      <div *ngIf="loading">
+        <ion-spinner name="crescent"></ion-spinner>
+      </div>
+    </section>
+  </main>
+  <app-footer></app-footer>
 </ion-content>

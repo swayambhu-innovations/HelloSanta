@@ -4,18 +4,31 @@
       <app-sidenav activeLinkID="referrals" *ngIf="screenwidth>600"></app-sidenav>
       <section id="orders-container">
         <h2 id="your-cart-title">Referral</h2>
-        <ion-item>
-          <ion-label>Signup For Referral</ion-label>
-          <ion-toggle color="primary" mode="ios" slot="end" (ionChange)="referralState($event)" #referralToggle></ion-toggle>
-        </ion-item>
-        <ion-list>
-          <ion-item *ngFor="let user of users">
-            <ion-avatar>
-              <img [src]="user.photoURL" />
-            </ion-avatar>
-            <ion-label>{{user.displayName}}</ion-label>
-          </ion-item>
-        </ion-list>
+        <div *ngIf="loading">
+          <ion-card>
+            <form [formGroup]="form">
+              <ion-item>
+                <ion-label>Signup For Referral</ion-label>
+                <ion-toggle color="primary" mode="ios" slot="end" formControlName="userReferral" (ionChange)="referralState($event)" #referralToggle></ion-toggle>
+              </ion-item>
+            </form>
+            <ion-item *ngIf="isReferrer">
+              <ion-icon name="medal" color="primary" slot="start"></ion-icon>
+              <ion-label slot="start">&nbsp;&nbsp;&nbsp;<strong> Code:</strong> &nbsp; {{referCode}}</ion-label>
+              <ion-label slot="end" color="primary" (click)="copyToClipboard('https://hellosanta.in/signup?referCode='+referCode)">https://hellosanta.in/signup?referid={{referCode}}</ion-label>
+            </ion-item>
+          </ion-card>
+          <br>
+          <ion-list *ngIf="isReferrer">
+            <ion-item *ngFor="let user of users">
+              <ion-avatar>
+                <img [src]="user.photoURL" />
+              </ion-avatar>
+              <ion-label>{{user.displayName}}</ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
+        <ion-spinner name="crescent" *ngIf="!loading"></ion-spinner>
       </section>
   </main>
   <app-footer></app-footer>
