@@ -4,6 +4,7 @@ import { DataProvider } from 'src/app/providers/data.provider';
 import { AuthService } from 'src/app/services/auth.service';
 import { PaymentService } from 'src/app/services/payment.service';
 import { MatStepper } from '@angular/material/stepper';
+import { ModalController } from '@ionic/angular';
 @Component({
   selector: 'app-trackorder',
   templateUrl: './trackorder.component.html',
@@ -28,6 +29,7 @@ export class TrackorderComponent implements OnInit {
     private paymentService: PaymentService,
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
+    private modalController: ModalController,
     ) {
     this.activatedRoute.queryParams.subscribe(params => {
       this.shippingId = params['shippingId'];
@@ -46,6 +48,9 @@ export class TrackorderComponent implements OnInit {
       this.authService.presentToast("Page expired please go back to home and reinitiate this page");
       console.log(this.shippingId,shipmentID);
     }
+  }
+  generateInvoice(){
+
   }
 // next(){
 //     this.orderConfirmed=true;

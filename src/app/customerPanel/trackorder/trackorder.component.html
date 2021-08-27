@@ -1,6 +1,9 @@
 <ion-content>
     <app-header></app-header>
   <div class="inner-box">
+    <ion-button (click)="generateInvoice()">
+      Generate Invoice
+    </ion-button>
   <mat-stepper orientation="vertical" [linear]="isLinear" #stepper >
     <mat-step label="Order Placed" state="complete" [stepControl]="" #step1>
       <p>Your order has been Placed</p>
