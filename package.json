@@ -27,9 +27,12 @@
     "@ionic/angular": "^5.5.2",
     "aos": "^2.3.4",
     "firebase": "^8.8.0",
+    "html-to-pdfmake": "^2.3.4",
     "ion2-calendar": "^3.0.0-rc.0",
+    "jspdf": "^2.3.1",
     "moment": "^2.29.1",
     "ng-starrating": "^1.0.20",
+    "pdfmake": "^0.2.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"

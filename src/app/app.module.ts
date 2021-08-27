@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -109,6 +110,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { ApDashboardOrderItemComponent } from './Components/ap-dashboard-order-item/ap-dashboard-order-item.component';
 import { ShippingDetailPopComponent } from './popovers/shipping-detail-pop/shipping-detail-pop.component';
 import { ApOrdersOptionsItemComponent } from './Components/ap-orders-options-item/ap-orders-options-item.component';
+import { CommentCardComponent } from './Components/comment-card/comment-card.component';
+import { MatBadgeModule } from '@angular/material/badge'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -197,7 +200,7 @@ import { ApOrdersOptionsItemComponent } from './Components/ap-orders-options-ite
     UserReferralComponent,
     SearchResultComponent,
     CalenderComponent,
-
+    CommentCardComponent,
     ApDashboardOrderItemComponent,
     ShippingDetailPopComponent,
     ApOrdersOptionsItemComponent,
@@ -218,6 +221,8 @@ import { ApOrdersOptionsItemComponent } from './Components/ap-orders-options-ite
     FormsModule,
     MatStepperModule,
     MatIconModule,
+    MatBadgeModule,
+    AngularFireAnalyticsModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
@@ -226,7 +231,7 @@ import { ApOrdersOptionsItemComponent } from './Components/ap-orders-options-ite
     LoginGuard,
     {
       provide: STEPPER_GLOBAL_OPTIONS,
-      useValue: { displayDefaultIndicatorType: false }
+      useValue: { displayDefaultIndicatorType: false, showError: true }
     },
   ],
   bootstrap: [AppComponent],

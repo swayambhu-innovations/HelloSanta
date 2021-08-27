@@ -4,6 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DataProvider } from 'src/app/providers/data.provider';
 import { AuthService } from 'src/app/services/auth.service';
 import { InventoryService } from 'src/app/services/inventory.service';
+import { AngularFireAnalytics } from '@angular/fire/analytics';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { StarRatingComponent } from 'ng-starrating';
 
 @Component({
   selector: 'app-singleproduct',
@@ -22,6 +25,7 @@ export class SingleproductComponent implements OnInit {
     selectedExtraTitle:string;
     recommendationProducts=[];
     extrasData:any={};
+    comments:any;
     priceList={};
     displayPrice=0;
   constructor(
@@ -30,11 +34,21 @@ export class SingleproductComponent implements OnInit {
     private authService: AuthService,
     private dataProvider: DataProvider,
     private inventoryService: InventoryService,
-    private router: Router,) {
+    private router: Router,
+    private analytics: AngularFireAnalytics,
+    private formbuilder: FormBuilder,) {
     this.activatedRoute.queryParams.subscribe(params => {
         this.productId = params['productId'];
     });
+    this.form=this.formbuilder.group({
+      commentTitle:this.commentTitle,
+      commentBody:this.commentBody,
+    })
   }
+  stars:number=0;
+  form:FormGroup;
+  commentTitle: FormControl = new FormControl('', [Validators.required]);
+  commentBody: FormControl = new FormControl('', [Validators.required]);
   genList(value) {
     let randomList = [];
     for (let i = 1; i < value+1; i++) {
@@ -43,6 +57,7 @@ export class SingleproductComponent implements OnInit {
     return randomList;
   }
   buyNow() {
+    this.analytics.logEvent('buyNow', {productId: this.productId,productName:this.productData.productName});
     if (Object.keys(this.extrasData).length==this.productData.extraData.length-2){
       alert("Add to cart product price"+this.productPrice.toString());
       this.dataProvider.checkOutdata=[{
@@ -54,9 +69,9 @@ export class SingleproductComponent implements OnInit {
     }else{
       this.authService.presentToast('Please select all the extras options.')
     }
-    
   }
   addToCart() {
+    this.analytics.logEvent('addToCart')
     if (Object.keys(this.extrasData).length==this.productData.extraData.length-1){
       let cartItem = {
         productData:this.productData.productId,
@@ -74,45 +89,69 @@ export class SingleproductComponent implements OnInit {
   }
   calculatePrice(){
     this.productPrice=0;
-    for (let key in this.extrasData) {
-      let currentValue=0;
-      console.log("key",key);
-      if (key.startsWith('sizeSel') || key.startsWith('faceInput')){
-        if (this.extrasData['sizeSel']!=undefined && this.extrasData['faceInput']!=undefined){
-          console.log("Calculate formula")
-          let sizeSel = this.extrasData['sizeSel'];
-          let faceCount = this.extrasData['faceInput']
-          let yDash = (100+(faceCount-1)*70)/100;
-          let value = ((((((+sizeSel.sizeInputFactor)*yDash*(+sizeSel.sizeInputHours)*(+sizeSel.sizeInputPPH))+(+sizeSel.sizeInputPrice)+(+sizeSel.sizeInputAddon))*(100+(+sizeSel.sizeInputMargin))*0.01))*1.12)*1.03;
-          console.log("value",value);
-          currentValue=value;
-        }else{
-          this.authService.presentToast('Please select faces in the image and also select size of the picture.')
+    for (let i of Object.keys(this.extrasData)){
+      let vldCounter= 0;
+      this.productData.permutations.forEach((val)=>{
+        val.permutations.forEach((perm)=>{
+          if (perm.sectionTitle==i && perm.title == this.extrasData[i].title){
+            vldCounter++;
+          }
+        })
+        if (vldCounter==this.productData.extraData.length){
+          this.productPrice=val.price;
+          vldCounter=0;
         }
-      } else {
-        // console.log(key,this.extrasData[key].priceAddon);
-        currentValue=+this.extrasData[key].priceAddon;
-      }
-      this.productPrice+=currentValue;
+      })
     }
-    console.log(this.productPrice);
-    let gstplatformValue = this.productPrice+((this.productPrice+(this.productPrice/100)*12)/100)*3;
-    console.log(gstplatformValue);
-    this.productPrice=this.round5(gstplatformValue)
-    console.log("Calculated price ==> ",this.productPrice);
   }
-  updateData(event,data){
-    let dat = event.detail.value;
-    if (data=='sizeSel'){
-      this.extrasData[data]=dat;
-    } else{
-      // this.productPrice+=+event.detail.value.priceAddon;
-      this.extrasData[data]=event.detail.value;
+  updateData(event,relative,sectionTitle){
+    console.log(event); 
+    this.extrasData[sectionTitle]=event.detail.value;
+    let relatives=[];
+    if (relative){
+      let msgString="";
+      this.productData.extraData.forEach((val:any)=>{
+        if(val.isRelative==relative){
+          val.values.forEach((options)=>{
+            relatives.push(options);
+          })
+        }
+      })
+      let checked=[]
+      relatives.forEach((val)=>{
+        console.log("rela",val,sectionTitle)
+        if (!relatives.includes(this.extrasData[val.sectionTitle]) && !checked.includes(val.sectionTitle)){
+          msgString+=" "+val.sectionTitle+","
+          checked.push(val.sectionTitle)
+        }
+      })
+      if (msgString.length>0){
+        this.authService.presentToast("You need to select"+msgString+" to get final price");
+      }else {
+        this.calculatePrice();
+      }
+    } else {
+      this.extrasData[sectionTitle]=event.detail.value;
+      this.calculatePrice();
     }
-    this.calculatePrice()
-    // this.extrasData[data]=event.detail.value;
-    console.log(this.extrasData);
-    
+  }
+  changeRatingStar($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}){
+    this.stars=$event.newValue;
+  }
+  addComment(){
+    this.analytics.logEvent('addComment');
+    let today = new Date();
+    let commentData = {
+      commentTitle: this.form.get('commentTitle').value,
+      commentBody: this.form.get('commentBody').value,
+      userId:this.authService.userId,
+      userName:this.authService.getUserName(),
+      userImage:this.authService.getUserPhoto(),
+      commentDate:today.toDateString(),
+      stars:this.stars,
+    }
+    console.log(commentData);
+    this.inventoryService.addComment(commentData,this.productId);
   }
   ngOnInit() {
     this.afs.collection('products').doc(this.productId).valueChanges().subscribe((value:any)=>{
@@ -122,9 +161,10 @@ export class SingleproductComponent implements OnInit {
         this.displayPrice=value.productPrice;
         this.selectedImage=this.productData.productImages[0].image;
         this.selectedExtraType=this.productData.extraData[0].type;
-        this.selectedExtraTitle=this.productData.extraData[0].title;
+        this.selectedExtraTitle=this.productData.extraData[0].sectionTitle;
         this.category=this.productData.productCategory;
         this.subcategory=this.productData.productSubcategory;
+        this.comments=value.comments;
     })
     this.afs
         .collection('products').valueChanges().subscribe((proddata:any)=>{

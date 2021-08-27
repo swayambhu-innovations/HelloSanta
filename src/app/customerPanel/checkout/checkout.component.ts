@@ -13,6 +13,7 @@ import { InventoryService } from 'src/app/services/inventory.service';
 import { PaymentService } from 'src/app/services/payment.service';
 import { environment } from 'src/environments/environment';
 import firebase from 'firebase/app';
+import { AngularFireAnalytics } from '@angular/fire/analytics';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -28,6 +29,7 @@ export class CheckoutComponent implements OnInit {
     private formbuilder: FormBuilder,
     private inventoryService: InventoryService,
     private router: Router,
+    private analytics: AngularFireAnalytics,
   ) {
     this.form = this.formbuilder.group({
       firstName: this.firstName,
@@ -139,6 +141,7 @@ export class CheckoutComponent implements OnInit {
     this.payableAmount = this.grandTotal * 100;
     console.log('payable amount', this.payableAmount);
     this.initiatePaymentModal($event);
+    this.analytics.logEvent('Checkout');
   }
 
   initiatePaymentModal(event) {

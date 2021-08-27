@@ -13,8 +13,10 @@
       </ion-avatar>
     </button>
     <button class="onlyIcon" *ngIf="authService.isJustLoggedIn" (click)="presentCartinfo($event)">
-      <ion-badge style="margin-bottom:4px;" *ngIf="cartItems.length > 0">{{cartItems.length}}</ion-badge>
-      <ion-icon name="cart"></ion-icon>
+      <span *ngIf="cartItems.length > 0" [matBadge]="cartItems.length" matBadgePosition='above after' matBadgeColor="warn" matBadgeOverlap="false">
+        <ion-icon name="cart"></ion-icon>
+      </span>
+      <ion-icon *ngIf="cartItems.length <= 0" name="cart"></ion-icon>
     </button>
     <button class="onlyIcon" *ngIf="authService.isJustLoggedIn">
       <ion-icon name="calendar-number"></ion-icon>

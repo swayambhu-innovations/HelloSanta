@@ -1,0 +1,17 @@
+<ion-card>
+  <ion-item>
+    <ion-avatar>
+      <img [src]="image" />
+    </ion-avatar>
+    <ion-label>{{username}}</ion-label>
+  </ion-item>
+  <star-rating class="uk-align-center uk-text-center uk-margin-small-top" [value]="stars" [totalstars]="5" checkedcolor="goldenrod" [readonly]="true" size="25px" >
+  </star-rating>
+  <ion-card-header>
+    <ion-card-subtitle>{{title}}</ion-card-subtitle>
+    <ion-card-title>{{commentDate}}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    {{body}}
+  </ion-card-content>
+</ion-card>

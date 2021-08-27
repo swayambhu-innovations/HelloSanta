@@ -108,7 +108,10 @@ li > button > ion-icon {
   color:rgb(41, 41, 41);
   padding-left: 0px;
 }
-
+ion-icon[name="cart"]{
+  color:white;
+  font-size:30px;
+}
 ion-icon[name="close"]{
   color:var(--ion-color-primary);
   font-size:30px;

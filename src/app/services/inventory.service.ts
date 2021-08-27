@@ -398,4 +398,9 @@ export class InventoryService {
   updateUserData(data){
     return this.afs.collection('users').doc(this.authService.userId).set(data,{merge:true});
   }
+  addComment(comment,productId){
+    this.afs.collection('products').doc(productId).update({
+      comments:firebase.firestore.FieldValue.arrayUnion(comment),
+    })
+  }
 }
