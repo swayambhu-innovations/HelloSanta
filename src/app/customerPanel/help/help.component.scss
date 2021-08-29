@@ -84,7 +84,21 @@
   width: 500px;
   height: auto;
 }
-
+ion-card{
+  margin: 0 auto;
+  padding:20px;
+  width:fit-content;
+  box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
+  border-radius: 25px;
+  border: 5px solid #9081FF;
+}
+ion-item{
+  border-bottom: 2px solid #6D5DE3;
+}
+ion-textarea{
+  border: 2px solid #9081FF;
+  border-radius: 15px;
+}
 @media only screen and (max-width: 1366px) {
   .inner-box3{
     height: auto;

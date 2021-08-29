@@ -1,59 +1,37 @@
-
 <ion-content>
-  <app-header ></app-header>
+  <app-header></app-header>
   <h1 style="font-size: 3em; text-align: center;">Your events panel</h1>
-  <div class="uk-flex uk-flex-center">
-    <div class="uk-card uk-card-default uk-card-body card1">Item 1
-      <ul>
-        <li>Item 1</li>
-        <li>Item 1</li>
-        <li>Item 1</li>
-        <li>Item 1</li>
-        <li>Item 1</li>
-      </ul>
-    </div>
-    <div class="uk-card uk-card-default uk-card-body uk-margin-left">
-      Item 1
-      <ul>
-        <li>Item 1</li>
-        <li>Item 1</li>
-        <li>Item 1</li>
-        <li>Item 1</li>
-        <li>Item 1</li>
-      </ul>
-    </div>
-    <div class="uk-card uk-card-default uk-card-body uk-margin-left">Item 3
-      Item 1
-      <ul>
-        <li>Item 1</li>
-        <li>Item 1</li>
-        <li>Item 1</li>
-        <li>Item 1</li>
-        <li>Item 1</li>
-      </ul>
-    </div>
-    <div class="uk-card uk-card-default uk-card-body uk-margin-left">Item 4
-      Item 1
-      <ul>
-        <li>Item 1</li>
-        <li>Item 1</li>
-        <li>Item 1</li>
-        <li>Item 1</li>
-        <li>Item 1</li>
-      </ul>
-    </div>
-    <div class="uk-card uk-card-default uk-card-body uk-margin-left">Item 5
-      Item 1
-      <ul>
-        <li>Item 1</li>
-        <li>Item 1</li>
-        <li>Item 1</li>
-        <li>Item 1</li>
-        <li>Item 1</li>
-      </ul>
-    </div>
-  </div>
-  <ion-button expand="block" (click)="openCalendar()">Open Calendar</ion-button>
-<app-accordion></app-accordion>
-  <app-footer ></app-footer>
+  <ion-card>
+    <ion-item>
+      <ion-input type="text" placeholder="Event Name" #eventName></ion-input>
+      <ion-select value="birthday" multiple="false" placeholder="Type" #eventType>
+        <ion-select-option value="birthday">Birthday</ion-select-option>
+        <ion-select-option value="Anniversary">Anneversary</ion-select-option>
+      </ion-select>
+      <ion-item>
+        <ion-label>Event Date</ion-label>
+        <ion-datetime display-format="DD.MM.YYYY" #eventDate></ion-datetime>
+      </ion-item>
+      <button (click)="addEvent()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-item>
+    <ion-list>
+      <ion-item *ngFor="let event of events">
+        <ion-label>{{event.name}}</ion-label>
+        <ion-badge color="primary" mode="ios">{{event.type}}</ion-badge>
+        <ion-chip color="primary" mode="md" outline="true">
+          <ion-label>{{event.date}}</ion-label>
+        </ion-chip>
+        <button>
+          <ion-icon name="create"></ion-icon>
+        </button>
+        <button>
+          <ion-icon name="trash-bin"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  <app-accordion></app-accordion>
+  <app-footer></app-footer>
 </ion-content>

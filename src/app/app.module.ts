@@ -114,6 +114,7 @@ import { CommentCardComponent } from './Components/comment-card/comment-card.com
 import { MatBadgeModule } from '@angular/material/badge'; 
 import { AddCommentComponent } from './popovers/add-comment/add-comment.component';
 import { CategoryProductsComponent } from './customerPanel/category-products/category-products.component';
+import { InvoiceDetailComponent } from './modals/invoice-detail/invoice-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -208,6 +209,7 @@ import { CategoryProductsComponent } from './customerPanel/category-products/cat
     ApOrdersOptionsItemComponent,
     AddCommentComponent,
     CategoryProductsComponent,
+    InvoiceDetailComponent,
   ],
   entryComponents: [],
   imports: [

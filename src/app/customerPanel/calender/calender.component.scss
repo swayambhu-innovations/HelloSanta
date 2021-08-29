@@ -1,5 +1,22 @@
-.uk-card{
-    width:400px;
-    height:500px;
-    display:block;
+ion-card{
+    box-shadow: 5px 10px 20px rgba(143, 95, 255, 0.4);
+    border-radius: 20px;
+    margin: 0 auto;
+    width:fit-content;
+    min-width: 600px;
+}
+ion-icon{
+    margin-left: 5px;
+}
+ion-icon[name="create"]{
+    color:var(--ion-color-primary);
+    font-size: 30px;
+}
+ion-icon[name="trash-bin"]{
+    color:var(--ion-color-danger);
+    font-size: 30px;
+}
+ion-icon[name="add"]{
+    color:var(--ion-color-success);
+    font-size: 30px;
 }

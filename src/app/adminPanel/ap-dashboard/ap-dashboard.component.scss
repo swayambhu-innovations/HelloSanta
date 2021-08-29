@@ -55,7 +55,11 @@ ion-content > ion-card > ion-list > ion-item > ion-chip {
 ion-content > ion-card > ion-list > ion-item > ion-chip:hover {
     background-color: rgba(149, 104, 255, 0.144);
 }
-
+ion-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
 
 
 

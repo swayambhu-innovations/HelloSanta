@@ -9,3 +9,10 @@ ion-spinner{
 ion-content{
     height:200px;
 }
+ion-col > img {
+    width: auto;
+    height: 180px;
+    position: relative;
+    left:50%;
+    transform:translateX(-50%);
+}

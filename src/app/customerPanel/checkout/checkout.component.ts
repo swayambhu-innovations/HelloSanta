@@ -237,6 +237,8 @@ export class CheckoutComponent implements OnInit {
               shippingDetail:res.body,
               products:this.orders,
               orderStage:"live",
+              orderId:res.body.order_id,
+              shipment_id:res.body.shipment_id,
             }
             this.inventoryService.updateUserData({orders:firebase.firestore.FieldValue.arrayUnion(currentOrder)});
             this.dataProvider.shippingData=currentOrder.shippingDetail.shipment_id.toString();

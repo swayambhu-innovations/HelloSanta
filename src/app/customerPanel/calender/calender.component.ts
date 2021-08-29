@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonDatetime, IonInput, IonSelect, ModalController } from '@ionic/angular';
 import {
   CalendarModal,
   CalendarModalOptions,
@@ -12,9 +12,22 @@ import {
   styleUrls: ['./calender.component.scss'],
 })
 export class CalenderComponent{
-
+  @ViewChild('eventName') eventName: IonInput;
+  @ViewChild('eventType') eventType: IonSelect;
+  @ViewChild('eventDate') eventDate: IonDatetime;
+  events:any=[
+    {
+      "name":"hallo",
+      "date":"21-03-21",
+      "type":"Birthday",
+    }
+  ];
   constructor(public modalCtrl: ModalController) { }
-
+  addEvent(){
+    console.log("date",this.eventDate)
+    console.log("type",this.eventType)
+    console.log("eventName",this.eventName)
+  }
   async  openCalendar() {
     const options: CalendarModalOptions = {
       title: 'BASIC'

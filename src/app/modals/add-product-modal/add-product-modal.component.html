@@ -5,8 +5,7 @@
   <div *ngIf="showProgress">
     <ion-progress-bar [color]="progressColor" [value]="progressValue" [type]="progressType"></ion-progress-bar>
   </div>
-  <!-- TODO [linear]="true" -->
-  <mat-stepper #stepper [linear]="false">
+  <mat-stepper #stepper [linear]="true">
     <mat-step [completed]="basicDetail.valid" [stepControl]="basicDetail" [editable]="true">
       <form [formGroup]="basicDetail" (ngSubmit)="addBasicDetailProduct(stepper)" method="POST">
         <ng-template matStepLabel>Product Basic Details</ng-template>
@@ -120,8 +119,7 @@
         </ion-row>
       </form>
     </mat-step>
-    <!-- TODO [stepControl]="customisationsForm" -->
-    <mat-step  [completed]="customisationsForm.valid"  [editable]="true">
+    <mat-step  [completed]="customisationsForm.valid"  [stepControl]="customisationsForm" [editable]="true">
       <ng-template matStepLabel>Product Customisations</ng-template>
       <form [formGroup]="customisationsForm" (ngSubmit)="customisationSubmit(stepper)">
         <ion-item>
@@ -264,7 +262,6 @@
           </ion-item>
         </ion-card>
         <ion-item>
-          <!-- TODO && !basicDetail.valid -->
           <ion-button type="submit">
             Next
           </ion-button>

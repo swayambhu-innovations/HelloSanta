@@ -62,7 +62,7 @@ const routes: Routes = [
   {path:'wishlist', component:WishlistComponent},
   {path:'orders', component:OrdersComponent},
   {path:'referral', component:UserReferralComponent},
-  {path:'calender', component:CalenderComponent},
+  {path:'calendar', component:CalenderComponent},
   {path:'digitalart', component:DigitalartworksComponent},
   {path:'handmadeart', component:HandmadeartworksComponent},
   {path:'trackorder', component:TrackorderComponent},

@@ -1,26 +1,30 @@
 <div class="header" id="">
   <a href="/" class="logo"><img src="assets/logo.svg" alt="Hello Santa"></a>
   <div class="search">
-    <input type="text" placeholder=" Search Anything..." name="search" id="searchInput" (change)="presentSearchResult($event)">
+    <input type="text" placeholder=" Search Anything..." name="search" id="searchInput"
+      (change)="presentSearchResult($event)">
     <button>
-      <ion-icon name="search" style="font-size:30px;" ></ion-icon>
+      <ion-icon name="search" style="font-size:30px;"></ion-icon>
     </button>
   </div>
   <div class="headButtons">
-    <button *ngIf="authService.isJustLoggedIn" (click)="presentUserinfo($event)" >
+    <button *ngIf="authService.isJustLoggedIn" (click)="presentUserinfo($event)">
       <ion-avatar>
         <img [src]="image" />
       </ion-avatar>
     </button>
     <button class="onlyIcon" *ngIf="authService.isJustLoggedIn" (click)="presentCartinfo($event)">
-      <span *ngIf="cartItems.length > 0" [matBadge]="cartItems.length" matBadgePosition='above after' matBadgeColor="warn" matBadgeOverlap="false">
+      <span *ngIf="cartItems.length > 0" [matBadge]="cartItems.length" matBadgePosition='above after'
+        matBadgeColor="warn" matBadgeOverlap="false">
         <ion-icon name="cart"></ion-icon>
       </span>
       <ion-icon *ngIf="cartItems.length <= 0" name="cart"></ion-icon>
     </button>
-    <button class="onlyIcon" *ngIf="authService.isJustLoggedIn">
-      <ion-icon name="calendar-number"></ion-icon>
-    </button>
+    <a href="./calendar">
+      <button class="onlyIcon" *ngIf="authService.isJustLoggedIn">
+        <ion-icon name="calendar-number"></ion-icon>
+      </button>
+    </a>
     <button class="onlyIcon" *ngIf="authService.isJustLoggedIn">
       <ion-icon name="wallet"></ion-icon>
     </button>
@@ -35,7 +39,9 @@
 <div class="links">
   <ul class="nav">
     <div>
-      <li><button uk-toggle="target: #offcanvas-push"><ion-icon name="menu"></ion-icon></button></li>
+      <li><button uk-toggle="target: #offcanvas-push">
+          <ion-icon name="menu"></ion-icon>
+        </button></li>
     </div>
     <li><a href="/">Home</a></li>
     <li><a href="/handmadeart/">Handmade Products</a></li>
@@ -49,34 +55,37 @@
 </div>
 <div id="offcanvas-push" uk-offcanvas="overlay: true">
   <div class="uk-offcanvas-bar">
-      <button class="uk-offcanvas-close" type="button" ><ion-icon name="close"></ion-icon></button>
-      <ul>
-        <li *ngIf="!this.authService.isJustLoggedIn"><a href="/login">Login</a></li>
-        <li><a href="">Account</a></li>
-        <li *ngIf="this.authService.getCurrenAccessLevel == 'Vendor'"><a href="/VendorPanel/Dashboard">Vendor Panel</a></li>
-        <li *ngIf="this.authService.getCurrenAccessLevel == 'Admin'"><a href="/AdminPanel/Dashboard">Admin Panel</a></li>
-        <li><a href="">Contact Us</a></li>
-        <li><a href="">Products</a></li>
-        <li><a href="">Cart</a></li>
-      </ul>
-      <div class="bottomAvatar">
-        <ion-row>
-          <button *ngIf="authService.isJustLoggedIn">
-            <ion-avatar>
-              <img [src]="image" />
-            </ion-avatar>
-          </button>
-          <ion-button (click)="authService.SignOut()" *ngIf="authService.isJustLoggedIn">
-            Log Out
-          </ion-button>
-          <ion-button href="./login/" *ngIf="!authService.isJustLoggedIn">
-            Log In
-          </ion-button>
-          <ion-button href="./signup/" *ngIf="!authService.isJustLoggedIn">
-            Register
-          </ion-button>
-        </ion-row>
-      </div>
+    <button class="uk-offcanvas-close" type="button">
+      <ion-icon name="close"></ion-icon>
+    </button>
+    <ul>
+      <li *ngIf="!this.authService.isJustLoggedIn"><a href="/login">Login</a></li>
+      <li><a href="">Account</a></li>
+      <li *ngIf="this.authService.getCurrenAccessLevel == 'Vendor'"><a href="/VendorPanel/Dashboard">Vendor Panel</a>
+      </li>
+      <li *ngIf="this.authService.getCurrenAccessLevel == 'Admin'"><a href="/AdminPanel/Dashboard">Admin Panel</a></li>
+      <li><a href="">Contact Us</a></li>
+      <li><a href="">Products</a></li>
+      <li><a href="">Cart</a></li>
+    </ul>
+    <div class="bottomAvatar">
+      <ion-row>
+        <button *ngIf="authService.isJustLoggedIn">
+          <ion-avatar>
+            <img [src]="image" />
+          </ion-avatar>
+        </button>
+        <ion-button (click)="authService.SignOut()" *ngIf="authService.isJustLoggedIn">
+          Log Out
+        </ion-button>
+        <ion-button href="./login/" *ngIf="!authService.isJustLoggedIn">
+          Log In
+        </ion-button>
+        <ion-button href="./signup/" *ngIf="!authService.isJustLoggedIn">
+          Register
+        </ion-button>
+      </ion-row>
+    </div>
   </div>
 </div>
 <div class="headerMobile">
