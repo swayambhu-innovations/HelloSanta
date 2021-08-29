@@ -120,6 +120,9 @@
               </form>
             </ion-list>
           </ion-card>
+          <ion-button (click)="presentInvoice()" expand="full" fill="clear" slot="start">
+            Invoice&nbsp;&nbsp;&nbsp;<ion-icon name="filter-circle"></ion-icon>
+          </ion-button>
           <input type="checkbox" id="vehicle1" name="vehicle1" value="emailCopy">
           <label for="vehicle1">Send a copy of invoice to email after payment.</label><br>
         </main>

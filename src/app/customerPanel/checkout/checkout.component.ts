@@ -1,5 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { ModalController } from '@ionic/angular';
+import { InvoiceDetailComponent } from 'src/app/modals/invoice-detail/invoice-detail.component';
 import {
   FormBuilder,
   FormControl,
@@ -30,6 +32,7 @@ export class CheckoutComponent implements OnInit {
     private inventoryService: InventoryService,
     private router: Router,
     private analytics: AngularFireAnalytics,
+    public modalController: ModalController,
   ) {
     this.form = this.formbuilder.group({
       firstName: this.firstName,
@@ -97,6 +100,13 @@ export class CheckoutComponent implements OnInit {
   processingPayment: boolean;
   paymentResponse: any = {};
   orderItems = [];
+
+  async presentInvoice() {
+    const modal = await this.modalController.create({
+      component: InvoiceDetailComponent,
+    });
+    return await modal.present();
+  }
 
   get grandTotal(): number {
     var total = 0;
