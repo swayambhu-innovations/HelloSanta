@@ -1,6 +1,10 @@
 <ion-content>
     <app-header></app-header>
-    <ion-spinner *ngIf="!productData"></ion-spinner>
+    <div *ngIf="productData==undefined">
+        <div>
+            <ion-spinner></ion-spinner>
+        </div>
+    </div>
     <main id="container" *ngIf="productData">
         <section id="product">
             <div id="product-images-and-details">
@@ -15,16 +19,27 @@
                     <h2 id="product-name">{{productData.productName}}<br><span>{{productData.shortDescription}}</span>
                     </h2>
                     <div id="product-feature-buttons">
-                        <button class="product-feature-button" *ngFor="let catText of category">{{catText}}</button>
-                        <button class="product-feature-button"
-                            *ngFor="let subcatText of subcategory">{{subcatText}}</button>
+                        <a href="./specificProducts?category={{catText}}" *ngFor="let catText of category"><button
+                                class="product-feature-button">{{catText}}</button></a>
+                        <a href="./specificProducts?category={{subcatText}}"
+                            *ngFor="let subcatText of subcategory"><button
+                                class="product-feature-button">{{subcatText}}</button></a>
                     </div>
-                    <p id="product-price">Price: &#8377; <span *ngIf="productPrice==0">{{displayPrice}}</span> <span
-                            *ngIf="productPrice!=0">{{productPrice}}</span></p>
+                    <p id="product-price">Price: &#8377;
+                        <span *ngIf="productPrice!=undefined">
+                            <span *ngIf="productPrice==0">{{displayPrice}}</span>
+                            <span *ngIf="productPrice>0">{{productPrice}}</span>
+                        </span>
+                        <span *ngIf="productPrice==undefined">
+                            Not Possible
+                        </span>
+                    </p>
                     <div id="product-action-buttons">
-                        <button id="product-buy-now" class=product-action-button (click)="buyNow()">Buy Now</button>
-                        <button id="product-add-to-cart" class=product-action-button (click)="addToCart()">Add to
-                            Cart</button>
+                        <button id="product-buy-now" [disabled]="(productPrice==0 || productPrice==undefined)"
+                            class=product-action-button (click)="buyNow()">Buy Now</button>
+                        <button id="product-add-to-cart" [disabled]="(productPrice==0 || productPrice==undefined)"
+                            class=product-action-button (click)="addToCart()">Add to
+                            Cart </button>
                     </div>
                     <div></div>
                     <div id="product-filters">
@@ -39,8 +54,8 @@
                     </div>
                     <div *ngFor="let item of productData.extraData">
                         <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='textSel'">
-                            <ion-radio-group [name]="item.sectionTitle" [value]="extrasData[item.sectionTitle]"
-                                required (ionChange)="updateData($event,item.isRelative,item.sectionTitle)"
+                            <ion-radio-group [name]="item.sectionTitle" [value]="extrasData[item.sectionTitle]" required
+                                (ionChange)="updateData($event,item.isRelative,item.sectionTitle)"
                                 id="imgSel{{item.sectionTitle}}">
                                 <ion-card class="selectionChoiceCard" *ngFor="let single of item.values">
                                     <span class="selectionTitle">{{single.title}}</span><br>
@@ -68,27 +83,12 @@
             </div>
         </section>
         <section id="product-description">
-            <h1>Ratings</h1>
-            <ion-card>
-                <h3>Add your own review</h3>
-                <form [formGroup]="form" (ngSubmit)="addComment()">
-                    <ion-item>
-                        <ion-label position="floating">Review Title</ion-label>
-                        <ion-input type="text" formControlName="commentTitle" placeholder="Title"></ion-input>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label position="floating">Review Description</ion-label>
-                        <ion-textarea formControlName="commentBody"></ion-textarea>
-                    </ion-item>
-                    <star-rating (rate)="changeRatingStar($event)"
-                        class="uk-align-center uk-text-center uk-margin-small-top" [value]="0" [totalstars]="5"
-                        checkedcolor="goldenrod" size="25px">
-                    </star-rating>
-                    <ion-button type="submit" shape="round" [disabled]="!form.valid">
-                        Submit
-                    </ion-button>
-                </form>
-            </ion-card>
+            <ion-item>
+                <ion-title style="font-size: 20px;">Ratings</ion-title>
+                <ion-button (click)="addComment($event)" shape="round">
+                    Add Review
+                </ion-button>
+            </ion-item>
             <div class="ratings uk-align-center uk-text-center">
                 <app-comment-card [image]="comment.userImage" [stars]="comment.stars" [body]="comment.commentBody"
                     [title]="comment.commentTitle" [commentDate]="comment.commentDate" [username]="comment.userName"

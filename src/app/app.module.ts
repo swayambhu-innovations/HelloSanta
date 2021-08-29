@@ -112,6 +112,8 @@ import { ShippingDetailPopComponent } from './popovers/shipping-detail-pop/shipp
 import { ApOrdersOptionsItemComponent } from './Components/ap-orders-options-item/ap-orders-options-item.component';
 import { CommentCardComponent } from './Components/comment-card/comment-card.component';
 import { MatBadgeModule } from '@angular/material/badge'; 
+import { AddCommentComponent } from './popovers/add-comment/add-comment.component';
+import { CategoryProductsComponent } from './customerPanel/category-products/category-products.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -204,6 +206,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     ApDashboardOrderItemComponent,
     ShippingDetailPopComponent,
     ApOrdersOptionsItemComponent,
+    AddCommentComponent,
+    CategoryProductsComponent,
   ],
   entryComponents: [],
   imports: [

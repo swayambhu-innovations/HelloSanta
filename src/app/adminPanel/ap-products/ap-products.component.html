@@ -20,7 +20,6 @@
   </ion-toolbar>
   <ion-row uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100" *ngIf="switch.checked && allProds!=[]">
     <div *ngFor="let item of allProds">
-      <ion-label>1</ion-label>
       <app-product 
       [totalCancelled]="item.totalCancels"
       [image]="item.productImages[0].image"

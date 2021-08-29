@@ -32,7 +32,12 @@ ion-row > ion-button{
     --color:var(--ion-color-primary);
     font-weight:600;
 }
-
+.addButton{
+    font-size: 30px;
+    color: var(--ion-color-primary);
+    font-weight: 600;
+    margin: 5px;
+} 
 
 
 

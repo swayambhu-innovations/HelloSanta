@@ -39,6 +39,7 @@ export class AddProductModalComponent implements OnInit {
   allVendors: any;
   selectedVendors = [];
   permutations:any;
+  addons:any;
   basicDetail: FormGroup;
   customisationsForm: FormGroup;
   productName: FormControl = new FormControl('', [
@@ -70,7 +71,7 @@ export class AddProductModalComponent implements OnInit {
     Validators.required,
     Validators.min(5),
   ]);
-  customisationsCount: FormControl = new FormControl('', [
+  customisationsCount: FormControl = new FormControl({value:1,disabled:true}, [
     Validators.required,
     Validators.min(1),
   ]);
@@ -390,6 +391,7 @@ export class AddProductModalComponent implements OnInit {
             type: type,
             quantityMax: quantityMax,
             sectionTitle: sectionTitle,
+            isRelative: false,
           });
         } else if (type == 'extraInfo') {
           let optionsCount = (
@@ -419,6 +421,7 @@ export class AddProductModalComponent implements OnInit {
               type: type,
               values: options,
               sectionTitle: sectionTitle,
+              isRelative: false,
             });
           }
         } else if (type == 'faceCount') {
@@ -430,6 +433,7 @@ export class AddProductModalComponent implements OnInit {
           data.push({
             type: type,
             maximumFaces: maximumFaces,
+            isRelative: false,
           });
         } 
       } catch (e) {
@@ -444,10 +448,14 @@ export class AddProductModalComponent implements OnInit {
         dts.push(adp.values);
       }
       console.log("values",dts);
-      dts = this.cartProd(dts);
+      if (dts.length>0){
+        dts = this.cartProd(dts);
+      }
       console.log("permutations",dts)
       this.permutations=dts;
       this.customisations=[];
+      this.addons =JSON.parse(JSON.stringify(data));
+      console.log("addons",this.addons);
       // this.customisations.push(data);
       // this.customisations.push(relativeData);
       relativeData.forEach((value)=>{
@@ -502,9 +510,35 @@ export class AddProductModalComponent implements OnInit {
         this.finalData[i]['permutations'] = data;
         console.log("data got")
       } else {
+        this.finalData[i]={};
         this.finalData[i]['isPossible'] = false;
       }
     }
+    for (let i=0; i < this.addons.length;i++){
+      let values= [];
+      for (let j=0; j < this.addons[i].values.length;j++){
+        let data = {
+          sectionTitle: this.addons[i].values[j].sectionTitle,
+          title: this.addons[i].values[j].title,
+          price:(document.getElementById('addonPrice'+i.toString()+j.toString()) as HTMLInputElement).value,
+          length:(document.getElementById('addonLength'+i.toString()+j.toString()) as HTMLInputElement).value,
+          width:(document.getElementById('addonWidth'+i.toString()+j.toString()) as HTMLInputElement).value,
+          breadth:(document.getElementById('addonBreadth'+i.toString()+j.toString()) as HTMLInputElement).value,
+          weight:(document.getElementById('addonWeight'+i.toString()+j.toString()) as HTMLInputElement).value,
+        }
+        values.push(data);
+      }
+      for (let customCount=0;customCount<this.customisations.length;customCount++){
+        if (this.customisations[customCount].sectionTitle==this.addons[i].sectionTitle && this.customisations[customCount].type==this.addons[i].type){
+          this.customisations[customCount]={
+            type:this.addons[i].type,
+            sectionTitle:this.addons[i].sectionTitle,
+            values:values,
+            isRelative:this.addons[i].isRelative}
+        }
+      }
+    }
+    console.log("customisations",this.customisations);
     console.log("finalData: ",this.finalData);
     console.log("checkin validity")
     if(this.finalData!=undefined){
@@ -517,6 +551,18 @@ export class AddProductModalComponent implements OnInit {
     }
     this.progressType="determinate"
     this.showProgress=false;
+  }
+  increaseValue(){
+    console.log("increase value fired")
+    if (+this.customisationsCount.value < 10 && +this.customisationsCount.value >= 1){
+      console.log("increase value true")
+      this.customisationsCount.setValue(+this.customisationsCount.value + 1);
+    }
+  }
+  decreaseValue(){
+    if (+this.customisationsCount.value <= 10 && +this.customisationsCount.value > 1){
+      this.customisationsCount.setValue(+this.customisationsCount.value - 1);
+    }
   }
   constructor(
     private formbuilder: FormBuilder,

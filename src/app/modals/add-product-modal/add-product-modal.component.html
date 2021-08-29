@@ -5,6 +5,7 @@
   <div *ngIf="showProgress">
     <ion-progress-bar [color]="progressColor" [value]="progressValue" [type]="progressType"></ion-progress-bar>
   </div>
+  <!-- TODO [linear]="true" -->
   <mat-stepper #stepper [linear]="false">
     <mat-step [completed]="basicDetail.valid" [stepControl]="basicDetail" [editable]="true">
       <form [formGroup]="basicDetail" (ngSubmit)="addBasicDetailProduct(stepper)" method="POST">
@@ -119,15 +120,22 @@
         </ion-row>
       </form>
     </mat-step>
-    <mat-step  [completed]="customisationsForm.valid" [stepControl]="customisationsForm" [editable]="true">
+    <!-- TODO [stepControl]="customisationsForm" -->
+    <mat-step  [completed]="customisationsForm.valid"  [editable]="true">
       <ng-template matStepLabel>Product Customisations</ng-template>
       <form [formGroup]="customisationsForm" (ngSubmit)="customisationSubmit(stepper)">
         <ion-item>
-          <ion-label position="floating">Customisations</ion-label>
+          <ion-label>Customisations</ion-label>
           <ion-input type="number" min=1 max=10 [value]="1" id="customsCount" placeholder="Customisation Count"
-            formControlName="customisationsCount" #customs required="true"></ion-input>
+            formControlName="customisationsCount" required="true" ></ion-input>
+          <button (click)="increaseValue()" type="button" class="addButton">
+            <ion-icon slot="end" name="add-circle"></ion-icon>
+          </button>
+          <button (click)="decreaseValue()" type="button" class="addButton">
+            <ion-icon slot="end" name="remove-circle"></ion-icon>
+          </button>
         </ion-item>
-        <ion-card *ngFor="let item of genList(customs.value)">
+        <ion-card *ngFor="let item of genList(customisationsCount.value)">
           <ion-radio-group name="price" value="imgSel" id="radio{{item}}" #option required="true">
             <ion-list-header>
               <ion-label>Price Options</ion-label>
@@ -243,9 +251,21 @@
               </ion-item>
             </ion-card-content>
           </ion-card>
+          <ion-item>
+            <ion-label>Customisations</ion-label>
+            <ion-input type="number" min=1 max=10 [value]="1" id="customsCount" placeholder="Customisation Count"
+              formControlName="customisationsCount" required="true" ></ion-input>
+            <button (click)="increaseValue()" type="button" class="addButton">
+              <ion-icon slot="end" name="add-circle"></ion-icon>
+            </button>
+            <button (click)="decreaseValue()" type="button" class="addButton">
+              <ion-icon slot="end" name="remove-circle"></ion-icon>
+            </button>
+          </ion-item>
         </ion-card>
         <ion-item>
-          <ion-button type="submit" [disabled]="!customisationsForm.valid && !basicDetail.valid">
+          <!-- TODO && !basicDetail.valid -->
+          <ion-button type="submit">
             Next
           </ion-button>
         </ion-item>
@@ -256,10 +276,7 @@
       <form (ngSubmit)="submitPrices(stepper)">
         <ion-card *ngFor="let item of permutations; let i = index" [attr.data-index]="i">
           <ion-item>
-            <ion-label>1</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-chip *ngFor="let inside of item" color="primary" mode="ios">{{inside.title}}</ion-chip>
+            <ion-chip *ngFor="let inside of item" color="primary" mode="ios">Permutations {{inside.title}}</ion-chip>
           </ion-item>
           <ion-item>
             <ion-label>Possible</ion-label>
@@ -287,6 +304,35 @@
               <ion-input required="true" type="number" id="Weight{{i}}"></ion-input>
             </ion-item>
           </ion-card-content>
+        </ion-card>
+        <ion-card *ngFor="let value of addons let i = index" [attr.data-index]="i">
+          <div *ngFor="let item of value.values let j = index" [attr.data-index]="j">
+            <ion-chip color="primary" mode="ios" outline="true">
+              <ion-label>{{item.title}}</ion-label>
+            </ion-chip>
+            <ion-card-content>
+              <ion-item>
+                <ion-label>Price</ion-label>
+                <ion-input required="true" type="number" id="addonPrice{{i}}{{j}}"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>Length</ion-label>
+                <ion-input required="true" type="number" id="addonLength{{i}}{{j}}"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>Width</ion-label>
+                <ion-input required="true" type="number" id="addonWidth{{i}}{{j}}"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>Breadth</ion-label>
+                <ion-input required="true" type="number" id="addonBreadth{{i}}{{j}}"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>Weight</ion-label>
+                <ion-input required="true" type="number" id="addonWeight{{i}}{{j}}"></ion-input>
+              </ion-item>
+            </ion-card-content>
+          </div>
         </ion-card>
         <ion-button type="submit">
           Complete Product Information
