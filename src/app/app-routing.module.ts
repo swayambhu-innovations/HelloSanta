@@ -51,6 +51,7 @@ import { AdminPanelGuard } from './guards/admin-panel.guard';
 import { PendingProductsComponent } from './adminPanel/pending-products/pending-products.component';
 import { UserReferralComponent } from './customerPanel/user-referral/user-referral.component';
 import { CalenderComponent } from './customerPanel/calender/calender.component';
+import { CategoryProductsComponent } from './customerPanel/category-products/category-products.component';
 const routes: Routes = [
   {path:'', component:HomeComponent},
   {path:'login', component:AuthLoginComponent},
@@ -83,7 +84,7 @@ const routes: Routes = [
   {path:'account', component:AccountComponent},
   {path:'product', component:SingleproductComponent},
   {path:'customorder', component:CustomproductComponent},
-
+  {path:'specificProducts', component:CategoryProductsComponent},
   {path:"verifyEmail", component:VerifyEmailComponent},
   {
     path:"AdminPanel",

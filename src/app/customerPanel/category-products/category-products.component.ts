@@ -1,18 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { FilterModalComponent } from 'src/app/modals/filter-modal/filter-modal.component';
 import { SortModalComponent } from 'src/app/modals/sort-modal/sort-modal.component';
 
 @Component({
-  selector: 'app-digitalartworks',
-  templateUrl: './digitalartworks.component.html',
-  styleUrls: ['./digitalartworks.component.scss'],
+  selector: 'app-category-products',
+  templateUrl: './category-products.component.html',
+  styleUrls: ['./category-products.component.scss'],
 })
-export class DigitalartworksComponent implements OnInit {
+export class CategoryProductsComponent implements OnInit {
 
   screenwidth=window.innerWidth
-  constructor(public modalController: ModalController,private afs: AngularFirestore) { }
+  category: any;
+  subcategory: any;
+  constructor(public modalController: ModalController,private afs: AngularFirestore,private activatedRoute: ActivatedRoute,) { 
+    this.activatedRoute.queryParams.subscribe((params) => {
+      this.category = params['category'];
+      this.subcategory = params['subcategory'];
+    });
+  }
   async presentFilter() {
     const modal = await this.modalController.create({
       component: FilterModalComponent,
@@ -133,7 +141,7 @@ export class DigitalartworksComponent implements OnInit {
               unknown++;
             }
           });
-          if (unknown == 0 && product.productCategory.includes('Digital Artworks')) {
+          if (unknown == 0 && (product.productCategory.includes(this.category) || product.productSubcategory.includes(this.subcategory))) {
             this.allDigitalProds.push(product);
             this.copyArray.push(product);
           }

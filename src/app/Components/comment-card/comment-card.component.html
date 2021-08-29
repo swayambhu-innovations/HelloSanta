@@ -3,9 +3,10 @@
     <ion-avatar>
       <img [src]="image" />
     </ion-avatar>
+    &nbsp;&nbsp;
     <ion-label>{{username}}</ion-label>
   </ion-item>
-  <star-rating class="uk-align-center uk-text-center uk-margin-small-top" [value]="stars" [totalstars]="5" checkedcolor="goldenrod" [readonly]="true" size="25px" >
+  <star-rating class="uk-text-center uk-margin-small-top" [value]="stars" [totalstars]="5" [readonly]="true" size="25px" checkedcolor="#9081FF" uncheckedcolor="#d0caff">
   </star-rating>
   <ion-card-header>
     <ion-card-subtitle>{{title}}</ion-card-subtitle>
