@@ -6,9 +6,65 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./invoice-detail.component.scss'],
 })
 export class InvoiceDetailComponent implements OnInit {
-
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {}
-
+  products = [
+    {
+      SerialNo: '1',
+      ProductId: '45',
+      ProductName: 'artwork Pandora',
+      Quantity: '10',
+      Price: '4000',
+    },
+    {
+      SerialNo: '1',
+      ProductId: '45',
+      ProductName: 'artwork Pandora',
+      Quantity: '10',
+      Price: '4000',
+    },
+    {
+      SerialNo: '1',
+      ProductId: '45',
+      ProductName: 'artwork Pandora',
+      Quantity: '10',
+      Price: '4000',
+    },
+    {
+      SerialNo: '1',
+      ProductId: '45',
+      ProductName: 'artwork Pandora',
+      Quantity: '10',
+      Price: '4000',
+    },
+    {
+      SerialNo: '1',
+      ProductId: '45',
+      ProductName: 'artwork Pandora',
+      Quantity: '10',
+      Price: '4000',
+    },
+    {
+      SerialNo: '1',
+      ProductId: '45',
+      ProductName: 'artwork Pandora',
+      Quantity: '10',
+      Price: '4000',
+    },
+    {
+      SerialNo: '1',
+      ProductId: '45',
+      ProductName: 'artwork Pandora',
+      Quantity: '10',
+      Price: '4000',
+    },
+    {
+      SerialNo: '1',
+      ProductId: '45',
+      ProductName: 'artwork Pandora',
+      Quantity: '10',
+      Price: '4000',
+    },
+  ];
 }
