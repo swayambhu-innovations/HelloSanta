@@ -21,7 +21,9 @@
   padding-left:10px;
   padding-right:10px;
 }
-
+.details{
+  margin-top:20px;
+}
 .order-title {
   font-family: 'Poppins';
   font-size: 1.5rem;
@@ -68,6 +70,10 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .order-img {
+    height: auto;
+  }
+  
   .order-card {
     width: 160px;
     margin: 0.5em 0.25em;

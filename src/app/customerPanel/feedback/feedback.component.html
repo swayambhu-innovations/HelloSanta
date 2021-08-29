@@ -3,11 +3,48 @@
   <ion-card class="uk-align-center uk-text-center rating">
     <form action="">
       <div>
-        <star-rating [value]="0" [totalstars]="5" checkedcolor="goldenrod" [size]="starsize" >
+        <star-rating [value]="0" [totalstars]="5" checkedcolor="#675ce0" [size]="starsize" (rate)="onRate($event)">
         </star-rating>
       </div>
     </form>
+    <div *ngIf="rating != undefined">
+      <h1>{{optionsTitle}}</h1>
+      <div *ngIf="rating == 1">
+      <ion-chip color="primary" outline="true" *ngFor="let tag of options">
+        <ion-checkbox></ion-checkbox>
+        <ion-label>{{tag}}</ion-label>
+      </ion-chip>
+      </div>
+      <div *ngIf="rating == 2">
+        <ion-chip color="primary" outline="true" *ngFor="let tag of options">
+          <ion-checkbox></ion-checkbox>
+          <ion-label>{{tag}}</ion-label>
+        </ion-chip>
+      </div>
+      <div *ngIf="rating == 3">
+        <ion-chip color="primary" outline="true" *ngFor="let tag of options">
+          <ion-checkbox></ion-checkbox>
+          <ion-label>{{tag}}</ion-label>
+        </ion-chip>
+      </div>
+      <div *ngIf="rating == 4">
+        <ion-chip color="primary" outline="true" *ngFor="let tag of options">
+          <ion-checkbox></ion-checkbox>
+          <ion-label>{{tag}}</ion-label>
+        </ion-chip>
+      </div>
+      <div *ngIf="rating == 5">
+        <ion-chip color="primary" outline="true" *ngFor="let tag of options">
+          <ion-checkbox></ion-checkbox>
+          <ion-label>{{tag}}</ion-label>
+        </ion-chip>
+      </div>
+    </div>
+<ion-textarea color="primary" outline="true" style="border: 3px solid black;mar" ></ion-textarea>
   </ion-card>
+  <ion-button (click)="onClick()" expand="block" fill="clear" shape="round">
+Submit
+  </ion-button>
   <app-accordion></app-accordion>
   <app-footer ></app-footer>
 </ion-content>

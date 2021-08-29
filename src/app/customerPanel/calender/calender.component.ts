@@ -1,28 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { CalendarModal, CalendarModalOptions } from 'ion2-calendar';
+import {
+  CalendarModal,
+  CalendarModalOptions,
+  DayConfig,
+  CalendarResult
+} from 'ion2-calendar';
 @Component({
   selector: 'app-calender',
   templateUrl: './calender.component.html',
   styleUrls: ['./calender.component.scss'],
 })
-export class CalenderComponent implements OnInit {
+export class CalenderComponent{
 
-  constructor(public modalController: ModalController) { }
+  constructor(public modalCtrl: ModalController) { }
 
-  async calendarModal() {
+  async  openCalendar() {
     const options: CalendarModalOptions = {
-      pickMode: 'range',
-      title: 'Range Date',
+      title: 'BASIC'
     };
-
-    let calendarUi =  await this.modalController.create({
+ 
+    const myCalendar = await this.modalCtrl.create({
       component: CalendarModal,
       componentProps: { options }
     });
-
-    calendarUi.present();
+ 
+    myCalendar.present();
+ 
+    const event: any = await myCalendar.onDidDismiss();
+    const title: any = "helloboy";
+    const date: CalendarResult = event.data;
+    const datetitle: DayConfig = event.title;
+    console.log(date);
+    console.log(title);
   }
   ngOnInit() {}
 

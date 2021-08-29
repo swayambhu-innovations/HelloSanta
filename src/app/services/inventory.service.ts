@@ -403,4 +403,13 @@ export class InventoryService {
       comments:firebase.firestore.FieldValue.arrayUnion(comment),
     })
   }
+  getUserOrders(){
+    return this.afs.collection('users').doc(this.authService.userId).ref.get().then((user:any)=>{
+      if (user.exists) {
+       // return user.data();
+       console.log(user.data());
+      }
+    });
+
+  }
 }
