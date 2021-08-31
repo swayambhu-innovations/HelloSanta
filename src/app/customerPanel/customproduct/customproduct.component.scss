@@ -24,6 +24,7 @@ button{
   display: inline-block;
   font-size: 25px;
   cursor: pointer;
+  margin-top: 20px;
 }
 #subject{
   outline: none;
@@ -52,9 +53,6 @@ ion-card{
   border: 5px solid #9081FF;
 }
 
-.orderbutton{
-
-}
 ion-content> div {
   text-align: center;
 }
