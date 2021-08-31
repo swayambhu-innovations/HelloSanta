@@ -66,8 +66,22 @@ input:focus{
 .addProductModal .modal-wrapper{
     --width:60vw;
 }
+#product-image-preview > .ngxImageZoomContainer {
+    width: 500px !important;
+    height: 500px !important;
+}
+.ngxImageZoomLensEnabled{
+    border: 2px dashed #9e91ff !important;
+}
+.monthview-datetable{
+    width:90vw;
+    border: 2px solid var(--ion-color-primary);
+}
 @media screen and (max-width: 500px){
     .addProductModal .modal-wrapper{
         --width:100vw;
+    }
+    #product-image-preview  {
+        display:none;
     }
 }

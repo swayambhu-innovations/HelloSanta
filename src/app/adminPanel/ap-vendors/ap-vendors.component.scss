@@ -46,8 +46,18 @@ ion-list > ion-item > ion-card > ion-row > ion-col > ion-title{
 
 }
 
-
-
+img{
+    position: relative;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+h4{
+    font-size: 30px;
+    margin-top: 20px;
+    color:#9081FF;
+    text-align: center;
+}
 
 
 

@@ -48,6 +48,19 @@ button:hover{
     box-shadow: 5px 5px 15px rgba(255, 131, 131, 0.2);
 }
 
+img{
+    position: relative;
+    width: 300px;
+    left:50%;
+    transform: translateX(-50%);
+}
+h4{
+    font-size: 30px;
+    margin-top: 20px;
+    color:#9081FF;
+    text-align: center;
+}
+
 
 
 

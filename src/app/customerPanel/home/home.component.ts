@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import * as AOS from 'aos';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -35,7 +34,6 @@ export class HomeComponent implements OnInit {
     return array;
   }
   ngOnInit() {
-    AOS.init();
     this.afs
       .collection('products')
       .valueChanges()
@@ -86,67 +84,70 @@ export class HomeComponent implements OnInit {
       });
     this.afs
       .doc('/specificSelectedProducts/products')
-      .valueChanges()
-      .subscribe((value: any) => {
-        if (value.featuredProducts) {
-          value.featuredProducts.forEach((prod) => {
-            this.afs
-              .doc(`products/${prod.productId}`)
-              .valueChanges()
-              .subscribe((product: any) => {
-                if (product != undefined) {
-                  let unknown = 0;
-                  this.allFeaturedProds.forEach((oldProduct: any) => {
-                    if (product.productId == oldProduct.productId) {
-                      unknown++;
+      .ref.get()
+      .then((value: any) => {
+        if (value.exists){
+          value= value.data()
+          if (value.featuredProducts) {
+            value.featuredProducts.forEach((prod) => {
+              this.afs
+                .doc(`products/${prod.productId}`)
+                .valueChanges()
+                .subscribe((product: any) => {
+                  if (product != undefined) {
+                    let unknown = 0;
+                    this.allFeaturedProds.forEach((oldProduct: any) => {
+                      if (product.productId == oldProduct.productId) {
+                        unknown++;
+                      }
+                    });
+                    if (unknown == 0) {
+                      this.allFeaturedProds.push(product);
                     }
-                  });
-                  if (unknown == 0) {
-                    this.allFeaturedProds.push(product);
                   }
-                }
-              });
-          });
-        }
-        if (value.recommendedProducts) {
-          value.recommendedProducts.forEach((prod) => {
-            this.afs
-              .doc(`products/${prod.productId}`)
-              .valueChanges()
-              .subscribe((product: any) => {
-                if (product != undefined) {
-                  let unknown = 0;
-                  this.allRecommendedProds.forEach((oldProduct: any) => {
-                    if (product.productId == oldProduct.productId) {
-                      unknown++;
+                });
+            });
+          }
+          if (value.recommendedProducts) {
+            value.recommendedProducts.forEach((prod) => {
+              this.afs
+                .doc(`products/${prod.productId}`)
+                .valueChanges()
+                .subscribe((product: any) => {
+                  if (product != undefined) {
+                    let unknown = 0;
+                    this.allRecommendedProds.forEach((oldProduct: any) => {
+                      if (product.productId == oldProduct.productId) {
+                        unknown++;
+                      }
+                    });
+                    if (unknown == 0) {
+                      this.allRecommendedProds.push(product);
                     }
-                  });
-                  if (unknown == 0) {
-                    this.allRecommendedProds.push(product);
                   }
-                }
-              });
-          });
-        }
-        if (value.santasChoice) {
-          value.santasChoice.forEach((prod) => {
-            this.afs
-              .doc(`products/${prod.productId}`)
-              .valueChanges()
-              .subscribe((product: any) => {
-                if (product != undefined) {
-                  let unknown = 0;
-                  this.allSantasChoiceProds.forEach((oldProduct: any) => {
-                    if (product.productId == oldProduct.productId) {
-                      unknown++;
+                });
+            });
+          }
+          if (value.santasChoice) {
+            value.santasChoice.forEach((prod) => {
+              this.afs
+                .doc(`products/${prod.productId}`)
+                .valueChanges()
+                .subscribe((product: any) => {
+                  if (product != undefined) {
+                    let unknown = 0;
+                    this.allSantasChoiceProds.forEach((oldProduct: any) => {
+                      if (product.productId == oldProduct.productId) {
+                        unknown++;
+                      }
+                    });
+                    if (unknown == 0) {
+                      this.allSantasChoiceProds.push(product);
                     }
-                  });
-                  if (unknown == 0) {
-                    this.allSantasChoiceProds.push(product);
                   }
-                }
-              });
-          });
+                });
+            });
+          }
         }
       });
   }

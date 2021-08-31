@@ -1,8 +1,8 @@
 <ion-content>
   <ion-label>Orders</ion-label>
   <ion-card>
-    <ion-label>Latest Orders</ion-label>
-    <ion-list uk-scrollspy="target: > ion-item; cls: uk-animation-fade; delay: 100">
+    <ion-label>Latest Orders</ion-label><br>
+    <ion-list *ngIf="liveOrders.length>0" uk-scrollspy="target: > ion-item; cls: uk-animation-fade; delay: 100">
       <div *ngFor="let order of liveOrders">
         <app-ap-orders-options-item *ngFor="let product of order.products"
         [name]="product.productName"
@@ -15,10 +15,12 @@
         </app-ap-orders-options-item>
       </div>
     </ion-list>
+    <img src="./assets/NotFound.gif" *ngIf="liveOrders.length<=0" alt="">
+    <h4 *ngIf="liveOrders.length<=0" >No new orders</h4>
   </ion-card>
   <ion-card>
-    <ion-label>Old Orders</ion-label>
-    <ion-list uk-scrollspy="target: > ion-item; cls: uk-animation-fade; delay: 100">
+    <ion-label>Old Orders</ion-label><br>
+    <ion-list *ngIf="oldOrders.length>0" uk-scrollspy="target: > ion-item; cls: uk-animation-fade; delay: 100">
       <div *ngFor="let order of oldOrders">
         <app-ap-dashboard-order-item *ngFor="let product of order.products"
         [name]="product.productName" 
@@ -29,5 +31,7 @@
         </app-ap-dashboard-order-item>
       </div>
     </ion-list>
+    <img src="./assets/NotFound.gif" *ngIf="oldOrders.length<=0" alt="">
+    <h4 *ngIf="oldOrders.length<=0" >No old orders</h4>
   </ion-card>
 </ion-content>

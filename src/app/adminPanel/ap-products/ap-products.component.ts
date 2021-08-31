@@ -67,13 +67,17 @@ export class APProductsComponent implements OnInit {
   editItem(){
     this.presentModal()
   }
+  visible:boolean= false;
   allProds:any = [];
   ngOnInit() {
     this.afs
       .collection('products')
       .valueChanges()
       .subscribe((proddata) => {
-        this.allProds=proddata
+        this.allProds=proddata;
+        if (this.allProds.length > 0){
+          this.visible=true;
+        }
         console.log(this.allProds);
       });
   }

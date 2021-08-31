@@ -102,8 +102,8 @@ const routes: Routes = [
       {path:'OffersAndReferrals',component:APOffersReferralsComponent},
       {path:'Blog',component:APBLogComponent},
       {path:'Feedback',component:APFeedbackComponent},
-      {path:'Analytics',component:APAnalyticsComponent},
-      {path:'LoginAccess',component:APLoginAccessComponent},
+      {path:'Analytics',component:APAnalyticsComponent,},
+      {path:'LoginAccess',component:APLoginAccessComponent,},
       {path:'PendingProducts', component: PendingProductsComponent}
     ]
   },

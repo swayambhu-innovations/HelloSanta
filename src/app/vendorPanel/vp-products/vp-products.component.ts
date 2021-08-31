@@ -19,9 +19,19 @@ export class VPProductsComponent implements OnInit {
     public afs: AngularFirestore,
     public popoverController: PopoverController
   ) {}
+  async presentEditProductModal(id) {
+    const modal = await this.modalController.create({
+      component: EditProductComponent,
+      componentProps: {
+        productId: id,
+      }
+    });
+    return await modal.present();
+  }
   async presentModal() {
     const modal = await this.modalController.create({
       component: PendingProductModalComponent,
+      cssClass:"addProductModal"
     });
     return await modal.present();
   }

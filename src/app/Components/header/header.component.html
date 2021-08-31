@@ -10,7 +10,7 @@
   <div class="headButtons">
     <button *ngIf="authService.isJustLoggedIn" (click)="presentUserinfo($event)">
       <ion-avatar>
-        <img [src]="image" />
+        <img [src]="image" referrerpolicy="no-referrer" />
       </ion-avatar>
     </button>
     <button class="onlyIcon" *ngIf="authService.isJustLoggedIn" (click)="presentCartinfo($event)">
@@ -25,9 +25,14 @@
         <ion-icon name="calendar-number"></ion-icon>
       </button>
     </a>
-    <button class="onlyIcon" *ngIf="authService.isJustLoggedIn">
-      <ion-icon name="wallet"></ion-icon>
-    </button>
+    <a href="./referral">
+      <button class="onlyIcon" *ngIf="authService.isJustLoggedIn">
+        <span *ngIf="coins > 0" [matBadge]="coins" matBadgePosition='above after'
+          matBadgeColor="warn" matBadgeOverlap="false">
+          <ion-icon name="wallet"></ion-icon>
+        </span>
+      </button>
+    </a>
     <ion-button href="./login/" *ngIf="!authService.isJustLoggedIn">
       Log In
     </ion-button>

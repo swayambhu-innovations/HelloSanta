@@ -41,7 +41,7 @@
   <h1 style="font-family: Poppins;text-align: center;font-weight: bold;font-size: 20px;color: #ADA2FF;">just mention
     your concern ,fill the form and we will get right back to you..</h1>
   <ion-card>
-    <form [formGroup]="helpForm" action="mailto:connect@hellosanta.in" enctype="multipart/form-data" method="POST">
+    <form [formGroup]="helpForm" (ngSubmit)="addHelpData()" method="POST">
       <ion-row>
         <ion-col>
           <ion-item>
@@ -64,7 +64,7 @@
         </ion-col>
       </ion-row>
       <ion-textarea formControlName="description" placeholder="description"></ion-textarea>
-      <ion-button type="submit">Submit</ion-button>
+      <ion-button type="submit" [disabled]="!helpForm.valid">Submit</ion-button>
     </form>
   </ion-card>
   <div class="uk-panel union" *ngIf="screenwidth>600">

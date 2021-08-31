@@ -1,5 +1,10 @@
 ion-card{
     padding:10px;
+    width:100%;
+}
+.longList{
+    overflow-y: auto;
+    height:200px;
 }
 .header{
     padding: 20px;
@@ -27,7 +32,12 @@ ion-row > ion-button{
     --color:var(--ion-color-primary);
     font-weight:600;
 }
-
+.addButton{
+    font-size: 30px;
+    color: var(--ion-color-primary);
+    font-weight: 600;
+    margin: 5px;
+} 
 
 
 

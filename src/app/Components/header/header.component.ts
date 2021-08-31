@@ -21,11 +21,12 @@ export class HeaderComponent implements OnInit {
     private afs : AngularFirestore,
     ) { }
   cartItems=[]
-
+  coins:number=0;
   ngOnInit() {
     this.image = this.authService.getUserPhoto();
     this.afs.collection('users').doc(this.authService.userId).valueChanges().subscribe((doc:any) => {
       if (doc){
+        this.coins = doc.totalCashback;
         doc.cartItems.forEach((item:any) => {
           this.afs.collection('products').doc(item.productData).valueChanges().subscribe((doc:any) => {
             let found = false;

@@ -20,3 +20,12 @@ ion-icon[name="add"]{
     color:var(--ion-color-success);
     font-size: 30px;
 }
+ion-content > div {
+    margin-top:50px;
+}
+.item {
+    --border-color: transparent;
+    --highlight-color-focused:transparent;
+    --highlight-color-valid:transparent;
+    --highlight-color-invalid:transparent;
+}

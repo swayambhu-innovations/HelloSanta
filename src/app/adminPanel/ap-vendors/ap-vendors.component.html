@@ -1,5 +1,5 @@
 <ion-content>
-  <ion-list uk-scrollspy="target: > ion-item; cls: uk-animation-fade; delay: 100">
+  <ion-list uk-scrollspy="target: > ion-item; cls: uk-animation-fade; delay: 100" *ngIf="visible">
     <ion-item *ngFor="let item of vendors">
       <ion-card>
         <ion-row>
@@ -36,4 +36,6 @@
       </ion-card>
     </ion-item>
   </ion-list>
+  <h4 *ngIf="!visible" >No vendors found</h4>
+  <img src="./assets/NotFound.gif" *ngIf="!visible" alt="">
 </ion-content>

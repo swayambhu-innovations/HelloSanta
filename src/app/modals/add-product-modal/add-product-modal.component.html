@@ -303,32 +303,34 @@
           </ion-card-content>
         </ion-card>
         <ion-card *ngFor="let value of addons let i = index" [attr.data-index]="i">
-          <div *ngFor="let item of value.values let j = index" [attr.data-index]="j">
-            <ion-chip color="primary" mode="ios" outline="true">
-              <ion-label>{{item.title}}</ion-label>
-            </ion-chip>
-            <ion-card-content>
-              <ion-item>
-                <ion-label>Price</ion-label>
-                <ion-input required="true" type="number" id="addonPrice{{i}}{{j}}"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label>Length</ion-label>
-                <ion-input required="true" type="number" id="addonLength{{i}}{{j}}"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label>Width</ion-label>
-                <ion-input required="true" type="number" id="addonWidth{{i}}{{j}}"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label>Breadth</ion-label>
-                <ion-input required="true" type="number" id="addonBreadth{{i}}{{j}}"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label>Weight</ion-label>
-                <ion-input required="true" type="number" id="addonWeight{{i}}{{j}}"></ion-input>
-              </ion-item>
-            </ion-card-content>
+          <div *ngIf="value=='textSel' || value=='imgSel'">
+            <div *ngFor="let item of value.values let j = index" [attr.data-index]="j">
+              <ion-chip color="primary" mode="ios" outline="true">
+                <ion-label>{{item.title}}</ion-label>
+              </ion-chip>
+              <ion-card-content>
+                <ion-item>
+                  <ion-label>Price</ion-label>
+                  <ion-input required="true" type="number" id="addonPrice{{i}}{{j}}"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Length</ion-label>
+                  <ion-input required="true" type="number" id="addonLength{{i}}{{j}}"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Width</ion-label>
+                  <ion-input required="true" type="number" id="addonWidth{{i}}{{j}}"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Breadth</ion-label>
+                  <ion-input required="true" type="number" id="addonBreadth{{i}}{{j}}"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Weight</ion-label>
+                  <ion-input required="true" type="number" id="addonWeight{{i}}{{j}}"></ion-input>
+                </ion-item>
+              </ion-card-content>
+            </div>
           </div>
         </ion-card>
         <ion-button type="submit">

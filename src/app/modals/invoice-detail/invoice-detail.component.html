@@ -1,103 +1,107 @@
 <ion-content>
-<ion-row>
-  <div>
-    <div class="part1">
-    <p class="text1">INVOICE</p>
-    </div>
-    <div class="part2">
-      <img src="assets/icon.png" alt="" class="img">
-      <p class="text2">Hello Santa <br><span class="text3">A DearSanta LLP Product</span></p>
-      <br>
-      <p class="text4">Office address:<br>
-        2nd Flr, Sarvottam Complex
-        M. R. Road,
-        Khalpara, Siliguri
-        Darjeeling - 734005, WB</p>
+  <div id="invoiceData" #invoiceData>
+    <ion-row>
+      <div>
+        <div class="part1">
+          <p class="text1">INVOICE</p>
+        </div>
+        <div class="part2">
+          <img src="assets/icon.png" alt="" class="img">
+          <p class="text2">Hello Santa <br><span class="text3">A DearSanta LLP Product</span></p>
+          <br>
+          <p class="text4">Office address:<br>
+            2nd Flr, Sarvottam Complex
+            M. R. Road,
+            Khalpara, Siliguri
+            Darjeeling - 734005, WB</p>
+        </div>
+        <br>
+        <div class="text5">
+          <ion-icon name="globe-outline"></ion-icon>https://hellosanta.in
+        </div>
+        <div class="text6">
+          <ion-icon name="mail-open-outline"></ion-icon>connect@hellosanta.in
+        </div>
       </div>
-<br>
-  <div class="text5"><ion-icon name="globe-outline"></ion-icon>https://hellosanta.in</div>
-  <div class="text6"><ion-icon name="mail-open-outline"></ion-icon>connect@hellosanta.in</div>
+      <div class="info">
+        <div class="title">
+          <p class="text7">Date: 23rd, Auguest, 2021</p>
+          <br>
+          <p class="text8">GSTIN: 19AASFD2352C1ZH</p>
+          <p class="text9">Invoice No.: HSPR000UserId</p>
+          <hr style="background-color: #6D5DE3;width: 300px;height: 5px;margin-left: 120px;">
+          <br>
+        </div>
+        <div class="address">
+          <div class="billing">
+            <p class="texttitle1">Billing Address</p>
+            <br>
+            <p class="text10">Name:</p>
+            <p class="text11">Phone no:</p>
+            <p class="text12">Address No:</p>
+            <br>
+            <p class="text13">Pincode:</p>
+            <p class="text14">State:</p>
+            <p class="text15">Email:</p>
+          </div>
+          <div class="delivery">
+            <p class="texttitle2">Delivery Address</p>
+            <br>
+            <p class="text15">Name:</p>
+            <p class="text16">Phone no:</p>
+            <p class="text17">Address No:</p>
+            <br>
+            <p class="text18">Pincode:</p>
+            <p class="text19">State:</p>
+            <p class="text20">Email:</p>
+          </div>
+        </div>
+        <section id="orders-table-container">
+          <table id="orders-table">
+            <thead id="orders-table-head">
+              <tr>
+                <th>Sr. No.</th>
+                <th>Product Id</th>
+                <th>Product Name</th>
+                <th>Qty.</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of products">
+                <td>{{product.SerialNo}}</td>
+                <td>{{product.ProductId}}</td>
+                <td>{{product.ProductName}}</td>
+                <td>{{product.Quantity}}</td>
+                <td>{{product.Price}}</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3" style="text-align: right;">Total</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td colspan="4" style="text-align: right;">Discount</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td colspan="4" style="text-align: right;">Tax & charges</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td colspan="4" style="text-align: right;">Grand Total</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </section>
+        <img src="assets/Invoice.jpg" alt="" class="img-stamp">
+      </div>
+    </ion-row>
   </div>
-
-
-
-  <div class="info">
-    <div class="title">
-    <p class="text7">Date: 23rd, Auguest, 2021</p>
-    <br>
-    <p class="text8">GSTIN: 19AASFD2352C1ZH</p>
-    <p class="text9">Invoice No.: HSPR000UserId</p>
-    <hr style="background-color: #6D5DE3;width: 300px;height: 5px;margin-left: 120px;">
-    <br>
-  </div>
-
-  <div class="address">
-    <div class="billing">
-    <p class="texttitle1">Billing Address</p>
-    <br>
-    <p class="text10">Name:</p>
-    <p class="text11">Phone no:</p>
-    <p class="text12">Address No:</p>
-    <br>
-    <p class="text13">Pincode:</p>
-    <p class="text14">State:</p>
-    <p class="text15">Email:</p>
-    </div>
-    <div class="delivery">
-      <p class="texttitle2">Delivery Address</p>
-      <br>
-    <p class="text15">Name:</p>
-    <p class="text16">Phone no:</p>
-    <p class="text17">Address No:</p>
-    <br>
-    <p class="text18">Pincode:</p>
-    <p class="text19">State:</p>
-    <p class="text20">Email:</p>
-  </div>
-  </div>
-    <section id="orders-table-container">
-      <table id="orders-table">
-        <thead id="orders-table-head">
-          <tr>
-            <th>Sr. No.</th>
-            <th>Product Id</th>
-            <th>Product Name</th>
-            <th>Qty.</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let product of products">
-            <td>{{product.SerialNo}}</td>
-            <td>{{product.ProductId}}</td>
-            <td>{{product.ProductName}}</td>
-            <td>{{product.Quantity}}</td>
-            <td>{{product.Price}}</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="3" style="text-align: right;">Total</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td colspan="4" style="text-align: right;">Discount</td>
-            <td></td>
-          </tr>
-          <tr >
-            <td colspan="4" style="text-align: right;">Tax & charges</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td colspan="4" style="text-align: right;">Grand Total</td>
-            <td></td>
-          </tr>
-        </tfoot>
-      </table>
-    </section>
-    <img src="assets/Invoice.jpg" alt="" class="img-stamp">
-  </div>
-</ion-row>
-
+  <ion-button (click)="downloadAsPDF()" expand="block" fill="outline" shape="round">
+    Download as PDF
+  </ion-button>
 </ion-content>

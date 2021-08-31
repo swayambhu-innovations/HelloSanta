@@ -27,6 +27,7 @@ export class SingleproductComponent implements OnInit {
   productId: string;
   selectedImage: string;
   productData: any;
+  purchasedProduct: boolean= false;
   productPrice: number=0;
   selectedExtraType: string;
   selectedExtraTitle: string;
@@ -51,7 +52,10 @@ export class SingleproductComponent implements OnInit {
     });
   }
   
-  
+  setImage(item){
+    this.selectedImage=item;
+    (document.getElementsByClassName("ngxImageZoomFull")[0] as HTMLImageElement).src=item;
+  }
   genList(value) {
     let randomList = [];
     for (let i = 1; i < value + 1; i++) {
@@ -102,28 +106,29 @@ export class SingleproductComponent implements OnInit {
     return Math.ceil(x / 5) * 5;
   }
   comparePriceListing(object1, Object2) {
+    // console.log('compare price',object1, Object2);
     let isTrue = true;
     for (let i of Object.keys(object1)) {
+      if (i=="isRelative"){continue}
       if (object1[i] != Object2[i]) {
-        // console.log(object1[i], Object2[i],i);
-        if (i!="isRelative"){
-          isTrue = false;
-        }// console.log("i",i,object1[i],Object2[i])
+        isTrue = false;
       }
     }
+    // console.log('isTrue',isTrue);
     return isTrue;
   }
   calculatePrice() {
     // console.log("calculatePrice",this.extrasData);
     // let addonPrice:number = 0;
     this.productPrice = 0;
-    this.productData.permutations.forEach((val) => {
+    for (let valIndex=0; valIndex < this.productData.permutations.length; valIndex++) {
+      let val:any = this.productData.permutations[valIndex];
       let vldCounter = 0;
       let relativeCounter= 0;
       for (let i of Object.keys(this.extrasData)){
         if (this.extrasData[i].isRelative){
           relativeCounter++;
-          console.log(val.isPossible,"isPossible")
+          // console.log(val,"isPossible")
           if (val.isPossible==true){
             val.permutations.forEach((perm) => {
               if (this.comparePriceListing(perm, this.extrasData[i])) {
@@ -131,6 +136,7 @@ export class SingleproductComponent implements OnInit {
               }
             });
           } else {
+            // console.log("not possible", this.productPrice);
             this.productPrice = undefined;
           }
         }
@@ -138,15 +144,30 @@ export class SingleproductComponent implements OnInit {
       if (vldCounter == relativeCounter && vldCounter!=0 && relativeCounter!=0) {
         this.productPrice = +val.price;
         vldCounter = 0;
+        break;
       }
-      console.log("calculatePrice", this.productPrice);
-    });
+      // console.log("calculatePrice", this.productPrice);
+    };
+    let quantity=1;
+    let faceCounts = 0;
     if (this.productPrice != undefined && this.productPrice != 0) {
       for (let i of Object.keys(this.extrasData)){
         if (this.extrasData[i].isRelative==false){
-          this.productPrice += +this.extrasData[i].price;
+          if (this.extrasData[i].type=='textSel' || this.extrasData[i].type=='imgSel'){
+            this.productPrice += +this.extrasData[i].price;
+          } else if (this.extrasData[i].type=='quantitySel') {
+            quantity = +this.extrasData[i].quantity;
+          } else if (this.extrasData[i].type=='faceCount') {
+            faceCounts= +this.extrasData[i].faces;
+          }
         }
       }
+      let facesExtraPrices=0
+      if (faceCounts>1){facesExtraPrices = ((+this.productPrice/100) * (75*faceCounts));}
+      let quantifiedPrice = (+this.productPrice + facesExtraPrices) * quantity;
+      // let gstPrice = ((quantifiedPrice/100)*18);
+      // let platformPrice = ((quantifiedPrice+gstPrice)/100)*3;
+      this.productPrice = +quantifiedPrice;
     } else {
       this.productPrice = undefined;
       this.authService.presentToast("Please select all options then you can select addons")
@@ -154,8 +175,9 @@ export class SingleproductComponent implements OnInit {
   }
   updateData(event, relative, sectionTitle) {
     // console.log(event);
-    event.detail.value['isRelative']=relative;
+    event.detail.value['isRelative']=relative || false;
     this.extrasData[sectionTitle] = event.detail.value;
+    console.log(this.extrasData);
     let relatives = [];
     if (relative) {
       let msgString = '';
@@ -179,7 +201,7 @@ export class SingleproductComponent implements OnInit {
       });
       if (msgString.length > 0) {
         this.authService.presentToast(
-          'You need to select' + msgString + ' to get final price'
+          'You need to select' + msgString + ' and addons to get final price'
         );
       } else {
         this.calculatePrice();
@@ -203,6 +225,17 @@ export class SingleproductComponent implements OnInit {
     console.log('onDidDismiss resolved with role', role);
   }
   ngOnInit() {
+    this.inventoryService.getUserInfo().ref.get().then((doc:any) => {
+      if (doc.exists){
+        doc.data().orders.forEach((ord:any)=>{
+          ord.products.forEach((prod:any)=>{
+            if (prod.productId == this.productId){
+              this.purchasedProduct = true;
+            }
+          })
+        })
+      }
+    })
     this.afs
       .collection('products')
       .doc(this.productId)

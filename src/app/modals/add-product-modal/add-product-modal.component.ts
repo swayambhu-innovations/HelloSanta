@@ -22,13 +22,13 @@ export class AddProductModalComponent implements OnInit {
   // recommendedProducts=[]
   // featuredProducts=[]
   // santasChoice=[]
-  finalData:any;
+  finalData: any;
   customisations: any;
-  showProgress:boolean = false;
-  progressColor: string="warning";
-  progressValue:number=0.0;
+  showProgress: boolean = false;
+  progressColor: string = 'warning';
+  progressValue: number = 0.0;
   progressType: string = 'indeterminate';
-  basicProductDetails:any;
+  basicProductDetails: any;
   customSelections = {};
   prodImagesEvents = {};
   allSubCategories = [];
@@ -38,8 +38,8 @@ export class AddProductModalComponent implements OnInit {
   mainCategorySelected: {} = {};
   allVendors: any;
   selectedVendors = [];
-  permutations:any;
-  addons:any;
+  permutations: any;
+  addons: any;
   basicDetail: FormGroup;
   customisationsForm: FormGroup;
   productName: FormControl = new FormControl('', [
@@ -71,10 +71,10 @@ export class AddProductModalComponent implements OnInit {
     Validators.required,
     Validators.min(5),
   ]);
-  customisationsCount: FormControl = new FormControl({value:1,disabled:true}, [
-    Validators.required,
-    Validators.min(1),
-  ]);
+  customisationsCount: FormControl = new FormControl(
+    { value: 1, disabled: true },
+    [Validators.required, Validators.min(1)]
+  );
   baseWidth: FormControl = new FormControl(0, [Validators.required]);
   baseHeight: FormControl = new FormControl(0, [Validators.required]);
   baseBreadth: FormControl = new FormControl(0, [Validators.required]);
@@ -154,36 +154,38 @@ export class AddProductModalComponent implements OnInit {
     return fileList[0];
   }
   async addBasicDetailProduct(stepper: MatStepper) {
-    this.progressType="indeterminate"
+    this.progressType = 'indeterminate';
     let prodList = [];
     let res = await this.presentContinueAlert();
     if (res == 'continue') {
       this.basicDetail.disable();
       this.isLoading = true;
-      this.showProgress=true;
+      this.showProgress = true;
       if (
         this.formCategories.length >= 1 &&
         this.formSubcategories.length >= 1
       ) {
-        let value = this.basicDetail.get('productName')!.value.replace(' ', '_');
+        let value = this.basicDetail
+          .get('productName')!
+          .value.replace(' ', '_');
         let x = document.getElementById('mainProdImage') as HTMLInputElement;
-        console.log("prodImagesEvents",this.prodImagesEvents);
+        console.log('prodImagesEvents', this.prodImagesEvents);
         stepper.next();
-        this.progressType="determinate"
+        this.progressType = 'determinate';
         for (let imgc = 0; imgc < +x.value; imgc++) {
-          this.progressValue+=1/(+x.value*2);
-          let fileEv = this.prodImagesEvents['productImage' + imgc.toString()]
+          this.progressValue += 1 / (+x.value * 2);
+          let fileEv = this.prodImagesEvents['productImage' + imgc.toString()];
           const imgFile = await this.uploadFile(
             fileEv,
             `products/${value}/image_${imgc}_${fileEv.name}`
           ).toPromise();
-          this.progressValue+=1/(+x.value*2);
+          this.progressValue += 1 / (+x.value * 2);
           console.log(imgFile);
           prodList.push({
             image: imgFile,
           });
         }
-        this.authService.presentToast('Images uploaded',4000);
+        this.authService.presentToast('Images uploaded', 4000);
         let data = {
           productName: this.basicDetail.get('productName')!.value,
           productDescription: this.basicDetail.get('productDescription')!.value,
@@ -195,12 +197,12 @@ export class AddProductModalComponent implements OnInit {
           vendorId: this.selectedVendors,
           totalStock: this.basicDetail.get('totalStock')!.value,
           productImages: await prodList,
-          comments:[],
-          totalSales:0,
-          totalCancels:0,
+          comments: [],
+          totalSales: 0,
+          totalCancels: 0,
         };
         console.log(data);
-        this.basicProductDetails=data;
+        this.basicProductDetails = data;
       } else {
         this.basicDetail.enable();
         // this.basicDetail.reset();
@@ -260,19 +262,19 @@ export class AddProductModalComponent implements OnInit {
     this.selectedVendors = event.detail.value;
   }
   async customisationSubmit(stepper: MatStepper) {
-    console.log("matStepper",stepper);
+    console.log('matStepper', stepper);
     let data = [];
     let relativeData = [];
     let customs = this.customisationsForm.get('customisationsCount').value;
     let error = false;
-    let errorMesage = ""
+    let errorMesage = '';
     stepper.next();
     for (let i = 0; i < customs; i++) {
       try {
         let type = (
           document.getElementById('radio' + i.toString()) as HTMLInputElement
         ).value;
-        this.progressValue=0;
+        this.progressValue = 0;
         if (type == 'imgSel') {
           let optionsCount = (
             document.getElementById(
@@ -291,7 +293,9 @@ export class AddProductModalComponent implements OnInit {
           ).checked;
           if (+optionsCount > 0) {
             let options = [];
-            let value = this.basicDetail.get('productName')!.value.replace(' ', '_');
+            let value = this.basicDetail
+              .get('productName')!
+              .value.replace(' ', '_');
             for (let imgCount = 0; imgCount < +optionsCount; imgCount++) {
               let imageTitle = (
                 document.getElementById(
@@ -302,18 +306,24 @@ export class AddProductModalComponent implements OnInit {
                 this.customSelections[
                   'image' + i.toString() + imgCount.toString()
                 ];
-              this.progressValue+=1/(+optionsCount*2);
+              this.progressValue += 1 / (+optionsCount * 2);
               let imageUrl = await this.uploadFile(
                 image,
-                  `products/${value}/ExtraOptions/${imageTitle.replace(' ','_')}/image_${imgCount}_${image.name}`
-                ).toPromise();
-              this.progressValue+=1/(+optionsCount*2);
+                `products/${value}/ExtraOptions/${imageTitle.replace(
+                  ' ',
+                  '_'
+                )}/image_${imgCount}_${image.name}`
+              ).toPromise();
+              this.progressValue += 1 / (+optionsCount * 2);
               options.push({
                 image: imageUrl,
                 title: imageTitle,
                 sectionTitle: sectionTitle,
               });
-              this.authService.presentToast('All customisations images are uploaded successfully',4000);
+              this.authService.presentToast(
+                'All customisations images are uploaded successfully',
+                4000
+              );
             }
             if (isRelative) {
               relativeData.push({
@@ -435,46 +445,50 @@ export class AddProductModalComponent implements OnInit {
             maximumFaces: maximumFaces,
             isRelative: false,
           });
-        } 
+        }
       } catch (e) {
         error = true;
-        errorMesage=e;
+        errorMesage = e;
       }
     }
-    if (!error){
-      console.log(data,relativeData);
+    if (!error) {
+      console.log(data, relativeData);
       let dts = [];
       for (let adp of relativeData) {
         dts.push(adp.values);
       }
-      console.log("values",dts);
-      if (dts.length>0){
+      console.log('values', dts);
+      if (dts.length > 0) {
         dts = this.cartProd(dts);
       }
-      console.log("permutations",dts)
-      this.permutations=dts;
-      this.customisations=[];
-      this.addons =JSON.parse(JSON.stringify(data));
-      console.log("addons",this.addons);
+      console.log('permutations', dts);
+      this.permutations = dts;
+      this.customisations = [];
+      this.addons = JSON.parse(JSON.stringify(data));
+      console.log('addons', this.addons);
       // this.customisations.push(data);
       // this.customisations.push(relativeData);
-      relativeData.forEach((value)=>{
+      relativeData.forEach((value) => {
         this.customisations.push(value);
-      })
-      data.forEach((value)=>{
+      });
+      data.forEach((value) => {
         this.customisations.push(value);
-      })
+      });
     } else {
-      this.authService.presentToast('There is an error with customisation fields',5000);
-      console.error(errorMesage)
+      this.authService.presentToast(
+        'There is an error with customisation fields',
+        5000
+      );
+      console.error(errorMesage);
     }
   }
   cartProd(paramArray) {
     function addTo(curr, args) {
-      var i, copy, 
-          rest = args.slice(1),
-          last = !rest.length,
-          result = [];
+      var i,
+        copy,
+        rest = args.slice(1),
+        last = !rest.length,
+        result = [];
       for (i = 0; i < args[0].length; i++) {
         copy = curr.slice();
         copy.push(args[0][i]);
@@ -488,79 +502,132 @@ export class AddProductModalComponent implements OnInit {
     }
     return addTo([], paramArray);
   }
-  submitPrices(stepper: MatStepper){
-    console.log("submitPrices triggered");
-    this.progressType="indeterminate"
+  submitPrices(stepper: MatStepper) {
+    console.log('submitPrices triggered');
+    this.progressType = 'indeterminate';
     let length = this.permutations.length;
-    console.log("copying array")
+    console.log('copying array');
     this.finalData = JSON.parse(JSON.stringify(this.permutations));
-    console.log("array copied")
+    console.log('array copied');
     for (let i = 0; i < length; i++) {
-      let isPossible = (document.getElementById('isPossible'+ i.toString()) as HTMLInputElement).checked;
-      console.log("isPossible: ",isPossible);
+      let isPossible = (
+        document.getElementById('isPossible' + i.toString()) as HTMLInputElement
+      ).checked;
+      console.log('isPossible: ', isPossible);
       if (isPossible) {
         let data = this.permutations[i];
-        this.finalData[i]={};
+        this.finalData[i] = {};
         this.finalData[i]['isPossible'] = true;
-        this.finalData[i]['price'] = (document.getElementById('price' + i.toString()) as HTMLInputElement).value;
-        this.finalData[i]['configLength'] = (document.getElementById('Length' + i.toString()) as HTMLInputElement).value;
-        this.finalData[i]['configWidth'] = (document.getElementById('Width' + i.toString()) as HTMLInputElement).value;
-        this.finalData[i]['configBreadth'] = (document.getElementById('Breadth' + i.toString()) as HTMLInputElement).value;
-        this.finalData[i]['configWeight'] = (document.getElementById('Weight' + i.toString()) as HTMLInputElement).value;
+        this.finalData[i]['price'] = (
+          document.getElementById('price' + i.toString()) as HTMLInputElement
+        ).value;
+        this.finalData[i]['configLength'] = (
+          document.getElementById('Length' + i.toString()) as HTMLInputElement
+        ).value;
+        this.finalData[i]['configWidth'] = (
+          document.getElementById('Width' + i.toString()) as HTMLInputElement
+        ).value;
+        this.finalData[i]['configBreadth'] = (
+          document.getElementById('Breadth' + i.toString()) as HTMLInputElement
+        ).value;
+        this.finalData[i]['configWeight'] = (
+          document.getElementById('Weight' + i.toString()) as HTMLInputElement
+        ).value;
         this.finalData[i]['permutations'] = data;
-        console.log("data got")
+        console.log('data got');
       } else {
-        this.finalData[i]={};
+        this.finalData[i] = {};
         this.finalData[i]['isPossible'] = false;
       }
     }
-    for (let i=0; i < this.addons.length;i++){
-      let values= [];
-      for (let j=0; j < this.addons[i].values.length;j++){
-        let data = {
-          sectionTitle: this.addons[i].values[j].sectionTitle,
-          title: this.addons[i].values[j].title,
-          price:(document.getElementById('addonPrice'+i.toString()+j.toString()) as HTMLInputElement).value,
-          length:(document.getElementById('addonLength'+i.toString()+j.toString()) as HTMLInputElement).value,
-          width:(document.getElementById('addonWidth'+i.toString()+j.toString()) as HTMLInputElement).value,
-          breadth:(document.getElementById('addonBreadth'+i.toString()+j.toString()) as HTMLInputElement).value,
-          weight:(document.getElementById('addonWeight'+i.toString()+j.toString()) as HTMLInputElement).value,
+    for (let i = 0; i < this.addons.length; i++) {
+      let values = [];
+      if (this.addons[i].type == 'textSel' || this.addons[i].type == 'imgSel') {
+        for (let j = 0; j < this.addons[i].values.length; j++) {
+          let data = {
+            sectionTitle: this.addons[i].values[j].sectionTitle,
+            title: this.addons[i].values[j].title,
+            price: (
+              document.getElementById(
+                'addonPrice' + i.toString() + j.toString()
+              ) as HTMLInputElement
+            ).value,
+            length: (
+              document.getElementById(
+                'addonLength' + i.toString() + j.toString()
+              ) as HTMLInputElement
+            ).value,
+            width: (
+              document.getElementById(
+                'addonWidth' + i.toString() + j.toString()
+              ) as HTMLInputElement
+            ).value,
+            breadth: (
+              document.getElementById(
+                'addonBreadth' + i.toString() + j.toString()
+              ) as HTMLInputElement
+            ).value,
+            weight: (
+              document.getElementById(
+                'addonWeight' + i.toString() + j.toString()
+              ) as HTMLInputElement
+            ).value,
+          };
+          values.push(data);
         }
-        values.push(data);
+      } else {
+        values=this.addons[i].values || [];
       }
-      for (let customCount=0;customCount<this.customisations.length;customCount++){
-        if (this.customisations[customCount].sectionTitle==this.addons[i].sectionTitle && this.customisations[customCount].type==this.addons[i].type){
-          this.customisations[customCount]={
-            type:this.addons[i].type,
-            sectionTitle:this.addons[i].sectionTitle,
-            values:values,
-            isRelative:this.addons[i].isRelative}
+      for (
+        let customCount = 0;
+        customCount < this.customisations.length;
+        customCount++
+      ) {
+        if (
+          this.customisations[customCount].sectionTitle ==
+            this.addons[i].sectionTitle &&
+          this.customisations[customCount].type == this.addons[i].type
+        ) {
+          this.customisations[customCount] = {
+            type: this.addons[i].type,
+            sectionTitle: this.addons[i].sectionTitle || 'Faces',
+            values: values,
+            isRelative: this.addons[i].isRelative,
+          };
         }
       }
     }
-    console.log("customisations",this.customisations);
-    console.log("finalData: ",this.finalData);
-    console.log("checkin validity")
-    if(this.finalData!=undefined){
-      this.basicProductDetails['permutations']=this.finalData;
-      this.basicProductDetails['extraData']=this.customisations;
+    console.log('customisations', this.customisations);
+    console.log('finalData: ', this.finalData);
+    console.log('checkin validity');
+    if (this.finalData != undefined) {
+      if (this.basicProductDetails==undefined){this.basicProductDetails={}}
+      this.basicProductDetails['permutations'] = this.finalData;
+      this.basicProductDetails['extraData'] = this.customisations;
+      console.log('basicProductDetails', this.basicProductDetails);
       this.inventory.addProduct(this.basicProductDetails);
-      this.modalController.dismiss()
+      this.modalController.dismiss();
       console.log(this.basicProductDetails);
-      this.authService.presentToast('Product added successfully',5000);
+      this.authService.presentToast('Product added successfully', 5000);
     }
-    this.progressType="determinate"
-    this.showProgress=false;
+    this.progressType = 'determinate';
+    this.showProgress = false;
   }
-  increaseValue(){
-    console.log("increase value fired")
-    if (+this.customisationsCount.value < 10 && +this.customisationsCount.value >= 1){
-      console.log("increase value true")
+  increaseValue() {
+    console.log('increase value fired');
+    if (
+      +this.customisationsCount.value < 10 &&
+      +this.customisationsCount.value >= 1
+    ) {
+      console.log('increase value true');
       this.customisationsCount.setValue(+this.customisationsCount.value + 1);
     }
   }
-  decreaseValue(){
-    if (+this.customisationsCount.value <= 10 && +this.customisationsCount.value > 1){
+  decreaseValue() {
+    if (
+      +this.customisationsCount.value <= 10 &&
+      +this.customisationsCount.value > 1
+    ) {
       this.customisationsCount.setValue(+this.customisationsCount.value - 1);
     }
   }
@@ -572,7 +639,7 @@ export class AddProductModalComponent implements OnInit {
     private storage: AngularFireStorage,
     public dataProvider: DataProvider,
     public afs: AngularFirestore,
-    public modalController: ModalController,
+    public modalController: ModalController
   ) {
     this.basicDetail = this.formbuilder.group({
       productName: this.productName,

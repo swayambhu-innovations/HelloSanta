@@ -8,12 +8,23 @@
     <main id="container" *ngIf="productData">
         <section id="product">
             <div id="product-images-and-details">
-                <div id="product-images">
+                <div id="product-images" *ngIf="screenwidth > 800">
                     <div id="product-images-list">
-                        <img [src]="item.image" (click)="selectedImage=item.image" class="product-images-list-item"
+                        <img [src]="item.image" [ngStyle]="{'border': selectedImage == item.image ? '2px solid #9e91ff' : 'none' }" (click)="setImage(item.image)" class="product-images-list-item"
                             [alt]="item.imageName" *ngFor="let item of productData.productImages">
                     </div>
-                    <img [src]="selectedImage" alt="Product Image Description" id="product-image-preview">
+                    <lib-ngx-image-zoom [thumbImage]="selectedImage" [lensWidth]="200" [lensHeight]="200" zoomMode="hover" [enableScrollZoom]="true" [enableLens]="true" alt="Product Image Description" id="product-image-preview"></lib-ngx-image-zoom>
+                </div>
+                <div id="product-images" *ngIf="screenwidth < 800">
+                    <div uk-lightbox="animation: fade" id="product-image-preview">
+                        <a class="uk-inline" href="{{selectedImage}}" >
+                            <img [src]="selectedImage" [alt]="productData.productName">
+                        </a>
+                    </div>
+                    <div id="product-images-list">
+                        <img [src]="item.image" [ngStyle]="{'border': selectedImage == item.image ? '2px solid #9e91ff' : 'none' }" (click)="selectedImage=item.image" class="product-images-list-item"
+                            [alt]="item.imageName" *ngFor="let item of productData.productImages">
+                    </div>
                 </div>
                 <div id="product-details">
                     <h2 id="product-name">{{productData.productName}}<br><span>{{productData.shortDescription}}</span>
@@ -52,27 +63,51 @@
                                 *ngIf="extra.type!='faceInput' && extra.type!='extraInfo'">{{extra.sectionTitle}}</span>
                         </button>
                     </div>
-                    <div *ngFor="let item of productData.extraData">
+                    <div *ngFor="let item of productData.extraData" id="productFilterSelections" [ngStyle]="{'padding': (item.sectionTitle == selectedExtraTitle) ? '20px' : '0px'}">
                         <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='textSel'">
                             <ion-radio-group [name]="item.sectionTitle" [value]="extrasData[item.sectionTitle]" required
                                 (ionChange)="updateData($event,item.isRelative,item.sectionTitle)"
                                 id="imgSel{{item.sectionTitle}}">
                                 <ion-card class="selectionChoiceCard" *ngFor="let single of item.values">
                                     <span class="selectionTitle">{{single.title}}</span><br>
-                                    <span class="selectionPrice"> &#8377;{{single.priceAddon}}</span>
                                     <ion-radio [value]="single"></ion-radio>
                                 </ion-card>
                             </ion-radio-group>
                         </ion-row>
-                        <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='img'">
+                        <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='imgSel'">
                             <ion-card class="selectionChoiceCard" *ngFor="let single of item.values"
                                 id="selImg{{single.imageTitle}}{{item.sectionTitle}}">
                                 <img [src]="single.image" />
                                 <ion-label class="uk-align-center uk-text-center">{{single.imageTitle}}</ion-label>
-                                <ion-label class="uk-align-center uk-text-center">&#8377;{{single.priceAddon}}
-                                </ion-label>
                                 <ion-radio [value]="single"></ion-radio>
                             </ion-card>
+                        </ion-row>
+                        <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='faceCount'">
+                            <ion-radio-group [name]="item.sectionTitle" [value]="extrasData[item.sectionTitle]" required
+                            (ionChange)="updateData($event,item.isRelative,item.sectionTitle)">
+                                <ion-card class="selectionChoiceCard" *ngFor="let single of genList(4)">
+                                    <ion-label class="uk-align-center uk-text-center">{{single}}</ion-label>
+                                    <ion-radio [value]="{'type':item.type,'isRelative':item.isRealtive,'faces':single}"></ion-radio>
+                                </ion-card>
+                            </ion-radio-group>
+                        </ion-row>
+                        <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='extraInfo'">
+                            <ion-radio-group [name]="item.sectionTitle" [value]="extrasData[item.sectionTitle]" required
+                            (ionChange)="updateData($event,item.isRelative,item.sectionTitle)">
+                                <ion-card class="selectionChoiceCard" style="width:400px;" *ngFor="let single of item.values">
+                                    <ion-textarea (ionChange)="single['data']=extraDataValue.value" [placeholder]="single.title" #extraDataValue></ion-textarea>
+                                    <ion-radio [value]="single"></ion-radio>
+                                </ion-card>
+                            </ion-radio-group>
+                        </ion-row>
+                        <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='quantitySel'">
+                            <ion-radio-group [name]="item.sectionTitle" [value]="extrasData[item.sectionTitle]" required
+                            (ionChange)="updateData($event,item.isRelative,item.sectionTitle)">
+                                <ion-card class="selectionChoiceCard" *ngFor="let single of genList(4)">
+                                    <ion-label class="uk-align-center uk-text-center">{{single}}</ion-label>
+                                    <ion-radio [value]="{'type':item.type,'isRelative':item.isRealtive,'quantity':single}"></ion-radio>
+                                </ion-card>
+                            </ion-radio-group>
                         </ion-row>
                     </div>
                 </div>
@@ -85,7 +120,7 @@
         <section id="product-description">
             <ion-item>
                 <ion-title style="font-size: 20px;">Ratings</ion-title>
-                <ion-button (click)="addComment($event)" shape="round">
+                <ion-button *ngIf="purchasedProduct" (click)="addComment($event)" shape="round">
                     Add Review
                 </ion-button>
             </ion-item>
@@ -93,6 +128,7 @@
                 <app-comment-card [image]="comment.userImage" [stars]="comment.stars" [body]="comment.commentBody"
                     [title]="comment.commentTitle" [commentDate]="comment.commentDate" [username]="comment.userName"
                     *ngFor="let comment of comments"></app-comment-card>
+                <img src="./assets/NotFound.gif" alt="Nothing TO Show" *ngIf="comments.length<=0">
             </div>
         </section>
         <div id="container2">

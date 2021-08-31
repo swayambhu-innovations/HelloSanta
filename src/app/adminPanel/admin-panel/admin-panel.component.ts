@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataProvider } from 'src/app/providers/data.provider';
+import { EventSchedulerService } from 'src/app/services/event-scheduler.service';
 
 
 @Component({
@@ -24,7 +25,9 @@ export class AdminPanelComponent implements OnInit {
     { title: 'Login/Access', url: '/AdminPanel/LoginAccess', icon: 'key' },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor(public dataProvider: DataProvider) { }
-  ngOnInit() {}
+  constructor(public dataProvider: DataProvider,private eventSchedulerService:EventSchedulerService) { }
+  ngOnInit() {
+    this.eventSchedulerService.init();
+  }
 
 }

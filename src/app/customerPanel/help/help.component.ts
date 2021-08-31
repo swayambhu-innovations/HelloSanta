@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
   selector: 'app-help',
@@ -8,7 +10,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class HelpComponent implements OnInit {
   screenwidth=window.innerWidth
-  constructor(private formbuilder: FormBuilder,) {
+  constructor(private formbuilder: FormBuilder,private inventoryService: InventoryService,private authService: AuthService) {
     this.helpForm = this.formbuilder.group({
       fullName: this.fullName,
       email: this.email,
@@ -32,6 +34,17 @@ export class HelpComponent implements OnInit {
   description: FormControl = new FormControl('', [
     Validators.required,
   ]);
+  addHelpData(){
+    let data = {
+      fullName: this.fullName.value,
+      email: this.email.value,
+      subject: this.subject.value,
+      description: this.description.value,
+    }
+    this.inventoryService.addhelpDocument(data);
+    this.authService.presentToast("Sent the feedback")
+    this.helpForm.reset();
+  }
   ngOnInit() {}
 
 }

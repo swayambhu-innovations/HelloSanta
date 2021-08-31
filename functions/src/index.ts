@@ -1,9 +1,6 @@
 const functions = require('firebase-functions');
 const Razorpay = require('razorpay');
-
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
+const nodemailer = require('nodemailer');
 var key_id = 'rzp_test_1GPCwB7UYA1pfl';
 var key_secret = '3v5jh3ZOsERttf0ZGE1gbmNj';
 var request = require('request');
@@ -12,7 +9,41 @@ var instance = new Razorpay({
   key_id: key_id,
   key_secret: key_secret,
 });
+var transporter = nodemailer.createTransport({
+  name: 'www.hellosanta.in',
+  host: 'mail.hellosanta.in',
+  port: 587,
+  secure: false, // true for 465, false for other ports
+  auth: {
+    user: 'connect@hellosanta.in', // your domain email address
+    pass: 'Support@9208Santa', // your password
+  },
+  tls:{
+    rejectUnauthorized:false
+  },
+  logger: true,
+  debug: true
+});
 
+exports.sendMail = functions.https.onRequest((req: any, res: any) => {
+  return cors(req, res, () => {
+    const mailOptions = {
+      from: 'Hello Santa <connect@hellosanta.in>',
+      to: req.body.email,
+      subject: req.body.subject,
+      html: req.body.content,
+    };
+    console.log(mailOptions);
+    return transporter.sendMail(mailOptions, (erro: any, info: any) => {
+      // console.log(info);
+      if (erro) {
+        console.log(erro);
+        return res.send(erro.toString());
+      }
+      return res.status(200).send({'msg':'Sended'});
+    });
+  });
+});
 exports.createOrder = functions.https.onRequest((req: any, res: any) => {
   return cors(req, res, () => {
     var options = {
@@ -109,12 +140,12 @@ exports.shipOrder = functions.https.onRequest((req: any, res: any) => {
         if (error) throw new Error(error);
         console.log(shipResponse.body);
         let shipResponseBody = JSON.parse(shipResponse.body);
-        shipResponseBody['orderDate']=orderDate;
-        shipResponse 
+        shipResponseBody['orderDate'] = orderDate;
+        shipResponse
           ? res.status(200).send({
               res: shipResponse,
               req: req.body,
-              body:shipResponseBody,
+              body: shipResponseBody,
             })
           : res.status(500).send(error);
       });
@@ -139,69 +170,70 @@ exports.checkOrderShipment = functions.https.onRequest((req: any, res: any) => {
       if (error) throw new Error(error);
       var response = JSON.parse(authResponse.body);
       var options = {
-        'method': 'GET',
-        'url': 'https://apiv2.shiprocket.in/v1/external/shipments/'+req.body.shipmentId,
-        'headers': {
+        method: 'GET',
+        url:
+          'https://apiv2.shiprocket.in/v1/external/shipments/' +
+          req.body.shipmentId,
+        headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer '+response.token,
-        }
-      };
-      request(options, function (error:any, response:any) {
-        if (error) throw new Error(error);
-        response 
-          ? res.status(200).send({
-            res: response,
-            req: req.body,
-            body:response.body,
-          })
-        : res.status(500).send(error);
-      });
-    })
-  });
-});
-
-exports.cancelOrderShipment = functions.https.onRequest((req: any, res: any) => {
-  return cors(req, res, () => {
-    var authOptions = {
-      method: 'POST',
-      url: 'https://apiv2.shiprocket.in/v1/external/auth/login',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: 'hellosantaapi@gmail.com',
-        password: 'Poiuy@09876',
-      }),
-    };
-    request(authOptions, function (error: any, authResponse: any) {
-      if (error) throw new Error(error);
-      var response = JSON.parse(authResponse.body);
-      console.log('authApi', response, req.body.ids,typeof req.body.ids);
-      var options = {
-        'method': 'POST',
-        'url': 'https://apiv2.shiprocket.in/v1/external/orders/cancel',
-        'headers': {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer '+response.token,
+          Authorization: 'Bearer ' + response.token,
         },
-        body:JSON.stringify({
-          ids:req.body.ids,
-        })
       };
-      request(options, function (error:any, response:any) {
+      request(options, function (error: any, response: any) {
         if (error) throw new Error(error);
-        console.log("response",response)
-        response 
+        response
           ? res.status(200).send({
-            res: response,
-            req: req.body,
-            body:response.body,
-          })
-        : res.status(500).send(error);
+              res: response,
+              req: req.body,
+              body: response.body,
+            })
+          : res.status(500).send(error);
       });
-    })
+    });
   });
 });
 
-
-
+exports.cancelOrderShipment = functions.https.onRequest(
+  (req: any, res: any) => {
+    return cors(req, res, () => {
+      var authOptions = {
+        method: 'POST',
+        url: 'https://apiv2.shiprocket.in/v1/external/auth/login',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: 'hellosantaapi@gmail.com',
+          password: 'Poiuy@09876',
+        }),
+      };
+      request(authOptions, function (error: any, authResponse: any) {
+        if (error) throw new Error(error);
+        var response = JSON.parse(authResponse.body);
+        console.log('authApi', response, req.body.ids, typeof req.body.ids);
+        var options = {
+          method: 'POST',
+          url: 'https://apiv2.shiprocket.in/v1/external/orders/cancel',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + response.token,
+          },
+          body: JSON.stringify({
+            ids: req.body.ids,
+          }),
+        };
+        request(options, function (error: any, response: any) {
+          if (error) throw new Error(error);
+          console.log('response', response);
+          response
+            ? res.status(200).send({
+                res: response,
+                req: req.body,
+                body: response.body,
+              })
+            : res.status(500).send(error);
+        });
+      });
+    });
+  }
+);

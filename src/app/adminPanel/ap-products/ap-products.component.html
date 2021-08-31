@@ -18,40 +18,43 @@
     <ion-label slot="end">Pretty View</ion-label>
     <ion-toggle slot="end" checked #switch></ion-toggle>
   </ion-toolbar>
-  <ion-row uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100" *ngIf="switch.checked && allProds!=[]">
-    <div *ngFor="let item of allProds">
-      <app-product 
-      [totalCancelled]="item.totalCancels"
-      [image]="item.productImages[0].image"
-      [description]="item.seoDescription"
-      [name]="item.productName"
-      [price]="item.productPrice"
-      [totalSales]="item.totalSales"
-      [id]="item.productId"
-      ></app-product>
-    </div>
-  </ion-row>
-  <ion-row uk-scrollspy="target: > ion-item; cls: uk-animation-fade; delay: 50" *ngIf="!switch.checked && allProds!=[]">
-    <ion-item *ngFor="let item of allProds">
-      <ion-img size="small" [src]="item.productImages[0].image"></ion-img>&nbsp;&nbsp;&nbsp;&nbsp;
-      <ion-label color="secondary">{{item.productName}}</ion-label>
-      <ion-label>{{item.seoDescription}}</ion-label>&nbsp;&nbsp;&nbsp;&nbsp;
-      <ion-label color="success"><strong>Total Sales: &nbsp;</strong>{{item.totalSales}}</ion-label>
-      <ion-chip color="primary">
-        <ion-label><strong>Price:&nbsp;</strong>&#8377;&nbsp;{{item.productPrice}}</ion-label>
-      </ion-chip>
-      <button slot="end" (click)="deleteItem(item.productId)">
-        <ion-icon name="trash"></ion-icon>
-      </button>
-      <button slot="end" (click)="presentEditProductModal(item.productId)">
-        <ion-icon name="create"></ion-icon>
-      </button>
-      <button (click)="presentSpecificProductsPop($event,item.productId)">
-        <ion-icon name="albums"></ion-icon>
-      </button>
-    </ion-item>
-  </ion-row>
-  <div id="overlay" *ngIf="allProds==[] || allProds==undefined">
-    <ion-spinner name="crescent" color="tertiary"></ion-spinner>
+  <div *ngIf="visible">
+    <ion-row uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100" *ngIf="switch.checked && allProds!=[]">
+      <div *ngFor="let item of allProds">
+        <app-product 
+        [totalCancelled]="item.totalCancels"
+        [image]="item.productImages[0].image"
+        [description]="item.seoDescription"
+        [name]="item.productName"
+        [price]="item.productPrice"
+        [totalSales]="item.totalSales"
+        [id]="item.productId"
+        ></app-product>
+      </div>
+    </ion-row>
+    <ion-row uk-scrollspy="target: > ion-item; cls: uk-animation-fade; delay: 50" *ngIf="!switch.checked && allProds!=[]">
+      <ion-item *ngFor="let item of allProds">
+        <ion-img size="small" [src]="item.productImages[0].image"></ion-img>&nbsp;&nbsp;&nbsp;&nbsp;
+        <ion-label color="secondary">{{item.productName}}</ion-label>
+        <ion-label>{{item.seoDescription}}</ion-label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <ion-label color="success"><strong>Total Sales: &nbsp;</strong>{{item.totalSales}}</ion-label>
+        <ion-chip color="primary">
+          <ion-label><strong>Price:&nbsp;</strong>&#8377;&nbsp;{{item.productPrice}}</ion-label>
+        </ion-chip>
+        <button slot="end" (click)="deleteItem(item.productId)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+        <button slot="end" (click)="presentEditProductModal(item.productId)">
+          <ion-icon name="create"></ion-icon>
+        </button>
+        <button (click)="presentSpecificProductsPop($event,item.productId)">
+          <ion-icon name="albums"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-row>
+  </div>
+  <div class="uk-margin-large-top" *ngIf="!visible">
+    <h4>No products found</h4>
+    <img src="./assets/loading.gif" alt="">
   </div>
 </ion-content>

@@ -104,6 +104,7 @@ export class CheckoutComponent implements OnInit {
   async presentInvoice() {
     const modal = await this.modalController.create({
       component: InvoiceDetailComponent,
+      cssClass:'invoiceModal'
     });
     return await modal.present();
   }

@@ -410,6 +410,24 @@ export class InventoryService {
        console.log(user.data());
       }
     });
-
   }
+  addhelpDocument(data){
+    this.afs.collection('feedback').add(data);
+  }
+  getHelpDocuments(){
+    return this.afs.collection('feedback').ref.get();
+  }
+  addCalendarEvent(event){
+    this.afs.collection('users').doc(this.authService.userId).collection('events').add(event).then((docRef) => {
+      const productRef = this.afs.doc(`users/${this.authService.userId}/events/${docRef.id}`);
+      productRef.update({ eventId: docRef.id });
+    });
+  }
+  removeCalendarEvent(eventId){
+    this.afs.collection('users').doc(this.authService.userId).collection('events').doc(eventId).delete();
+  }
+  getUserEvents(){
+    return this.afs.collection('users').doc(this.authService.userId).collection('events');
+  }
+  
 }

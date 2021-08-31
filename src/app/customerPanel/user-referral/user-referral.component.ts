@@ -12,6 +12,7 @@ import { InventoryService } from 'src/app/services/inventory.service';
 export class UserReferralComponent implements OnInit {
   screenwidth = window.innerWidth;
   loading = false;
+  coins:number=0;
   form: FormGroup;
   referCode: string;
   isReferrer: boolean;
@@ -60,6 +61,7 @@ export class UserReferralComponent implements OnInit {
             this.referredIds = users.referred;
             this.referCode=users.referralCode;
             this.isReferrer=users.isReferrer;
+            this.coins=users.totalCashback;
             this.loading = true;
             this.users = snapshot.filter((val) => {
               console.log(val.uid, 'val.id');

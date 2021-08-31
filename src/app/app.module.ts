@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
+import { ActivatedRouteSnapshot, RouteReuseStrategy, RouterStateSnapshot } from '@angular/router';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -77,7 +77,7 @@ import { VPProductCardComponent } from './Components/vpproduct-card/vpproduct-ca
 import { AuthService } from './services/auth.service';
 import { DataProvider } from './providers/data.provider';
 import { LoginGuard } from './guards/login-guard.guard';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VerifyEmailComponent } from './customerPanel/verify-email/verify-email.component';
 import { SetupModalStepOneComponent } from './modals/setup-modal-step-one/setup-modal-step-one.component';
 import { AddProductModalComponent } from './modals/add-product-modal/add-product-modal.component';
@@ -103,18 +103,20 @@ import { UserReferralComponent } from './customerPanel/user-referral/user-referr
 import { SearchResultComponent } from './popovers/search-result/search-result.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalenderComponent } from './customerPanel/calender/calender.component';
-import { CalendarModule } from 'ion2-calendar';
-import {MatStepperModule} from '@angular/material/stepper';
-import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
-import {MatIconModule} from '@angular/material/icon';
+import { MatStepperModule } from '@angular/material/stepper';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { MatIconModule } from '@angular/material/icon';
 import { ApDashboardOrderItemComponent } from './Components/ap-dashboard-order-item/ap-dashboard-order-item.component';
 import { ShippingDetailPopComponent } from './popovers/shipping-detail-pop/shipping-detail-pop.component';
 import { ApOrdersOptionsItemComponent } from './Components/ap-orders-options-item/ap-orders-options-item.component';
 import { CommentCardComponent } from './Components/comment-card/comment-card.component';
-import { MatBadgeModule } from '@angular/material/badge'; 
+import { MatBadgeModule } from '@angular/material/badge';
 import { AddCommentComponent } from './popovers/add-comment/add-comment.component';
 import { CategoryProductsComponent } from './customerPanel/category-products/category-products.component';
 import { InvoiceDetailComponent } from './modals/invoice-detail/invoice-detail.component';
+import { MoreInfoComponent } from './popovers/more-info/more-info.component';
+import { NgxImageZoomModule } from 'ngx-image-zoom';
+import { NgCalendarModule } from 'ionic2-calendar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -210,6 +212,7 @@ import { InvoiceDetailComponent } from './modals/invoice-detail/invoice-detail.c
     AddCommentComponent,
     CategoryProductsComponent,
     InvoiceDetailComponent,
+    MoreInfoComponent,
   ],
   entryComponents: [],
   imports: [
@@ -223,12 +226,13 @@ import { InvoiceDetailComponent } from './modals/invoice-detail/invoice-detail.c
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     BrowserAnimationsModule,
-    CalendarModule,
     FormsModule,
     MatStepperModule,
     MatIconModule,
     MatBadgeModule,
     AngularFireAnalyticsModule,
+    NgxImageZoomModule,
+    NgCalendarModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
@@ -236,8 +240,14 @@ import { InvoiceDetailComponent } from './modals/invoice-detail/invoice-detail.c
     DataProvider,
     LoginGuard,
     {
+      provide: 'externalUrlRedirectResolver',
+      useValue: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+        window.location.href = (route.data as any).externalUrl;
+      },
+    },
+    {
       provide: STEPPER_GLOBAL_OPTIONS,
-      useValue: { displayDefaultIndicatorType: false, showError: true }
+      useValue: { displayDefaultIndicatorType: false, showError: true },
     },
   ],
   bootstrap: [AppComponent],

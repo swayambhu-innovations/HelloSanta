@@ -56,9 +56,18 @@ ion-content > ion-card > ion-list > ion-item > ion-chip:hover {
     background-color: rgba(149, 104, 255, 0.144);
 }
 
-
-
-
+img{
+    position: relative;
+    width: 300px;
+    left:50%;
+    transform: translateX(-50%);
+}
+h4{
+    font-size: 25px;
+    margin-top: 20px;
+    color:#9081FF;
+    text-align: center;
+}
 
 
 

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { MatStepper } from '@angular/material/stepper';
+import { AlertController, ModalController } from '@ionic/angular';
 import { last, switchMap } from 'rxjs/operators';
 import { DataProvider } from 'src/app/providers/data.provider';
 import { AuthService } from 'src/app/services/auth.service';
@@ -14,13 +15,26 @@ import { InventoryService } from 'src/app/services/inventory.service';
   styleUrls: ['./pending-product-modal.component.scss'],
 })
 export class PendingProductModalComponent implements OnInit {
+  finalData:any;
+  customisations: any;
+  showProgress:boolean = false;
+  progressColor: string="warning";
+  progressValue:number=0.0;
+  progressType: string = 'indeterminate';
+  basicProductDetails:any;
   customSelections = {};
   prodImagesEvents = {};
   allSubCategories = [];
   allCategories = [];
   formCategories = [];
   formSubcategories = [];
-  form: FormGroup;
+  mainCategorySelected: {} = {};
+  allVendors: any;
+  selectedVendors = [];
+  permutations:any;
+  addons:any;
+  basicDetail: FormGroup;
+  customisationsForm: FormGroup;
   productName: FormControl = new FormControl('', [
     Validators.required,
     Validators.minLength(5),
@@ -50,14 +64,23 @@ export class PendingProductModalComponent implements OnInit {
     Validators.required,
     Validators.min(5),
   ]);
-  customisationsCount: FormControl = new FormControl('', [
+  customisationsCount: FormControl = new FormControl({value:1,disabled:true}, [
     Validators.required,
     Validators.min(1),
   ]);
-  formulaAvalue: FormControl = new FormControl('', [Validators.required]);
-  formulaBvalue: FormControl = new FormControl('', [Validators.required]);
-  formulaCvalue: FormControl = new FormControl('', [Validators.required]);
+  baseWidth: FormControl = new FormControl(0, [Validators.required]);
+  baseHeight: FormControl = new FormControl(0, [Validators.required]);
+  baseBreadth: FormControl = new FormControl(0, [Validators.required]);
+  baseWeight: FormControl = new FormControl(0, [Validators.required]);
   isLoading: boolean = false;
+  changeCategoryType(value, main, type) {
+    this.mainCategorySelected[main] = [];
+    console.log(this.mainCategorySelected);
+  }
+  addTocategory(event, index, type) {
+    this.mainCategorySelected[type][index] = event.detail.value;
+    console.log(this.mainCategorySelected);
+  }
   customTypeChanged(value, item) {
     console.log(value);
   }
@@ -67,7 +90,7 @@ export class PendingProductModalComponent implements OnInit {
   checkFields() {
     let dtx = '';
     let nump = 0;
-    const controls = this.form.controls;
+    const controls = this.basicDetail.controls;
     for (const name in controls) {
       if (controls[name].invalid) {
         dtx += name + ', ';
@@ -84,14 +107,12 @@ export class PendingProductModalComponent implements OnInit {
   }
   loadFile(event, count) {
     var image = document.getElementById(count) as HTMLImageElement;
-    image.src = URL.createObjectURL(event.target.files[0]);
     if (event.target.files[0].size > 500000) {
       this.authService.presentToast('File is greater than 500 KB');
       event.target.value = '';
     } else {
       image.src = URL.createObjectURL(event.target.files[0]);
-      this.fileChange(event);
-      this.customSelections[count] = event;
+      this.customSelections[count] = this.fileChange(event);
     }
   }
   loadProdImage(event, count) {
@@ -101,8 +122,7 @@ export class PendingProductModalComponent implements OnInit {
       event.target.value = '';
     } else {
       image.src = URL.createObjectURL(event.target.files[0]);
-      this.fileChange(event);
-      this.prodImagesEvents[count] = event;
+      this.prodImagesEvents[count] = this.fileChange(event);
     }
   }
   uploadFile(file, fileName) {
@@ -126,318 +146,57 @@ export class PendingProductModalComponent implements OnInit {
     let fileList: FileList = event.target.files;
     return fileList[0];
   }
-  async addProduct() {
-    let dict = [];
+  async addBasicDetailProduct(stepper: MatStepper) {
+    this.progressType="indeterminate"
     let prodList = [];
     let res = await this.presentContinueAlert();
     if (res == 'continue') {
-      this.dataProvider.showOverlay = true;
-      this.form.disable();
+      this.basicDetail.disable();
       this.isLoading = true;
-      this.dataProvider.overlayStatus = 'Curating data fields ...';
+      this.showProgress=true;
       if (
         this.formCategories.length >= 1 &&
         this.formSubcategories.length >= 1
       ) {
-        let value = this.form.get('productName')!.value.replace(' ', '_');
+        let value = this.basicDetail.get('productName')!.value.replace(' ', '_');
         let x = document.getElementById('mainProdImage') as HTMLInputElement;
+        console.log("prodImagesEvents",this.prodImagesEvents);
+        stepper.next();
+        this.progressType="determinate"
         for (let imgc = 0; imgc < +x.value; imgc++) {
-          let fileEv = this.fileChange(
-            this.prodImagesEvents['productImage' + imgc.toString()]
-          );
-          this.dataProvider.overlayStatus =
-            'Uploading file ' + fileEv.name.toString() + '...';
+          this.progressValue+=1/(+x.value*2);
+          let fileEv = this.prodImagesEvents['productImage' + imgc.toString()]
           const imgFile = await this.uploadFile(
             fileEv,
             `products/${value}/image_${imgc}_${fileEv.name}`
           ).toPromise();
+          this.progressValue+=1/(+x.value*2);
           console.log(imgFile);
           prodList.push({
             image: imgFile,
-            imageName: this.form.get('productName')!.value.replace(' ', '_'),
           });
         }
-        for (let i = 0; i < this.form.get('customisationsCount')!.value; i++) {
-          let sel = (document.getElementById('radio' + i) as HTMLInputElement)
-            .value;
-          if (sel == 'imgSel') {
-            let values = [];
-            let cout = (
-              document.getElementById('imgInput' + i) as HTMLInputElement
-            ).value;
-            for (let x = 0; x < +cout; x++) {
-              let imageTitle = (
-                document.getElementById(
-                  'imgTitle' + i.toString() + x.toString()
-                ) as HTMLInputElement
-              ).value;
-              let fileName = imageTitle.replace(' ', '_');
-              let fileEv = this.fileChange(
-                this.customSelections['image' + i.toString() + x.toString()]
-              );
-              let priceAddon = (
-                document.getElementById(
-                  'priceImageAddon' + i.toString() + x.toString()
-                ) as HTMLInputElement
-              ).value;
-              this.dataProvider.overlayStatus =
-                'Uploading file ' + fileEv.name.toString() + '...';
-              const file = await this.uploadFile(
-                fileEv,
-                `products/${value}/optionImages/${fileName}_${x}_${fileEv.name}`
-              ).toPromise();
-              console.log(file);
-              values.push({
-                image: file,
-                imageTitle: imageTitle,
-                priceAddon: priceAddon,
-              });
-            }
-            let sectionTitle = (
-              document.getElementById(
-                'sectionImgTitle' + i.toString()
-              ) as HTMLInputElement
-            ).value;
-            dict.push({
-              type: 'imgSel',
-              length: values.length,
-              title: sectionTitle,
-              values: values,
-            });
-          } else if (sel == 'textSel') {
-            let values = [];
-            let cout = (
-              document.getElementById('textInput' + i) as HTMLInputElement
-            ).value;
-            for (let x = 0; x < +cout; x++) {
-              let textTitle = (
-                document.getElementById(
-                  'textSel' + i.toString() + x.toString()
-                ) as HTMLInputElement
-              ).value;
-              let priceAddon = (
-                document.getElementById(
-                  'textPriceAddon' + i.toString() + x.toString()
-                ) as HTMLInputElement
-              ).value;
-              values.push({
-                title: textTitle,
-                priceAddon: priceAddon,
-              });
-            }
-            let sectionTitle = (
-              document.getElementById(
-                'sectionTextTitle' + i.toString()
-              ) as HTMLInputElement
-            ).value;
-            dict.push({
-              type: 'textSel',
-              length: values.length,
-              values: values,
-              title: sectionTitle,
-            });
-          } else if (sel == 'numberSel') {
-            let values = [];
-            let cout = (
-              document.getElementById('numInput' + i) as HTMLInputElement
-            ).value;
-            for (let x = 0; x < +cout; x++) {
-              let numTitle = (
-                document.getElementById(
-                  'numSel' + i.toString() + x.toString()
-                ) as HTMLInputElement
-              ).value;
-              let priceAddon = (
-                document.getElementById(
-                  'numberPriceAddon' + i.toString() + x.toString()
-                ) as HTMLInputElement
-              ).value;
-              values.push({
-                title: numTitle,
-                priceAddon: priceAddon,
-              });
-            }
-            let sectionTitle = (
-              document.getElementById(
-                'sectionNumTitle' + i.toString()
-              ) as HTMLInputElement
-            ).value;
-            dict.push({
-              type: 'numberSel',
-              length: values.length,
-              values: values,
-              title: sectionTitle,
-            });
-          } else if (sel == 'extraInfo') {
-            let values = [];
-            let cout = (
-              document.getElementById('extraInput' + i) as HTMLInputElement
-            ).value;
-            for (let x = 0; x < +cout; x++) {
-              let extraTitle = (
-                document.getElementById(
-                  'extraSel' + i.toString() + x.toString()
-                ) as HTMLInputElement
-              ).value;
-              values.push({
-                title: extraTitle,
-              });
-            }
-            let sectionTitle = (
-              document.getElementById(
-                'sectionExtraTitle' + i.toString()
-              ) as HTMLInputElement
-            ).value;
-            dict.push({
-              type: 'extraInfo',
-              length: values.length,
-              values: values,
-              title: sectionTitle,
-            });
-          } else if (sel == 'faceInput') {
-            let inputTitle = (
-              document.getElementById(
-                'faceInputTitle' + i.toString()
-              ) as HTMLInputElement
-            ).value;
-            let perPrice = (
-              document.getElementById(
-                'faceInputPrice' + i.toString()
-              ) as HTMLInputElement
-            ).value;
-            let values = [{ inputTitle: inputTitle, priceAddon: perPrice }];
-            dict.push({
-              type: 'faceInput',
-              length: values.length,
-              values: values,
-            });
-          } else if (sel == 'sizeInput') {
-            let sizeTitle = (
-              document.getElementById(
-                'sizeInputTitle' + i.toString()
-              ) as HTMLInputElement
-            ).value;
-            let sizesCount = (
-              document.getElementById(
-                'sizeInputCount' + i.toString()
-              ) as HTMLInputElement
-            ).value;
-            let values = [];
-            for (let sizesIndex of this.genList(sizesCount)) {
-              let sizeInputText = (
-                document.getElementById(
-                  'sizeInputText' + i.toString() + sizesIndex.toString()
-                ) as HTMLInputElement
-              ).value;
-              let sizeInputAddon = (
-                document.getElementById(
-                  'sizeInputAddon' + i.toString() + sizesIndex.toString()
-                ) as HTMLInputElement
-              ).value;
-              let sizeInputPrice = (
-                document.getElementById(
-                  'sizeInputAPrice' + i.toString() + sizesIndex.toString()
-                ) as HTMLInputElement
-              ).value;
-              let sizeInputMargin = (
-                document.getElementById(
-                  'sizeInputMargin' + i.toString() + sizesIndex.toString()
-                ) as HTMLInputElement
-              ).value;
-              let sizeInputHours = (
-                document.getElementById(
-                  'sizeInputHours' + i.toString() + sizesIndex.toString()
-                ) as HTMLInputElement
-              ).value;
-              let sizeInputPPH = (
-                document.getElementById(
-                  'sizeInputPPH' + i.toString() + sizesIndex.toString()
-                ) as HTMLInputElement
-              ).value;
-              let sizeInputFactor = (
-                document.getElementById(
-                  'sizeInputSizeFactor' + i.toString() + sizesIndex.toString()
-                ) as HTMLInputElement
-              ).value;
-              values.push({
-                sizeInputText: sizeInputText,
-                sizeInputAddon: sizeInputAddon,
-                sizeInputPrice: sizeInputPrice,
-                sizeInputMargin: sizeInputMargin,
-                sizeInputHours: sizeInputHours,
-                sizeInputPPH: sizeInputPPH,
-                sizeInputFactor: sizeInputFactor,
-              });
-            }
-            console.log({
-              title: sizeTitle,
-              sizesCount: values.length,
-              values: values,
-            });
-            dict.push({
-              title: sizeTitle,
-              sizesCount: values.length,
-              values: values,
-            });
-          }
-        }
-        this.dataProvider.overlayStatus = 'Checking Data ...';
-        let allConditionsFalse = true;
-        while (allConditionsFalse == true) {
-          let counter = 0;
-          prodList.forEach((prod) => {
-            if (
-              prod == [] ||
-              prod.image == null ||
-              prod.image == '' ||
-              prod.image == undefined
-            ) {
-              console.log('image is null');
-            } else if (
-              prod != [] &&
-              prod.image != null &&
-              prod.image != '' &&
-              prod.image != undefined
-            ) {
-              counter++;
-            }
-          });
-          console.log('counter', counter);
-          if (prodList.length == counter) {
-            allConditionsFalse = false;
-            console.log('allConditionsFalse');
-          }
-        }
+        this.authService.presentToast('Images uploaded',4000);
         let data = {
-          productName: this.form.get('productName')!.value,
-          productDescription: this.form.get('productDescription')!.value,
-          shortDescription: this.form.get('shortDescription')!.value,
-          seoDescription: this.form.get('seoDescription')!.value,
-          productPrice: this.form.get('productPrice')!.value,
+          productName: this.basicDetail.get('productName')!.value,
+          productDescription: this.basicDetail.get('productDescription')!.value,
+          shortDescription: this.basicDetail.get('shortDescription')!.value,
+          seoDescription: this.basicDetail.get('seoDescription')!.value,
+          productPrice: this.basicDetail.get('productPrice')!.value,
           productCategory: this.formCategories,
           productSubcategory: this.formSubcategories,
-          vendorId: this.form.get('vendorId')!.value,
-          totalStock: this.form.get('totalStock')!.value,
-          customisationsCount: this.form.get('customisationsCount')!.value,
-          extraData: await dict,
+          vendorId: this.selectedVendors,
+          totalStock: this.basicDetail.get('totalStock')!.value,
           productImages: await prodList,
-          totalCancels: 0,
-          totalSales: 0,
+          comments:[],
+          totalSales:0,
+          totalCancels:0,
         };
-        await this.delay(1000);
-        this.dataProvider.overlayStatus = 'Uploading Data ...';
-        await this.inventory.addPendingProduct(data);
-        this.dataProvider.overlayStatus = 'Uploaded Data Successfully';
-        this.authService.presentToast('Added the data successfully');
-        this.isLoading = false;
-        this.form.enable();
-        // this.form.reset();
-        this.dataProvider.showOverlay = false;
+        console.log(data);
+        this.basicProductDetails=data;
       } else {
-        this.isLoading = false;
-        this.form.enable();
-        // this.form.reset();
-        this.dataProvider.showOverlay = false;
+        this.basicDetail.enable();
+        // this.basicDetail.reset();
         this.authService.presentToast(
           'Please select at least one category and one sub category'
         );
@@ -490,6 +249,314 @@ export class PendingProductModalComponent implements OnInit {
       this.formSubcategories.splice(index, 1);
     }
   }
+  addToVendors(event) {
+    this.selectedVendors = event.detail.value;
+  }
+  async customisationSubmit(stepper: MatStepper) {
+    console.log("matStepper",stepper);
+    let data = [];
+    let relativeData = [];
+    let customs = this.customisationsForm.get('customisationsCount').value;
+    let error = false;
+    let errorMesage = ""
+    stepper.next();
+    for (let i = 0; i < customs; i++) {
+      try {
+        let type = (
+          document.getElementById('radio' + i.toString()) as HTMLInputElement
+        ).value;
+        this.progressValue=0;
+        if (type == 'imgSel') {
+          let optionsCount = (
+            document.getElementById(
+              'imgInput' + i.toString()
+            ) as HTMLInputElement
+          ).value;
+          let sectionTitle = (
+            document.getElementById(
+              'sectionImgTitle' + i.toString()
+            ) as HTMLInputElement
+          ).value;
+          let isRelative = (
+            document.getElementById(
+              'imgCheck' + i.toString()
+            ) as HTMLInputElement
+          ).checked;
+          if (+optionsCount > 0) {
+            let options = [];
+            let value = this.basicDetail.get('productName')!.value.replace(' ', '_');
+            for (let imgCount = 0; imgCount < +optionsCount; imgCount++) {
+              let imageTitle = (
+                document.getElementById(
+                  'imgTitle' + i.toString() + imgCount.toString()
+                ) as HTMLInputElement
+              ).value;
+              let image =
+                this.customSelections[
+                  'image' + i.toString() + imgCount.toString()
+                ];
+              this.progressValue+=1/(+optionsCount*2);
+              let imageUrl = await this.uploadFile(
+                image,
+                  `products/${value}/ExtraOptions/${imageTitle.replace(' ','_')}/image_${imgCount}_${image.name}`
+                ).toPromise();
+              this.progressValue+=1/(+optionsCount*2);
+              options.push({
+                image: imageUrl,
+                title: imageTitle,
+                sectionTitle: sectionTitle,
+              });
+              this.authService.presentToast('All customisations images are uploaded successfully',4000);
+            }
+            if (isRelative) {
+              relativeData.push({
+                type: type,
+                values: options,
+                sectionTitle: sectionTitle,
+                isRelative: isRelative,
+              });
+            } else {
+              data.push({
+                type: type,
+                values: options,
+                sectionTitle: sectionTitle,
+                isRelative: isRelative,
+              });
+            }
+          }
+        } else if (type == 'textSel') {
+          let optionsCount = (
+            document.getElementById(
+              'textInput' + i.toString()
+            ) as HTMLInputElement
+          ).value;
+          let sectionTitle = (
+            document.getElementById(
+              'sectionTextTitle' + i.toString()
+            ) as HTMLInputElement
+          ).value;
+          let isRelative = (
+            document.getElementById(
+              'textCheck' + i.toString()
+            ) as HTMLInputElement
+          ).checked;
+          if (+optionsCount > 0) {
+            let options = [];
+            for (let imgCount = 0; imgCount < +optionsCount; imgCount++) {
+              let textTitle = (
+                document.getElementById(
+                  'textSelTitle' + i.toString() + imgCount.toString()
+                ) as HTMLInputElement
+              ).value;
+              options.push({
+                title: textTitle,
+                sectionTitle: sectionTitle,
+              });
+            }
+            if (isRelative) {
+              relativeData.push({
+                type: type,
+                values: options,
+                sectionTitle: sectionTitle,
+                isRelative: isRelative,
+              });
+            } else {
+              data.push({
+                type: type,
+                values: options,
+                sectionTitle: sectionTitle,
+                isRelative: isRelative,
+              });
+            }
+          }
+        } else if (type == 'quantitySel') {
+          let quantityMax = (
+            document.getElementById(
+              'quantityMax' + i.toString()
+            ) as HTMLInputElement
+          ).value;
+          let sectionTitle = (
+            document.getElementById(
+              'sectionNumTitle' + i.toString()
+            ) as HTMLInputElement
+          ).value;
+          data.push({
+            type: type,
+            quantityMax: quantityMax,
+            sectionTitle: sectionTitle,
+            isRelative: false,
+          });
+        } else if (type == 'extraInfo') {
+          let optionsCount = (
+            document.getElementById(
+              'extraInput' + i.toString()
+            ) as HTMLInputElement
+          ).value;
+          let sectionTitle = (
+            document.getElementById(
+              'sectionExtraTitle' + i.toString()
+            ) as HTMLInputElement
+          ).value;
+          if (+optionsCount > 0) {
+            let options = [];
+            for (let imgCount = 0; imgCount < +optionsCount; imgCount++) {
+              let textTitle = (
+                document.getElementById(
+                  'extraSel' + i.toString() + imgCount.toString()
+                ) as HTMLInputElement
+              ).value;
+              options.push({
+                title: textTitle,
+                sectionTitle: sectionTitle,
+              });
+            }
+            data.push({
+              type: type,
+              values: options,
+              sectionTitle: sectionTitle,
+              isRelative: false,
+            });
+          }
+        } else if (type == 'faceCount') {
+          let maximumFaces = (
+            document.getElementById(
+              'faceInputMaximum' + i.toString()
+            ) as HTMLInputElement
+          ).value;
+          data.push({
+            type: type,
+            maximumFaces: maximumFaces,
+            isRelative: false,
+          });
+        } 
+      } catch (e) {
+        error = true;
+        errorMesage=e;
+      }
+    }
+    if (!error){
+      console.log(data,relativeData);
+      let dts = [];
+      for (let adp of relativeData) {
+        dts.push(adp.values);
+      }
+      console.log("values",dts);
+      if (dts.length>0){
+        dts = this.cartProd(dts);
+      }
+      console.log("permutations",dts)
+      this.permutations=dts;
+      this.customisations=[];
+      this.addons =JSON.parse(JSON.stringify(data));
+      console.log("addons",this.addons);
+      // this.customisations.push(data);
+      // this.customisations.push(relativeData);
+      relativeData.forEach((value)=>{
+        this.customisations.push(value);
+      })
+      data.forEach((value)=>{
+        this.customisations.push(value);
+      })
+    } else {
+      this.authService.presentToast('There is an error with customisation fields',5000);
+      console.error(errorMesage)
+    }
+  }
+  cartProd(paramArray) {
+    function addTo(curr, args) {
+      var i, copy, 
+          rest = args.slice(1),
+          last = !rest.length,
+          result = [];
+      for (i = 0; i < args[0].length; i++) {
+        copy = curr.slice();
+        copy.push(args[0][i]);
+        if (last) {
+          result.push(copy);
+        } else {
+          result = result.concat(addTo(copy, rest));
+        }
+      }
+      return result;
+    }
+    return addTo([], paramArray);
+  }
+  submitPrices(stepper: MatStepper){
+    console.log("submitPrices triggered");
+    this.progressType="indeterminate"
+    let length = this.permutations.length;
+    console.log("copying array")
+    this.finalData = JSON.parse(JSON.stringify(this.permutations));
+    console.log("array copied")
+    for (let i = 0; i < length; i++) {
+      let isPossible = (document.getElementById('isPossible'+ i.toString()) as HTMLInputElement).checked;
+      console.log("isPossible: ",isPossible);
+      if (isPossible) {
+        let data = this.permutations[i];
+        this.finalData[i]={};
+        this.finalData[i]['isPossible'] = true;
+        this.finalData[i]['price'] = (document.getElementById('price' + i.toString()) as HTMLInputElement).value;
+        this.finalData[i]['configLength'] = (document.getElementById('Length' + i.toString()) as HTMLInputElement).value;
+        this.finalData[i]['configWidth'] = (document.getElementById('Width' + i.toString()) as HTMLInputElement).value;
+        this.finalData[i]['configBreadth'] = (document.getElementById('Breadth' + i.toString()) as HTMLInputElement).value;
+        this.finalData[i]['configWeight'] = (document.getElementById('Weight' + i.toString()) as HTMLInputElement).value;
+        this.finalData[i]['permutations'] = data;
+        console.log("data got")
+      } else {
+        this.finalData[i]={};
+        this.finalData[i]['isPossible'] = false;
+      }
+    }
+    for (let i=0; i < this.addons.length;i++){
+      let values= [];
+      for (let j=0; j < this.addons[i].values.length;j++){
+        let data = {
+          sectionTitle: this.addons[i].values[j].sectionTitle,
+          title: this.addons[i].values[j].title,
+          price:(document.getElementById('addonPrice'+i.toString()+j.toString()) as HTMLInputElement).value,
+          length:(document.getElementById('addonLength'+i.toString()+j.toString()) as HTMLInputElement).value,
+          width:(document.getElementById('addonWidth'+i.toString()+j.toString()) as HTMLInputElement).value,
+          breadth:(document.getElementById('addonBreadth'+i.toString()+j.toString()) as HTMLInputElement).value,
+          weight:(document.getElementById('addonWeight'+i.toString()+j.toString()) as HTMLInputElement).value,
+        }
+        values.push(data);
+      }
+      for (let customCount=0;customCount<this.customisations.length;customCount++){
+        if (this.customisations[customCount].sectionTitle==this.addons[i].sectionTitle && this.customisations[customCount].type==this.addons[i].type){
+          this.customisations[customCount]={
+            type:this.addons[i].type,
+            sectionTitle:this.addons[i].sectionTitle,
+            values:values,
+            isRelative:this.addons[i].isRelative}
+        }
+      }
+    }
+    console.log("customisations",this.customisations);
+    console.log("finalData: ",this.finalData);
+    console.log("checkin validity")
+    if(this.finalData!=undefined){
+      this.basicProductDetails['permutations']=this.finalData;
+      this.basicProductDetails['extraData']=this.customisations;
+      this.inventory.addPendingProduct(this.basicProductDetails);
+      this.modalController.dismiss()
+      console.log(this.basicProductDetails);
+      this.authService.presentToast('Product added successfully',5000);
+    }
+    this.progressType="determinate"
+    this.showProgress=false;
+  }
+  increaseValue(){
+    console.log("increase value fired")
+    if (+this.customisationsCount.value < 10 && +this.customisationsCount.value >= 1){
+      console.log("increase value true")
+      this.customisationsCount.setValue(+this.customisationsCount.value + 1);
+    }
+  }
+  decreaseValue(){
+    if (+this.customisationsCount.value <= 10 && +this.customisationsCount.value > 1){
+      this.customisationsCount.setValue(+this.customisationsCount.value - 1);
+    }
+  }
   constructor(
     private formbuilder: FormBuilder,
     private authService: AuthService,
@@ -498,21 +565,26 @@ export class PendingProductModalComponent implements OnInit {
     private storage: AngularFireStorage,
     public dataProvider: DataProvider,
     public afs: AngularFirestore,
+    public modalController: ModalController,
   ) {
-    this.form = this.formbuilder.group({
+    this.basicDetail = this.formbuilder.group({
       productName: this.productName,
       productDescription: this.productDescription,
       shortDescription: this.shortDescription,
       seoDescription: this.seoDescription,
       productPrice: this.productPrice,
-      vendorId: this.vendorId,
       totalStock: this.totalStock,
+      baseWidth: this.baseWidth,
+      baseBreadth: this.baseBreadth,
+      baseHeight: this.baseHeight,
+      baseWeight: this.baseWeight,
+    });
+    this.customisationsForm = this.formbuilder.group({
       customisationsCount: this.customisationsCount,
     });
   }
-
   ngOnInit() {
-    this.form.enable();
+    this.basicDetail.enable();
     this.afs
       .collection('data')
       .doc('category')
@@ -520,6 +592,21 @@ export class PendingProductModalComponent implements OnInit {
       .subscribe((categories: any) => {
         this.allCategories = categories.categories;
         this.allSubCategories = categories.subCategories;
+      });
+    this.afs
+      .collection('users')
+      .ref.get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc: any) => {
+          if (this.allVendors == undefined) {
+            this.allVendors = [];
+          }
+          this.allVendors.push({
+            id: doc.id,
+            name: doc.data().displayName,
+          });
+        });
+        console.log(this.allVendors);
       });
   }
 
