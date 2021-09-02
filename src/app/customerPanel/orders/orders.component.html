@@ -5,7 +5,7 @@
     <section id="orders-container">
       <h2 id="your-cart-title">Your Orders</h2>
       <div class="product-row" *ngIf="!loading">
-        <div *ngFor="let product of liveOrders">
+        <div class="product-row" *ngFor="let product of liveOrders">
           <app-small-product-card [img]="orderProducts.productImages[0].image"
           [productTitle]="orderProducts.productName" [price]="orderProducts.productPrice" [productId]="orderProducts.productId"
           [date]="product.shippingDetail.orderDate" *ngFor="let orderProducts of product.products"></app-small-product-card>

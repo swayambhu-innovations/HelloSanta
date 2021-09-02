@@ -1,9 +1,8 @@
 <ion-content>
   <ion-toolbar>
-    <ion-label slot="end">Pretty View</ion-label>
-    <ion-toggle slot="end" checked #switch></ion-toggle>
+    <ion-title>Pending Products</ion-title>
   </ion-toolbar>
-  <ion-row uk-scrollspy="target: > ion-item; cls: uk-animation-fade; delay: 50">
+  <ion-row uk-scrollspy="target: > ion-item; cls: uk-animation-fade; delay: 50" *ngIf="allProds.length>0">
     <ion-item *ngFor="let item of allProds">
       <ion-img size="small" [src]="item.productImages[0].image"></ion-img>&nbsp;&nbsp;&nbsp;&nbsp;
       <ion-label color="secondary">{{item.productName}}</ion-label>
@@ -17,4 +16,87 @@
       </button>
     </ion-item>
   </ion-row>
+  <div *ngIf="allProds==undefined || allProds.length<=0">
+    <img src="./assets/NotFound.gif" alt="Nothing TO Show" >
+    <h3 class="uk-text-center uk-text-danger">No Pending products found</h3>
+  </div>
+  <ion-toolbar>
+    <ion-title>Custom Products</ion-title>
+  </ion-toolbar>
+  <ion-row uk-scrollspy="target: > ion-item; cls: uk-animation-fade; delay: 50" *ngIf="customProds.length>0">
+    <mat-accordion>
+      <mat-expansion-panel hideToggle  *ngFor="let item of customProds" >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{item.email}}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{item.productCategory}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <table class="uk-table uk-table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Full Name</td>
+              <td>{{item.fullName}}</td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td>{{item.email}}</td>
+            </tr>
+            <tr>
+              <td>Phone Number</td>
+              <td>{{item.phoneNumber}}</td>
+            </tr>
+            <tr>
+              <td>Description</td>
+              <td>{{item.customProductDescription}}</td>
+            </tr>
+            <tr>
+              <td>Product Category</td>
+              <td>{{item.productCategory}}</td>
+            </tr>
+            <tr>
+              <td>Product Price</td>
+              <td>{{item.customPrice}}</td>
+            </tr>
+            <tr>
+              <td>Product Id</td>
+              <td>{{item.productId}}</td>
+            </tr>
+            <tr>
+              <td>Address Line 1</td>
+              <td>{{item.addressLine1}}</td>
+            </tr>
+            <tr>
+              <td>City</td>
+              <td>{{item.city}}</td>
+            </tr>
+            <tr>
+              <td>State</td>
+              <td>{{item.state}}</td>
+            </tr>
+            <tr>
+              <td>Pincode</td>
+              <td>{{item.pincode}}</td>
+            </tr>
+            <tr>
+              <td>Country</td>
+              <td>{{item.country}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </ion-row>
+  <div *ngIf="customProds==undefined || customProds.length<=0">
+    <img src="./assets/NotFound.gif" alt="Nothing TO Show" >
+    <h3 class="uk-text-center uk-text-danger">No Custom products found</h3>
+  </div>
 </ion-content>

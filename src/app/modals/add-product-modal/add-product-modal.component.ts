@@ -425,6 +425,7 @@ export class AddProductModalComponent implements OnInit {
               options.push({
                 title: textTitle,
                 sectionTitle: sectionTitle,
+                isRelative: false,
               });
             }
             data.push({

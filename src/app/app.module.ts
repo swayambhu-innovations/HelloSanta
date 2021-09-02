@@ -117,6 +117,8 @@ import { InvoiceDetailComponent } from './modals/invoice-detail/invoice-detail.c
 import { MoreInfoComponent } from './popovers/more-info/more-info.component';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { NgCalendarModule } from 'ionic2-calendar';
+import { AlertsModalService } from './services/alerts-modal.service';
+import {MatExpansionModule} from '@angular/material/expansion'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -174,7 +176,6 @@ import { NgCalendarModule } from 'ionic2-calendar';
     BuyagainComponent,
     AccountComponent,
     SingleproductComponent,
-    CustomproductComponent,
     AuthLoginComponent,
     AuthSignUpComponent,
     FeedbackCardComponent,
@@ -213,6 +214,7 @@ import { NgCalendarModule } from 'ionic2-calendar';
     CategoryProductsComponent,
     InvoiceDetailComponent,
     MoreInfoComponent,
+    CustomproductComponent,
   ],
   entryComponents: [],
   imports: [
@@ -228,15 +230,18 @@ import { NgCalendarModule } from 'ionic2-calendar';
     BrowserAnimationsModule,
     FormsModule,
     MatStepperModule,
+    MatExpansionModule,
     MatIconModule,
     MatBadgeModule,
     AngularFireAnalyticsModule,
     NgxImageZoomModule,
     NgCalendarModule,
+    
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthService,
+    AlertsModalService,
     DataProvider,
     LoginGuard,
     {

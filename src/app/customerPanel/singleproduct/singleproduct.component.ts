@@ -27,8 +27,8 @@ export class SingleproductComponent implements OnInit {
   productId: string;
   selectedImage: string;
   productData: any;
-  purchasedProduct: boolean= false;
-  productPrice: number=0;
+  purchasedProduct: boolean = false;
+  productPrice: number = 0;
   selectedExtraType: string;
   selectedExtraTitle: string;
   recommendationProducts = [];
@@ -45,16 +45,18 @@ export class SingleproductComponent implements OnInit {
     private router: Router,
     private analytics: AngularFireAnalytics,
     private formbuilder: FormBuilder,
-    public popoverController: PopoverController,
+    public popoverController: PopoverController
   ) {
     this.activatedRoute.queryParams.subscribe((params) => {
       this.productId = params['productId'];
     });
   }
-  
-  setImage(item){
-    this.selectedImage=item;
-    (document.getElementsByClassName("ngxImageZoomFull")[0] as HTMLImageElement).src=item;
+
+  setImage(item) {
+    this.selectedImage = item;
+    (
+      document.getElementsByClassName('ngxImageZoomFull')[0] as HTMLImageElement
+    ).src = item;
   }
   genList(value) {
     let randomList = [];
@@ -68,9 +70,12 @@ export class SingleproductComponent implements OnInit {
       productId: this.productId,
       productName: this.productData.productName,
     });
+    console.log(
+      Object.keys(this.extrasData).length,
+      this.productData.extraData.length
+    );
     if (
-      Object.keys(this.extrasData).length ==
-      this.productData.extraData.length - 2
+      Object.keys(this.extrasData).length == this.productData.extraData.length
     ) {
       alert('Add to cart product price' + this.productPrice.toString());
       this.dataProvider.checkOutdata = [
@@ -89,7 +94,7 @@ export class SingleproductComponent implements OnInit {
     this.analytics.logEvent('addToCart');
     if (
       Object.keys(this.extrasData).length ==
-      this.productData.extraData.length - 1
+      this.productData.extraData.length
     ) {
       let cartItem = {
         productData: this.productData.productId,
@@ -109,7 +114,9 @@ export class SingleproductComponent implements OnInit {
     // console.log('compare price',object1, Object2);
     let isTrue = true;
     for (let i of Object.keys(object1)) {
-      if (i=="isRelative"){continue}
+      if (i == 'isRelative') {
+        continue;
+      }
       if (object1[i] != Object2[i]) {
         isTrue = false;
       }
@@ -121,15 +128,19 @@ export class SingleproductComponent implements OnInit {
     // console.log("calculatePrice",this.extrasData);
     // let addonPrice:number = 0;
     this.productPrice = 0;
-    for (let valIndex=0; valIndex < this.productData.permutations.length; valIndex++) {
-      let val:any = this.productData.permutations[valIndex];
+    for (
+      let valIndex = 0;
+      valIndex < this.productData.permutations.length;
+      valIndex++
+    ) {
+      let val: any = this.productData.permutations[valIndex];
       let vldCounter = 0;
-      let relativeCounter= 0;
-      for (let i of Object.keys(this.extrasData)){
-        if (this.extrasData[i].isRelative){
+      let relativeCounter = 0;
+      for (let i of Object.keys(this.extrasData)) {
+        if (this.extrasData[i].isRelative) {
           relativeCounter++;
           // console.log(val,"isPossible")
-          if (val.isPossible==true){
+          if (val.isPossible == true) {
             val.permutations.forEach((perm) => {
               if (this.comparePriceListing(perm, this.extrasData[i])) {
                 vldCounter++;
@@ -141,73 +152,87 @@ export class SingleproductComponent implements OnInit {
           }
         }
       }
-      if (vldCounter == relativeCounter && vldCounter!=0 && relativeCounter!=0) {
+      if (
+        vldCounter == relativeCounter &&
+        vldCounter != 0 &&
+        relativeCounter != 0
+      ) {
         this.productPrice = +val.price;
         vldCounter = 0;
         break;
       }
       // console.log("calculatePrice", this.productPrice);
-    };
-    let quantity=1;
+    }
+    let quantity = 1;
     let faceCounts = 0;
     if (this.productPrice != undefined && this.productPrice != 0) {
-      for (let i of Object.keys(this.extrasData)){
-        if (this.extrasData[i].isRelative==false){
-          if (this.extrasData[i].type=='textSel' || this.extrasData[i].type=='imgSel'){
+      for (let i of Object.keys(this.extrasData)) {
+        if (this.extrasData[i].isRelative == false) {
+          if (
+            this.extrasData[i].type == 'textSel' ||
+            this.extrasData[i].type == 'imgSel'
+          ) {
             this.productPrice += +this.extrasData[i].price;
-          } else if (this.extrasData[i].type=='quantitySel') {
+          } else if (this.extrasData[i].type == 'quantitySel') {
             quantity = +this.extrasData[i].quantity;
-          } else if (this.extrasData[i].type=='faceCount') {
-            faceCounts= +this.extrasData[i].faces;
+          } else if (this.extrasData[i].type == 'faceCount') {
+            faceCounts = +this.extrasData[i].faces;
           }
         }
       }
-      let facesExtraPrices=0
-      if (faceCounts>1){facesExtraPrices = ((+this.productPrice/100) * (75*faceCounts));}
+      let facesExtraPrices = 0;
+      if (faceCounts > 1) {
+        facesExtraPrices = (+this.productPrice / 100) * (75 * faceCounts);
+      }
       let quantifiedPrice = (+this.productPrice + facesExtraPrices) * quantity;
       // let gstPrice = ((quantifiedPrice/100)*18);
       // let platformPrice = ((quantifiedPrice+gstPrice)/100)*3;
       this.productPrice = +quantifiedPrice;
     } else {
       this.productPrice = undefined;
-      this.authService.presentToast("Please select all options then you can select addons")
+      this.authService.presentToast(
+        'Please select all options then you can select addons'
+      );
     }
   }
   updateData(event, relative, sectionTitle) {
     // console.log(event);
-    event.detail.value['isRelative']=relative || false;
-    this.extrasData[sectionTitle] = event.detail.value;
-    console.log(this.extrasData);
-    let relatives = [];
-    if (relative) {
-      let msgString = '';
-      this.productData.extraData.forEach((val: any) => {
-        if (val.isRelative == relative) {
-          val.values.forEach((options) => {
-            relatives.push(options);
-          });
+    if (typeof event.detail.value == 'object') {
+      console.log('updater ');
+      event.detail.value['isRelative'] = relative || false;
+      this.extrasData[sectionTitle] = event.detail.value;
+      console.log(this.extrasData);
+      let relatives = [];
+      if (relative) {
+        let msgString = '';
+        this.productData.extraData.forEach((val: any) => {
+          if (val.isRelative == relative) {
+            val.values.forEach((options) => {
+              relatives.push(options);
+            });
+          }
+        });
+        let checked = [];
+        relatives.forEach((val) => {
+          // console.log("rela",val,sectionTitle)
+          if (
+            !relatives.includes(this.extrasData[val.sectionTitle]) &&
+            !checked.includes(val.sectionTitle)
+          ) {
+            msgString += ' ' + val.sectionTitle + ',';
+            checked.push(val.sectionTitle);
+          }
+        });
+        if (msgString.length > 0) {
+          this.authService.presentToast(
+            'You need to select' + msgString + ' and addons to get final price'
+          );
+        } else {
+          this.calculatePrice();
         }
-      });
-      let checked = [];
-      relatives.forEach((val) => {
-        // console.log("rela",val,sectionTitle)
-        if (
-          !relatives.includes(this.extrasData[val.sectionTitle]) &&
-          !checked.includes(val.sectionTitle)
-        ) {
-          msgString += ' ' + val.sectionTitle + ',';
-          checked.push(val.sectionTitle);
-        }
-      });
-      if (msgString.length > 0) {
-        this.authService.presentToast(
-          'You need to select' + msgString + ' and addons to get final price'
-        );
       } else {
         this.calculatePrice();
       }
-    } else {
-      this.calculatePrice();
     }
   }
   async addComment(ev) {
@@ -217,32 +242,34 @@ export class SingleproductComponent implements OnInit {
         productId: this.productId,
       },
       event: ev,
-      cssClass:"commentBox",
-      translucent: true
+      cssClass: 'commentBox',
+      translucent: true,
     });
     await popover.present();
     const { role } = await popover.onDidDismiss();
     console.log('onDidDismiss resolved with role', role);
   }
   ngOnInit() {
-    this.inventoryService.getUserInfo().ref.get().then((doc:any) => {
-      if (doc.exists){
-        doc.data().orders.forEach((ord:any)=>{
-          ord.products.forEach((prod:any)=>{
-            if (prod.productId == this.productId){
-              this.purchasedProduct = true;
-            }
-          })
-        })
-      }
-    })
+    this.inventoryService
+      .getUserInfo()
+      .ref.get()
+      .then((doc: any) => {
+        if (doc.exists) {
+          doc.data().orders.forEach((ord: any) => {
+            ord.products.forEach((prod: any) => {
+              if (prod.productId == this.productId) {
+                this.purchasedProduct = true;
+              }
+            });
+          });
+        }
+      });
     this.afs
       .collection('products')
       .doc(this.productId)
-      .ref
-      .get()
+      .ref.get()
       .then((value: any) => {
-        value=value.data();
+        value = value.data();
         console.log(value);
         this.productData = value;
         this.productPrice = 0;

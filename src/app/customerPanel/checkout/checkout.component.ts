@@ -22,6 +22,7 @@ import { AngularFireAnalytics } from '@angular/fire/analytics';
   styleUrls: ['./checkout.component.scss'],
 })
 export class CheckoutComponent implements OnInit {
+  dataCopy;
   constructor(
     private afs: AngularFirestore,
     public dataProvider: DataProvider,
@@ -44,6 +45,7 @@ export class CheckoutComponent implements OnInit {
       pincode: this.pincode,
       state: this.state,
       country: this.country,
+      message: this.message,
     });
   }
   form: FormGroup;
@@ -91,7 +93,7 @@ export class CheckoutComponent implements OnInit {
     Validators.minLength(5),
     Validators.pattern('[a-zA-Z ]*'),
   ]);
-
+  message: FormControl = new FormControl('', [Validators.minLength(10),Validators.maxLength(100)]);
   orders = [];
   objectKeys = Object.keys;
   quantity = 0;
@@ -100,7 +102,9 @@ export class CheckoutComponent implements OnInit {
   processingPayment: boolean;
   paymentResponse: any = {};
   orderItems = [];
-
+  log(data){
+    console.log(data);
+  }
   async presentInvoice() {
     const modal = await this.modalController.create({
       component: InvoiceDetailComponent,
@@ -111,8 +115,8 @@ export class CheckoutComponent implements OnInit {
 
   get grandTotal(): number {
     var total = 0;
-    this.orders.forEach((order) => {
-      total += order.productPrice;
+    this.dataCopy.forEach((order) => {
+      total += order.price;
     });
     return total;
   }
@@ -125,27 +129,33 @@ export class CheckoutComponent implements OnInit {
     return total;
   }
   ngOnInit() {
-    this.dataProvider.checkOutdata.forEach((prod) => {
-      var docRef = this.afs.collection('products').ref.doc(prod.productData);
-      docRef.get().then((data) => {
-        if (data.exists) {
-          console.log('Document data:', data  );
-          let dat:any = data.data();
-          this.orderItems.push({
-            name:dat.productName,
-            sku:prod.productData,
-            units:1,
-            selling_price:500,
-          })
-          dat['finalPrice'] = prod.price;
-          dat['selections'] = prod.extrasData;
-          this.orders.push(dat);
-        } else {
-          console.log('No such document!');
-        }
+    if (this.dataProvider.checkOutdata){
+      this.dataCopy = this.dataProvider.checkOutdata;
+      this.dataProvider.checkOutdata.forEach((prod) => {
+        var docRef = this.afs.collection('products').ref.doc(prod.productData);
+        docRef.get().then((data) => {
+          if (data.exists) {
+            console.log('Document data:', data  );
+            let dat:any = data.data();
+            this.orderItems.push({
+              name:dat.productName,
+              sku:prod.productData,
+              units:1,
+              selling_price:500,
+            })
+            dat['finalPrice'] = prod.price;
+            dat['selections'] = prod.extrasData;
+            this.orders.push(dat);
+          } else {
+            console.log('No such document!');
+          }
+        });
       });
-    });
-    this.WindowRef = this.paymentService.WindowRef;
+      this.WindowRef = this.paymentService.WindowRef;
+    } else {
+      this.authService.presentToast('Oh Ohh! Checkout expired &#x1F605;')
+      this.router.navigate(['']);
+    }
   }
   proceedToPay($event) {
     this.processingPayment = true;
@@ -221,7 +231,7 @@ export class CheckoutComponent implements OnInit {
           this.paymentResponse = res;
           this.changeRef.detectChanges();
           console.log('success response', this.paymentResponse);
-          let shippingDetail = {
+          const shippingDetail = {
             order_id: `Order#${Math.floor(Math.random() * 5123435345 * 43) + 10}`,
             billing_customer_name:this.form.get('firstName')!.value,
             billing_last_name:this.form.get('lastName')!.value,
@@ -250,8 +260,9 @@ export class CheckoutComponent implements OnInit {
               orderStage:"live",
               orderId:res.body.order_id,
               shipment_id:res.body.shipment_id,
+              orderConfirmed:false,
             }
-            this.inventoryService.updateUserData({orders:firebase.firestore.FieldValue.arrayUnion(currentOrder)});
+            this.inventoryService.addUserOrder(currentOrder);
             this.dataProvider.shippingData=currentOrder.shippingDetail.shipment_id.toString();
             this.router.navigateByUrl('trackorder?shippingId='+currentOrder.shippingDetail.shipment_id.toString());
           },

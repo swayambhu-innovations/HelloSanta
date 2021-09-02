@@ -1,15 +1,15 @@
 const functions = require('firebase-functions');
 const Razorpay = require('razorpay');
 const nodemailer = require('nodemailer');
-var key_id = 'rzp_test_1GPCwB7UYA1pfl';
-var key_secret = '3v5jh3ZOsERttf0ZGE1gbmNj';
-var request = require('request');
+let key_id = 'rzp_test_1GPCwB7UYA1pfl';
+let key_secret = '3v5jh3ZOsERttf0ZGE1gbmNj';
+let request = require('request');
 const cors = require('cors')({ origin: true });
-var instance = new Razorpay({
+let instance = new Razorpay({
   key_id: key_id,
   key_secret: key_secret,
 });
-var transporter = nodemailer.createTransport({
+let transporter = nodemailer.createTransport({
   name: 'www.hellosanta.in',
   host: 'mail.hellosanta.in',
   port: 587,
@@ -18,11 +18,11 @@ var transporter = nodemailer.createTransport({
     user: 'connect@hellosanta.in', // your domain email address
     pass: 'Support@9208Santa', // your password
   },
-  tls:{
-    rejectUnauthorized:false
+  tls: {
+    rejectUnauthorized: false,
   },
   logger: true,
-  debug: true
+  debug: true,
 });
 
 exports.sendMail = functions.https.onRequest((req: any, res: any) => {
@@ -40,13 +40,13 @@ exports.sendMail = functions.https.onRequest((req: any, res: any) => {
         console.log(erro);
         return res.send(erro.toString());
       }
-      return res.status(200).send({'msg':'Sended'});
+      return res.status(200).send({ msg: 'Sended' });
     });
   });
 });
 exports.createOrder = functions.https.onRequest((req: any, res: any) => {
   return cors(req, res, () => {
-    var options = {
+    let options = {
       amount: req.body.amount,
       currency: 'INR',
       receipt: req.body.receipt,
@@ -82,10 +82,10 @@ exports.capturePayments = functions.https.onRequest((req: any, res: any) => {
 exports.shipOrder = functions.https.onRequest((req: any, res: any) => {
   return cors(req, res, () => {
     console.log('request body', req.body, typeof req.body);
-    var date = new Date();
-    var orderDate =
+    let date = new Date();
+    let orderDate =
       date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-    var compliedRes = req.body;
+    let compliedRes = req.body;
     let shiprocketBody = {
       order_id: compliedRes.order_id,
       order_date: orderDate,
@@ -109,7 +109,7 @@ exports.shipOrder = functions.https.onRequest((req: any, res: any) => {
       height: compliedRes.height,
       weight: compliedRes.weight,
     };
-    var options = {
+    let options = {
       method: 'POST',
       url: 'https://apiv2.shiprocket.in/v1/external/auth/login',
       headers: {
@@ -123,11 +123,11 @@ exports.shipOrder = functions.https.onRequest((req: any, res: any) => {
     console.log('shiprocket data', shiprocketBody);
     request(options, function (error: any, authResponse: any) {
       if (error) throw new Error(error);
-      var response = JSON.parse(authResponse.body);
+      let response = JSON.parse(authResponse.body);
       console.log('authApi', response, typeof response.body);
-      var authApiKey = response.token;
+      let authApiKey = response.token;
       console.log('authApiKey', authApiKey);
-      var shipoptions = {
+      let shipoptions = {
         method: 'POST',
         url: 'https://apiv2.shiprocket.in/v1/external/orders/create/adhoc',
         headers: {
@@ -155,7 +155,7 @@ exports.shipOrder = functions.https.onRequest((req: any, res: any) => {
 
 exports.checkOrderShipment = functions.https.onRequest((req: any, res: any) => {
   return cors(req, res, () => {
-    var authOptions = {
+    let authOptions = {
       method: 'POST',
       url: 'https://apiv2.shiprocket.in/v1/external/auth/login',
       headers: {
@@ -168,11 +168,11 @@ exports.checkOrderShipment = functions.https.onRequest((req: any, res: any) => {
     };
     request(authOptions, function (error: any, authResponse: any) {
       if (error) throw new Error(error);
-      var response = JSON.parse(authResponse.body);
-      var options = {
+      let response = JSON.parse(authResponse.body);
+      let options = {
         method: 'GET',
         url:
-          'https://apiv2.shiprocket.in/v1/external/shipments/' +
+          'https://apiv2.shiprocket.in/v1/external/courier/track/shipment/' +
           req.body.shipmentId,
         headers: {
           'Content-Type': 'application/json',
@@ -196,7 +196,7 @@ exports.checkOrderShipment = functions.https.onRequest((req: any, res: any) => {
 exports.cancelOrderShipment = functions.https.onRequest(
   (req: any, res: any) => {
     return cors(req, res, () => {
-      var authOptions = {
+      let authOptions = {
         method: 'POST',
         url: 'https://apiv2.shiprocket.in/v1/external/auth/login',
         headers: {
@@ -209,9 +209,9 @@ exports.cancelOrderShipment = functions.https.onRequest(
       };
       request(authOptions, function (error: any, authResponse: any) {
         if (error) throw new Error(error);
-        var response = JSON.parse(authResponse.body);
+        let response = JSON.parse(authResponse.body);
         console.log('authApi', response, req.body.ids, typeof req.body.ids);
-        var options = {
+        let options = {
           method: 'POST',
           url: 'https://apiv2.shiprocket.in/v1/external/orders/cancel',
           headers: {

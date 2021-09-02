@@ -1,33 +1,83 @@
 <ion-content>
-    <app-header></app-header>
+  <app-header></app-header>
   <div class="inner-box">
-    <ion-button (click)="generateInvoice()">
+    <ion-button (click)="presentInvoice()">
       Generate Invoice
     </ion-button>
-  <mat-stepper orientation="vertical" [linear]="isLinear" #stepper >
-    <mat-step label="Order Placed" state="complete" [stepControl]="" #step1>
-      <p>Your order has been Placed</p>
-    </mat-step>
-    <mat-step label="Order Confirmed" state="cancel"  #step2 >
-      <p>Your order has been confirmed</p>
-    </mat-step>
-    <mat-step label="Order Status" state="inprocess" #step3>
-      <p>Your order Status</p>
-    </mat-step>
-    <mat-step label="Order Delivered" state="inprocess" #step4>
-      <p>Your order has been delivered</p>
-    </mat-step>
-    <ng-template matStepperIcon="complete">
-      <mat-icon>check_circle</mat-icon>
-    </ng-template>
-    <ng-template matStepperIcon="cancel">
-      <mat-icon>cancel</mat-icon>
-    </ng-template>
-    <ng-template matStepperIcon="inprocess">
-      <mat-icon>published_with_changes</mat-icon>
-    </ng-template>
-  </mat-stepper>
+    <div *ngIf='shipmentOrderData.tracking_data'>
+      <ion-button *ngIf='shipmentOrderData.tracking_data.track_url' target="_blank"
+      [href]="shipmentOrderData.tracking_data.track_url" fill="outline">
+      In depth tracking
+    </ion-button>
+    </div>
+    <div *ngIf="shipmentOrderData.tracking_data">
+      <h1 *ngIf='shipmentOrderData.tracking_data.shipment_status' style="color:orange;font-size: 30px;font-weight:800">
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==1">Order Assigned</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==2">Label Generated</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==3">Pickup Scheduled</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==4">Pickup Queued</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==5">Manifest Generated</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==6">Shipped</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==7">Delivered</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==8">Cancelled</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==9">RTO Initiated</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==10">RTO Delivered</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==11">Pending</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==12">Lost</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==13">Pickup Error</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==14">RTO Acknowledged</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==15">Pickup Rescheduled</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==16">Cancellation Requested</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==17">Out For Delivery</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==18">In Transit</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==19">Out For Pickup</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==20">Pickup Exception</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==21">Undeliverd</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==22">Delayed</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==24">Destroyed</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==25">Damaged</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==26">Fulfilled</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==38">Reached Destination Hub</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==39">Misrouted</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==40">RTO NDR</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==41">RTO OFD</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==42">Picked Up</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==43">Self FulFiled</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==44">Disposed Off</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==45">Cancelled Before Dispatched</span>
+        <span *ngIf="shipmentOrderData.tracking_data.shipment_status==46">RTO In Transit</span>
+      </h1>
+    </div>
+    <mat-stepper orientation="vertical" [selectedIndex]="0" [linear]="isLinear" #stepper
+      *ngIf="shipmentOrderData.tracking_data">
+      <div *ngIf="shipmentOrderData.tracking_data.track_status!=undefined">
+        <mat-step label="Order Status" state="inprocess" *ngIf="shipmentOrderData.tracking_data.track_status==0" #step3>
+          <p>{{shipmentOrderData.tracking_data.error}}</p>
+        </mat-step>
+      </div>
+      <div *ngIf="shipmentOrderData.tracking_data.track_status>=1" #step2>
+        <mat-step [label]="orderStatus.status + '&nbsp;&nbsp;' + orderStatus.date" state="inprocess"
+          *ngFor="let orderStatus of shipmentOrderData.tracking_data.shipment_track_activities">
+          <p><strong>Detail:&nbsp;&nbsp;</strong>{{orderStatus.activity}}</p>
+          <p style="color:rgb(44, 211, 94)"><strong>Location:&nbsp;&nbsp;</strong>{{orderStatus.location}}</p>
+        </mat-step>
+      </div>
+      <mat-step label="Order Placed" state="complete" [completed]="true" #step1>
+        <p>Your order has been Placed</p>
+      </mat-step>
+      <ng-template matStepperIcon="complete">
+        <mat-icon>check_circle</mat-icon>
+      </ng-template>
+      <ng-template matStepperIcon="cancel">
+        <mat-icon>cancel</mat-icon>
+      </ng-template>
+      <ng-template matStepperIcon="inprocess">
+        <mat-icon>published_with_changes</mat-icon>
+      </ng-template>
+
+    </mat-stepper>
+    <ion-spinner name="crescent" *ngIf="!shipmentOrderData.tracking_data"></ion-spinner>
   </div>
-    <app-accordion></app-accordion>
-    <app-footer ></app-footer>
+  <app-accordion></app-accordion>
+  <app-footer></app-footer>
 </ion-content>

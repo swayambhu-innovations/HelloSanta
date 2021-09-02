@@ -5,6 +5,7 @@ import { AddCategoriesComponent } from 'src/app/modals/add-categories/add-catego
 import { AddProductModalComponent } from 'src/app/modals/add-product-modal/add-product-modal.component';
 import { EditProductComponent } from 'src/app/modals/edit-product/edit-product.component';
 import { SpecificProductsComponent } from 'src/app/popovers/specific-products/specific-products.component';
+import { AlertsModalService } from 'src/app/services/alerts-modal.service';
 import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
@@ -17,81 +18,11 @@ export class PendingProductsComponent implements OnInit {
     public modalController: ModalController,
     public inventoryService: InventoryService,
     public afs: AngularFirestore,
-    public popoverController: PopoverController
+    public popoverController: PopoverController,
+    public alertsModals: AlertsModalService,
   ) {}
+  customProds=[];
   allProducts = {};
-  products = [
-    {
-      totalCancelled: 20,
-      image:
-        'https://images.unsplash.com/photo-1593642634402-b0eb5e2eebc9?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tincidunt commodo. Nunc justo nisi, vestibulum facilisis porta vestibulum, ultrices volutpat arcu. Quisque nec dui mattis, fringilla magna in, vulputate enim. Fusce ut euismod ligula, id laoreet ex. ',
-      name: 'Complete Painting',
-      price: '2500',
-      totalSales: '294',
-    },
-    {
-      totalCancelled: 203,
-      image:
-        'https://images.unsplash.com/photo-1593642634402-b0eb5e2eebc9?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tincidunt commodo. Nunc justo nisi, vestibulum facilisis porta vestibulum, ultrices volutpat arcu. Quisque nec dui mattis, fringilla magna in, vulputate enim. Fusce ut euismod ligula, id laoreet ex. ',
-      name: 'Complete Painting',
-      price: '2500',
-      totalSales: '294',
-    },
-    {
-      totalCancelled: 20,
-      image:
-        'https://images.unsplash.com/photo-1593642634402-b0eb5e2eebc9?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tincidunt commodo. Nunc justo nisi, vestibulum facilisis porta vestibulum, ultrices volutpat arcu. Quisque nec dui mattis, fringilla magna in, vulputate enim. Fusce ut euismod ligula, id laoreet ex. ',
-      name: 'Complete Painting',
-      price: '2500',
-      totalSales: '294',
-    },
-    {
-      totalCancelled: 3,
-      image:
-        'https://images.unsplash.com/photo-1593642634402-b0eb5e2eebc9?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tincidunt commodo. Nunc justo nisi, vestibulum facilisis porta vestibulum, ultrices volutpat arcu. Quisque nec dui mattis, fringilla magna in, vulputate enim. Fusce ut euismod ligula, id laoreet ex. ',
-      name: 'Complete Painting',
-      price: '2500',
-      totalSales: '294',
-    },
-    {
-      totalCancelled: 20,
-      image:
-        'https://images.unsplash.com/photo-1593642634402-b0eb5e2eebc9?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tincidunt commodo. Nunc justo nisi, vestibulum facilisis porta vestibulum, ultrices volutpat arcu. Quisque nec dui mattis, fringilla magna in, vulputate enim. Fusce ut euismod ligula, id laoreet ex. ',
-      name: 'Complete Painting',
-      price: '2500',
-      totalSales: '294',
-    },
-    {
-      totalCancelled: 320,
-      image:
-        'https://images.unsplash.com/photo-1593642634402-b0eb5e2eebc9?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tincidunt commodo. Nunc justo nisi, vestibulum facilisis porta vestibulum, ultrices volutpat arcu. Quisque nec dui mattis, fringilla magna in, vulputate enim. Fusce ut euismod ligula, id laoreet ex. ',
-      name: 'Complete Painting',
-      price: '2500',
-      totalSales: '294',
-    },
-    {
-      totalCancelled: 203,
-      image:
-        'https://images.unsplash.com/photo-1593642634402-b0eb5e2eebc9?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tincidunt commodo. Nunc justo nisi, vestibulum facilisis porta vestibulum, ultrices volutpat arcu. Quisque nec dui mattis, fringilla magna in, vulputate enim. Fusce ut euismod ligula, id laoreet ex. ',
-      name: 'Complete Painting',
-      price: '2500',
-      totalSales: '294',
-    },
-  ];
   allProds = [];
   ngOnInit() {
     this.afs
@@ -100,5 +31,11 @@ export class PendingProductsComponent implements OnInit {
       .subscribe((proddata) => {
         this.allProds=proddata
       });
+    this.afs.collection('customProducts').valueChanges().subscribe((proddata) => {
+      this.customProds=[];
+      proddata.forEach((prod) => {
+        this.customProds.push(prod);
+      })
+    })
   }
 }

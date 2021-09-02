@@ -18,6 +18,10 @@ export class InvoiceDetailComponent implements OnInit {
   ngOnInit() {}
   @ViewChild('invoiceData') pdfTable: ElementRef;
   downloadAsPDF() {
+    // var doc = new jsPDF();
+    // let source = document.getElementById('invoiceData');
+    // doc.html(source);
+    // doc.save();
     // const doc = new jsPDF();
     // const pdfTable = this.pdfTable.nativeElement;
     // var html = htmlToPdfmake(pdfTable.innerHTML,{imagesByReference:true});

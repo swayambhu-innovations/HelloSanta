@@ -151,10 +151,6 @@
               <ion-radio slot="start" color="primary" value="quantitySel"></ion-radio>
             </ion-item>
             <ion-item class="listoptions">
-              <ion-label>Extra Description</ion-label>
-              <ion-radio slot="start" color="primary" value="extraInfo"></ion-radio>
-            </ion-item>
-            <ion-item class="listoptions">
               <ion-label>Face Count</ion-label>
               <ion-radio slot="start" color="primary" value="faceCount"></ion-radio>
             </ion-item>
@@ -220,24 +216,6 @@
                 <ion-label position="floating">Number Text</ion-label>
                 <ion-input required="true" type="text" id="quantityMax{{item}}"></ion-input>
               </ion-item>
-            </ion-card-content>
-          </ion-card>
-          <ion-card *ngIf="option.value=='extraInfo'">
-            <h3>Extra Selection</h3>
-            <ion-card-content>
-              <ion-input id="extraInput{{item}}" type="number" min=1 max=10 value=1 name="selImgCount" required="true"
-                placeholder="Images Count" #imageCount></ion-input>
-              <ion-item>
-                <ion-label>Section Title</ion-label>
-                <ion-input type="text" placeholder="Section Title" required="true" id="sectionExtraTitle{{item}}">
-                </ion-input>
-              </ion-item>
-              <ion-card *ngFor="let extraIndex of genList(imageCount.value)">
-                <ion-item>
-                  <ion-label position="floating">Extra Info Title</ion-label>
-                  <ion-input required="true" type="text" id="extraSel{{item}}{{extraIndex}}"></ion-input>
-                </ion-item>
-              </ion-card>
             </ion-card-content>
           </ion-card>
           <ion-card *ngIf="option.value=='faceCount'">

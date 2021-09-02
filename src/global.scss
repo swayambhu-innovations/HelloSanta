@@ -38,6 +38,14 @@ html, body {
 .star::before{
     content: url('/assets/star.svg') !important;
 }
+.simpleCenter{
+    margin:0 auto;
+}
+.center{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
 button{
     background:transparent;
     margin: 0%;
@@ -58,6 +66,9 @@ input:focus{
 }
 .ap-ship-popover .popover-content{
     width:300px;
+}
+.cartlist .popover-content{
+    width:fit-content;
 }
 .commentBox .popover-content{
     width:400px;

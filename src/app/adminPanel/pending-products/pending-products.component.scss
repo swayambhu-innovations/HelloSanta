@@ -16,6 +16,20 @@ ion-item:hover{
 ion-toolbar{
     box-shadow:2px 1px 5px rgba(0,0,0,0.3)
 }
+div > img{
+    width:500px;
+    height:auto;
+    position:relative;
+    left:50%;
+    transform: translateX(-50%);
+    filter: saturate(0%);
+    opacity: 0.4;
+    transition: all .5s ease-in-out;
+}
+div > img:hover{
+    filter: saturate(100%);
+    opacity: 1;
+}
 #overlay {
     position: absolute;
     top: 0%;

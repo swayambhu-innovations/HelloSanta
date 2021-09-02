@@ -363,7 +363,11 @@ export class InventoryService {
             this.authService.presentToast('You are opted in with old key');
             this.afs
               .collection(`referrals`)
-              .doc(this.authService.userId).set({ userId: this.authService.userId, code: data.data().referralCode});
+              .doc(this.authService.userId)
+              .set({
+                userId: this.authService.userId,
+                code: data.data().referralCode,
+              });
           } else {
             this.afs
               .collection('users')
@@ -371,7 +375,12 @@ export class InventoryService {
               .update({ referralCode: key });
             this.afs
               .collection(`referrals`)
-              .doc(this.authService.userId).set({ userId: this.authService.userId, code: key, isOptedIn: true});
+              .doc(this.authService.userId)
+              .set({
+                userId: this.authService.userId,
+                code: key,
+                isOptedIn: true,
+              });
             this.authService.presentToast('You are opted in with a new key.');
           }
         }
@@ -380,54 +389,112 @@ export class InventoryService {
       isReferrer: true,
     });
   }
-  optOutReferral(){
+  optOutReferral() {
     this.afs.collection('users').doc(this.authService.userId).update({
       isReferrer: false,
     });
     this.afs
-    .collection(`referrals`)
-    .doc(this.authService.userId).set({isOptedIn: false});
+      .collection(`referrals`)
+      .doc(this.authService.userId)
+      .set({ isOptedIn: false });
     this.authService.presentToast('You have opted out');
   }
-  getUserInfo(){
+  getUserInfo() {
     return this.afs.collection('users').doc(this.authService.userId);
   }
-  completeReferral(referrerUid,referredUid,code){
-
+  completeReferral(referrerUid, referredUid, code) {}
+  addUserOrder(data) {
+    this.afs
+      .collection('users')
+      .doc(this.authService.userId)
+      .collection('orders')
+      .add(data)
+      .then((docRef) => {
+        this.afs
+          .collection('users')
+          .doc(this.authService.userId)
+          .collection('orders')
+          .doc(docRef.id)
+          .update({ orderId: docRef.id });
+      });
   }
-  updateUserData(data){
-    return this.afs.collection('users').doc(this.authService.userId).set(data,{merge:true});
+  deleteOrder(orderId){
+    this.afs.collection('users').doc(this.authService.userId).collection('orders').doc(orderId).delete()
   }
-  addComment(comment,productId){
-    this.afs.collection('products').doc(productId).update({
-      comments:firebase.firestore.FieldValue.arrayUnion(comment),
-    })
+  updateUserData(data) {
+    return this.afs
+      .collection('users')
+      .doc(this.authService.userId)
+      .set(data, { merge: true });
   }
-  getUserOrders(){
-    return this.afs.collection('users').doc(this.authService.userId).ref.get().then((user:any)=>{
-      if (user.exists) {
-       // return user.data();
-       console.log(user.data());
-      }
-    });
+  addComment(comment, productId) {
+    this.afs
+      .collection('products')
+      .doc(productId)
+      .update({
+        comments: firebase.firestore.FieldValue.arrayUnion(comment),
+      });
   }
-  addhelpDocument(data){
+  getUserOrders() {
+    return this.afs
+      .collection('users')
+      .doc(this.authService.userId)
+      .ref.get()
+      .then((user: any) => {
+        if (user.exists) {
+          // return user.data();
+          console.log(user.data());
+        }
+      });
+  }
+  addhelpDocument(data) {
     this.afs.collection('feedback').add(data);
   }
-  getHelpDocuments(){
+  getHelpDocuments() {
     return this.afs.collection('feedback').ref.get();
   }
-  addCalendarEvent(event){
-    this.afs.collection('users').doc(this.authService.userId).collection('events').add(event).then((docRef) => {
-      const productRef = this.afs.doc(`users/${this.authService.userId}/events/${docRef.id}`);
-      productRef.update({ eventId: docRef.id });
-    });
+  addCalendarEvent(event) {
+    this.afs
+      .collection('users')
+      .doc(this.authService.userId)
+      .collection('events')
+      .add(event)
+      .then((docRef) => {
+        const productRef = this.afs.doc(
+          `users/${this.authService.userId}/events/${docRef.id}`
+        );
+        productRef.update({ eventId: docRef.id });
+      });
   }
-  removeCalendarEvent(eventId){
-    this.afs.collection('users').doc(this.authService.userId).collection('events').doc(eventId).delete();
+  removeCalendarEvent(eventId) {
+    this.afs
+      .collection('users')
+      .doc(this.authService.userId)
+      .collection('events')
+      .doc(eventId)
+      .delete();
   }
-  getUserEvents(){
-    return this.afs.collection('users').doc(this.authService.userId).collection('events');
+  getUserEvents() {
+    return this.afs
+      .collection('users')
+      .doc(this.authService.userId)
+      .collection('events');
   }
-  
+  addCustomProduct(data) {
+    this.afs
+      .collection('customProducts')
+      .add(data)
+      .then((docRef) => {
+        const productRef = this.afs.doc(`customProducts/${docRef.id}`);
+        productRef.update({ productId: docRef.id });
+      });
+  }
+  removeCustomProduct(docId) {
+    this.afs.collection('customProducts').doc(docId).delete();
+  }
+  getOrder(shipmentId){
+    return this.afs.firestore.collection('users')
+    .doc(this.authService.userId)
+    .collection('orders')
+  }
 }

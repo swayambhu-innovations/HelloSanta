@@ -76,6 +76,7 @@ export class HeaderComponent implements OnInit {
       component: CartinfoComponent,
       event: ev,
       translucent: true,
+      cssClass:'cartlist',
       componentProps: {
         products: this.cartItems,
       }

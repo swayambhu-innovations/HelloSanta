@@ -1,5 +1,5 @@
 <ion-content>
-  <ion-list *ngIf="products>0">
+  <ion-list *ngIf="products.length>0">
     <ion-item *ngFor= "let product of products">
       <ion-row>
         <ion-col>
@@ -17,7 +17,7 @@
       <ion-label>Open Cart</ion-label>
     </ion-item>
   </ion-list>
-  <div class="uk-padding">
+  <div class="uk-padding" *ngIf="products.length<=0">
     <img src="./assets/NotFound.gif" >
     <ion-label><strong>No items in your cart</strong></ion-label>
   </div>

@@ -44,8 +44,9 @@ ion-item,ion-list{
 .product-row{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: flex-start;
+  flex-direction: row;
+//   justify-content: space-evenly;
+//   align-items: flex-start;
 }
 @media only screen and (max-width: 600px) {
     #orders-container {

@@ -1,89 +1,96 @@
 <ion-content>
-  <app-header ></app-header>
-      <ion-card>
-        <h1 style="font-family: Poppins;text-align: center;padding-top: 80px;font-weight: bolder;font-size: 50px;color: #6D5DE3">Custom request Form</h1>
-        <ion-list>
-          <form >
-            <ion-item>
-              <ion-label position="floating">
-                Select Category
-              </ion-label>
-                  <ion-select value="brown" okText="Okay" cancelText="Dismiss">
-                    <ion-select-option value="brown">Brown</ion-select-option>
-                    <ion-select-option value="blonde">Blonde</ion-select-option>
-                    <ion-select-option value="black">Black</ion-select-option>
-                    <ion-select-option value="red">Red</ion-select-option>
-                  </ion-select>
-            </ion-item>
-            <ion-item>
-              <textarea id="subject" name="subject" placeholder="Provide a discription of your custom request" style="height:400px; margin:5% 15%;"></textarea>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">
-                Post a price quotation
-              </ion-label>
-              <ion-input type="text" placeholder="Your price" formControlName="price" required ></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">
-                Your Full Name
-              </ion-label>
-              <ion-input type="text" placeholder="Your Name" formControlName="fullName" required></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">
-                Your Email
-              </ion-label>
-              <ion-input type="text" placeholder="Enter Your Email" formControlName="email" required>
-              </ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">
-                Your Phone number
-              </ion-label>
-              <ion-input type="integer" placeholder="Enter Your Phone number" formControlName="phoneNumber"
-                         required></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">
-                delivery address(including house number)
-              </ion-label>
-              <ion-input type="text" placeholder="delivery address(including house number)"
-                         formControlName="addressLine1" required></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">
-                city
-              </ion-label>
-              <ion-input type="text" placeholder="enter your city" required formControlName="city">
-              </ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">
-                Pincode
-              </ion-label>
-              <ion-input type="text" placeholder="Enter Your Pincode" required formControlName="pincode">
-              </ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">
-                State
-              </ion-label>
-              <ion-input type="text" placeholder="Enter Your State" required formControlName="state">
-              </ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">
-                Country
-              </ion-label>
-              <ion-input type="text" placeholder="Enter Your country" required formControlName="country">
-              </ion-input>
-            </ion-item>
-          </form>
-        </ion-list>
-        <div align="center"><button>Submit</button></div>
-      </ion-card>
+  <app-header></app-header>
+  <ion-card>
+    <form [formGroup]="customProductForm" (ngSubmit)="submitProduct()">
+      <h1
+        style="font-family: Poppins;text-align: center;padding-top: 80px;font-weight: bolder;font-size: 50px;color: #6D5DE3">
+        Custom request Form</h1>
+      <ion-list>
+        <h2>Your Product Idea Detail</h2>
+        <ion-item>
+          <ion-label position="floating">
+            Select Category
+          </ion-label>
+          <ion-select formControlName="productCategory" (ionChange)="setCategoryValue($event)" value="painting" okText="Okay" cancelText="Dismiss">
+            <ion-select-option value="painting">Painting</ion-select-option>
+            <ion-select-option value="digital">Digital Art</ion-select-option>
+            <ion-select-option value="black">Black</ion-select-option>
+            <ion-select-option value="red">Red</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Your Product description</ion-label>
+          <ion-textarea formControlName="customProductDescription" style="height:400px;" name="subject"
+            placeholder="Provide a discription of your custom request"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">
+            Post a price quotation
+          </ion-label>
+          <ion-input type="text" placeholder="Your price" formControlName="customPrice" required></ion-input>
+        </ion-item>
+        <div style="border-radius:20px;border:5px double #9081FF;height:5px;margin: 50px 0px;" width="100%"></div>
+        <h2>Shipping Detail</h2>
+        <ion-item>
+          <ion-label position="floating">
+            Your Full Name
+          </ion-label>
+          <ion-input type="text" placeholder="Your Name" formControlName="fullName" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">
+            Your Email
+          </ion-label>
+          <ion-input type="text" placeholder="Enter Your Email" formControlName="email" required>
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">
+            Your Phone number
+          </ion-label>
+          <ion-input type="integer" placeholder="Enter Your Phone number" formControlName="phoneNumber" required>
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">
+            delivery address(including house number)
+          </ion-label>
+          <ion-input type="text" placeholder="Delivery address(including house number)" formControlName="addressLine1"
+            required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">
+            city
+          </ion-label>
+          <ion-input type="text" placeholder="Enter your city" required formControlName="city">
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">
+            Pincode
+          </ion-label>
+          <ion-input type="text" placeholder="Enter Your Pincode" required formControlName="pincode">
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">
+            State
+          </ion-label>
+          <ion-input type="text" placeholder="Enter Your State" required formControlName="state">
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">
+            Country
+          </ion-label>
+          <ion-input type="text" placeholder="Enter Your country" required formControlName="country">
+          </ion-input>
+        </ion-item>
+      </ion-list>
+      <button class="center" type="submit" [disabled]="!customProductForm.valid">Submit</button>
+    </form>
+  </ion-card>
 
   <app-accordion></app-accordion>
-  <app-footer ></app-footer>
+  <app-footer></app-footer>
 </ion-content>
