@@ -199,9 +199,10 @@ export class SingleproductComponent implements OnInit {
   updateData(event, relative, sectionTitle) {
     // console.log(event);
     if (typeof event.detail.value == 'object') {
-      console.log('updater ');
+      console.log('updater ',event,relative,sectionTitle);  
       event.detail.value['isRelative'] = relative || false;
       this.extrasData[sectionTitle] = event.detail.value;
+      console.log(this.extrasData);
       console.log(this.extrasData);
       let relatives = [];
       if (relative) {
@@ -226,7 +227,7 @@ export class SingleproductComponent implements OnInit {
         });
         if (msgString.length > 0) {
           this.authService.presentToast(
-            'You need to select' + msgString + ' and addons to get final price'
+            'You need to select' + msgString + ' faces and addons to get final price'
           );
         } else {
           this.calculatePrice();
@@ -280,6 +281,7 @@ export class SingleproductComponent implements OnInit {
         this.selectedExtraTitle = this.productData.extraData[0].sectionTitle;
         this.category = this.productData.productCategory;
         this.subcategory = this.productData.productSubcategory;
+
       });
     this.afs.collection('products').doc(this.productId).collection('comments').ref.get().then((value: any) => {
       this.comments=[];
