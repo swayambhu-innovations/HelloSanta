@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content [ngStyle]="{'filter': (dataProvider.showOverlay) ? 'blur(10px)' : 'blur(0px)' }">
   <app-header></app-header>
   <main id="container">
     <h2 id="your-cart-title">Your Cart</h2>
@@ -11,3 +11,6 @@
   </main>
   <app-footer></app-footer>
 </ion-content>
+<div id="overlay" *ngIf="dataProvider.showOverlay">
+  <ion-spinner name="crescent" color="tertiary"></ion-spinner>
+</div>

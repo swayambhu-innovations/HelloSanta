@@ -33,7 +33,7 @@ export class CheckoutComponent implements OnInit {
     private inventoryService: InventoryService,
     private router: Router,
     private analytics: AngularFireAnalytics,
-    public modalController: ModalController,
+    public modalController: ModalController
   ) {
     this.form = this.formbuilder.group({
       firstName: this.firstName,
@@ -46,6 +46,7 @@ export class CheckoutComponent implements OnInit {
       state: this.state,
       country: this.country,
       message: this.message,
+      santaCredit: this.santaCredit,
     });
   }
   form: FormGroup;
@@ -93,22 +94,28 @@ export class CheckoutComponent implements OnInit {
     Validators.minLength(5),
     Validators.pattern('[a-zA-Z ]*'),
   ]);
-  message: FormControl = new FormControl('', [Validators.minLength(10),Validators.maxLength(100)]);
+  santaCredit: FormControl = new FormControl(false, [Validators.required]);
+  message: FormControl = new FormControl('', [
+    Validators.minLength(10),
+    Validators.maxLength(100),
+  ]);
   orders = [];
   objectKeys = Object.keys;
   quantity = 0;
+  offerFlat: number = 0;
   payableAmount = 0;
   WindowRef: any;
   processingPayment: boolean;
   paymentResponse: any = {};
   orderItems = [];
-  log(data){
+  santaCoins: number = 0;
+  log(data) {
     console.log(data);
   }
   async presentInvoice() {
     const modal = await this.modalController.create({
       component: InvoiceDetailComponent,
-      cssClass:'invoiceModal'
+      cssClass: 'invoiceModal',
     });
     return await modal.present();
   }
@@ -118,31 +125,44 @@ export class CheckoutComponent implements OnInit {
     this.dataCopy.forEach((order) => {
       total += order.price;
     });
-    return total;
+    return total - this.offerFlat;
   }
-  get grandHeight():number{
+  get grandHeight(): number {
     var total = 0;
     this.orders.forEach((order) => {
-      
       total += order.finalPrice;
     });
     return total;
   }
+  setCashback(event) {
+    if (event.detail.checked) {
+      this.offerFlat = this.santaCoins;
+    } else {
+      this.offerFlat = 0;
+    }
+  }
   ngOnInit() {
-    if (this.dataProvider.checkOutdata){
+    this.dataProvider.showOverlay=false;
+    this.inventoryService
+      .getUserInfo()
+      .ref.get()
+      .then((user: any) => {
+        this.santaCoins = user.data().totalCashback;
+      });
+    if (this.dataProvider.checkOutdata) {
       this.dataCopy = this.dataProvider.checkOutdata;
       this.dataProvider.checkOutdata.forEach((prod) => {
         var docRef = this.afs.collection('products').ref.doc(prod.productData);
         docRef.get().then((data) => {
           if (data.exists) {
-            console.log('Document data:', data  );
-            let dat:any = data.data();
+            console.log('Document data:', data);
+            let dat: any = data.data();
             this.orderItems.push({
-              name:dat.productName,
-              sku:prod.productData,
-              units:1,
-              selling_price:500,
-            })
+              name: dat.productName,
+              sku: prod.productData,
+              units: 1,
+              selling_price: prod.price - this.offerFlat,
+            });
             dat['finalPrice'] = prod.price;
             dat['selections'] = prod.extrasData;
             this.orders.push(dat);
@@ -153,11 +173,12 @@ export class CheckoutComponent implements OnInit {
       });
       this.WindowRef = this.paymentService.WindowRef;
     } else {
-      this.authService.presentToast('Oh Ohh! Checkout expired &#x1F605;')
+      this.authService.presentToast('Oh Ohh! Checkout expired &#x1F605;');
       this.router.navigate(['']);
     }
   }
   proceedToPay($event) {
+    this.dataProvider.showOverlay=true;
     this.processingPayment = true;
     this.payableAmount = this.grandTotal * 100;
     console.log('payable amount', this.payableAmount);
@@ -210,7 +231,9 @@ export class CheckoutComponent implements OnInit {
         ref.handlePayment(response);
       },
       prefill: {
-        name: this.form.get('firstName')!.value.toString()+this.form.get('lastName')!.value.toString(),
+        name:
+          this.form.get('firstName')!.value.toString() +
+          this.form.get('lastName')!.value.toString(),
         email: this.form.get('email')!.value,
         contact: this.form.get('phoneNumber')!.value,
       },
@@ -228,13 +251,18 @@ export class CheckoutComponent implements OnInit {
       })
       .subscribe(
         (res) => {
+          if (this.offerFlat > 0) {
+            this.inventoryService.updateUserData({ totalCashback: 0 });
+          }
           this.paymentResponse = res;
           this.changeRef.detectChanges();
           console.log('success response', this.paymentResponse);
           const shippingDetail = {
-            order_id: `Order#${Math.floor(Math.random() * 5123435345 * 43) + 10}`,
-            billing_customer_name:this.form.get('firstName')!.value,
-            billing_last_name:this.form.get('lastName')!.value,
+            order_id: `Order#${
+              Math.floor(Math.random() * 5123435345 * 43) + 10
+            }`,
+            billing_customer_name: this.form.get('firstName')!.value,
+            billing_last_name: this.form.get('lastName')!.value,
             billing_city: this.form.get('city')!.value,
             billing_pincode: this.form.get('pincode')!.value,
             billing_state: this.form.get('state')!.value,
@@ -242,36 +270,47 @@ export class CheckoutComponent implements OnInit {
             billing_email: this.form.get('email')!.value,
             billing_phone: this.form.get('phoneNumber')!.value,
             billing_address: this.form.get('addressLine1')!.value,
-            order_items:this.orderItems,
+            order_items: this.orderItems,
             payment_method: 'Prepaid',
-            sub_total:this.grandTotal,
-            length:1,
-            height:1,
-            weight:1,
-            breadth:1,
-          }
-          console.log('shippingDetail',shippingDetail);
-          this.paymentService.shipOrder(shippingDetail).subscribe((res: any)=>{
-            console.log('shipping Confirmed Detail',res);
-            this.authService.presentToast('Order Placed Successfully');
-            let currentOrder = {
-              shippingDetail:res.body,
-              products:this.orders,
-              orderStage:"live",
-              orderId:res.body.order_id,
-              shipment_id:res.body.shipment_id,
-              orderConfirmed:false,
+            sub_total: this.grandTotal,
+            length: 1,
+            height: 1,
+            weight: 1,
+            breadth: 1,
+          };
+          console.log('shippingDetail', shippingDetail);
+          this.paymentService.shipOrder(shippingDetail).subscribe(
+            (res: any) => {
+              this.authService.presentToast('Payment Successful &#x1F60A;');
+              console.log('shipping Confirmed Detail', res);
+              let currentOrder = {
+                shippingDetail: res.body,
+                products: this.orders,
+                orderStage: 'live',
+                orderId: res.body.order_id,
+                shipment_id: res.body.shipment_id,
+                orderConfirmed: false,
+                orderMessage: this.message.value || '',
+              };
+              this.inventoryService.addUserOrder(currentOrder);
+              this.dataProvider.shippingData =
+                currentOrder.shippingDetail.shipment_id.toString();
+              this.authService.presentToast('Order Placed Successfully ');
+              this.router.navigateByUrl(
+                'trackorder?shippingId=' +
+                  currentOrder.shippingDetail.shipment_id.toString()
+              );
+            },
+            (error) => {
+              this.paymentResponse = error;
+              this.authService.presentToast(
+                error.message +
+                  '\nPlease contact hello santa, to complete your order',
+                7000
+              );
+              console.log('Error occured while completing shipment');
             }
-            this.inventoryService.addUserOrder(currentOrder);
-            this.dataProvider.shippingData=currentOrder.shippingDetail.shipment_id.toString();
-            this.router.navigateByUrl('trackorder?shippingId='+currentOrder.shippingDetail.shipment_id.toString());
-          },
-          (error)=>{
-            this.paymentResponse= error;
-            this.authService.presentToast(error.message+"\nPlease contact hello santa for to complete your order",7000);
-            console.log('Error occured while completing shipment')
-          }
-          )
+          );
         },
         (error) => {
           this.paymentResponse = error;

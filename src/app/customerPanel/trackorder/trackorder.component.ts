@@ -57,13 +57,14 @@ export class TrackorderComponent implements OnInit {
         .subscribe(async (res: any) => {
           this.shipmentOrderData = JSON.parse(res.body);
           console.log(this.shipmentOrderData);
-          this.inventoryService.getOrder(shipmentID).get().then((order: any) => {
+          this.inventoryService.getOrder().get().then((order: any) => {
             console.log(order);
             order.forEach((orderItem: any) => {
-              console.log(orderItem.data());
+              console.log("orderids",orderItem.data(),orderItem.data().shipment_id,shipmentID);
               if (orderItem.data().shipment_id==shipmentID){
                 this.orderData=orderItem.data();
                 this.orderConfirmed = orderItem.data().orderConfirmed;
+                console.log("orderData",this.orderData);
               }
             });
             // this.orderConfirmed = order.data().orderConfirmed;

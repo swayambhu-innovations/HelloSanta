@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { StarRatingComponent } from 'ng-starrating';
+import { AuthService } from 'src/app/services/auth.service';
 import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
@@ -16,30 +18,60 @@ export class FeedbackComponent implements OnInit {
   options: any = [];
   orderId: string;
   orderData:any;
-  constructor(private activatedRoute: ActivatedRoute,private inventoryService: InventoryService) {
+  values:any={}
+  shipment_id: any;
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private inventoryService: InventoryService,
+    private formbuilder: FormBuilder,
+    private authService: AuthService
+    ) {
     this.activatedRoute.queryParams.subscribe((params) => {
       this.orderId = params['orderId'];
     });
+    this.form = this.formbuilder.group({
+      starCount: this.StarCount,
+      moreInfo: this.moreInfo,
+    });
   }
-
+  form: FormGroup;
+  StarCount: FormControl = new FormControl('', [Validators.required,]);
+  moreInfo: FormControl = new FormControl();
   ngOnInit() {
     if (this.orderId){
-      this.inventoryService.getUserInfo().ref.get().then((doc:any)=>{
-        if (doc.exists){
-          doc.data().orders.forEach((order)=>{
-            if (order.orderId == this.orderId){
-              this.orderData = order;
-            }
-          })
-        }
-      });
+      this.inventoryService.getOrder().get().then((snapshot:any) => {
+        snapshot.forEach((doc:any) => {
+          if (this.orderId == doc.data().orderId){
+            this.orderData = doc.data()
+            this.shipment_id = doc.data().shipment_id
+            console.log(this.orderData)
+          }
+        })
+      })
     }
     if (this.screenwidth >= 600) {
       this.starsize = '50px';
     }
   }
   submitFeedback(){
-
+    console.log('submitFeedback');
+    console.log(this.moreInfo.value);
+    console.log(this.StarCount.value)
+    console.log(this.values)
+    let feedback = {
+      stars:this.StarCount.value,
+      moreInfo:this.moreInfo.value,
+      options:this.values,
+      name:this.authService.getUserName(),
+      email:this.authService.getUserEmail(),
+      photoURL:this.authService.getUserPhoto(),
+      userId: this.authService.userId,
+    }
+    if (this.orderId){
+      this.inventoryService.addProductFeedback(this.orderId,feedback)
+    } else {
+      this.inventoryService.addWebsiteFeedback(feedback)
+    }
   }
   onRate(event: {
     oldValue: number;
@@ -48,6 +80,7 @@ export class FeedbackComponent implements OnInit {
   }) {
     console.log('value', event.newValue);
     this.rating = event.newValue;
+    this.StarCount.setValue(event.newValue)
     if (this.rating == 1) {
       this.optionsTitle = ' What went so wrong?';
       this.options = [
@@ -89,5 +122,6 @@ export class FeedbackComponent implements OnInit {
         'Value For Money',
       ];
     }
+    this.values[this.optionsTitle]={}
   }
 }

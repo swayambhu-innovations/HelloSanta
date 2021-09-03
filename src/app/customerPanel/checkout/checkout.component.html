@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content [ngStyle]="{'filter': (dataProvider.showOverlay) ? 'blur(10px)' : 'blur(0px)' }">
   <app-header></app-header>
   <div class="home">
     <div class="uk-panel">
@@ -115,6 +115,10 @@
                   <ion-label position="floating">Your Message</ion-label>
                   <ion-textarea placeholder="Enter your message" formControlName="message"></ion-textarea>
                 </ion-item>
+                <ion-item *ngIf="santaCoins>0">
+                  <ion-checkbox [checked]="false" formControlName="santaCredit" (ionChange)="setCashback($event)"></ion-checkbox>
+                  <ion-label>&nbsp;&nbsp;&nbsp;Use Your {{santaCoins}} Santa Credit for <strong>&#x20B9;{{this.santaCoins}}</strong> off.</ion-label>
+                </ion-item>
                 <div align="center">
                   <button type="submit" [disabled]="!form.valid">
                     <div *ngIf="processingPayment">
@@ -137,3 +141,6 @@
   </div>
   <app-footer></app-footer>
 </ion-content>
+<div id="overlay" *ngIf="dataProvider.showOverlay">
+  <ion-spinner name="crescent" color="tertiary"></ion-spinner>
+</div>

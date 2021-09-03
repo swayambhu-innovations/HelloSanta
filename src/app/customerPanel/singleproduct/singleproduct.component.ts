@@ -40,12 +40,12 @@ export class SingleproductComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public afs: AngularFirestore,
     private authService: AuthService,
-    private dataProvider: DataProvider,
+    public dataProvider: DataProvider,
     private inventoryService: InventoryService,
     private router: Router,
     private analytics: AngularFireAnalytics,
     private formbuilder: FormBuilder,
-    public popoverController: PopoverController
+    public popoverController: PopoverController,
   ) {
     this.activatedRoute.queryParams.subscribe((params) => {
       this.productId = params['productId'];
@@ -77,6 +77,7 @@ export class SingleproductComponent implements OnInit {
     if (
       Object.keys(this.extrasData).length == this.productData.extraData.length
     ) {
+      this.dataProvider.showOverlay=true;
       alert('Add to cart product price' + this.productPrice.toString());
       this.dataProvider.checkOutdata = [
         {
@@ -251,11 +252,11 @@ export class SingleproductComponent implements OnInit {
   }
   ngOnInit() {
     this.inventoryService
-      .getUserInfo()
+      .getUserOrders()
       .ref.get()
       .then((doc: any) => {
         if (doc.exists) {
-          doc.data().orders.forEach((ord: any) => {
+          doc.data().forEach((ord: any) => {
             ord.products.forEach((prod: any) => {
               if (prod.productId == this.productId) {
                 this.purchasedProduct = true;
@@ -279,8 +280,13 @@ export class SingleproductComponent implements OnInit {
         this.selectedExtraTitle = this.productData.extraData[0].sectionTitle;
         this.category = this.productData.productCategory;
         this.subcategory = this.productData.productSubcategory;
-        this.comments = value.comments;
       });
+    this.afs.collection('products').doc(this.productId).collection('comments').ref.get().then((value: any) => {
+      this.comments=[];
+      value.forEach((doc: any) => {
+        this.comments.push(doc.data());
+      });
+    })
     this.afs
       .collection('products')
       .valueChanges()

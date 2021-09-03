@@ -430,22 +430,19 @@ export class InventoryService {
   addComment(comment, productId) {
     this.afs
       .collection('products')
-      .doc(productId)
-      .update({
-        comments: firebase.firestore.FieldValue.arrayUnion(comment),
+      .doc(productId).collection('comments')
+      .add(comment).then((docRef) => {
+        this.afs.collection('products').doc(productId).collection('comments').doc(docRef.id).set({ commentId: docRef.id }, { merge: true });
       });
+  }
+  getProductComments(productId){
+    return this.afs.collection('products').doc(productId).collection('comments');
   }
   getUserOrders() {
     return this.afs
       .collection('users')
       .doc(this.authService.userId)
-      .ref.get()
-      .then((user: any) => {
-        if (user.exists) {
-          // return user.data();
-          console.log(user.data());
-        }
-      });
+      .collection('orders');
   }
   addhelpDocument(data) {
     this.afs.collection('feedback').add(data);
@@ -492,9 +489,24 @@ export class InventoryService {
   removeCustomProduct(docId) {
     this.afs.collection('customProducts').doc(docId).delete();
   }
-  getOrder(shipmentId){
+  getOrder(){
+    return this.afs.firestore.collection('users')
+    .doc(this.authService.userId)
+    .collection('orders');
+  }
+  addProductFeedback(orderId,feedback){
     return this.afs.firestore.collection('users')
     .doc(this.authService.userId)
     .collection('orders')
+    .doc(orderId).set({feedback:feedback},{merge:true})
+  }
+  addWebsiteFeedback(feedback){
+    return this.afs.firestore.collection('websiteFeedback').add(feedback).then((docRef) => {
+      const productRef = this.afs.doc(`websiteFeedback/${docRef.id}`);
+      productRef.update({ feedbackId: docRef.id });
+    });
+  }
+  getWebsiteFeedbacks(){
+    return this.afs.collection('websiteFeedback');
   }
 }

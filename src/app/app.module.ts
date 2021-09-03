@@ -118,7 +118,8 @@ import { MoreInfoComponent } from './popovers/more-info/more-info.component';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { NgCalendarModule } from 'ionic2-calendar';
 import { AlertsModalService } from './services/alerts-modal.service';
-import {MatExpansionModule} from '@angular/material/expansion'; 
+import {MatExpansionModule} from '@angular/material/expansion';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -236,7 +237,6 @@ import {MatExpansionModule} from '@angular/material/expansion';
     AngularFireAnalyticsModule,
     NgxImageZoomModule,
     NgCalendarModule,
-    
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

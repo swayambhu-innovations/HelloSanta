@@ -12,11 +12,13 @@ export class APFeedbackComponent implements OnInit {
 
   constructor(private inventoryService: InventoryService,public popoverController: PopoverController) { }
   feedbacks:any;
-  async showInfo(ev,data){
+  websiteFeedbacks:any;
+  async showInfo(ev,data,listData?){
     const popover = await this.popoverController.create({
       component: MoreInfoComponent,
       componentProps: {
-        data: data
+        data: data,
+        listData:listData!=undefined ? Object.keys(listData):undefined,
       },
       event: ev,
       translucent: true
@@ -31,6 +33,12 @@ export class APFeedbackComponent implements OnInit {
        doc.data()['id']=doc.id;
        this.feedbacks.push(doc.data());
      })
+    })
+    this.inventoryService.getWebsiteFeedbacks().valueChanges().subscribe((data:any) => {
+      this.websiteFeedbacks=[]
+      data.forEach((doc:any) => {
+        this.websiteFeedbacks.push(doc)
+      })
     })
   }
 }

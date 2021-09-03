@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class MoreInfoComponent implements OnInit {
   @Input() data:string;
+  @Input() listData:any;
   constructor() { }
 
   ngOnInit() {}

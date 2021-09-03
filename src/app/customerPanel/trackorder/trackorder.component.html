@@ -1,6 +1,11 @@
 <ion-content>
   <app-header></app-header>
   <div class="inner-box">
+    <ion-row *ngIf="orderData">
+      <app-small-product-card *ngFor="let order of orderData.products" [img]="order.productImages[0].image"
+                  [productTitle]="order.productName" [date]="orderData.shippingDetail.orderDate" 
+                  [price]="order.finalPrice" [productId]="order.productId"></app-small-product-card>
+    </ion-row>
     <ion-button (click)="presentInvoice()">
       Generate Invoice
     </ion-button>

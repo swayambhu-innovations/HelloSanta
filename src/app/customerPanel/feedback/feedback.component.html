@@ -1,50 +1,53 @@
 <ion-content>
-  <app-header ></app-header>
+  <app-header></app-header>
   <ion-card class="uk-align-center uk-text-center rating">
-    <form action="">
+    <h1 *ngIf="orderId==undefined">Give a website feedback</h1>
+    <h1 *ngIf="orderId!=undefined">Give order feedback</h1>
+    <form (ngSubmit)="submitFeedback()" [formGroup]="form">
       <div>
-        <star-rating [value]="0" [totalstars]="5" checkedcolor="#675ce0" [size]="starsize" (rate)="onRate($event)">
+        <star-rating [value]="0" [formControlName]="" [totalstars]="5" checkedcolor="#675ce0" [size]="starsize" (rate)="onRate($event)">
         </star-rating>
       </div>
-    </form>
-    <div *ngIf="rating != undefined">
-      <h1>{{optionsTitle}}</h1>
-      <div *ngIf="rating == 1">
-      <ion-chip color="primary" outline="true" *ngFor="let tag of options">
-        <ion-checkbox></ion-checkbox>
-        <ion-label>{{tag}}</ion-label>
-      </ion-chip>
+      <div *ngIf="rating != undefined">
+        <h1>{{optionsTitle}}</h1>
+        <div *ngIf="rating == 1">
+          <ion-chip color="primary" outline="true" *ngFor="let tag of options">
+            <ion-checkbox (ionChange)="values[optionsTitle][tag]=checker.checked" #checker></ion-checkbox>
+            <ion-label>{{tag}}</ion-label>
+          </ion-chip>
+        </div>
+        <div *ngIf="rating == 2">
+          <ion-chip color="primary" outline="true" *ngFor="let tag of options">
+            <ion-checkbox (ionChange)="values[optionsTitle][tag]=checker.checked" #checker></ion-checkbox>
+            <ion-label>{{tag}}</ion-label>
+          </ion-chip>
+        </div>
+        <div *ngIf="rating == 3">
+          <ion-chip color="primary" outline="true" *ngFor="let tag of options">
+            <ion-checkbox (ionChange)="values[optionsTitle][tag]=checker.checked" #checker></ion-checkbox>
+            <ion-label>{{tag}}</ion-label>
+          </ion-chip>
+        </div>
+        <div *ngIf="rating == 4">
+          <ion-chip color="primary" outline="true" *ngFor="let tag of options">
+            <ion-checkbox (ionChange)="values[optionsTitle][tag]=checker.checked" #checker></ion-checkbox>
+            <ion-label>{{tag}}</ion-label>
+          </ion-chip>
+        </div>
+        <div *ngIf="rating == 5">
+          <ion-chip color="primary" outline="true" *ngFor="let tag of options">
+            <ion-checkbox (ionChange)="values[optionsTitle][tag]=checker.checked" #checker></ion-checkbox>
+            <ion-label>{{tag}}</ion-label>
+          </ion-chip>
+        </div>
       </div>
-      <div *ngIf="rating == 2">
-        <ion-chip color="primary" outline="true" *ngFor="let tag of options">
-          <ion-checkbox></ion-checkbox>
-          <ion-label>{{tag}}</ion-label>
-        </ion-chip>
-      </div>
-      <div *ngIf="rating == 3">
-        <ion-chip color="primary" outline="true" *ngFor="let tag of options">
-          <ion-checkbox></ion-checkbox>
-          <ion-label>{{tag}}</ion-label>
-        </ion-chip>
-      </div>
-      <div *ngIf="rating == 4">
-        <ion-chip color="primary" outline="true" *ngFor="let tag of options">
-          <ion-checkbox></ion-checkbox>
-          <ion-label>{{tag}}</ion-label>
-        </ion-chip>
-      </div>
-      <div *ngIf="rating == 5">
-        <ion-chip color="primary" outline="true" *ngFor="let tag of options">
-          <ion-checkbox></ion-checkbox>
-          <ion-label>{{tag}}</ion-label>
-        </ion-chip>
-      </div>
-    </div>
-<ion-textarea color="primary" outline="true" style="border: 3px solid black;" ></ion-textarea>
+    <ion-textarea formControlName="moreInfo" color="primary" outline="true" style="border: 3px solid black;"></ion-textarea>
+    <ion-button type="submit" shape="round">
+      Submit
+    </ion-button>
+  </form>
   </ion-card>
-  <ion-button (click)="submitFeedback()" shape="round">
-Submit
-  </ion-button>
+  
   <app-accordion></app-accordion>
-  <app-footer ></app-footer>
+  <app-footer></app-footer>
 </ion-content>

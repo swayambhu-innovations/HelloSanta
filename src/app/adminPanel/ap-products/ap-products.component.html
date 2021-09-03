@@ -44,7 +44,7 @@
         <button slot="end" (click)="deleteItem(item.productId)">
           <ion-icon name="trash"></ion-icon>
         </button>
-        <button slot="end" (click)="presentEditProductModal(item.productId)">
+        <button slot="end" disabled (click)="presentEditProductModal(item.productId)">
           <ion-icon name="create"></ion-icon>
         </button>
         <button (click)="presentSpecificProductsPop($event,item.productId)">

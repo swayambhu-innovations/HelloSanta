@@ -14,7 +14,7 @@ export class CartComponent implements OnInit {
   constructor(
     private afs: AngularFirestore,
     private authService: AuthService,
-    private dataProvider:DataProvider,
+    public dataProvider:DataProvider,
     private router: Router,) { }
   cartItems=[]
   checkoutItems=[]
@@ -39,6 +39,7 @@ export class CartComponent implements OnInit {
     })
   }
   moveToCheckout(){
+    this.dataProvider.showOverlay=true;
     console.log('checkout items', this.checkoutItems)
     this.dataProvider.checkOutdata=this.checkoutItems;
     this.router.navigate(['checkout']);

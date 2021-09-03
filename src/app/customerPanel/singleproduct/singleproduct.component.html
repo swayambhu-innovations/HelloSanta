@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content [ngStyle]="{'filter': (dataProvider.showOverlay) ? 'blur(10px)' : 'blur(0px)' }">
     <app-header></app-header>
     <div *ngIf="productData==undefined">
         <div>
@@ -118,7 +118,7 @@
                     Add Review
                 </ion-button>
             </ion-item>
-            <div class="ratings uk-align-center uk-text-center">
+            <div class="ratings uk-align-center uk-text-center" *ngIf="comments">
                 <app-comment-card [image]="comment.userImage" [stars]="comment.stars" [body]="comment.commentBody"
                     [title]="comment.commentTitle" [commentDate]="comment.commentDate" [username]="comment.userName"
                     *ngFor="let comment of comments"></app-comment-card>
@@ -142,3 +142,6 @@
     </main>
     <app-footer></app-footer>
 </ion-content>
+<div id="overlay" *ngIf="dataProvider.showOverlay">
+    <ion-spinner name="crescent" color="tertiary"></ion-spinner>
+</div>
