@@ -1,9 +1,23 @@
 <ion-content>
+  <ion-toolbar>
+    <ion-title>Latest Orders</ion-title>
+  </ion-toolbar>
   <ion-list>
-    <div>
-      <app-vporders-summary-card *ngFor="let order of orders" [price]="order.price" [description]="order.description"
-        [items]="order.items" [deliveryDate]="order.deliveryDate" [purchaseDate]="order.purchaseDate">
-      </app-vporders-summary-card>
-    </div>
+    <ion-item *ngFor="let order of orders">
+      <ion-label><strong>Products:</strong> {{order.products.length}}</ion-label>
+      <ion-label color="success"><strong>Order Id:</strong> {{order.orderId}}</ion-label>
+      <ion-label color="danger">{{order.shippingDetail.orderDate}}</ion-label>
+      <ion-chip color="primary" outline="true">
+        <ion-icon name="at-circle-outline"></ion-icon>
+        <ion-label>{{order.shippingDetail.status}}</ion-label>
+        <ion-icon name="stats-chart"></ion-icon>
+      </ion-chip>
+      <ion-label>{{order.deliveryDate}}</ion-label>
+      <ion-button shape="round" (click)="showOrderInfo(order)">
+        More Info
+      </ion-button>
+    </ion-item>
   </ion-list>
+  <img src="./assets/NotFound.gif" alt="NOt Found" *ngIf="orders.length<=0 || orders==undefined">
+
 </ion-content>

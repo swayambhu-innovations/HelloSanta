@@ -316,6 +316,7 @@ export class AddProductModalComponent implements OnInit {
               ).toPromise();
               this.progressValue += 1 / (+optionsCount * 2);
               options.push({
+                type: type,
                 image: imageUrl,
                 title: imageTitle,
                 sectionTitle: sectionTitle,
@@ -366,6 +367,7 @@ export class AddProductModalComponent implements OnInit {
                 ) as HTMLInputElement
               ).value;
               options.push({
+                type: type,
                 title: textTitle,
                 sectionTitle: sectionTitle,
               });
@@ -397,11 +399,21 @@ export class AddProductModalComponent implements OnInit {
               'sectionNumTitle' + i.toString()
             ) as HTMLInputElement
           ).value;
+          let options=[];
+          for (let faceIndex = 1; faceIndex <= +quantityMax; faceIndex++) {
+            options.push({
+              type: type,
+              quantity: faceIndex,
+              isRelative: false,
+              sectionTitle: sectionTitle,
+            });
+          }
           data.push({
             type: type,
             quantityMax: quantityMax,
             sectionTitle: sectionTitle,
             isRelative: false,
+            values: options,
           });
         } else if (type == 'extraInfo') {
           let optionsCount = (
@@ -423,6 +435,7 @@ export class AddProductModalComponent implements OnInit {
                 ) as HTMLInputElement
               ).value;
               options.push({
+                type: type,
                 title: textTitle,
                 sectionTitle: sectionTitle,
                 isRelative: false,
@@ -441,10 +454,19 @@ export class AddProductModalComponent implements OnInit {
               'faceInputMaximum' + i.toString()
             ) as HTMLInputElement
           ).value;
+          let options=[];
+          for (let faceIndex = 1; faceIndex <= +maximumFaces; faceIndex++) {
+            options.push({
+              type: type,
+              faces: faceIndex,
+              isRelative: false,
+            });
+          }
           data.push({
             type: type,
             maximumFaces: maximumFaces,
             isRelative: false,
+            values: options,
           });
         }
       } catch (e) {

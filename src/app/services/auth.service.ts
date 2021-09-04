@@ -184,7 +184,10 @@ export class AuthService {
     this.afAuth.currentUser.finally().then((value)=>{a=value})
     return a;
   }
-
+  get userDob():Date{
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    return user.dob;
+  }
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     return (user !== null && user.emailVerified !== false) ? true : false;

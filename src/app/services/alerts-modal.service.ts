@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AlertController, ModalController, PopoverController } from '@ionic/angular';
+import { ShowOrderInfoComponent } from '../modals/show-order-info/show-order-info.component';
 import { MoreInfoComponent } from '../popovers/more-info/more-info.component';
 
 @Injectable({
@@ -28,6 +29,17 @@ export class AlertsModalService {
     await alert.present();
     const { role } = await alert.onDidDismiss();
     return role;
+  }
+  async showOrderInfo(data) {
+    const popover = await this.popoverController.create({
+      component: ShowOrderInfoComponent,
+      componentProps: {
+        order: data
+      },
+      cssClass: 'order-info',
+      translucent: true
+    });
+    await popover.present();
   }
   async showInfo(ev,data){
     const popover = await this.popoverController.create({

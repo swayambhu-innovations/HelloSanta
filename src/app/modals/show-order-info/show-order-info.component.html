@@ -1,0 +1,38 @@
+<ion-content>
+    <ion-item>
+        <ion-label>Order Confirmed</ion-label>
+        <ion-chip color="primary" mode="md" outline="true" *ngIf="order.orderConfirmed">
+            <ion-label>Yes</ion-label>
+        </ion-chip>
+        <ion-chip color="danger" mode="md" outline="true" *ngIf="!order.orderConfirmed">
+            <ion-label>No</ion-label>
+        </ion-chip>
+    </ion-item>
+    <ion-item>
+        <ion-label>Order Date</ion-label>
+        <ion-label color="primary"><strong>{{order.shippingDetail.orderDate}}</strong></ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label>Order Status</ion-label>
+        <ion-label color="success"><strong>{{order.shippingDetail.status}}</strong></ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label>Special Message</ion-label>
+        <ion-label color="primary"><strong>{{order.shippingDetail.specialMessage}}</strong></ion-label>
+    </ion-item>
+    <hr class="uk-divider-icon">
+    <ion-card *ngFor="let product of order.products">
+        <img [src]="product.productImages[0].image" >
+        <br>
+        <ion-title>{{product.productName}}</ion-title>
+        <br>
+        <p style="width:300px;margin:10px;">{{product.seoDescription}}</p><br>
+        <ion-card>
+            <ion-title>Selections</ion-title>
+            <ion-item *ngFor="let val of genData(product.selections)">
+                <ion-label>{{val.title}}</ion-label>
+                <ion-label color="primary">{{val.value}}</ion-label>
+            </ion-item>
+        </ion-card>
+    </ion-card>
+</ion-content>

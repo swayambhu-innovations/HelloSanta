@@ -30,19 +30,20 @@
     <ion-label>Latest Orders</ion-label>
     <ion-list>
       <ion-item *ngFor="let order of orders">
-        <ion-label>{{order.name}}</ion-label>
-        <ion-label>{{order.price}}</ion-label>
-        <ion-label>{{order.orderDate}}</ion-label>
+        <ion-label><strong>Products:</strong> {{order.products.length}}</ion-label>
+        <ion-label color="success"><strong>Order Id:</strong> {{order.orderId}}</ion-label>
+        <ion-label color="danger">{{order.shippingDetail.orderDate}}</ion-label>
         <ion-chip color="primary" outline="true">
           <ion-icon name="at-circle-outline"></ion-icon>
-          <ion-label>{{order.status}}</ion-label>
+          <ion-label>{{order.shippingDetail.status}}</ion-label>
           <ion-icon name="stats-chart"></ion-icon>
         </ion-chip>
         <ion-label>{{order.deliveryDate}}</ion-label>
-        <ion-button shape="round">
+        <ion-button shape="round" (click)="showOrderInfo(order)">
           More Info
         </ion-button>
       </ion-item>
     </ion-list>
+    <img src="./assets/NotFound.gif" alt="NOt Found" *ngIf="orders.length<=0 || orders==undefined">
   </ion-card>
 </ion-content>

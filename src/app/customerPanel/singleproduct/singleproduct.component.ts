@@ -45,7 +45,7 @@ export class SingleproductComponent implements OnInit {
     private router: Router,
     private analytics: AngularFireAnalytics,
     private formbuilder: FormBuilder,
-    public popoverController: PopoverController,
+    public popoverController: PopoverController
   ) {
     this.activatedRoute.queryParams.subscribe((params) => {
       this.productId = params['productId'];
@@ -77,7 +77,7 @@ export class SingleproductComponent implements OnInit {
     if (
       Object.keys(this.extrasData).length == this.productData.extraData.length
     ) {
-      this.dataProvider.showOverlay=true;
+      this.dataProvider.showOverlay = true;
       alert('Add to cart product price' + this.productPrice.toString());
       this.dataProvider.checkOutdata = [
         {
@@ -94,8 +94,7 @@ export class SingleproductComponent implements OnInit {
   addToCart() {
     this.analytics.logEvent('addToCart');
     if (
-      Object.keys(this.extrasData).length ==
-      this.productData.extraData.length
+      Object.keys(this.extrasData).length == this.productData.extraData.length
     ) {
       let cartItem = {
         productData: this.productData.productId,
@@ -199,7 +198,7 @@ export class SingleproductComponent implements OnInit {
   updateData(event, relative, sectionTitle) {
     // console.log(event);
     if (typeof event.detail.value == 'object') {
-      console.log('updater ',event,relative,sectionTitle);  
+      console.log('updater ', event, relative, sectionTitle);
       event.detail.value['isRelative'] = relative || false;
       this.extrasData[sectionTitle] = event.detail.value;
       console.log(this.extrasData);
@@ -227,7 +226,9 @@ export class SingleproductComponent implements OnInit {
         });
         if (msgString.length > 0) {
           this.authService.presentToast(
-            'You need to select' + msgString + ' faces and addons to get final price'
+            'You need to select' +
+              msgString +
+              ' faces and addons to get final price'
           );
         } else {
           this.calculatePrice();
@@ -256,15 +257,14 @@ export class SingleproductComponent implements OnInit {
       .getUserOrders()
       .ref.get()
       .then((doc: any) => {
-        if (doc.exists) {
-          doc.data().forEach((ord: any) => {
-            ord.products.forEach((prod: any) => {
-              if (prod.productId == this.productId) {
-                this.purchasedProduct = true;
-              }
-            });
+        doc.forEach((ord: any) => {
+          ord = ord.data();
+          ord.products.forEach((prod: any) => {
+            if (prod.productId == this.productId) {
+              this.purchasedProduct = true;
+            }
           });
-        }
+        });
       });
     this.afs
       .collection('products')
@@ -272,7 +272,6 @@ export class SingleproductComponent implements OnInit {
       .ref.get()
       .then((value: any) => {
         value = value.data();
-        console.log(value);
         this.productData = value;
         this.productPrice = 0;
         this.displayPrice = value.productPrice;
@@ -281,14 +280,23 @@ export class SingleproductComponent implements OnInit {
         this.selectedExtraTitle = this.productData.extraData[0].sectionTitle;
         this.category = this.productData.productCategory;
         this.subcategory = this.productData.productSubcategory;
-
+        for (let d of this.productData.extraData) {
+          if (d.type == 'faceCount') {
+            this.extrasData[d.sectionTitle] = d.values[0];
+          }
+        }
       });
-    this.afs.collection('products').doc(this.productId).collection('comments').ref.get().then((value: any) => {
-      this.comments=[];
-      value.forEach((doc: any) => {
-        this.comments.push(doc.data());
+    this.afs
+      .collection('products')
+      .doc(this.productId)
+      .collection('comments')
+      .ref.get()
+      .then((value: any) => {
+        this.comments = [];
+        value.forEach((doc: any) => {
+          this.comments.push(doc.data());
+        });
       });
-    })
     this.afs
       .collection('products')
       .valueChanges()
@@ -297,7 +305,6 @@ export class SingleproductComponent implements OnInit {
           let unknown = 0;
           this.recommendationProducts.forEach((oldProduct: any) => {
             if (product.productId == oldProduct.productId) {
-              console.log('already exists');
               unknown++;
             }
           });

@@ -8,4 +8,9 @@
 ion-toolbar{
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
 }
-
+img{
+    position: relative;
+    width: 300px;
+    left:50%;
+    transform: translateX(-50%);
+}

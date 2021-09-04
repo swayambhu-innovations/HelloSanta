@@ -6,7 +6,7 @@
     </ion-item>
     <ion-item>
         <ion-label position="floating">Review Description</ion-label>
-        <ion-textarea formControlName="commentBody"></ion-textarea>
+        <ion-textarea formControlName="commentBody" maxlength="500"></ion-textarea>
     </ion-item>
     <star-rating (rate)="changeRatingStar($event)" class="uk-align-center uk-text-center uk-margin-small-top"
         [value]="0" [totalstars]="5" checkedcolor="#9081FF" size="25px" uncheckedcolor="#d0caff">

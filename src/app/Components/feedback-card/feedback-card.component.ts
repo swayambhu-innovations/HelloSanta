@@ -9,6 +9,7 @@ export class FeedbackCardComponent implements OnInit {
   @Input() title:string=""
   @Input() description:string=""
   @Input() image: string=""
+  @Input() stars:number = 4;
   
   constructor() { }
 

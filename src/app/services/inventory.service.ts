@@ -509,4 +509,5 @@ export class InventoryService {
   getWebsiteFeedbacks(){
     return this.afs.collection('websiteFeedback');
   }
+
 }

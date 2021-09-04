@@ -10,9 +10,10 @@ export class VPOrdersSummaryCardComponent implements OnInit {
   @Input() description:string;
   @Input() items:any;
   @Input() purchaseDate:string;
-  @Input() deliveryDate:string;
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.items,this.price,this.description,this.purchaseDate);
+  }
 
 }

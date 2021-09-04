@@ -85,9 +85,9 @@
                         <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='faceCount'">
                             <ion-radio-group [name]="item.sectionTitle" [value]="extrasData[item.sectionTitle]" required
                             (ionChange)="updateData($event,item.isRelative,item.sectionTitle)">
-                                <ion-card class="selectionChoiceCard" *ngFor="let single of genList(4)">
-                                    <ion-label class="uk-align-center uk-text-center">{{single}}</ion-label>
-                                    <ion-radio [value]="{'type':item.type,'isRelative':item.isRealtive,'faces':single}"></ion-radio>
+                                <ion-card class="selectionChoiceCard" *ngFor="let single of item.values">
+                                    <ion-label class="uk-align-center uk-text-center">{{single.faces}}</ion-label>
+                                    <ion-radio [value]="single"></ion-radio>
                                 </ion-card>
                             </ion-radio-group>
                         </ion-row>
@@ -97,9 +97,9 @@
                         <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='quantitySel'">
                             <ion-radio-group [name]="item.sectionTitle" [value]="extrasData[item.sectionTitle]" required
                             (ionChange)="updateData($event,item.isRelative,item.sectionTitle)">
-                                <ion-card class="selectionChoiceCard" *ngFor="let single of genList(4)">
+                                <ion-card class="selectionChoiceCard" *ngFor="let single of item.values">
                                     <ion-label class="uk-align-center uk-text-center">{{single}}</ion-label>
-                                    <ion-radio [value]="{'type':item.type,'isRelative':item.isRealtive,'quantity':single}"></ion-radio>
+                                    <ion-radio [value]="single"></ion-radio>
                                 </ion-card>
                             </ion-radio-group>
                         </ion-row>
@@ -114,11 +114,11 @@
         <section id="product-description">
             <ion-item>
                 <ion-title style="font-size: 20px;">Ratings</ion-title>
-                <ion-button *ngIf="purchasedProduct" (click)="addComment($event)" shape="round">
+                <ion-button *ngIf="purchasedProduct" (click)="addComment($event)" size="medium" fill="outline">
                     Add Review
                 </ion-button>
             </ion-item>
-            <div class="ratings uk-align-center uk-text-center" *ngIf="comments">
+            <div class="ratings uk-align-center uk-text-center" uk-grid="masonry: true" *ngIf="comments">
                 <app-comment-card [image]="comment.userImage" [stars]="comment.stars" [body]="comment.commentBody"
                     [title]="comment.commentTitle" [commentDate]="comment.commentDate" [username]="comment.userName"
                     *ngFor="let comment of comments"></app-comment-card>

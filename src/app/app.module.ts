@@ -119,6 +119,7 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { NgCalendarModule } from 'ionic2-calendar';
 import { AlertsModalService } from './services/alerts-modal.service';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { ShowOrderInfoComponent } from './modals/show-order-info/show-order-info.component';
 
 @NgModule({
   declarations: [
@@ -216,6 +217,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     InvoiceDetailComponent,
     MoreInfoComponent,
     CustomproductComponent,
+    ShowOrderInfoComponent,
   ],
   entryComponents: [],
   imports: [
