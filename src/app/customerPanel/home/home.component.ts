@@ -86,8 +86,8 @@ export class HomeComponent implements OnInit {
       .doc('/specificSelectedProducts/products')
       .ref.get()
       .then((value: any) => {
-        if (value.exists){
-          value= value.data()
+        if (value.exists) {
+          value = value.data();
           if (value.featuredProducts) {
             value.featuredProducts.forEach((prod) => {
               this.afs

@@ -52,6 +52,18 @@
     <li><a href="/">Home</a></li>
     <li><a href="/handmadeart/">Handmade Products</a></li>
     <li><a href="/digitalart/">Digital Products</a></li>
+    <li><a href="/shop/">Shop</a></li>
+    <div uk-dropdown class="dog">
+      <ul class="uk-nav uk-dropdown-nav " style="display:block">
+          <li class="uk-active"><a href="#">Active</a></li>
+          <li><a href="#">Item</a></li>
+          <li class="uk-nav-header">Header</li>
+          <li><a href="#">Item</a></li>
+          <li><a href="#">Item</a></li>
+          <li class="uk-nav-divider"></li>
+          <li><a href="#">Item</a></li>
+      </ul>
+    </div>
     <li><a href="/bloghome/">Blog</a></li>
     <li><a href="/help/">Contact</a></li>
     <li *ngIf="this.authService.getCurrenAccessLevel == 'Admin'"><a href="/AdminPanel/Dashboard">Admin Panel</a></li>

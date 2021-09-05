@@ -55,6 +55,7 @@ a {
 .img {
   float: left;
   width: 45%;
+  height: 50%;
   margin-left: 5%;
   margin-top: 3%;
 }
@@ -64,8 +65,10 @@ a {
   color: #6d5de3;
 }
 .heading-discription {
+  padding-top: 100px;
   font-size: 1.2rem;
   font-family: Raleway;
+  line-height: 2;
   margin-right: 3%;
   width: 80%;
   color: #ff6584;

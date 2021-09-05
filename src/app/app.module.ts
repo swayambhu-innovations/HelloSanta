@@ -120,7 +120,7 @@ import { NgCalendarModule } from 'ionic2-calendar';
 import { AlertsModalService } from './services/alerts-modal.service';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ShowOrderInfoComponent } from './modals/show-order-info/show-order-info.component';
-
+import { ShopComponent } from './customerPanel/shop/shop.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -218,6 +218,7 @@ import { ShowOrderInfoComponent } from './modals/show-order-info/show-order-info
     MoreInfoComponent,
     CustomproductComponent,
     ShowOrderInfoComponent,
+    ShopComponent,
   ],
   entryComponents: [],
   imports: [

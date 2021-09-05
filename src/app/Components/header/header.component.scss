@@ -93,6 +93,11 @@ div > ul{
   justify-items: center;
   background-color: #fdfaf2;
 }
+
+.dog{
+height: 250px;
+  background-color: #fdfaf2;
+}
 li{
   font-weight: 500;
   list-style: none !important;
@@ -107,6 +112,7 @@ text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease-in-out;
 }
+
 li > button > ion-icon {
   font-size: 30px;
   color: var(--ion-color-primary);
