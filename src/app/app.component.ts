@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AlertController } from '@ionic/angular';
+import { AuthService } from './services/auth.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -14,5 +17,36 @@ export class AppComponent {
     { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+  constructor(public alertController: AlertController,private afs: AngularFirestore,public authService: AuthService) {}
+
+  async presentAlertPrompt() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Report Bug !',
+      inputs: [
+        {
+          name: 'name1',
+          type: 'text',
+          placeholder: 'Your Message'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Report Bug',
+          handler: (alertData) => {
+            this.afs.collection('bugs').add({message:alertData.name1});
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
 }

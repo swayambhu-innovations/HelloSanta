@@ -24,7 +24,8 @@ export class HeaderComponent implements OnInit {
   coins: number = 0;
   ngOnInit() {
     this.image = this.authService.getUserPhoto();
-    this.afs
+    if (this.authService.isJustLoggedIn){
+      this.afs
       .collection('users')
       .doc(this.authService.userId)
       .valueChanges()
@@ -56,6 +57,7 @@ export class HeaderComponent implements OnInit {
           console.log('no user data');
         }
       });
+    }
   }
   async presentUserinfo(ev: any) {
     const popover = await this.popoverController.create({

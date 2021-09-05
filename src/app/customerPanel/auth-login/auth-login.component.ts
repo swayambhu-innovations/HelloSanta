@@ -11,6 +11,8 @@ export class AuthLoginComponent implements OnInit {
 
   constructor(public authService:AuthService,public dataProvider:DataProvider) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.dataProvider.showOverlay=false;
+  }
 
 }

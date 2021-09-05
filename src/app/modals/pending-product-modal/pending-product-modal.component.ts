@@ -253,19 +253,19 @@ export class PendingProductModalComponent implements OnInit {
     this.selectedVendors = event.detail.value;
   }
   async customisationSubmit(stepper: MatStepper) {
-    console.log("matStepper",stepper);
+    console.log('matStepper', stepper);
     let data = [];
     let relativeData = [];
     let customs = this.customisationsForm.get('customisationsCount').value;
     let error = false;
-    let errorMesage = ""
+    let errorMesage = '';
     stepper.next();
     for (let i = 0; i < customs; i++) {
       try {
         let type = (
           document.getElementById('radio' + i.toString()) as HTMLInputElement
         ).value;
-        this.progressValue=0;
+        this.progressValue = 0;
         if (type == 'imgSel') {
           let optionsCount = (
             document.getElementById(
@@ -284,7 +284,9 @@ export class PendingProductModalComponent implements OnInit {
           ).checked;
           if (+optionsCount > 0) {
             let options = [];
-            let value = this.basicDetail.get('productName')!.value.replace(' ', '_');
+            let value = this.basicDetail
+              .get('productName')!
+              .value.replace(' ', '_');
             for (let imgCount = 0; imgCount < +optionsCount; imgCount++) {
               let imageTitle = (
                 document.getElementById(
@@ -295,18 +297,25 @@ export class PendingProductModalComponent implements OnInit {
                 this.customSelections[
                   'image' + i.toString() + imgCount.toString()
                 ];
-              this.progressValue+=1/(+optionsCount*2);
+              this.progressValue += 1 / (+optionsCount * 2);
               let imageUrl = await this.uploadFile(
                 image,
-                  `products/${value}/ExtraOptions/${imageTitle.replace(' ','_')}/image_${imgCount}_${image.name}`
-                ).toPromise();
-              this.progressValue+=1/(+optionsCount*2);
+                `products/${value}/ExtraOptions/${imageTitle.replace(
+                  ' ',
+                  '_'
+                )}/image_${imgCount}_${image.name}`
+              ).toPromise();
+              this.progressValue += 1 / (+optionsCount * 2);
               options.push({
+                type: type,
                 image: imageUrl,
                 title: imageTitle,
                 sectionTitle: sectionTitle,
               });
-              this.authService.presentToast('All customisations images are uploaded successfully',4000);
+              this.authService.presentToast(
+                'All customisations images are uploaded successfully',
+                4000
+              );
             }
             if (isRelative) {
               relativeData.push({
@@ -349,6 +358,7 @@ export class PendingProductModalComponent implements OnInit {
                 ) as HTMLInputElement
               ).value;
               options.push({
+                type: type,
                 title: textTitle,
                 sectionTitle: sectionTitle,
               });
@@ -380,11 +390,21 @@ export class PendingProductModalComponent implements OnInit {
               'sectionNumTitle' + i.toString()
             ) as HTMLInputElement
           ).value;
+          let options=[];
+          for (let faceIndex = 1; faceIndex <= +quantityMax; faceIndex++) {
+            options.push({
+              type: type,
+              quantity: faceIndex,
+              isRelative: false,
+              sectionTitle: sectionTitle,
+            });
+          }
           data.push({
             type: type,
             quantityMax: quantityMax,
             sectionTitle: sectionTitle,
             isRelative: false,
+            values: options,
           });
         } else if (type == 'extraInfo') {
           let optionsCount = (
@@ -406,8 +426,10 @@ export class PendingProductModalComponent implements OnInit {
                 ) as HTMLInputElement
               ).value;
               options.push({
+                type: type,
                 title: textTitle,
                 sectionTitle: sectionTitle,
+                isRelative: false,
               });
             }
             data.push({
@@ -423,43 +445,55 @@ export class PendingProductModalComponent implements OnInit {
               'faceInputMaximum' + i.toString()
             ) as HTMLInputElement
           ).value;
+          let options=[];
+          for (let faceIndex = 1; faceIndex <= +maximumFaces; faceIndex++) {
+            options.push({
+              type: type,
+              faces: faceIndex,
+              isRelative: false,
+            });
+          }
           data.push({
             type: type,
             maximumFaces: maximumFaces,
             isRelative: false,
+            values: options,
           });
-        } 
+        }
       } catch (e) {
         error = true;
-        errorMesage=e;
+        errorMesage = e;
       }
     }
-    if (!error){
-      console.log(data,relativeData);
+    if (!error) {
+      console.log(data, relativeData);
       let dts = [];
       for (let adp of relativeData) {
         dts.push(adp.values);
       }
-      console.log("values",dts);
-      if (dts.length>0){
+      console.log('values', dts);
+      if (dts.length > 0) {
         dts = this.cartProd(dts);
       }
-      console.log("permutations",dts)
-      this.permutations=dts;
-      this.customisations=[];
-      this.addons =JSON.parse(JSON.stringify(data));
-      console.log("addons",this.addons);
+      console.log('permutations', dts);
+      this.permutations = dts;
+      this.customisations = [];
+      this.addons = JSON.parse(JSON.stringify(data));
+      console.log('addons', this.addons);
       // this.customisations.push(data);
       // this.customisations.push(relativeData);
-      relativeData.forEach((value)=>{
+      relativeData.forEach((value) => {
         this.customisations.push(value);
-      })
-      data.forEach((value)=>{
+      });
+      data.forEach((value) => {
         this.customisations.push(value);
-      })
+      });
     } else {
-      this.authService.presentToast('There is an error with customisation fields',5000);
-      console.error(errorMesage)
+      this.authService.presentToast(
+        'There is an error with customisation fields',
+        5000
+      );
+      console.error(errorMesage);
     }
   }
   cartProd(paramArray) {

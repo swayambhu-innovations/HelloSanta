@@ -112,7 +112,7 @@
             </div>
         </section>
         <section id="product-description">
-            <ion-item>
+            <ion-item *ngIf="authService.isJustLoggedIn">
                 <ion-title style="font-size: 20px;">Ratings</ion-title>
                 <ion-button *ngIf="purchasedProduct" (click)="addComment($event)" size="medium" fill="outline">
                     Add Review

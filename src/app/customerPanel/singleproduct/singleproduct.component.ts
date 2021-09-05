@@ -39,7 +39,7 @@ export class SingleproductComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     public afs: AngularFirestore,
-    private authService: AuthService,
+    public authService: AuthService,
     public dataProvider: DataProvider,
     private inventoryService: InventoryService,
     private router: Router,
@@ -253,7 +253,8 @@ export class SingleproductComponent implements OnInit {
     console.log('onDidDismiss resolved with role', role);
   }
   ngOnInit() {
-    this.inventoryService
+    if (this.authService.isJustLoggedIn){
+      this.inventoryService
       .getUserOrders()
       .ref.get()
       .then((doc: any) => {
@@ -266,6 +267,7 @@ export class SingleproductComponent implements OnInit {
           });
         });
       });
+    }
     this.afs
       .collection('products')
       .doc(this.productId)

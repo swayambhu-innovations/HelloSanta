@@ -120,6 +120,6 @@ export class AuthSignUpComponent implements OnInit {
   }
 
 
-  ngOnInit() {}
+  ngOnInit() {this.dataProvider.showOverlay=false;}
 
 }

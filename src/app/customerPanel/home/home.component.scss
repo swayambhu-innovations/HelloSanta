@@ -187,18 +187,13 @@ padding-bottom: 3%;
   box-shadow: rgba(100, 100, 111, 1) 0px 7px 29px 0px;
   border-radius: 50px;
   background-color: #fff;
-  color: white;
+  // color: white;
   margin: 2%;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 25px;
   cursor: pointer
-}
-
-.active, .products:hover {
-  background-color: rgb(134, 38, 38);
-  color: rgb(102, 16, 16);
 }
 
 
