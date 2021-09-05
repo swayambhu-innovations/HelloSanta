@@ -509,5 +509,7 @@ export class InventoryService {
   getWebsiteFeedbacks(){
     return this.afs.collection('websiteFeedback');
   }
-
+  getCategories(){
+    return this.afs.collection('data').doc('category');
+  }
 }

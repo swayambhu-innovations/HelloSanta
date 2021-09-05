@@ -6,6 +6,7 @@ import { PopoverController } from '@ionic/angular';
 import { CartinfoComponent } from 'src/app/popovers/cartinfo/cartinfo.component';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { SearchResultComponent } from 'src/app/popovers/search-result/search-result.component';
+import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
   selector: 'app-header',
@@ -18,9 +19,11 @@ export class HeaderComponent implements OnInit {
     public authService: AuthService,
     public dataProvider: DataProvider,
     public popoverController: PopoverController,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private inventoryService: InventoryService,
   ) {}
   cartItems = [];
+  categories;
   coins: number = 0;
   ngOnInit() {
     this.image = this.authService.getUserPhoto();
@@ -58,6 +61,11 @@ export class HeaderComponent implements OnInit {
         }
       });
     }
+    this.inventoryService.getCategories().ref.get().then((doc:any)=>{
+      if (doc.exists){
+        this.categories = doc.data().categories;
+      }
+    });;
   }
   async presentUserinfo(ev: any) {
     const popover = await this.popoverController.create({
