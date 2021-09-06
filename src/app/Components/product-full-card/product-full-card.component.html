@@ -9,6 +9,6 @@
   </ion-card>
   <div class="order-price-and-add-to-cart">
     <p class="order-price">Starting at: <br><span>₹{{price}}</span></p>
-    <button (click)="addToWishlist()" class="order-add-to-cart"><ion-icon name="heart"></ion-icon></button>
+    <button *ngIf="authService.isJustLoggedIn" (click)="addToWishlist()" class="order-add-to-cart"><ion-icon name="heart"></ion-icon></button>
   </div>
 </ion-card>

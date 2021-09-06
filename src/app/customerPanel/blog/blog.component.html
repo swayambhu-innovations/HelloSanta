@@ -1,22 +1,24 @@
 <ion-content>
-  <app-header ></app-header>
-<div class="uk-cover-container uk-height-large">
-  <img [src]="blogimg" alt="" uk-cover>
-</div>
-<div class="uk-panel">
-  <button class="button1"><a href="/bloghome">&lt;&lt; Back</a></button>
-  <button class="button2"><a href="/bloghome">Next &gt;&gt;</a></button>
-</div>
-<div class="uk-panel" >
-    <div class="inner-box">
-      <h3 style="font-family: Poppins;text-align: left;padding-left: 8%;padding-top: 2%;font-weight: bolder;font-size: 20px;color: #6D5DE3;">{{blogdate}}</h3>
-      <h1 class="heading">{{blogtitle}}</h1>
-    <div [innerHTML]="blogcontent"></div>
+  <app-header></app-header>
+  <div class="uk-cover-container uk-height-large">
+    <img [src]="blogimg" alt="" uk-cover>
   </div>
-</div>
-<div class="uk-panel">
-  <button class="button3"><a href="/bloghome">&lt;&lt; Back</a></button>
-  <button class="button4"><a href="/bloghome">Next &gt;&gt;</a></button>
-</div>
-<app-footer ></app-footer>
+  <div class="uk-panel">
+    <button class="button1"><a href="/bloghome">&lt;&lt; Back</a></button>
+    <button class="button2"><a href="/bloghome">Next &gt;&gt;</a></button>
+  </div>
+  <div class="uk-panel">
+    <div class="inner-box">
+      <h3
+        style="font-family: Poppins;text-align: left;padding-left: 8%;padding-top: 2%;font-weight: bolder;font-size: 20px;color: #6D5DE3;">
+        {{blogdate}}</h3>
+      <h1 class="heading">{{blogtitle}}</h1>
+      <div [innerHTML]="blogcontent"></div>
+    </div>
+  </div>
+  <div class="uk-panel">
+    <button class="button3"><a href="/bloghome">&lt;&lt; Back</a></button>
+    <button class="button4"><a href="/bloghome">Next &gt;&gt;</a></button>
+  </div>
+  <app-footer></app-footer>
 </ion-content>

@@ -18,10 +18,11 @@ export class APOrdersComponent implements OnInit {
   ngOnInit() {
     this.afs
       .collection('users')
-      .doc(this.authService.userId)
+      .doc(this.authService.userId).collection('orders')
       .ref.get()
       .then((value: any) => {
-        value.data().orders.forEach((order: any) => {
+        value.forEach((order: any) => {
+          order = order.data();
           if (order.orderStage == 'live') {
             let productsData = [];
             order.products.forEach((product: any) => {
@@ -38,17 +39,7 @@ export class APOrdersComponent implements OnInit {
               products: productsData,
               shippingDetail: order.shippingDetail,
             });
-          }
-        });
-        console.log(this.liveOrders);
-      });
-    this.afs
-      .collection('users')
-      .doc(this.authService.userId)
-      .ref.get()
-      .then((value: any) => {
-        value.data().orders.forEach((order: any) => {
-          if (order.orderStage == 'delivered') {
+          } else if (order.orderStage == 'delivered') {
             let productsData = [];
             order.products.forEach((product: any) => {
               this.afs
@@ -66,7 +57,7 @@ export class APOrdersComponent implements OnInit {
             });
           }
         });
-        console.log(this.oldOrders);
+        console.log(this.liveOrders);
       });
   }
 }

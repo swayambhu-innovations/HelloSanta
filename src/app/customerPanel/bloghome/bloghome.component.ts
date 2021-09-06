@@ -12,8 +12,11 @@ export class BloghomeComponent implements OnInit {
   constructor(private inventoryService: InventoryService,public afs: AngularFirestore) { }
   blogs=[]
   ngOnInit() {
-    this.afs.collection('blog').valueChanges().subscribe((data) => {
-      this.blogs=data;
+    this.afs.collection('blog').ref.get().then((data:any) => {
+      this.blogs=[];
+      data.forEach((element:any) => {
+        this.blogs.push(element.data())
+      });
     })
   }
 

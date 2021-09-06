@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class ProductFullCardComponent implements OnInit {
   @Input() category:string;
   @Input() subcategory:string;
   @Input() productId:string
-  constructor(public inventoryService: InventoryService) { }
+  constructor(public inventoryService: InventoryService, public authService:AuthService) { }
   textlength=70;
   addToWishlist(){
     let data = {

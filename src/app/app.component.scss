@@ -2,12 +2,20 @@
 div {
   width: 100vw;
   height:30px;
-  background-color: var(--ion-color-warning);
+  background-color: var(--ion-color-primary-tint);
   color:black;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  vertical-align: middle;
+  flex-direction: column;
   text-align: center;
 }
 div > *{
-  color:tomato;
+  color:white;
+  margin:0;
+}
+div > p > button {
   font-weight:700;
 }
 ion-router-outlet {

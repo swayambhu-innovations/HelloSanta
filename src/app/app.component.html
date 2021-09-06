@@ -1,11 +1,11 @@
 <ion-app>
     <div>
-        Website in beta mode. <button (click)="presentAlertPrompt()">Click here to report a bug.</button>
+        <p>Website in beta mode. <button (click)="presentAlertPrompt()">Click here to report a bug.</button></p>
     </div>
     <div *ngIf="authService.isJustLoggedIn">
         <div class="emailnotVerified" *ngIf="!authService.isEmailVerified">
             <p>Please verify your email</p>
         </div>
     </div>
-    <ion-router-outlet [ngStyle]="{'top': authService.isEmailVerified ? '30px' : '80px' }"></ion-router-outlet>
+    <ion-router-outlet [ngStyle]="{'top': authService.isLoggedIn ? '30px' : '80px' }"></ion-router-outlet>
 </ion-app>

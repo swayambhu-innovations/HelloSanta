@@ -219,7 +219,7 @@ button[disabled]{
     flex-direction: row;
     flex-wrap: wrap;
 }
-.ratings > img{
+#product-description > img{
     width:500px;
     height:auto;
     position:relative;
@@ -229,7 +229,7 @@ button[disabled]{
     opacity: 0.4;
     transition: all .5s ease-in-out;
 }
-.ratings > img:hover{
+#product-description > img:hover{
     filter: saturate(100%);
     opacity: 1;
 }

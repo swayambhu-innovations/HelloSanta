@@ -16,9 +16,10 @@ export class APDashboardComponent implements OnInit {
   liveOrders=[];
   constructor(private afs: AngularFirestore,private authService: AuthService,) { } 
   ngOnInit() {
-    this.afs.collection('users').doc(this.authService.userId).ref.get().then((value:any)=>{
-      value.data().orders.forEach((order:any)=>{
+    this.afs.collection('users').doc(this.authService.userId).collection('orders').ref.get().then((value:any)=>{
+      value.forEach((order:any)=>{
         let productsData=[];
+        order = order.data();
         order.products.forEach((product:any)=>{
           this.afs.collection('products').doc(product.productId).ref.get().then((productValue:any)=>{
             productsData.push(productValue.data());

@@ -4,7 +4,12 @@
   display: flex;
   justify-content: space-between;
 }
-
+.NotFoundImage{
+  position: relative;
+  width: 300px;
+  left:50%;
+  transform: translateX(-50%);
+}
 .pageheading {
   font-family: Poppins;
   text-align: center;

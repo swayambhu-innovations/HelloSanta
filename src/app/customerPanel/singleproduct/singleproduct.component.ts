@@ -66,45 +66,55 @@ export class SingleproductComponent implements OnInit {
     return randomList;
   }
   buyNow() {
-    this.analytics.logEvent('buyNow', {
-      productId: this.productId,
-      productName: this.productData.productName,
-    });
-    console.log(
-      Object.keys(this.extrasData).length,
-      this.productData.extraData.length
-    );
-    if (
-      Object.keys(this.extrasData).length == this.productData.extraData.length
-    ) {
-      this.dataProvider.showOverlay = true;
-      alert('Add to cart product price' + this.productPrice.toString());
-      this.dataProvider.checkOutdata = [
-        {
-          productData: this.productData.productId,
-          extrasData: this.extrasData,
-          price: this.productPrice,
-        },
-      ];
-      this.router.navigate(['checkout']);
+    if (this.authService.isJustLoggedIn){
+      this.analytics.logEvent('buyNow', {
+        productId: this.productId,
+        productName: this.productData.productName,
+      });
+      console.log(
+        Object.keys(this.extrasData).length,
+        this.productData.extraData.length
+      );
+      if (
+        Object.keys(this.extrasData).length == this.productData.extraData.length
+      ) {
+        this.dataProvider.showOverlay = true;
+        alert('Add to cart product price' + this.productPrice.toString());
+        this.dataProvider.checkOutdata = [
+          {
+            productData: this.productData.productId,
+            extrasData: this.extrasData,
+            price: this.productPrice,
+          },
+        ];
+        this.router.navigate(['checkout']);
+      } else {
+        this.authService.presentToast('Please select all the extras options.');
+      }
     } else {
-      this.authService.presentToast('Please select all the extras options.');
+      this.authService.presentToast('Please login to continue.');
+      this.router.navigate(['login']);
     }
   }
   addToCart() {
-    this.analytics.logEvent('addToCart');
-    if (
-      Object.keys(this.extrasData).length == this.productData.extraData.length
-    ) {
-      let cartItem = {
-        productData: this.productData.productId,
-        extrasData: this.extrasData,
-        price: this.productPrice,
-      };
-      this.inventoryService.addToCart(cartItem);
-      console.log('addToCart');
+    if (this.authService.isJustLoggedIn){
+      this.analytics.logEvent('addToCart');
+      if (
+        Object.keys(this.extrasData).length == this.productData.extraData.length
+      ) {
+        let cartItem = {
+          productData: this.productData.productId,
+          extrasData: this.extrasData,
+          price: this.productPrice,
+        };
+        this.inventoryService.addToCart(cartItem);
+        console.log('addToCart');
+      } else {
+        this.authService.presentToast('Please select all the extras options.');
+      }
     } else {
-      this.authService.presentToast('Please select all the extras options.');
+      this.authService.presentToast('Please login to continue.');
+      this.router.navigate(['login']);
     }
   }
   round5(x) {
