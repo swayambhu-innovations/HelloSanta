@@ -1,9 +1,10 @@
 <ion-content>
   <app-header></app-header>
+  <div class="home">
   <h1 class="pageheading" >THE BLOG</h1>
   <div *ngIf="blogs.length>0">
     <img [src]="blogs[0].blogImage" class="img">
-    <hr style="background-color: #6D5DE3;width: 90vw;height: 5px;margin: auto;">
+    <hr style="background-color: #6D5DE3;width: 90%;height: 5px;margin: auto;">
     <div class="fourthbox" *ngIf="blogs.length>0">
       <p class="firstheading">{{blogs[0].blogTitle}}</p>
       <p class="heading-discription" *ngIf="screenwidth>600">{{blogs[0].blogExcerpt}}</p>
@@ -15,14 +16,14 @@
   <img class="NotFoundImage" src="./assets/NotFound.gif" alt="No Blog Found" *ngIf="blogs.length<=0">
   <main id="blog" *ngIf="blogs.length>0">
     <section id="blog-container">
-      <h1
-        style="font-family: Poppins;text-align: center;padding-top: 10px;padding-bottom: 20px;font-weight: bold;font-size: 3rem;color: #FF6584">
-        Read More Blogs</h1><br>
+      <h1 class="head">Read More Blogs</h1>
+      <br>
       <div class="product-row">
         <app-blog-card *ngFor="let blog of blogs" [blogimg]="blog.blogImage" [blogTitle]="blog.blogTitle"
           [blogDescription]="blog.blogExcerpt" [blogId]="blog.blogId"></app-blog-card>
       </div>
     </section>
   </main>
+</div>
   <app-footer></app-footer>
 </ion-content>

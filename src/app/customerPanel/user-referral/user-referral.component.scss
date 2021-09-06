@@ -5,6 +5,12 @@
     outline: none;
 }
 
+.home{
+    margin: 0 auto;
+    min-width: 978px;
+    max-width: 1920px;
+  }
+
 #container {
     width: 95%;
     margin: 3em auto;
@@ -40,10 +46,22 @@ app-sidenav {
   justify-content: space-evenly;
   align-items: flex-start;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1024px){
+    .home{
+        margin: 0 auto;
+        min-width: 300px;
+        max-width: 800px;
+      }
     #orders-container {
         width: 98%;
         padding: 1em;
+        margin: 20px 0px;
+    }
+    #container {
+        width: 90%;
+        margin: 3em auto;
+        display: block;
+        justify-content: space-between;
     }
 
 }

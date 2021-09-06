@@ -15,7 +15,7 @@ background-color: #6D5DE3;
     padding: 50px;
     margin: 5% auto;
     background: rgba(255, 255, 255, .7);
-    box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
+    box-shadow: 0 15px 20px rgba(0, 0, 0, .5);
     border-radius: 25px;
     align-items: center;
   }
@@ -45,14 +45,14 @@ background-color: #6D5DE3;
     width: 30vw;
   }
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 1024px) {
 .title{
   font-size: 1.8rem;
   padding-right: 40px;
   padding-left: 40px;
 }
  .line{
-width: 80vw;
+width: 80%;
  }
  .inner-box4{
    width: 95vw;
@@ -60,7 +60,7 @@ width: 80vw;
  }
 
 li{
-  width: 85vw;
+  width: 85%;
 }
 .accordiontext{
   width: 50vw;

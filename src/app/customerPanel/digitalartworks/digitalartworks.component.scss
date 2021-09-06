@@ -1,3 +1,8 @@
+.home{
+  margin: 0 auto;
+  min-width: 978px;
+  max-width: 1920px;
+}
 .firstheading{
   font-size: 48px;
   color:whiteviolet;
@@ -149,7 +154,12 @@ ion-spinner{
   top:calc(250px - 70px);
   // transform:translateY(-250px)
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1024px) {
+  .home{
+    margin: 0 auto;
+    min-width: 300px;
+    max-width: 800px;
+  }
 .fourthbox{
   margin-top: 50px;
   width: 80%;

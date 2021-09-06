@@ -1,5 +1,6 @@
 <ion-content>
   <app-header></app-header>
+  <div class="home">
   <h1 style="font-size: 3em; text-align: center;">Your events panel</h1>
   <ion-card>
     <form [formGroup]="eventForm" (ngSubmit)="addEvent()">
@@ -47,6 +48,7 @@
       </ion-item>
     </ion-list>
   </ion-card>
+
   <div *ngIf="events.length>0">
     <calendar [eventSource]="calendarEvents"
               [calendarMode]="calendar.mode"
@@ -59,5 +61,6 @@
     </calendar>
   </div>
   <app-accordion></app-accordion>
+</div>
   <app-footer></app-footer>
 </ion-content>

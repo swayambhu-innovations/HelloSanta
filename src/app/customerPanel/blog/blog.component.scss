@@ -1,11 +1,15 @@
-
+.home{
+  margin: 0 auto;
+  min-width: 978px;
+  max-width: 1920px;
+}
   .inner-box{
     height: auto;
-    width: 80vw;
+    width: 90%;
     font-family: Poppins;
     text-align: left;
     font-size: 1.5rem;
-    margin:3% 10% 3% 10%;
+    margin:3% 5%;
     padding: 50px;
     background: rgba(255, 255, 255, .7);
     box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
@@ -29,7 +33,7 @@
     border-radius: 10px;
     border: 5px solid #9081FF;
     color: white;
-    padding: 5px 40px;
+    padding: 5px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -46,7 +50,7 @@
     border-radius: 10px;
     border: 5px solid #9081FF;
     color: white;
-    padding: 5px 40px;
+    padding: 5px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -63,7 +67,7 @@
     border-radius: 10px;
     border: 5px solid #9081FF;
     color: white;
-    padding: 5px 40px;
+    padding: 5px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -80,7 +84,7 @@
     border-radius: 10px;
     border: 5px solid #9081FF;
     color: white;
-    padding: 5px 40px;
+    padding: 5px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -95,15 +99,21 @@
  a{
    color: white;
  }
- @media only screen and (max-width: 600px){
+ @media only screen and (max-width: 1024px){
+  .home{
+    margin: 0 auto;
+    min-width: 300px;
+    max-width: 800px;
+  }
   .heading{
     font-size: 19px;
   }
   .inner-box{
-    margin: 2.5%;
+    margin: 7.5%;
     padding: 5%;
+    border-radius: 15px;
     font-size: 15px; 
-    width: 92%; 
+    width: 85%; 
   }
   .button1{
     padding: 5px 20px;

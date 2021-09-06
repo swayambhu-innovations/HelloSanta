@@ -1,5 +1,6 @@
 <ion-content>
   <app-header></app-header>
+  <div class="home">
   <div class="inner-box">
     <ion-row *ngIf="orderData">
       <app-small-product-card *ngFor="let order of orderData.products" [img]="order.productImages[0].image"
@@ -84,5 +85,6 @@
     <ion-spinner name="crescent" *ngIf="!shipmentOrderData.tracking_data"></ion-spinner>
   </div>
   <app-accordion></app-accordion>
+</div>
   <app-footer></app-footer>
 </ion-content>

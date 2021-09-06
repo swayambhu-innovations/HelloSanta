@@ -25,15 +25,18 @@ footer .content {
   padding:0px;
   color: #fff;
   text-align:center;
+  margin-bottom: -5px;
 }
 svg {
   width:100vw;
   height: auto;
+  margin-bottom: -5px;
 }
 footer .lovebysanta{
   background-color:#9081FF;
   width: 100vw;
   height: 80px;
+  margin-bottom: -10px;
 }
 
 .content h3 {
@@ -54,8 +57,8 @@ footer .lovebysanta{
 }
 
 .content .footer-left {
-  width: 20%;
-  padding-top: 45px;
+  margin-left: 50px;
+  margin-top: 40px;
   text-align: left;
 }
 
@@ -74,7 +77,6 @@ margin-bottom: -25px;
 
 .footer-left .customerslinks{
   padding-top: 50px;
-  padding-left: 110px;
   font-family: Raleway;
 }
 .footer-left .footer-icons a {
@@ -93,12 +95,13 @@ margin-bottom: -25px;
 }
 
 .footer-left .footer-icons {
-  margin-top: 0px;
+  margin-top: 10px;
 }
 
 .content .footer-center {
-  width: 40%;
-  padding-top: 85px;
+  margin-top: 40px;
+  margin-left: -125px;
+
   text-align: left;
 }
 .footer-center a{
@@ -106,19 +109,16 @@ margin-bottom: -25px;
 }
 
 .footer-center .QuickLinks{
+  text-align: left;
+  margin-left: 20px;
   font-family: Raleway;
-  position: absolute;
-  top: 58%;
-  left: 41%;
-  transform: translate(-50%, -50%);
 }
 
 .content .footer-right {
-  position: relative;
+  margin-top: 50px;
+  margin-right: 125px;
   text-align: center;
   color: white;
-  width: 40%;
-  right: 150px;
 }
 
 .footer-right .footerlogo{
@@ -140,7 +140,7 @@ margin-bottom: -25px;
   width: 350px;
   position: absolute;
   top: 50%;
-  left: 67%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 
@@ -175,46 +175,109 @@ margin-bottom: -25px;
 li{
   list-style: none !important;
 }
-@media (max-width: 767px) {
-  /* Target devices narrower than 768px. */
-  h4{
-    color:rgb(255, 255, 255);
-    font-weight: 600;
-    font-size: 25px;
-  }
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 1024px) {
+ /* Target devices narrower than 768px. */
+ svg{
+  margin-bottom: -5px;
+}
+h4{
+  color:rgb(255, 255, 255);
+  font-weight: 600;
+  font-size: 30px;
+  margin: 20px 0px;
+  font-family: poppins;
+}
+.mobile{
+  display:block;
+}
+.desktop{
+  display:none;
+}
+footer.mobile > div > div{
+  position: relative;
+  height:fit-content;
+  top:50%;
+  transform: translateY(-50%);
+}
+footer.mobile > div{
+  display:flex;
+  flex-direction: column;
+  background-color: #9081FF;
+  width: 100%;
+  height:90vh;
+  align-items: center;
+}
+ul{
+  color:white;
+  padding-left: 0%;
+  text-align: center;
+  font-size: 18px;
+  font-family: poppins;
+  line-height: 1.2;
+}
+ul > li > a{
+  color:white;
+}
+footer.mobile > div > div > div{
+  text-align: center;
+}
+footer.mobile > div > div > div > a > ion-icon{
+  color:white;
+  font-size: 40px;
+}
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 1024px) {
   .mobile{
-    display:block;
-  }
-  .desktop{
     display:none;
   }
-  footer.mobile > div > div{
-    position: relative;
-    height:fit-content;
-    top:50%;
-    transform: translateY(-50%);
+  .desktop{
+    display:block;
   }
-  footer.mobile > div{
-    display:flex;
-    flex-direction: column;
-    background-color: #9081FF;
-    width: 100%;
-    height:90vh;
-    align-items: center;
+  .content .footer-left {
+    margin-left: 30px;
+    margin-top: 40px;
+    text-align: left;
   }
-  ul{
-    color:white;
-    padding-left: 0%;
+  .content .footer-center {
+    margin-top: 40px;
+    margin-left: -100px;
+  
+    text-align: left;
+  }
+  .content .footer-right {
+    margin-top: 20px;
+    margin-right: 40px;
     text-align: center;
+    color: white;
   }
-  ul > li > a{
-    color:white;
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .mobile{
+    display:none;
   }
-  footer.mobile > div > div > div{
+  .desktop{
+    display:block;
+  }
+  .content .footer-left {
+    margin-left: 50px;
+    margin-top: 40px;
+    text-align: left;
+  }
+  .content .footer-center {
+    margin-top: 40px;
+    margin-left: -125px;
+  
+    text-align: left;
+  }
+  .content .footer-right {
+    margin-top: 50px;
+    margin-right: 125px;
     text-align: center;
-  }
-  footer.mobile > div > div > div > a > ion-icon{
-    color:white;
-    font-size: 40px;
+    color: white;
   }
 }

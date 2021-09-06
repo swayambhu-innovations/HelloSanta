@@ -1,7 +1,8 @@
 <ion-content>
   <app-header></app-header>
+  <div class="home">
   <main id="container">
-      <app-sidenav activeLinkID="buy-again" *ngIf="screenwidth>600"></app-sidenav>
+      <app-sidenav activeLinkID="buy-again"></app-sidenav>
       <section id="orders-container">
         <h2 id="your-cart-title">Buy Again</h2>
         <div class="product-row">
@@ -9,5 +10,6 @@
         </div>
       </section>
   </main>
+</div>
   <app-footer></app-footer>
 </ion-content>

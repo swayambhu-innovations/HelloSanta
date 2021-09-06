@@ -1,5 +1,6 @@
 <ion-content [ngStyle]="{'filter': (dataProvider.showOverlay) ? 'blur(10px)' : 'blur(0px)' }">
     <app-header></app-header>
+    <div class="home">
     <div *ngIf="productData==undefined">
         <div>
             <ion-spinner></ion-spinner>
@@ -112,20 +113,18 @@
             </div>
         </section>
         <section id="product-description">
-            <ion-item>
+            <ion-item *ngIf="authService.isJustLoggedIn">
                 <ion-title style="font-size: 20px;">Ratings</ion-title>
-                <div *ngIf="authService.isJustLoggedIn">
-                    <ion-button *ngIf="purchasedProduct" (click)="addComment($event)" size="medium" fill="outline">
-                        Add Review
-                    </ion-button>
-                </div>
+                <ion-button *ngIf="purchasedProduct" (click)="addComment($event)" size="medium" fill="outline">
+                    Add Review
+                </ion-button>
             </ion-item>
             <div class="ratings uk-align-center uk-text-center" uk-grid="masonry: true" *ngIf="comments">
                 <app-comment-card [image]="comment.userImage" [stars]="comment.stars" [body]="comment.commentBody"
                     [title]="comment.commentTitle" [commentDate]="comment.commentDate" [username]="comment.userName"
                     *ngFor="let comment of comments"></app-comment-card>
+                <img src="./assets/NotFound.gif" alt="Nothing TO Show" *ngIf="comments.length<=0">
             </div>
-            <img class="noComments" src="./assets/NotFound.gif" alt="Nothing TO Show" *ngIf="comments==undefined">
         </section>
         <div id="container2">
             <section id="orders-container" *ngIf="recommendationProducts!=[]">
@@ -142,6 +141,7 @@
             <ion-spinner *ngIf="recommendationProducts==[]"></ion-spinner>
         </div>
     </main>
+    </div>
     <app-footer></app-footer>
 </ion-content>
 <div id="overlay" *ngIf="dataProvider.showOverlay">

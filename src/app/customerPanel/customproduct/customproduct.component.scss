@@ -1,4 +1,8 @@
-
+.home{
+  margin: 0 auto;
+  min-width: 978px;
+  max-width: 1920px;
+}
 .inner-box{
   height: auto;
   width: 80vw;
@@ -59,4 +63,37 @@ ion-card{
 
 ion-content> div {
   text-align: center;
+}
+@media only screen and (max-width: 1024px){
+  .home{
+    margin: 0 auto;
+    min-width: 300px;
+    max-width: 800px;
+  }
+  ion-card{
+    height: fit-content;
+    width: 90%;
+    font-family: Poppins;
+    text-align: left;
+    font-size: 10px;
+    padding:10px;
+    margin: 2.5% 5%;
+    background: rgba(255, 255, 255, .7);
+    box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
+    border-radius: 50px;
+    border: 5px solid #9081FF;
+  }
+  button{
+    background-color: #ADA2FF; /* Green */
+    border-radius: 10px;
+    border: 5px solid #9081FF;
+    color: white;
+    margin: 3%;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    cursor: pointer;
+  }
 }

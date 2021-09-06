@@ -5,6 +5,12 @@
     box-sizing: border-box;
 }
 
+.home{
+    margin: 0 auto;
+    min-width: 978px;
+    max-width: 1920px;
+  }
+
 #container {
     width: 95%;
     margin: 4em auto;
@@ -16,7 +22,7 @@
   display: flex;
   justify-content: space-between;
 }
-ion-content > div{
+ion-content > div > div{
     height:80vh;
 }
 ion-content > div > div > ion-spinner{
@@ -329,7 +335,13 @@ ion-radio-group{
 }
 
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1024px) {
+
+    .home{
+        margin: 0 auto;
+        min-width:300px;
+        max-width: 800px;
+      }
     .ratings > img{
         width:80vw;
         margin:auto 0;

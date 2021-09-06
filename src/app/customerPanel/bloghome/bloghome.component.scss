@@ -4,6 +4,11 @@
   display: flex;
   justify-content: space-between;
 }
+.home{
+  margin: 0 auto;
+  min-width: 978px;
+  max-width: 1920px;
+}
 .NotFoundImage{
   position: relative;
   width: 300px;
@@ -28,7 +33,7 @@
 
 .product-row {
   width: 100%;
-  padding: 4em;
+  padding: 2em;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -54,15 +59,16 @@ a {
   background-color: white;
   width: 45%;
   height: 60%;
-  margin-left: 57%;
+  margin-left: 55%;
   margin-top: 4%;
 }
-.img {
+img {
   float: left;
-  width: 45%;
-  height: 50%;
-  margin-left: 5%;
-  margin-top: 3%;
+  width: 35%;
+  height: 400px;
+  margin-left: 10%;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 .firstheading {
   font-size: 48px;
@@ -70,43 +76,58 @@ a {
   color: #6d5de3;
 }
 .heading-discription {
-  padding-top: 100px;
+  padding-top: 50px;
   font-size: 1.2rem;
   font-family: Raleway;
   line-height: 2;
-  margin-right: 3%;
+  margin-right: 10%;
   width: 80%;
   color: #ff6584;
 }
-@media only screen and (max-width: 600px) {
+
+.head{
+font-family: Poppins;
+text-align: center;
+padding-top: 80px;
+font-weight: bold;
+font-size: 3rem;
+color: #FF6584;
+}
+@media only screen and (max-width: 1024px) {
+  .home{
+    margin: 0 auto;
+    min-width:300px;
+    max-width: 800px;
+  }
   .pageheading {
     font-size: 4rem;
   }
   .fourthbox {
     background-color: white;
-    width: 45%;
+    width: 90%;
     height: 10%;
-    margin-left: 57%;
-    margin-top: 4%;
+    margin: 2% 2%;
+    margin-top: 2%;
   }
-  .img {
-    width: 40%;
-    margin-left: 5%;
-    margin-top: 3%;
+  img {
+    float:none;
+    width: 90%;
+    margin: 3% 4%;
   }
+
   .firstheading {
     font-size: 1.5rem;
+    text-align: center;
   }
   .heading-discription {
     font-size: 1rem;
-    margin-top: 10%;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin: 3% 4%;
     width: 90%;
+    text-align: center;
   }
   .button {
     padding: 5px 20px;
-    margin: 0% 0% 0% 35%;
+    margin: 0% 0% 0% 32%;
     font-size: 1rem;
   }
   #blog-container {
@@ -115,5 +136,13 @@ a {
     padding: 0.5em;
     display: block;
     flex-wrap: wrap;
+  }
+  .head{
+    font-family: Poppins;
+text-align: center;
+padding-top: 80px;
+font-weight: bold;
+font-size: 1.5rem;
+color: #FF6584;
   }
 }

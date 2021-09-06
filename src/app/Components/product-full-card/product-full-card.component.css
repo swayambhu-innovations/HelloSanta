@@ -85,24 +85,26 @@
   .order-title {
     font-size: 1rem;
     margin-top: 0%;
+    line-height: 1;
   }
 
   .order-description{
     font-size: 0.6rem;
     margin-top: 5px;
+    line-height: 1;
   }
 
   .order-price-and-add-to-cart {
-    margin-top: -25px;
+    margin-top: -5px;
     margin-bottom: -15px;
     font-size: 1rem;
     
   }
 
   .order-price {
-    font-size: 0.7rem;
-    margin-top: 0.8rem;
-    margin-right: 0.2rem;
+    font-size: 0.8rem;
+    margin-top: 0rem;
+    margin-right: 0.2em;
   }
   .order-add-to-cart {
 
