@@ -121,6 +121,7 @@ import { AlertsModalService } from './services/alerts-modal.service';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ShowOrderInfoComponent } from './modals/show-order-info/show-order-info.component';
 import { ShopComponent } from './customerPanel/shop/shop.component';
+import { OrdercardComponent } from './Components/ordercard/ordercard.component';
 import { USE_EMULATOR as FIRESTORE_EMULATOR } from '@angular/fire/firestore';
 @NgModule({
   declarations: [
@@ -220,6 +221,7 @@ import { USE_EMULATOR as FIRESTORE_EMULATOR } from '@angular/fire/firestore';
     CustomproductComponent,
     ShowOrderInfoComponent,
     ShopComponent,
+    OrdercardComponent,
   ],
   entryComponents: [],
   imports: [
