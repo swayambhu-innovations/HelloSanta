@@ -4,6 +4,15 @@
   <ion-card class="uk-align-center uk-text-center rating">
     <h1 *ngIf="orderId==undefined">Give a website feedback</h1>
     <h1 *ngIf="orderId!=undefined">Give order feedback</h1>
+    <ion-row *ngIf="orderData">
+      <app-small-product-card *ngFor="let orderItem of orderData.products"
+      [img]="orderItem.productImages[0].image"
+      [productTitle]="orderItem.productName" 
+      [price]="orderItem.finalPrice"
+      [date]="orderData.shippingDetail.orderDate"
+      [productId]="orderItem.productId"
+      ></app-small-product-card>
+    </ion-row>
     <form (ngSubmit)="submitFeedback()" [formGroup]="form">
       <div>
         <star-rating [value]="0" [formControlName]="" [totalstars]="5" checkedcolor="#675ce0" [size]="starsize" (rate)="onRate($event)">

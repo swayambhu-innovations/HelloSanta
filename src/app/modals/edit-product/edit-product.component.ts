@@ -39,6 +39,7 @@ export class EditProductComponent implements OnInit {
   selectedVendors = [];
   permutations:any;
   addons:any;
+  imagesNumList:number=0;
   selectedCategories:any;
   selectedSubcategories:any;
   basicDetail: FormGroup;
@@ -545,7 +546,7 @@ export class EditProductComponent implements OnInit {
     if(this.finalData!=undefined){
       this.basicProductDetails['permutations']=this.finalData;
       this.basicProductDetails['extraData']=this.customisations;
-      this.inventory.addProduct(this.basicProductDetails);
+      this.inventory.editProduct(this.productId,this.basicProductDetails);
       this.modalController.dismiss()
       console.log(this.basicProductDetails);
       this.authService.presentToast('Product added successfully',5000);
@@ -592,21 +593,28 @@ export class EditProductComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.afs.collection('products').doc(this.productId).get().subscribe((data:any)=>{
+    this.afs.collection('products').doc(this.productId).get().subscribe(async (data:any)=>{
       this.productName.setValue(data.data().productName);
       this.productDescription.setValue(data.data().productDescription);
       this.shortDescription.setValue(data.data().shortDescription);
       this.seoDescription.setValue(data.data().seoDescription);
       this.productPrice.setValue(data.data().productPrice);
       this.totalStock.setValue(data.data().totalStock);
-      this.baseWidth.setValue(data.data().baseWidth);
-      this.baseBreadth.setValue(data.data().baseBreadth);
-      this.baseHeight.setValue(data.data().baseHeight);
-      this.baseWeight.setValue(data.data().baseWeight);
-      this.selectedCategories=data.data().categories;
-      this.selectedSubcategories=data.data().subCategories;
-      this.selectedVendors=data.data().vendors;
-      
+      this.selectedCategories=data.data().productCategory;
+      this.selectedSubcategories=data.data().productSubcategory;
+      this.selectedVendors=data.data().vendorId;
+      this.productData = data.data();
+      console.log("product data",this.productData);
+      let imgCount = 0;
+      this.imagesNumList = data.data().productImages.length;
+      console.log("images num list",this.imagesNumList);
+      // (document.getElementById('mainProdImage') as HTMLInputElement).value = data.data().productImages.length;
+      await this.delay(1000);
+      for (let i of data.data().productImages){
+        (document.getElementById('productImage'+imgCount) as HTMLImageElement).src = i.image
+        imgCount++;
+      }
+
     })
     this.basicDetail.enable();
     this.afs

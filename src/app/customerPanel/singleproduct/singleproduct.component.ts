@@ -24,6 +24,7 @@ export class SingleproductComponent implements OnInit {
   screenwidth = window.innerWidth;
   category = [];
   subcategory = [];
+  quantity: number = 1;
   productId: string;
   selectedImage: string;
   productData: any;
@@ -79,12 +80,13 @@ export class SingleproductComponent implements OnInit {
         Object.keys(this.extrasData).length == this.productData.extraData.length
       ) {
         this.dataProvider.showOverlay = true;
-        alert('Add to cart product price' + this.productPrice.toString());
+        // alert('Add to cart product price' + this.productPrice.toString());
         this.dataProvider.checkOutdata = [
           {
             productData: this.productData.productId,
             extrasData: this.extrasData,
             price: this.productPrice,
+            quantity: this.quantity,
           },
         ];
         this.router.navigate(['checkout']);
@@ -106,6 +108,7 @@ export class SingleproductComponent implements OnInit {
           productData: this.productData.productId,
           extrasData: this.extrasData,
           price: this.productPrice,
+          quantity: this.quantity,
         };
         this.inventoryService.addToCart(cartItem);
         console.log('addToCart');
@@ -194,10 +197,10 @@ export class SingleproductComponent implements OnInit {
       if (faceCounts > 1) {
         facesExtraPrices = (+this.productPrice / 100) * (75 * faceCounts);
       }
-      let quantifiedPrice = (+this.productPrice + facesExtraPrices) * quantity;
+      this.quantity = quantity;
+      this.productPrice = (+this.productPrice + facesExtraPrices);
       // let gstPrice = ((quantifiedPrice/100)*18);
       // let platformPrice = ((quantifiedPrice+gstPrice)/100)*3;
-      this.productPrice = +quantifiedPrice;
     } else {
       this.productPrice = undefined;
       this.authService.presentToast(

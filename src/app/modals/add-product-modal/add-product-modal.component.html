@@ -52,19 +52,19 @@
         </ion-item>
         <ion-item>
           <ion-label position="floating">Product Base Width</ion-label>
-          <ion-input type="number" formControlName="baseWidth" placeholder="Base width"></ion-input>
+          <ion-input type="number" [value]="0" formControlName="baseWidth" placeholder="Base width"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Product Base Height</ion-label>
-          <ion-input type="number" formControlName="baseHeight" placeholder="Base height"></ion-input>
+          <ion-input type="number" [value]="0" formControlName="baseHeight" placeholder="Base height"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Product Base Breadth</ion-label>
-          <ion-input type="number" formControlName="baseBreadth" placeholder="Base Breadth"></ion-input>
+          <ion-input type="number" [value]="0" formControlName="baseBreadth" placeholder="Base Breadth"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Product Base Weight</ion-label>
-          <ion-input type="number" formControlName="baseWeight" placeholder="Weight in KG"></ion-input>
+          <ion-input type="number" [value]="0" formControlName="baseWeight" placeholder="Weight in KG"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Select Categories</ion-label>
@@ -104,7 +104,7 @@
         </ion-item>
         <ion-item>
           <ion-label position="floating">Total Stock</ion-label>
-          <ion-input type="number" placeholder="Total Stock" required="true" formControlName="totalStock"></ion-input>
+          <ion-input type="number" placeholder="Total Stock" value="20" required="true" formControlName="totalStock"></ion-input>
         </ion-item>
         <ion-row class="header">
           <ion-button type="reset" [disabled]="isLoading || !basicDetail.valid">
@@ -223,7 +223,7 @@
             <ion-card-content>
               <ion-item>
                 <ion-label position="floating">Maximum Faces</ion-label>
-                <ion-input required="true" type="number" value="4" id="faceInputMaximum{{item}}"></ion-input>
+                <ion-input required="true" type="number" [value]="4" id="faceInputMaximum{{item}}"></ion-input>
               </ion-item>
             </ion-card-content>
           </ion-card>
@@ -260,23 +260,23 @@
           <ion-card-content *ngIf="possible.checked">
             <ion-item>
               <ion-label position="floating">Price</ion-label>
-              <ion-input required="true" type="number" id="price{{i}}"></ion-input>
+              <ion-input required="true" type="number" [value]="0" id="price{{i}}"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Length</ion-label>
-              <ion-input required="true" type="number" id="Length{{i}}"></ion-input>
+              <ion-input required="true" type="number" [value]="0" id="Length{{i}}"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Width</ion-label>
-              <ion-input required="true" type="number" id="Width{{i}}"></ion-input>
+              <ion-input required="true" type="number" [value]="0" id="Width{{i}}"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Breadth</ion-label>
-              <ion-input required="true" type="number" id="Breadth{{i}}"></ion-input>
+              <ion-input required="true" type="number" [value]="0" id="Breadth{{i}}"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Weight</ion-label>
-              <ion-input required="true" type="number" id="Weight{{i}}"></ion-input>
+              <ion-input required="true" type="number" [value]="0" id="Weight{{i}}"></ion-input>
             </ion-item>
           </ion-card-content>
         </ion-card>
@@ -289,23 +289,23 @@
               <ion-card-content>
                 <ion-item>
                   <ion-label>Price</ion-label>
-                  <ion-input required="true" type="number" id="addonPrice{{i}}{{j}}"></ion-input>
+                  <ion-input required="true" type="number" [value]="0" id="addonPrice{{i}}{{j}}"></ion-input>
                 </ion-item>
                 <ion-item>
                   <ion-label>Length</ion-label>
-                  <ion-input required="true" type="number" id="addonLength{{i}}{{j}}"></ion-input>
+                  <ion-input required="true" type="number" [value]="0" id="addonLength{{i}}{{j}}"></ion-input>
                 </ion-item>
                 <ion-item>
                   <ion-label>Width</ion-label>
-                  <ion-input required="true" type="number" id="addonWidth{{i}}{{j}}"></ion-input>
+                  <ion-input required="true" type="number" [value]="0" id="addonWidth{{i}}{{j}}"></ion-input>
                 </ion-item>
                 <ion-item>
                   <ion-label>Breadth</ion-label>
-                  <ion-input required="true" type="number" id="addonBreadth{{i}}{{j}}"></ion-input>
+                  <ion-input required="true" type="number" [value]="0" id="addonBreadth{{i}}{{j}}"></ion-input>
                 </ion-item>
                 <ion-item>
                   <ion-label>Weight</ion-label>
-                  <ion-input required="true" type="number" id="addonWeight{{i}}{{j}}"></ion-input>
+                  <ion-input required="true" type="number" [value]="0" id="addonWeight{{i}}{{j}}"></ion-input>
                 </ion-item>
               </ion-card-content>
             </div>

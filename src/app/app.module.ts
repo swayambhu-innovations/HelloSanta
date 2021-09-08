@@ -121,6 +121,7 @@ import { AlertsModalService } from './services/alerts-modal.service';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ShowOrderInfoComponent } from './modals/show-order-info/show-order-info.component';
 import { ShopComponent } from './customerPanel/shop/shop.component';
+import { USE_EMULATOR as FIRESTORE_EMULATOR } from '@angular/fire/firestore';
 @NgModule({
   declarations: [
     AppComponent,
@@ -244,9 +245,13 @@ import { ShopComponent } from './customerPanel/shop/shop.component';
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthService,
-    AlertsModalService,
+    AlertsModalService, 
     DataProvider,
     LoginGuard,
+    // {
+    //   provide: FIRESTORE_EMULATOR,
+    //   useValue: environment.production ? undefined : ['localhost', 8080],
+    // },
     {
       provide: 'externalUrlRedirectResolver',
       useValue: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {

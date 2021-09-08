@@ -2,13 +2,22 @@
   <app-header></app-header>
   <div class="home">
   <main id="container">
-      <app-sidenav activeLinkID="buy-again"></app-sidenav>
-      <section id="orders-container">
-        <h2 id="your-cart-title">Buy Again</h2>
-        <div class="product-row">
-          <app-product-full-card *ngFor="let product of products" [img]="product.img" [productTitle]="product.name" [productDescription]="product.description" [price]="product.price" ></app-product-full-card>
+    <app-sidenav activeLinkID="your-orders" *ngIf="screenwidth>600"></app-sidenav>
+    <section id="orders-container">
+      <h2 id="your-cart-title">Your Orders</h2>
+      <div *ngIf="!loading">
+        <div class="product-row" *ngIf="liveOrders">
+          <div class="product-row" *ngFor="let product of liveOrders">
+            <app-product-full-card [img]="orderProducts.productImages[0].image"
+            [productTitle]="orderProducts.productName" [price]="orderProducts.productPrice" [productId]="orderProducts.productId"
+             *ngFor="let orderProducts of product.products"></app-product-full-card>
+          </div>
         </div>
-      </section>
+      </div>
+      <div *ngIf="loading">
+        <ion-spinner name="crescent"></ion-spinner>
+      </div>
+    </section>
   </main>
 </div>
   <app-footer></app-footer>

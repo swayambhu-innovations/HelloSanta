@@ -80,6 +80,10 @@ input:focus{
 .addProductModal .modal-wrapper{
     --width:60vw;
 }
+.addEditProductModal .modal-wrapper{
+    --width:60vw;
+}
+
 #product-image-preview > .ngxImageZoomContainer {
     width: 500px !important;
     height: 500px !important;
@@ -98,5 +102,10 @@ input:focus{
     }
     #product-image-preview  {
         display:none;
+    }
+    .searchResult .popover-content{
+        position: absolute;
+        left: 0px;
+        width:100vw;
     }
 }

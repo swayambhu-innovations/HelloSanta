@@ -5,13 +5,13 @@
   <div *ngIf="showProgress">
     <ion-progress-bar [color]="progressColor" [value]="progressValue" [type]="progressType"></ion-progress-bar>
   </div>
-  <mat-stepper #stepper [linear]="true">
+  <mat-stepper #stepper [linear]="true" *ngIf="productData">
     <mat-step [completed]="basicDetail.valid" [stepControl]="basicDetail" [editable]="true">
       <form [formGroup]="basicDetail" (ngSubmit)="addBasicDetailProduct(stepper)" method="POST">
         <ng-template matStepLabel>Product Basic Details</ng-template>
         <ion-item>
           <ion-label>Total Product Images</ion-label>
-          <ion-input type="number" required="true" placeholder="Total product images." id="mainProdImage" value=2 min=2
+          <ion-input type="number" required="true" placeholder="Total product images." id="mainProdImage" [value]="imagesNumList" min=2
             max=10 #mainImgCount></ion-input>
         </ion-item>
         <ion-card *ngFor="let prodImg of genList(mainImgCount.value)">
@@ -41,61 +41,22 @@
           </ion-textarea>
         </ion-item>
         <ion-item>
-          <ion-label>Base Margin</ion-label>
-          <ion-input type="number" placeholder="Base Margin" required="true"></ion-input>
-        </ion-item>
-        <ion-item>
           <ion-label position="floating">Display Price</ion-label>
           <ion-input type="number" min=0 value=0 placeholder="Product Price" required="true"
             formControlName="productPrice">
           </ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Product Base Width</ion-label>
-          <ion-input type="number" formControlName="baseWidth" placeholder="Base width"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Product Base Height</ion-label>
-          <ion-input type="number" formControlName="baseHeight" placeholder="Base height"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Product Base Breadth</ion-label>
-          <ion-input type="number" formControlName="baseBreadth" placeholder="Base Breadth"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Product Base Weight</ion-label>
-          <ion-input type="number" formControlName="baseWeight" placeholder="Weight in KG"></ion-input>
-        </ion-item>
-        <ion-item>
           <ion-label>Select Categories</ion-label>
-          <ion-card class="longList">
-            <ion-card-header>
-              <ion-card-title>Select Categories</ion-card-title>
-            </ion-card-header>
-            <ion-list>
-              <ion-item *ngFor="let category of allCategories">
-                <ion-label>{{category}}</ion-label>
-                <ion-checkbox *ngIf="selectedCategories.includes(category)" color="primary" [value]="category" slot="start" (ionChange)="addToCatgories(category,$event)"></ion-checkbox>
-                <ion-checkbox *ngIf="!selectedCategories.includes(category)" color="primary" slot="start" (ionChange)="addToCatgories(category,$event)"></ion-checkbox>
-              </ion-item>
-            </ion-list>
-          </ion-card>
+          <ion-select [value]="selectedCategories" multiple="true" placeholder="Select Pizza">
+            <ion-select-option [value]="category" *ngFor="let category of allCategories">{{category}}</ion-select-option>
+          </ion-select>
         </ion-item>
         <ion-item>
-          <ion-card class="longList">
-            <ion-card-header>
-              <ion-card-title>Select Subcategories</ion-card-title>
-            </ion-card-header>
-            <ion-list>
-              <ion-item *ngFor="let category of allSubCategories">
-                <ion-label>{{category}}</ion-label>
-                <ion-checkbox *ngIf="selectedSubcategories.includes(category)" [value]="category" color="primary" (ionChange)="addToSubcatgories(category,$event)" slot="start">
-                </ion-checkbox>
-                <ion-checkbox *ngIf="!selectedSubcategories.includes(category)" color="primary" (ionChange)="addToSubcatgories(category,$event)" slot="start">
-                </ion-checkbox>
-              </ion-item>
-            </ion-list>
-          </ion-card>
+          <ion-label>Select Subcategories</ion-label>
+          <ion-select [value]="selectedSubcategories" multiple="true" placeholder="Select Pizza">
+            <ion-select-option [value]="category" *ngFor="let category of allSubCategories">{{category}}</ion-select-option>
+          </ion-select>
         </ion-item>
         <ion-item>
           <ion-label>Vendor Id</ion-label>

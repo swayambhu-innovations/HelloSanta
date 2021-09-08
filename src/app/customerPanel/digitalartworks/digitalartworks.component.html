@@ -94,7 +94,7 @@
         <div class="product-row" *ngIf="allDigitalProds">
           <app-product-full-card *ngFor="let product of allDigitalProds" [img]="product.productImages[0].image"
             [productTitle]="product.productName" [productDescription]="product.seoDescription"
-            [price]="product.productPrice"></app-product-full-card>
+            [price]="product.productPrice" [productId]="product.productId"></app-product-full-card>
           <div *ngIf="allDigitalProds.length==0">
             <p>Nothing to show</p>
           </div>

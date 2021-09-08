@@ -1,18 +1,22 @@
-<ion-content>
+<ion-content [ngStyle]="{'filter': (dataProvider.showOverlay) ? 'blur(10px)' : 'blur(0px)' }">
   <app-header></app-header>
   <div class="home">
   <main id="container">
       <app-sidenav activeLinkID="account" ></app-sidenav>
       <section id="profile-container">
           <div id="img-name-and-email">
-              <img [src]="authService.getUserPhoto()"
-                  alt="Profile Pic" class="circular-profile-pic" style="width:100px;height:100px">
+            <img [src]="authService.getUserPhoto()"
+            alt="Profile Pic" class="circular-profile-pic" style="width:100px;height:100px">
               <div id="name-and-email">
                   <h2 id="name">{{userName}}</h2>
                   <p id="email">{{userEmail}}</p>
+                  <ion-item button lines="none">
+                    <input type="file" name="file" (change)="changeImage($event)" id="file" class="inputfile" />
+                    <label for="file">Choose a file</label>
+                  </ion-item>
               </div>
           </div>
-          <h5>Just change the required fields, it will be updated automatically.</h5>
+          <h3>Just change the required fields, it will be updated automatically.</h3>
           <form action="" id="edit-form">
               <div class="form-input-div">
                   <label for="first-name" class="form-label">Full Name</label>
@@ -44,3 +48,7 @@
 </div>
   <app-footer></app-footer>
 </ion-content>
+<div id="overlay" *ngIf="dataProvider.showOverlay">
+    <ion-spinner name="crescent" color="tertiary"></ion-spinner>
+    <p class="text-align-center">{{uploadPercent}}</p>
+</div>
