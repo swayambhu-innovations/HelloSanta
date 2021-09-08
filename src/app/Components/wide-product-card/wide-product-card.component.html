@@ -14,5 +14,16 @@
 </div>
 <div class="order-config">
   <h4 class="chosen-config">{{orderconfig}}</h4>
+  <div>
+    <ion-item lines="none">
+        <button slot="start" [disabled]="quantity<=1" (click)="quantity=quantity-1">
+            <ion-icon name="remove"></ion-icon>
+        </button>
+        <ion-label color="primary">{{quantity}}</ion-label>
+        <button [disabled]="quantity>=10" slot="end" (click)="quantity=quantity+1">
+            <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-item>
+</div>
 </div>
 </div>
