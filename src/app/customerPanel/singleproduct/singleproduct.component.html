@@ -14,7 +14,7 @@
                         <img [src]="item.image" [ngStyle]="{'border': selectedImage == item.image ? '2px solid #9e91ff' : 'none' }" (click)="setImage(item.image)" class="product-images-list-item"
                             [alt]="item.imageName" *ngFor="let item of productData.productImages">
                     </div>
-                    <lib-ngx-image-zoom [thumbImage]="selectedImage" [lensWidth]="200" [lensHeight]="200" zoomMode="hover" [enableScrollZoom]="true" [enableLens]="true" alt="Product Image Description" id="product-image-preview"></lib-ngx-image-zoom>
+                    <lib-ngx-image-zoom [thumbImage]="selectedImage" [lensWidth]="200" [lensHeight]="200" zoomMode="hover" [scrollStepSize]="50"	 [enableScrollZoom]="true" [enableLens]="true" alt="Product Image Description" id="product-image-preview"></lib-ngx-image-zoom>
                 </div>
                 <div id="product-images" *ngIf="screenwidth < 800">
                     <div uk-lightbox="animation: fade" id="product-image-preview">
@@ -37,6 +37,7 @@
                             *ngFor="let subcatText of subcategory"><button
                                 class="product-feature-button">{{subcatText}}</button></a>
                     </div>
+                    <div class="product-buttons">
                     <p id="product-price">Price: &#8377;
                         <span *ngIf="productPrice!=undefined">
                             <span *ngIf="productPrice==0">{{displayPrice}}</span>
@@ -53,6 +54,7 @@
                             class=product-action-button (click)="addToCart()">Add to
                             Cart </button>
                     </div>
+                </div>
                     <div></div>
                     <div id="product-filters">
                         <button class="product-filter"

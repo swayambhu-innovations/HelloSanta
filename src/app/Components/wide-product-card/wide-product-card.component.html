@@ -1,6 +1,7 @@
 <div class="order-card">
   <img [src]="img"
        alt="{{orderTitle}}" class="order-img">
+       <div class="order">
   <div class="order-details">
     <h4 class="order-title">{{orderTitle}}</h4>
     <p class="order-description">{{orderDescription}}</p>
@@ -10,4 +11,8 @@
     <ion-button class="order-remove" (click)="removeFromWishlist()">Remove</ion-button>
     <ion-button class="order-view" href="./product?category={{this.category}}&subcategory={{this.subcategory}}&productId={{this.productId}}">View Product</ion-button>
   </div>
+</div>
+<div class="order-config">
+  <h4 class="chosen-config">{{orderconfig}}</h4>
+</div>
 </div>

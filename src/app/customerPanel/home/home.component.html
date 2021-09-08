@@ -41,12 +41,12 @@
       uk-slideshow-item="next"></a>
   </div>
     <div class="wrapper" >
-      <div class="static-txt">HELLO SANTA offers</div>
+      <div class="static-txt">Hello Santa offers</div>
       <ul class="dynamic-txts">
-        <li><span>FREE SHIPPING</span></li>
-        <li><span>EASY SUPPORT</span></li>
-        <li><span>PERSONAL GIFT MASTER</span></li>
-        <li><span>PERSONALISED GIFTS</span></li>
+        <li><span>Free Shipping</span></li>
+        <li><span>Easy Support</span></li>
+        <li><span>Personal Gift Master</span></li>
+        <li><span>Personalised Gifts</span></li>
       </ul>
     </div>
   <div class="uk-panel">
@@ -62,8 +62,12 @@
       </section>
     </div>
   </div>
-  <div class="uk-panel uk-align-center" style="padding-top: 50px">
-    <img style="width: 90%;height: auto;margin: 0% 5%" src="assets/Component.png" alt="">
+  <div class="uk-animation-toggle" tabindex="0">
+  <div class="uk-panel uk-align-center uk-animation-fast uk-animation-fade" style="padding-top: 50px">
+
+      <img style="width: 90%;height: auto;margin: 0% 5%" src="assets/Component.png" alt="">
+  </div>
+    
   </div>
   <div class="uk-panel" style="padding-top: 50px">
     <img style="width: 100%" src="assets/Union1.png" alt="">
@@ -97,13 +101,13 @@
       <section id="orders-container3">
         <h1 class="recommend">Recommended Products</h1>
         <ion-row class="uk uk-align-center uk-text-center" id="product">
-          <ion-button class="products" size="large" [fill]="(recommendedSelection==0) ? 'outline' : 'solid'" shape="round"  (click)="recommendedSelection=0" >
+          <ion-button class="products" size="large" [fill]="(recommendedSelection==0) ? 'outline' : 'none'" shape="round"  (click)="recommendedSelection=0" >
             Recommended Products
           </ion-button>
-          <ion-button class="products" size="large" shape="round" [fill]="(recommendedSelection==1) ? 'outline' : 'solid'" (click)="recommendedSelection=1" >
+          <ion-button class="products" size="large" shape="round" [fill]="(recommendedSelection==1) ? 'outline' : 'none'" (click)="recommendedSelection=1" >
             Santa's Choice
           </ion-button>
-          <ion-button class="products" size="large" shape="round" [fill]="(recommendedSelection==2) ? 'outline' : 'solid'" (click)="recommendedSelection=2" >
+          <ion-button class="products" size="large" shape="round" [fill]="(recommendedSelection==2) ? 'outline' : 'none'" (click)="recommendedSelection=2" >
             Featured Product
           </ion-button>
         </ion-row>

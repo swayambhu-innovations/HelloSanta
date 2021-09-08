@@ -1,7 +1,7 @@
 .bg {
   width: 100%;
   height: auto;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
 }
@@ -83,7 +83,10 @@ a {
   -ms-flex-pack: center;
   justify-content: center;
 }
-
+.formbg-outer{
+  margin-top: 100px;
+margin-right: 310px;
+}
 .formbg {
   display: flex;
   flex-direction: column;
@@ -91,8 +94,8 @@ a {
   width: fit-content;
   height: fit-content;
   max-width: fit-content;
-  background: #ffffff91;
-  opacity: 80%;
+  background: #ffffff;
+  opacity: 90%;
   box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
   border-radius: 25px;
 }

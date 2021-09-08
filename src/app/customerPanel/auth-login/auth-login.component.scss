@@ -8,9 +8,10 @@ img.bg {
   height: auto;
 
   /* Set up positioning */
-  position: fixed;
+  position:absolute;
   top: 0;
   left: 0;
+
 }
 
 img {
@@ -117,7 +118,7 @@ a {
   padding-bottom: 24px;
 }
 .padding-horizontal--48 {
-  padding: 48px;
+  padding: 48px 48px 20px 48px;
 }
 .padding-bottom--15 {
   padding-bottom: 15px;
@@ -128,7 +129,10 @@ a {
   -ms-flex-pack: center;
   justify-content: center;
 }
-
+.formbg-outer{
+  margin-top: 100px;
+margin-right: 310px;
+}
 .formbg {
   margin: 0px auto;
   width: 100%;
@@ -137,6 +141,11 @@ a {
   opacity: 80%;
   box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
   border-radius: 25px;
+}
+
+.signup{
+text-align:center;
+
 }
 span {
   display: block;
@@ -214,11 +223,13 @@ input[type="submit"] {
   font-weight: 600;
   font-size: 40px; 
   color: #FFC332;
+  margin: 0 20px;
 }
 
 .footer-link span {
   font-size: 14px;
   text-align: center;
+  margin: 0 10px;
 }
 .listing a {
   color: #697386;
