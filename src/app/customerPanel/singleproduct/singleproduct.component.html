@@ -1,157 +1,169 @@
 <ion-content [ngStyle]="{'filter': (dataProvider.showOverlay) ? 'blur(10px)' : 'blur(0px)' }">
     <app-header></app-header>
     <div class="home">
-    <div *ngIf="productData==undefined">
-        <div>
-            <ion-spinner></ion-spinner>
+        <div *ngIf="productData==undefined">
+            <div>
+                <ion-spinner></ion-spinner>
+            </div>
         </div>
-    </div>
-    <main id="container" *ngIf="productData">
-        <section id="product">
-            <div id="product-images-and-details">
-                <div id="product-images" *ngIf="screenwidth > 800">
-                    <div id="product-images-list">
-                        <img [src]="item.image" [ngStyle]="{'border': selectedImage == item.image ? '2px solid #9e91ff' : 'none' }" (click)="setImage(item.image)" class="product-images-list-item"
-                            [alt]="item.imageName" *ngFor="let item of productData.productImages">
+        <main id="container" *ngIf="productData">
+            <section id="product">
+                <div id="product-images-and-details">
+                    <div id="product-images" *ngIf="screenwidth > 800">
+                        <div id="product-images-list">
+                            <img [src]="item.image"
+                                [ngStyle]="{'border': selectedImage == item.image ? '2px solid #9e91ff' : 'none' }"
+                                (click)="setImage(item.image)" class="product-images-list-item" [alt]="item.imageName"
+                                *ngFor="let item of productData.productImages">
+                        </div>
+                        <lib-ngx-image-zoom [thumbImage]="selectedImage" [lensWidth]="200" [lensHeight]="200"
+                            zoomMode="hover" [scrollStepSize]="50" [enableScrollZoom]="true" [enableLens]="true"
+                            alt="Product Image Description" id="product-image-preview"></lib-ngx-image-zoom>
                     </div>
-                    <lib-ngx-image-zoom [thumbImage]="selectedImage" [lensWidth]="200" [lensHeight]="200" zoomMode="hover" [enableScrollZoom]="true" [enableLens]="true" alt="Product Image Description" id="product-image-preview"></lib-ngx-image-zoom>
-                </div>
-                <div id="product-images" *ngIf="screenwidth < 800">
-                    <div uk-lightbox="animation: fade" id="product-image-preview">
-                        <a class="uk-inline" href="{{selectedImage}}" >
-                            <img [src]="selectedImage" [alt]="productData.productName">
-                        </a>
+                    <div id="product-images" *ngIf="screenwidth < 800">
+                        <div uk-lightbox="animation: fade" id="product-image-preview">
+                            <a class="uk-inline" href="{{selectedImage}}">
+                                <img [src]="selectedImage" [alt]="productData.productName">
+                            </a>
+                        </div>
+                        <div id="product-images-list">
+                            <img [src]="item.image"
+                                [ngStyle]="{'border': selectedImage == item.image ? '2px solid #9e91ff' : 'none' }"
+                                (click)="selectedImage=item.image" class="product-images-list-item"
+                                [alt]="item.imageName" *ngFor="let item of productData.productImages">
+                        </div>
                     </div>
-                    <div id="product-images-list">
-                        <img [src]="item.image" [ngStyle]="{'border': selectedImage == item.image ? '2px solid #9e91ff' : 'none' }" (click)="selectedImage=item.image" class="product-images-list-item"
-                            [alt]="item.imageName" *ngFor="let item of productData.productImages">
-                    </div>
-                </div>
-                <div id="product-details">
-                    <h2 id="product-name">{{productData.productName}}<br><span>{{productData.shortDescription}}</span>
-                    </h2>
-                    <div id="product-feature-buttons">
-                        <a href="./specificProducts?category={{catText}}" *ngFor="let catText of category"><button
-                                class="product-feature-button">{{catText}}</button></a>
-                        <a href="./specificProducts?category={{subcatText}}"
-                            *ngFor="let subcatText of subcategory"><button
-                                class="product-feature-button">{{subcatText}}</button></a>
-                    </div>
-                    <p id="product-price">Price: &#8377;
-                        <span *ngIf="productPrice!=undefined">
-                            <span *ngIf="productPrice==0">{{displayPrice*quantity}}</span>
-                            <span *ngIf="productPrice>0">{{productPrice*quantity}}</span>
-                        </span>
-                        <span *ngIf="productPrice==undefined">
-                            Not Possible
-                        </span>
-                    </p>
-                    <div id="product-action-buttons">
-                        <button id="product-buy-now" [disabled]="(productPrice==0 || productPrice==undefined)"
-                            class=product-action-button (click)="buyNow()">Buy Now</button>
-                        <button id="product-add-to-cart" [disabled]="(productPrice==0 || productPrice==undefined)"
-                            class=product-action-button (click)="addToCart()">Add to
-                            Cart </button>
-                    </div>
-                    <div>
-                        <ion-item lines="none">
-                            <button slot="start" [disabled]="quantity<=1" (click)="quantity=quantity-1">
-                                <ion-icon name="remove"></ion-icon>
+                    <div id="product-details">
+                        <h2 id="product-name">
+                            {{productData.productName}}<br><span>{{productData.shortDescription}}</span>
+                        </h2>
+                        <div id="product-feature-buttons">
+                            <a href="./specificProducts?category={{catText}}" *ngFor="let catText of category"><button
+                                    class="product-feature-button">{{catText}}</button></a>
+                            <a href="./specificProducts?category={{subcatText}}"
+                                *ngFor="let subcatText of subcategory"><button
+                                    class="product-feature-button">{{subcatText}}</button></a>
+                        </div>
+                        <div class="product-buttons">
+                            <p id="product-price">Price: &#8377;
+                                <span *ngIf="productPrice!=undefined">
+                                    <span *ngIf="productPrice==0">{{displayPrice*quantity}}</span>
+                                    <span *ngIf="productPrice>0">{{productPrice*quantity}}</span>
+                                </span>
+                                <span *ngIf="productPrice==undefined">
+                                    Not Possible
+                                </span>
+                            </p>
+                            <div id="product-action-buttons">
+                                <button id="product-buy-now" [disabled]="(productPrice==0 || productPrice==undefined)"
+                                    class=product-action-button (click)="buyNow()">Buy Now</button>
+                                <button id="product-add-to-cart"
+                                    [disabled]="(productPrice==0 || productPrice==undefined)"
+                                    class=product-action-button (click)="addToCart()">Add to
+                                    Cart </button>
+                            </div>
+                            <div>
+                                <ion-item lines="none">
+                                    <button slot="start" [disabled]="quantity<=1" (click)="quantity=quantity-1">
+                                        <ion-icon name="remove"></ion-icon>
+                                    </button>
+                                    <ion-label color="primary">{{quantity}}</ion-label>
+                                    <button [disabled]="quantity>=10" slot="end" (click)="quantity=quantity+1">
+                                        <ion-icon name="add"></ion-icon>
+                                    </button>
+                                </ion-item>
+                            </div>
+                        </div>
+                        <div id="product-filters">
+                            <button class="product-filter"
+                                (click)="selectedExtraType=extra.type;selectedExtraTitle=extra.sectionTitle"
+                                *ngFor="let extra of productData.extraData">
+                                <span *ngIf="extra.type=='faceInput'">Image Faces</span>
+                                <span *ngIf="extra.type=='extraInfo'">Extra Info</span>
+                                <span
+                                    *ngIf="extra.type!='faceInput' && extra.type!='extraInfo'">{{extra.sectionTitle}}</span>
                             </button>
-                            <ion-label color="primary">{{quantity}}</ion-label>
-                            <button [disabled]="quantity>=10" slot="end" (click)="quantity=quantity+1">
-                                <ion-icon name="add"></ion-icon>
-                            </button>
-                        </ion-item>
-                    </div>
-                    <div></div>
-                    <div id="product-filters">
-                        <button class="product-filter"
-                            (click)="selectedExtraType=extra.type;selectedExtraTitle=extra.sectionTitle"
-                            *ngFor="let extra of productData.extraData">
-                            <span *ngIf="extra.type=='faceInput'">Image Faces</span>
-                            <span *ngIf="extra.type=='extraInfo'">Extra Info</span>
-                            <span
-                                *ngIf="extra.type!='faceInput' && extra.type!='extraInfo'">{{extra.sectionTitle}}</span>
-                        </button>
-                    </div>
-                    <div *ngFor="let item of productData.extraData" id="productFilterSelections" [ngStyle]="{'padding': (item.sectionTitle == selectedExtraTitle) ? '20px' : '0px'}">
-                        <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='textSel'">
-                            <ion-radio-group [name]="item.sectionTitle" [value]="extrasData[item.sectionTitle]" required
-                                (ionChange)="updateData($event,item.isRelative,item.sectionTitle)"
-                                id="imgSel{{item.sectionTitle}}">
-                                <ion-card class="selectionChoiceCard" *ngFor="let single of item.values">
-                                    <span class="selectionTitle">{{single.title}}</span><br>
+                        </div>
+                        <div *ngFor="let item of productData.extraData" id="productFilterSelections"
+                            [ngStyle]="{'padding': (item.sectionTitle == selectedExtraTitle) ? '20px' : '0px'}">
+                            <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='textSel'">
+                                <ion-radio-group [name]="item.sectionTitle" [value]="extrasData[item.sectionTitle]"
+                                    required (ionChange)="updateData($event,item.isRelative,item.sectionTitle)"
+                                    id="imgSel{{item.sectionTitle}}">
+                                    <ion-card class="selectionChoiceCard" *ngFor="let single of item.values">
+                                        <span class="selectionTitle">{{single.title}}</span><br>
+                                        <ion-radio [value]="single"></ion-radio>
+                                    </ion-card>
+                                </ion-radio-group>
+                            </ion-row>
+                            <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='imgSel'">
+                                <ion-card class="selectionChoiceCard" *ngFor="let single of item.values"
+                                    id="selImg{{single.imageTitle}}{{item.sectionTitle}}">
+                                    <img [src]="single.image" />
+                                    <ion-label class="uk-align-center uk-text-center">{{single.imageTitle}}</ion-label>
                                     <ion-radio [value]="single"></ion-radio>
                                 </ion-card>
-                            </ion-radio-group>
-                        </ion-row>
-                        <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='imgSel'">
-                            <ion-card class="selectionChoiceCard" *ngFor="let single of item.values"
-                                id="selImg{{single.imageTitle}}{{item.sectionTitle}}">
-                                <img [src]="single.image" />
-                                <ion-label class="uk-align-center uk-text-center">{{single.imageTitle}}</ion-label>
-                                <ion-radio [value]="single"></ion-radio>
-                            </ion-card>
-                        </ion-row>
-                        <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='faceCount'">
-                            <ion-radio-group [name]="item.sectionTitle" [value]="extrasData[item.sectionTitle]" required
-                            (ionChange)="updateData($event,item.isRelative,item.sectionTitle)">
-                                <ion-card class="selectionChoiceCard" *ngFor="let single of item.values">
-                                    <ion-label class="uk-align-center uk-text-center">{{single.faces}}</ion-label>
-                                    <ion-radio [value]="single"></ion-radio>
+                            </ion-row>
+                            <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='faceCount'">
+                                <ion-radio-group [name]="item.sectionTitle" [value]="extrasData[item.sectionTitle]"
+                                    required (ionChange)="updateData($event,item.isRelative,item.sectionTitle)">
+                                    <ion-card class="selectionChoiceCard" *ngFor="let single of item.values">
+                                        <ion-label class="uk-align-center uk-text-center">{{single.faces}}</ion-label>
+                                        <ion-radio [value]="single"></ion-radio>
+                                    </ion-card>
+                                </ion-radio-group>
+                            </ion-row>
+                            <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='extraInfo'">
+                                <ion-card class="selectionChoiceCard">You can add your message at the checkout
                                 </ion-card>
-                            </ion-radio-group>
-                        </ion-row>
-                        <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='extraInfo'">
-                            <ion-card class="selectionChoiceCard">You can add your message at the checkout</ion-card>
-                        </ion-row>
-                        <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='quantitySel'">
-                            <ion-radio-group [name]="item.sectionTitle" [value]="extrasData[item.sectionTitle]" required
-                            (ionChange)="updateData($event,item.isRelative,item.sectionTitle)">
-                                <ion-card class="selectionChoiceCard" *ngFor="let single of item.values">
-                                    <ion-label class="uk-align-center uk-text-center">{{single}}</ion-label>
-                                    <ion-radio [value]="single"></ion-radio>
-                                </ion-card>
-                            </ion-radio-group>
-                        </ion-row>
+                            </ion-row>
+                            <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='quantitySel'">
+                                <ion-radio-group [name]="item.sectionTitle" [value]="extrasData[item.sectionTitle]"
+                                    required (ionChange)="updateData($event,item.isRelative,item.sectionTitle)">
+                                    <ion-card class="selectionChoiceCard" *ngFor="let single of item.values">
+                                        <ion-label class="uk-align-center uk-text-center">{{single}}</ion-label>
+                                        <ion-radio [value]="single"></ion-radio>
+                                    </ion-card>
+                                </ion-radio-group>
+                            </ion-row>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div id="product-description">
-                <h4 id="product-description-title">Description</h4>
-                <div [innerHTML]="productData.productDescription"></div>
-            </div>
-        </section>
-        <section id="product-description">
-            <ion-item *ngIf="authService.isJustLoggedIn">
-                <ion-title style="font-size: 20px;">Ratings</ion-title>
-                <ion-button *ngIf="purchasedProduct" (click)="addComment($event)" size="medium" fill="outline">
-                    Add Review
-                </ion-button>
-            </ion-item>
-            <div class="ratings uk-align-center uk-text-center" uk-grid="masonry: true" *ngIf="comments">
-                <app-comment-card [image]="comment.userImage" [stars]="comment.stars" [body]="comment.commentBody"
-                    [title]="comment.commentTitle" [commentDate]="comment.commentDate" [username]="comment.userName"
-                    *ngFor="let comment of comments"></app-comment-card>
-                <img src="./assets/NotFound.gif" alt="Nothing TO Show" *ngIf="comments.length<=0">
-            </div>
-        </section>
-        <div id="container2">
-            <section id="orders-container" *ngIf="recommendationProducts!=[]">
-                <div>
-                    <h1 class="headingproducts uk-text-center">More Products like This</h1>
-                    <div class="product-row uk-text-center uk-align-center">
-                        <app-product-full-card *ngFor="let product of recommendationProducts"
-                            [img]="product.productImages[0].image" [productTitle]="product.productName"
-                            [productDescription]="product.seoDescription" [price]="product.productPrice" [productId]="product.productId">
-                        </app-product-full-card>
-                    </div>
+                <div id="product-description">
+                    <h4 id="product-description-title">Description</h4>
+                    <div [innerHTML]="productData.productDescription"></div>
                 </div>
             </section>
-            <ion-spinner *ngIf="recommendationProducts==[]"></ion-spinner>
-        </div>
-    </main>
+            <section id="product-description">
+                <ion-item *ngIf="authService.isJustLoggedIn">
+                    <ion-title style="font-size: 20px;">Ratings</ion-title>
+                    <ion-button *ngIf="purchasedProduct" (click)="addComment($event)" size="medium" fill="outline">
+                        Add Review
+                    </ion-button>
+                </ion-item>
+                <div class="ratings uk-align-center uk-text-center" uk-grid="masonry: true" *ngIf="comments">
+                    <app-comment-card [image]="comment.userImage" [stars]="comment.stars" [body]="comment.commentBody"
+                        [title]="comment.commentTitle" [commentDate]="comment.commentDate" [username]="comment.userName"
+                        *ngFor="let comment of comments"></app-comment-card>
+                    <img src="./assets/NotFound.gif" alt="Nothing TO Show" *ngIf="comments.length<=0">
+                </div>
+            </section>
+            <div id="container2">
+                <section id="orders-container" *ngIf="recommendationProducts!=[]">
+                    <div>
+                        <h1 class="headingproducts uk-text-center">More Products like This</h1>
+                        <div class="product-row uk-text-center uk-align-center">
+                            <app-product-full-card *ngFor="let product of recommendationProducts"
+                                [img]="product.productImages[0].image" [productTitle]="product.productName"
+                                [productDescription]="product.seoDescription" [price]="product.productPrice"
+                                [productId]="product.productId">
+                            </app-product-full-card>
+                        </div>
+                    </div>
+                </section>
+                <ion-spinner *ngIf="recommendationProducts==[]"></ion-spinner>
+            </div>
+        </main>
     </div>
     <app-footer></app-footer>
 </ion-content>

@@ -1,7 +1,9 @@
+
 .home{
   margin: 0 auto;
   min-width: 978px;
   max-width: 1920px;
+  zoom: 80%;
 }
 .inner-box{
   height: 500px;
@@ -81,7 +83,7 @@ button{
   padding-top: 10px;
   padding-bottom: 20px;
   font-weight: bold;
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: var(--ion-color-primary);
 }
 
@@ -162,7 +164,7 @@ padding-bottom: 3%;
   text-align: center;
   padding: 80px;
   font-weight: bold;
-  font-size: 3.5rem;
+  font-size: 3rem;
   color: #7E6DFF
 }
 
@@ -180,26 +182,27 @@ padding-bottom: 3%;
  padding-top: 60px;
  padding-bottom: 5px;
  font-weight: bold;
- font-size: 3rem;
+ font-size: 2.5rem;
 }
 
 .products{ 
-  box-shadow: rgba(100, 100, 111, 1) 0px 7px 29px 0px;
+  box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
   border-radius: 50px;
-  background-color: #fff;
+  background-color: var(--ion-color-primary);
+  color: rgb(80, 80, 80);
   // color: white;
   margin: 2%;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 25px;
+  font-size: 20px;
   cursor: pointer
 }
 
 
 
 #container3 {
-  width: 95%;
+  width: 80%;
   margin: 3em auto;
   display: flex;
   justify-content: space-between;
@@ -224,6 +227,7 @@ padding-bottom: 3%;
 }
 a{
   color: white;
+  outline: none;
 }
 
 .headingtitle{
@@ -253,6 +257,7 @@ a{
   transform: translateX(-32%);
   font-size: 3.5rem;
   padding: 0px 20px;
+  margin: 40px 0px;
 }
 .wrapper .static-txt{
   font-family: Poppins;
@@ -285,7 +290,7 @@ a{
 .dynamic-txts li span{
   font-family: Poppins;
   text-align: center;
-  color: #FF6584;
+  color: var(--ion-color-primary);
   font-weight: bold;
   position: relative;
   margin: 5px 0;
@@ -298,7 +303,7 @@ a{
   height: 100%;
   width: 100%;
   background: white;
-  border-left: 2px solid #FC6D6D;
+  border-left: 2px solid var(--ion-color-primary);
   animation: typing 3s steps(20) infinite;
 }
 @keyframes typing {
@@ -392,9 +397,9 @@ a{
     display: flex;
     position: relative;
     left: 50%;
-    transform: translateX(-40%);
+    transform: translateX(-47.5%);
     font-size: 1.1rem;
-    padding: 0px 0px;
+    padding: 20px 0px;
   }
   .wrapper .static-txt{
     font-family: Poppins;

@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
           });
           if (
             unknown == 0 &&
-            product.productCategory.includes('Handmade Products') &&
+            product.productCategory.includes('Home Catgeory One') &&
             this.allHandmadeProds.length <= 5
           ) {
             this.allHandmadeProds.push(product);
@@ -76,7 +76,7 @@ export class HomeComponent implements OnInit {
           });
           if (
             unknown == 0 &&
-            product.productCategory.includes('Digital Artworks')
+            product.productCategory.includes('Home Catgeory Two')
           ) {
             this.allDigitalProds.push(product);
           }

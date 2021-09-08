@@ -125,19 +125,24 @@ ion-item > ion-label {
 .product-feature-button {
     margin-right: 1em;
     padding: .5em 1em;
-    font-size: 1.1rem;
+    font-size: 0.8rem;
     color: #6D5CE5;
     border: 2px solid #6D5CE5;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border-radius: 50px;
 }
-
+.product-buttons{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-top: 2em;
+}
 #product-price{
     color: #5AC179;
     font-size: 2rem;
     font-weight: 700;
     margin: 1em 0;
-    text-align: center;
+    text-align: left;
 }
 
 #product-filters {
@@ -153,11 +158,12 @@ ion-item > ion-label {
     overflow-y: visible;
 }
 .product-filter {
-    padding: .5em;
+    padding: 1em;
     border-radius: 50px;
     font-family: 'Poppins';
     width: 23%;
     color: #6D5CE5;
+    font-size: 1.2em;
     font-weight: 700;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border: none;
@@ -171,7 +177,7 @@ ion-item > ion-label {
 
 #product-types-title {
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 700;
 }
 
@@ -183,7 +189,7 @@ ion-item > ion-label {
 #product-action-buttons {
     display: flex;
     justify-content: center;
-    margin: 1em 0;
+    margin: 1em 100px;
 }
 
 .product-action-button {
@@ -316,7 +322,7 @@ ion-spinner{
 }
 .selectionTitle{
     color: var(--ion-color-primary);
-    font-size: 20px;
+    font-size: 15px;
 }
 .selectionChoiceCard{
     display: flex;
