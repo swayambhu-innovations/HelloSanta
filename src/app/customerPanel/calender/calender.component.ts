@@ -25,6 +25,7 @@ export class CalenderComponent {
   // @ViewChild('allDay') allDay: IonSelect;
   // @ViewChild('startDate') startDate: IonDatetime;
   // @ViewChild('endDate') endDate: any;
+  screenWidth = window.innerWidth;
   events: any = [];
   calendarEvents: any = [];
   eventForm: FormGroup;

@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
@@ -12,14 +13,26 @@ export class WideProductCardComponent implements OnInit {
   @Input() orderDescription:string = "Lorem ipsum dolor sit amet, consectetur\n" +
     "                  adipiscing elit. Curabitur cursus tincidunt\n" +
     "                  commodo. Nunc justo nisi, vestibulum."
-  @Input() orderprice:string = "2300"
+  @Input() orderprice:number = 2300;
   @Input() category:string;
   @Input() subcategory:string;
   @Input() productId:string
   @Input() extras:any;
   @Input() orderconfig:string = "Chosen config"
   @Input() quantity:number = 1
-  constructor(public inventoryService: InventoryService) { }
+  @Input() showQuantity:boolean = false;
+  @Input() showImageInput:boolean = false;
+  @Output() changeQuantity : EventEmitter<any> = new EventEmitter();
+  @Output() addImage: EventEmitter<any> = new EventEmitter();
+  constructor(public inventoryService: InventoryService,private authService: AuthService) { }
+  changeImage(image){
+    if (image.target.files[0].size < 500000){
+      this.addImage.emit({productId:this.productId,image:image.target.files[0]});
+      this.authService.presentToast("Image added successfully")
+    } else {
+      this.authService.presentToast("Image size should be less than 500kb",3000)
+    }
+  }
   removeFromWishlist(){
     let data = {
       productId: this.productId,
@@ -28,7 +41,14 @@ export class WideProductCardComponent implements OnInit {
     }
     this.inventoryService.removeFromWishlist(data);
   }
-  ngOnInit(): void {
+  removeQuantity(){
+    this.quantity=this.quantity-1
+    this.changeQuantity.emit({quantity:this.quantity,productId:this.productId});
   }
+  addQuantity(){
+    this.quantity=this.quantity+1
+    this.changeQuantity.emit({quantity:this.quantity,productId:this.productId});
+  }
+  ngOnInit(){}
 
 }

@@ -79,6 +79,7 @@ export class AddProductModalComponent implements OnInit {
   baseHeight: FormControl = new FormControl(0, [Validators.required]);
   baseBreadth: FormControl = new FormControl(0, [Validators.required]);
   baseWeight: FormControl = new FormControl(0, [Validators.required]);
+  imageReference: FormControl = new FormControl(false);
   isLoading: boolean = false;
   changeCategoryType(value, main, type) {
     this.mainCategorySelected[main] = [];
@@ -195,6 +196,7 @@ export class AddProductModalComponent implements OnInit {
           productCategory: this.formCategories,
           productSubcategory: this.formSubcategories,
           vendorId: this.selectedVendors,
+          imageReference: this.imageReference.value,
           totalStock: this.basicDetail.get('totalStock')!.value,
           productImages: await prodList,
           comments: [],
@@ -675,6 +677,7 @@ export class AddProductModalComponent implements OnInit {
       baseBreadth: this.baseBreadth,
       baseHeight: this.baseHeight,
       baseWeight: this.baseWeight,
+      imageReference: this.imageReference,
     });
     this.customisationsForm = this.formbuilder.group({
       customisationsCount: this.customisationsCount,

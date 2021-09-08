@@ -101,7 +101,7 @@ export class CheckoutComponent implements OnInit {
   ]);
   orders = [];
   objectKeys = Object.keys;
-  quantity = 0;
+  quantity = 1;
   offerFlat: number = 0;
   payableAmount = 0;
   WindowRef: any;
@@ -109,8 +109,24 @@ export class CheckoutComponent implements OnInit {
   paymentResponse: any = {};
   orderItems = [];
   santaCoins: number = 0;
+  imageRequired: any = [];
+  imagesValid: boolean = false;
   log(data) {
     console.log(data);
+  }
+  addImage(event) {
+    console.log('event Image', event);
+    let allValid = true;
+    this.imageRequired.forEach((data, index) => {
+      if (data.productId == event.productId) {
+        this.imageRequired[index].imageReference = event.image;
+      }
+      if (data.imageRequired == undefined) {
+        allValid = false;
+      }
+    });
+    this.imagesValid = allValid;
+    console.log('imageRequired', this.imageRequired);
   }
   async presentInvoice() {
     const modal = await this.modalController.create({
@@ -123,7 +139,7 @@ export class CheckoutComponent implements OnInit {
   get grandTotal(): number {
     var total = 0;
     this.dataCopy.forEach((order) => {
-      total += order.price;
+      total += order.price * order.quantity;
     });
     return total - this.offerFlat;
   }
@@ -142,7 +158,7 @@ export class CheckoutComponent implements OnInit {
     }
   }
   ngOnInit() {
-    this.dataProvider.showOverlay=false;
+    this.dataProvider.showOverlay = false;
     this.inventoryService
       .getUserInfo()
       .ref.get()
@@ -157,6 +173,13 @@ export class CheckoutComponent implements OnInit {
           if (data.exists) {
             console.log('Document data:', data);
             let dat: any = data.data();
+            if (dat.imageReference) {
+              this.imagesValid = false;
+              this.imageRequired.push({
+                productId: dat.productId,
+                imageReference: undefined,
+              });
+            }
             this.orderItems.push({
               name: dat.productName,
               sku: prod.productData,
@@ -165,6 +188,7 @@ export class CheckoutComponent implements OnInit {
             });
             dat['finalPrice'] = prod.price;
             dat['selections'] = prod.extrasData;
+            dat['quantity'] = prod.quantity;
             this.orders.push(dat);
           } else {
             console.log('No such document!');
@@ -178,12 +202,16 @@ export class CheckoutComponent implements OnInit {
     }
   }
   proceedToPay($event) {
-    this.dataProvider.showOverlay=true;
-    this.processingPayment = true;
-    this.payableAmount = this.grandTotal * 100;
-    console.log('payable amount', this.payableAmount);
-    this.initiatePaymentModal($event);
-    this.analytics.logEvent('Checkout');
+    if (this.imagesValid) {
+      this.dataProvider.showOverlay = true;
+      this.processingPayment = true;
+      this.payableAmount = this.grandTotal * 100;
+      console.log('payable amount', this.payableAmount);
+      this.initiatePaymentModal($event);
+      this.analytics.logEvent('Checkout');
+    } else {
+      this.authService.presentToast('Please add all images by pressing Choose a file on every product.');
+    }
   }
 
   initiatePaymentModal(event) {

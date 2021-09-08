@@ -42,7 +42,8 @@ ion-content > div {
       max-width: 800px;
     }
     ion-card{
-        width:600px;
+        width:80vw;
+        margin: 10px auto;
     }
     ion-icon{
         margin-left: 5px;
@@ -52,12 +53,12 @@ ion-content > div {
         font-size: 10px;
     }
     ion-icon[name="trash-bin"]{
-        color:var(--ion-color-danger);
-        font-size: 10px;
+        color:white;
+        font-size: 25px;
     }
     ion-icon[name="add"]{
-        color:var(--ion-color-success);
-        font-size: 10px;
+        color:white;
+        font-size: 30px;
     }
     ion-content > div {
         margin-top:50px;

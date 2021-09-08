@@ -1,12 +1,59 @@
 <ion-content>
   <app-header></app-header>
   <div class="home">
-  <h1 style="font-size: 3em; text-align: center;">Your events panel</h1>
-  <ion-card>
-    <form [formGroup]="eventForm" (ngSubmit)="addEvent()">
-      <ion-item>
+    <h1 style="font-size: 3em; text-align: center;">Your events panel</h1>
+    <ion-card *ngIf="screenWidth>600">
+      <form [formGroup]="eventForm" (ngSubmit)="addEvent()">
+        <ion-item>
+          <ion-input type="text" formControlName="eventTitle" placeholder="Event Name" #eventName></ion-input>
+          <ion-select value="birthday" multiple="false" (ionChange)="setEventType($event)" formControlName="eventType"
+            placeholder="Type" #eventType>
+            <ion-select-option value="birthday">Birthday</ion-select-option>
+            <ion-select-option value="Anniversary">Anneversary</ion-select-option>
+          </ion-select>
+          <ion-item class="item">
+            <ion-label>All Day</ion-label>&nbsp;&nbsp;
+            <ion-checkbox id="allValueDay" (ionChange)="setCheckValue($event)" formControlName="allDay"></ion-checkbox>
+          </ion-item>
+          <ion-item class="item">
+            <ion-label>Start Date</ion-label>
+            <ion-datetime display-format="DD.MM.YYYY" formControlName="startDate" #startDate></ion-datetime>
+          </ion-item>
+          <ion-item class="item">
+            <ion-label>End Date</ion-label>
+            <ion-datetime display-format="DD.MM.YYYY" formControlName="endDate" #endDate></ion-datetime>
+          </ion-item>
+          <button type="submit">
+            <ion-icon name="add"></ion-icon>
+          </button>
+        </ion-item>
+      </form>
+      <hr class="uk-divider-icon" style="margin: 0 0 !important;">
+      <ion-list>
+        <ion-item *ngFor="let event of events">
+          <ion-label>{{event.title}}</ion-label>
+          <ion-badge color="primary" mode="ios" *ngIf="event.allDay">All Day</ion-badge>
+          <ion-badge color="primary" mode="ios" *ngIf="!event.allDay">Specific</ion-badge>
+          <ion-chip color="secondary" mode="md" outline="false">
+            <ion-label>{{event.type}}</ion-label>
+          </ion-chip>
+          <ion-chip color="primary" mode="md" outline="true">
+            <ion-label>{{event.startDate}}</ion-label>
+          </ion-chip>
+          <ion-chip color="primary" mode="md" outline="true">
+            <ion-label>{{event.endDate}}</ion-label>
+          </ion-chip>
+          <button (click)="removeEvent(event)">
+            <ion-icon name="trash-bin"></ion-icon>
+          </button>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+    <ion-card *ngIf="screenWidth<600">
+      <form [formGroup]="eventForm" (ngSubmit)="addEvent()">
         <ion-input type="text" formControlName="eventTitle" placeholder="Event Name" #eventName></ion-input>
-        <ion-select value="birthday" multiple="false" (ionChange)="setEventType($event)" formControlName="eventType" placeholder="Type" #eventType>
+        <ion-select value="birthday" multiple="false" (ionChange)="setEventType($event)" formControlName="eventType"
+          placeholder="Type" #eventType>
           <ion-select-option value="birthday">Birthday</ion-select-option>
           <ion-select-option value="Anniversary">Anneversary</ion-select-option>
         </ion-select>
@@ -22,45 +69,42 @@
           <ion-label>End Date</ion-label>
           <ion-datetime display-format="DD.MM.YYYY" formControlName="endDate" #endDate></ion-datetime>
         </ion-item>
-        <button type="submit">
+        <ion-button type="submit" color="success" expand="full">
+          <ion-label>Add</ion-label>
           <ion-icon name="add"></ion-icon>
-        </button>
-      </ion-item>
-    </form>
-    <hr class="uk-divider-icon" style="margin: 0 0 !important;">
-    <ion-list>
-      <ion-item *ngFor="let event of events">
-        <ion-label>{{event.title}}</ion-label>
-        <ion-badge color="primary" mode="ios" *ngIf="event.allDay">All Day</ion-badge>
-        <ion-badge color="primary" mode="ios" *ngIf="!event.allDay">Specific</ion-badge>
-        <ion-chip color="secondary" mode="md" outline="false">
-          <ion-label>{{event.type}}</ion-label>
-        </ion-chip>
-        <ion-chip color="primary" mode="md" outline="true">
-          <ion-label>{{event.startDate}}</ion-label>
-        </ion-chip>
-        <ion-chip color="primary" mode="md" outline="true">
-          <ion-label>{{event.endDate}}</ion-label>
-        </ion-chip>
-        <button (click)="removeEvent(event)">
-          <ion-icon name="trash-bin"></ion-icon>
-        </button>
-      </ion-item>
-    </ion-list>
-  </ion-card>
-
-  <div *ngIf="events.length>0">
-    <calendar [eventSource]="calendarEvents"
-              [calendarMode]="calendar.mode"
-              [currentDate]="calendar.currentDate"
-              (onCurrentDateChanged)="onCurrentDateChanged($event)"
-              (onEventSelected)="onEventSelected($event)"
-              (onTitleChanged)="onViewTitleChanged($event)"
-              (onTimeSelected)="onTimeSelected($event)"
-              [step]="calendar.step">
-    </calendar>
+        </ion-button>
+      </form>
+      <ion-list>
+        <ion-item *ngFor="let event of events">
+          <div class="uk-width-1-1">
+            <ion-label>{{event.title}}</ion-label><br>
+              <ion-badge color="primary" mode="ios" *ngIf="event.allDay">All Day</ion-badge>
+              <ion-badge color="primary" mode="ios" *ngIf="!event.allDay">Specific</ion-badge>
+              <ion-chip color="secondary" mode="md" outline="false">
+                <ion-label>{{event.type}}</ion-label>
+              </ion-chip><br>
+            <div>
+              <ion-chip color="primary" mode="md" outline="true">
+                <ion-label>{{event.startDate}}</ion-label>
+              </ion-chip><br>
+              <ion-chip color="primary" mode="md" outline="true">
+                <ion-label>{{event.endDate}}</ion-label>
+              </ion-chip><br>
+            </div>
+            <ion-button (click)="removeEvent(event)" color="danger" expand="full">
+              <ion-icon name="trash-bin"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+    <div *ngIf="events.length>0">
+      <calendar [eventSource]="calendarEvents" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
+        (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)"
+        (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)" [step]="calendar.step">
+      </calendar>
+    </div>
+    <app-accordion></app-accordion>
   </div>
-  <app-accordion></app-accordion>
-</div>
   <app-footer></app-footer>
 </ion-content>

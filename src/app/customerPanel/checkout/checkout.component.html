@@ -9,7 +9,7 @@
             <div class="product-row">
               <app-wide-product-card *ngFor="let order of orders" [img]="order.productImages[0].image"
                 [orderTitle]="order.productName" [orderDescription]="order.seoDescription"
-                [orderprice]="order.finalPrice"></app-wide-product-card>
+                [orderprice]="order.finalPrice" (addImage)="addImage($event)" [productId]="order.productId" [quantity]="order.quantity" [showImageInput]="order.imageReference" [showQuantity]="false"></app-wide-product-card>
             </div>
           </section>
           <section id="orders-table-container">
@@ -25,9 +25,9 @@
               <tbody>
                 <tr *ngFor="let order of orders">
                   <td>{{order.productName}}</td>
-                  <td>1</td>
+                  <td>{{order.quantity}}</td>
                   <td>{{order.productPrice}}</td>
-                  <td>{{order.finalPrice}}</td>
+                  <td>{{order.finalPrice*order.quantity}}</td>
                 </tr>
               </tbody>
               <tfoot>
