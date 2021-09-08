@@ -6,14 +6,10 @@
     <ion-title>Filter</ion-title>
   </ion-toolbar>
 <ion-list class="list">
-  <ion-radio-group name="price" value="MinToMax">
+  <ion-radio-group name="price" [value]="dataProvider.filter" (ionChange)="filterEvent($event)">
     <ion-list-header>
       <ion-label>Price Options</ion-label>
     </ion-list-header>
-    <ion-item class="listoptions">
-      <ion-label>Minimum to Maximum</ion-label>
-      <ion-radio slot="start" color="primary" value="MinToMax"></ion-radio>
-    </ion-item>
     <ion-item class="listoptions">
       <ion-label>500-1000</ion-label>
       <ion-radio slot="start" color="primary" value="500-1000"></ion-radio>

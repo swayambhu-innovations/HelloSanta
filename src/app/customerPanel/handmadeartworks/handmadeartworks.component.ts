@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ModalController } from '@ionic/angular';
 import { FilterModalComponent } from 'src/app/modals/filter-modal/filter-modal.component';
 import { SortModalComponent } from 'src/app/modals/sort-modal/sort-modal.component';
+import { DataProvider } from 'src/app/providers/data.provider';
 
 @Component({
   selector: 'app-handmadeartworks',
@@ -11,12 +12,20 @@ import { SortModalComponent } from 'src/app/modals/sort-modal/sort-modal.compone
 })
 export class HandmadeartworksComponent implements OnInit {
 screenwidth=window.innerWidth
-  constructor(public modalController: ModalController,private afs: AngularFirestore,) { }
+  constructor(public modalController: ModalController,private afs: AngularFirestore,public dataProvider: DataProvider) { }
   async presentFilter() {
     const modal = await this.modalController.create({
       component: FilterModalComponent,
+      swipeToClose: true,
     });
-    return await modal.present();
+    modal.onDidDismiss().then((modelData) => {
+      if (modelData !== null) {
+        // this.modelData = modelData.data;
+        console.log('Modal Data : ' + modelData.data);
+      }
+    });
+    await modal.present()
+    await console.log("Filter Data",this.dataProvider.filter);
   }
   async presentsort() {
     const modal = await this.modalController.create({
@@ -30,6 +39,11 @@ screenwidth=window.innerWidth
   categories=[];
   subcategories=[];
   filters= {};
+  presentTargetFilter(){
+    this.presentFilter();
+    this.filter({detail:{value:this.dataProvider.filter}},'price');
+  }
+  presentTargetsort(){}
   resetFilter(){
     this.filters={};
     this.allHandmadeProds=this.copyArray;
@@ -38,83 +52,104 @@ screenwidth=window.innerWidth
     (document.getElementById('subcategoryFilter') as HTMLIonRadioGroupElement).value='';
   }
   filter(event,type){
+    console.log(event,"EventFromFilter");
     this.filters[type]= event.detail.value;
     this.allHandmadeProds=[];
     this.copyArray.forEach((item)=>{
       this.allHandmadeProds.push(item);
     })
     for (let i in this.filters){
-      if (i=='price'){
-        this.priceChange(this.filters[i]);
-      } else if (i=='subcategory'){
-        this.subCategoryChange(this.filters[i]);
-      } else if (i=='category'){
-        this.categoryChange(this.filters[i]);
+      if (this.filters[i].type=='price'){
+        this.allHandmadeProds=this.priceChange(i,this.allHandmadeProds);
+      } else if (this.filters[i].type=='subcategory'){
+        this.allHandmadeProds=this.subCategoryChange(i,this.allHandmadeProds);
+      } else if (this.filters[i].type=='category'){
+        this.allHandmadeProds=this.categoryChange(i,this.allHandmadeProds);
       }
     }
   }
-  subCategoryChange(value){
-    this.allHandmadeProds.forEach((item)=>{
+  addFilter(val,type){
+    console.log(val);
+    if (val.detail.checked){
+      val.detail['type']=type;
+      this.filters[val.detail.value] = val.detail;
+    } else {
+      delete this.filters[val.detail.value];
+    }
+    console.log(this.filters);
+    this.allHandmadeProds=[]
+    this.copyArray.forEach((item)=>{
+      this.allHandmadeProds.push(item);
+    })
+    for (let i in this.filters){
+      if (this.filters[i].type=='subcategory'){
+        this.allHandmadeProds=this.subCategoryChange(i,this.copyArray);
+      } else if (this.filters[i].type=='category'){
+        this.allHandmadeProds=this.categoryChange(i,this.copyArray);
+      }
+    }
+    for (let i in this.filters){
+      if (this.filters[i].type=='price'){
+        this.allHandmadeProds=this.priceChange(i,this.allHandmadeProds);
+      }
+    }
+
+  }
+  subCategoryChange(value,array){
+    let tempList = [];
+    array.forEach((item)=>{
       if (item.productSubcategory.includes(value)==false){
-        this.allHandmadeProds.splice(this.allHandmadeProds.indexOf(item),1);
+        tempList.push(item);
       }
     })
+    array=tempList;
+    return array;
   }
-  categoryChange(value){
-    this.allHandmadeProds.forEach((item)=>{
-      if (item.productCategory.includes(value)==false){
-        this.allHandmadeProds.splice(this.allHandmadeProds.indexOf(item),1);
+  categoryChange(value,array){
+    let tempList = [];
+    array.forEach((item)=>{
+      if (item.productCategory.includes(value)){
+        tempList.push(item);
       }
     })
+    array=tempList;
+    return array;
   }
-  priceChange(value){
-    if (value=='MinToMax'){
+  priceChange(value,array){
+    if (value=='500-1000'){
       let tempList = [];
-      for (let i; i<this.allHandmadeProds; i++) {
-        let min_idx=i;
-        for (let j=1; j<this.allHandmadeProds.length; j++) {
-          if (this.allHandmadeProds[i].productPrice<this.allHandmadeProds[j].productPrice) {
-            min_idx=j;
-          }
-        }
-        let temp=this.allHandmadeProds[i];
-        this.allHandmadeProds[i]=this.allHandmadeProds[min_idx];
-        this.allHandmadeProds[min_idx]=temp;
-      }
-    }
-    else if (value=='500-1000'){
-      let tempList = [];
-      for (let i of this.allHandmadeProds) {
+      for (let i of array) {
         if (i.productPrice>=500 && i.productPrice<=1000) {
           tempList.push(i);
         }
       }
-      this.allHandmadeProds=tempList;
+      array=tempList;
     } else if (value=='1000-5000'){
       let tempList = [];
-      for (let i of this.allHandmadeProds) {
+      for (let i of array) {
         if (i.productPrice>=1000 && i.productPrice<=5000) {
           tempList.push(i);
         }
       }
-      this.allHandmadeProds=tempList;
+      array=tempList;
     } else if (value=='5000-10000'){
       let tempList = [];
-      for (let i of this.allHandmadeProds) {
+      for (let i of array) {
         if (i.productPrice>=5000 && i.productPrice<=10000) {
           tempList.push(i);
         }
       }
-      this.allHandmadeProds=tempList;
+      array=tempList;
     } else if (value=='Above10000'){
       let tempList = [];
-      for (let i of this.allHandmadeProds) {
+      for (let i of array) {
         if (i.productPrice>10000) {
           tempList.push(i);
         }
       }
-      this.allHandmadeProds=tempList;
+      array=tempList;
     }
+    return array;
   }
   ngOnInit() {
     this.afs
@@ -133,7 +168,7 @@ screenwidth=window.innerWidth
               unknown++;
             }
           });
-          if (unknown == 0 && product.productCategory.includes('Handmade Products')) {
+          if (unknown == 0 && product.productCategory.includes('Artworks')) {
             this.allHandmadeProds.push(product);
             this.copyArray.push(product);
           }

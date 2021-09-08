@@ -32,14 +32,15 @@ export class EventSchedulerService {
                 // console.log('userEvents', userEvents);
                 userEvents.forEach((event: any) => {
                   event = event.data();
-                  console.log('interval output', event);
+                  // console.log('interval output', event);
                   let nowDate = new Date();
                   nowDate.setDate(nowDate.getDate() + 10);
                   let eventDate = new Date(event.startDate);
-                  console.log('nowDate', nowDate);
+                  // console.log('nowDate', nowDate);
                   if (!event.mailSend) {
                     console.log('eventDate', eventDate, nowDate);
                     if (nowDate >= eventDate) {
+                      console.log('Sending wishes to',element.email)
                       if (event.type == 'anniversary') {
                         this.sendAnniversaryEventMail(
                           element.email,

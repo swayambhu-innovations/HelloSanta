@@ -39,6 +39,7 @@ export class APProductsComponent implements OnInit {
   async presentEditProductModal(id) {
     const modal = await this.modalController.create({
       component: EditProductComponent,
+      cssClass:"addEditProductModal",
       componentProps: {
         productId: id,
       }

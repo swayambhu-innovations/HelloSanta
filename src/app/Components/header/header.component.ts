@@ -2,11 +2,12 @@ import { UserinfoComponent } from './../../popovers/userinfo/userinfo.component'
 import { Component, OnInit } from '@angular/core';
 import { DataProvider } from 'src/app/providers/data.provider';
 import { AuthService } from 'src/app/services/auth.service';
-import { PopoverController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { CartinfoComponent } from 'src/app/popovers/cartinfo/cartinfo.component';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { SearchResultComponent } from 'src/app/popovers/search-result/search-result.component';
 import { InventoryService } from 'src/app/services/inventory.service';
+import { SearchComponent } from 'src/app/modals/search/search.component';
 
 @Component({
   selector: 'app-header',
@@ -21,10 +22,18 @@ export class HeaderComponent implements OnInit {
     public popoverController: PopoverController,
     private afs: AngularFirestore,
     private inventoryService: InventoryService,
+    private modalController: ModalController,
   ) {}
   cartItems = [];
   categories;
   coins: number = 0;
+  async presentSearch(event){
+    const modal = await this.modalController.create({
+      component: SearchComponent,
+      cssClass: 'searchModal',
+    })
+    await modal.present();
+  }
   ngOnInit() {
     this.image = this.authService.getUserPhoto();
     if (this.authService.isJustLoggedIn){

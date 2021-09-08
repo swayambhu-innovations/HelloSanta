@@ -1,49 +1,36 @@
 <ion-header translucent>
-  <ion-toolbar>
+  <ion-toolbar style="margin:5px;">
+    <button (click)="modalController.dismiss()">
+      <ion-icon name="close" style="font-size: 30px;"></ion-icon>
+    </button>
     <ion-title>Searchbar</ion-title>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar></ion-searchbar>
+    <ion-searchbar (ionChange)="search($event)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
-<ion-content fullscreen>
-  <ion-list class="list">
-    <ion-item>Amsterdam</ion-item>
-    <ion-item>Bogota</ion-item>
-    <ion-item>Buenos Aires</ion-item>
-    <ion-item>Cairo</ion-item>
-    <ion-item>Dhaka</ion-item>
-    <ion-item>Edinburgh</ion-item>
-    <ion-item>Geneva</ion-item>
-    <ion-item>Genoa</ion-item>
-    <ion-item>Glasgow</ion-item>
-    <ion-item>Hanoi</ion-item>
-    <ion-item>Hong Kong</ion-item>
-    <ion-item>Islamabad</ion-item>
-    <ion-item>Istanbul</ion-item>
-    <ion-item>Jakarta</ion-item>
-    <ion-item>Kiel</ion-item>
-    <ion-item>Kyoto</ion-item>
-    <ion-item>Le Havre</ion-item>
-    <ion-item>Lebanon</ion-item>
-    <ion-item>Lhasa</ion-item>
-    <ion-item>Lima</ion-item>
-    <ion-item>London</ion-item>
-    <ion-item>Los Angeles</ion-item>
-    <ion-item>Madrid</ion-item>
-    <ion-item>Manila</ion-item>
-    <ion-item>New York</ion-item>
-    <ion-item>Olympia</ion-item>
-    <ion-item>Oslo</ion-item>
-    <ion-item>Panama City</ion-item>
-    <ion-item>Peking</ion-item>
-    <ion-item>Philadelphia</ion-item>
-    <ion-item>San Francisco</ion-item>
-    <ion-item>Seoul</ion-item>
-    <ion-item>Taipeh</ion-item>
-    <ion-item>Tel Aviv</ion-item>
-    <ion-item>Tokio</ion-item>
-    <ion-item>Uelzen</ion-item>
-    <ion-item>Washington</ion-item>
+<ion-content *ngIf="results">
+  <div *ngIf="results==[]">
+    <ion-spinner name="crescent"></ion-spinner>
+    <h3 class="uk-text-center">Searching {{keyword}}...</h3>
+  </div>
+  <div *ngIf="!searchable">
+    <h3 class="uk-text-center">Search Anything</h3>
+  </div>
+  <ion-list *ngIf="results && searchable">
+    <ion-item button *ngFor="let result of results" [href]="result.href">
+      <ion-thumbnail>
+        <img [src]="result.image" />
+      </ion-thumbnail>
+      <ion-col>
+        <ion-label>{{result.text}}</ion-label>
+        <ion-chip *ngIf="result.type=='blog'" outline="true" color="primary">Blog Post</ion-chip>
+        <ion-chip *ngIf="result.type=='product'" outline="true" color="secondary">Product</ion-chip>
+      </ion-col>
+    </ion-item>
+    <ion-col *ngIf="results.length==0" class="uk-text-center">
+      <p class="uk-text-center">No Results Found</p><br>
+      <img src="./assets/NotFound.gif" alt="Floating empty boxes">
+    </ion-col>
   </ion-list>
 </ion-content>

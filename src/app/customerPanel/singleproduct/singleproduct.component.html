@@ -39,8 +39,8 @@
                     </div>
                     <p id="product-price">Price: &#8377;
                         <span *ngIf="productPrice!=undefined">
-                            <span *ngIf="productPrice==0">{{displayPrice}}</span>
-                            <span *ngIf="productPrice>0">{{productPrice}}</span>
+                            <span *ngIf="productPrice==0">{{displayPrice*quantity}}</span>
+                            <span *ngIf="productPrice>0">{{productPrice*quantity}}</span>
                         </span>
                         <span *ngIf="productPrice==undefined">
                             Not Possible
@@ -52,6 +52,17 @@
                         <button id="product-add-to-cart" [disabled]="(productPrice==0 || productPrice==undefined)"
                             class=product-action-button (click)="addToCart()">Add to
                             Cart </button>
+                    </div>
+                    <div>
+                        <ion-item lines="none">
+                            <button slot="start" [disabled]="quantity<=1" (click)="quantity=quantity-1">
+                                <ion-icon name="remove"></ion-icon>
+                            </button>
+                            <ion-label color="primary">{{quantity}}</ion-label>
+                            <button [disabled]="quantity>=10" slot="end" (click)="quantity=quantity+1">
+                                <ion-icon name="add"></ion-icon>
+                            </button>
+                        </ion-item>
                     </div>
                     <div></div>
                     <div id="product-filters">
@@ -133,7 +144,7 @@
                     <div class="product-row uk-text-center uk-align-center">
                         <app-product-full-card *ngFor="let product of recommendationProducts"
                             [img]="product.productImages[0].image" [productTitle]="product.productName"
-                            [productDescription]="product.seoDescription" [price]="product.productPrice">
+                            [productDescription]="product.seoDescription" [price]="product.productPrice" [productId]="product.productId">
                         </app-product-full-card>
                     </div>
                 </div>

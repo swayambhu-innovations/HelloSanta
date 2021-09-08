@@ -123,29 +123,53 @@ export class AuthService {
         this.presentToast("Completing your registration");
         console.log("Download URl",this.downloadURL);
         console.log("Starting file upload ")
-        this.uploadFile(photo,result.user.uid).subscribe((imageUrl)=>{
-          console.log("Completed the imageurl ",imageUrl)
+        if (photo==undefined) {
+          this.uploadFile(photo,result.user.uid).subscribe((imageUrl)=>{
+            console.log("Completed the imageurl ",imageUrl)
+            this.SetUserData({user:result.user,displayName:name,photo:imageUrl,dob:dob,referralCode:referralCode});
+            let today = new Date();
+            var currentAccess:access={
+              accessLevel:'Customer',
+            }
+            localStorage.setItem("localItem",JSON.stringify({
+              uid:result.user.uid,
+              email: result.user.email,
+              displayName:name,
+              photoURL: imageUrl,
+              emailVerified: result.user.emailVerified,
+              isAdmin:false,
+              firstLogin:today.toLocaleDateString("en-US",AuthService.dateOptions).toString(),
+              data:result.user.data || [],
+              post:"Customer",
+              presentToday:this.formatPresentToday(true),
+              access:currentAccess,
+            }))
+            console.log("Completed the setUser data")
+            this.router.navigate(['']);
+          })
+        } else {
+          let imageUrl = './profile.svg';
           this.SetUserData({user:result.user,displayName:name,photo:imageUrl,dob:dob,referralCode:referralCode});
-          let today = new Date();
-          var currentAccess:access={
-            accessLevel:'Customer',
-          }
-          localStorage.setItem("localItem",JSON.stringify({
-            uid:result.user.uid,
-            email: result.user.email,
-            displayName:name,
-            photoURL: imageUrl,
-            emailVerified: result.user.emailVerified,
-            isAdmin:false,
-            firstLogin:today.toLocaleDateString("en-US",AuthService.dateOptions).toString(),
-            data:result.user.data || [],
-            post:"Customer",
-            presentToday:this.formatPresentToday(true),
-            access:currentAccess,
-          }))
-          console.log("Completed the setUser data")
-          this.router.navigate(['']);
-        })
+            let today = new Date();
+            var currentAccess:access={
+              accessLevel:'Customer',
+            }
+            localStorage.setItem("localItem",JSON.stringify({
+              uid:result.user.uid,
+              email: result.user.email,
+              displayName:name,
+              photoURL: imageUrl,
+              emailVerified: result.user.emailVerified,
+              isAdmin:false,
+              firstLogin:today.toLocaleDateString("en-US",AuthService.dateOptions).toString(),
+              data:result.user.data || [],
+              post:"Customer",
+              presentToday:this.formatPresentToday(true),
+              access:currentAccess,
+            }))
+            console.log("Completed the setUser data")
+            this.router.navigate(['']);
+        }
       }).catch((error:any) => {
         this.presentToast(error.message);
         console.log(error.message)
@@ -213,7 +237,7 @@ export class AuthService {
     provider.addScope('https://www.googleapis.com/auth/user.gender.read')
     return this.AuthLogin(provider);
   }  
-
+  
   getUserData() {
     return JSON.parse(localStorage.getItem('user') || '{}')
   }

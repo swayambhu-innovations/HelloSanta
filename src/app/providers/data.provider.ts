@@ -9,5 +9,6 @@ export class DataProvider {
     public overlayStatus:string = "Loading...";
     public checkOutdata:any;
     public shippingData:any;
+    public filter:any;
     public constructor() { }
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-buyagain',
@@ -7,27 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BuyagainComponent implements OnInit {
   screenwidth=window.innerWidth
-  constructor() { }
+  constructor(public authService: AuthService,public afs: AngularFirestore) { }
+  liveOrders=[];
+  loading=true;
 
-  ngOnInit() {}
-  products=[
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"ArtWork Product",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-      "price":"2300",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"ArtWork Product",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-      "price":"2300",
-    },
-    {
-      "img":"https://source.unsplash.com/940x650",
-      "name":"ArtWork Product",
-      "description":"Lorem ipsum dolor sit amet, consecteturadipiscing elit. Curabitur cursus tinciduntcommodo. Nunc justo nisi, vestibulum.",
-      "price":"2300",
-    },
-  ]
+  ngOnInit() {
+    this.afs.collection('users').doc(this.authService.userId).collection('orders').ref.get().then((value:any)=>{
+      value.forEach((order:any)=>{
+        order = order.data();
+        let productsData=[];
+        order.products.forEach((product:any)=>{
+          this.afs.collection('products').doc(product.productId).ref.get().then((productValue:any)=>{
+            productsData.push(productValue.data());
+            this.loading=false;
+          })
+        })
+        this.liveOrders.push({products:productsData,shippingDetail:order.shippingDetail})
+      });
+      console.log(this.liveOrders);
+    })
+  }
 }

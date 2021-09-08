@@ -17,8 +17,6 @@ export class AuthSignUpComponent implements OnInit {
   name: FormControl = new FormControl("", [Validators.required, Validators.pattern('[a-zA-Z ]*')]);
   email: FormControl = new FormControl("", [Validators.required, Validators.email]);
   password: FormControl = new FormControl("", [Validators.required, Validators.minLength(10)])
-  photo: FormControl = new FormControl("", [Validators.required])
-  confirmPassword:FormControl = new FormControl("", [Validators.required])
   referralCode:FormControl = new FormControl("",)
   v_status: boolean = false;
   isLoading: boolean = false; // disable the submit button if loading
@@ -41,11 +39,7 @@ export class AuthSignUpComponent implements OnInit {
       name: this.name,
       email: this.email,
       password:this.password,
-      photo:this.photo,
-      confirmPassword:this.confirmPassword,
       referralCode:this.referralCode,
-    }, {
-      validator: this.MustMatch('password', 'confirmPassword')
     });
    }
 
@@ -74,22 +68,7 @@ export class AuthSignUpComponent implements OnInit {
   }
 
 
-   MustMatch(controlName: string, matchingControlName: string) {
-    return (formGroup: FormGroup) => {
-        const control = formGroup.controls[controlName];
-        const matchingControl = formGroup.controls[matchingControlName];
-        if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-            // return if another validator has already found an error on the matchingControl
-            return;
-        }
-        // set error on matchingControl if validation fails
-        if (control.value !== matchingControl.value) {
-            matchingControl.setErrors({ mustMatch: true });
-        } else {
-            matchingControl.setErrors(null);
-        }
-    }
-  }
+
   async onSubmit() {
     if (this.form.status == "VALID") {
       this.form.disable(); // disable the form if it's valid to disable multiple submissions
