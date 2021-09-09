@@ -8,7 +8,7 @@
           <section id="orders-card">
             <div class="product-row">
               <app-wide-product-card *ngFor="let order of orders" [img]="order.productImages[0].image"
-                [orderTitle]="order.productName" [orderDescription]="order.seoDescription"
+                [orderTitle]="order.productName" [identifier]="order.ref" [configData]="order.config" [showActions]="false" [orderDescription]="order.seoDescription"
                 [orderprice]="order.finalPrice" (addImage)="addImage($event)" [productId]="order.productId" [quantity]="order.quantity" [showImageInput]="order.imageReference" [showQuantity]="false"></app-wide-product-card>
             </div>
           </section>
@@ -120,7 +120,8 @@
                   <ion-label>&nbsp;&nbsp;&nbsp;Use Your {{santaCoins}} Santa Credit for <strong>&#x20B9;{{this.santaCoins}}</strong> off.</ion-label>
                 </ion-item>
                 <div align="center">
-                  <button type="submit" [disabled]="!form.valid">
+                  <!-- TODO [disabled]="!form.valid" -->
+                  <button type="submit" >
                     <div *ngIf="processingPayment">
                       <ion-spinner name="crescent"></ion-spinner> Processing
                     </div>
@@ -132,9 +133,6 @@
               </form>
             </ion-list>
           </ion-card>
-          <ion-button (click)="presentInvoice()" expand="full" fill="clear" slot="start">
-            Get Invoice&nbsp;&nbsp;&nbsp;<ion-icon name="filter-circle"></ion-icon>
-          </ion-button>
         </main>
       </div>
     </div>

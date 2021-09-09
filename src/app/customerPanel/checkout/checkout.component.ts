@@ -16,6 +16,7 @@ import { PaymentService } from 'src/app/services/payment.service';
 import { environment } from 'src/environments/environment';
 import firebase from 'firebase/app';
 import { AngularFireAnalytics } from '@angular/fire/analytics';
+import { InvoiceService } from 'src/app/services/invoice.service';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -33,7 +34,8 @@ export class CheckoutComponent implements OnInit {
     private inventoryService: InventoryService,
     private router: Router,
     private analytics: AngularFireAnalytics,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private invoiceService: InvoiceService,
   ) {
     this.form = this.formbuilder.group({
       firstName: this.firstName,
@@ -115,25 +117,21 @@ export class CheckoutComponent implements OnInit {
     console.log(data);
   }
   addImage(event) {
-    console.log('event Image', event);
+    console.log('event Image ############################ ', event);
     let allValid = true;
+    // console.log('imageRequiredLEngth', this.imageRequired,event,this.dataProvider.data);
     this.imageRequired.forEach((data, index) => {
-      if (data.productId == event.productId) {
+      if (data.ref == event.refData) {
         this.imageRequired[index].imageReference = event.image;
       }
-      if (data.imageRequired == undefined) {
+      if (data.imageReference == undefined) {
         allValid = false;
       }
     });
     this.imagesValid = allValid;
     console.log('imageRequired', this.imageRequired);
   }
-  async presentInvoice() {
-    const modal = await this.modalController.create({
-      component: InvoiceDetailComponent,
-      cssClass: 'invoiceModal',
-    });
-    return await modal.present();
+  presentInvoice() {
   }
 
   get grandTotal(): number {
@@ -168,17 +166,21 @@ export class CheckoutComponent implements OnInit {
     if (this.dataProvider.checkOutdata) {
       this.dataCopy = this.dataProvider.checkOutdata;
       this.dataProvider.checkOutdata.forEach((prod) => {
+        console.log('prod from checkoutdata', prod);
         var docRef = this.afs.collection('products').ref.doc(prod.productData);
         docRef.get().then((data) => {
           if (data.exists) {
-            console.log('Document data:', data);
+            // console.log('Document data:', data);
             let dat: any = data.data();
             if (dat.imageReference) {
               this.imagesValid = false;
+              // console.log('identifier >>>',prod.identifier);
               this.imageRequired.push({
                 productId: dat.productId,
+                ref: prod.identifier,
                 imageReference: undefined,
               });
+              console.log('imageRequired', this.imageRequired,this.imageRequired.length);
             }
             this.orderItems.push({
               name: dat.productName,
@@ -186,9 +188,23 @@ export class CheckoutComponent implements OnInit {
               units: 1,
               selling_price: prod.price - this.offerFlat,
             });
+            console.log('identifier >>>',prod.identifier);
             dat['finalPrice'] = prod.price;
             dat['selections'] = prod.extrasData;
             dat['quantity'] = prod.quantity;
+            dat['ref']=prod.identifier;
+            dat['cartId']=prod.cartId;
+            let config = []
+            for (let key of Object.keys(dat.selections)) {
+              let selection = dat.selections[key];
+              if (selection.type == 'textSel' || selection.type == 'imgSel'){
+                config.push({title:selection.sectionTitle,value:selection.title});
+              } else if (selection.type == 'faceCount'){
+                config.push({title:'Faces',value:selection.faces});
+              }
+            }
+            dat['config'] = config;
+            console.log('dat data dt',dat);
             this.orders.push(dat);
           } else {
             console.log('No such document!');
@@ -202,13 +218,18 @@ export class CheckoutComponent implements OnInit {
     }
   }
   proceedToPay($event) {
+    console.log('imagereq',this.imageRequired)
+    console.log('imageVald',this.imagesValid)
     if (this.imagesValid) {
       this.dataProvider.showOverlay = true;
       this.processingPayment = true;
       this.payableAmount = this.grandTotal * 100;
+      this.imageRequired.forEach((data, index) => {
+        console.log(data);
+      })
       console.log('payable amount', this.payableAmount);
-      this.initiatePaymentModal($event);
-      this.analytics.logEvent('Checkout');
+      // this.initiatePaymentModal($event);
+      // this.analytics.logEvent('Checkout');
     } else {
       this.authService.presentToast('Please add all images by pressing Choose a file on every product.');
     }
@@ -318,9 +339,22 @@ export class CheckoutComponent implements OnInit {
                 orderId: res.body.order_id,
                 shipment_id: res.body.shipment_id,
                 orderConfirmed: false,
+                grandTotal:this.grandTotal,
                 orderMessage: this.message.value || '',
               };
               this.inventoryService.addUserOrder(currentOrder);
+
+              let detail = {
+                name:shippingDetail.billing_customer_name,
+                address: shippingDetail.billing_address,
+                city: shippingDetail.billing_city,
+                state: shippingDetail.billing_state,
+                country: shippingDetail.billing_country,
+                pincode: shippingDetail.billing_pincode,
+                mobile: shippingDetail.billing_phone,
+                email: shippingDetail.billing_email,
+              }
+              this.invoiceService.createInvoice(this.orders,this.grandTotal,detail);
               this.dataProvider.shippingData =
                 currentOrder.shippingDetail.shipment_id.toString();
               this.authService.presentToast('Order Placed Successfully ');

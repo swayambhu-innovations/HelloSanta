@@ -52,7 +52,6 @@ import { PendingProductsComponent } from './adminPanel/pending-products/pending-
 import { UserReferralComponent } from './customerPanel/user-referral/user-referral.component';
 import { CalenderComponent } from './customerPanel/calender/calender.component';
 import { CategoryProductsComponent } from './customerPanel/category-products/category-products.component';
-import { ShopComponent } from './customerPanel/shop/shop.component';
 const routes: Routes = [
   {path:'', component:HomeComponent},
   {path:'login', component:AuthLoginComponent},
@@ -78,7 +77,6 @@ const routes: Routes = [
   data: { authGuardPipe: redirectLoggedInTo(['/Login']), "route":"checkout" },},
   {path:'digitalart', component:DigitalartworksComponent},
   {path:'handmadeart', component:HandmadeartworksComponent},
-  {path:'shop', component:ShopComponent},
   {path:'trackorder', component:TrackorderComponent,
   canActivate:[LoginGuard],
   data: { authGuardPipe: redirectLoggedInTo(['/Login']), "route":"checkout" },},

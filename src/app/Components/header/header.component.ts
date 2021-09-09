@@ -8,6 +8,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { SearchResultComponent } from 'src/app/popovers/search-result/search-result.component';
 import { InventoryService } from 'src/app/services/inventory.service';
 import { SearchComponent } from 'src/app/modals/search/search.component';
+import { InvoiceService } from 'src/app/services/invoice.service';
 
 @Component({
   selector: 'app-header',
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit {
     private afs: AngularFirestore,
     private inventoryService: InventoryService,
     private modalController: ModalController,
+    public invoiceService: InvoiceService,
   ) {}
   cartItems = [];
   categories;
@@ -39,12 +41,13 @@ export class HeaderComponent implements OnInit {
     if (this.authService.isJustLoggedIn){
       this.afs
       .collection('users')
-      .doc(this.authService.userId)
+      .doc(this.authService.userId).collection('cart')
       .valueChanges()
       .subscribe((doc: any) => {
+        this.cartItems =[];
         if (doc) {
           this.coins = doc.totalCashback;
-          doc.cartItems.forEach((item: any) => {
+          doc.forEach((item: any) => {
             this.afs
               .collection('products')
               .doc(item.productData)
@@ -52,16 +55,10 @@ export class HeaderComponent implements OnInit {
               .then((doc: any) => {
                 if (doc.exists) {
                   doc = doc.data();
-                  let found = false;
-                  this.cartItems.forEach((item: any) => {
-                    if (item.productId == doc.productId) {
-                      found = true;
-                      item.quantity = item.quantity + 1;
-                    }
-                  });
-                  if (!found) {
-                    this.cartItems.push(doc);
-                  }
+                  console.log("doc item.finalPrice",item);
+                  doc['finalPrice']=item.price;
+                  doc['quantity']=item.quantity;
+                  this.cartItems.push(doc);
                 }
               });
           });
@@ -74,7 +71,7 @@ export class HeaderComponent implements OnInit {
       if (doc.exists){
         this.categories = doc.data().categories;
       }
-    });;
+    });
   }
   async presentUserinfo(ev: any) {
     const popover = await this.popoverController.create({

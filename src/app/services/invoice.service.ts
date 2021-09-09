@@ -1,196 +1,120 @@
 import { Injectable } from '@angular/core';
-// import * as fs from "fs";
-// import * as PDFDocument from "pdfkit";
-
+import { jsPDF } from 'jspdf';
+import 'jspdf-autotable';
+import { UserOptions } from 'jspdf-autotable';
+interface jsPDFWithPlugin extends jsPDF {
+  autoTable: (options: UserOptions) => jsPDF;
+}
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class InvoiceService {
-  
-  createInvoice(invoice, path) {
-    // let doc = new PDFDocument({ size: "A4", margin: 50 });
-    // this.generateHeader(doc);
-    // this.generateCustomerInformation(doc, invoice);
-    // this.generateInvoiceTable(doc, invoice);
-    // this.generateFooter(doc);
-  
-    // doc.end();
-    // doc.pipe(fs.createWriteStream(path));
-  }
-  
-  generateHeader(doc) {
-    doc
-      .image("logo.png", 50, 45, { width: 50 })
-      .fillColor("#444444")
-      .fontSize(20)
-      .text("ACME Inc.", 110, 57)
-      .fontSize(10)
-      .text("ACME Inc.", 200, 50, { align: "right" })
-      .text("123 Main Street", 200, 65, { align: "right" })
-      .text("New York, NY, 10025", 200, 80, { align: "right" })
-      .moveDown();
-  }
-  
-  generateCustomerInformation(doc, invoice) {
-    doc
-      .fillColor("#444444")
-      .fontSize(20)
-      .text("Invoice", 50, 160);
-  
-    this.generateHr(doc, 185);
-  
-    const customerInformationTop = 200;
-  
-    doc
-      .fontSize(10)
-      .text("Invoice Number:", 50, customerInformationTop)
-      .font("Helvetica-Bold")
-      .text(invoice.invoice_nr, 150, customerInformationTop)
-      .font("Helvetica")
-      .text("Invoice Date:", 50, customerInformationTop + 15)
-      .text(this.formatDate(new Date()), 150, customerInformationTop + 15)
-      .text("Balance Due:", 50, customerInformationTop + 30)
-      .text(
-        this.formatCurrency(invoice.subtotal - invoice.paid),
-        150,
-        customerInformationTop + 30
-      )
-  
-      .font("Helvetica-Bold")
-      .text(invoice.shipping.name, 300, customerInformationTop)
-      .font("Helvetica")
-      .text(invoice.shipping.address, 300, customerInformationTop + 15)
-      .text(
-        invoice.shipping.city +
-          ", " +
-          invoice.shipping.state +
-          ", " +
-          invoice.shipping.country,
-        300,
-        customerInformationTop + 30
-      )
-      .moveDown();
-  
-    this.generateHr(doc, 252);
-  }
-  
-  generateInvoiceTable(doc, invoice) {
-    let i;
-    const invoiceTableTop = 330;
-  
-    doc.font("Helvetica-Bold");
-    this.generateTableRow(
-      doc,
-      invoiceTableTop,
-      "Item",
-      "Description",
-      "Unit Cost",
-      "Quantity",
-      "Line Total"
-    );
-    this.generateHr(doc, invoiceTableTop + 20);
-    doc.font("Helvetica");
-  
-    for (i = 0; i < invoice.items.length; i++) {
-      const item = invoice.items[i];
-      const position = invoiceTableTop + (i + 1) * 30;
-      this.generateTableRow(
-        doc,
-        position,
-        item.item,
-        item.description,
-        this.formatCurrency(item.amount / item.quantity),
-        item.quantity,
-        this.formatCurrency(item.amount)
+  doc = new jsPDF() as jsPDFWithPlugin;
+  async getBase64ImageFromUrl(imageUrl) {
+    var res = await fetch(imageUrl);
+    var blob = await res.blob();
+
+    return new Promise((resolve, reject) => {
+      var reader = new FileReader();
+      reader.addEventListener(
+        'load',
+        function () {
+          resolve(reader.result);
+        },
+        false
       );
-  
-      this.generateHr(doc, position + 20);
+
+      reader.onerror = () => {
+        return reject(this);
+      };
+      reader.readAsDataURL(blob);
+    });
+  }
+  gstin: string = '27AAACR532F1Z4';
+  addressline1: string = 'Khalpara, Siliguri Darjeeling';
+  address: string = '2nd Flr, Sarvottam Complex M. R. Road';
+  state: string = 'West Bengal';
+  pincode: string = '734005';
+  createInvoice(data,grandTotal,shippingDetail) {
+    let body = [];
+    for (let i of data){
+      body.push([i.productName, i.quantity, i.finalPrice,i.finalPrice*i.quantity]);
     }
-  
-    const subtotalPosition = invoiceTableTop + (i + 1) * 30;
-    this.generateTableRow(
-      doc,
-      subtotalPosition,
-      "",
-      "",
-      "Subtotal",
-      "",
-      this.formatCurrency(invoice.subtotal)
-    );
-  
-    const paidToDatePosition = subtotalPosition + 20;
-    this.generateTableRow(
-      doc,
-      paidToDatePosition,
-      "",
-      "",
-      "Paid To Date",
-      "",
-      this.formatCurrency(invoice.paid)
-    );
-  
-    const duePosition = paidToDatePosition + 25;
-    doc.font("Helvetica-Bold");
-    this.generateTableRow(
-      doc,
-      duePosition,
-      "",
-      "",
-      "Balance Due",
-      "",
-      this.formatCurrency(invoice.subtotal - invoice.paid)
-    );
-    doc.font("Helvetica");
+    body.push(['', '', 'Grand Total', grandTotal]);
+    console.log(data);
+    console.log(body);
+    this.getBase64ImageFromUrl('./assets/icon.png')
+      .then((base64: any) => {
+        this.doc.addImage(base64, 'PNG', 10, 10, 30, 30);
+        this.doc.text('Hello Santa', 10, 45);
+        this.doc.setFontSize(10);
+        this.doc.text(`GSTIN:${this.gstin}`, 10, 50);
+        this.doc.text(`Invoice No:${Math.floor(Math.random() * 100)}`, 10, 55);
+        this.doc.text(`Date:${new Date().toLocaleDateString()}`, 10, 60);
+        this.doc.text(`${this.addressline1}`, 200, 30, { align: 'right' });
+        this.doc.text(`${this.address}`, 200, 35, { align: 'right' });
+        this.doc.text(`${this.state}`, 200, 40, { align: 'right' });
+        this.doc.text(`${this.pincode}`, 200, 45, { align: 'right' });
+        this.doc.setDrawColor(113, 76, 207);
+        this.doc.line(10, 70, 200, 70);
+        this.doc
+          .setDrawColor(0, 0, 0)
+          .setFontSize(10)
+          .setFont(undefined, 'bold');
+        this.doc.text('Country of Supply', 10, 80).setFont(undefined, 'normal');
+        this.doc
+          .text('India', 50, 80)
+          .setFontSize(8)
+          .setFontSize(10)
+          .setFont(undefined, 'bold');
+        this.doc
+          .text('Place of Supply', 80, 80)
+          .setFontSize(8)
+          .setFont(undefined, 'normal');
+        this.doc.text('Siliguri Darjeeling', 110, 80).setFont(undefined, 'bold');
+        this.doc.text('Billing Customer Name', 10, 85).setFont(undefined, 'normal');
+        this.doc.text(shippingDetail.name, 50, 85).setFont(undefined, 'bold');
+        this.doc.text('Billing Customer Address', 10, 90).setFont(undefined, 'normal');
+        this.doc.text(shippingDetail.address, 50, 90).setFont(undefined, 'bold');
+        this.doc.text('Billing City', 10, 95).setFont(undefined, 'normal');
+        this.doc.text(shippingDetail.city, 50, 95).setFont(undefined, 'bold');
+        this.doc.text('Billing State', 10, 100).setFont(undefined, 'normal');
+        this.doc.text(shippingDetail.state, 50, 100).setFont(undefined, 'bold');
+        this.doc.text('Billing Pincode', 10, 105).setFont(undefined, 'normal');
+        this.doc.text(shippingDetail.pincode, 50, 105).setFont(undefined, 'bold');
+        this.doc.text('Billing Email', 10, 110).setFont(undefined, 'normal');
+        this.doc.text(shippingDetail.email, 50, 110).setFont(undefined, 'bold');
+        this.doc.text('Billing Mobile', 10, 115).setFont(undefined, 'normal');
+        this.doc.text(shippingDetail.mobile, 50, 115).setFont(undefined, 'bold');
+        this.doc.text('Payment Method', 10, 120).setFont(undefined, 'normal');
+        this.doc.text('Prepaid', 50, 120);
+        this.doc.setDrawColor(113, 76, 207);
+        this.doc.line(10, 125, 200, 125);
+        this.doc.setDrawColor(0, 0, 0);
+        this.doc.setFontSize(8);
+        this.doc.autoTable({
+          startY: 130,
+          styles: { overflow: 'linebreak', fontSize: 7 },
+          headStyles: {
+            minCellHeight: 5,
+            fontSize: 7,
+            fontStyle: 'bold',
+            halign: 'center',
+            lineWidth: 0.02,
+            fillColor: [159, 115, 255],
+            lineColor: [217, 216, 216],
+          },
+          theme: 'grid',
+          head: [['Item', 'Quantity', 'Price','Total']],
+          body: body,
+        });
+
+        this.doc.save('a4.pdf');
+      })
+      .catch((error) => {
+        console.log('Error occured', error);
+      });
   }
-  
-  generateFooter(doc) {
-    doc
-      .fontSize(10)
-      .text(
-        "Payment is due within 15 days. Thank you for your business.",
-        50,
-        780,
-        { align: "center", width: 500 }
-      );
-  }
-  
-  generateTableRow(
-    doc,
-    y,
-    item,
-    description,
-    unitCost,
-    quantity,
-    lineTotal
-  ) {
-    doc
-      .fontSize(10)
-      .text(item, 50, y)
-      .text(description, 150, y)
-      .text(unitCost, 280, y, { width: 90, align: "right" })
-      .text(quantity, 370, y, { width: 90, align: "right" })
-      .text(lineTotal, 0, y, { align: "right" });
-  }
-  
-  generateHr(doc, y) {
-    doc
-      .strokeColor("#aaaaaa")
-      .lineWidth(1)
-      .moveTo(50, y)
-      .lineTo(550, y)
-      .stroke();
-  }
-  
-  formatCurrency(cents) {
-    return "$" + (cents / 100).toFixed(2);
-  }
-  
-  formatDate(date) {
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-  
-    return year + "/" + month + "/" + day;
-  }
-  constructor() { }
+
+  constructor() {}
 }

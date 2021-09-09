@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { DataProvider } from 'src/app/providers/data.provider';
 import { AuthService } from 'src/app/services/auth.service';
 import { InventoryService } from 'src/app/services/inventory.service';
 
@@ -19,36 +20,41 @@ export class WideProductCardComponent implements OnInit {
   @Input() productId:string
   @Input() extras:any;
   @Input() orderconfig:string = "Chosen config"
-  @Input() quantity:number = 1
+  @Input() quantity:number = 1;
+  @Input() identifier:string="";
+  @Input() configData:any;
+  db:any={};
+  @Input() showConfig:boolean = true;
+  @Input() showActions:boolean = true;
   @Input() showQuantity:boolean = false;
   @Input() showImageInput:boolean = false;
   @Output() changeQuantity : EventEmitter<any> = new EventEmitter();
   @Output() addImage: EventEmitter<any> = new EventEmitter();
-  constructor(public inventoryService: InventoryService,private authService: AuthService) { }
+  @Output() removeEvent: EventEmitter<any> = new EventEmitter();
+  constructor(public inventoryService: InventoryService,private authService: AuthService,private dataProvider: DataProvider) { }
   changeImage(image){
     if (image.target.files[0].size < 500000){
-      this.addImage.emit({productId:this.productId,image:image.target.files[0]});
+      this.dataProvider.data=this.identifier;
+      const a:any = {productId:this.productId,image:image.target.files[0],refData:this.identifier}
+      this.addImage.emit(a);
       this.authService.presentToast("Image added successfully")
     } else {
       this.authService.presentToast("Image size should be less than 500kb",3000)
     }
   }
   removeFromWishlist(){
-    let data = {
-      productId: this.productId,
-      category: this.category,
-      subcategory: this.subcategory
-    }
-    this.inventoryService.removeFromWishlist(data);
+    this.removeEvent.emit({productId:this.productId,ref:this.identifier})
   }
   removeQuantity(){
     this.quantity=this.quantity-1
-    this.changeQuantity.emit({quantity:this.quantity,productId:this.productId});
+    this.changeQuantity.emit({quantity:this.quantity,productId:this.productId,ref:this.identifier});
   }
   addQuantity(){
     this.quantity=this.quantity+1
-    this.changeQuantity.emit({quantity:this.quantity,productId:this.productId});
+    this.changeQuantity.emit({quantity:this.quantity,productId:this.productId,ref:this.identifier});
   }
-  ngOnInit(){}
+  ngOnInit(){
+    this.db[this.identifier]=this.identifier;
+  } 
 
 }

@@ -123,7 +123,7 @@ export class AuthService {
         this.presentToast("Completing your registration");
         console.log("Download URl",this.downloadURL);
         console.log("Starting file upload ")
-        if (photo==undefined) {
+        if (photo!=undefined) {
           this.uploadFile(photo,result.user.uid).subscribe((imageUrl)=>{
             console.log("Completed the imageurl ",imageUrl)
             this.SetUserData({user:result.user,displayName:name,photo:imageUrl,dob:dob,referralCode:referralCode});
@@ -148,7 +148,7 @@ export class AuthService {
             this.router.navigate(['']);
           })
         } else {
-          let imageUrl = './profile.svg';
+          let imageUrl = './profileDefault.png';
           this.SetUserData({user:result.user,displayName:name,photo:imageUrl,dob:dob,referralCode:referralCode});
             let today = new Date();
             var currentAccess:access={
@@ -357,7 +357,6 @@ export class AuthService {
         data:user.data || [],
         access:currentAccess,
         isReferrer:user.isRefferrer || false,
-        cartItems:user.cartItems || [],
         currentOrder:user.currentOrder || [],
         dob:user.dob || dob || undefined,
         friends:user.friends || [],
@@ -382,7 +381,6 @@ export class AuthService {
         firstLogin:today.toLocaleDateString("en-US",AuthService.dateOptions).toString(),
         data:user.data || [],
         access:currentAccess,
-        cartItems:user.cartItems || [],
         isReferrer:user.isRefferrer || false,
         currentOrder:user.currentOrder || [],
         dob:user.dob || dob,

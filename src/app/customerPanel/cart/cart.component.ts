@@ -19,26 +19,54 @@ export class CartComponent implements OnInit {
   ) {}
   cartItems = [];
   checkoutItems = [];
-  quantityChanged(event){
+  quantityChanged(event) {
     console.log('event', event);
     this.checkoutItems.forEach((item: any, index: number) => {
-      if(item.productId === event.productId){
+      console.log('item', item, event);
+      if (item.identifier === event.ref) {
+        console.log('item xyz', item);
         this.checkoutItems[index].quantity = event.quantity;
+        this.afs
+          .collection('users')
+          .doc(this.authService.userId)
+          .collection('cart')
+          .doc(item.cartId)
+          .update({ quantity: event.quantity });
       }
-    })
+    });
+  }
+  removecartItem(event) {
+    console.log('event', event);
+    this.afs
+      .collection('users')
+      .doc(this.authService.userId)
+      .collection('cart')
+      .ref.get()
+      .then((doc: any) => {
+        console.log('undeifned data', doc);
+        doc.forEach((item: any) => {
+          console.log('doc', item.data());
+          if (item.data().identifier === event.ref) {
+            item.ref.delete();
+            this.authService.presentToast('Item removed from cart');
+            console.log('deleting item', item);
+          }
+        });
+      });
   }
   ngOnInit() {
     this.afs
       .collection('users')
       .doc(this.authService.userId)
-      .valueChanges()
-      .subscribe((doc: any) => {
+      .collection('cart')
+      .ref.get()
+      .then((doc: any) => {
         if (doc) {
-          this.checkoutItems = doc.cartItems;
-          console.log('doc data', doc);
           this.cartItems = [];
-          doc.cartItems.forEach((item: any) => {
-            console.log('item', item);
+          doc.forEach((item: any) => {
+            item = item.data();
+            this.checkoutItems.push(item);
+            // console.log('item', item);
             this.afs
               .collection('products')
               .doc(item.productData)
@@ -46,9 +74,27 @@ export class CartComponent implements OnInit {
               .then((prod: any) => {
                 if (prod.data()) {
                   prod = prod.data();
-                  prod['options'] = item.extraData;
                   prod['finalPrice'] = item.price;
                   prod['quantity'] = item.quantity;
+                  prod['identifier'] = item.identifier;
+                  console.log('item',item.extrasData)
+                  let config = [];
+                  for (let key of Object.keys(item.extrasData)){
+                    let selection=item.extrasData[key];
+                    if (
+                      selection.type == 'textSel' ||
+                      selection.type == 'imgSel'
+                    ) {
+                      config.push({
+                        title: selection.sectionTitle,
+                        value: selection.title,
+                      });
+                    } else if (selection.type == 'faceCount') {
+                      config.push({ title: 'Faces', value: selection.faces });
+                    }
+                  }
+                  prod['config'] = config;
+                  // console.log('prod', prod);
                   this.cartItems.push(prod);
                 }
               });

@@ -120,7 +120,6 @@ import { NgCalendarModule } from 'ionic2-calendar';
 import { AlertsModalService } from './services/alerts-modal.service';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ShowOrderInfoComponent } from './modals/show-order-info/show-order-info.component';
-import { ShopComponent } from './customerPanel/shop/shop.component';
 import { OrdercardComponent } from './Components/ordercard/ordercard.component';
 import { USE_EMULATOR as FIRESTORE_EMULATOR } from '@angular/fire/firestore';
 @NgModule({
@@ -220,7 +219,6 @@ import { USE_EMULATOR as FIRESTORE_EMULATOR } from '@angular/fire/firestore';
     MoreInfoComponent,
     CustomproductComponent,
     ShowOrderInfoComponent,
-    ShopComponent,
     OrdercardComponent,
   ],
   entryComponents: [],

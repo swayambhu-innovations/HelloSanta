@@ -328,18 +328,14 @@ export class InventoryService {
     this.authService.presentToast('Offer added');
   }
   addToCart(data) {
+    data['identifier']=(Math.random().toString().replace('.',''))+(data.productData.toString());
     this.afs
       .collection('users')
-      .doc(this.authService.userId)
-      .update({
-        cartItems: firebase.firestore.FieldValue.arrayUnion(data),
-      })
-      .then((docRef) => {
-        this.authService.presentToast('Added to cart');
-      })
-      .catch((error) => {
-        this.authService.presentToast('Error: ' + error.toString());
+      .doc(this.authService.userId).collection('cart')
+      .add(data).then((docRef)=>{
+        this.afs.doc(`users/${this.authService.userId}/cart/${docRef.id}`).update({cartId:docRef.id});
       });
+      
   }
   makeid(length) {
     var result = '';

@@ -6,7 +6,6 @@
         <div class="formbg">
           <a href="http://hellosanta.in/" rel="dofollow"><img src="assets/logo.png" class="logo"></a>
           <span class="padding-bottom--15" style="text-align:center;">Create your account</span>
-          <img class="avatar" *ngIf="img1" [src]="img1">
           <form [formGroup]="form" (ngSubmit)="onSubmit()" action="">
             <input type="text" autocomplete="name" autofocus placeholder="Full Name" inputmode="text" required
               formControlName="name" #name>
@@ -14,8 +13,6 @@
               formControlName="email">
             <input type="password" autocomplete="password" placeholder="Password" inputmode="text" required #password
               formControlName="password">
-            <input type="password" autocomplete="password" placeholder="Retype-Password" inputmode="text" required
-              #confirmPassword formControlName="confirmPassword">
             <input type="text" placeholder="referralCode" name="referCode" formControlName="referralCode">
             <button (click)="presentModal()" style="background-color: rgb(247, 152, 223); padding: 10px 20px; border-radius: 25px; margin: 10px 0px;">Setup Information</button>
             <button [disabled]="isLoading || !form.valid" [ngClass]="isLoading || !form.valid ? 'disabled' : ''"
