@@ -20,11 +20,11 @@ export class CartComponent implements OnInit {
   cartItems = [];
   checkoutItems = [];
   quantityChanged(event) {
-    console.log('event', event);
+    // console.log('event', event);
     this.checkoutItems.forEach((item: any, index: number) => {
-      console.log('item', item, event);
+      // console.log('item', item, event);
       if (item.identifier === event.ref) {
-        console.log('item xyz', item);
+        // console.log('item xyz', item);
         this.checkoutItems[index].quantity = event.quantity;
         this.afs
           .collection('users')
@@ -36,20 +36,20 @@ export class CartComponent implements OnInit {
     });
   }
   removecartItem(event) {
-    console.log('event', event);
+    // console.log('event', event);
     this.afs
       .collection('users')
       .doc(this.authService.userId)
       .collection('cart')
       .ref.get()
       .then((doc: any) => {
-        console.log('undeifned data', doc);
+        // console.log('undeifned data', doc);
         doc.forEach((item: any) => {
-          console.log('doc', item.data());
+          // console.log('doc', item.data());
           if (item.data().identifier === event.ref) {
             item.ref.delete();
             this.authService.presentToast('Item removed from cart');
-            console.log('deleting item', item);
+            // console.log('deleting item', item);
           }
         });
       });
@@ -77,7 +77,7 @@ export class CartComponent implements OnInit {
                   prod['finalPrice'] = item.price;
                   prod['quantity'] = item.quantity;
                   prod['identifier'] = item.identifier;
-                  console.log('item',item.extrasData)
+                  // console.log('item',item.extrasData)
                   let config = [];
                   for (let key of Object.keys(item.extrasData)){
                     let selection=item.extrasData[key];
@@ -100,13 +100,13 @@ export class CartComponent implements OnInit {
               });
           });
         } else {
-          console.log('no user data');
+          // console.log('no user data');
         }
       });
   }
   moveToCheckout() {
     this.dataProvider.showOverlay = true;
-    console.log('checkout items', this.checkoutItems);
+    // console.log('checkout items', this.checkoutItems);
     this.dataProvider.checkOutdata = this.checkoutItems;
     this.router.navigate(['checkout']);
   }

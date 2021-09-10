@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import { DataProvider } from 'src/app/providers/data.provider';
 import { AuthService } from 'src/app/services/auth.service';
 import { InventoryService } from 'src/app/services/inventory.service';
@@ -8,7 +8,7 @@ import { InventoryService } from 'src/app/services/inventory.service';
   templateUrl: './wide-product-card.component.html',
   styleUrls: ['./wide-product-card.component.css']
 })
-export class WideProductCardComponent implements OnInit {
+export class WideProductCardComponent implements OnInit,OnChanges  {
   @Input() img:string =  "https://source.unsplash.com/650x940"
   @Input() orderTitle:string = "ArtWork Product"
   @Input() orderDescription:string = "Lorem ipsum dolor sit amet, consectetur\n" +
@@ -36,6 +36,7 @@ export class WideProductCardComponent implements OnInit {
     if (image.target.files[0].size < 500000){
       this.dataProvider.data=this.identifier;
       const a:any = {productId:this.productId,image:image.target.files[0],refData:this.identifier}
+      console.log("Event logging just before emitting the event from function changeImage(event)",this.identifier)
       this.addImage.emit(a);
       this.authService.presentToast("Image added successfully")
     } else {
@@ -54,7 +55,9 @@ export class WideProductCardComponent implements OnInit {
     this.changeQuantity.emit({quantity:this.quantity,productId:this.productId,ref:this.identifier});
   }
   ngOnInit(){
-    this.db[this.identifier]=this.identifier;
+    console.log('Event value emitted from ngOnInit()',this.identifier)
   } 
-
+  ngOnChanges(){
+    console.log('Event value emitted from OnChanges() from child component',this.identifier)
+  }
 }

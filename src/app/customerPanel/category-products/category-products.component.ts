@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { FilterModalComponent } from 'src/app/modals/filter-modal/filter-modal.component';
 import { SortModalComponent } from 'src/app/modals/sort-modal/sort-modal.component';
+import { DataProvider } from 'src/app/providers/data.provider';
 
 @Component({
   selector: 'app-category-products',
@@ -15,7 +16,7 @@ export class CategoryProductsComponent implements OnInit {
   screenwidth=window.innerWidth
   category: any;
   subcategory: any;
-  constructor(public modalController: ModalController,private afs: AngularFirestore,private activatedRoute: ActivatedRoute,) { 
+  constructor(public modalController: ModalController,private afs: AngularFirestore,private dataProvider: DataProvider,private activatedRoute: ActivatedRoute,) { 
     this.activatedRoute.queryParams.subscribe((params) => {
       this.category = params['category'];
       this.subcategory = params['subcategory'];
@@ -25,6 +26,10 @@ export class CategoryProductsComponent implements OnInit {
     const modal = await this.modalController.create({
       component: FilterModalComponent,
     });
+    modal.onDidDismiss()
+      .then((data) => {
+        console.log("homies",data);
+    });
     return await modal.present();
   }
   async presentsort() {
@@ -32,6 +37,11 @@ export class CategoryProductsComponent implements OnInit {
       component: SortModalComponent,
     });
     return await modal.present();
+  }
+  showFilterModal(){
+    let data = this.presentFilter();
+    console.log("present filter ",data);
+    console.log("filter dataprovider",this.dataProvider.filter)
   }
   allDigitalProds:any;
   copyArray=[];

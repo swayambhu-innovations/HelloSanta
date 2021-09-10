@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnChanges, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ModalController } from '@ionic/angular';
 import { InvoiceDetailComponent } from 'src/app/modals/invoice-detail/invoice-detail.component';
@@ -114,10 +114,10 @@ export class CheckoutComponent implements OnInit {
   imageRequired: any = [];
   imagesValid: boolean = false;
   log(data) {
-    console.log(data);
+    // console.log(data);
   }
   addImage(event) {
-    console.log('event Image ############################ ', event);
+    console.log('Event recieved by the addImage(event) eventHandler function', event);
     let allValid = true;
     // console.log('imageRequiredLEngth', this.imageRequired,event,this.dataProvider.data);
     this.imageRequired.forEach((data, index) => {
@@ -129,7 +129,7 @@ export class CheckoutComponent implements OnInit {
       }
     });
     this.imagesValid = allValid;
-    console.log('imageRequired', this.imageRequired);
+    // console.log('imageRequired', this.imageRequired);
   }
   presentInvoice() {
   }
@@ -155,6 +155,7 @@ export class CheckoutComponent implements OnInit {
       this.offerFlat = 0;
     }
   }
+
   ngOnInit() {
     this.dataProvider.showOverlay = false;
     this.inventoryService
@@ -166,7 +167,7 @@ export class CheckoutComponent implements OnInit {
     if (this.dataProvider.checkOutdata) {
       this.dataCopy = this.dataProvider.checkOutdata;
       this.dataProvider.checkOutdata.forEach((prod) => {
-        console.log('prod from checkoutdata', prod);
+        // console.log('prod from checkoutdata', prod);
         var docRef = this.afs.collection('products').ref.doc(prod.productData);
         docRef.get().then((data) => {
           if (data.exists) {
@@ -180,7 +181,7 @@ export class CheckoutComponent implements OnInit {
                 ref: prod.identifier,
                 imageReference: undefined,
               });
-              console.log('imageRequired', this.imageRequired,this.imageRequired.length);
+              // console.log('imageRequired', this.imageRequired,this.imageRequired.length);
             }
             this.orderItems.push({
               name: dat.productName,
@@ -188,7 +189,7 @@ export class CheckoutComponent implements OnInit {
               units: 1,
               selling_price: prod.price - this.offerFlat,
             });
-            console.log('identifier >>>',prod.identifier);
+            // console.log('identifier >>>',prod.identifier);
             dat['finalPrice'] = prod.price;
             dat['selections'] = prod.extrasData;
             dat['quantity'] = prod.quantity;
@@ -204,10 +205,10 @@ export class CheckoutComponent implements OnInit {
               }
             }
             dat['config'] = config;
-            console.log('dat data dt',dat);
+            // console.log('dat data dt',dat);
             this.orders.push(dat);
           } else {
-            console.log('No such document!');
+            // console.log('No such document!');
           }
         });
       });
@@ -227,7 +228,7 @@ export class CheckoutComponent implements OnInit {
       this.imageRequired.forEach((data, index) => {
         console.log(data);
       })
-      console.log('payable amount', this.payableAmount);
+      // console.log('payable amount', this.payableAmount);
       // this.initiatePaymentModal($event);
       // this.analytics.logEvent('Checkout');
     } else {
