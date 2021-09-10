@@ -122,6 +122,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { ShowOrderInfoComponent } from './modals/show-order-info/show-order-info.component';
 import { OrdercardComponent } from './Components/ordercard/ordercard.component';
 import { USE_EMULATOR as FIRESTORE_EMULATOR } from '@angular/fire/firestore';
+import { AddSocialAccountComponent } from './popovers/add-social-account/add-social-account.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -220,6 +221,7 @@ import { USE_EMULATOR as FIRESTORE_EMULATOR } from '@angular/fire/firestore';
     CustomproductComponent,
     ShowOrderInfoComponent,
     OrdercardComponent,
+    AddSocialAccountComponent
   ],
   entryComponents: [],
   imports: [

@@ -17,13 +17,32 @@ export class ProductFullCardComponent implements OnInit {
   @Input() category:string;
   @Input() subcategory:string;
   @Input() productId:string
+  wishlist:any=this.authService.getCurrentWishlist();
   constructor(public inventoryService: InventoryService, public authService:AuthService) { }
   textlength=70;
+  has(){
+    // console.log("wishlist",this.wishlist,this.productId);
+    let found = false;
+    this.wishlist.forEach((item)=>{
+      if(item == this.productId){
+        // console.log("true wishlist")
+        found = true;
+      }
+    })
+    return found;
+  }
   addToWishlist(){
-    let data = {
-      productId: this.productId,
+    if (this.has()){
+      console.log("Already in wishlist removing it")
+      this.inventoryService.removeFromWishlist(this.productId);
+      this.wishlist.splice(this.wishlist.indexOf(this.productId),1);
+      this.authService.presentToast("Removed from wishlist");
+    } else {
+      console.log("Adding to wishlist")
+      this.inventoryService.addToWishlist(this.productId);
+      this.wishlist.push(this.productId);
+      this.authService.presentToast("Added to wishlist");
     }
-    this.inventoryService.addToWishlist(data);
   }
   ngOnInit(): void {
     if ( this.productDescription.length>=this.textlength){

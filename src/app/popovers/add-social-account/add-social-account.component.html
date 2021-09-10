@@ -1,0 +1,22 @@
+<ion-content>
+  <ion-card-subtitle>Add Social Account</ion-card-subtitle>
+  <form [formGroup]="form" (ngSubmit)="addSocialMediaLink()">
+    <ion-item>
+      <ion-label>Platform</ion-label>
+      <ion-select formControlName="type" value="logo-facebook" multiple="false" placeholder="Select Social Media Platform">
+        <ion-select-option value="logo-facebook"><ion-icon name="logo-facebook"></ion-icon>Facebook</ion-select-option>
+        <ion-select-option value="logo-instagram"><ion-icon name="logo-instagram"></ion-icon>Instagram</ion-select-option>
+        <ion-select-option value="logo-youtube"><ion-icon name="logo-youtube"></ion-icon>Youtube</ion-select-option>
+        <ion-select-option value="logo-snapchat"><ion-icon name="logo-snapchat"></ion-icon>Snapchat</ion-select-option>
+        <ion-select-option value="logo-snapchat"><ion-icon name="logo-snapchat"></ion-icon>Linkedin</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>URL</ion-label>
+      <ion-input formControlName="socialMediaLink" type="url"></ion-input>
+    </ion-item>
+    <ion-button type="submit" expand="block" fill="outline" shape="round">
+      Add
+    </ion-button>
+  </form>
+</ion-content>

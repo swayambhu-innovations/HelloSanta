@@ -6,15 +6,14 @@
     <section id="orders-container">
       <h2 id="your-cart-title">Your Wishlist</h2>
       <div class="product-row">
-        <app-wide-product-card *ngFor="let order of wishlist" 
+        <app-product-full-card *ngFor="let order of wishlist" 
         [img]="order.productImages[0].image" 
-        [orderTitle]="order.productName" 
-        [orderDescription]="order.seoDescription" 
-        [orderprice]="order.productPrice" 
+        [productTitle]="order.productName"
+        [price]="order.productPrice"
         [productId]="order.productId"
         [category]="order.category"
         [subcategory]="order.subcategory"
-        ></app-wide-product-card>
+        ></app-product-full-card>
       </div>
     </section>
   </main>

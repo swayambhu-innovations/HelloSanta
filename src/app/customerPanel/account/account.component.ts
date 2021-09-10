@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { PopoverController } from '@ionic/angular';
+import { AddSocialAccountComponent } from 'src/app/popovers/add-social-account/add-social-account.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
   selector: 'app-account',
@@ -9,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class AccountComponent implements OnInit {
   screenwidth=window.innerWidth
-  constructor(public authService: AuthService,public afs: AngularFirestore) { }
+  constructor(public inventoryService: InventoryService,public authService: AuthService,public afs: AngularFirestore,private popoverController: PopoverController) { }
   userName:string;
   userEmail:string;
   userImage: string;
@@ -17,7 +20,27 @@ export class AccountComponent implements OnInit {
   totalRefers: string;
   totalCashback: string;
   totalSales: string;
+  country:string;
+  type: string;
+  dob: string;
+  emailVerified: string;
+  gender: string;
+  isReferrer: string;
+  mobileNumber: string;
+  uid: string;
   liveOrders=[];
+  socialAccounts=[];
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: AddSocialAccountComponent,
+      event: ev,
+      translucent: true,
+      componentProps: {
+        userId: this.authService.userId,
+      }
+    });
+    return await popover.present();
+  }
   ngOnInit() {
     this.afs.collection('users').doc(this.authService.userId).valueChanges().subscribe((value:any)=>{
       this.userName=value.displayName;
@@ -28,6 +51,17 @@ export class AccountComponent implements OnInit {
       this.totalCashback=value.totalCashback;
       this.totalSales=value.totalSalesPoints;
       this.liveOrders=value.currentOrder;
+      this.socialAccounts=value.socialMedia;
+      this.country=value.country;
+      this.type=value.access.accessLevel;
+      this.dob=(new Date(value.dob)).toDateString();
+      this.emailVerified=value.emailVerified;
+      this.gender=value.gender;
+      if (value.isReferrer){
+        this.isReferrer=value.referralCode;
+      }
+      this.mobileNumber=value.mobileNumber;
+      this.uid = value.uid;
     })
   }
   products=[

@@ -22,6 +22,7 @@ export class AuthSignUpComponent implements OnInit {
   isLoading: boolean = false; // disable the submit button if loading
   img1:any;
   file:any;
+  passwordType: boolean=true;
   constructor(
     public authService:AuthService,
     private formbuilder: FormBuilder,

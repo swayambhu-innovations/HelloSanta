@@ -353,8 +353,11 @@ export class CheckoutComponent implements OnInit {
                 pincode: shippingDetail.billing_pincode,
                 mobile: shippingDetail.billing_phone,
                 email: shippingDetail.billing_email,
+                discount:{available:true,code:'offerCode',price:120},
+                grandTotal:this.grandTotal,
+                taxCharges:(this.grandTotal/100)*15,
               }
-              this.invoiceService.createInvoice(this.orders,this.grandTotal,detail);
+              this.invoiceService.createInvoice(this.orders,detail);
               this.dataProvider.shippingData =
                 currentOrder.shippingDetail.shipment_id.toString();
               this.authService.presentToast('Order Placed Successfully ');

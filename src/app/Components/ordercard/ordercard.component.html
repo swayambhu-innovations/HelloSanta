@@ -24,14 +24,9 @@
     </div>
     
   </div>
-  <div class="product-row" *ngIf="!loading">
-    <div class="product-row" *ngFor="let product of liveOrders">
-      <app-small-product-card [img]="orderProducts.productImages[0].image"
-      [productTitle]="orderProducts.productName" [price]="orderProducts.productPrice" [productId]="orderProducts.productId"
-      [date]="product.shippingDetail.orderDate" *ngFor="let orderProducts of product.products"></app-small-product-card>
-    </div>
-  </div>
-  <div *ngIf="loading">
-    <ion-spinner name="crescent"></ion-spinner>
+  <div class="product-row" *ngFor="let product of liveOrders">
+    <app-small-product-card [img]="product.productImages[0].image"
+    [productTitle]="product.productName" [price]="product.productPrice" [productId]="product.productId"
+    [date]="orderdate"></app-small-product-card>
   </div>
 </section>

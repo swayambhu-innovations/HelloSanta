@@ -8,18 +8,21 @@
               <a href="http://hellosanta.in/" rel="dofollow"><img src="assets/logo.png"></a>
               <span class="padding-bottom--15">Log-in to your account</span>
               <form>
-                <div class="field padding-bottom--24">
+                <div class="padding-bottom--24">
                   <label for="email">Email</label>
-                  <input type="email" name="email" required #email>
+                  <input class="input" type="email" name="email" required #email>
                 </div>
-                <div class="field padding-bottom--24">
+                <div class="padding-bottom--24">
                   <div class="grid--50-50">
                     <label for="password">Password</label>
                     <div class="reset-pass">
                       <a href="#">Forgot your password?</a>
                     </div>
                   </div>
-                  <input type="password" name="password" required #password>
+                  <ion-item class="input" lines="none">
+                    <input [type]="passwordType ? 'password' : 'text'" autocomplete="password" placeholder="Password" inputmode="text" required #password>
+                    <button (click)="passwordType=!passwordType"><ion-icon slot="end" [name]="passwordType ? 'eye-off' : 'eye'"></ion-icon></button>
+                  </ion-item>
                 </div>
                 <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
                   <label for="checkbox">

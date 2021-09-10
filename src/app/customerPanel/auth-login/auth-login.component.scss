@@ -190,18 +190,43 @@ label {
   rgba(0, 0, 0, 0) 0px 0px 0px 0px,
   rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
+ion-item{
+  padding: 0px !important;
 
-input[type="submit"] {
-  background-color: rgb(84, 105, 212);
+}
+.input{
+  font-size: 16px;
+  line-height: 28px;
+  padding: 8px 16px;
+  min-width: 200px;
+  min-height: 44px;
+  margin: 5px 0px;
+  outline: none;
+  font-weight: 600;
+  color:#FFC550;
+  border: solid 1px white;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
   box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
   rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0.12) 0px 1px 1px 0px,
-  rgb(84, 105, 212) 0px 0px 0px 1px,
+  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+  rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
   rgba(0, 0, 0, 0) 0px 0px 0px 0px,
   rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
-  font-weight: 600;
-  cursor: pointer;
+  rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+}
+.input:active,.input:focus{
+  border:2px solid #FFC550; 
+  outline: none;
+}
+input{
+  width: 100%;
+  height: 100%;
+  color:#FFC550;
+}
+button > ion-icon{
+  color: #FFC550;
+  font-size: 30px;
 }
 .field-checkbox input {
   width: 20px;

@@ -7,14 +7,19 @@
           <a href="http://hellosanta.in/" rel="dofollow"><img src="assets/logo.png" class="logo"></a>
           <span class="padding-bottom--15" style="text-align:center;">Create your account</span>
           <form [formGroup]="form" (ngSubmit)="onSubmit()" action="">
-            <input type="text" autocomplete="name" autofocus placeholder="Full Name" inputmode="text" required
+            <input class="input" type="text" autocomplete="name" autofocus placeholder="Full Name" inputmode="text" required
               formControlName="name" #name>
-            <input type="text" autocomplete="email" placeholder="Email Address" inputmode="text" required #email
+            <input class="input" type="text" autocomplete="email" placeholder="Email Address" inputmode="text" required #email
               formControlName="email">
-            <input type="password" autocomplete="password" placeholder="Password" inputmode="text" required #password
-              formControlName="password">
-            <input type="text" placeholder="referralCode" name="referCode" formControlName="referralCode">
-            <button (click)="presentModal()" style="background-color: rgb(247, 152, 223); padding: 10px 20px; border-radius: 25px; margin: 10px 0px;">Setup Information</button>
+            <ion-item class="input" lines="none">
+              <input [type]="passwordType ? 'password' : 'text'" autocomplete="password" placeholder="Password" inputmode="text" required #password
+                formControlName="password">
+              <button (click)="passwordType=!passwordType"><ion-icon slot="end" [name]="passwordType ? 'eye-off' : 'eye'"></ion-icon></button>
+            </ion-item>
+            <input class="input" type="text" placeholder="referralCode" name="referCode" formControlName="referralCode">
+            <button (click)="presentModal()"
+              style="background-color: rgb(247, 152, 223); padding: 10px 20px; border-radius: 25px; margin: 10px 0px;">Setup
+              Information</button>
             <button [disabled]="isLoading || !form.valid" [ngClass]="isLoading || !form.valid ? 'disabled' : ''"
               class="button" type="submit">Continue</button>
           </form>

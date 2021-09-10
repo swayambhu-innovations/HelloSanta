@@ -258,7 +258,9 @@ export class AuthService {
     let photo = (user !== null && user.photoURL !== "") ? user.photoURL : "";
     return photo
   }
-
+  getCurrentWishlist(){
+    return JSON.parse(localStorage.getItem('localUserData') || '{}').wishlist;
+  }
   // Auth logic to run auth providers
   AuthLogin(provider:any) {
     this.homeDataProvider.showOverlay=true;

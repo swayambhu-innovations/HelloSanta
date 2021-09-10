@@ -19,10 +19,10 @@ export class WishlistComponent implements OnInit {
         if (value.wishlist.indexOf(element)==0){
           this.wishlist.length=0;
         }
-        this.afs.collection('products').doc(element.productId).valueChanges().subscribe((proddata:any)=>{
+        this.afs.collection('products').doc(element).valueChanges().subscribe((proddata:any)=>{
           let unknown=0
           this.wishlist.forEach((elem:any) => {
-            if (proddata.productId==elem.productId) {
+            if (proddata.productId==elem) {
               console.log("already exists");
               unknown++;
             }

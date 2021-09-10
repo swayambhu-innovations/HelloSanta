@@ -199,6 +199,7 @@ export class InventoryService {
     let statement = productRef.update({
       wishlist: firebase.firestore.FieldValue.arrayRemove(data),
     });
+    console.log("removed statement",statement);
     return statement;
   }
   editPendingProduct(productID, data) {
@@ -507,5 +508,11 @@ export class InventoryService {
   }
   getCategories(){
     return this.afs.collection('data').doc('category');
+  }
+  addSocialMediaLink(data){
+    return this.afs.collection('users').doc(this.authService.userId).set({socialMedia:firebase.firestore.FieldValue.arrayUnion(data)},{merge:true});
+  }
+  removeSocialMediaLink(data){
+    return this.afs.collection('users').doc(this.authService.userId).set({socialMedia:firebase.firestore.FieldValue.arrayRemove(data)},{merge:true});
   }
 }

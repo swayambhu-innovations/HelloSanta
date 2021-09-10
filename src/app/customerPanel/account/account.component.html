@@ -1,19 +1,39 @@
 <ion-content>
-    <app-header></app-header>
-    <div class="home">
+  <app-header></app-header>
+  <div class="home">
     <main id="container">
       <app-sidenav activeLinkID="account"></app-sidenav>
       <section id="account-container">
         <div id="img-name-and-email">
-          <img
-            [src]="userImage"
-            alt="Profile Pic" class="circular-profile-pic" style="width:100px;height:100px">
+          <img [src]="userImage" alt="Profile Pic" class="circular-profile-pic" style="width:100px;height:100px">
           <div id="name-and-email">
             <h2 id="name">{{userName}}</h2>
             <p id="email">{{userEmail}}</p>
             <a href="profilepage">Edit Profile</a>
           </div>
+          <button (click)="presentPopover($event)">
+            <ion-icon name="person-add" color="primary" size="large"></ion-icon>
+          </button>
         </div>
+        <div>
+          <p><strong>Country: </strong>{{country}}</p>
+          <p><strong>Type: </strong>{{type}}</p>
+          <p><strong>DOB: </strong>{{dob}}</p>
+          <p><strong>Email Verified: </strong>{{emailVerified}}</p>
+          <p><strong>Gender: </strong>{{gender}}</p>
+          <p *ngIf="isReferrer"><strong>Referral: </strong>{{isReferrer}}</p>
+          <p><strong>Mobile Number: </strong>{{mobileNumber}}</p>
+          <p><strong>User Id: </strong>{{uid}}</p>
+        </div>
+        <ion-list>
+          <ion-item *ngFor="let item of socialAccounts" [href]="item.url" target="_blank">
+            <ion-icon slot="start" [name]="item.type"></ion-icon>
+            <ion-label color="primary">&nbsp;&nbsp;{{item.url}}</ion-label>
+            <button (click)="inventoryService.removeSocialMediaLink(item)">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+          </ion-item>
+        </ion-list>
         <div id="statistic-cards">
           <div class="statistic-card" id="total-orders-card">
             <p class="card-title">Total Orders</p>
@@ -34,11 +54,13 @@
         </div>
         <div id="latest-orders" *ngIf="liveOrders.length>0">
           <div class="product-row">
-            <app-small-product-card *ngFor="let product of liveOrders" [img]="product.productImage" [productTitle]="product.productName" [price]="product.productPrice" [date]="product.purchaseDate"></app-small-product-card>
+            <app-small-product-card *ngFor="let product of liveOrders" [img]="product.productImage"
+              [productTitle]="product.productName" [price]="product.productPrice" [date]="product.purchaseDate">
+            </app-small-product-card>
           </div>
         </div>
       </section>
     </main>
   </div>
-    <app-footer></app-footer>
+  <app-footer></app-footer>
 </ion-content>

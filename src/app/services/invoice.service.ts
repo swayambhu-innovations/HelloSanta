@@ -35,14 +35,16 @@ export class InvoiceService {
   address: string = '2nd Flr, Sarvottam Complex M. R. Road';
   state: string = 'West Bengal';
   pincode: string = '734005';
-  createInvoice(data,grandTotal,shippingDetail) {
+  createInvoice(data,shippingDetail) {
     let body = [];
     for (let i of data){
       body.push([i.productName, i.quantity, i.finalPrice,i.finalPrice*i.quantity]);
     }
-    body.push(['', '', 'Grand Total', grandTotal]);
-    console.log(data);
-    console.log(body);
+    body.push(['', '', 'Tax & Charges', shippingDetail.taxCharges]);
+    if (shippingDetail.discount.available==true){
+      body.push(['Dicount Code', shippingDetail.discount.code, 'Discount', shippingDetail.discount.price]);
+    }
+    body.push(['', '', 'Grand Total', shippingDetail.grandTotal]);
     this.getBase64ImageFromUrl('./assets/icon.png')
       .then((base64: any) => {
         this.doc.addImage(base64, 'PNG', 10, 10, 30, 30);
