@@ -29,6 +29,7 @@ export class CategoryProductsComponent implements OnInit {
     modal.onDidDismiss()
       .then((data) => {
         console.log("homies",data);
+        // this.addFilter(data.data,type)
     });
     return await modal.present();
   }

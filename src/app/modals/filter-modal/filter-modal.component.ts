@@ -11,6 +11,7 @@ export class FilterModalComponent implements OnInit {
   constructor(private modalController: ModalController,public dataProvider: DataProvider) { }
   async filterEvent(event){
     console.log(event,"event")
+    event['filterType']='price'
     this.dataProvider.filter = event.detail.value;
     console.log("event two")
     await this.modalController.dismiss(event);

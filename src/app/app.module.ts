@@ -41,8 +41,6 @@ import { ProfileComponent } from './customerPanel/profile/profile.component';
 import { FeedbackComponent } from './customerPanel/feedback/feedback.component';
 import { WishlistComponent } from './customerPanel/wishlist/wishlist.component';
 import { OrdersComponent } from './customerPanel/orders/orders.component';
-import { DigitalartworksComponent } from './customerPanel/digitalartworks/digitalartworks.component';
-import { HandmadeartworksComponent } from './customerPanel/handmadeartworks/handmadeartworks.component';
 import { TrackorderComponent } from './customerPanel/trackorder/trackorder.component';
 import { CartComponent } from './customerPanel/cart/cart.component';
 import { HelpComponent } from './customerPanel/help/help.component';
@@ -165,8 +163,6 @@ import { AddSocialAccountComponent } from './popovers/add-social-account/add-soc
     FeedbackComponent,
     WishlistComponent,
     OrdersComponent,
-    DigitalartworksComponent,
-    HandmadeartworksComponent,
     TrackorderComponent,
     CartComponent,
     HelpComponent,

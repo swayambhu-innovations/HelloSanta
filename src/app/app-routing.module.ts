@@ -28,8 +28,6 @@ import { ProfileComponent } from './customerPanel/profile/profile.component';
 import { FeedbackComponent } from './customerPanel/feedback/feedback.component';
 import { WishlistComponent } from './customerPanel/wishlist/wishlist.component';
 import { OrdersComponent } from './customerPanel/orders/orders.component';
-import { DigitalartworksComponent } from './customerPanel/digitalartworks/digitalartworks.component';
-import { HandmadeartworksComponent } from './customerPanel/handmadeartworks/handmadeartworks.component';
 import { TrackorderComponent } from './customerPanel/trackorder/trackorder.component';
 import { CartComponent } from './customerPanel/cart/cart.component';
 import { HelpComponent } from './customerPanel/help/help.component';
@@ -75,8 +73,6 @@ const routes: Routes = [
   {path:'calendar', component:CalenderComponent,
   canActivate:[LoginGuard],
   data: { authGuardPipe: redirectLoggedInTo(['/Login']), "route":"checkout" },},
-  {path:'digitalart', component:DigitalartworksComponent},
-  {path:'handmadeart', component:HandmadeartworksComponent},
   {path:'trackorder', component:TrackorderComponent,
   canActivate:[LoginGuard],
   data: { authGuardPipe: redirectLoggedInTo(['/Login']), "route":"checkout" },},
