@@ -31,7 +31,7 @@
           matBadgeColor="warn" matBadgeOverlap="false">
           <ion-icon name="wallet"></ion-icon>
         </span>
-        <ion-icon *ngIf="coins <= 0" name="wallet"></ion-icon>
+        <ion-icon *ngIf="coins <= 0 || coins==undefined" name="wallet"></ion-icon>
       </button>
     </a>
     <ion-button href="./login/" *ngIf="!authService.isJustLoggedIn">
