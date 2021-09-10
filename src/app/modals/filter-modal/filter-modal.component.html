@@ -1,31 +1,38 @@
 <ion-content>
   <ion-toolbar>
-    <ion-buttons slot="start" >
+    <ion-buttons slot="start">
       <ion-back-button icon="arrow-back"></ion-back-button>
     </ion-buttons>
     <ion-title>Filter</ion-title>
   </ion-toolbar>
-<ion-list class="list">
-  <ion-radio-group name="price" [value]="dataProvider.filter" (ionChange)="filterEvent($event)">
-    <ion-list-header>
-      <ion-label>Price Options</ion-label>
-    </ion-list-header>
-    <ion-item class="listoptions">
-      <ion-label>500-1000</ion-label>
-      <ion-radio slot="start" color="primary" value="500-1000"></ion-radio>
+  <h3 style="color: tomato; text-align: center; font-weight: bold">
+    Category Filter
+  </h3>
+  <ion-list class="list">
+    <ion-item class="listoptions" *ngFor="let category of categories">
+      <ion-label>{{ category }}</ion-label>
+      <ion-checkbox
+        mode="ios"
+        slot="start"
+        color="primary"
+        [value]="category"
+      ></ion-checkbox>
     </ion-item>
-    <ion-item class="listoptions">
-      <ion-label>1000-5000</ion-label>
-      <ion-radio slot="start" color="primary" value="1000-5000"></ion-radio>
+  </ion-list>
+
+  <h3 style="color: tomato; text-align: center; font-weight: bold">
+    Subcategory Filter
+  </h3>
+  <br>
+  <ion-list class="list">
+    <ion-item class="listoptions" *ngFor="let subcategory of subcategories">
+      <ion-label>{{ subcategory }}</ion-label>
+      <ion-checkbox
+        mode="ios"
+        slot="start"
+        color="primary"
+        [value]="subcategory"
+      ></ion-checkbox>
     </ion-item>
-    <ion-item class="listoptions">
-      <ion-label>5000-10000</ion-label>
-      <ion-radio slot="start" color="primary" value="5000-10000"></ion-radio>
-    </ion-item>
-    <ion-item class="listoptions">
-      <ion-label>Above 10000</ion-label>
-      <ion-radio slot="start" color="primary" value="Above10000"></ion-radio>
-    </ion-item>
-  </ion-radio-group>
-</ion-list>
+  </ion-list>
 </ion-content>

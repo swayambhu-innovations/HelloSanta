@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { ModalController } from '@ionic/angular';
 import { DataProvider } from 'src/app/providers/data.provider';
 
@@ -8,7 +9,7 @@ import { DataProvider } from 'src/app/providers/data.provider';
   styleUrls: ['./filter-modal.component.scss'],
 })
 export class FilterModalComponent implements OnInit {
-  constructor(private modalController: ModalController,public dataProvider: DataProvider) { }
+  constructor(private modalController: ModalController,public dataProvider: DataProvider,private afs: AngularFirestore) { }
   async filterEvent(event){
     console.log(event,"event")
     event['filterType']='price'
@@ -17,6 +18,17 @@ export class FilterModalComponent implements OnInit {
     await this.modalController.dismiss(event);
     console.log("event three")
   }
-  ngOnInit() {}
+  copyArray=[];
+  categories=[];
+  subcategories=[];
+  filters= {};
+  ngOnInit() {
+    this.afs.collection('data').doc('category').ref.get().then((value:any)=>{
+      if (value.exists){
+        this.categories=value.data().categories;
+        this.subcategories=value.data().subCategories;
+      }
+    })
+  }
 
 }
