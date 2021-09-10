@@ -9,7 +9,7 @@ import { DataProvider } from 'src/app/providers/data.provider';
   styleUrls: ['./filter-modal.component.scss'],
 })
 export class FilterModalComponent implements OnInit {
-  constructor(private modalController: ModalController,public dataProvider: DataProvider,private afs: AngularFirestore) { }
+  constructor(public modalController: ModalController,public dataProvider: DataProvider,private afs: AngularFirestore) { }
   async filterEvent(event){
     console.log(event,"event")
     event['filterType']='price'
@@ -18,10 +18,29 @@ export class FilterModalComponent implements OnInit {
     await this.modalController.dismiss(event);
     console.log("event three")
   }
+  selectedCategories=[];
+  selectedSubcategories=[]
   copyArray=[];
   categories=[];
   subcategories=[];
   filters= {};
+  dismiss(){
+    
+  }
+  addCategory(data){
+    if (data.detail.checked){
+      this.selectedCategories.includes(4) ? console.log() : this.selectedCategories.push(data.detail.value)
+    }else{
+      this.selectedCategories.splice(this.selectedCategories.indexOf(data.value),1)
+    }
+  }
+  addSubcategory(data){
+    if (data.detail.checked){
+      this.selectedSubcategories.includes(4) ? console.log() : this.selectedSubcategories.push(data.detail.value)
+    }else{
+      this.selectedSubcategories.splice(this.selectedSubcategories.indexOf(data.value),1)
+    }
+  }
   ngOnInit() {
     this.afs.collection('data').doc('category').ref.get().then((value:any)=>{
       if (value.exists){

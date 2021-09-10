@@ -1,7 +1,9 @@
 <ion-content>
   <ion-toolbar>
     <ion-buttons slot="start" >
-      <ion-back-button icon="arrow-back"></ion-back-button>
+      <button (click)="modalController.dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
     </ion-buttons>
     <ion-title>Price</ion-title>
   </ion-toolbar>
