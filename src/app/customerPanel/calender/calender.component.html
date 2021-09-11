@@ -1,7 +1,7 @@
 <ion-content>
   <app-header></app-header>
   <div class="home">
-    <h1 style="font-size: 3em; text-align: center;">Your events panel</h1>
+    <h1 class="title">Your events panel</h1>
     <ion-card *ngIf="screenWidth>600">
       <form [formGroup]="eventForm" (ngSubmit)="addEvent()">
         <ion-item>

@@ -19,7 +19,7 @@ export class WideProductCardComponent implements OnInit,OnChanges  {
   @Input() subcategory:string;
   @Input() productId:string
   @Input() extras:any;
-  @Input() orderconfig:string = "Chosen config"
+  @Input() orderconfig:string = "Order Config"
   @Input() quantity:number = 1;
   @Input() identifier:string="";
   @Input() configData:any;

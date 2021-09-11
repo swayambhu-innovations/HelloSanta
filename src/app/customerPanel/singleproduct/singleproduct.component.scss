@@ -120,6 +120,7 @@ ion-item > ion-label {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    line-height: 2.5;
 }
 
 .product-feature-button {
@@ -370,7 +371,7 @@ ion-radio-group{
     }
     #container2 {
       margin-top: 50px;
-      width: 92%;
+      width: 99%;
     }
     #container{
         margin-top: 10px;
@@ -424,10 +425,63 @@ ion-radio-group{
         margin: 10% 0%;
         width: 100%;
     }
+    #product-name {
+        color: #6D5CE5;
+        font-size: 2rem;
+        font-family: 'Poppins';
+        line-height: 1;
+    }
     #product-description {
         font-size: 1rem;
         margin:2.5%;
         padding: 15px;
 
       }
+
+      #product-action-buttons {
+        margin: 1em 10px;
+    }
+    
+    .product-action-button {
+        padding: .5em 0.8em;
+    }
+
+    #product-filters {
+        display: block;
+        justify-content: space-between;
+        margin: 2em 0.5em;
+        padding: 5px;
+        overflow-x: auto;
+        overflow-y: visible;
+    }
+    #productFilterSelections{
+        overflow-x: auto;
+        overflow-y: visible;
+    }
+    .product-filter {
+        padding: 1em;
+        border-radius: 50px;
+        font-family: 'Poppins';
+        width: 50%;
+        color: #6D5CE5;
+        font-size: 1.2em;
+        font-weight: 700;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        border: none;
+    }
+
+    ion-item{
+        margin: 0 1.5em;
+    }
+
+    #orders-container {
+        padding: 0.5em;
+      }
+      #product-price{
+        color: #5AC179;
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 1em 2em;
+        text-align: center;
+    }
   }

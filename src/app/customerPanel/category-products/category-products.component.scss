@@ -2,6 +2,7 @@
   font-size: 48px;
   color: whiteviolet;
   font-family: "Segoe Print";
+line-height: 1.5;
   color: #6d5de3;
 }
 .heading-discription {
@@ -120,13 +121,14 @@ ion-row {
   width: 75%;
   display: flex;
   justify-content: space-between;
+  border-radius: 20px;
 }
 
 #orders-container {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 50px;
   width: 100%;
-  padding: 1em;
+  padding: 0.25em;
   display: flex;
   flex-wrap: wrap;
   min-height: 500px;

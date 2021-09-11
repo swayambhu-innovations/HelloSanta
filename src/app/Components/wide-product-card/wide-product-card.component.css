@@ -9,8 +9,8 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 2em;
-  width: 100%;
+  margin: auto;
+  width: 80%;
 }
 ion-item > button {
   border-radius: 10px;
@@ -29,7 +29,7 @@ ion-item > ion-label {
 }
 
 .order-img {
-  width: 30%;
+  width: 20%;
   display: block;
   margin: 1em;
 }
@@ -37,27 +37,32 @@ ion-item > ion-label {
 .order-details {
   color: #6d5de3;
   padding: 1em;
-  width: 50%;
+  width: 100%;
+  font-size: 1rem;
   line-height: 1.5;
 }
 
 .order-title {
   font-family: "Poppins";
-  font-size: 1.5rem;
+  font-size: 1rem;
   color: #6d5de3;
 }
 
 .order-config {
   color: #6d5de3;
   padding: 1em;
-  width: 50%;
+  width: 100%;
   line-height: 1.5;
+  text-align: center;
 }
 .chosen-config {
   color: #6d5de3;
   padding: 1em;
   font-size: 1.5em;
   line-height: 1.5;
+}
+.config{
+  font-size: 0.8em;
 }
 .order-price-and-btns {
   margin: 1em;
@@ -110,7 +115,7 @@ ion-card {
     display: block;
     width: 325px;
     margin: 0.5em;
-    padding: 5%;
+    padding: 2.5%;
   }
   .order-img {
     width: 100%;
@@ -120,11 +125,14 @@ ion-card {
   .order-details {
     color: #6d5de3;
     padding: 0.3em;
+    width: 100%;
+    font-size: 1rem;
+text-align: center;
   }
 
   .order-title {
     font-family: "Poppins";
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 700;
     color: #6d5de3;
   }
@@ -134,11 +142,13 @@ ion-card {
   }
 
   .order-price {
-    font-size: 1.2rem;
-    font-weight: 700;
     margin-top: -30px;
+    color: #5ac179;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
   }
-
   .order-remove,
   .order-view {
     border-radius: 20px;
@@ -148,6 +158,22 @@ ion-card {
     font-weight: 700;
     width: 45%;
     margin: 0.25em 0.25em;
+  }
+  .order-config {
+    color: #6d5de3;
+    padding: 0.2em;
+    width: 100%;
+    line-height: 1.5;
+  }
+  .chosen-config {
+    color: #6d5de3;
+    padding: 0.5em;
+    font-size: 1em;
+    line-height: 1.5;
+    text-align: center;
+  }
+  .config{
+    font-size: 0.75em;
   }
 }
 .inputfile {

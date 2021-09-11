@@ -23,7 +23,8 @@
 #cart-container {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border-radius: 50px;
-    padding: 2em;
+    padding: 0.25em;
+    padding-top: 20px;
 }
 
 .product-row{
@@ -36,7 +37,8 @@
 }
 
 app-wide-product-card{
-  width:80%;
+  width:100%;
+  margin: 1% 0%;
 }
 
 button{
@@ -48,6 +50,8 @@ button{
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 25px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 20px;
   cursor: pointer;
 }

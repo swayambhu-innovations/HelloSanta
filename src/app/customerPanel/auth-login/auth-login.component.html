@@ -1,4 +1,5 @@
 <ion-content [ngStyle]="{'filter': (dataProvider.showOverlay) ? 'blur(10px)' : 'blur(0px)' }">
+  <div class="home">
   <img src="../../assets/login-03.jpg" class="bg">
   <div class="login-root ">
       <div class="box-root flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
@@ -50,6 +51,7 @@
           </div>
         </div>
       </div>
+  </div>
   </div>
 </ion-content>
 <div id="overlay" *ngIf="dataProvider.showOverlay">
