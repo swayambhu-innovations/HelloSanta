@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ActivatedRouteSnapshot, RouteReuseStrategy, RouterStateSnapshot } from '@angular/router';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
@@ -121,6 +121,7 @@ import { ShowOrderInfoComponent } from './modals/show-order-info/show-order-info
 import { OrdercardComponent } from './Components/ordercard/ordercard.component';
 import { USE_EMULATOR as FIRESTORE_EMULATOR } from '@angular/fire/firestore';
 import { AddSocialAccountComponent } from './popovers/add-social-account/add-social-account.component';
+import { CustomErrorHandlerService } from './services/logger.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -250,6 +251,7 @@ import { AddSocialAccountComponent } from './popovers/add-social-account/add-soc
     //   provide: FIRESTORE_EMULATOR,
     //   useValue: environment.production ? undefined : ['localhost', 8080],
     // },
+    {provide: ErrorHandler, useClass: CustomErrorHandlerService},
     {
       provide: 'externalUrlRedirectResolver',
       useValue: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {

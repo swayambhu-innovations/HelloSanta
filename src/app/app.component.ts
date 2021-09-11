@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AlertController } from '@ionic/angular';
+import { DataProvider } from './providers/data.provider';
 import { AuthService } from './services/auth.service';
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ export class AppComponent {
     { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor(public alertController: AlertController,private afs: AngularFirestore,public authService: AuthService) {}
+  constructor(public alertController: AlertController,private afs: AngularFirestore,public authService: AuthService,private dataProvider: DataProvider) {}
 
   async presentAlertPrompt() {
     const alert = await this.alertController.create({
@@ -41,7 +42,41 @@ export class AppComponent {
         }, {
           text: 'Report Bug',
           handler: (alertData) => {
-            this.afs.collection('bugs').add({message:alertData.name1});
+            let data = {
+              message:alertData.name1,
+              url:window.location.href,
+              time:new Date().getTime(),
+              clientInfo:window.navigator.userAgent,
+              user:this.authService.userId,
+              logs:this.dataProvider.logs,
+              screenWidth:screen.width,
+              screenHeight:screen.height,
+              windowWidth:window.innerWidth,
+              windowHeight:window.innerHeight,
+              availWidth:screen.availWidth,
+              availHeight:screen.availHeight,
+              colorDepth:screen.colorDepth,
+              pixelDepth:screen.pixelDepth,
+              referrer:document.referrer,
+              historyLength:history.length,
+              title:document.title,
+              browserName:window.navigator.appName,
+              browserVersion:navigator.appVersion,
+              platform:navigator.platform,
+              userLanguage:navigator.language,
+              userAgent:navigator.userAgent,
+              cookieEnabled:navigator.cookieEnabled,
+              onLine:navigator.onLine,
+              javaEnabled:navigator.javaEnabled(),
+              product:navigator.product,
+              productSub:navigator.productSub,
+              vendor:navigator.vendor,
+              vendorSub:navigator.vendorSub,
+              hardwareConcurrency:navigator.hardwareConcurrency,
+              maxTouchPoints:navigator.maxTouchPoints,
+              doNotTrack:navigator.doNotTrack,
+            }
+            this.afs.collection('bugs').add(data);
           }
         }
       ]

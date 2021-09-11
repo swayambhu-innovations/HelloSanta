@@ -18,6 +18,7 @@
         mode="ios"
         slot="start"
         color="primary"
+        [checked]="selectedCategories.includes(category)"
         [value]="category"
       ></ion-checkbox>
     </ion-item>
@@ -31,7 +32,9 @@
       <ion-label>{{ subcategory }}</ion-label>
       <ion-checkbox
         mode="ios"
+        (ionChange)="addSubcategory($event)"
         slot="start"
+        [checked]="selectedSubcategories.includes(subcategory)"
         color="primary"
         [value]="subcategory"
       ></ion-checkbox>

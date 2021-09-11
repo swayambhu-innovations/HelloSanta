@@ -1,37 +1,30 @@
 <ion-content>
   <ion-toolbar>
     <ion-buttons slot="start" >
-      <button (click)="modalController.dismiss()">
+      <button (click)="modalController.dismiss({prices:this.selectedSort})">
         <ion-icon name="arrow-back"></ion-icon>
       </button>
     </ion-buttons>
     <ion-title>Price</ion-title>
   </ion-toolbar>
 <ion-list class="list">
-  <ion-radio-group name="price" value="MinToMax">
-    <ion-list-header>
-      <ion-label>Price Options</ion-label>
-    </ion-list-header>
+  <ion-list class="list">
     <ion-item class="listoptions">
-      <ion-label>Minimum to Maximum</ion-label>
-      <ion-radio slot="start" color="primary" value="MinToMax"></ion-radio>
-    </ion-item>
-    <ion-item class="listoptions">
+      <ion-checkbox slot="start" [checked]="selectedSort.includes('500-1000')" value="500-1000" mode="ios" (ionChange)="addPriceOption($event)"></ion-checkbox>
       <ion-label>500-1000</ion-label>
-      <ion-radio slot="start" color="primary" value="500-1000"></ion-radio>
     </ion-item>
     <ion-item class="listoptions">
+      <ion-checkbox slot="start" [checked]="selectedSort.includes('1000-5000')" value="1000-5000" mode="ios" (ionChange)="addPriceOption($event)"></ion-checkbox>
       <ion-label>1000-5000</ion-label>
-      <ion-radio slot="start" color="primary" value="1000-5000"></ion-radio>
     </ion-item>
     <ion-item class="listoptions">
+      <ion-checkbox slot="start" [checked]="selectedSort.includes('5000-10000')" value="5000-10000" mode="ios" (ionChange)="addPriceOption($event)"></ion-checkbox>
       <ion-label>5000-10000</ion-label>
-      <ion-radio slot="start" color="primary" value="5000-10000"></ion-radio>
     </ion-item>
     <ion-item class="listoptions">
+      <ion-checkbox slot="start" [checked]="selectedSort.includes('Above10000')" value="Above10000" mode="ios" (ionChange)="addPriceOption($event)"></ion-checkbox>
       <ion-label>Above 10000</ion-label>
-      <ion-radio slot="start" color="primary" value="Above10000"></ion-radio>
     </ion-item>
-  </ion-radio-group>
+  </ion-list>
 </ion-list>
 </ion-content>
