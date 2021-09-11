@@ -116,7 +116,7 @@ import { MoreInfoComponent } from './popovers/more-info/more-info.component';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { NgCalendarModule } from 'ionic2-calendar';
 import { AlertsModalService } from './services/alerts-modal.service';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { ShowOrderInfoComponent } from './modals/show-order-info/show-order-info.component';
 import { OrdercardComponent } from './Components/ordercard/ordercard.component';
 import { USE_EMULATOR as FIRESTORE_EMULATOR } from '@angular/fire/firestore';

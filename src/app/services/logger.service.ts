@@ -10,7 +10,7 @@ export class CustomErrorHandlerService extends ErrorHandler {
 
     handleError(error) {
         // Here you can provide whatever logging you want
-        this.dataProvider.logs.push(error);
+        this.dataProvider.logs.push(error.message);
         super.handleError(error);
     }
 }

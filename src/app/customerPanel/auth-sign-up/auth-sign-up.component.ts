@@ -15,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AuthSignUpComponent implements OnInit {
   form: FormGroup;
   name: FormControl = new FormControl("", [Validators.required, Validators.pattern('[a-zA-Z ]*')]);
-  email: FormControl = new FormControl("", [Validators.required, Validators.email]);
+  email: FormControl = new FormControl("", [Validators.required, Validators.pattern('/^([_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,5}))|(\d+$)$/')]);
   password: FormControl = new FormControl("", [Validators.required, Validators.minLength(10)])
   referralCode:FormControl = new FormControl("",)
   v_status: boolean = false;
