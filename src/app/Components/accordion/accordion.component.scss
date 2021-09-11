@@ -47,7 +47,7 @@ background-color: #6D5DE3;
 
   @media only screen and (max-width: 1024px) {
 .title{
-  font-size: 1.8rem;
+  font-size: 1rem;
   padding-right: 40px;
   padding-left: 40px;
 }
@@ -58,11 +58,14 @@ width: 80%;
    width: 95vw;
    margin:5% 2.5% 10%;
  }
-
+ .uk-accordion-title{
+  font-size: 1rem;
+}
 li{
   width: 85%;
 }
 .accordiontext{
   width: 50vw;
+  font-size: 0.8rem;
 }
   }
