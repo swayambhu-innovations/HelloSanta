@@ -1,7 +1,99 @@
-
+.home{
+    margin: 0 auto;
+    min-width: 978px;
+    max-width: 1920px;
+    zoom: 80%;
+  }
+  h1{
+      font-family: raleway;
+      font-size: 2.3em;
+  }
+  .title{
+    font-family: raleway;
+    font-size: 0.70em;
+  }
+  ion-card{
+    box-shadow: 5px 10px 20px rgba(143, 95, 255, 0.4);
+  border-radius: 50px;
+  width: 50%;
+  padding: 4em;
+margin-top: 5em;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-direction: column;
+}
+ion-textarea{
+    text-align: left;
+    border-radius: 25px;
+    width: 800px;
+    height: 150px;
+}
+ion-button{
+    margin-top:30px;
+    height: 50px;
+width: 50%;
+    font-size: 2em;
+}
 star-rating{
     margin-top:30px;
 }
 form > div {
     padding-top: 20px;
+    font-size: 3em;
+    margin-bottom: 25px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .home{
+      margin: 0 auto;
+      min-width:300px;
+      max-width: 800px;
+      zoom: 100%;
+    }
+    h1{
+        font-family: raleway;
+        font-size: 1.5em;
+        margin-top: -20px;
+        margin-bottom: -10px;
+    }
+    .title{
+        font-family: raleway;
+        font-size: 0.4em;
+        margin-bottom: 10px;
+      }
+    ion-card{
+      box-shadow: 5px 10px 20px rgba(143, 95, 255, 0.4);
+    border-radius: 50px;
+    width: 90%;
+    padding: 4em;
+  margin-top: 5em;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+  }
+  ion-textarea{
+    margin-top:10px;
+    margin-bottom: 10px;
+      border-radius: 10px;
+      width: 250px;
+      height: 150px;
+  }
+  ion-button{
+      height: 40px;
+  width: 50%;
+      font-size: 1.5em;
+      margin-top: 10px;
+      margin-bottom: -10px;
+  }
+  star-rating{
+      margin-top:0px;
+      margin-bottom: 0px;
+  }
+  form > div {
+      padding-top: 20px;
+  }
 }
