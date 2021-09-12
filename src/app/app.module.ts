@@ -123,6 +123,7 @@ import { USE_EMULATOR as FIRESTORE_EMULATOR } from '@angular/fire/firestore';
 import { AddSocialAccountComponent } from './popovers/add-social-account/add-social-account.component';
 import { CustomErrorHandlerService } from './services/logger.service';
 import { ShopComponent } from './customerPanel/shop/shop.component';
+import { IontabComponent } from './Components/iontab/iontab.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -221,6 +222,7 @@ import { ShopComponent } from './customerPanel/shop/shop.component';
     OrdercardComponent,
     AddSocialAccountComponent,
     ShopComponent,
+    IontabComponent,
   ],
   entryComponents: [],
   imports: [

@@ -98,16 +98,6 @@ input:focus{
     width:90vw;
     border: 2px solid var(--ion-color-primary);
 }
-app-header{
-    position: -webkit-sticky;
-    position: -moz-sticky;
-    position: -ms-sticky;
-    position: -o-sticky;
-    position:absolute;
-    position: sticky;
-    top:0px;
-    z-index: 999;
-}
 @media screen and (max-width: 500px){
     .addProductModal .modal-wrapper{
         --width:100vw;
