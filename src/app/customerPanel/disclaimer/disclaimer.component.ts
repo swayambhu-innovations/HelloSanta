@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./disclaimer.component.scss'],
 })
 export class DisclaimerComponent implements OnInit {
-
+  screenwidth = window.innerWidth;
   constructor() { }
 
   ngOnInit() {}

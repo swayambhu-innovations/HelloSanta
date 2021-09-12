@@ -10,6 +10,7 @@ import { InventoryService } from 'src/app/services/inventory.service';
   styleUrls: ['./customproduct.component.scss'],
 })
 export class CustomproductComponent implements OnInit {
+  screenwidth = window.innerWidth;
   customProductForm: FormGroup;
   fullName: FormControl = new FormControl('', [
     Validators.required,

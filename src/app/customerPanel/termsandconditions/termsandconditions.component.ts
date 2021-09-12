@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./termsandconditions.component.scss'],
 })
 export class TermsandconditionsComponent implements OnInit {
-
+  screenwidth = window.innerWidth;
   constructor() { }
 
   ngOnInit() {}

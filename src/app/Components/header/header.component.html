@@ -72,13 +72,15 @@
     </button>
     <ul>
       <li *ngIf="!this.authService.isJustLoggedIn"><a href="/login">Login</a></li>
-      <li><a href="">Account</a></li>
+      <li><a href="/account">Account</a></li>
       <li *ngIf="this.authService.getCurrenAccessLevel == 'Vendor'"><a href="/VendorPanel/Dashboard">Vendor Panel</a>
       </li>
       <li *ngIf="this.authService.getCurrenAccessLevel == 'Admin'"><a href="/AdminPanel/Dashboard">Admin Panel</a></li>
-      <li><a href="">Contact Us</a></li>
-      <li><a href="">Products</a></li>
-      <li><a href="">Cart</a></li>
+      <li><a href="/help">Contact Us</a></li>
+      <li><a href="/orders">Your Orders</a></li>
+      <li><a href="/disclaimer">Disclaimer</a></li>
+      <li><a href="/privacypolicy">Privacypolicy</a></li>
+      <li><a href="/termsandconditions">Terms&conditions</a></li>
     </ul>
     <div class="bottomAvatar">
       <ion-row>

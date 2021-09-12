@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./refundandreturn.component.scss'],
 })
 export class RefundandreturnComponent implements OnInit {
-
+  screenwidth = window.innerWidth;
   constructor() { }
 
   ngOnInit() {}

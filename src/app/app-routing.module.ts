@@ -51,6 +51,7 @@ import { UserReferralComponent } from './customerPanel/user-referral/user-referr
 import { CalenderComponent } from './customerPanel/calender/calender.component';
 import { CategoryProductsComponent } from './customerPanel/category-products/category-products.component';
 import { ShopComponent } from './customerPanel/shop/shop.component';
+import { IontabComponent } from './Components/iontab/iontab.component';
 const routes: Routes = [
   {path:'', component:HomeComponent},
   {path:'login', component:AuthLoginComponent},
@@ -139,6 +140,22 @@ const routes: Routes = [
       {path:'Issues',component:VPIssuesComponent},
       {path:'Feedback',component:VPFeedbackComponent},
       {path:'Profile',component:VPProfileComponent},
+    ]
+  },
+  {
+    path:"tab",
+    component:IontabComponent,
+    children:[
+      {path:'account', component:AccountComponent,
+  canActivate:[LoginGuard],
+  data: { authGuardPipe: redirectLoggedInTo(['/Login']), "route":"checkout" },},
+      {path:'cart', component:CartComponent,
+      canActivate:[LoginGuard],
+      data: { authGuardPipe: redirectLoggedInTo(['/Login']), "route":"checkout" },},
+      {path:'wishlist', component:WishlistComponent,
+  canActivate:[LoginGuard],
+  data: { authGuardPipe: redirectLoggedInTo(['/Login']), "route":"checkout" },},
+  {path:'shop', component:ShopComponent,},
     ]
   }
 ];

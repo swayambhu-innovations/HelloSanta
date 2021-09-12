@@ -137,6 +137,7 @@
       </div>
     </div>
   </div>
+  <app-iontab  *ngIf="screenwidth<600"></app-iontab>
   <app-footer></app-footer>
 </ion-content>
 <div id="overlay" *ngIf="dataProvider.showOverlay">

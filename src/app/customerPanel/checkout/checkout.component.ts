@@ -23,6 +23,7 @@ import { InvoiceService } from 'src/app/services/invoice.service';
   styleUrls: ['./checkout.component.scss'],
 })
 export class CheckoutComponent implements OnInit {
+  screenwidth = window.innerWidth;
   dataCopy;
   constructor(
     private afs: AngularFirestore,

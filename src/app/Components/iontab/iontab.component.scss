@@ -3,3 +3,7 @@ ion-tabs{
     position: sticky !important;
     bottom: 0%;
 }
+
+ion-tab-button{
+    --color:var(--ion-color-primary-tint);
+}

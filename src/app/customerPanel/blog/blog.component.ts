@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./blog.component.scss'],
 })
 export class BlogComponent implements OnInit {
+  screenwidth = window.innerWidth;
   @Input() blogimg:string;
   @Input() blogdate:string;
   @Input() blogtitle:string;

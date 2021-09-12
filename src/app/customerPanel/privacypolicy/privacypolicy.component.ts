@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./privacypolicy.component.scss'],
 })
 export class PrivacypolicyComponent implements OnInit {
-
+  screenwidth = window.innerWidth;
   constructor() { }
 
   ngOnInit() {}
