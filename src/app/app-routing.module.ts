@@ -142,22 +142,7 @@ const routes: Routes = [
       {path:'Profile',component:VPProfileComponent},
     ]
   },
-  {
-    path:"tab",
-    component:IontabComponent,
-    children:[
-      {path:'account', component:AccountComponent,
-  canActivate:[LoginGuard],
-  data: { authGuardPipe: redirectLoggedInTo(['/Login']), "route":"checkout" },},
-      {path:'cart', component:CartComponent,
-      canActivate:[LoginGuard],
-      data: { authGuardPipe: redirectLoggedInTo(['/Login']), "route":"checkout" },},
-      {path:'wishlist', component:WishlistComponent,
-  canActivate:[LoginGuard],
-  data: { authGuardPipe: redirectLoggedInTo(['/Login']), "route":"checkout" },},
-  {path:'shop', component:ShopComponent,},
-    ]
-  }
+ 
 ];
 
 @NgModule({
