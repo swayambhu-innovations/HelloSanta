@@ -7,10 +7,10 @@
     <hr style="background-color: #6D5DE3;width: 90%;height: 5px;margin: auto;">
     <div class="fourthbox" *ngIf="blogs.length>0">
       <p class="firstheading">{{blogs[0].blogTitle}}</p>
-      <p class="heading-discription" *ngIf="screenwidth>600">{{blogs[0].blogExcerpt}}</p>
+      <p class="heading-discription" *ngIf="screenwidth>600" >{{blogs[0].blogExcerpt}}</p>
       <button class="button" *ngIf="screenwidth>600"><a href="/blog">Read more</a></button>
     </div>
-    <p class="heading-discription" *ngIf="screenwidth<600">{{blogs[0].blogContent}}</p>
+    <p class="heading-discription" *ngIf="screenwidth<600" [innerHTML]="blogs[0].blogContent"></p>
     <button class="button" *ngIf="screenwidth<600"><a href="/blog">Read more</a></button>
   </div>
   <img class="NotFoundImage" src="./assets/NotFound.gif" alt="No Blog Found" *ngIf="blogs.length<=0">
