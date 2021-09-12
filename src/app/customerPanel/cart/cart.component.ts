@@ -59,12 +59,11 @@ export class CartComponent implements OnInit {
       .collection('users')
       .doc(this.authService.userId)
       .collection('cart')
-      .ref.get()
-      .then((doc: any) => {
+      .valueChanges()
+      .subscribe((doc: any) => {
         if (doc) {
           this.cartItems = [];
           doc.forEach((item: any) => {
-            item = item.data();
             this.checkoutItems.push(item);
             // console.log('item', item);
             this.afs

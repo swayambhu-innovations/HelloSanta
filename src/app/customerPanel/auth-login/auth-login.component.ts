@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./auth-login.component.scss'],
 })
 export class AuthLoginComponent implements OnInit {
-  passwordType: boolean=true;
+  passwordType: boolean=true; 
   constructor(public authService:AuthService,public dataProvider:DataProvider) { }
 
   ngOnInit() {

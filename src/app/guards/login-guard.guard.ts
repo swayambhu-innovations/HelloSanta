@@ -12,7 +12,8 @@ export class LoginGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if(this.authService.isJustLoggedIn){
-      if(!this.authService.isEmailVerified){
+      if(!this.authService.isEmailVerified && !this.authService.isNumberVerified){
+        alert('Your email or phone number is not verified'+this.authService.isEmailVerified.toString()+this.authService.isNumberVerified.toString());
         this.router.navigate(['/verifyEmail'])
         return false
       }

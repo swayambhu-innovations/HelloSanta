@@ -122,6 +122,7 @@ import { OrdercardComponent } from './Components/ordercard/ordercard.component';
 import { USE_EMULATOR as FIRESTORE_EMULATOR } from '@angular/fire/firestore';
 import { AddSocialAccountComponent } from './popovers/add-social-account/add-social-account.component';
 import { CustomErrorHandlerService } from './services/logger.service';
+import { ShopComponent } from './customerPanel/shop/shop.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -218,7 +219,8 @@ import { CustomErrorHandlerService } from './services/logger.service';
     CustomproductComponent,
     ShowOrderInfoComponent,
     OrdercardComponent,
-    AddSocialAccountComponent
+    AddSocialAccountComponent,
+    ShopComponent,
   ],
   entryComponents: [],
   imports: [
@@ -251,6 +253,7 @@ import { CustomErrorHandlerService } from './services/logger.service';
     //   provide: FIRESTORE_EMULATOR,
     //   useValue: environment.production ? undefined : ['localhost', 8080],
     // },
+
     {provide: ErrorHandler, useClass: CustomErrorHandlerService},
     {
       provide: 'externalUrlRedirectResolver',

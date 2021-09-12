@@ -19,6 +19,7 @@ export interface User {
     emailVerified: boolean;
     isAdmin:boolean;
     data:[];
+    phoneNumber:string;
     firstLogin:string,
     access:access,
     isReferrer:boolean,

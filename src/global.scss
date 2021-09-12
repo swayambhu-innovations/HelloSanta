@@ -99,8 +99,12 @@ input:focus{
     border: 2px solid var(--ion-color-primary);
 }
 app-header{
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+    position:absolute;
     position: sticky;
-    position:-webkit-sticky;
     top:0px;
     z-index: 999;
 }
