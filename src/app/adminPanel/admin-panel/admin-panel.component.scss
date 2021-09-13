@@ -40,6 +40,9 @@ ion-toolbar {
   color: #6c59f5;
   text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.253);
 }
+ion-split-pane[contentId="main-content"]{
+  margin-top:50px;
+}
 ion-menu {
   width: 250px;
   border-right: 5px solid #9c8fff;
