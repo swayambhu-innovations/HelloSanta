@@ -1,6 +1,7 @@
 <div class="uk-panel">
     <div class="inner-box4" align="center">
-        <h1 class="title">Have General Doubts ? Find Your Answers Here</h1>
+        <h1 class="title" *ngIf="screenwidth>600">Have General Doubts ? Find Your Answers Here</h1>
+        <h1 class="title" *ngIf="screenwidth<600">FAQ's</h1>
         <hr class="line">
         <ul uk-accordion>
           <li>

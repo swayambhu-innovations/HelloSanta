@@ -213,7 +213,7 @@ ion-icon[name="close"]{
     color: var(--ion-color-primary);
   }
   .headerMobile{
-    height:80px;
+    height:65px;
     display:flex;
     background-color: #9668FF;
     justify-content: space-around;
@@ -226,8 +226,9 @@ ion-icon[name="close"]{
   }
   .headerMobile .img{
     color:white;
-    width:200px;
-    height:50px;
+    width:210px;
+    margin-top: 12px;
+    height:60px;
   }
   .uk-offcanvas-bar > ul > li{
     width:200px;
