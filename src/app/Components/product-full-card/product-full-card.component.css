@@ -111,15 +111,9 @@
 
     margin: 0 0 0 5px;
     padding: 3px 4px;
-    font-size: 0.5rem;
+    font-size: 1.25rem;
     border-radius: 5px;
-    border: 2px solid #9081FF;
+    border: none;
   }
-  .order-add-to-cart1 {
-    margin: 0 0 0 0;
-    border-radius: 5px;
-    padding: 5px 3px;
-    font-size: 0.6rem;
-    border: 2px solid #FFAC03;
-  }
+
   }

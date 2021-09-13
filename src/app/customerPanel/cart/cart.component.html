@@ -12,8 +12,8 @@
     </section>
   </main>
 </div>
-<app-iontab  *ngIf="screenwidth<600"></app-iontab>
   <app-footer></app-footer>
+  <app-iontab  *ngIf="screenwidth<600"></app-iontab>
 </ion-content>
 <div id="overlay" *ngIf="dataProvider.showOverlay">
   <ion-spinner name="crescent" color="tertiary"></ion-spinner>
