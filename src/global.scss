@@ -98,6 +98,29 @@ input:focus{
     width:90vw;
     border: 2px solid var(--ion-color-primary);
 }
+monthview > div > ion-slides {
+    box-shadow: 5px 10px 20px rgba(218, 161, 255, 0.5);
+}
+ion-list[class*="event-detail-container"]{
+    border: none !important;
+}
+td[class*="monthview-current"]{
+    background-color: #cac3ff !important;
+    border:2px dashed #9e91ff !important;
+    color:white;
+}
+td [class*="text-muted"]{
+    background-color: var(--ion-color-primary);
+}
+td[class*='monthview-primary-with-event']{
+    background-color: var(--ion-color-primary-tint) !important;
+}
+
+td[class*='monthview-selected']{
+    background-color: var(--ion-color-primary) !important;
+}
+
+
 @media screen and (max-width: 500px){
     .addProductModal .modal-wrapper{
         --width:100vw;
