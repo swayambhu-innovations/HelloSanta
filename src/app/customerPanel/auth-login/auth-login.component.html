@@ -1,57 +1,93 @@
 <ion-content [ngStyle]="{'filter': (dataProvider.showOverlay) ? 'blur(10px)' : 'blur(0px)' }">
   <div class="home">
-  <img src="../../assets/login-03.jpg" class="bg">
-  <div class="login-root ">
+    <img src="../../assets/login-03.jpg" class="bg">
+    <div class="login-root ">
       <div class="box-root flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
         <div class="formbg-outer uk-position-center-right">
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
               <a href="http://hellosanta.in/" rel="dofollow"><img src="assets/logo.png"></a>
               <span class="padding-bottom--15">Log-in to your account</span>
-              <form>
-                <div class="padding-bottom--24">
-                  <label for="email">Email</label>
-                  <input class="input" type="email" name="email" required #email>
-                </div>
-                <div class="padding-bottom--24">
-                  <div class="grid--50-50">
-                    <label for="password">Password</label>
-                    <div class="reset-pass">
-                      <a href="#">Forgot your password?</a>
+              <ion-slides mode="md" pager="false" [options]="slideOpts" scrollbar="false" #slides>
+                <ion-slide >
+                  <form [formGroup]="stepOne" (ngSubmit)="onSubmit()" action="">
+                    <input class="input" type="text" name="email" autocomplete="email"
+                      placeholder="Email Or Phone Number" inputmode="text" required #email formControlName="email">
+                    <div id="recaptcha-container"></div>
+                    <br>
+                    <button [disabled]="!stepOne.valid" [ngClass]="!stepOne.valid ? 'disabled' : ''"
+                      class="button" type="submit">Continue</button>
+                  </form>
+                </ion-slide>
+                <ion-slide>
+                  <form [formGroup]="stepTwo" (ngSubmit)="submitStepTwo()">
+                    <div *ngIf="!emailType">
+                      <ion-title>OTP Sent to your number {{this.email.value}}</ion-title>
+                      <br>
+                      <div *ngIf="windowRef.confirmationResult">
+                        <hr>
+                        <ion-item class="input" lines="none">
+                          <ion-label for="code" position="floating">Enter your Verification Code Here</ion-label><br>
+                          <input type="text" name="code" formControlName="otp" placeholder="6 Digit OTP">
+                        </ion-item>
+                        <br>
+                        <ion-progress-bar color="primary" [value]="resendProgress" *ngIf="timeleft>0">
+                        </ion-progress-bar>
+                        <br *ngIf="timeleft>0">
+                        <ion-label *ngIf="timeleft>0" style="font-size:15px;">Wait <strong>{{timeleft}}</strong> seconds
+                          to resend OTP</ion-label>
+                        <br *ngIf="timeleft>0">
+                        <ion-button class="resendButton" (click)="sendLoginCode()" *ngIf="timeleft<=0"
+                          [disabled]="timeleft>0">
+                          <ion-icon name="timer"></ion-icon>Resend OTP
+                        </ion-button>
+                        <br *ngIf="timeleft<=0">
+                      </div>
+                      <ion-item *ngIf="windowRef.confirmationResult==undefined || windowRef.confirmationResult==false">
+                        <ion-label>Sending OTP</ion-label>
+                        <ion-spinner name="crescent"></ion-spinner>
+                      </ion-item>
+                      <br>
                     </div>
-                  </div>
-                  <ion-item class="input" lines="none">
-                    <input [type]="passwordType ? 'password' : 'text'" autocomplete="password" placeholder="Password" inputmode="text" required #password>
-                    <button (click)="passwordType=!passwordType"><ion-icon slot="end" [name]="passwordType ? 'eye-off' : 'eye'"></ion-icon></button>
-                  </ion-item>
-                </div>
-                <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
-                  <label for="checkbox">
-                    <input type="checkbox" name="checkbox"> Stay signed in for a week
-                  </label>
-                </div>
-                <button class="button" (click)="authService.SignIn(email.value.toString(),password.value.toString())">Login</button>
-              </form>
+                    <ion-item class="input" lines="none" *ngIf="emailType">
+                      <input [type]="passwordType ? 'password' : 'text'" autocomplete="password" placeholder="Password"
+                        inputmode="text" required #password formControlName="password">
+                      <button (click)="passwordType=!passwordType" type="button">
+                        <ion-icon slot="end" [name]="passwordType ? 'eye-off' : 'eye'"></ion-icon>
+                      </button>
+                    </ion-item>
+                    <button [disabled]="!stepTwo.valid" [ngClass]="!stepTwo.valid ? 'disabled' : ''"
+                    class="button" type="submit">Continue</button>
+                  </form>
+                </ion-slide>
+              </ion-slides>
               <div class="field">
                 <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
-                  <button class="ssolink" (click)="authService.GoogleAuth()"><ion-icon name="logo-google" ></ion-icon></button>
-                  <button class="ssolink" ><ion-icon name="logo-facebook" ></ion-icon></button>
-                  <button class="ssolink" ><ion-icon name="logo-apple" ></ion-icon></button>
+                  <button class="ssolink" (click)="authService.GoogleAuth()">
+                    <ion-icon name="logo-google"></ion-icon>
+                  </button>
+                  <button class="ssolink">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                  </button>
+                  <button class="ssolink">
+                    <ion-icon name="logo-apple"></ion-icon>
+                  </button>
                 </div>
               </div>
-                <span class="signup">Don't have an account? <a href="/signup">Sign-Up</a></span>
+              <span class="signup">Don't have an account? <a href="/signup">Sign-Up</a></span>
+
             </div>
-          </div>
-          <div class="footer-link padding-top--24">
-            <div class="listing  flex-flex center-center">
-              <span><a href="#">Hello Santa</a></span>
-              <span><a href="#">Contact</a></span>
-              <span><a href="#">Privacy & terms</a></span>
+            <div class="footer-link padding-top--24">
+              <div class="listing  flex-flex center-center">
+                <span><a href="#">Hello Santa</a></span>
+                <span><a href="#">Contact</a></span>
+                <span><a href="#">Privacy & terms</a></span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-  </div>
+    </div>
   </div>
 </ion-content>
 <div id="overlay" *ngIf="dataProvider.showOverlay">

@@ -38,7 +38,16 @@ ion-content > div {
   --highlight-color-valid: transparent;
   --highlight-color-invalid: transparent;
 }
-
+ion-list > ion-card{
+  padding:10px;
+}
+ion-input{
+  margin:5px;
+}
+calendar{
+  display: block;
+  margin-top:20px;
+}
 @media only screen and (max-width: 1024px) {
   .home{
     margin: 0 auto;

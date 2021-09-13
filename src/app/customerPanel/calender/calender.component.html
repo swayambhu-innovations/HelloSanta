@@ -74,28 +74,29 @@
           <ion-icon name="add"></ion-icon>
         </ion-button>
       </form>
+      <hr class="uk-divider-icon">
       <ion-list>
-        <ion-item *ngFor="let event of events">
-          <div class="uk-width-1-1">
-            <ion-label>{{event.title}}</ion-label><br>
-              <ion-badge color="primary" mode="ios" *ngIf="event.allDay">All Day</ion-badge>
-              <ion-badge color="primary" mode="ios" *ngIf="!event.allDay">Specific</ion-badge>
+        <ion-card *ngFor="let event of events">
+          <ion-card-header>
+            <ion-title>{{event.title}}</ion-title><br>
+          </ion-card-header>
+          <ion-chip color="primary" mode="ios" *ngIf="event.allDay">All Day</ion-chip>
+              <ion-chip color="primary" mode="ios" *ngIf="!event.allDay">Specific</ion-chip>
               <ion-chip color="secondary" mode="md" outline="false">
                 <ion-label>{{event.type}}</ion-label>
               </ion-chip><br>
             <div>
               <ion-chip color="primary" mode="md" outline="true">
-                <ion-label>{{event.startDate}}</ion-label>
+                {{event.startDate}}
               </ion-chip><br>
               <ion-chip color="primary" mode="md" outline="true">
-                <ion-label>{{event.endDate}}</ion-label>
+                {{event.endDate}}
               </ion-chip><br>
             </div>
-            <ion-button (click)="removeEvent(event)" color="danger" expand="full">
+            <ion-button (click)="removeEvent(event)" shape="round" color="danger" expand="full">
               <ion-icon name="trash-bin"></ion-icon>
             </ion-button>
-          </div>
-        </ion-item>
+        </ion-card>
       </ion-list>
     </ion-card>
     <div *ngIf="events.length>0">

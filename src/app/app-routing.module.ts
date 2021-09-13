@@ -51,7 +51,7 @@ import { UserReferralComponent } from './customerPanel/user-referral/user-referr
 import { CalenderComponent } from './customerPanel/calender/calender.component';
 import { CategoryProductsComponent } from './customerPanel/category-products/category-products.component';
 import { ShopComponent } from './customerPanel/shop/shop.component';
-import { IontabComponent } from './Components/iontab/iontab.component';
+import { NotFound404Component } from './customerPanel/not-found404/not-found404.component';
 const routes: Routes = [
   {path:'', component:HomeComponent},
   {path:'login', component:AuthLoginComponent},
@@ -142,7 +142,7 @@ const routes: Routes = [
       {path:'Profile',component:VPProfileComponent},
     ]
   },
- 
+  {path:'**', component:NotFound404Component}
 ];
 
 @NgModule({
