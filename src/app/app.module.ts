@@ -124,6 +124,7 @@ import { AddSocialAccountComponent } from './popovers/add-social-account/add-soc
 import { CustomErrorHandlerService } from './services/logger.service';
 import { ShopComponent } from './customerPanel/shop/shop.component';
 import { IontabComponent } from './Components/iontab/iontab.component';
+import { NotFound404Component } from './customerPanel/not-found404/not-found404.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -223,6 +224,7 @@ import { IontabComponent } from './Components/iontab/iontab.component';
     AddSocialAccountComponent,
     ShopComponent,
     IontabComponent,
+    NotFound404Component,
   ],
   entryComponents: [],
   imports: [
