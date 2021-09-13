@@ -54,6 +54,7 @@ button {
 .handmade {
   font-family: Poppins;
   text-align: center;
+  margin-top: 10px;
   padding: 80px;
   font-weight: bold;
   font-size: 50px;
@@ -158,6 +159,7 @@ button {
 .digital {
   font-family: Poppins;
   text-align: center;
+  margin-top: 60px;
   padding: 80px;
   font-weight: bold;
   font-size: 3rem;
@@ -217,8 +219,9 @@ button {
   align-items: flex-start;
 }
 a {
-  color: white;
-  outline: none;
+  text-decoration: none;
+  color: #fff;
+
 }
 
 .headingtitle {
