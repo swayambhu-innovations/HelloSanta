@@ -11,7 +11,7 @@ import { InventoryService } from 'src/app/services/inventory.service';
   styleUrls: ['./feedback.component.scss'],
 })
 export class FeedbackComponent implements OnInit {
-  starsize: string = '20px';
+  starsize: string = '30px';
   screenwidth = window.innerWidth;
   rating: any;
   optionsTitle: string = '';

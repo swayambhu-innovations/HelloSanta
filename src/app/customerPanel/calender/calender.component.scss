@@ -1,7 +1,8 @@
-.home {
+.home{
   margin: 0 auto;
   min-width: 978px;
   max-width: 1920px;
+  zoom: 80%;
 }
 .title {
   font-size: 3em;
@@ -39,10 +40,11 @@ ion-content > div {
 }
 
 @media only screen and (max-width: 1024px) {
-  .home {
+  .home{
     margin: 0 auto;
-    min-width: 300px;
+    min-width:300px;
     max-width: 800px;
+    zoom: 100%;
   }
   .title {
     font-size: 1.5em;

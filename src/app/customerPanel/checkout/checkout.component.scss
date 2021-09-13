@@ -2,6 +2,7 @@
   margin: 0 auto;
   min-width: 978px;
   max-width: 1920px;
+  zoom: 80%;
 }
 * {
     margin: 0;
@@ -76,7 +77,7 @@ ion-card{
   width: 80%;
   font-family: Poppins;
   text-align: left;
-  font-size: 20px;
+  font-size: 50px;
   padding: 50px;
   margin: 5% 10%;
   background: rgba(255, 255, 255, .7);
@@ -84,9 +85,7 @@ ion-card{
   border-radius: 10px;
   border: 5px solid #9081FF;
 }
-ion-item{
-  font-size: 10px;
-}
+
 .product-row{
   display: flex;
   flex-wrap: wrap;
@@ -100,6 +99,7 @@ ion-item{
     font-size: 1.25rem;
     border-radius: 20px;
     font-family: 'Poppins';
+    margin: 50px 0px;
 }
 
 #orders-table-head {
@@ -117,6 +117,7 @@ ion-item{
     margin: 0 auto;
     min-width:300px;
     max-width: 800px;
+    zoom: 100%;
   }
   #orders-table-container{
     overflow: scroll;
@@ -124,7 +125,7 @@ ion-item{
 
 #orders-table {
   margin: 20px 0px;
-  font-size: 0.5rem;
+  font-size: 0.6rem;
 
 }
 ion-card{

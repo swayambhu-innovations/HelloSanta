@@ -9,6 +9,7 @@
     margin: 0 auto;
     min-width: 978px;
     max-width: 1920px;
+    zoom: 80%;
   }
 
 #container {
@@ -49,8 +50,9 @@ app-sidenav {
 @media only screen and (max-width: 1024px){
     .home{
         margin: 0 auto;
-        min-width: 300px;
+        min-width:300px;
         max-width: 800px;
+        zoom: 100%;
       }
     #orders-container {
         width: 98%;

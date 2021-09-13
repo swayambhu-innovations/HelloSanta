@@ -19,7 +19,7 @@
         </star-rating>
       </div>
       <div *ngIf="rating != undefined">
-        <h1>{{optionsTitle}}</h1>
+        <h1 class="title">{{optionsTitle}}</h1>
         <div *ngIf="rating == 1">
           <ion-chip color="primary" outline="true" *ngFor="let tag of options">
             <ion-checkbox (ionChange)="values[optionsTitle][tag]=checker.checked" #checker></ion-checkbox>
@@ -51,7 +51,7 @@
           </ion-chip>
         </div>
       </div>
-    <ion-textarea formControlName="moreInfo" color="primary" outline="true" style="border: 3px solid black;"></ion-textarea>
+    <ion-textarea formControlName="moreInfo" color="primary" outline="true" style="border: 3px solid rgb(98, 84, 226);"></ion-textarea>
     <ion-button type="submit" shape="round">
       Submit
     </ion-button>
