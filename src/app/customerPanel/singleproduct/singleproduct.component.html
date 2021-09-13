@@ -135,8 +135,8 @@
                 </div>
             </section>
             <section id="product-description">
-                <ion-item *ngIf="authService.isJustLoggedIn">
-                    <ion-title style="font-size: 20px;">Ratings</ion-title>
+                <ion-item *ngIf="authService.isJustLoggedIn"class="title">
+                    <ion-title class="title1">Ratings</ion-title>
                     <ion-button *ngIf="purchasedProduct" (click)="addComment($event)" size="medium" fill="outline">
                         Add Review
                     </ion-button>
@@ -145,7 +145,7 @@
                     <app-comment-card [image]="comment.userImage" [stars]="comment.stars" [body]="comment.commentBody"
                         [title]="comment.commentTitle" [commentDate]="comment.commentDate" [username]="comment.userName"
                         *ngFor="let comment of comments"></app-comment-card>
-                    <img src="./assets/NotFound.gif" alt="Nothing TO Show" *ngIf="comments.length<=0">
+                    <img src="./assets/no-review-01.jpg" class="review-image" alt="Nothing TO Show" *ngIf="comments.length<=0">
                 </div>
             </section>
             <div id="container2">

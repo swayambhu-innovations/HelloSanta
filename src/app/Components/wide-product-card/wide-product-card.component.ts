@@ -16,6 +16,7 @@ export class WideProductCardComponent implements OnInit,OnChanges  {
     "                  commodo. Nunc justo nisi, vestibulum."
   @Input() orderprice:number = 2300;
   @Input() category:string;
+  screenwidth = window.innerWidth;
   @Input() subcategory:string;
   @Input() productId:string
   @Input() extras:any;

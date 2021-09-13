@@ -232,7 +232,7 @@ button[disabled]{
   padding: 50px;
   background: rgba(255, 255, 255, .7);
   box-shadow: #9081ff3b 10px 20px 30px 0px;
-  border-radius: 50px;
+  border-radius: 20px;
   border: 3px solid #9081FF;
 }
 #product-description > ion-card {
@@ -248,6 +248,19 @@ button[disabled]{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+.review-image{
+    width: 800px;
+    height: auto;
+    margin: auto;
+font-size: 15px; 
+text-align: center;
+}
+.title{
+    font-size: 50px; text-align: center; margin: auto;
+}
+.title1{
+    font-size: 25px; text-align: center; margin: auto;
 }
 #product-description > img{
     width:500px;
@@ -371,6 +384,19 @@ ion-radio-group{
         width:80vw;
         margin:auto 0;
     }
+    .review-image{
+        width: 100px;
+        height: auto;
+        margin: auto;
+    font-size: 20px; 
+    text-align: center;
+    }
+    .title{
+        font-size: 20px; text-align: center; margin-left: 40px;
+    }
+    .title1{
+        font-size: 15px; text-align: center; margin: auto;
+    }
     #container2 {
       margin-top: 50px;
       width: 99%;
@@ -382,7 +408,6 @@ ion-radio-group{
         align-items: flex-start;
         flex-direction: column;
     }
-    
     #product-images {
         width: 100vw;
         display: flex;

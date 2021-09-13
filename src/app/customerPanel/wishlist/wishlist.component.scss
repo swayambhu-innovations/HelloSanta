@@ -27,7 +27,6 @@ app-sidenav {
     text-align: center;
     font-family: 'Poppins';
     margin-top: 1em;
-    text-decoration: underline;
     margin-bottom: 1em;
     color: #6D5DE3;
     font-weight: 700;
@@ -56,11 +55,22 @@ app-sidenav {
       }
     #orders-container {
         width: 98%;
-        padding: 1em;
+        padding: 0.5em;
         margin: 20px 0px;
     }
+    
+#your-cart-title {
+    font-size: 2rem;
+    text-align: center;
+    font-family: 'Poppins';
+    margin-top: 1em;
+    margin-bottom: 1em;
+    color: #6D5DE3;
+    font-weight: 700;
+}
+
     #container {
-        width: 90%;
+        width: 95%;
         margin: 3em auto;
         display: block;
         justify-content: space-between;

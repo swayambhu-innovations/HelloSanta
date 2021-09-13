@@ -4,54 +4,25 @@
     <div class="uk-cover-container uk-height-large">
       <img src="assets/Promo.png" alt="" uk-cover />
     </div>
-    <h1
-      style="
-        font-family: Poppins;
-        text-align: center;
-        font-weight: bolder;
-        font-size: 35px;
-        color: #6d5de3;
-        padding-top: 5%;
-      "
-    >
+    <h1 class="text1">
       We are all open to resolve your issues or clear your doubts
     </h1>
-    <hr
-      style="background-color: #6d5de3; width: 90%; height: 5px; margin: auto"
-    />
-    <h1
-      style="
-        font-family: Poppins;
-        text-align: center;
-        font-weight: bolder;
-        font-size: 35px;
-        color: #6d5de3;
-        padding-top: 10%;
-      "
-    >
-      Wanna Reach us?, find us on the map..
-    </h1>
-    <h1
-      style="
-        font-family: Poppins;
-        text-align: center;
-        font-weight: bold;
-        font-size: 20px;
-        color: #ada2ff;
-      "
-    >
+    <hr class="line7" />
+    <h1 class="text2">Wanna Reach us?, find us on the map..</h1>
+    <h1 class="text3">
       If you need any physical assistance, office address is mentioned below:
     </h1>
 
     <div class="uk-panel">
       <div class="inner-box2" align="center">
         <span>
-          Address: 2nd Flr, Sarvottam Complex M. R. Road, Khalpara, Siliguri
-          Darjeeling - 734005, West Bengal
+          <b>Address:</b> 2nd Flr, Sarvottam Complex M. R. Road, Khalpara,
+          <br>
+          Siliguri Darjeeling - 734005, West Bengal
           <br />
-          contact number : +91-8840896079
+          <b>contact number :</b> +91-8840896079
           <br />
-          email id : connect@hellosanta.in
+          <b>email id :</b> connect@hellosanta.in
           <br />
         </span>
       </div>
@@ -59,35 +30,15 @@
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d57026.71374978921!2d88.42389600000001!3d26.707028!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDQyJzI1LjMiTiA4OMKwMjUnMjYuMCJF!5e0!3m2!1sen!2sus!4v1627203635781!5m2!1sen!2sus"
           class="map"
-          style="border: 0; border-radius: 25px; height: 100%; width: 100%;"
+          style="border: 0; border-radius: 20px; height: 100%; width: 100%"
           allowfullscreen=""
           loading="lazy"
         ></iframe>
       </div>
     </div>
-    <h1
-      style="
-        font-family: Poppins;
-        text-align: center;
-        font-weight: bolder;
-        font-size: 35px;
-        color: #6d5de3;
-        padding-top: 10%;
-      "
-    >
-      Need Help?, just fill the Form
-    </h1>
-    <h1
-      style="
-        font-family: Poppins;
-        text-align: center;
-        font-weight: bold;
-        font-size: 20px;
-        color: #ada2ff;
-      "
-    >
-      just mention your concern ,fill the form and we will get right back to
-      you..
+    <h1 class="text4">Need Help?, just fill the Form</h1>
+    <h1 class="text5">
+      just mention your concern <br />& we'll get right back to you..
     </h1>
     <ion-card>
       <form [formGroup]="helpForm" (ngSubmit)="addHelpData()" method="POST">
@@ -120,22 +71,14 @@
           </ion-col>
           <ion-col>
             <div class="uk-card-media-top">
-              <img
-                src="assets/Group22.png"
-                alt=""
-                style="
-                  float: right;
-                  width: 300px;
-                  height: auto;
-                  padding-right: 30px;
-                "
-              />
+              <img class="image-support" src="assets/Group22.png" alt="" />
             </div>
           </ion-col>
         </ion-row>
         <ion-textarea
           formControlName="description"
           placeholder="description"
+          rows="5"
         ></ion-textarea>
         <ion-button type="submit" [disabled]="!helpForm.valid"
           >Submit</ion-button
@@ -145,7 +88,7 @@
     <div class="uk-panel union" *ngIf="screenwidth > 600">
       <img src="assets/Union1.png" alt="" />
       <div class="uk-position-center-left uk-panel" style="padding-left: 50px">
-        <div style="text-align: left; float: right ;line-height: 1;">
+        <div style="text-align: left; float: right; line-height: 1">
           Wanna socialize or<br />
           connect?,we are<br />
           everywhere attempting to<br />
@@ -179,5 +122,5 @@
     <app-accordion></app-accordion>
   </div>
   <app-footer></app-footer>
-  <app-iontab  *ngIf="screenwidth<600"></app-iontab>
+  <app-iontab *ngIf="screenwidth < 600"></app-iontab>
 </ion-content>

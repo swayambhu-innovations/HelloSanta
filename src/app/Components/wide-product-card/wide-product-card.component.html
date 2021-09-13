@@ -3,7 +3,7 @@
   <div class="order">
     <div class="order-details">
       <h4 class="order-title">{{orderTitle}}</h4>
-      <p class="order-description">{{orderDescription}}</p>
+      <p class="order-description" *ngIf="screenwidth>600">{{orderDescription}}</p>
     </div>
     <div class="order-price-and-btns">
       <p class="order-price">Price: ₹{{orderprice * quantity}}</p>
@@ -11,7 +11,7 @@
       <ion-button *ngIf="showActions" class="order-view"
         href="./product?productId={{this.productId}}">View
         Product</ion-button>
-        <ion-item button lines="none" *ngIf="showImageInput">
+        <ion-item style="margin: 2% 0%;" button lines="none" *ngIf="showImageInput">
           <input type="file" name="file" max="1" (change)="changeImage($event)" id="file" class="inputfile" />
           <label for="file">Choose a file</label>
         </ion-item>
@@ -22,7 +22,7 @@
     <ion-list class="config">
       <ion-item class="config" *ngFor="let configitem of configData">
         <ion-label>{{configitem.title}}</ion-label>
-        <ion-icon name="arrow-forward"></ion-icon>
+        <ion-icon style="color: rgb(66, 66, 66);" name="caret-forward"></ion-icon>
         <ion-label>{{configitem.value}}</ion-label>
       </ion-item>
     </ion-list>

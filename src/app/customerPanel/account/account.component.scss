@@ -139,6 +139,7 @@ ion-icon[name="trash"]{
     }
 }
 @media only screen and (max-width: 1024px) {
+    
     .home{
         margin: 0 auto;
         min-width: 300px;
@@ -150,11 +151,26 @@ ion-icon[name="trash"]{
         padding: 1em;
         margin: 20px 0px;
     }
+    
+#statistic-cards {
+    display: flex;
+    justify-content: space-between;
+    margin: 2em ;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 
     .statistic-card {
-        padding: 1em 0.2em;
+        padding: 0.5em 0.2em;
         font-size: 1.25rem;
-        width: 23%;
+        height: 2em;
+        width: 45%;
+        margin: 2%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
         box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     }
     

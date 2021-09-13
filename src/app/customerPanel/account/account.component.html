@@ -9,7 +9,7 @@
           <div id="name-and-email">
             <h2 id="name">{{userName}}</h2>
             <p id="email">{{userEmail}}</p>
-            <a href="profilepage">Edit Profile</a>
+            <a href="/profile">Edit Profile</a>
           </div>
           <button (click)="presentPopover($event)">
             <ion-icon name="person-add" color="primary" size="large"></ion-icon>
@@ -17,20 +17,18 @@
         </div>
         <div>
           <p><strong>Country: </strong>{{country}}</p>
-          <p><strong>Type: </strong>{{type}}</p>
           <p><strong>DOB: </strong>{{dob}}</p>
           <p><strong>Email Verified: </strong>{{emailVerified}}</p>
           <p><strong>Gender: </strong>{{gender}}</p>
           <p *ngIf="isReferrer"><strong>Referral: </strong>{{isReferrer}}</p>
           <p><strong>Mobile Number: </strong>{{mobileNumber}}</p>
-          <p><strong>User Id: </strong>{{uid}}</p>
         </div>
         <ion-list>
           <ion-item *ngFor="let item of socialAccounts" [href]="item.url" target="_blank">
-            <ion-icon slot="start" [name]="item.type"></ion-icon>
+            <ion-icon style="color: rgb(85, 85, 85);"slot="start" [name]="item.type"></ion-icon>
             <ion-label color="primary">&nbsp;&nbsp;{{item.url}}</ion-label>
             <button (click)="inventoryService.removeSocialMediaLink(item)">
-              <ion-icon name="trash"></ion-icon>
+              <ion-icon style="font-size: medium;" name="trash"></ion-icon>
             </button>
           </ion-item>
         </ion-list>
@@ -44,12 +42,12 @@
             <p class="card-number">{{totalRefers}}</p>
           </div>
           <div class="statistic-card" id="total-cashback-card">
-            <p class="card-title">Total Cashback</p>
+            <p class="card-title">Cashback</p>
             <p class="card-number">{{totalCashback}}</p>
           </div>
           <div class="statistic-card" id="total-orders-2-card">
-            <p class="card-title">Total Sales</p>
-            <p class="card-number">{{totalSales}}</p>
+            <p class="card-title">Total Coins</p>
+            <p class="card-number">{{totalCoins}}</p>
           </div>
         </div>
         <div id="latest-orders" *ngIf="liveOrders.length>0">

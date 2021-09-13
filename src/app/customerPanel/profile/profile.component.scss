@@ -32,7 +32,7 @@ img:hover{
 	opacity: 0;
 	overflow: hidden;
 	position: absolute;
-	z-index: -1;
+	z-index: 0;
 }
 .inputfile + label {
     font-size: 17px;
@@ -55,7 +55,7 @@ img:hover{
 
 #profile-container {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    border-radius: 50px;
+    border-radius: 20px;
     width: 78%;
     padding: 4em;
 }
@@ -127,13 +127,14 @@ img:hover{
 }
 
 .form-input {
-    border: 1px solid #ADA2FF;
+    border-bottom: 1px solid #ADA2FF;
     font-size: 1rem;
     padding: .25em .5em;
     font-family: 'Poppins';
-    background-color: #f2f1ff;
+    background-color: none;
     color: #6D5CE5;
 }
+select {outline: none; }
 #overlay{
     // display: none;
     position: absolute;
@@ -182,12 +183,14 @@ a{
     }
     
     .form-input {
-        border: 1px solid #ADA2FF;
+        border-bottom: 1px solid #ADA2FF;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 10px 0px;
         font-size: 1rem;
         padding: .25em .5em;
         font-family: 'Poppins';
-        background-color: #f2f1ff;
+        background-color: #fff;
         color: #6D5CE5;
+        outline: none;
     }
     .button1{
         padding: 5px 20px;

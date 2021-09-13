@@ -3,6 +3,7 @@
   min-width: 978px;
   max-width: 1920px;
   zoom: 80%;
+  z-index: 1;
 }
 .title {
   font-size: 3em;
@@ -45,7 +46,6 @@ ion-input{
   margin:5px;
 }
 calendar{
-  display: block;
   margin-top:20px;
 }
 @media only screen and (max-width: 1024px) {
