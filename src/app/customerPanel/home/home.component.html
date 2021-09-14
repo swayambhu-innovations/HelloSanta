@@ -59,7 +59,7 @@
         <h1 class="handmade"><a href="/shop">Our <span style="color: #F3F692">Beloved</span> Range of <span
               style="color: #F3F692">Handmade</span> Products</a></h1>
         <div class="product-row" >
-          <app-category-card *ngFor="let othercategory of allHandmadeProds" [img]="othercategory.productImages[0].image"
+          <app-category-card *ngFor="let othercategory of allHandmadeProds" [img]="othercategory.productImages"
             [categoryTitle]="othercategory.productName" [price]="othercategory.productPrice" [category]="othercategory.productCategory" [subcategory]="othercategory.productSubcategory" [productId]="othercategory.productId"></app-category-card>
         </div>
       </section>
@@ -70,18 +70,16 @@
       <section id="orders-container1">
         <h1 class="handmade2">Gifts that Everyone Likes</h1>
         <div class="product-row" >
-          <app-category-card *ngFor="let othercategory of allHandmadeProds" [img]="othercategory.productImages[0].image"
-            [categoryTitle]="othercategory.productName" [category]="othercategory.productCategory" [subcategory]="othercategory.productSubcategory" [productId]="othercategory.productId"></app-category-card>
+          <app-category-card *ngFor="let othercategory of allHandmadeProds" [img]="othercategory.productImages"
+            [categoryTitle]="othercategory.productName" [price]="othercategory.productPrice" [category]="othercategory.productCategory" [subcategory]="othercategory.productSubcategory" [productId]="othercategory.productId"></app-category-card>
         </div>
       </section>
     </div>
   </div>
   <div class="uk-animation-toggle" tabindex="0">
-  <div class="uk-panel uk-align-center uk-animation-fast uk-animation-fade" style="padding-top: 50px">
-
+  <div class="uk-panel uk-align-center" style="padding-top: 50px">
       <img style="width: 90%;height: auto;margin: 0% 5%" src="assets/Component.png" alt="">
   </div>
-    
   </div>
   <div class="uk-panel" style="padding-top: 50px" *ngIf="screenwidth>1020">
     <img style="width: 100%" src="assets/Union1.png" alt="">
@@ -89,9 +87,9 @@
       <section id="orders-container2">
         <h1 class="digital"><a href="/shop">Our <span style="color: #FF6584">Beloved</span> Range of <span
               style="color: #FF6584">Digital</span> Products</a></h1>
-        <div class="product-row1" *ngIf="screenwidth>1020">
-          <app-category-card *ngFor="let category of allDigitalProds" [img]="category.productImages[0].image"
-            [categoryTitle]="category.productName" [productId]="category.productId">
+        <div class="product-row1" *ngIf="screenwidth>1020" uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100">
+          <app-category-card *ngFor="let category of allDigitalProds" [img]="category.productImages"
+            [categoryTitle]="category.productName" [price]="category.productPrice" [productId]="category.productId">
           </app-category-card>
         </div>
       </section>
@@ -102,8 +100,8 @@
       <section id="orders-container2">
         <h1 class="handmade2">Gifts from Creative Box</h1>
         <div class="product-row1" >
-          <app-category-card *ngFor="let category of allDigitalProds" [img]="category.productImages[0].image"
-            [categoryTitle]="category.productName" [productId]="category.productId">
+          <app-category-card *ngFor="let category of allDigitalProds" [img]="category.productImages"
+            [categoryTitle]="category.productName" [price]="category.productPrice" [productId]="category.productId">
           </app-category-card>
         </div>
       </section>

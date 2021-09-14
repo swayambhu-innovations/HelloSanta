@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonRouterOutlet } from '@ionic/angular';
 import { DataProvider } from './providers/data.provider';
 import { AuthService } from './services/auth.service';
+import { RouterOutlet } from '@angular/router'
+import { fader } from './animations/routeAnimations';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
+  animations: [fader],
 })
 export class AppComponent {
   public appPages = [
@@ -19,7 +23,9 @@ export class AppComponent {
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor(public alertController: AlertController,private afs: AngularFirestore,public authService: AuthService,private dataProvider: DataProvider) {}
-
+  prepareRoute(outlet: IonRouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+  }
   async presentAlertPrompt() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',

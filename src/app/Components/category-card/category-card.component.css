@@ -55,6 +55,12 @@
   font-size: 2.5rem;
   cursor: pointer;
 }
+ion-card{
+  transition: all 0.5s ease-in-out;
+}
+ion-card:hover{
+  transform: scale(1.05);
+}
 
 @media only screen and (max-width: 1024px) {
   .category-card {

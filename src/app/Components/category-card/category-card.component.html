@@ -1,10 +1,15 @@
-<div class="uk-animation-toggle" tabindex="0">
-<ion-card class="category-card  uk-animation-scale-down " href="./product?productId={{this.productId}}">
-  <img [src]="img"
-       alt="{{categoryTitle}}" class="category-img">
+<ion-card class="category-card " uk-scrollspy-class="uk-animation-slide-top">
+  <a href="./product?productId={{this.productId}}" >
+    <!-- <img [src]="img[0].image" (mouseenter)="hover=true" (mouseleave)="hover=!hover" alt="{{categoryTitle}}" class="category-img" *ngIf="hover">
+    <img [src]="img[1].image" (mouseenter)="hover=true" (mouseleave)="hover=!hover" alt="{{categoryTitle}}" class="category-img" *ngIf="!hover"> -->
+    <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
+      <img [src]="img[0].image" alt="">
+      <img class="uk-transition-scale-up uk-position-cover" [src]="img[1].image" alt="">
+  </div>
   <div class="category-details">
     <h4 class="category-title">{{categoryTitle}}</h4>
   </div>
+  </a>
   <div class="order-price-and-add-to-cart">
     <p class="order-price">Starting at: <br><span>₹{{price}}</span></p>
     <div class="uk-animation-toggle" tabindex="0">
@@ -14,4 +19,3 @@
     </div>
   </div>
 </ion-card>
-</div>

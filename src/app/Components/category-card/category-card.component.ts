@@ -8,13 +8,14 @@ import { InventoryService } from 'src/app/services/inventory.service';
   styleUrls: ['./category-card.component.css']
 })
 export class CategoryCardComponent implements OnInit {
-  @Input() img:string =  "https://source.unsplash.com/650x940"
+  @Input() img:any =  [{image:"https://source.unsplash.com/650x940"},{image:"https://source.unsplash.com/650x940"}]
   @Input() categoryTitle:string = "ArtWork Product"
   @Input() category:string;
   @Input() subcategory:string;
   @Input() productId:string;
   @Input() price:string;
   wishlist:any=this.authService.getCurrentWishlist();
+  hover:boolean=false;
   constructor(public authService: AuthService,private inventoryService: InventoryService) { }
   has(){
     let found = false;

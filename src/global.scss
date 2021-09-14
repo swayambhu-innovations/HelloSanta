@@ -35,6 +35,11 @@ html, body {
     -webkit-tap-highlight-color: transparent;
     --ion-font-family: 'Poppins', sans-serif;
 }
+a{text-decoration: none;}
+a:hover{
+    text-decoration: none;
+    color: var(--ion-color-primary);
+}
 .star::before{
     content: url('/assets/star.svg') !important;
 }
