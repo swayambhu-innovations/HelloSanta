@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AlertController, IonRouterOutlet } from '@ionic/angular';
 import { DataProvider } from './providers/data.provider';
@@ -12,7 +12,7 @@ import { fader } from './animations/routeAnimations';
   styleUrls: ['app.component.scss'],
   animations: [fader],
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   public appPages = [
     { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
     { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
@@ -25,6 +25,8 @@ export class AppComponent {
   constructor(public alertController: AlertController,private afs: AngularFirestore,public authService: AuthService,private dataProvider: DataProvider) {}
   prepareRoute(outlet: IonRouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+  }
+  ngOnInit() {
   }
   async presentAlertPrompt() {
     const alert = await this.alertController.create({
