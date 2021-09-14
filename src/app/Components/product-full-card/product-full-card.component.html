@@ -1,7 +1,6 @@
 <ion-card class="order-card">
   <ion-card class="order-details" href="./product?productId={{this.productId}}">
-    <img [src]="img"
-       alt="{{productTitle}}" class="order-img">
+    <img [src]="img" alt="{{productTitle}}" class="order-img">
     <div class="details">
       <h4 class="order-title">{{productTitle}}</h4>
       <p class="order-description">{{productDescription}}</p>
@@ -10,7 +9,9 @@
   <div class="order-price-and-add-to-cart">
     <p class="order-price">Starting at: <br><span>₹{{price}}</span></p>
     <div class="uk-animation-toggle" tabindex="0">
-      <button *ngIf="authService.isJustLoggedIn" (click)="addToWishlist()" class="order-add-to-cart animation-scale-up"><ion-icon [name]="has() ? 'heart' : 'heart-outline'"></ion-icon></button>
-  </div>
+      <button *ngIf="authService.isJustLoggedIn" (click)="addToWishlist()" class="order-add-to-cart animation-scale-up">
+        <ion-icon [name]="has() ? 'heart' : 'heart-outline'"></ion-icon>
+      </button>
+    </div>
   </div>
 </ion-card>

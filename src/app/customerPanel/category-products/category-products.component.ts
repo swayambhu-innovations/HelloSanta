@@ -18,6 +18,7 @@ export class CategoryProductsComponent implements OnInit {
   modalFilterSelectedCategory: any;
   modalFilterSelectedSubcategory: any;
   modalFilterPrice:any;
+  window = window.innerWidth;
   constructor(
     public modalController: ModalController,
     private afs: AngularFirestore,

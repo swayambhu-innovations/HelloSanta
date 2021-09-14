@@ -22,6 +22,39 @@
   text-align: center;
   color: #7a7a7a;
 }
+.order-price-and-add-to-cart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Poppins';
+  font-size: 1.25rem;
+  padding-left:20px;
+  padding-right:20px;
+}
+
+.order-price {
+  font-family: 'Poppins';
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  margin-right: 0.2em;
+  color: #5AC179;
+
+}
+
+.order-price > span{
+  font-size: 1.5rem;
+}
+.order-add-to-cart {
+  background-color: white; /* Green */
+  border-radius: 10px;
+  color: var(--ion-color-primary);
+  margin-left:2px;
+  padding: 3px 10px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
 
 @media only screen and (max-width: 1024px) {
   .category-card {

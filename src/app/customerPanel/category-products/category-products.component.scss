@@ -157,6 +157,11 @@ ion-spinner {
   top: calc(250px - 70px);
   // transform:translateY(-250px)
 }
+.headerImage{
+  width: 100vw;
+  height:auto;
+  object-fit:fill;
+}
 @media only screen and (max-width: 1024px) {
   .home{
     margin: 0 auto;

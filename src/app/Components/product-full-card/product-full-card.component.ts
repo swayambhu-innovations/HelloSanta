@@ -21,11 +21,9 @@ export class ProductFullCardComponent implements OnInit {
   constructor(public inventoryService: InventoryService, public authService:AuthService) { }
   textlength=70;
   has(){
-    // console.log("wishlist",this.wishlist,this.productId);
     let found = false;
     this.wishlist.forEach((item)=>{
       if(item == this.productId){
-        // console.log("true wishlist")
         found = true;
       }
     })

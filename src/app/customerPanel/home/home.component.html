@@ -60,7 +60,7 @@
               style="color: #F3F692">Handmade</span> Products</a></h1>
         <div class="product-row" >
           <app-category-card *ngFor="let othercategory of allHandmadeProds" [img]="othercategory.productImages[0].image"
-            [categoryTitle]="othercategory.productName" [category]="othercategory.productCategory" [subcategory]="othercategory.productSubcategory" [productId]="othercategory.productId"></app-category-card>
+            [categoryTitle]="othercategory.productName" [price]="othercategory.productPrice" [category]="othercategory.productCategory" [subcategory]="othercategory.productSubcategory" [productId]="othercategory.productId"></app-category-card>
         </div>
       </section>
     </div>

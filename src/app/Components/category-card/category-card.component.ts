@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
   selector: 'app-category-card',
@@ -10,10 +12,34 @@ export class CategoryCardComponent implements OnInit {
   @Input() categoryTitle:string = "ArtWork Product"
   @Input() category:string;
   @Input() subcategory:string;
-  @Input() productId:string
-  constructor() { }
+  @Input() productId:string;
+  @Input() price:string;
+  wishlist:any=this.authService.getCurrentWishlist();
+  constructor(public authService: AuthService,private inventoryService: InventoryService) { }
+  has(){
+    let found = false;
+    this.wishlist.forEach((item)=>{
+      if(item == this.productId){
+        found = true;
+      }
+    })
+    return found;
+  }
+  addToWishlist(){
+    if (this.has()){
+      console.log("Already in wishlist removing it")
+      this.inventoryService.removeFromWishlist(this.productId);
+      this.wishlist.splice(this.wishlist.indexOf(this.productId),1);
+      this.authService.presentToast("Removed from wishlist");
+    } else {
+      console.log("Adding to wishlist")
+      this.inventoryService.addToWishlist(this.productId);
+      this.wishlist.push(this.productId);
+      this.authService.presentToast("Added to wishlist");
+    }
+  }
+  ngOnInit(){
 
-  ngOnInit(): void {
   }
 
 }
