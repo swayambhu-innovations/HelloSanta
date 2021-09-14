@@ -119,12 +119,13 @@ import { AlertsModalService } from './services/alerts-modal.service';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ShowOrderInfoComponent } from './modals/show-order-info/show-order-info.component';
 import { OrdercardComponent } from './Components/ordercard/ordercard.component';
-import { USE_EMULATOR as FIRESTORE_EMULATOR } from '@angular/fire/firestore';
 import { AddSocialAccountComponent } from './popovers/add-social-account/add-social-account.component';
 import { CustomErrorHandlerService } from './services/logger.service';
 import { ShopComponent } from './customerPanel/shop/shop.component';
 import { IontabComponent } from './Components/iontab/iontab.component';
 import { NotFound404Component } from './customerPanel/not-found404/not-found404.component';
+import { USE_EMULATOR as FUNCTIONS_EMULATOR } from '@angular/fire/functions';
+import { AboutusComponent } from './customerPanel/aboutus/aboutus.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -225,6 +226,7 @@ import { NotFound404Component } from './customerPanel/not-found404/not-found404.
     ShopComponent,
     IontabComponent,
     NotFound404Component,
+    AboutusComponent,
   ],
   entryComponents: [],
   imports: [
@@ -237,6 +239,7 @@ import { NotFound404Component } from './customerPanel/not-found404/not-found404.
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    AngularFireAnalyticsModule,
     BrowserAnimationsModule,
     FormsModule,
     MatStepperModule,
@@ -253,11 +256,6 @@ import { NotFound404Component } from './customerPanel/not-found404/not-found404.
     AlertsModalService, 
     DataProvider,
     LoginGuard,
-    // {
-    //   provide: FIRESTORE_EMULATOR,
-    //   useValue: environment.production ? undefined : ['localhost', 8080],
-    // },
-
     {provide: ErrorHandler, useClass: CustomErrorHandlerService},
     {
       provide: 'externalUrlRedirectResolver',
@@ -265,6 +263,10 @@ import { NotFound404Component } from './customerPanel/not-found404/not-found404.
         window.location.href = (route.data as any).externalUrl;
       },
     },
+    // {
+    //   provide: FUNCTIONS_EMULATOR,
+    //   useValue: environment.production ? undefined : ['localhost', 5001],
+    // },  
     {
       provide: STEPPER_GLOBAL_OPTIONS,
       useValue: { displayDefaultIndicatorType: false, showError: true },

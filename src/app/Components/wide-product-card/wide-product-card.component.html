@@ -11,9 +11,8 @@
       <ion-button *ngIf="showActions" class="order-view"
         href="./product?productId={{this.productId}}">View
         Product</ion-button>
-        <ion-item style="margin: 2% 0%;" button lines="none" *ngIf="showImageInput">
-          <input type="file" name="file" max="1" (change)="changeImage($event)" id="file" class="inputfile" />
-          <label for="file">Choose a file</label>
+        <ion-item button lines="none" *ngIf="showImageInput">
+          <input type="file" name="file" max="1" (change)="changeImage($event)" id="file"/>
         </ion-item>
     </div>
   </div>

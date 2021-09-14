@@ -17,6 +17,8 @@ import { environment } from 'src/environments/environment';
 import firebase from 'firebase/app';
 import { AngularFireAnalytics } from '@angular/fire/analytics';
 import { InvoiceService } from 'src/app/services/invoice.service';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { last, switchMap } from 'rxjs/operators';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -34,6 +36,7 @@ export class CheckoutComponent implements OnInit {
     private formbuilder: FormBuilder,
     private inventoryService: InventoryService,
     private router: Router,
+    private storage: AngularFireStorage,
     private analytics: AngularFireAnalytics,
     public modalController: ModalController,
     private invoiceService: InvoiceService,
@@ -118,7 +121,7 @@ export class CheckoutComponent implements OnInit {
     // console.log(data);
   }
   addImage(event) {
-    console.log('Event recieved by the addImage(event) eventHandler function', event);
+    console.log('Event recieved by the addImage(event) eventHandler function', event,this.imageRequired);
     let allValid = true;
     // console.log('imageRequiredLEngth', this.imageRequired,event,this.dataProvider.data);
     this.imageRequired.forEach((data, index) => {
@@ -219,19 +222,26 @@ export class CheckoutComponent implements OnInit {
       this.router.navigate(['']);
     }
   }
-  proceedToPay($event) {
+  uploadFile(file, userName) {
+    const filePath = ('referenceImage/' +`${userName}/` + userName.toString() + file.name);
+    console.log('Starting file upload', filePath);
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+    return task.snapshotChanges().pipe(
+      last(),
+      switchMap(() => fileRef.getDownloadURL())
+    );
+  }
+  async proceedToPay($event) {
     console.log('imagereq',this.imageRequired)
     console.log('imageVald',this.imagesValid)
     if (this.imagesValid) {
       this.dataProvider.showOverlay = true;
       this.processingPayment = true;
       this.payableAmount = this.grandTotal * 100;
-      this.imageRequired.forEach((data, index) => {
-        console.log(data);
-      })
-      // console.log('payable amount', this.payableAmount);
-      // this.initiatePaymentModal($event);
-      // this.analytics.logEvent('Checkout');
+      console.log('payable amount', this.payableAmount);
+      this.initiatePaymentModal($event);
+      this.analytics.logEvent('Checkout');
     } else {
       this.authService.presentToast('Please add all images by pressing Choose a file on every product.');
     }
@@ -332,6 +342,7 @@ export class CheckoutComponent implements OnInit {
           console.log('shippingDetail', shippingDetail);
           this.paymentService.shipOrder(shippingDetail).subscribe(
             (res: any) => {
+              
               this.authService.presentToast('Payment Successful &#x1F60A;');
               console.log('shipping Confirmed Detail', res);
               let currentOrder = {
