@@ -15,6 +15,7 @@
         [subcategory]="order.subcategory"
         ></app-product-full-card>
       </div>
+      <img src="./assets/NotFound.gif" alt="" *ngIf="wishlist.length<=0 || wishlist==undefined">
     </section>
     <app-sidenav activeLinkID="wishlist" *ngIf="screenwidth<1024"></app-sidenav>
   </main>

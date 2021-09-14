@@ -479,7 +479,7 @@ ion-radio-group{
     }
 
     #product-filters {
-        display: block;
+        display: flex;
         justify-content: space-between;
         margin: 2em 0.5em;
         padding: 5px;
@@ -500,6 +500,7 @@ ion-radio-group{
         font-weight: 700;
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         border: none;
+
     }
 
     ion-item{
