@@ -79,8 +79,9 @@ export class TrackorderComponent implements OnInit {
       console.log('shipment function triggered ');
       this.paymentService
         .checkShipmentDetail(shipmentID)
-        .subscribe(async (res: any) => {
-          this.shipmentOrderData = JSON.parse(res.body);
+        .subscribe((res: any) => {
+          console.log('check',res)
+          // this.shipmentOrderData = JSON.parse(res.body);
           console.log(this.shipmentOrderData);
           this.inventoryService
             .getOrder()
