@@ -37,7 +37,7 @@
                         <h2 id="product-name">
                             {{productData.productName}}<br><span>{{productData.shortDescription}}</span>
                         </h2>
-                        <div id="product-feature-buttons" *ngIf="screenwidth>600">
+                        <div id="product-feature-buttons" *ngIf="screenwidth>1020">
                             <a href="./specificProducts?category={{catText}}" *ngFor="let catText of category"><button
                                     class="product-feature-button">{{catText}}</button></a>
                             <a href="./specificProducts?category={{subcatText}}"
@@ -166,7 +166,7 @@
         </main>
     </div>
     <app-footer></app-footer>
-    <app-iontab  *ngIf="screenwidth<600"></app-iontab>
+    <app-iontab  *ngIf="screenwidth<1024"></app-iontab>
 </ion-content>
 <div id="overlay" *ngIf="dataProvider.showOverlay">
     <ion-spinner name="crescent" color="tertiary"></ion-spinner>

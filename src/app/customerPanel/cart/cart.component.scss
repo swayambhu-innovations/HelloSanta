@@ -12,9 +12,8 @@
   zoom: 80%;
 }
 #container {
-    width: 95%;
-    margin: 3em auto;
-    font-size: 1.5em;
+  width: 80%;
+  margin: 3em auto;
 }
 
 #your-cart-title {
@@ -25,27 +24,30 @@
     color: #6D5DE3;
     font-weight: 700;
 }
+.inner-box{
+  height: auto;
+  width: 95%;
+  font-family: Poppins;
+  text-align: left;
+  font-size: 20px;
+  margin:2.5%;
+  padding: 5px;
+  background: rgba(255, 255, 255, .7);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
+  border-radius: 10px;
+  border: 5px solid #9081FF;
 
-#cart-container {
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    border-radius: 50px;
-    padding: 0.25em;
-    padding-top: 20px;
 }
+
 
 .product-row{
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: flex-start;
  
 }
 
-app-wide-product-card{
-  width:100%;
-  margin: 1% 0%;
-}
 
 button{
   background-color: #ADA2FF; /* Green */

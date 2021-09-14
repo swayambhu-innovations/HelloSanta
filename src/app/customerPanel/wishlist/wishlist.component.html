@@ -2,7 +2,7 @@
   <app-header></app-header>
   <div class="home">
   <main id="container">
-    <app-sidenav activeLinkID="wishlist"></app-sidenav>
+    <app-sidenav activeLinkID="wishlist" *ngIf="screenwidth>1020"></app-sidenav>
     <section id="orders-container">
       <h2 id="your-cart-title">Your Wishlist</h2>
       <div class="product-row">
@@ -16,8 +16,9 @@
         ></app-product-full-card>
       </div>
     </section>
+    <app-sidenav activeLinkID="wishlist" *ngIf="screenwidth<1024"></app-sidenav>
   </main>
 </div>
   <app-footer></app-footer>
-  <app-iontab  *ngIf="screenwidth<600"></app-iontab>
+  <app-iontab  *ngIf="screenwidth<1024"></app-iontab>
 </ion-content>

@@ -1,6 +1,8 @@
 <ion-content [ngStyle]="{'filter': (dataProvider.showOverlay) ? 'blur(10px)' : 'blur(0px)' }">
   <app-header></app-header>
+  
   <div class="home">
+    <div class="inner-box" align="center">
   <main id="container">
     <h2 id="your-cart-title">Your Cart</h2>
     <section id="cart-container">
@@ -12,8 +14,9 @@
     </section>
   </main>
 </div>
+</div>
   <app-footer></app-footer>
-  <app-iontab  *ngIf="screenwidth<600"></app-iontab>
+  <app-iontab  *ngIf="screenwidth<1024"></app-iontab>
 </ion-content>
 <div id="overlay" *ngIf="dataProvider.showOverlay">
   <ion-spinner name="crescent" color="tertiary"></ion-spinner>

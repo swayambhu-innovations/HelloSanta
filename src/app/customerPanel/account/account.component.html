@@ -2,7 +2,7 @@
   <app-header></app-header>
   <div class="home">
     <main id="container">
-      <app-sidenav activeLinkID="account"></app-sidenav>
+      <app-sidenav activeLinkID="account" *ngIf="screenwidth>1020"></app-sidenav>
       <section id="account-container">
         <div id="img-name-and-email">
           <img [src]="userImage" alt="Profile Pic" class="circular-profile-pic" style="width:100px;height:100px">
@@ -28,7 +28,7 @@
             <ion-icon style="color: rgb(85, 85, 85);"slot="start" [name]="item.type"></ion-icon>
             <ion-label color="primary">&nbsp;&nbsp;{{item.url}}</ion-label>
             <button (click)="inventoryService.removeSocialMediaLink(item)">
-              <ion-icon style="font-size: medium;" name="trash"></ion-icon>
+              <ion-icon class="trash" name="trash"></ion-icon>
             </button>
           </ion-item>
         </ion-list>
@@ -58,8 +58,10 @@
           </div>
         </div>
       </section>
+      <app-sidenav activeLinkID="account" *ngIf="screenwidth<1024"></app-sidenav>
     </main>
+
   </div>
   <app-footer></app-footer>
-  <app-iontab  *ngIf="screenwidth<600"></app-iontab>
+  <app-iontab  *ngIf="screenwidth<1024"></app-iontab>
 </ion-content>
