@@ -23,7 +23,7 @@
   color: #7a7a7a;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1024px) {
   .category-card {
     margin-top: 0.75em ;
     width: 130px;

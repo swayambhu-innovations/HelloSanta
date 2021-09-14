@@ -2,7 +2,7 @@
   <app-header></app-header>
   <div class="home">
     <h1 class="title">Your events panel</h1>
-    <ion-card *ngIf="screenWidth>600">
+    <ion-card *ngIf="screenwidth>1020">
       <form [formGroup]="eventForm" (ngSubmit)="addEvent()">
         <ion-item>
           <ion-input type="text" formControlName="eventTitle" placeholder="Event Name" #eventName></ion-input>
@@ -49,7 +49,7 @@
         </ion-item>
       </ion-list>
     </ion-card>
-    <ion-card *ngIf="screenWidth<600">
+    <ion-card *ngIf="screenwidth<1024">
       <form [formGroup]="eventForm" (ngSubmit)="addEvent()">
         <ion-input type="text" formControlName="eventTitle" placeholder="Event Name" #eventName></ion-input>
         <ion-select value="birthday" multiple="false" (ionChange)="setEventType($event)" formControlName="eventType"
@@ -108,5 +108,5 @@
     <app-accordion></app-accordion>
   </div>
   <app-footer></app-footer>
-  <app-iontab  *ngIf="screenWidth<600"></app-iontab>
+  <app-iontab  *ngIf="screenwidth<1024"></app-iontab>
 </ion-content>

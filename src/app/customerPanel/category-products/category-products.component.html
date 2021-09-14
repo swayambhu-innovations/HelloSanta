@@ -2,7 +2,7 @@
   <app-header></app-header>
   <div class="home">
   <div class="headerContainer">
-    <div class="distImages" *ngIf="screenwidth>600">
+    <div class="distImages" *ngIf="screenwidth>1020">
       <img class="first" src="assets/img1.png">
       <img class="second" src="assets/img2.png">
       <img class="third" src="assets/img3.png">
@@ -24,7 +24,7 @@
         ligula, id laoreet ex.</p>
     </div>
   </div>
-  <ion-toolbar *ngIf="screenwidth<600">
+  <ion-toolbar *ngIf="screenwidth<1024">
     <ion-button (click)="showFilterModal()" expand="full" fill="clear" slot="start">
       Filter&nbsp;&nbsp;&nbsp;<ion-icon name="filter-circle"></ion-icon>
     </ion-button>
@@ -33,7 +33,7 @@
     </ion-button>
   </ion-toolbar>
   <div class="headerContainer">
-    <div class="searchbox" *ngIf="screenwidth>600">
+    <div class="searchbox" *ngIf="screenwidth>1020">
       <ion-button (click)="resetFilter()" style="margin:10px 20px;" expand="block" shape="round">
         Reset Filters
       </ion-button>
@@ -96,5 +96,5 @@
   </div>
 </div>
   <app-footer></app-footer>
-  <app-iontab  *ngIf="screenwidth<600"></app-iontab>
+  <app-iontab  *ngIf="screenwidth<1024"></app-iontab>
 </ion-content>

@@ -1,209 +1,207 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    outline: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
 }
 
-.home{
-    margin: 0 auto;
-    min-width: 978px;
-    max-width: 1920px;
-    zoom: 80%;
-  }
+.home {
+  margin: 0 auto;
+  min-width: 978px;
+  max-width: 1920px;
+  zoom: 80%;
+}
 #container {
-    width: 95%;
-    margin: 3em auto;
-    display: flex;
-    justify-content: space-between;
+  width: 95%;
+  margin: 3em auto;
+  display: flex;
+  justify-content: space-between;
 }
 
 app-sidenav {
-    width: 20%;
+  width: 20%;
 }
 
 #account-container {
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    border-radius: 50px;
-    width: 78%;
-    padding: 4em;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 20px;
+  width: 78%;
+  padding: 4em;
 }
 
 #img-name-and-email {
-    display: flex;
-    width:100%;
-    align-items: center;
-    font-family: 'Raleway';
+  display: flex;
+  width: 100%;
+  align-items: center;
+  font-family: "Raleway";
 }
 #img-name-and-email > button {
-    position:relative;
-    right:10px;
-    margin-left: 100px;
+  position: relative;
+  right: 10px;
+  margin-left: 100px;
 }
 .circular-profile-pic {
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 #name-and-email {
-    margin-left: 1em;
+  margin-left: 1em;
 }
 
 #name {
-    font-size: 2rem;
-    color: #6D5CE5;
-    margin: 0;
+  font-size: 2rem;
+  color: #6d5ce5;
+  margin: 0;
 }
 
 #email {
-    color: #ADA2FF;
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin: 0;
+  color: #ada2ff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
 }
 
 #statistic-cards {
-    display: flex;
-    justify-content: space-between;
-    margin: 4em 0;
+  display: flex;
+  justify-content: space-between;
+  margin: 4em 0;
 }
 
 .statistic-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: 'Raleway';
-    border-width: 3px;
-    border-style: solid;
-    border-radius: 20px;
-    border-color: transparent;
-    padding: .5em 1em;
-    font-weight: 700;
-    font-size: 1.25rem;
-    width: 23%;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Raleway";
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 20px;
+  border-color: transparent;
+  padding: 0.5em 1em;
+  font-weight: 700;
+  font-size: 1.25rem;
+  width: 23%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .card-title {
-    margin: 0;
-    margin-right: 1em;
+  margin: 0;
+  margin-right: 1em;
 }
 
 .card-number {
-    font-size: 1.5rem;
-    margin: 0;
+  font-size: 1.5rem;
+  margin: 0;
 }
 
 #total-orders-card {
-    background-color: #ff8800;
-    color: #fff;
+  background-color: #ff8800;
+  color: #fff;
 }
 
 #referrals-card {
-    background-color: #FF6584;
-    color: #fff;
+  background-color: #ff6584;
+  color: #fff;
 }
 
 #total-cashback-card {
-    background-color: #6AB9FF;
-    color: #fff;
+  background-color: #6ab9ff;
+  color: #fff;
 }
 
 #total-orders-2-card {
-    background-color: #FF796A;
-    color: #fff;
+  background-color: #ff796a;
+  color: #fff;
 }
 
 #latest-orders {
-    display: flex;
-    justify-content: space-between;
-    border: 3px solid #ADA2FF;
-    padding: 2em;
-    border-radius: 50px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  display: flex;
+  justify-content: space-between;
+  border: 3px solid #ada2ff;
+  padding: 2em;
+  border-radius: 50px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
-.product-row{
+.product-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: flex-start;
 }
-ion-icon[name="trash"]{
-    color:#FF6584;
-    font-size:1.5rem;
+ion-icon[name="trash"] {
+  color: #ff6584;
+  font-size: 1.5rem;
 }
-@media only screen and (max-width: 600px) {
-    #img-name-and-email > button {
-        margin-left: 10px;
-    }
-}
+
 @media only screen and (max-width: 1024px) {
-    
-    .home{
-        margin: 0 auto;
-        min-width: 300px;
-        max-width: 800px;
-        zoom: 100%;
-      }
-    #account-container {
-        width: 98%;
-        padding: 1em;
-        margin: 20px 0px;
-    }
-    
-#statistic-cards {
+  .home {
+    margin: 0 auto;
+    min-width: 300px;
+    max-width: 800px;
+    zoom: 100%;
+  }
+  #account-container {
+    width: 98%;
+    padding: 1em;
+    margin: 20px 1%;
+  }
+  #img-name-and-email > button {
+    margin-left: 10px;
+  }
+  .trash {
+    font-size: medium;
+  }
+  #statistic-cards {
     display: flex;
     justify-content: space-between;
-    margin: 2em ;
+    margin: 2em;
     flex-direction: row;
     flex-wrap: wrap;
-}
-
-    .statistic-card {
-        padding: 0.5em 0.2em;
-        font-size: 1.25rem;
-        height: 2em;
-        width: 45%;
-        margin: 2%;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    }
-    
-    
-    .card-title {
-        font-size: 0.6rem;
-        margin-right: 0.2em;
-    }
-    
-    .card-number {
-        font-size: 0.8rem;
-
-    }
-    
-    #latest-orders {
-        padding: 2em;
-    }
-    #name {
-        font-size: 1.2rem;
-        color: #6D5CE5;
-        margin: 0;
-    }
-    
-    #email {
-        color: #ADA2FF;
-        font-size: 0.7em;
-        font-weight: 600;
-        margin: 0;
-    }
-    #container {
-        width: 90%;
-        margin: 3em auto;
-        display: block;
-        justify-content: space-between;
-    }
   }
+
+  .statistic-card {
+    padding: 0.5em 0.2em;
+    font-size: 1.25rem;
+    height: 2em;
+    width: 45%;
+    margin: 2%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+
+  .card-title {
+    font-size: 0.6rem;
+    margin-right: 0.2em;
+  }
+
+  .card-number {
+    font-size: 0.8rem;
+  }
+
+  #latest-orders {
+    padding: 2em;
+  }
+  #name {
+    font-size: 1.2rem;
+    color: #6d5ce5;
+    margin: 0;
+  }
+
+  #email {
+    color: #ada2ff;
+    font-size: 0.7em;
+    font-weight: 600;
+    margin: 0;
+  }
+  #container {
+    width: 90%;
+    margin: 3em auto;
+    display: block;
+    justify-content: space-between;
+  }
+}

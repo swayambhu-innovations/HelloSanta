@@ -2,6 +2,7 @@
   <app-header></app-header>
   <div class="home">
   <main id="container">
+    <app-sidenav activeLinkID="profile" *ngIf="screenwidth>1020"></app-sidenav>
       <section id="profile-container">
           <div id="img-name-and-email">
             <img [src]="authService.getUserPhoto()"
@@ -39,11 +40,11 @@
               </div>
           </form>
       </section>
-      <app-sidenav activeLinkID="account" ></app-sidenav>
+      <app-sidenav activeLinkID="profile" *ngIf="screenwidth<1024"></app-sidenav>
   </main>
 </div>
   <app-footer></app-footer>
-  <app-iontab  *ngIf="screenwidth<600"></app-iontab>
+  <app-iontab  *ngIf="screenwidth<1024"></app-iontab>
 </ion-content>
 <div id="overlay" *ngIf="dataProvider.showOverlay">
     <ion-spinner name="crescent" color="tertiary"></ion-spinner>

@@ -2,7 +2,7 @@
   <app-header></app-header>
   <div class="home">
   <main id="container">
-    <app-sidenav activeLinkID="your-orders" ></app-sidenav>
+    <app-sidenav activeLinkID="your-orders" *ngIf="screenwidth>1020"></app-sidenav>
     <section id="orders-container">
       <h2 id="your-cart-title">Your Orders</h2>
       <div *ngIf="!loading">
@@ -18,8 +18,9 @@
         <ion-spinner name="crescent"></ion-spinner>
       </div>
     </section>
+    <app-sidenav activeLinkID="your-orders" *ngIf="screenwidth<1024"></app-sidenav>
   </main>
 </div>
   <app-footer></app-footer>
-  <app-iontab  *ngIf="screenwidth<600"></app-iontab>
+  <app-iontab  *ngIf="screenwidth<1024"></app-iontab>
 </ion-content>

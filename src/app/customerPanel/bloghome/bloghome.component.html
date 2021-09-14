@@ -7,11 +7,11 @@
     <hr style="background-color: #6D5DE3;width: 90%;height: 5px;margin: auto;">
     <div class="fourthbox" *ngIf="blogs.length>0">
       <p class="firstheading">{{blogs[0].blogTitle}}</p>
-      <p class="heading-discription" *ngIf="screenwidth>600" >{{blogs[0].blogExcerpt}}</p>
-      <button class="button" *ngIf="screenwidth>600"><a href="/blog">Read more</a></button>
+      <p class="heading-discription" *ngIf="screenwidth>1020" >{{blogs[0].blogExcerpt}}</p>
+      <button class="button" *ngIf="screenwidth>1020"><a href="/blog">Read more</a></button>
     </div>
-    <p class="heading-discription" *ngIf="screenwidth<600" [innerHTML]="blogs[0].blogContent"></p>
-    <button class="button" *ngIf="screenwidth<600"><a href="/blog">Read more</a></button>
+    <p class="heading-discription" *ngIf="screenwidth<1024" [innerHTML]="blogs[0].blogContent"></p>
+    <button class="button" *ngIf="screenwidth<1024"><a href="/blog">Read more</a></button>
   </div>
   <img class="NotFoundImage" src="./assets/NotFound.gif" alt="No Blog Found" *ngIf="blogs.length<=0">
   <main id="blog" *ngIf="blogs.length>0">
@@ -26,5 +26,5 @@
   </main>
 </div>
   <app-footer></app-footer>
-  <app-iontab  *ngIf="screenwidth<600"></app-iontab>
+  <app-iontab  *ngIf="screenwidth<1024"></app-iontab>
 </ion-content>
