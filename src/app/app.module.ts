@@ -125,6 +125,7 @@ import { IontabComponent } from './Components/iontab/iontab.component';
 import { NotFound404Component } from './customerPanel/not-found404/not-found404.component';
 import { USE_EMULATOR as FUNCTIONS_EMULATOR } from '@angular/fire/functions';
 import { AboutusComponent } from './customerPanel/aboutus/aboutus.component';
+import { StarRatingComponent } from './Components/star-rating/star-rating.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -226,6 +227,7 @@ import { AboutusComponent } from './customerPanel/aboutus/aboutus.component';
     IontabComponent,
     NotFound404Component,
     AboutusComponent,
+    StarRatingComponent,
   ],
   entryComponents: [],
   imports: [

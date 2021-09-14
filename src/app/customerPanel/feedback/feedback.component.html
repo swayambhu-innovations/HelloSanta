@@ -1,65 +1,40 @@
 <ion-content>
   <app-header></app-header>
   <div class="home">
-  <ion-card class="uk-align-center uk-text-center rating">
-    <h1 *ngIf="orderId==undefined">Give a website feedback</h1>
-    <h1 *ngIf="orderId!=undefined">Give order feedback</h1>
-    <ion-row *ngIf="orderData">
-      <app-ordercard
-      [orderid]="orderData.orderId"
-      [orderdate]="orderData.shippingDetail.orderDate"
-      [shipmentid]="orderData.shippingDetail.shipment_id"
-      [shipmentstage]="orderData.orderStage"
-      [liveOrders]="orderData.products"
-      ></app-ordercard>
-    </ion-row>
-    <form (ngSubmit)="submitFeedback()" [formGroup]="form">
-      <div>
-        <star-rating [value]="0" [formControlName]="" [totalstars]="5" checkedcolor="#675ce0" [size]="starsize" (rate)="onRate($event)">
-        </star-rating>
-      </div>
-      <div *ngIf="rating != undefined">
-        <h1 class="title">{{optionsTitle}}</h1>
-        <div *ngIf="rating == 1">
-          <ion-chip color="primary" outline="true" *ngFor="let tag of options">
-            <ion-checkbox (ionChange)="values[optionsTitle][tag]=checker.checked" #checker></ion-checkbox>
-            <ion-label>{{tag}}</ion-label>
-          </ion-chip>
+    <ion-card class="uk-align-center uk-text-center rating">
+      <h1 *ngIf="orderId==undefined">Give a website feedback</h1>
+      <h1 *ngIf="orderId!=undefined">Give order feedback</h1>
+      <ion-row *ngIf="orderData">
+        <app-ordercard [orderid]="orderData.orderId" [orderdate]="orderData.shippingDetail.orderDate"
+          [shipmentid]="orderData.shippingDetail.shipment_id" [shipmentstage]="orderData.orderStage"
+          [liveOrders]="orderData.products"></app-ordercard>
+      </ion-row>
+      <form (ngSubmit)="submitFeedback()" [formGroup]="form">
+        <div>
+          <star-rating [value]="0" [formControlName]="" [totalstars]="5" checkedcolor="#675ce0" [size]="starsize"
+            (rate)="onRate($event)">
+          </star-rating>
         </div>
-        <div *ngIf="rating == 2">
-          <ion-chip color="primary" outline="true" *ngFor="let tag of options">
-            <ion-checkbox (ionChange)="values[optionsTitle][tag]=checker.checked" #checker></ion-checkbox>
-            <ion-label>{{tag}}</ion-label>
-          </ion-chip>
+        <div *ngIf="rating != undefined">
+          <h1 class="title">{{optionsTitle}}</h1>
+          <ion-row *ngIf="refreshRating">
+            <ion-item class="toggelableButton" button (click)="checker.checked=!checker.checked" [color]="checker.checked ? 'primary' : 'none'" lines="none"
+               *ngFor="let tag of options">
+              <ion-checkbox class="tagSel" [checked]="false" hidden (ionChange)="values[optionsTitle][tag]=checker.checked" #checker></ion-checkbox>
+              <ion-label>{{tag}}</ion-label>
+            </ion-item>
+          </ion-row>
         </div>
-        <div *ngIf="rating == 3">
-          <ion-chip color="primary" outline="true" *ngFor="let tag of options">
-            <ion-checkbox (ionChange)="values[optionsTitle][tag]=checker.checked" #checker></ion-checkbox>
-            <ion-label>{{tag}}</ion-label>
-          </ion-chip>
-        </div>
-        <div *ngIf="rating == 4">
-          <ion-chip color="primary" outline="true" *ngFor="let tag of options">
-            <ion-checkbox (ionChange)="values[optionsTitle][tag]=checker.checked" #checker></ion-checkbox>
-            <ion-label>{{tag}}</ion-label>
-          </ion-chip>
-        </div>
-        <div *ngIf="rating == 5">
-          <ion-chip color="primary" outline="true" *ngFor="let tag of options">
-            <ion-checkbox (ionChange)="values[optionsTitle][tag]=checker.checked" #checker></ion-checkbox>
-            <ion-label>{{tag}}</ion-label>
-          </ion-chip>
-        </div>
-      </div>
-    <ion-textarea formControlName="moreInfo" color="primary" outline="true" style="border: 3px solid rgb(98, 84, 226);"></ion-textarea>
-    <ion-button type="submit" shape="round">
-      Submit
-    </ion-button>
-  </form>
-  </ion-card>
-  
-  <app-accordion></app-accordion>
-</div>
+        <ion-textarea formControlName="moreInfo" color="primary" outline="true"
+          style="border: 3px solid rgb(98, 84, 226);"></ion-textarea>
+        <ion-button type="submit" shape="round">
+          Submit
+        </ion-button>
+      </form>
+    </ion-card>
+
+    <app-accordion></app-accordion>
+  </div>
   <app-footer></app-footer>
-  <app-iontab  *ngIf="screenwidth<600"></app-iontab>
+  <app-iontab *ngIf="screenwidth<600"></app-iontab>
 </ion-content>

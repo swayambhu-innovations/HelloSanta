@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { StarRatingComponent } from 'ng-starrating';
 import { AuthService } from 'src/app/services/auth.service';
 import { InventoryService } from 'src/app/services/inventory.service';
 
@@ -18,8 +17,10 @@ export class FeedbackComponent implements OnInit {
   options: any = [];
   orderId: string;
   orderData:any;
-  values:any={}
+  values:any={'sel':{}}
   shipment_id: any;
+  clicked:any=[];
+  refreshRating:boolean=true;
   constructor(
     private activatedRoute: ActivatedRoute,
     private inventoryService: InventoryService,
@@ -53,6 +54,9 @@ export class FeedbackComponent implements OnInit {
       this.starsize = '50px';
     }
   }
+  log(event) {
+    console.log(event);
+  }
   submitFeedback(){
     console.log('submitFeedback');
     console.log(this.moreInfo.value);
@@ -67,17 +71,15 @@ export class FeedbackComponent implements OnInit {
       photoURL:this.authService.getUserPhoto(),
       userId: this.authService.userId,
     }
-    if (this.orderId){
-      this.inventoryService.addProductFeedback(this.orderId,feedback)
-    } else {
-      this.inventoryService.addWebsiteFeedback(feedback)
-    }
+    // if (this.orderId){
+    //   this.inventoryService.addProductFeedback(this.orderId,feedback)
+    // } else {
+    //   this.inventoryService.addWebsiteFeedback(feedback)
+    // }
   }
-  onRate(event: {
-    oldValue: number;
-    newValue: number;
-    starRating: StarRatingComponent;
-  }) {
+  onRate(event) {
+    this.values={};
+    this.refreshRating=false;
     console.log('value', event.newValue);
     this.rating = event.newValue;
     this.StarCount.setValue(event.newValue)
@@ -123,5 +125,6 @@ export class FeedbackComponent implements OnInit {
       ];
     }
     this.values[this.optionsTitle]={}
+    this.refreshRating=true;
   }
 }

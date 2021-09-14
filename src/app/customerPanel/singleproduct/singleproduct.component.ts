@@ -11,7 +11,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { StarRatingComponent } from 'ng-starrating';
 import { PopoverController } from '@ionic/angular';
 import { AddCommentComponent } from 'src/app/popovers/add-comment/add-comment.component';
 

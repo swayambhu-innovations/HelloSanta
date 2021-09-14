@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAnalytics } from '@angular/fire/analytics';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PopoverController } from '@ionic/angular';
-import { StarRatingComponent } from 'ng-starrating';
 import { AuthService } from 'src/app/services/auth.service';
 import { InventoryService } from 'src/app/services/inventory.service';
 
@@ -34,7 +33,6 @@ export class AddCommentComponent implements OnInit {
   changeRatingStar($event: {
     oldValue: number;
     newValue: number;
-    starRating: StarRatingComponent;
   }) {
     this.stars = $event.newValue;
   }

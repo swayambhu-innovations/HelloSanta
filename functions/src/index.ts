@@ -27,6 +27,7 @@ let transporter = nodemailer.createTransport({
 
 exports.sendMail = functions.https.onRequest((req: any, res: any) => {
   return cors(req, res, () => {
+    
     const mailOptions = {
       from: 'Hello Santa <connect@hellosanta.in>',
       to: req.body.email,

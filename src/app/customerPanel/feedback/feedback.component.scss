@@ -24,6 +24,17 @@ margin-top: 5em;
   align-items: center;
   flex-direction: column;
 }
+div > ion-item {
+  width:100px;
+}
+.toggelableButton{
+  border-radius:10px;
+  box-shadow: 5px 10px 20px rgba(143, 95, 255, 0.4);
+}
+ion-row{
+  justify-content: space-evenly;
+  align-items: center;
+}
 ion-textarea{
     text-align: left;
     border-radius: 25px;
