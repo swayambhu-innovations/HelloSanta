@@ -4,7 +4,7 @@
   </ion-toolbar>
   <ion-row uk-scrollspy="target: > ion-item; cls: uk-animation-fade; delay: 50" *ngIf="allProds.length>0">
     <ion-item *ngFor="let item of allProds">
-      <ion-img size="small" [src]="item.productImages[0].image"></ion-img>&nbsp;&nbsp;&nbsp;&nbsp;
+      <ion-img size="small" [src]="item.productImages"></ion-img>&nbsp;&nbsp;&nbsp;&nbsp;
       <ion-label color="secondary">{{item.productName}}</ion-label>
       <ion-label>{{item.seoDescription}}</ion-label>&nbsp;&nbsp;&nbsp;&nbsp;
       <ion-label color="success"><strong>Total Sales: &nbsp;</strong>{{item.totalSales}}</ion-label>

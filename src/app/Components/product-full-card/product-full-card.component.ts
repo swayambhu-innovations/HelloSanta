@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { InventoryService } from 'src/app/services/inventory.service';
 
@@ -8,7 +8,7 @@ import { InventoryService } from 'src/app/services/inventory.service';
   styleUrls: ['./product-full-card.component.css']
 })
 export class ProductFullCardComponent implements OnInit {
-  @Input() img:string =  "https://source.unsplash.com/650x940"
+  @Input() img:any =  [{image:"https://source.unsplash.com/650x940"},{image:"https://source.unsplash.com/650x940"}];
   @Input() productTitle:string = "ArtWork Product"
   @Input() productDescription:string = "Lorem ipsum dolor sit amet, consectetur\n" +
     "                  adipiscing elit. Curabitur cursus tincidunt\n" +
@@ -20,6 +20,7 @@ export class ProductFullCardComponent implements OnInit {
   wishlist:any=this.authService.getCurrentWishlist();
   constructor(public inventoryService: InventoryService, public authService:AuthService) { }
   textlength=70;
+  @ViewChild('icon') card: any;
   has(){
     let found = false;
     this.wishlist.forEach((item)=>{
@@ -29,7 +30,11 @@ export class ProductFullCardComponent implements OnInit {
     })
     return found;
   }
+  delay(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
   addToWishlist(){
+    this.card.el.classList.add('uk-animation-shake');
     if (this.has()){
       console.log("Already in wishlist removing it")
       this.inventoryService.removeFromWishlist(this.productId);
@@ -41,6 +46,7 @@ export class ProductFullCardComponent implements OnInit {
       this.wishlist.push(this.productId);
       this.authService.presentToast("Added to wishlist");
     }
+    this.card.el.classList.add('uk-animation-shake');
   }
   ngOnInit(): void {
     if ( this.productDescription.length>=this.textlength){

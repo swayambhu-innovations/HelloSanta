@@ -289,7 +289,7 @@ export class SingleproductComponent implements OnInit {
         this.productData = value;
         this.productPrice = 0;
         this.displayPrice = value.productPrice;
-        this.selectedImage = this.productData.productImages[0].image;
+        this.selectedImage = this.productData.productImages;
         this.selectedExtraType = this.productData.extraData[0].type;
         this.selectedExtraTitle = this.productData.extraData[0].sectionTitle;
         this.category = this.productData.productCategory;

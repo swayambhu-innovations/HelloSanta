@@ -13,8 +13,11 @@ export class BlogCardComponent implements OnInit {
     "                  commodo. Nunc justo nisi, vestibulum."
   @Input() blogId:string;
   constructor() { }
-
+  textlength:number = 100;
   ngOnInit(): void {
+    if ( this.blogDescription.length>=this.textlength){
+      this.blogDescription =  this.blogDescription.substring(0,this.textlength) +"...";
+    }
   }
 
 }

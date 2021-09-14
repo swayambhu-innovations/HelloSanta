@@ -21,20 +21,21 @@ export class AddBlogComponent implements OnInit {
     private formbuilder: FormBuilder,
     private authService: AuthService,
     private storage: AngularFireStorage,
-    public dataProvider: DataProvider,
+    public dataProvider: DataProvider
   ) {
     this.form = this.formbuilder.group({
-      blogName:this.blogName,
+      blogName: this.blogName,
       blogContent: this.blogContent,
       blogImage: this.blogImage,
       blogExcerpt: this.blogExcerpt,
       blogTags: this.blogTags,
       blogDate: this.blogDate,
-      blogPublish:this.blogPublish,
+      blogPublish: this.blogPublish,
+      mainBlog: this.mainBlog,
     });
   }
   isLoading: boolean = false;
-  imageEvent:any=undefined;
+  imageEvent: any = undefined;
   form: FormGroup;
   blogName: FormControl = new FormControl('', [
     Validators.required,
@@ -56,10 +57,9 @@ export class AddBlogComponent implements OnInit {
     Validators.required,
     Validators.minLength(300),
   ]);
-  blogImage: FormControl = new FormControl('', [
-    Validators.required,
-  ]);
-  blogPublish: FormControl = new FormControl('')
+  blogImage: FormControl = new FormControl('', [Validators.required]);
+  blogPublish: FormControl = new FormControl(false);
+  mainBlog: FormControl = new FormControl(false);
   uploadFile(file, fileName) {
     console.log('Starting file upload', fileName);
     const fileRef = this.storage.ref(fileName);
@@ -69,9 +69,9 @@ export class AddBlogComponent implements OnInit {
       switchMap(() => fileRef.getDownloadURL())
     );
   }
-  getFileFromEvent(event){
+  getFileFromEvent(event) {
     let fileList: FileList = event.target.files;
-    return fileList[0]
+    return fileList[0];
   }
   loadFile(event, count) {
     var image = document.getElementById(count) as HTMLImageElement;
@@ -104,7 +104,8 @@ export class AddBlogComponent implements OnInit {
         blogContent: this.form.get('blogContent')!.value,
         blogTags: this.form.get('blogTags')!.value.toString().split(','),
         blogDate: this.form.get('blogDate')!.value,
-        isPublished:false,
+        isPublished:this.blogPublish.value,
+        mainBlog: this.mainBlog.value,
         lastEdit:[],
       }
       this.dataProvider.overlayStatus="Uploading data to database...";
@@ -117,5 +118,4 @@ export class AddBlogComponent implements OnInit {
     })
   }
   ngOnInit() {}
-  
 }

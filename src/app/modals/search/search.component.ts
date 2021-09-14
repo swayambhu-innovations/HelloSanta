@@ -28,7 +28,7 @@ export class SearchComponent implements OnInit {
             this.results.push({
               text:value.productName,
               href:"./product?productId="+value.productId,
-              image:value.productImages[0].image,
+              image:value.productImages,
               type:'product',
             });
           }

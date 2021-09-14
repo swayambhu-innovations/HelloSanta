@@ -7,7 +7,7 @@
           <h2 id="checkout-title">Checkout</h2>
           <section id="orders-card">
             <div class="product-row">
-              <app-wide-product-card *ngFor="let order of orders" [img]="order.productImages[0].image"
+              <app-wide-product-card *ngFor="let order of orders" [img]="order.productImages"
                 [orderTitle]="order.productName" [identifier]="order.ref" [configData]="order.config" [showActions]="false" [orderDescription]="order.seoDescription"
                 [orderprice]="order.finalPrice" (addImage)="addImage($event)" [productId]="order.productId" [quantity]="order.quantity" [showImageInput]="order.imageReference" [showQuantity]="true"></app-wide-product-card>
             </div>

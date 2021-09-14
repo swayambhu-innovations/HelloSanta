@@ -11,9 +11,12 @@
             <ion-select-option value="birthday">Birthday</ion-select-option>
             <ion-select-option value="Anniversary">Anneversary</ion-select-option>
           </ion-select>
-          <ion-item class="item">
-            <ion-label>All Day</ion-label>&nbsp;&nbsp;
-            <ion-checkbox id="allValueDay" (ionChange)="setCheckValue($event)" formControlName="allDay"></ion-checkbox>
+          <ion-item>
+            <ion-label>Repeat</ion-label>
+            <ion-select value="yearly" multiple="false" placeholder="Repeat interval" formControlName="periodicType">
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+            </ion-select>
           </ion-item>
           <ion-item class="item">
             <ion-label>Start Date</ion-label>
@@ -21,7 +24,7 @@
           </ion-item>
           <ion-item class="item">
             <ion-label>End Date</ion-label>
-            <ion-datetime display-format="DD.MM.YYYY" formControlName="endDate" #endDate></ion-datetime>
+            <ion-datetime display-format="DD.MM.YYYY" formControlName="endDate" value="startDate.value" #endDate></ion-datetime>
           </ion-item>
           <button type="submit">
             <ion-icon name="add"></ion-icon>

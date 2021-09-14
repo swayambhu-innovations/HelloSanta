@@ -83,7 +83,7 @@
     <div id="container2">
       <section id="orders-container">
         <div class="product-row" *ngIf="allDigitalProds">
-          <app-product-full-card *ngFor="let product of allDigitalProds" [img]="product.productImages[0].image"
+          <app-product-full-card *ngFor="let product of allDigitalProds" [img]="product.productImages"
             [productTitle]="product.productName" [productDescription]="product.seoDescription"
             [price]="product.productPrice" [productId]="product.productId"></app-product-full-card>
           <div *ngIf="allDigitalProds.length==0">

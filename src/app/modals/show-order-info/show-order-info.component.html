@@ -22,7 +22,7 @@
     </ion-item>
     <hr class="uk-divider-icon">
     <ion-card *ngFor="let product of order.products">
-        <img [src]="product.productImages[0].image" >
+        <img [src]="product.productImages" >
         <br>
         <ion-title>{{product.productName}}</ion-title>
         <br>

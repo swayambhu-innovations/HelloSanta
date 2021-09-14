@@ -23,7 +23,7 @@
   </div>
   <hr class="line">
   <div class="product-row" *ngFor="let product of liveOrders">
-    <app-small-product-card [img]="product.productImages[0].image"
+    <app-small-product-card [img]="product.productImages"
     [productTitle]="product.productName" [price]="product.productPrice" [productId]="product.productId"
     [date]="orderdate"></app-small-product-card>
   </div>

@@ -8,7 +8,7 @@
   <ion-row uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100" class="main">
     <div *ngFor="let product of allProds">
       <app-vpproduct-card
-      [image]="product.productImages[0].image"
+      [image]="product.productImages"
       [name]="product.productName"
       [description]="product.seoDescription"
       [id]="product.productId"

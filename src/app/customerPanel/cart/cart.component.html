@@ -7,7 +7,7 @@
     <h2 id="your-cart-title">Your Cart</h2>
     <section id="cart-container">
       <div class="product-row">
-        <app-wide-product-card [productId]="order.productId" [identifier]="order.identifier" [configData]="order.config" [showQuantity]="true" (removeEvent)='removecartItem($event)' (changeQuantity)="quantityChanged($event)" [quantity]="order.quantity" *ngFor="let order of cartItems" [extras]="order.options" [img]="order.productImages[0].image" [orderTitle]="order.productName" [orderDescription]="order.seoDescription" [orderprice]="order.finalPrice" ></app-wide-product-card>
+        <app-wide-product-card [productId]="order.productId" [identifier]="order.identifier" [configData]="order.config" [showQuantity]="true" (removeEvent)='removecartItem($event)' (changeQuantity)="quantityChanged($event)" [quantity]="order.quantity" *ngFor="let order of cartItems" [extras]="order.options" [img]="order.productImages" [orderTitle]="order.productName" [orderDescription]="order.seoDescription" [orderprice]="order.finalPrice" ></app-wide-product-card>
       </div>
       <div align="center"><button [disabled]="cartItems.length<0" (click)="moveToCheckout()">Checkout To Cart</button></div>
       <img src="./assets/NotFound.gif" alt="" *ngIf="cartItems.length<=0 || cartItems==undefined">

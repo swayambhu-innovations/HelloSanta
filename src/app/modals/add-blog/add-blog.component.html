@@ -29,6 +29,10 @@
         <ion-input formControlName="blogImage" type="file"(change)="loadFile($event,'blogImage')" accept="image/png, image/jpeg" placeholder="Blog Image"></ion-input>
       </ion-item>
       <ion-item>
+        <ion-label>Main Blog</ion-label>
+        <ion-checkbox color="danger" slot="start" formControlName="mainBlog" (ionChange)="mainBlog.setValue(mainCheck.checked)" #mainCheck></ion-checkbox>
+      </ion-item>
+      <ion-item>
         <ion-label position="floating">Blog Content (HTML ONLY)</ion-label>
         <ion-textarea rows="10" formControlName="blogContent"></ion-textarea>
       </ion-item>
@@ -50,10 +54,10 @@
       </ion-item>
       <ion-item>
         <ion-label>Publish it instantly</ion-label>
-        <ion-checkbox color="danger" slot="start" ></ion-checkbox>
+        <ion-checkbox checked="false" color="danger" formControlName="blogPublish" slot="start" (ionChange)="mainBlog.setValue(instantPublish.checked)" #instantPublish></ion-checkbox>
       </ion-item>
       <br>
-      <ion-button type="submit" expand="full" fill="solid" size="default" [disabled]="isLoading || !form.valid">
+      <ion-button type="submit" expand="full" fill="solid" size="default">
         Upload
       </ion-button>
     </form>

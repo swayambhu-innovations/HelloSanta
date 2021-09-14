@@ -7,7 +7,7 @@
       <h2 id="your-cart-title">Your Wishlist</h2>
       <div class="product-row">
         <app-product-full-card *ngFor="let order of wishlist" 
-        [img]="order.productImages[0].image" 
+        [img]="order.productImages" 
         [productTitle]="order.productName"
         [price]="order.productPrice"
         [productId]="order.productId"

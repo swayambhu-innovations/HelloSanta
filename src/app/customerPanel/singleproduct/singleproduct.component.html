@@ -154,7 +154,7 @@
                         <h1 class="headingproducts uk-text-center">More Products like This</h1>
                         <div class="product-row uk-text-center uk-align-center">
                             <app-product-full-card *ngFor="let product of recommendationProducts"
-                                [img]="product.productImages[0].image" [productTitle]="product.productName"
+                                [img]="product.productImages" [productTitle]="product.productName"
                                 [productDescription]="product.seoDescription" [price]="product.productPrice"
                                 [productId]="product.productId">
                             </app-product-full-card>

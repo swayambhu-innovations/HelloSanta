@@ -5,7 +5,7 @@
   <div *ngIf="showProgress">
     <ion-progress-bar [color]="progressColor" [value]="progressValue" [type]="progressType"></ion-progress-bar>
   </div>
-  <mat-stepper #stepper [linear]="true">
+  <mat-stepper #stepper [linear]="false">
     <mat-step [completed]="basicDetail.valid" [stepControl]="basicDetail" [editable]="true">
       <form [formGroup]="basicDetail" (ngSubmit)="addBasicDetailProduct(stepper)" method="POST">
         <ng-template matStepLabel>Product Basic Details</ng-template>
