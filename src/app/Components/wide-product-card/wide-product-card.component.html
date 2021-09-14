@@ -9,7 +9,7 @@
       <p class="order-price">Price: ₹{{orderprice * quantity}}</p>
       <ion-button *ngIf="showActions" class="order-remove" (click)="removeFromWishlist()">Remove</ion-button>
       <ion-button *ngIf="showActions" class="order-view"
-        href="./product?productId={{this.productId}}">View
+        routerLink="../product" [queryParams]="{productId:productId}">View
         Product</ion-button>
         <ion-item button lines="none" *ngIf="showImageInput">
           <input type="file" name="file" max="1" (change)="changeImage($event)" id="file"/>

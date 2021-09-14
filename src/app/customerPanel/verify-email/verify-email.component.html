@@ -9,10 +9,10 @@
   <img src="assets/vectors/emailVerify.png" alt="">
 </ion-card>
 <ion-card *ngIf="authService.isEmailVerified">
-  <p class="txt2 uk-text-center" color="danger" >Email verified. Move to <a href="./">
+  <p class="txt2 uk-text-center" color="danger" >Email verified. Move to <a routerLink="../">
       Home
   </a></p>
-  <ion-button href="./" expand="block" shape="round">
+  <ion-button routerLink="../" expand="block" shape="round">
     Move to home
   </ion-button>
   <img src="assets/vectors/emailVerify.png" alt="">

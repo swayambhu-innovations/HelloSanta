@@ -38,9 +38,9 @@
                             {{productData.productName}}<br><span>{{productData.shortDescription}}</span>
                         </h2>
                         <div id="product-feature-buttons" *ngIf="screenwidth>1020">
-                            <a href="./specificProducts?category={{catText}}" *ngFor="let catText of category"><button
+                            <a routerLink="../specificProducts" [queryParams]="{category:catText}" *ngFor="let catText of category"><button
                                     class="product-feature-button">{{catText}}</button></a>
-                            <a href="./specificProducts?category={{subcatText}}"
+                            <a routerLink="../specificProducts" [queryParams]="{category:subcatText}"
                                 *ngFor="let subcatText of subcategory"><button
                                     class="product-feature-button">{{subcatText}}</button></a>
                         </div>

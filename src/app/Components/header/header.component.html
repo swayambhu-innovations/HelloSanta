@@ -1,7 +1,7 @@
 
 <div class="headerdesk">
 <div class="header" id="">
-  <a href="/" class="logo"><img src="assets/logo.svg" alt="Hello Santa"></a>
+  <a routerLink="/" class="logo"><img src="assets/logo.svg" alt="Hello Santa"></a>
   <div class="search">
     <input type="text" placeholder=" Search Anything..." name="search" id="searchInput"
       (change)="presentSearchResult($event)">
@@ -22,12 +22,12 @@
       </span>
       <ion-icon *ngIf="cartItems.length <= 0" name="cart"></ion-icon>
     </button>
-    <a href="./calendar">
+    <a routerLink="../calendar">
       <button class="onlyIcon" *ngIf="authService.isJustLoggedIn">
         <ion-icon name="calendar-number"></ion-icon>
       </button>
     </a>
-    <a href="./referral">
+    <a routerLink="../referral">
       <button class="onlyIcon" *ngIf="authService.isJustLoggedIn">
         <span *ngIf="coins > 0" [matBadge]="coins" matBadgePosition='above after'
           matBadgeColor="warn" matBadgeOverlap="false">
@@ -36,10 +36,10 @@
         <ion-icon *ngIf="coins <= 0 || coins==undefined" name="wallet"></ion-icon>
       </button>
     </a>
-    <ion-button href="./login/" *ngIf="!authService.isJustLoggedIn">
+    <ion-button routerLink="../login/" *ngIf="!authService.isJustLoggedIn">
       Log In
     </ion-button>
-    <ion-button href="./signup/" *ngIf="!authService.isJustLoggedIn">
+    <ion-button routerLink="../signup/" *ngIf="!authService.isJustLoggedIn">
       Register
     </ion-button>
   </div>
@@ -51,18 +51,18 @@
           <ion-icon name="menu"></ion-icon>
         </button></li>
     </div>
-    <li><a href="/">Home</a></li>
-    <li><a href="/shop/">Shop</a></li>
+    <li><a routerLink="/">Home</a></li>
+    <li><a routerLink="/shop/">Shop</a></li>
     <div uk-dropdown class="dog">
       <ul class="uk-nav uk-dropdown-nav " style="display:block">
-          <li><a href="/specificProducts?category={{category}}" *ngFor="let category of categories">{{category}}</a></li>
+          <li><a routerLink="/specificProducts" [queryParams]="{category:category}" *ngFor="let category of categories">{{category}}</a></li>
       </ul>
     </div>
-    <li><a href="/bloghome/">Blog</a></li>
-    <li><a href="/help/">Contact</a></li>
-    <li *ngIf="this.authService.getCurrenAccessLevel == 'Admin'"><a href="/AdminPanel/Dashboard">Admin Panel</a></li>
-    <li *ngIf="this.authService.getCurrenAccessLevel == 'Vendor'"><a href="/VendorPanel/Dashboard">Vendor Panel</a></li>
-    <li><a href="/wishlist">Wishlist</a></li>
+    <li><a routerLink="/bloghome/">Blog</a></li>
+    <li><a routerLink="/help/">Contact</a></li>
+    <li *ngIf="this.authService.getCurrenAccessLevel == 'Admin'"><a routerLink="/AdminPanel/Dashboard">Admin Panel</a></li>
+    <li *ngIf="this.authService.getCurrenAccessLevel == 'Vendor'"><a routerLink="/VendorPanel/Dashboard">Vendor Panel</a></li>
+    <li><a routerLink="/wishlist">Wishlist</a></li>
   </ul>
 </div>
 <div id="offcanvas-push" uk-offcanvas="overlay: true">
@@ -71,16 +71,16 @@
       <ion-icon name="close"></ion-icon>
     </button>
     <ul>
-      <li *ngIf="!this.authService.isJustLoggedIn"><a href="/login">Login</a></li>
-      <li><a href="/account">Account</a></li>
-      <li *ngIf="this.authService.getCurrenAccessLevel == 'Vendor'"><a href="/VendorPanel/Dashboard">Vendor Panel</a>
+      <li *ngIf="!this.authService.isJustLoggedIn"><a routerLink="/login">Login</a></li>
+      <li><a routerLink="/account">Account</a></li>
+      <li *ngIf="this.authService.getCurrenAccessLevel == 'Vendor'"><a routerLink="/VendorPanel/Dashboard">Vendor Panel</a>
       </li>
-      <li *ngIf="this.authService.getCurrenAccessLevel == 'Admin'"><a href="/AdminPanel/Dashboard">Admin Panel</a></li>
-      <li><a href="/help">Contact Us</a></li>
-      <li><a href="/orders">Your Orders</a></li>
-      <li><a href="/disclaimer">Disclaimer</a></li>
-      <li><a href="/privacypolicy">Privacypolicy</a></li>
-      <li><a href="/termsandconditions">Terms&conditions</a></li>
+      <li *ngIf="this.authService.getCurrenAccessLevel == 'Admin'"><a routerLink="/AdminPanel/Dashboard">Admin Panel</a></li>
+      <li><a routerLink="/help">Contact Us</a></li>
+      <li><a routerLink="/orders">Your Orders</a></li>
+      <li><a routerLink="/disclaimer">Disclaimer</a></li>
+      <li><a routerLink="/privacypolicy">Privacypolicy</a></li>
+      <li><a routerLink="/termsandconditions">Terms&conditions</a></li>
     </ul>
     <div class="bottomAvatar">
       <ion-row>
@@ -92,10 +92,10 @@
         <ion-button (click)="authService.SignOut()" *ngIf="authService.isJustLoggedIn">
           Log Out
         </ion-button>
-        <ion-button href="./login/" *ngIf="!authService.isJustLoggedIn">
+        <ion-button routerLink="../login/" *ngIf="!authService.isJustLoggedIn">
           Log In
         </ion-button>
-        <ion-button href="./signup/" *ngIf="!authService.isJustLoggedIn">
+        <ion-button routerLink="../signup/" *ngIf="!authService.isJustLoggedIn">
           Register
         </ion-button>
       </ion-row>
@@ -107,7 +107,7 @@
   <button uk-toggle="target: #offcanvas-push">
     <ion-icon name="menu"></ion-icon>
   </button>
-  <a class="img" href="/">
+  <a class="img" routerLink="/">
   <img src="./assets/logo-light.svg" alt="Hello Santa Logo">
 </a>
   <button (click)="presentSearch($event)">

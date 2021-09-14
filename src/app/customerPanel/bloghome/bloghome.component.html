@@ -8,10 +8,10 @@
     <div class="fourthbox" *ngIf="blogs.length>0">
       <p class="firstheading">{{blogs[0].blogTitle}}</p>
       <p class="heading-discription" *ngIf="screenwidth>1020" >{{blogs[0].blogExcerpt}}</p>
-      <button class="button" *ngIf="screenwidth>1020"><a href="/blog">Read more</a></button>
+      <button class="button" *ngIf="screenwidth>1020"><a routerLink="/blog">Read more</a></button>
     </div>
     <p class="heading-discription" *ngIf="screenwidth<1024" [innerHTML]="blogs[0].blogContent"></p>
-    <button class="button" *ngIf="screenwidth<1024"><a href="/blog">Read more</a></button>
+    <button class="button" *ngIf="screenwidth<1024"><a routerLink="/blog">Read more</a></button>
   </div>
   <img class="NotFoundImage" src="./assets/NotFound.gif" alt="No Blog Found" *ngIf="blogs.length<=0">
   <main id="blog" *ngIf="blogs.length>0">

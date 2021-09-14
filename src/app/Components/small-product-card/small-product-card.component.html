@@ -1,4 +1,4 @@
-<ion-card class="latest-order-card" href="./product?productId={{productId}}">
+<ion-card class="latest-order-card" routerLink="../product" [queryParams]="{productId:productId}">
   <img [src]="img"
        alt="{{productTitle}}" class="latest-order-img">
   <div class="latest-order-details">

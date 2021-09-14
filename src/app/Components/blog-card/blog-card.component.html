@@ -1,4 +1,4 @@
-<ion-card href="./blog?id={{blogId}}" class="blog-card">
+<ion-card routerLink="../blog" [queryParams]="{id:blogId}" class="blog-card">
   <img [src]="blogimg"
        alt="{{blogTitle}}" class="blog-img">
   <div class="blog-details">

@@ -1,5 +1,5 @@
 <ion-card class="category-card " uk-scrollspy-class="uk-animation-slide-top">
-  <a href="./product?productId={{this.productId}}" >
+  <a routerLink="../product" [queryParams]="{productId:this.productId}" >
     <!-- <img [src]="img[0].image" (mouseenter)="hover=true" (mouseleave)="hover=!hover" alt="{{categoryTitle}}" class="category-img" *ngIf="hover">
     <img [src]="img[1].image" (mouseenter)="hover=true" (mouseleave)="hover=!hover" alt="{{categoryTitle}}" class="category-img" *ngIf="!hover"> -->
     <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
