@@ -72,6 +72,7 @@ ion-list {
   //   align-items: flex-start;
 }
 
+
 @media only screen and (max-width: 1024px) {
   #orders-container {
     border-radius: 25px;
@@ -90,5 +91,13 @@ ion-list {
   }
   .text11 {
     width: 100%;
+  }
+  .product-row{
+    display: flex;
+    flex-wrap: nowrap;
+    // flex-direction: row;
+    overflow-y: auto;
+    padding:20px;
+    justify-content:normal;
   }
 }

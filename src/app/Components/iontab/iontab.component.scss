@@ -3,6 +3,7 @@ ion-tabs{
     position: sticky !important;
     bottom: 0%;
     height:7%;
+    z-index: 1000;
 }
 
 ion-tab-button{

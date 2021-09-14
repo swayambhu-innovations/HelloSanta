@@ -28,11 +28,11 @@
                   <input type="tel" class="form-input" (change)="changeField($event,'mobile')" id="mobile" placeholder="Mobile">
               </div>
               <div class="form-input-div">
-                  <select class="form-input" id="gender" (change)="changeField($event,'gender')">
-                      <option value="M">Male</option>
-                      <option value="F">Female</option>
-                      <option value="O">Prefer not to say</option>
-                  </select>
+                  <ion-select class="form-input" id="gender" (change)="changeField($event,'gender')" placeholder="Gender">
+                      <ion-select-option value="M">Male</ion-select-option>
+                      <ion-select-option value="F">Female</ion-select-option>
+                      <ion-select-option value="O">Prefer not to say</ion-select-option>
+                  </ion-select>
               </div>
               <div class="form-input-div">
 
