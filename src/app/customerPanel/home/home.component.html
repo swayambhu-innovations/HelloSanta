@@ -67,10 +67,10 @@
     </div>
   </div>
   <div class="uk-panel inner-box88" *ngIf="screenwidth<1024">
-    <div class="uk-position-center uk-panel">
-      <section id="orders-container1">
-        <h1 class="handmade2">Gifts that Everyone Likes</h1>
-        <div class="product-row" >
+    <h1 class="handmade2">Gifts that Everyone Likes</h1>
+    <div class="uk-position-center uk-panel" id="category">
+      <section id="orders-container-small">
+        <div class="product-row-small" >
           <app-category-card *ngFor="let othercategory of allHandmadeProds" [img]="othercategory.productImages"
             [categoryTitle]="othercategory.productName" [price]="othercategory.productPrice" [category]="othercategory.productCategory" [subcategory]="othercategory.productSubcategory" [productId]="othercategory.productId">
           </app-category-card>
@@ -109,11 +109,11 @@
       </section>
     </div>
   </div>
-  <div class="uk-panel inner-box88" style="padding-top: 50px" *ngIf="screenwidth<1024">
-    <div class="uk-position-center uk-panel">
-      <section id="orders-container2">
-        <h1 class="handmade2">Gifts from Creative Box</h1>
-        <div class="product-row1" >
+  <div class="uk-panel inner-box88"  *ngIf="screenwidth<1024">
+    <h1 class="handmade2">Gifts from Creative Box</h1>
+    <div class="uk-position-center uk-panel" id="category">
+      <section id="orders-container-small">
+        <div class="product-row-small" >
           <app-category-card *ngFor="let category of allDigitalProds" [img]="category.productImages"
             [categoryTitle]="category.productName" [price]="category.productPrice" [productId]="category.productId">
           </app-category-card>
