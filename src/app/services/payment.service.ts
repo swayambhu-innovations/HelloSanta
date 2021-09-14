@@ -2,14 +2,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-
+import { AngularFireFunctions } from '@angular/fire/functions';
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private firebaseFunction:AngularFireFunctions,
   ) { }
 
   get WindowRef() {
@@ -17,7 +18,8 @@ export class PaymentService {
   }
 
   checkShipmentDetail(shipmentId){
-    return this.http.post(environment.cloudFunctions.checkOrderShipment, {shipmentId:shipmentId});
+    return this.firebaseFunction.httpsCallable('checkOrderShipment')(shipmentId);
+    // return this.http.post(environment.cloudFunctions.checkOrderShipment, {shipmentId:shipmentId});
   }
   
   createOrder(orderDetails) {

@@ -61,7 +61,7 @@ ion-item > ion-label {
   font-size: 1.5em;
   line-height: 1.5;
 }
-.config{
+.config {
   font-size: 0.8em;
 }
 .order-price-and-btns {
@@ -127,7 +127,7 @@ ion-card {
     padding: 0.5em;
     width: 100%;
     font-size: 1rem;
-text-align: center;
+    text-align: center;
   }
 
   .order-title {
@@ -172,7 +172,7 @@ text-align: center;
     line-height: 1.5;
     text-align: center;
   }
-  .config{
+  .config {
     font-size: 0.75em;
   }
 }
