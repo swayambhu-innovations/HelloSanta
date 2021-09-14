@@ -69,7 +69,6 @@ import { VPIssuesComponent } from './vendorPanel/vp-issues/vp-issues.component';
 import { VPFeedbackComponent } from './vendorPanel/vp-feedback/vp-feedback.component';
 import { FeedbackCardComponent } from './Components/feedback-card/feedback-card.component';
 import { IssuesCardComponent } from './Components/issues-card/issues-card.component';
-import { RatingModule } from 'ng-starrating';
 import { VPOrdersSummaryCardComponent } from './Components/vporders-summary-card/vporders-summary-card.component';
 import { VPProductCardComponent } from './Components/vpproduct-card/vpproduct-card.component';
 import { AuthService } from './services/auth.service';
@@ -233,7 +232,6 @@ import { AboutusComponent } from './customerPanel/aboutus/aboutus.component';
     HttpClientModule,
     BrowserModule,
     ReactiveFormsModule,
-    RatingModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireStorageModule,

@@ -31,7 +31,6 @@
     "ionic2-calendar": "^0.6.9",
     "jspdf": "^2.3.1",
     "jspdf-autotable": "^3.5.20",
-    "ng-starrating": "^1.0.20",
     "ngx-image-zoom": "^0.6.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.1",
