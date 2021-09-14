@@ -125,6 +125,7 @@ import { CustomErrorHandlerService } from './services/logger.service';
 import { ShopComponent } from './customerPanel/shop/shop.component';
 import { IontabComponent } from './Components/iontab/iontab.component';
 import { NotFound404Component } from './customerPanel/not-found404/not-found404.component';
+import { AboutusComponent } from './customerPanel/aboutus/aboutus.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -225,6 +226,7 @@ import { NotFound404Component } from './customerPanel/not-found404/not-found404.
     ShopComponent,
     IontabComponent,
     NotFound404Component,
+    AboutusComponent,
   ],
   entryComponents: [],
   imports: [

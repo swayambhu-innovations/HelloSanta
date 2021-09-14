@@ -52,11 +52,13 @@ import { CalenderComponent } from './customerPanel/calender/calender.component';
 import { CategoryProductsComponent } from './customerPanel/category-products/category-products.component';
 import { ShopComponent } from './customerPanel/shop/shop.component';
 import { NotFound404Component } from './customerPanel/not-found404/not-found404.component';
+import { AboutusComponent } from './customerPanel/aboutus/aboutus.component';
 const routes: Routes = [
   {path:'', component:HomeComponent},
   {path:'login', component:AuthLoginComponent},
   {path:'signup', component:AuthSignUpComponent},
   {path:'setup', component:SetupComponent},
+  {path:'aboutus', component:AboutusComponent},
   {path:'profile', component:ProfileComponent,
   canActivate:[LoginGuard],
   data: { authGuardPipe: redirectLoggedInTo(['/Login']), "route":"checkout" },},
