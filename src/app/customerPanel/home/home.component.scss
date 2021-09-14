@@ -67,7 +67,7 @@ button {
   background: rgba(255, 255, 255, 0.7);
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-
+  overflow-y: auto;
   align-items: center;
 }
 .handmade2 {
@@ -93,11 +93,10 @@ button {
   align-items: flex-start;
 }
 
+
 #blog {
-  width: 95%;
+  width: 98%;
   margin: 3em auto;
-  display: flex;
-  justify-content: space-between;
 }
 
 .blogs {
@@ -113,11 +112,10 @@ button {
 #blog-container {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 25px;
-  width: 90%;
+  width: 95%;
   margin: 0% auto;
   height: fit-content;
   padding: 1em;
-  align-items: flex-start;
 }
 
 #orders-container2 {
@@ -428,7 +426,10 @@ margin: auto;
     flex-direction: row;
     overflow-x: auto;
     justify-content: space-evenly;
-    align-items: none;
+  }
+  .blog-addspace{
+width: 500px;
+height: 1px;
   }
   .blogs {
     text-align: center;

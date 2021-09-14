@@ -188,12 +188,11 @@
     <div id="blog">
       <section id="blog-container">
         <h1 class="blogs">Read More Blogs</h1>
-        <ion-slides >
-          <ion-slide>
+        <div class="product-row-blog">
+          <div class="blog-addspace"></div>
           <app-blog-card *ngFor="let blog of blogs" [blogimg]="blog.blogImage" [blogTitle]="blog.blogTitle"
             [blogDescription]="blog.blogExcerpt" [blogId]="blog.blogId"></app-blog-card>
-          </ion-slide>
-        </ion-slides>
+          </div>
       </section>
     </div>
   </div>
