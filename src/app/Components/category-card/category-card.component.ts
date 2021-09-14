@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { InventoryService } from 'src/app/services/inventory.service';
 
@@ -16,6 +16,7 @@ export class CategoryCardComponent implements OnInit {
   @Input() price:string;
   wishlist:any=this.authService.getCurrentWishlist();
   hover:boolean=false;
+  @ViewChild('icon') card: any;
   constructor(public authService: AuthService,private inventoryService: InventoryService) { }
   has(){
     let found = false;
@@ -26,7 +27,11 @@ export class CategoryCardComponent implements OnInit {
     })
     return found;
   }
-  addToWishlist(){
+  delay(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+  async addToWishlist(){
+    this.card.el.classList.add('uk-animation-shake');
     if (this.has()){
       console.log("Already in wishlist removing it")
       this.inventoryService.removeFromWishlist(this.productId);
@@ -38,6 +43,8 @@ export class CategoryCardComponent implements OnInit {
       this.wishlist.push(this.productId);
       this.authService.presentToast("Added to wishlist");
     }
+    await this.delay(1000);
+    this.card.el.classList.remove('uk-animation-shake')
   }
   ngOnInit(){
 
