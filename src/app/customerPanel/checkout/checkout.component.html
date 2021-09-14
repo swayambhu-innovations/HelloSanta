@@ -17,7 +17,7 @@
               <thead id="orders-table-head">
                 <tr>
                   <th>Product Name</th>
-                  <th>Quantity</th>
+                  <th>Qty</th>
                   <th>Price</th>
                   <th>Total Price</th>
                 </tr>
@@ -41,7 +41,7 @@
             </table>
           </section>
           <ion-card>
-            <h3 style="text-align: center;font-size: 20px;">
+            <h3 style="text-align: center;font-size: 20px; font-family: Raleway;">
               Delivery info
             </h3>
             <ion-list>
@@ -113,7 +113,7 @@
                 </ion-item>
                 <ion-item *ngIf="checkbox.checked">
                   <ion-label position="floating">Your Message</ion-label>
-                  <ion-textarea placeholder="Enter your message" formControlName="message"></ion-textarea>
+                  <ion-textarea placeholder="Enter your message" formControlName="message" rows="5"></ion-textarea>
                 </ion-item>
                 <ion-item *ngIf="santaCoins>0">
                   <ion-checkbox [checked]="false" formControlName="santaCredit" (ionChange)="setCashback($event)"></ion-checkbox>
@@ -136,8 +136,8 @@
       </div>
     </div>
   </div>
-  <app-iontab  *ngIf="screenwidth<600"></app-iontab>
   <app-footer></app-footer>
+  <app-iontab  *ngIf="screenwidth<600"></app-iontab>
 </ion-content>
 <div id="overlay" *ngIf="dataProvider.showOverlay">
   <ion-spinner name="crescent" color="tertiary"></ion-spinner>

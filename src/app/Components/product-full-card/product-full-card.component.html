@@ -10,8 +10,7 @@
   <div class="order-price-and-add-to-cart">
     <p class="order-price">Starting at: <br><span>₹{{price}}</span></p>
     <div class="uk-animation-toggle" tabindex="0">
-      <button *ngIf="authService.isJustLoggedIn" (click)="addToWishlist()" class="order-add-to-cart uk-animation-shake"><ion-icon [name]="has() ? 'heart' : 'heart-outline'"></ion-icon></button>
+      <button *ngIf="authService.isJustLoggedIn" (click)="addToWishlist()" class="order-add-to-cart animation-scale-up"><ion-icon [name]="has() ? 'heart' : 'heart-outline'"></ion-icon></button>
   </div>
-   
   </div>
 </ion-card>

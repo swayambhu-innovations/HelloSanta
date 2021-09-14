@@ -19,7 +19,7 @@ export class AccountComponent implements OnInit {
   totalOrders: string;
   totalRefers: string;
   totalCashback: string;
-  totalSales: string;
+  totalCoins: string;
   country:string;
   type: string;
   dob: string;
@@ -49,7 +49,7 @@ export class AccountComponent implements OnInit {
       this.totalOrders=value.totalOrders;
       this.totalRefers=value.totalReferred;
       this.totalCashback=value.totalCashback;
-      this.totalSales=value.totalSalesPoints;
+      this.totalCoins=value.totalSalesPoints;
       this.liveOrders=value.currentOrder;
       this.socialAccounts=value.socialMedia;
       this.country=value.country;

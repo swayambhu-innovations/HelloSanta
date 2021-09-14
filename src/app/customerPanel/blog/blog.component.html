@@ -10,9 +10,6 @@
 </div>
 <div class="uk-panel" >
     <div class="inner-box">
-      <h3
-        style="font-family: Poppins;text-align: left;padding-left: 8%;padding-top: 2%;font-weight: bolder;font-size: 20px;color: #6D5DE3;">
-        {{blogdate}}</h3>
       <h1 class="heading">{{blogtitle}}</h1>
       <div class="mainContent" [innerHTML]="blogcontent"></div>
     </div>
@@ -22,6 +19,6 @@
     <button class="button4"><a href="/bloghome">Next &gt;&gt;</a></button>
   </div>
   </div>
-  <app-iontab  *ngIf="screenwidth<600"></app-iontab>
   <app-footer></app-footer>
+  <app-iontab  *ngIf="screenwidth<600"></app-iontab>
 </ion-content>

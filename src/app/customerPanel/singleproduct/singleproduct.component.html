@@ -37,7 +37,7 @@
                         <h2 id="product-name">
                             {{productData.productName}}<br><span>{{productData.shortDescription}}</span>
                         </h2>
-                        <div id="product-feature-buttons">
+                        <div id="product-feature-buttons" *ngIf="screenwidth>600">
                             <a href="./specificProducts?category={{catText}}" *ngFor="let catText of category"><button
                                     class="product-feature-button">{{catText}}</button></a>
                             <a href="./specificProducts?category={{subcatText}}"
@@ -135,8 +135,8 @@
                 </div>
             </section>
             <section id="product-description">
-                <ion-item *ngIf="authService.isJustLoggedIn">
-                    <ion-title style="font-size: 20px;">Ratings</ion-title>
+                <ion-item *ngIf="authService.isJustLoggedIn"class="title">
+                    <ion-title class="title1">Ratings</ion-title>
                     <ion-button *ngIf="purchasedProduct" (click)="addComment($event)" size="medium" fill="outline">
                         Add Review
                     </ion-button>
@@ -145,7 +145,7 @@
                     <app-comment-card [image]="comment.userImage" [stars]="comment.stars" [body]="comment.commentBody"
                         [title]="comment.commentTitle" [commentDate]="comment.commentDate" [username]="comment.userName"
                         *ngFor="let comment of comments"></app-comment-card>
-                    <img src="./assets/NotFound.gif" alt="Nothing TO Show" *ngIf="comments.length<=0">
+                    <img src="./assets/no-review-01.jpg" class="review-image" alt="Nothing TO Show" *ngIf="comments.length<=0">
                 </div>
             </section>
             <div id="container2">
@@ -165,8 +165,8 @@
             </div>
         </main>
     </div>
-    <app-iontab  *ngIf="screenwidth<600"></app-iontab>
     <app-footer></app-footer>
+    <app-iontab  *ngIf="screenwidth<600"></app-iontab>
 </ion-content>
 <div id="overlay" *ngIf="dataProvider.showOverlay">
     <ion-spinner name="crescent" color="tertiary"></ion-spinner>

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./accordion.component.scss'],
 })
 export class AccordionComponent implements OnInit {
-
+  screenwidth = window.innerWidth;
   constructor() { }
 
   ngOnInit() {}

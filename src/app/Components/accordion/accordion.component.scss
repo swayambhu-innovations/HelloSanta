@@ -46,7 +46,7 @@ background-color: #6D5DE3;
 
   @media only screen and (max-width: 1024px) {
 .title{
-  font-size: 1rem;
+  font-size: 2rem;
   padding-right: 30px;
   padding-left: 30px;
 }
@@ -56,6 +56,7 @@ width: 80%;
  .inner-box4{
    width: 95vw;
    margin:5% 2.5% 10%;
+   box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
  }
  .uk-accordion-title{
   font-size: 1rem;

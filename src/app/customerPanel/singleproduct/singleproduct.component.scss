@@ -32,7 +32,7 @@ ion-content > div > div > ion-spinner{
     color:var(--ion-color-primary);
 }
 ion-item{
-    width:300px;
+    width:200px;
     margin: 0 auto;
 }
 ion-item > button {
@@ -42,7 +42,7 @@ ion-item > button {
     color: white;
 }
 ion-item > button > ion-icon {
-    font-size: 30px;
+    font-size: 20px;
 }
 ion-item > ion-label {
     text-align: center;
@@ -232,7 +232,7 @@ button[disabled]{
   padding: 50px;
   background: rgba(255, 255, 255, .7);
   box-shadow: #9081ff3b 10px 20px 30px 0px;
-  border-radius: 50px;
+  border-radius: 20px;
   border: 3px solid #9081FF;
 }
 #product-description > ion-card {
@@ -248,6 +248,19 @@ button[disabled]{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+.review-image{
+    width: 800px;
+    height: auto;
+    margin: auto;
+font-size: 15px; 
+text-align: center;
+}
+.title{
+    font-size: 50px; text-align: center; margin: auto;
+}
+.title1{
+    font-size: 25px; text-align: center; margin: auto;
 }
 #product-description > img{
     width:500px;
@@ -371,6 +384,19 @@ ion-radio-group{
         width:80vw;
         margin:auto 0;
     }
+    .review-image{
+        width: 100px;
+        height: auto;
+        margin: auto;
+    font-size: 20px; 
+    text-align: center;
+    }
+    .title{
+        font-size: 20px; text-align: center; margin-left: 40px;
+    }
+    .title1{
+        font-size: 15px; text-align: center; margin: auto;
+    }
     #container2 {
       margin-top: 50px;
       width: 99%;
@@ -382,7 +408,6 @@ ion-radio-group{
         align-items: flex-start;
         flex-direction: column;
     }
-    
     #product-images {
         width: 100vw;
         display: flex;
@@ -429,7 +454,7 @@ ion-radio-group{
     }
     #product-name {
         color: #6D5CE5;
-        font-size: 2rem;
+        font-size: 1.5rem;
         font-family: 'Poppins';
         line-height: 1;
     }
@@ -446,6 +471,11 @@ ion-radio-group{
     
     .product-action-button {
         padding: .5em 0.8em;
+        font-family: 'Poppins';
+        font-size: 1rem;
+        margin: 0 0.75em;
+        border-radius: 25px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     }
 
     #product-filters {
@@ -466,14 +496,14 @@ ion-radio-group{
         font-family: 'Poppins';
         width: 50%;
         color: #6D5CE5;
-        font-size: 1.2em;
+        font-size: 0.75em;
         font-weight: 700;
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         border: none;
     }
 
     ion-item{
-        margin: 0 1.5em;
+        margin: 0 0.25em;
     }
 
     #orders-container {
@@ -481,9 +511,9 @@ ion-radio-group{
       }
       #product-price{
         color: #5AC179;
-        font-size: 2rem;
+        font-size: 1.25rem;
         font-weight: 700;
-        margin: 1em 2em;
-        text-align: center;
+        margin: 0.25em 1.25em;
+        text-align: left;
     }
   }

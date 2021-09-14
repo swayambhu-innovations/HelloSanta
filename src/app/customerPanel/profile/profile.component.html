@@ -2,7 +2,6 @@
   <app-header></app-header>
   <div class="home">
   <main id="container">
-      <app-sidenav activeLinkID="account" ></app-sidenav>
       <section id="profile-container">
           <div id="img-name-and-email">
             <img [src]="authService.getUserPhoto()"
@@ -19,35 +18,32 @@
           <h3>Just change the required fields, it will be updated automatically.</h3>
           <form action="" id="edit-form">
               <div class="form-input-div">
-                  <label for="first-name" class="form-label">Full Name</label>
-                  <input type="text" class="form-input" (change)="changeField($event,'firstName')" id="first-name">
+                  <input type="text" class="form-input" (change)="changeField($event,'firstName')" id="first-name" placeholder="Full Name" >
               </div>
               <div class="form-input-div">
-                  <label for="date-of-birth" class="form-label">Date of Birth</label>
-                  <input type="date" class="form-input" (change)="changeField($event,'dob')" id="date-of-birth">
+                  <input type="date" class="form-input" (change)="changeField($event,'dob')" id="date-of-birth" placeholder="Date of Birth" >
               </div>
               <div class="form-input-div">
-                  <label for="mobile" class="form-label">Mobile Number</label>
-                  <input type="tel" class="form-input" (change)="changeField($event,'mobile')" id="mobile">
+                  <input type="tel" class="form-input" (change)="changeField($event,'mobile')" id="mobile" placeholder="Mobile">
               </div>
               <div class="form-input-div">
-                  <label for="gender" class="form-label">Gender</label>
                   <select class="form-input" id="gender" (change)="changeField($event,'gender')">
                       <option value="M">Male</option>
                       <option value="F">Female</option>
-                      <option value="O">Others</option>
+                      <option value="O">Prefer not to say</option>
                   </select>
               </div>
               <div class="form-input-div">
-                  <label for="country" class="form-label">Country</label>
-                  <input type="text" class="form-input" (change)="changeField($event,'country')" id="country">
+
+                  <input type="text" class="form-input" (change)="changeField($event,'country')" id="country" placeholder="Country">
               </div>
           </form>
       </section>
+      <app-sidenav activeLinkID="account" ></app-sidenav>
   </main>
 </div>
-<app-iontab  *ngIf="screenwidth<600"></app-iontab>
   <app-footer></app-footer>
+  <app-iontab  *ngIf="screenwidth<600"></app-iontab>
 </ion-content>
 <div id="overlay" *ngIf="dataProvider.showOverlay">
     <ion-spinner name="crescent" color="tertiary"></ion-spinner>

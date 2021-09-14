@@ -2,7 +2,7 @@
   <app-header></app-header>
   <div class="home">
   <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1"
-    uk-slideshow="autoplay: true;autoplay-interval: 5000;pause-on-hover: true;ratio: 12:3; animation: push"
+    uk-slideshow="autoplay: true;autoplay-interval: 5000;pause-on-hover: true;ratio: 12:3; animation: fade"
     *ngIf="screenwidth>600">
     <ul class="uk-slideshow-items">
       <li>
@@ -21,18 +21,18 @@
       uk-slideshow-item="next"></a>
   </div>
   <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1"
-    uk-slideshow="autoplay: true;autoplay-interval: 5000;pause-on-hover: true;min-height: 400; max-height: 800; animation: push"
+    uk-slideshow="autoplay: true;autoplay-interval: 5000;pause-on-hover: true;min-height: 150; max-height: 150; animation: fade"
     *ngIf="screenwidth<600">
 
     <ul class="uk-slideshow-items">
       <li>
-        <img src="assets/2.png" alt="" uk-cover>
+        <img src="assets/banner-39.jpg" alt="" uk-cover>
       </li>
       <li>
-        <img src="assets/4.png" alt="" uk-cover>
+        <img src="assets/banner-40.jpg" alt="" uk-cover>
       </li>
       <li>
-        <img src="assets/6.png" alt="" uk-cover>
+        <img src="assets/banner-31.jpg" alt="" uk-cover>
       </li>
     </ul>
     <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
@@ -40,7 +40,7 @@
     <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
       uk-slideshow-item="next"></a>
   </div>
-    <div class="wrapper" >
+    <div class="wrapper" *ngIf="screenwidth>600">
       <div class="static-txt">Hello Santa offers</div>
       <ul class="dynamic-txts">
         <li><span>Free Shipping</span></li>
@@ -49,13 +49,27 @@
         <li><span>Personalised Gifts</span></li>
       </ul>
     </div>
-  <div class="uk-panel">
+    <div class="static text" *ngIf="screenwidth<600">
+      <p style="font-family: 'Crimson Text', serif; text-align: center;font-size: 20px; margin-top:30px;">Every gift from a friend <br>is a message for your happiness.</p>
+    </div>
+  <div class="uk-panel" *ngIf="screenwidth>600">
     <img style="width: 100%" src="assets/Union.png" alt="">
     <div class="uk-position-center uk-panel">
       <section id="orders-container1">
         <h1 class="handmade"><a href="/shop">Our <span style="color: #F3F692">Beloved</span> Range of <span
               style="color: #F3F692">Handmade</span> Products</a></h1>
-        <div class="product-row" *ngIf="screenwidth>600">
+        <div class="product-row" >
+          <app-category-card *ngFor="let othercategory of allHandmadeProds" [img]="othercategory.productImages[0].image"
+            [categoryTitle]="othercategory.productName" [category]="othercategory.productCategory" [subcategory]="othercategory.productSubcategory" [productId]="othercategory.productId"></app-category-card>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div class="uk-panel inner-box88" *ngIf="screenwidth<600">
+    <div class="uk-position-center uk-panel">
+      <section id="orders-container1">
+        <h1 class="handmade2">Gifts that Everyone Likes</h1>
+        <div class="product-row" >
           <app-category-card *ngFor="let othercategory of allHandmadeProds" [img]="othercategory.productImages[0].image"
             [categoryTitle]="othercategory.productName" [category]="othercategory.productCategory" [subcategory]="othercategory.productSubcategory" [productId]="othercategory.productId"></app-category-card>
         </div>
@@ -69,13 +83,25 @@
   </div>
     
   </div>
-  <div class="uk-panel" style="padding-top: 50px">
+  <div class="uk-panel" style="padding-top: 50px" *ngIf="screenwidth>600">
     <img style="width: 100%" src="assets/Union1.png" alt="">
     <div class="uk-position-center uk-panel">
       <section id="orders-container2">
         <h1 class="digital"><a href="/shop">Our <span style="color: #FF6584">Beloved</span> Range of <span
               style="color: #FF6584">Digital</span> Products</a></h1>
         <div class="product-row1" *ngIf="screenwidth>600">
+          <app-category-card *ngFor="let category of allDigitalProds" [img]="category.productImages[0].image"
+            [categoryTitle]="category.productName" [productId]="category.productId">
+          </app-category-card>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div class="uk-panel inner-box88" style="padding-top: 50px" *ngIf="screenwidth<600">
+    <div class="uk-position-center uk-panel">
+      <section id="orders-container2">
+        <h1 class="handmade2">Gifts from Creative Box</h1>
+        <div class="product-row1" >
           <app-category-card *ngFor="let category of allDigitalProds" [img]="category.productImages[0].image"
             [categoryTitle]="category.productName" [productId]="category.productId">
           </app-category-card>
@@ -150,10 +176,12 @@
     <div id="blog">
       <section id="blog-container">
         <h1 class="blogs">Read More Blogs</h1>
-        <div class="product-row">
+        <ion-slides >
+          <ion-slide>
           <app-blog-card *ngFor="let blog of blogs" [blogimg]="blog.blogImage" [blogTitle]="blog.blogTitle"
             [blogDescription]="blog.blogExcerpt" [blogId]="blog.blogId"></app-blog-card>
-        </div>
+          </ion-slide>
+        </ion-slides>
       </section>
     </div>
   </div>
@@ -178,6 +206,7 @@
  
   <app-accordion></app-accordion>
   </div>
-  <app-iontab  *ngIf="screenwidth<600"></app-iontab>
+
   <app-footer></app-footer>
+  <app-iontab  *ngIf="screenwidth<600"></app-iontab>
 </ion-content>

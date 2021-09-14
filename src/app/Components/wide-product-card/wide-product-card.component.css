@@ -19,7 +19,7 @@ ion-item > button {
   color: white;
 }
 ion-item > button > ion-icon {
-  font-size: 30px;
+  font-size: 15px;
 }
 ion-item > ion-label {
   text-align: center;
@@ -124,7 +124,7 @@ ion-card {
   }
   .order-details {
     color: #6d5de3;
-    padding: 0.3em;
+    padding: 0.5em;
     width: 100%;
     font-size: 1rem;
     text-align: center;
@@ -132,17 +132,17 @@ ion-card {
 
   .order-title {
     font-family: "Poppins";
-    font-size: 1rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: #6d5de3;
   }
 
   .order-price-and-btns {
-    margin: 1em;
+    margin: -0.75em 1em;
   }
 
   .order-price {
-    margin-top: -30px;
+    margin-top: 1px;
     color: #5ac179;
     font-size: 1.5rem;
     font-weight: 700;
@@ -157,7 +157,7 @@ ion-card {
     padding: 0.5em 0.5em;
     font-weight: 700;
     width: 45%;
-    margin: 0.25em 0.25em;
+    margin: 1em 0.25em;
   }
   .order-config {
     color: #6d5de3;
