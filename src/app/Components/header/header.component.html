@@ -72,10 +72,10 @@
     </button>
     <ul>
       <li *ngIf="this.authService.isJustLoggedIn"><a routerLink="/login">Login</a></li>
-      <li *ngIf="this.authService.isJustLoggedIn"><a routerLink="/account">Account</a></li>
       <li *ngIf="this.authService.getCurrenAccessLevel == 'Vendor'"><a routerLink="/VendorPanel/Dashboard">Vendor Panel</a>
       </li>
       <li *ngIf="this.authService.getCurrenAccessLevel == 'Admin'"><a routerLink="/AdminPanel/Dashboard">Admin Panel</a></li>
+      <li *ngIf="this.authService.isJustLoggedIn"><a routerLink="/account">Account</a></li>
       <li><a routerLink="/aboutus">About us</a></li>
       <li><a routerLink="/help">Contact Us</a></li>
       <li *ngIf="this.authService.isJustLoggedIn"><a routerLink="/orders">Your Orders</a></li>
