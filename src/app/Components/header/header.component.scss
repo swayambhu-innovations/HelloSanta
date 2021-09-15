@@ -96,6 +96,7 @@ div > ul{
   align-items: center;
   height:50px;
   padding:10px;
+
   margin-bottom:0px !important;
   justify-items: center;
   background-color: #fdfaf2;
@@ -143,7 +144,9 @@ ion-icon[name="close"]{
   align-items: flex-start;
   padding-left: 0px;
   margin-top: 20px;
-  height:fit-content;
+height: 450px;
+overflow-y: auto;
+
 }
 .uk-offcanvas-bar > ul > li{
   width:100%;
@@ -153,6 +156,7 @@ ion-icon[name="close"]{
   background-color: #9668FF;
   margin-bottom: 20px;
   height:50px;
+padding: 6px;
   text-align: center;
   color:white;
   border-top-right-radius: 20px;
