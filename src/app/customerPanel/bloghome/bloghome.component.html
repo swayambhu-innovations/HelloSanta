@@ -14,7 +14,7 @@
     <button class="button" *ngIf="screenwidth<1024"><a routerLink="/blog" [queryParams]="{id:main.blogId}">Read more</a></button>
   </div>
   <img loading="lazy" class="NotFoundImage" src="./assets/NotFound.gif" alt="No Blog Found" *ngIf="blogs.length<=0">
-  <main id="blog" *ngIf="blogs.length>0">
+  <div id="blog" *ngIf="blogs.length>0">
     <section id="blog-container">
       <h1 class="head">Read More Blogs</h1>
       <br>
@@ -23,7 +23,7 @@
           [blogDescription]="blog.blogExcerpt" [blogId]="blog.blogId"></app-blog-card>
       </div>
     </section>
-  </main>
+  </div>
 </div>
   <app-footer></app-footer>
   <app-iontab  *ngIf="screenwidth<1024"></app-iontab>

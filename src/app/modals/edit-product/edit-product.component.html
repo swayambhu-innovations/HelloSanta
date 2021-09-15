@@ -56,7 +56,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Vendor Id</ion-label>
-      <ion-select multiple="true" placeholder="Select Vendors" [value]="selectedVendors"
+      <ion-select multiple="true" placeholder="Select Vendors" [value]="[allVendors[0].id]"
         (ionChange)="addToVendors($event)">
         <ion-select-option [value]="vendor.id" *ngFor="let vendor of allVendors">
           {{vendor.name}}

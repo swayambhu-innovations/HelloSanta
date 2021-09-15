@@ -103,7 +103,10 @@
       </ion-list>
     </ion-card>
     <div *ngIf="events.length>0">
-      <calendar [eventSource]="calendarEvents" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
+      <ion-toolbar>
+        <h2 class="uk-text-center">{{viewTitle}}</h2>
+      </ion-toolbar>
+      <calendar [sliderOptions]="options" [eventSource]="calendarEvents" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
         (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)"
         (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)" [step]="calendar.step">
       </calendar>

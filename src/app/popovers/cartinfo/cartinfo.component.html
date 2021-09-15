@@ -4,7 +4,7 @@
       <ion-row>
         <ion-col>
           <ion-thumbnail>
-            <img loading="lazy" [src]="product.productImages" />
+            <img loading="lazy" [src]="product.productImages[0].image" />
           </ion-thumbnail>
         </ion-col>
         <ion-col>
@@ -13,7 +13,7 @@
         </ion-col>
       </ion-row>
     </ion-item>
-    <ion-item button routerLink="../cart">
+    <ion-item button routerLink="../cart" (click)="popoverController.dismiss()">
       <ion-label>Open Cart</ion-label>
     </ion-item>
   </ion-list>

@@ -38,15 +38,9 @@ export class EventSchedulerService {
                   if (!event.mailSend) {
                     if (event.periodicType == 'yearly') {
                       console.log('Sending wishes to',element.email)
-                      // nowDate.setDate();
                       let eventDate = new Date(event.startDate);
-                      // let dateConfig = ((eventDate.getMonth().toString()+'/'+eventDate.getDay()).toString()+'/'+nowDate.getFullYear())
-                      // let staleDate = (new Date(dateConfig));
                       let calculatedEventDate = new Date();
-                      // let lastDate = new Date()
                       calculatedEventDate.setDate(nowDate.getDate() + 35)
-                      // lastDate.setDate(nowDate.getDate() - 45)
-                      // console.log('Triggering',nowDate,calculatedEventDate,eventDate);
                       if (calculatedEventDate >= eventDate && eventDate >= nowDate) {
                         console.log('Event trigger found for',event.title,nowDate,eventDate,calculatedEventDate);
                         this.sendEventMail(
@@ -72,7 +66,25 @@ export class EventSchedulerService {
                       } else {
                         console.log('Event trigger not found',event.title,nowDate,calculatedEventDate);
                       }
+                    } else if (event.periodicType=='monthly'){
+                      console.log('Sending wishes to',element.email)
+                      let eventDate = new Date(event.startDate);
+                      let calculatedEventDate = new Date();
+                      if (calculatedEventDate.getDate() == eventDate.getDate()) {
+                        console.log('Event trigger found for',event.title,nowDate,eventDate,calculatedEventDate);
+                        this.sendEventMail(
+                          element.email,
+                          event.title,
+                          event.startDate,
+                          element.displayName,
+                          event.periodicType,
+                        );
+                      } else {
+                        console.log('Event trigger not found',event.title,nowDate,calculatedEventDate);
+                      }
                     }
+                  } else {
+                    
                   }
                 });
               });

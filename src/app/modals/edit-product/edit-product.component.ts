@@ -603,7 +603,7 @@ export class EditProductComponent implements OnInit {
       this.selectedSubcategories=data.data().productSubcategory;
       this.selectedVendors=data.data().vendorId;
       this.productData = data.data();
-      console.log("product data",this.productData);
+      console.log("product data",this.productData,this.selectedVendors);
       let imgCount = 0;
       this.imagesNumList = data.data().productImages.length;
       console.log("images num list",this.imagesNumList);
@@ -613,7 +613,6 @@ export class EditProductComponent implements OnInit {
         (document.getElementById('productImage'+imgCount) as HTMLImageElement).src = i.image
         imgCount++;
       }
-
     })
     this.basicDetail.enable();
     this.afs
@@ -633,7 +632,7 @@ export class EditProductComponent implements OnInit {
             this.allVendors = [];
           }
           this.allVendors.push({
-            id: doc.id,
+            id: doc.data().uid,
             name: doc.data().displayName,
           });
         });

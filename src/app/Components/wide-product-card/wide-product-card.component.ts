@@ -9,7 +9,7 @@ import { InventoryService } from 'src/app/services/inventory.service';
   styleUrls: ['./wide-product-card.component.css']
 })
 export class WideProductCardComponent implements OnInit,OnChanges  {
-  @Input() img:string =  "https://source.unsplash.com/650x940"
+  @Input() img:any;
   @Input() orderTitle:string = "ArtWork Product"
   @Input() orderDescription:string = "Lorem ipsum dolor sit amet, consectetur\n" +
     "                  adipiscing elit. Curabitur cursus tincidunt\n" +

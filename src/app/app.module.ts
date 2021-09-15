@@ -126,6 +126,9 @@ import { NotFound404Component } from './customerPanel/not-found404/not-found404.
 import { USE_EMULATOR as FUNCTIONS_EMULATOR } from '@angular/fire/functions';
 import { AboutusComponent } from './customerPanel/aboutus/aboutus.component';
 import { StarRatingComponent } from './Components/star-rating/star-rating.component';
+import { SwiperModule } from 'swiper/angular';
+import { enterAnimation } from './animations/routeAnimations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -234,7 +237,9 @@ import { StarRatingComponent } from './Components/star-rating/star-rating.compon
     HttpClientModule,
     BrowserModule,
     ReactiveFormsModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      navAnimation:enterAnimation
+    }),
     AppRoutingModule,
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -249,6 +254,7 @@ import { StarRatingComponent } from './Components/star-rating/star-rating.compon
     AngularFireAnalyticsModule,
     NgxImageZoomModule,
     NgCalendarModule,
+    SwiperModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

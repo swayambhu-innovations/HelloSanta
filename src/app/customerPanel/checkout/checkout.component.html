@@ -3,7 +3,7 @@
   <div class="home">
     <div class="uk-panel">
       <div class="inner-box" align="center">
-        <main id="container">
+        <div id="container">
           <h2 id="checkout-title">Checkout</h2>
           <section id="orders-card">
             <div class="product-row">
@@ -28,6 +28,12 @@
                   <td>{{order.quantity}}</td>
                   <td>{{order.productPrice}}</td>
                   <td>{{order.finalPrice*order.quantity}}</td>
+                </tr>
+                <tr *ngIf="couponData.available">
+                  <td></td>
+                  <td></td>
+                  <td>Offers & Discount</td>
+                  <td> -{{offerFlat+discount}}</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -108,6 +114,15 @@
                   </ion-input>
                 </ion-item>
                 <ion-item>
+                  <ion-label>Apply Coupon Code</ion-label>
+                  <ion-checkbox #couponCode></ion-checkbox>
+                </ion-item>
+                <ion-item *ngIf="couponCode.checked">
+                  <ion-input type="text" placeholder="Coupon Code" (ionChange)="searchCoupon($event)" [debounce]="500"></ion-input>
+                  <ion-label color="success" *ngIf="couponData.available">Applied {{couponData.title}} Offer</ion-label>
+                  <ion-spinner name="crescent" *ngIf="searchingCoupon"></ion-spinner>
+                </ion-item>
+                <ion-item>
                   <input type="checkbox" #checkbox (change)="log(checkbox)">
                   <ion-label>&nbsp;&nbsp;&nbsp;Add a message</ion-label>
                 </ion-item>
@@ -132,7 +147,7 @@
               </form>
             </ion-list>
           </ion-card>
-        </main>
+        </div>
       </div>
     </div>
   </div>

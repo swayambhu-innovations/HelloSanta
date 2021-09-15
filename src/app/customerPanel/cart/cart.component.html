@@ -3,7 +3,7 @@
   
   <div class="home">
     <div class="inner-box" align="center">
-  <main id="container">
+  <div id="container">
     <h2 id="your-cart-title">Your Cart</h2>
     <section id="cart-container">
       <div class="product-row">
@@ -12,7 +12,7 @@
       <div align="center"><button [disabled]="cartItems.length<0" (click)="moveToCheckout()">Checkout To Cart</button></div>
       <img loading="lazy" src="./assets/NotFound.gif" alt="" *ngIf="cartItems.length<=0 || cartItems==undefined">
     </section>
-  </main>
+  </div>
 </div>
 </div>
   <app-footer></app-footer>

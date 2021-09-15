@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cartinfo',
@@ -7,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CartinfoComponent implements OnInit {
   @Input() products:any;
-  constructor() { }
+  constructor(public popoverController: PopoverController) { }
   ngOnInit() {}
 
 }

@@ -6,7 +6,7 @@
                 <ion-spinner></ion-spinner>
             </div>
         </div>
-        <main id="container" *ngIf="productData">
+        <div id="container" *ngIf="productData">
             <section id="product">
                 <div id="product-images-and-details">
                     <div id="product-images" *ngIf="screenwidth > 800">
@@ -163,7 +163,7 @@
                 </section>
                 <ion-spinner *ngIf="recommendationProducts==[]"></ion-spinner>
             </div>
-        </main>
+        </div>
     </div>
     <app-footer></app-footer>
     <app-iontab  *ngIf="screenwidth<1024"></app-iontab>

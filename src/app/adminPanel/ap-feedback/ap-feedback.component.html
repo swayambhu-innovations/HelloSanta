@@ -33,7 +33,7 @@
     <ion-item *ngFor="let item of websiteFeedbacks">
       <ion-label>{{item.name}}</ion-label>
       <ion-chip color="primary" outline="true">{{item.email}}</ion-chip>
-      <star-rating [value]="item.stars" [totalstars]="5" [readonly]="true" checkedcolor="#675ce0" >
+      <star-rating [value]="item.stars" [totalstars]="5" size="25px" [readonly]="true" checkedcolor="#675ce0" >
       </star-rating>
       <ion-label>{{item.moreInfo}}</ion-label>
       <ion-button (click)="showInfo($event,item.moreInfo,item.options)" expand="block" fill="outline">

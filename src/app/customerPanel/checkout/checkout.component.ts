@@ -27,6 +27,7 @@ import { last, switchMap } from 'rxjs/operators';
 export class CheckoutComponent implements OnInit {
   screenwidth = window.innerWidth;
   dataCopy;
+  searchingCoupon:boolean=false;
   constructor(
     private afs: AngularFirestore,
     public dataProvider: DataProvider,
@@ -117,6 +118,38 @@ export class CheckoutComponent implements OnInit {
   santaCoins: number = 0;
   imageRequired: any = [];
   imagesValid: boolean = false;
+  coupons:any=[]
+  discount:number=0;
+  couponData:any={available:false};
+  searchCoupon(event){
+    this.searchingCoupon=true;
+    console.log(event); 
+    let defined =false;
+    this.coupons.forEach((coupon)=>{
+      if (event.detail.value.toLowerCase()==coupon.code.toLowerCase()){
+        if (this.dataProvider.checkOutdata.length>=coupon.minimumProducts){
+          if (this.grandTotal>=coupon.minimumPrice){
+            defined=true;
+            this.couponData = {
+              available:true,
+              code:coupon.code,
+              discount:coupon.cost,
+              title:coupon.name,
+            }
+            this.discount=coupon.cost;
+            console.log("Coupon Found") 
+          }
+        }
+      }
+    })
+    if (!defined){
+      this.couponData = {
+        available:false,
+      }
+      this.discount=0;
+    }
+    this.searchingCoupon=false;
+  }
   log(data) {
     // console.log(data);
   }
@@ -143,7 +176,7 @@ export class CheckoutComponent implements OnInit {
     this.dataCopy.forEach((order) => {
       total += order.price * order.quantity;
     });
-    return total - this.offerFlat;
+    return ((total - this.offerFlat ) - this.discount);
   }
   get grandHeight(): number {
     var total = 0;
@@ -217,6 +250,11 @@ export class CheckoutComponent implements OnInit {
         });
       });
       this.WindowRef = this.paymentService.WindowRef;
+      this.afs.collection('offers').ref.get().then((offers) => {
+        offers.forEach((offer) => {
+          this.coupons.push(offer.data());
+        })
+      })
     } else {
       this.authService.presentToast('Oh Ohh! Checkout expired &#x1F605;');
       this.router.navigate(['']);

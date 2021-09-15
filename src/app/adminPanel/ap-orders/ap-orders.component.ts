@@ -31,8 +31,10 @@ export class APOrdersComponent implements OnInit {
                 .doc(product.productId)
                 .ref.get()
                 .then((productValue: any) => {
-                  productsData.push(productValue.data());
-                  this.loading = false;
+                  if (productValue.exists) {
+                    productsData.push(productValue.data());
+                    this.loading = false;
+                  }
                 });
             });
             this.liveOrders.push({
@@ -47,8 +49,10 @@ export class APOrdersComponent implements OnInit {
                 .doc(product.productId)
                 .ref.get()
                 .then((productValue: any) => {
-                  productsData.push(productValue.data());
-                  this.loading = false;
+                  if (productValue.exists) {
+                    productsData.push(productValue.data());
+                    this.loading = false;
+                  }
                 });
             });
             this.oldOrders.push({
