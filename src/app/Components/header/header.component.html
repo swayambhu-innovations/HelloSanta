@@ -71,7 +71,7 @@
       <ion-icon name="close"></ion-icon>
     </button>
     <ul>
-      <li *ngIf="this.authService.isJustLoggedIn"><a routerLink="/login">Login</a></li>
+      <li *ngIf="!this.authService.isJustLoggedIn"><a routerLink="/login">Login</a></li>
       <li *ngIf="this.authService.getCurrenAccessLevel == 'Vendor'"><a routerLink="/VendorPanel/Dashboard">Vendor Panel</a>
       </li>
       <li *ngIf="this.authService.getCurrenAccessLevel == 'Admin'"><a routerLink="/AdminPanel/Dashboard">Admin Panel</a></li>
