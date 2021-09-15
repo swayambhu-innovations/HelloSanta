@@ -1,8 +1,8 @@
 <ion-card class="category-card " uk-scrollspy-class="uk-animation-slide-top">
   <a routerLink="../product" [queryParams]="{productId:this.productId}">
     <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
-      <img [src]="img[0].image" alt="">
-      <img class="uk-transition-scale-up uk-position-cover" [src]="img[1].image" alt="">
+      <img loading="lazy" [src]="img[0].image" alt="">
+      <img loading="lazy" class="uk-transition-scale-up uk-position-cover" [src]="img[1].image" alt="">
     </div>
     <div class="category-details">
       <h4 class="category-title">{{categoryTitle}}</h4>

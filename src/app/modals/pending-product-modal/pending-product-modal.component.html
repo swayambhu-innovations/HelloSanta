@@ -15,7 +15,7 @@
             max=10 #mainImgCount></ion-input>
         </ion-item>
         <ion-card *ngFor="let prodImg of genList(mainImgCount.value)">
-          <img id="productImage{{prodImg}}">
+          <img loading="lazy" id="productImage{{prodImg}}">
           <br>
           <ion-input type="file" required="true" accept="image/png, image/jpeg"
             (change)="loadProdImage($event,'productImage'+prodImg.toString())"></ion-input>
@@ -174,7 +174,7 @@
                 <ion-label>&nbsp;&nbsp;&nbsp; Relative Customisation</ion-label>
               </ion-item>
               <ion-card *ngFor="let imgIndex of genList(imageCount.value)">
-                <img id="image{{item}}{{imgIndex}}" width="300">
+                <img loading="lazy" id="image{{item}}{{imgIndex}}" width="300">
                 <input required="true" accept="image/png, image/jpg, image/jpeg"
                   (change)="loadFile($event,'image'+item.toString()+imgIndex.toString())" type="file">
                 <br>

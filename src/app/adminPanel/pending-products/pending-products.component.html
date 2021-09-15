@@ -17,7 +17,7 @@
     </ion-item>
   </ion-row>
   <div *ngIf="allProds==undefined || allProds.length<=0">
-    <img src="./assets/NotFound.gif" alt="Nothing TO Show" >
+    <img loading="lazy" src="./assets/NotFound.gif" alt="Nothing TO Show" >
     <h3 class="uk-text-center uk-text-danger">No Pending products found</h3>
   </div>
   <ion-toolbar>
@@ -96,7 +96,7 @@
     </mat-accordion>
   </ion-row>
   <div *ngIf="customProds==undefined || customProds.length<=0">
-    <img src="./assets/NotFound.gif" alt="Nothing TO Show" >
+    <img loading="lazy" src="./assets/NotFound.gif" alt="Nothing TO Show" >
     <h3 class="uk-text-center uk-text-danger">No Custom products found</h3>
   </div>
 </ion-content>

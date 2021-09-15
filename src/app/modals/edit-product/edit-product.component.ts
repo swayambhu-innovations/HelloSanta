@@ -155,7 +155,7 @@ export class EditProductComponent implements OnInit {
     let fileList: FileList = event.target.files;
     return fileList[0];
   }
-  async addBasicDetailProduct(stepper: MatStepper) {
+  async addBasicDetailProduct() {
     this.progressType="indeterminate"
     let prodList = [];
     let res = await this.presentContinueAlert();
@@ -170,7 +170,6 @@ export class EditProductComponent implements OnInit {
         let value = this.basicDetail.get('productName')!.value.replace(' ', '_');
         let x = document.getElementById('mainProdImage') as HTMLInputElement;
         console.log("prodImagesEvents",this.prodImagesEvents);
-        stepper.next();
         this.progressType="determinate"
         for (let imgc = 0; imgc < +x.value; imgc++) {
           this.progressValue+=1/(+x.value*2);

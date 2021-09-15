@@ -6,13 +6,13 @@
       *ngIf="screenwidth>1020">
       <ul class="uk-slideshow-items">
         <li>
-          <img src="assets/image1.png" alt="" uk-cover>
+          <img loading="lazy" src="assets/image1.png" alt="" uk-cover>
         </li>
         <li>
-          <img src="assets/image2.png" alt="" uk-cover>
+          <img loading="lazy" src="assets/image2.png" alt="" uk-cover>
         </li>
         <li>
-          <img src="assets/image3.png" alt="" uk-cover>
+          <img loading="lazy" src="assets/image3.png" alt="" uk-cover>
         </li>
       </ul>
       <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
@@ -26,13 +26,13 @@
 
       <ul class="uk-slideshow-items">
         <li>
-          <img src="assets/banner-39.jpg" alt="" uk-cover>
+          <img loading="lazy" src="assets/banner-39.jpg" alt="" uk-cover>
         </li>
         <li>
-          <img src="assets/banner-40.jpg" alt="" uk-cover>
+          <img loading="lazy" src="assets/banner-40.jpg" alt="" uk-cover>
         </li>
         <li>
-          <img src="assets/banner-31.jpg" alt="" uk-cover>
+          <img loading="lazy" src="assets/banner-31.jpg" alt="" uk-cover>
         </li>
       </ul>
       <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
@@ -54,7 +54,7 @@
         from a friend <br>is a message for your happiness.</p>
     </div>
     <div class="uk-panel" *ngIf="screenwidth>1020">
-      <img style="width: 100%" src="assets/Union.png" alt="">
+      <img loading="lazy" style="width: 100%" src="assets/Union.png" alt="">
       <div class="uk-position-center uk-panel">
         <section id="orders-container1">
           <h1 class="handmade"><a routerLink="/shop">Our <span style="color: #F3F692">Beloved</span> Range of <span
@@ -83,7 +83,8 @@
     </div>
     <div class="uk-animation-toggle" tabindex="0">
       <div class="uk-panel uk-align-center" style="padding-top: 50px">
-        <img src="./assets/masterGift.svg" uk-scrollspy="cls:uk-animation-fade" class="animatedSVGSection">
+        <!-- <img loading="lazy" src="./assets/masterGift.svg" class="animatedSVGSection"> -->
+        <lottie-player class="animatedSVGSection" src="assets/Animations/Blogging.json" background="transparent" speed="1" loop  autoplay ></lottie-player>
         <div class="sectionOneSeperator letfAligned" *ngIf="screenwidth>1024">
           <ion-card>
             <ion-card-header>
@@ -93,24 +94,27 @@
             </ion-card-header>
             <ion-card-content>
               By- Hello Santa
+              <img loading="lazy" src="./assets/icon/icon.png" width="40" alt="">
             </ion-card-content>
           </ion-card>
         </div>
         <div class="sectionOneSeperator rightAligned" *ngIf="screenwidth>1024">
           <ion-card>
             <ion-card-header>
-              <ion-card-title>There are Hundreds of Gifts to choose from, But I'll Always Know What suits you the Best.
+              <ion-card-title>When there is Love, distance is not the constraint.
+                Near or Far, Hello Santa is here to spread love.
               </ion-card-title>
             </ion-card-header>
             <ion-card-content>
               By- Hello Santa
+              <img loading="lazy" src="./assets/icon/icon.png" width="40" alt="">
             </ion-card-content>
           </ion-card>
         </div>
       </div>
     </div>
     <div class="uk-panel" style="padding-top: 50px" *ngIf="screenwidth>1020">
-      <img style="width: 100%" src="assets/Union1.png" alt="">
+      <img loading="lazy" style="width: 100%" src="assets/Union1.png" alt="">
       <div class="uk-position-center uk-panel">
         <section id="orders-container2">
           <h1 class="digital"><a routerLink="/shop">Our <span style="color: #FF6584">Beloved</span> Range of <span
@@ -205,7 +209,7 @@
     </div>
     <div tabindex="0">
       <div class="uk-panel " style="padding-top: 50px">
-        <img class="promobox uk-align-center" src="assets/Promo.png" alt="">
+        <img loading="lazy" class="promobox uk-align-center" src="assets/Promo.png" alt="">
       </div>
     </div>
     <div class="uk-panel" style="padding-top: 50px">
@@ -223,17 +227,17 @@
     <div class="uk-panel inner-box2 uk-align-center">
       <div>
         <div class="uk-panel hoverIncrease">
-          <a href="#"><img src="assets/Group20.png" alt=""></a>
+          <a href="#"><img loading="lazy" src="assets/Group20.png" alt=""></a>
         </div>
       </div>
       <div>
         <div class="uk-panel hoverIncrease">
-          <a href="#"><img src="assets/Group19.png" alt=""></a>
+          <a href="#"><img loading="lazy" src="assets/Group19.png" alt=""></a>
         </div>
       </div>
       <div>
         <div class="uk-panel hoverIncrease">
-          <a href="#"><img src="assets/Group18.png" alt=""></a>
+          <a href="#"><img loading="lazy" src="assets/Group18.png" alt=""></a>
         </div>
       </div>
     </div>

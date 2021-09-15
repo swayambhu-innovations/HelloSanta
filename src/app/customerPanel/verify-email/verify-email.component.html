@@ -6,7 +6,7 @@
   <ion-button (click)="authService.SendVerificationMail()" expand="block" shape="round">
     Resend Email
   </ion-button>
-  <img src="assets/vectors/emailVerify.png" alt="">
+  <img loading="lazy" src="assets/vectors/emailVerify.png" alt="">
 </ion-card>
 <ion-card *ngIf="authService.isEmailVerified">
   <p class="txt2 uk-text-center" color="danger" >Email verified. Move to <a routerLink="../">
@@ -15,6 +15,6 @@
   <ion-button routerLink="../" expand="block" shape="round">
     Move to home
   </ion-button>
-  <img src="assets/vectors/emailVerify.png" alt="">
+  <img loading="lazy" src="assets/vectors/emailVerify.png" alt="">
 </ion-card>
 </div>

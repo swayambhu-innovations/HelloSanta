@@ -1,6 +1,6 @@
 <ion-card *ngIf="totalCancelled > 300" style="border: 5px solid #FF6584;">
   <ion-row>
-    <img [src]="image">
+    <img loading="lazy" [src]="image">
     <div class="dataContainer">
       <div>
         <ion-label class="title">Sales/Cancelled</ion-label><br>
@@ -19,7 +19,7 @@
 </ion-card>
 <ion-card *ngIf="totalCancelled < 300 && totalCancelled > 200" style="border: 5px solid #FCD17A;">
   <ion-row>
-    <img [src]="image">
+    <img loading="lazy" [src]="image">
     <div class="dataContainer">
       <div>
         <ion-label class="title">Sales/Cancelled</ion-label><br>
@@ -38,7 +38,7 @@
 </ion-card>
 <ion-card *ngIf="totalCancelled < 100" style="border: 5px solid #6AB9FF;">
   <ion-row>
-    <img [src]="image">
+    <img loading="lazy" [src]="image">
     <div class="dataContainer">
       <div>
         <ion-label class="title">Sales/Cancelled</ion-label><br>

@@ -4,7 +4,7 @@
       <ion-card>
         <ion-row>
           <ion-avatar >
-            <img [src]="item.photoURL" />
+            <img loading="lazy" [src]="item.photoURL" />
           </ion-avatar>
           <ion-col class="textHolder">
             <ion-title>{{item.displayName}}</ion-title>
@@ -37,5 +37,5 @@
     </ion-item>
   </ion-list>
   <h4 *ngIf="!visible" >No vendors found</h4>
-  <img src="./assets/NotFound.gif" *ngIf="!visible" alt="">
+  <img loading="lazy" src="./assets/NotFound.gif" *ngIf="!visible" alt="">
 </ion-content>

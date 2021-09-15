@@ -100,7 +100,7 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "styles": [],
-            "scripts": [],
+            "scripts": ["node_modules/@lottiefiles/lottie-player/dist/lottie-player.js"],
             "assets": [
               {
                 "glob": "favicon.ico",

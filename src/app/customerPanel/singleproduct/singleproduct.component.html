@@ -11,7 +11,7 @@
                 <div id="product-images-and-details">
                     <div id="product-images" *ngIf="screenwidth > 800">
                         <div id="product-images-list">
-                            <img [src]="item.image"
+                            <img loading="lazy" [src]="item.image"
                                 [ngStyle]="{'border': selectedImage == item.image ? '2px solid #9e91ff' : 'none' }"
                                 (click)="setImage(item.image)" class="product-images-list-item" [alt]="item.imageName"
                                 *ngFor="let item of productData.productImages">
@@ -23,11 +23,11 @@
                     <div id="product-images" *ngIf="screenwidth < 800">
                         <div uk-lightbox="animation: fade" id="product-image-preview">
                             <a class="uk-inline" href="{{selectedImage}}">
-                                <img [src]="selectedImage" [alt]="productData.productName">
+                                <img loading="lazy" [src]="selectedImage" [alt]="productData.productName">
                             </a>
                         </div>
                         <div id="product-images-list">
-                            <img [src]="item.image"
+                            <img loading="lazy" [src]="item.image"
                                 [ngStyle]="{'border': selectedImage == item.image ? '2px solid #9e91ff' : 'none' }"
                                 (click)="selectedImage=item.image" class="product-images-list-item"
                                 [alt]="item.imageName" *ngFor="let item of productData.productImages">
@@ -99,7 +99,7 @@
                             <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='imgSel'">
                                 <ion-card class="selectionChoiceCard" *ngFor="let single of item.values"
                                     id="selImg{{single.imageTitle}}{{item.sectionTitle}}">
-                                    <img [src]="single.image" />
+                                    <img loading="lazy" [src]="single.image" />
                                     <ion-label class="uk-align-center uk-text-center">{{single.imageTitle}}</ion-label>
                                     <ion-radio [value]="single"></ion-radio>
                                 </ion-card>
@@ -145,7 +145,7 @@
                     <app-comment-card [image]="comment.userImage" [stars]="comment.stars" [body]="comment.commentBody"
                         [title]="comment.commentTitle" [commentDate]="comment.commentDate" [username]="comment.userName"
                         *ngFor="let comment of comments"></app-comment-card>
-                    <img src="./assets/no-review-01.jpg" class="review-image" alt="Nothing TO Show" *ngIf="comments.length<=0">
+                    <img loading="lazy" src="./assets/no-review-01.jpg" class="review-image" alt="Nothing TO Show" *ngIf="comments.length<=0">
                 </div>
             </section>
             <div id="container2">

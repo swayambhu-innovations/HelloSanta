@@ -15,7 +15,7 @@
         </app-ap-orders-options-item>
       </div>
     </ion-list>
-    <img src="./assets/NotFound.gif" *ngIf="liveOrders.length<=0" alt="">
+    <img loading="lazy" src="./assets/NotFound.gif" *ngIf="liveOrders.length<=0" alt="">
     <h4 *ngIf="liveOrders.length<=0" >No new orders</h4>
   </ion-card>
   <ion-card>
@@ -31,7 +31,7 @@
         </app-ap-dashboard-order-item>
       </div>
     </ion-list>
-    <img src="./assets/NotFound.gif" *ngIf="oldOrders.length<=0" alt="">
+    <img loading="lazy" src="./assets/NotFound.gif" *ngIf="oldOrders.length<=0" alt="">
     <h4 *ngIf="oldOrders.length<=0" >No old orders</h4>
   </ion-card>
 </ion-content>

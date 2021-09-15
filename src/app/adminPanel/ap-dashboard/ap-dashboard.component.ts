@@ -22,8 +22,10 @@ export class APDashboardComponent implements OnInit {
         order = order.data();
         order.products.forEach((product:any)=>{
           this.afs.collection('products').doc(product.productId).ref.get().then((productValue:any)=>{
-            productsData.push(productValue.data());
-            this.loading=false;
+            if (productValue.exists){
+              productsData.push(productValue.data());
+              this.loading=false;
+            }
           })
         })
         this.liveOrders.push({products:productsData,shippingDetail:order.shippingDetail})

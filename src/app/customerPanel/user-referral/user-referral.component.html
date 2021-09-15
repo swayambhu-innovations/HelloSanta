@@ -8,7 +8,7 @@
       <div *ngIf="loading">
         <ion-card>
           <ion-item>
-            <img src="./assets/coin.png" width="30" alt="">
+            <img loading="lazy" src="./assets/coin.png" width="30" alt="">
             <ion-label>&nbsp;&nbsp;<span style="color:var(--ion-color-primary)">{{coins}} </span> coins for total cashback of {{coins}} rupees, on your next order.</ion-label>
           </ion-item>
           <form [formGroup]="form">
@@ -30,7 +30,7 @@
         <ion-list *ngIf="isReferrer">
           <ion-item *ngFor="let user of users">
             <ion-avatar>
-              <img [src]="user.photoURL" />
+              <img loading="lazy" [src]="user.photoURL" />
             </ion-avatar>
             <ion-label>{{user.displayName}}</ion-label>
           </ion-item>

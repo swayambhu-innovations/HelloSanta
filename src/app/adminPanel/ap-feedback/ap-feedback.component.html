@@ -18,7 +18,7 @@
       </ion-button>
     </ion-item>
   </ion-list>
-  <img *ngIf="!feedbacks" src="./assets/loading.gif" alt="Floating Box">
+  <img loading="lazy" *ngIf="!feedbacks" src="./assets/loading.gif" alt="Floating Box">
   <hr class="uk-divider-icon">
   <ion-toolbar>
     <ion-title>Website Feedback</ion-title>
@@ -41,5 +41,5 @@
       </ion-button>
     </ion-item>
   </ion-list>
-  <img *ngIf="!websiteFeedbacks" src="./assets/loading.gif" alt="Floating Box">
+  <img loading="lazy" *ngIf="!websiteFeedbacks" src="./assets/loading.gif" alt="Floating Box">
 </ion-content>

@@ -4,7 +4,7 @@
       <ion-row>
         <ion-col>
           <ion-thumbnail>
-            <img [src]="product.productImages" />
+            <img loading="lazy" [src]="product.productImages" />
           </ion-thumbnail>
         </ion-col>
         <ion-col>
@@ -18,7 +18,7 @@
     </ion-item>
   </ion-list>
   <div class="uk-padding" *ngIf="products.length<=0">
-    <img src="./assets/NotFound.gif" >
+    <img loading="lazy" src="./assets/NotFound.gif" >
     <ion-label><strong>No items in your cart</strong></ion-label>
   </div>
 

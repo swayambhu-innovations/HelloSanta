@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

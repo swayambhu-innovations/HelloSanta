@@ -1,7 +1,7 @@
 
 <div class="headerdesk">
 <div class="header" id="">
-  <a routerLink="/" class="logo"><img src="assets/logo.svg" alt="Hello Santa"></a>
+  <a routerLink="/" class="logo"><img loading="lazy" src="assets/logo.svg" alt="Hello Santa"></a>
   <div class="search">
     <input type="text" placeholder=" Search Anything..." name="search" id="searchInput"
       (change)="presentSearchResult($event)">
@@ -12,7 +12,7 @@
   <div class="headButtons">
     <button *ngIf="authService.isJustLoggedIn" (click)="presentUserinfo($event)">
       <ion-avatar>
-        <img [src]="image" referrerpolicy="no-referrer" />
+        <img loading="lazy" [src]="image" referrerpolicy="no-referrer" />
       </ion-avatar>
     </button>
     <button class="onlyIcon" *ngIf="authService.isJustLoggedIn" (click)="presentCartinfo($event)">
@@ -86,7 +86,7 @@
       <ion-row>
         <button *ngIf="authService.isJustLoggedIn">
           <ion-avatar>
-            <img [src]="image" />
+            <img loading="lazy" [src]="image" />
           </ion-avatar>
         </button>
         <ion-button (click)="authService.SignOut()" *ngIf="authService.isJustLoggedIn">
@@ -108,7 +108,7 @@
     <ion-icon name="menu"></ion-icon>
   </button>
   <a class="img" routerLink="/">
-  <img src="./assets/logo-light.svg" alt="Hello Santa Logo">
+  <img loading="lazy" src="./assets/logo-light.svg" alt="Hello Santa Logo">
 </a>
   <button (click)="presentSearch($event)">
     <ion-icon name="search"></ion-icon>

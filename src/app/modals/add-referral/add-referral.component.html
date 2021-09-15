@@ -8,7 +8,7 @@
                 <ion-item *ngFor="let vendor of vendors">
                   <ion-radio [value]="vendor.uid" slot="start"></ion-radio>
                   <ion-avatar>
-                    <img [src]="vendor.photo" />
+                    <img loading="lazy" [src]="vendor.photo" />
                   </ion-avatar>
                   <ion-label color="primary">{{vendor.name}}</ion-label>
                 </ion-item>

@@ -1,10 +1,12 @@
 <ion-content>
   <app-header></app-header>
   <div class="home">
-  <img src="./assets/digitalDesktop.png" *ngIf="category=='Digital' && window >= 1024" class="headerImage">
-  <img src="./assets/handmadeDesktop.png" *ngIf="category=='Handmade' && window >= 1024" class="headerImage">
-  <img src="./assets/digitalMobile.png" *ngIf="category=='Digital' && window < 1024" class="headerImage">
-  <img src="./assets/handmadeMobile.png" *ngIf="category=='Handmade' && window < 1024" class="headerImage">
+  <img loading="lazy" src="./assets/digitalDesktop.png" *ngIf="category=='Digital' && window >= 1024" class="headerImage">
+  <img loading="lazy" src="./assets/handmadeDesktop.png" *ngIf="category=='Handmade' && window >= 1024" class="headerImage">
+  <img loading="lazy" src="./assets/digitalMobile.png" *ngIf="category=='Digital' && window < 1024" class="headerImage">
+  <img loading="lazy" src="./assets/handmadeMobile.png" *ngIf="category=='Handmade' && window < 1024" class="headerImage">
+  <img loading="lazy" src="./assets/shopDesktop.png" *ngIf="category!='Handmade' && category!='Digital' && window >= 1024" class="headerImage">
+  <img loading="lazy" src="./assets/shopMobile.png" *ngIf="category!='Digital' && category!='Digital' && window < 1024" class="headerImage">
   <hr class="uk-divider-icon">
   <ion-toolbar *ngIf="screenwidth<1024">
     <ion-button (click)="showFilterModal()" expand="full" fill="clear" slot="start">

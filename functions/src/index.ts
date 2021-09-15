@@ -89,7 +89,7 @@ exports.shipOrder = functions.https.onRequest((req: any, res: any) => {
     let compliedRes = req.body;
     let shiprocketBody = {
       order_id: compliedRes.order_id,
-      order_date: orderDate,
+      order_date: orderDate, 
       pickup_location: 'Primary',
       company_name: 'Hello Santa',
       billing_customer_name: compliedRes.billing_customer_name,

@@ -24,7 +24,7 @@
         </ion-item>
         <ion-item *ngFor="let item of users">
           <ion-avatar slot="start">
-            <img [src]="item.photoURL" />
+            <img loading="lazy" [src]="item.photoURL" />
           </ion-avatar>
             <ion-label color="primary" style="font-size: 20px;">{{item.displayName}}</ion-label>
             <ion-label color="secondary" style="font-size: 18px;">{{item.email}}</ion-label>

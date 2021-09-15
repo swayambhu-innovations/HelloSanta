@@ -23,7 +23,7 @@
   </ion-card>
   <ion-card>
     <form [formGroup]="form" (ngSubmit)="addBlog()" method="POST">
-      <img id="blogImage">
+      <img loading="lazy" id="blogImage">
       <ion-item>
         <ion-label position="floating">Blog Image (Click to select)</ion-label>
         <ion-input formControlName="blogImage" type="file"(change)="loadFile($event,'blogImage')" accept="image/png, image/jpeg" placeholder="Blog Image"></ion-input>

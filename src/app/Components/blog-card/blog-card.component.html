@@ -1,5 +1,5 @@
 <ion-card routerLink="../blog" [queryParams]="{id:blogId}" class="blog-card">
-  <img [src]="blogimg"
+  <img loading="lazy" [src]="blogimg"
        alt="{{blogTitle}}" class="blog-img">
   <div class="blog-details">
     <h4 class="blog-title">{{blogTitle}}</h4>

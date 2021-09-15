@@ -5,7 +5,7 @@
     <app-sidenav activeLinkID="profile" *ngIf="screenwidth>1020"></app-sidenav>
       <section id="profile-container">
           <div id="img-name-and-email">
-            <img [src]="authService.getUserPhoto()"
+            <img loading="lazy" loading="lazy"[src]="authService.getUserPhoto()"
             alt="Profile Pic" class="circular-profile-pic" style="width:100px;height:100px">
               <div id="name-and-email">
                   <h2 id="name">{{userName}}</h2>

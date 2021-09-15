@@ -2,10 +2,10 @@
   <div class="col-sm-12" *ngIf="type=='santa'">
     <ul class="list-inline rating-list" *ngFor="let star of stars" style="display: inline-block">
       <li (click)="countStar(star)" class="img" [ngClass]="{'selected': (star <= value)}" *ngIf="!readonly">
-        <img [ngStyle]="{'height':size,'width':'auto'}" src="./assets/profileDefault.png" alt="">
+        <img loading="lazy" [ngStyle]="{'height':size,'width':'auto'}" src="./assets/ratingIcons/{{star}}.png" alt="">
       </li>
       <li class="img" [ngClass]="{'selected': (star <= value)}" *ngIf="readonly">
-        <img [ngStyle]="{'height':size,'width':'auto'}" src="./assets/profileDefault.png" alt="">
+        <img loading="lazy" [ngStyle]="{'height':size,'width':'auto'}" src="./assets/ratingIcons/{{star}}.png" alt="">
       </li>
     </ul>
   </div>

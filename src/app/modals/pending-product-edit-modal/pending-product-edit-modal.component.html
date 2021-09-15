@@ -6,7 +6,7 @@
     <ion-input type="number" required="true" placeholder="Total product images." formControlName="productImagesCount" id="mainProdImage" value=2 min=2 max=10
       #mainImgCount></ion-input>
     <ion-card *ngFor="let prodImg of genList(mainImgCount.value)">
-      <img id="productImage{{prodImg}}">
+      <img loading="lazy" id="productImage{{prodImg}}">
       <br>
       <ion-input type="file" required="true" accept="image/png, image/jpeg"
         (change)="loadProdImage($event,'productImage'+prodImg.toString())"></ion-input>

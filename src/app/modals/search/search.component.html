@@ -20,7 +20,7 @@
   <ion-list *ngIf="results && searchable">
     <ion-item button *ngFor="let result of results" [href]="result.href">
       <ion-thumbnail>
-        <img [src]="result.image" />
+        <img loading="lazy" [src]="result.image" />
       </ion-thumbnail>
       <ion-col>
         <ion-label>{{result.text}}</ion-label>
@@ -30,7 +30,7 @@
     </ion-item>
     <ion-col *ngIf="results.length==0" class="uk-text-center">
       <p class="uk-text-center">No Results Found</p><br>
-      <img src="./assets/NotFound.gif" alt="Floating empty boxes">
+      <img loading="lazy" src="./assets/NotFound.gif" alt="Floating empty boxes">
     </ion-col>
   </ion-list>
 </ion-content>

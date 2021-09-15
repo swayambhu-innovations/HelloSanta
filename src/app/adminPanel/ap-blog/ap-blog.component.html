@@ -8,7 +8,7 @@
   <div class="blog" *ngIf="blogs!=undefined && blogs.length > 0 && blogs.length>=1">
     <h1>Latest BLOG</h1>
     <ion-row>
-      <img [src]="blogs[0].blogImage" class="topBlogImage">
+      <img loading="lazy" [src]="blogs[0].blogImage" class="topBlogImage">
       <div>
         <h2>{{blogs[0].blogTitle}}</h2>
         <ion-row>
@@ -38,7 +38,7 @@
         <tbody>
           <tr *ngFor="let blog of blogs">
             <td>
-              <img [src]="blog.blogImage" class="thumbnailImage" alt="">
+              <img loading="lazy" [src]="blog.blogImage" class="thumbnailImage" alt="">
             </td>
             <td class="mainData">
               <ion-label>{{blog.blogTitle}}</ion-label><br>
