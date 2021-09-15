@@ -177,7 +177,10 @@ export class AuthLoginComponent implements OnInit {
   }
   async emailLogin() {
     (this.signUpData['password'] = this.password.value), this.slides.slideTo(2);
-    this.authService.SignIn(this.signUpData.email, this.signUpData.password);
+    await this.authService.SignIn(this.signUpData.email, this.signUpData.password);
+    this.dataProvider.showOverlay = false;
+    alert(this.dataProvider.data)
+    if (this.dataProvider.data=="error"){this.stepTwo.enable();}
   }
   verifyLoginCode() {
     this.dataProvider.showOverlay = true;
@@ -191,14 +194,17 @@ export class AuthLoginComponent implements OnInit {
             if (doc.exists){
               this.router.navigate(['']);
               this.authService.presentToast('Sign In successful');
+              this.dataProvider.showOverlay = false;
             } else {
               this.authService.presentToast('You are not registered with this phone number.');
+              this.dataProvider.showOverlay = false;
             }
           })
       })
       .catch((error) => {
         this.authService.presentToast('Incorrect OTP entered');
         this.stepTwo.enable();
+        this.dataProvider.showOverlay = false;
       });
   }
   submitStepTwo() {
@@ -216,11 +222,9 @@ export class AuthLoginComponent implements OnInit {
       this.signUpData['type'] = 'email';
       (this.signUpData['email'] = this.email.value), this.slides.slideTo(1);
       this.stepTwo.removeControl('otp');
-      alert('email login');
     } else {
       this.emailType = false;
       this.slides.slideTo(1);
-      alert('otp login');
       this.stepTwo.removeControl('password');
       this.sendLoginCode();
     }
@@ -228,9 +232,12 @@ export class AuthLoginComponent implements OnInit {
   ngOnInit() {
     this.dataProvider.showOverlay = false;
     this.windowRef = this.authService.windowRef;
-    this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
-      'recaptcha-container'
-    );
+    this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('submitSignup',{
+      'size':'invisible',
+      'callback':(result) => {
+        this.onSubmit()
+      }
+    });
     this.windowRef.recaptchaVerifier.render();
   }
 

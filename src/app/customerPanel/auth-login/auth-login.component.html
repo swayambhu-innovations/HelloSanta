@@ -10,13 +10,13 @@
               <span class="padding-bottom--15">Log-in to your account</span>
               <ion-slides mode="md" pager="false" [options]="slideOpts" scrollbar="false" #slides>
                 <ion-slide >
-                  <form [formGroup]="stepOne" (ngSubmit)="onSubmit()" action="">
+                  <form [formGroup]="stepOne" action="">
                     <input class="input" type="text" name="email" autocomplete="email"
                       placeholder="Email Or Phone Number" inputmode="text" required #email formControlName="email">
                     <div id="recaptcha-container"></div>
                     <br>
                     <button [disabled]="!stepOne.valid" [ngClass]="!stepOne.valid ? 'disabled' : ''"
-                      class="button" type="submit">Continue</button>
+                      class="button" id="submitSignup" type="submit">Continue</button>
                   </form>
                 </ion-slide>
                 <ion-slide>

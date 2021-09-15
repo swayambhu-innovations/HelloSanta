@@ -120,6 +120,9 @@ ion-item{
   padding: 0px !important;
 
 }
+ion-slides{
+  width:350px;
+}
 ion-slide{
   flex-direction: column;
 }
@@ -258,6 +261,10 @@ form{
     box-shadow:5px 10px 20px rgba(0, 0, 0, 0.075);
     border:2px solid #FF6584;
   }
+  ion-slides{
+    width:auto;
+    max-width: 350px;
+  }
   form{
     display: flex;
     flex-direction: column;
@@ -265,7 +272,7 @@ form{
     padding-top: 10px;
     padding-right: 50px;
     justify-content: space-evenly;
-    height:400px;
+    height:200px;
   }
   .formbg{
     padding-top:5px;
@@ -282,6 +289,9 @@ form{
   }
   .submitButton{
     margin:0%;
+  }
+  .padding-bottom--15{
+    padding-bottom: 15px;
   }
 
 }

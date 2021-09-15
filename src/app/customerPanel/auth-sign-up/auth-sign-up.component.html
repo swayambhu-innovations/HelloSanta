@@ -7,14 +7,13 @@
           <div class="formbg">
             <a href="http://hellosanta.in/" rel="dofollow"><img loading="lazy" src="assets/logo.png" class="logo"></a>
             <span class="padding-bottom--15" style="text-align:center;">Create your account</span>
-            <ion-slides style="width:400px;" mode="md" pager="false" [options]="slideOpts" scrollbar="false" #slides>
+            <ion-slides mode="md" pager="false" [options]="slideOpts" scrollbar="false" #slides>
               <ion-slide >
-                <form [formGroup]="stepOne" (ngSubmit)="onSubmit()" action="">
+                <form [formGroup]="stepOne" action="">
                   <input class="input" type="text" name="email" autocomplete="email"
                     placeholder="Email Or Phone Number" inputmode="text" required #email formControlName="email">
-                  <div id="recaptcha-container"></div>
-                  <button [disabled]="!stepOne.valid" [ngClass]="!stepOne.valid ? 'disabled' : ''"
-              class="submitButton" type="submit">Continue</button>
+                  <button [disabled]="!stepOne.valid" [hidden]="!stepOne.valid" [ngClass]="!stepOne.valid ? 'disabled' : ''"
+              class="submitButton" id="submitSignup" type="submit">Continue</button>
                 </form>
               </ion-slide>
               <ion-slide>

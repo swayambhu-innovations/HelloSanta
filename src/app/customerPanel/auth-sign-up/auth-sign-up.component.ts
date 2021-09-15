@@ -250,12 +250,9 @@ export class AuthSignUpComponent implements OnInit {
       this.signUpData['type'] = 'email';
       (this.signUpData['email'] = this.email.value), this.slides.slideTo(1);
       this.stepTwo.removeControl('otp');
-      alert('email login');
     } else {
       this.emailType = false;
-
       this.slides.slideTo(1);
-      alert('otp login');
       this.stepTwo.removeControl('password');
       this.sendLoginCode();
     }
@@ -264,9 +261,12 @@ export class AuthSignUpComponent implements OnInit {
   ngOnInit() {
     this.dataProvider.showOverlay = false;
     this.windowRef = this.authService.windowRef;
-    this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
-      'recaptcha-container'
-    );
+    this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('submitSignup',{
+      'size':'invisible',
+      'callback':(result) => {
+        this.onSubmit()
+      }
+    });
     this.windowRef.recaptchaVerifier.render();
   }
   submitStepTwo() {

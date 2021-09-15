@@ -155,6 +155,8 @@ export class AuthService {
       })
       .catch((error: any) => {
         this.presentToast('An error occured ' + error.toString(), 5000);
+        this.homeDataProvider.showOverlay = false;
+        this.homeDataProvider.data = "error"
       });
   }
   // Sign up with email/password
