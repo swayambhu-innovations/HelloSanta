@@ -12,6 +12,7 @@ import { DataProvider } from 'src/app/providers/data.provider';
   styleUrls: ['./shop.component.scss'],
 })
 export class ShopComponent implements OnInit {
+  window = window.innerWidth;
   screenwidth = window.innerWidth;
   category: any;
   subcategory: any;

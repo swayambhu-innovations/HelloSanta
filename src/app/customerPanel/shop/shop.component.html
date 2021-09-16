@@ -1,29 +1,9 @@
 <ion-content>
   <app-header></app-header>
   <div class="home">
-  <div class="headerContainer">
-    <div class="distImages" *ngIf="screenwidth>1020">
-      <img loading="lazy" class="first" src="assets/img1.png">
-      <img loading="lazy" class="second" src="assets/img2.png">
-      <img loading="lazy" class="third" src="assets/img3.png">
-      <img loading="lazy" class="fourth" src="assets/img4.png">
-    </div>
-    <div class="fourthbox">
-      <p class="firstheading">Handmade
-        <br>
-        Artworks
-      </p>
-      <p class="heading-discription"> developing technologies, everything
-        is getting digitized, Lorem ipsum dolor sit
-        amet, consectetur adipiscing elit.
-        Curabitur cursus tincidunt commodo.
-        Nunc justo nisi, vestibulum facilisis porta
-        vestibulum, ultrices volutpat arcu.
-        Quisque nec dui mattis, fringilla magna
-        in, vulputate enim. Fusce ut euismod
-        ligula, id laoreet ex.</p>
-    </div>
-  </div>
+    <img loading="lazy" src="./assets/shopDesktop.png" *ngIf="category!='Handmade' && category!='Digital' && window >= 1024" class="headerImage">
+    <img loading="lazy" src="./assets/shopMobile.png" *ngIf="category!='Digital' && category!='Digital' && window < 1024" class="headerImage">
+    <hr class="uk-divider-icon">
   <ion-toolbar *ngIf="screenwidth<1024">
     <ion-button (click)="showFilterModal()" expand="full" fill="clear" slot="start">
       Filter&nbsp;&nbsp;&nbsp;<ion-icon name="filter-circle"></ion-icon>
