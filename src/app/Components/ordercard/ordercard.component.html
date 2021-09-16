@@ -1,4 +1,4 @@
-<section id="orders-container">
+<ion-card id="orders-container" routerLink="/trackorder" [queryParams]="{'shippingId':shipmentid}">
   <h2 id="your-cart-title">Your Orderinfo</h2>
   <hr class="line">
   <div class="text">
@@ -6,7 +6,6 @@
     <img loading="lazy" src="assets/icon.png" alt="" class="img">
     <div class="text9">
       <p class="text2">Hello Santa <br><span class="text3">A DearSanta LLP Product</span></p>
-
       <p class="text4">Office address:<br>
         2nd Flr, Sarvottam Complex
         M. R. Road,
@@ -21,10 +20,13 @@
     <p class="text4">Order-Date: {{orderdate}}</p>
     </div>
   </div>
+  <ion-button routerLink="/trackorder" [queryParams]="{'shippingId':shipmentid}" fill="outline" shape="round">
+    Track Order
+  </ion-button>
   <hr class="line">
   <div class="product-row" *ngFor="let product of liveOrders">
     <app-small-product-card [img]="product.productImages"
     [productTitle]="product.productName" [price]="product.productPrice" [productId]="product.productId"
     [date]="orderdate"></app-small-product-card>
   </div>
-</section>
+</ion-card>

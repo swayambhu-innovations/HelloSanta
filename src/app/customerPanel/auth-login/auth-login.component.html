@@ -28,7 +28,7 @@
                         <hr>
                         <ion-item class="input" lines="none">
                           <ion-label for="code" position="floating">Enter your Verification Code Here</ion-label><br>
-                          <input type="text" name="code" formControlName="otp" placeholder="6 Digit OTP">
+                          <input type="text" style="border: none;" name="code" formControlName="otp" placeholder="6 Digit OTP">
                         </ion-item>
                         <br>
                         <ion-progress-bar color="primary" [value]="resendProgress" *ngIf="timeleft>0">
@@ -37,10 +37,10 @@
                         <ion-label *ngIf="timeleft>0" style="font-size:15px;">Wait <strong>{{timeleft}}</strong> seconds
                           to resend OTP</ion-label>
                         <br *ngIf="timeleft>0">
-                        <ion-button class="resendButton" (click)="sendLoginCode()" *ngIf="timeleft<=0"
+                        <button button style="color: #FFC332;--color:#FFC332;" (click)="sendLoginCode()" *ngIf="timeleft<=0"
                           [disabled]="timeleft>0">
                           <ion-icon name="timer"></ion-icon>Resend OTP
-                        </ion-button>
+                        </button>
                         <br *ngIf="timeleft<=0">
                       </div>
                       <ion-item *ngIf="windowRef.confirmationResult==undefined || windowRef.confirmationResult==false">
@@ -50,7 +50,7 @@
                       <br>
                     </div>
                     <ion-item class="input" lines="none" *ngIf="emailType">
-                      <input [type]="passwordType ? 'password' : 'text'" autocomplete="password" placeholder="Password"
+                      <input style="border:none;" [type]="passwordType ? 'password' : 'text'" autocomplete="password" placeholder="Password"
                         inputmode="text" required #password formControlName="password">
                       <button (click)="passwordType=!passwordType" type="button">
                         <ion-icon slot="end" [name]="passwordType ? 'eye-off' : 'eye'"></ion-icon>
