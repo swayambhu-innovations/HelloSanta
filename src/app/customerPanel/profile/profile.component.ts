@@ -38,7 +38,7 @@ export class ProfileComponent implements OnInit {
       this.afs
         .collection('users')
         .doc(this.authService.userId)
-        .set({ dob: new Date(event.target.value.toString()) }, { merge: true });
+        .set({ dob: (new Date(event.target.value.toString())).toDateString() }, { merge: true });
       this.authService.presentToast('Your date of birth has been changed');
     } else if (type == 'mobile') {
       this.afs

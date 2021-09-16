@@ -20,11 +20,11 @@
           </ion-item>
           <ion-item class="item">
             <ion-label>Start Date</ion-label>
-            <ion-datetime display-format="DD.MM.YYYY" formControlName="startDate" #startDate></ion-datetime>
-          </ion-item>
+            <ion-input type="date" formControlName="startDate" #startDate></ion-input>
+          </ion-item> 
           <ion-item class="item">
             <ion-label>End Date</ion-label>
-            <ion-datetime display-format="DD.MM.YYYY" formControlName="endDate" value="startDate.value" #endDate></ion-datetime>
+            <ion-input type="date" display-format="DD.MM.YYYY" formControlName="endDate" value="startDate.value" #endDate></ion-input>
           </ion-item>
           <button type="submit">
             <ion-icon name="add"></ion-icon>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
 import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { InventoryService } from 'src/app/services/inventory.service';
 })
 export class UserinfoComponent implements OnInit {
   totalCoin:any;
-  constructor(private inventoryService: InventoryService) { }
+  constructor(private inventoryService: InventoryService,public popoverController: PopoverController) { }
 
   ngOnInit() {
     this.inventoryService.getUserInfo().ref.get().then((value:any)=>{

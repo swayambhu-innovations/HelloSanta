@@ -15,7 +15,7 @@
                       placeholder="Email Or Phone Number" inputmode="text" required #email formControlName="email">
                     <div id="recaptcha-container"></div>
                     <br>
-                    <button [disabled]="!stepOne.valid" [ngClass]="!stepOne.valid ? 'disabled' : ''"
+                    <button [disabled]="!stepOne.valid" [hidden]="!stepOne.valid" [ngClass]="!stepOne.valid ? 'disabled' : ''"
                       class="button" id="submitSignup" type="submit">Continue</button>
                   </form>
                 </ion-slide>

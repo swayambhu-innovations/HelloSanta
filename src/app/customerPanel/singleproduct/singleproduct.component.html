@@ -23,7 +23,7 @@
                     <div id="product-images" *ngIf="screenwidth < 800">
                         <div uk-lightbox="animation: fade" id="product-image-preview">
                             <a class="uk-inline" href="{{selectedImage}}">
-                                <img loading="lazy" [src]="selectedImage" [alt]="productData.productName">
+                                <img [src]="selectedImage" [alt]="productData.productName">
                             </a>
                         </div>
                         <div id="product-images-list">
@@ -165,9 +165,10 @@
             </div>
         </div>
     </div>
-    <app-footer></app-footer>
     <app-iontab  *ngIf="screenwidth<1024"></app-iontab>
+    <app-footer></app-footer>
 </ion-content>
+
 <div id="overlay" *ngIf="dataProvider.showOverlay">
     <ion-spinner name="crescent" color="tertiary"></ion-spinner>
 </div>
