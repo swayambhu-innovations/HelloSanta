@@ -58,11 +58,12 @@
           <li><a routerLink="/specificProducts" [queryParams]="{category:category}" *ngFor="let category of categories">{{category}}</a></li>
       </ul>
     </div>
-    <li><a routerLink="/bloghome/">Blog</a></li>
+    <li *ngIf="this.authService.isJustLoggedIn"><a routerLink="/wishlist">Wishlist</a></li>
     <li><a routerLink="/help/">Contact</a></li>
+    <li><a routerLink="/bloghome/">Blog</a></li>
     <li *ngIf="this.authService.getCurrenAccessLevel == 'Admin'"><a routerLink="/AdminPanel/Dashboard">Admin Panel</a></li>
     <li *ngIf="this.authService.getCurrenAccessLevel == 'Vendor'"><a routerLink="/VendorPanel/Dashboard">Vendor Panel</a></li>
-    <li><a routerLink="/wishlist">Wishlist</a></li>
+
   </ul>
 </div>
 <div id="offcanvas-push" uk-offcanvas="overlay: true">
@@ -76,12 +77,12 @@
       </li>
       <li *ngIf="this.authService.getCurrenAccessLevel == 'Admin'"><a routerLink="/AdminPanel/Dashboard">Admin Panel</a></li>
       <li *ngIf="this.authService.isJustLoggedIn"><a routerLink="/account">Account</a></li>
-      <li><a routerLink="/aboutus">About us</a></li>
-      <li><a routerLink="/help">Contact Us</a></li>
       <li *ngIf="this.authService.isJustLoggedIn"><a routerLink="/orders">Your Orders</a></li>
       <li *ngIf="this.authService.isJustLoggedIn"><a routerLink="/buyagain">Buyagain</a></li>
-      <li><a routerLink="/disclaimer">Disclaimer</a></li>
       <li *ngIf="this.authService.isJustLoggedIn"><a routerLink="/calendar">Calendar</a></li>
+      <li><a routerLink="/aboutus">About us</a></li>
+      <li><a routerLink="/help">Contact Us</a></li>
+      <li><a routerLink="/disclaimer">Disclaimer</a></li>
       <li><a routerLink="/privacypolicy">Privacypolicy</a></li>
       <li><a routerLink="/termsandconditions">Terms&conditions</a></li>
       <li><a routerLink="/refund">Refundandreturn</a></li>
