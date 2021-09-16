@@ -19,11 +19,15 @@ export class OrdersComponent implements OnInit {
         let productsData=[];
         order.products.forEach((product:any)=>{
           this.afs.collection('products').doc(product.productId).ref.get().then((productValue:any)=>{
-            productsData.push(productValue.data());
-            this.loading=false;
+            if (productValue.exists){
+              productValue.data()['available']=true;
+              productsData.push(productValue.data());
+              this.loading=false;
+            }
           })
         })
-        this.liveOrders.push({products:productsData,shippingDetail:order.shippingDetail})
+        order['products']=productsData;
+        this.liveOrders.push(order);
       });
       console.log(this.liveOrders);
     })
