@@ -2,7 +2,7 @@
       position: -webkit-sticky !important; /* Safari */
   position: sticky !important;
   top: 0;
-  z-index: 1000;
+  z-index: 100;
 }
 .header{
   position: relative;
@@ -141,6 +141,7 @@ ion-icon[name="close"]{
 #offcanvas-push{
 height: 100vh;
 overflow-y: auto;
+z-index: 100;
 }
 .uk-offcanvas-bar > ul{
   display: flex;
@@ -174,6 +175,7 @@ padding: 6px;
 .bottomAvatar{
   position: relative;
   margin-top: 15%;
+  margin-bottom: 15%;
   bottom:20px;
   left:20px;
   width:70%;
