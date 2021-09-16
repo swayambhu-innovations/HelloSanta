@@ -138,11 +138,7 @@ ion-icon[name="close"]{
   color:var(--ion-color-primary);
   font-size:30px;
 }
-#offcanvas-push{
-height: 100vh;
-overflow-y: auto;
-z-index: 100;
-}
+
 .uk-offcanvas-bar > ul{
   display: flex;
   flex-direction: column;
@@ -175,8 +171,7 @@ padding: 6px;
 .bottomAvatar{
   position: relative;
   margin-top: 15%;
-  margin-bottom: 15%;
-  bottom:20px;
+  margin-bottom: 10%;
   left:20px;
   width:70%;
 }
