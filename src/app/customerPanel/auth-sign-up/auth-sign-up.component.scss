@@ -274,6 +274,9 @@ form{
     justify-content: space-evenly;
     height:200px;
   }
+  ion-slide > form {
+    width: 300px;
+  }
   .formbg{
     padding-top:5px;
     width:300px;
@@ -281,7 +284,7 @@ form{
   }
 
   .formbg-outer{
-    margin: 5% 10%;
+    margin: 5% 12.5%;
   }
   form > input:nth-child(1){
     font-size: 15px;

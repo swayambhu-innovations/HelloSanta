@@ -47,7 +47,7 @@ export class AuthLoginComponent implements OnInit {
   slideOpts = {
     initialSlide: 0,
     speed: 400,
-    allowTouchMove: false,
+    allowTouchMove: true,
     on: {
       beforeInit() {
         const swiper = this;
@@ -162,7 +162,7 @@ export class AuthLoginComponent implements OnInit {
       .signInWithPhoneNumber('+91' + this.email.value, appVerifier)
       .then((result) => {
         this.windowRef.confirmationResult = result;
-        this.timeleft = 60;
+        this.timeleft = 3;
         console.log('time left', this.timeleft);
         var downloadTimer = setInterval((dt) => {
           if (this.timeleft <= 0) {
@@ -196,6 +196,7 @@ export class AuthLoginComponent implements OnInit {
               this.authService.presentToast('Sign In successful');
               this.dataProvider.showOverlay = false;
             } else {
+              this.router.navigate(['login']);
               this.authService.presentToast('You are not registered with this phone number.');
               this.dataProvider.showOverlay = false;
             }
