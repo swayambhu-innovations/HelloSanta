@@ -1,11 +1,16 @@
-
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+}
 
 .home{
     margin: 0 auto;
     min-width: 978px;
     max-width: 1920px;
-    height: auto;
-}
+    zoom: 80%;
+  }
 
 #container {
     width: 95%;
