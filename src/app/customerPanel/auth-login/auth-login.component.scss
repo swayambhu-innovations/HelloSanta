@@ -322,7 +322,7 @@ ion-slide {
     margin: 0 auto;
   }
   .formbg-outer{
-margin: 5% 12.5%;
+margin: 5% 10%;
   }
   input{
     min-width: 150px;
@@ -350,6 +350,16 @@ margin: 5% 12.5%;
   }
   .button{
     margin:0%;
+  }
+  .footer-link span {
+    font-size: 10px;
+    text-align: center;
+    margin: 0 10px;
+  }
+  .listing a {
+    color: #697386;
+    font-weight: 600;
+    margin: 0 10px;
   }
 
 }
