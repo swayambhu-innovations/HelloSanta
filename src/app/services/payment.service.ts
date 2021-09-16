@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
 export class PaymentService {
 
   constructor(
-    private http: HttpClient,
+    private https: HttpClient,
     private firebaseFunction:AngularFireFunctions,
     private authService:AuthService
   ) { }
@@ -20,27 +20,30 @@ export class PaymentService {
   }
 
   checkShipmentDetail(shipmentId){
-    // return this.firebaseFunction.httpsCallable('checkOrderShipment')(shipmentId);
-    return this.http.post(environment.cloudFunctions.checkOrderShipment, {shipmentId:shipmentId,uid:this.authService.userId});
+    return this.firebaseFunction.httpsCallable('checkOrderShipment')({shipmentId:shipmentId,uid:this.authService.userId});
+    // return this.https.post(environment.cloudFunctions.checkOrderShipment, {shipmentId:shipmentId,uid:this.authService.userId});
   }
   
   createOrder(orderDetails) {
     orderDetails.uid = this.authService.userId;
-    return this.http.post(environment.cloudFunctions.createOrder, orderDetails);
+    // return this.firebaseFunction.httpsCallable('createOrder')(orderDetails);
+    return this.https.post(environment.cloudFunctions.createOrder, orderDetails);
   }
 
-  capturePayment(paymemntDetails) {
-    paymemntDetails.uid = this.authService.userId;
-    return this.http.post(environment.cloudFunctions.capturePayment,paymemntDetails);
+  capturePayment(paymentDetails) {
+    paymentDetails.uid = this.authService.userId;
+    // return this.firebaseFunction.httpsCallable('capturePayment')(paymentDetails);
+    return this.https.post(environment.cloudFunctions.capturePayment,paymentDetails);
   }
 
   shipOrder(orderDetails) {
     orderDetails.uid = this.authService.userId;
-    return this.http.post(environment.cloudFunctions.shipOrder, orderDetails);
+    // return this.firebaseFunction.httpsCallable('shipOrder')(orderDetails);
+    return this.https.post(environment.cloudFunctions.shipOrder, orderDetails);
   }
 
   cancelOrderShipment(shipmentIds){
     shipmentIds.uid = this.authService.userId;
-    return this.http.post(environment.cloudFunctions.cancelOrderShipment, shipmentIds);
+    return this.https.post(environment.cloudFunctions.cancelOrderShipment, shipmentIds);
   }
 }

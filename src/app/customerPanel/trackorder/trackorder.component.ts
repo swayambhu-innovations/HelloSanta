@@ -81,7 +81,7 @@ export class TrackorderComponent implements OnInit {
         .checkShipmentDetail(shipmentID)
         .subscribe((res: any) => {
           console.log('check',res)
-          // this.shipmentOrderData = JSON.parse(res.body);
+          this.shipmentOrderData = res.data;
           console.log(this.shipmentOrderData);
           this.inventoryService
             .getOrder()

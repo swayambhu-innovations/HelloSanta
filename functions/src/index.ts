@@ -4,6 +4,7 @@ const nodemailer = require('nodemailer');
 let key_id = 'rzp_test_1GPCwB7UYA1pfl';
 let key_secret = '3v5jh3ZOsERttf0ZGE1gbmNj';
 let request = require('request');
+const Axios = require('axios');
 const cors = require('cors')({ origin: true });
 let instance = new Razorpay({
   key_id: key_id,
@@ -25,24 +26,29 @@ let transporter = nodemailer.createTransport({
   debug: true,
 });
 
-exports.sendMail = functions.https.onRequest((req: any, res: any) => {
-  return cors(req, res, () => {
-    
-    const mailOptions = {
-      from: 'Hello Santa <connect@hellosanta.in>',
-      to: req.body.email,
-      subject: req.body.subject,
-      html: req.body.content,
-    };
-    console.log(mailOptions);
-    return transporter.sendMail(mailOptions, (erro: any, info: any) => {
-      // console.log(info);
-      if (erro) {
-        console.log(erro);
-        return res.send(erro.toString());
-      }
-      return res.status(200).send({ msg: 'Sended' });
-    });
+exports.sendMail = functions.https.onCall((data: any, context: any) => {
+  if (!context.auth) {
+    throw new functions.https.HttpsError(
+      'failed-precondition',
+      'The function must be called while authenticated.'
+    );
+  }
+  const mailOptions = {
+    from: 'Hello Santa <connect@hellosanta.in>',
+    to: data.email,
+    subject: data.subject,
+    html: data.content,
+  };
+  return transporter.sendMail(mailOptions, (erro: any, info: any) => {
+    // console.log(info);
+    if (erro) {
+      console.log(erro);
+      throw new functions.https.HttpsError(
+        'failed-mailsend',
+        'Cannot send mail, some error occured'
+      );
+    }
+    return { msg: 'Sended' };
   });
 });
 exports.createOrder = functions.https.onRequest((req: any, res: any) => {
@@ -89,7 +95,7 @@ exports.shipOrder = functions.https.onRequest((req: any, res: any) => {
     let compliedRes = req.body;
     let shiprocketBody = {
       order_id: compliedRes.order_id,
-      order_date: orderDate, 
+      order_date: orderDate,
       pickup_location: 'Primary',
       company_name: 'Hello Santa',
       billing_customer_name: compliedRes.billing_customer_name,
@@ -154,45 +160,51 @@ exports.shipOrder = functions.https.onRequest((req: any, res: any) => {
   });
 });
 
-exports.checkOrderShipment = functions.https.onRequest((req: any, res: any) => {
-  return cors(req, res, () => {
-    let authOptions = {
+exports.checkOrderShipment = functions.https.onCall(
+  async (data: any, context: any) => {
+    if (!context.auth) {
+      throw new functions.https.HttpsError(
+        'failed-precondition',
+        'The function must be called while authenticated.'
+      );
+    } else {
+      return Axios({
       method: 'POST',
       url: 'https://apiv2.shiprocket.in/v1/external/auth/login',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
+      data: {
         email: 'hellosantaapi@gmail.com',
         password: 'Poiuy@09876',
-      }),
-    };
-    request(authOptions, function (error: any, authResponse: any) {
-      if (error) throw new Error(error);
-      let response = JSON.parse(authResponse.body);
-      let options = {
-        method: 'GET',
-        url:
-          'https://apiv2.shiprocket.in/v1/external/courier/track/shipment/' +
-          req.body.shipmentId,
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + response.token,
-        },
-      };
-      request(options, function (error: any, response: any) {
-        if (error) throw new Error(error);
-        response
-          ? res.status(200).send({
-              res: response,
-              req: req.body,
-              body: response.body,
-            })
-          : res.status(500).send(error);
+      },
+    })
+      .then((res: any) => {
+        console.log('authKeys', res.data.token);
+        return Axios({
+          method: 'GET',
+          url:
+            'https://apiv2.shiprocket.in/v1/external/courier/track/shipment/' +
+            data.shipmentId,
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + res.data.token,
+          },
+        }).then((trackRes: any) => {
+          console.log('trackRes', trackRes.data);
+          return { data: trackRes.data };
+        });
+      })
+      .catch((err: any) => {
+        console.log('error', err);
+        throw new functions.https.HttpsError(
+          'An Error occured',
+          'An error occured when checking shipment. Refresh the page or contact Hello Santa support team'
+        );
       });
-    });
-  });
-});
+    }
+  }
+);
 
 exports.cancelOrderShipment = functions.https.onRequest(
   (req: any, res: any) => {

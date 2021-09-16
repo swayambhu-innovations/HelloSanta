@@ -6,7 +6,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./small-product-card.component.css']
 })
 export class SmallProductCardComponent implements OnInit {
-  @Input() img:string =  "https://source.unsplash.com/650x940"
+  @Input() img:any;
   @Input() productTitle:string = "ArtWork Product"
   @Input() price:string = "2300"
   @Input() date:string = "22/06/2021"

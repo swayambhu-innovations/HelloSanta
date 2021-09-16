@@ -269,10 +269,10 @@ import { enterAnimation } from './animations/routeAnimations';
         window.location.href = (route.data as any).externalUrl;
       },
     },
-    // {
-    //   provide: FUNCTIONS_EMULATOR,
-    //   useValue: environment.production ? undefined : ['localhost', 5001],
-    // },  
+    {
+      provide: FUNCTIONS_EMULATOR,
+      useValue: environment.production ? undefined : ['localhost', 5001],
+    },  
     {
       provide: STEPPER_GLOBAL_OPTIONS,
       useValue: { displayDefaultIndicatorType: false, showError: true },

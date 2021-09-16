@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { InventoryService } from 'src/app/services/inventory.service';
 
@@ -20,15 +20,18 @@ export class FeedbackComponent implements OnInit {
   values:any={'sel':{}}
   shipment_id: any;
   clicked:any=[];
+  trackOrder:any;
   refreshRating:boolean=true;
   constructor(
     private activatedRoute: ActivatedRoute,
     private inventoryService: InventoryService,
     private formbuilder: FormBuilder,
+    private router: Router,
     private authService: AuthService
     ) {
     this.activatedRoute.queryParams.subscribe((params) => {
       this.orderId = params['orderId'];
+      this.trackOrder = params['trackId']
     });
     this.form = this.formbuilder.group({
       starCount: this.StarCount,
@@ -71,11 +74,14 @@ export class FeedbackComponent implements OnInit {
       photoURL:this.authService.getUserPhoto(),
       userId: this.authService.userId,
     }
-    // if (this.orderId){
-    //   this.inventoryService.addProductFeedback(this.orderId,feedback)
-    // } else {
-    //   this.inventoryService.addWebsiteFeedback(feedback)
-    // }
+    if (this.orderId){
+      this.inventoryService.addProductFeedback(this.orderId,feedback)
+    } else {
+      this.inventoryService.addWebsiteFeedback(feedback)
+    }
+    this.router.navigateByUrl(
+      'trackorder?shippingId=' +this.trackOrder.toString()
+    );
   }
   onRate(event) {
     this.values={};

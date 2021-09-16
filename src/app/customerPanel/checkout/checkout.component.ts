@@ -192,7 +192,15 @@ export class CheckoutComponent implements OnInit {
       this.offerFlat = 0;
     }
   }
-
+  makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  } 
   ngOnInit() {
     this.dataProvider.showOverlay = false;
     this.inventoryService
@@ -222,7 +230,7 @@ export class CheckoutComponent implements OnInit {
             }
             this.orderItems.push({
               name: dat.productName,
-              sku: prod.productData,
+              sku: prod.productData+this.makeid(7).toString(),
               units: 1,
               selling_price: prod.price - this.offerFlat,
             });
@@ -274,7 +282,7 @@ export class CheckoutComponent implements OnInit {
     console.log('imagereq',this.imageRequired)
     console.log('imageVald',this.imagesValid)
     if (this.imagesValid) {
-      this.dataProvider.showOverlay = true;
+      // this.dataProvider.showOverlay = true;
       this.processingPayment = true;
       this.payableAmount = this.grandTotal * 100;
       console.log('payable amount', this.payableAmount);
