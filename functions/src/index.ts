@@ -27,6 +27,12 @@ let transporter = nodemailer.createTransport({
 });
 
 exports.sendMail = functions.https.onCall((data: any, context: any) => {
+  if (context.app == undefined) {
+    throw new functions.https.HttpsError(
+        'failed-precondition',
+        'The function must be called from an App Check verified app.')
+  }
+
   if (!context.auth) {
     throw new functions.https.HttpsError(
       'failed-precondition',
@@ -162,6 +168,12 @@ exports.shipOrder = functions.https.onRequest((req: any, res: any) => {
 
 exports.checkOrderShipment = functions.https.onCall(
   async (data: any, context: any) => {
+    if (context.app == undefined) {
+      throw new functions.https.HttpsError(
+          'failed-precondition',
+          'The function must be called from an App Check verified app.')
+    }
+  
     if (!context.auth) {
       throw new functions.https.HttpsError(
         'failed-precondition',

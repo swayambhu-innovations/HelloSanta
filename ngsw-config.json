@@ -3,7 +3,7 @@
   "index": "/index.html",
   "assetGroups": [
     {
-      "name": "app",
+      "name": "Hello Santa",
       "installMode": "prefetch",
       "resources": {
         "files": [
@@ -22,7 +22,17 @@
       "resources": {
         "files": [
           "/assets/**",
-          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
+          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)",
+          "https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js",
+          "https://checkout.razorpay.com/v1/checkout.js",
+          "https://fonts.googleapis.com/icon?family=Material+Icons",
+          "https://fonts.googleapis.com/css2?family=Crimson+Text:ital@1&amp;display=swap",
+          "https://fonts.googleapis.com/css2?family=Poppins&amp;display=swap",
+          "https://fonts.googleapis.com/css2?family=Raleway&amp;display=swap",
+          "assets/dist/uikit-icons.min.js",
+          "https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css",
+          "assets/dist/uikit.min.css",
+          "assets/dist/uikit.min.js"
         ]
       }
     }
