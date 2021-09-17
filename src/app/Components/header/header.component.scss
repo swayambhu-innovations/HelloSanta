@@ -37,6 +37,7 @@
   height:50px;
   border-radius:10px;
   padding:5px;
+  outline: none;
 }
 .search > input:active{
   border:2px solid var(--ion-color-primary);

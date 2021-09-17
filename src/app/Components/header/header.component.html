@@ -46,11 +46,9 @@
 </div>
 <div class="links">
   <ul class="nav">
-    <div>
-      <li><button uk-toggle="target: #offcanvas-push">
+      <li><button uk-toggle="target: #offcanvas-push" >
           <ion-icon name="menu"></ion-icon>
         </button></li>
-    </div>
     <li><a routerLink="/">Home</a></li>
     <li><a routerLink="/shop/">Shop</a></li>
     <div uk-dropdown class="dog">
@@ -66,7 +64,8 @@
 
   </ul>
 </div>
-<div id="offcanvas-push" uk-offcanvas="overlay: true">
+</div>
+<div id="offcanvas-push" uk-offcanvas="overlay: true;" container="true" esc-close="true" bg-close="true">
   <div class="uk-offcanvas-bar">
     <button class="uk-offcanvas-close" type="button">
       <ion-icon name="close"></ion-icon>
@@ -106,7 +105,6 @@
       </ion-row>
     </div>
   </div>
-</div>
 </div>
 <div class="headerMobile">
   <button uk-toggle="target: #offcanvas-push">
