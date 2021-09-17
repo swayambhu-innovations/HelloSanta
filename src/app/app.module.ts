@@ -127,6 +127,7 @@ import { AboutusComponent } from './customerPanel/aboutus/aboutus.component';
 import { StarRatingComponent } from './Components/star-rating/star-rating.component';
 import { SwiperModule } from 'swiper/angular';
 import { enterAnimation } from './animations/routeAnimations';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -253,6 +254,12 @@ import { enterAnimation } from './animations/routeAnimations';
     NgxImageZoomModule,
     NgCalendarModule,
     SwiperModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

@@ -1,7 +1,7 @@
 {
-  "name": "Hello Santa E-Commerce Gifts",
-  "short_name": "Hello Santa",
-  "theme_color": "#675ce0",
+  "name": "app",
+  "short_name": "app",
+  "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",
