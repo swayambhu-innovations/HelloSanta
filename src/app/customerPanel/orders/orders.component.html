@@ -5,11 +5,11 @@
     <app-sidenav activeLinkID="your-orders" *ngIf="screenwidth>1020"></app-sidenav>
     <section id="orders-container">
       <h2 id="your-cart-title">Your Orders</h2>
-      <div class="product-row" *ngIf="!loading">
-        <div class="product-row" *ngFor="let orderData of liveOrders">
+      <div *ngIf="!loading">
+        <div class="product-row">
           <app-ordercard [orderid]="orderData.orderId" [orderdate]="orderData.shippingDetail.orderDate"
           [shipmentid]="orderData.shippingDetail.shipment_id" [shipmentstage]="orderData.orderStage"
-          [liveOrders]="orderData.products"></app-ordercard>
+          [liveOrders]="orderData.products" [customWidth]="screenwidth > 800 ? '28vw' : undefined" *ngFor="let orderData of liveOrders"></app-ordercard>
         </div>
       </div>
       <div *ngIf="loading">

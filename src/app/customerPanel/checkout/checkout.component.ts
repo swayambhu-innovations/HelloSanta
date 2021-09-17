@@ -120,12 +120,15 @@ export class CheckoutComponent implements OnInit {
   imagesValid: boolean = false;
   coupons:any=[]
   discount:number=0;
+  totalTax: number = 0;
+  subTotal: number = 0;
   couponData:any={available:false};
   searchCoupon(event){
     this.searchingCoupon=true;
-    console.log(event); 
+    console.log("coupon",event); 
     let defined =false;
     this.coupons.forEach((coupon)=>{
+      console.log("Checking coupon",event.detail.value.toLowerCase()==coupon.code.toLowerCase())
       if (event.detail.value.toLowerCase()==coupon.code.toLowerCase()){
         if (this.dataProvider.checkOutdata.length>=coupon.minimumProducts){
           if (this.grandTotal>=coupon.minimumPrice){
@@ -169,12 +172,43 @@ export class CheckoutComponent implements OnInit {
     // console.log('imageRequired', this.imageRequired);
   }
   presentInvoice() {
+    // let detail = {
+    //   name:shippingDetail.billing_customer_name,
+    //   address: shippingDetail.billing_address,
+    //   city: shippingDetail.billing_city,
+    //   state: shippingDetail.billing_state,
+    //   country: shippingDetail.billing_country,
+    //   pincode: shippingDetail.billing_pincode,
+    //   mobile: shippingDetail.billing_phone,
+    //   email: shippingDetail.billing_email,
+    //   discount:{available:true,code:'offerCode',price:120},
+    //   grandTotal:this.grandTotal,
+    //   taxCharges:(this.grandTotal/100)*15,
+    // }
+    let detail = {
+      name:this.firstName.value+' '+this.lastName.value,
+      address: this.addressLine1.value,
+      city: this.city.value,
+      state: this.state.value,
+      country: this.country.value,
+      pincode: this.pincode.value,
+      mobile: this.phoneNumber.value,
+      email: this.email.value,
+      discount:this.couponData,
+      subTotal:this.grandTotal-this.totalTax,
+      grandTotal:this.grandTotal,
+      taxCharges:this.totalTax,
+    }
+    this.invoiceService.createInvoice(this.orders,detail);
   }
 
   get grandTotal(): number {
     var total = 0;
+    this.totalTax=0;
+    this.subTotal=0;
     this.dataCopy.forEach((order) => {
       total += order.price * order.quantity;
+      this.totalTax+=((total/100)*15)
     });
     return ((total - this.offerFlat ) - this.discount);
   }
@@ -262,6 +296,7 @@ export class CheckoutComponent implements OnInit {
         offers.forEach((offer) => {
           this.coupons.push(offer.data());
         })
+        console.log('coupons', this.coupons);
       })
     } else {
       this.authService.presentToast('Oh Ohh! Checkout expired &#x1F605;');
@@ -416,7 +451,7 @@ export class CheckoutComponent implements OnInit {
                 grandTotal:this.grandTotal,
                 taxCharges:(this.grandTotal/100)*15,
               }
-              this.invoiceService.createInvoice(this.orders,detail);
+              
               this.dataProvider.shippingData =
                 currentOrder.shippingDetail.shipment_id.toString();
               this.authService.presentToast('Order Placed Successfully ');

@@ -16,7 +16,6 @@ export class AdminPanelComponent implements OnInit {
     { title: 'Products', url: '/AdminPanel/Products', icon: 'grid' },
     { title: 'Pending Products', url: '/AdminPanel/PendingProducts', icon: 'golf' },
     { title: 'Users', url: '/AdminPanel/Users', icon: 'people-circle' },
-    { title: 'Customize', url: '/AdminPanel/Customize', icon: 'cog' },
     { title: 'Complains', url: '/AdminPanel/Complains', icon: 'warning' },
     { title: 'Offers & Referrals', url: '/AdminPanel/OffersAndReferrals', icon: 'ticket' },
     { title: 'Blog', url: '/AdminPanel/Blog', icon: 'albums' },

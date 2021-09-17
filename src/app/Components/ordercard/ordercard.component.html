@@ -1,4 +1,4 @@
-<ion-card id="orders-container" routerLink="/trackorder" [queryParams]="{'shippingId':shipmentid}">
+<ion-card id="orders-container" [ngStyle]="{'width': customWidth ? customWidth : 'auto'}" routerLink="/trackorder" [queryParams]="{'shippingId':shipmentid}">
   <h2 id="your-cart-title">Your Orderinfo</h2>
   <hr class="line">
   <div class="text">
@@ -24,8 +24,8 @@
     Track Order
   </ion-button>
   <hr class="line">
-  <div class="product-row" *ngFor="let product of liveOrders">
-    <app-small-product-card [img]="product.productImages"
+  <div class="product-row">
+    <app-small-product-card [img]="product.productImages" *ngFor="let product of liveOrders"
     [productTitle]="product.productName" [price]="product.productPrice" [productId]="product.productId"
     [date]="orderdate"></app-small-product-card>
   </div>

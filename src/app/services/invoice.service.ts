@@ -38,11 +38,12 @@ export class InvoiceService {
   createInvoice(data,shippingDetail) {
     let body = [];
     for (let i of data){
-      body.push([i.productName, i.quantity, i.finalPrice,i.finalPrice*i.quantity]);
+      body.push([i.productName, i.quantity, i.finalPrice,(i.finalPrice*i.quantity)-(((i.finalPrice*i.quantity)/100)*15)]);
     }
+    body.push(['','','Subtotal',shippingDetail.subTotal])
     body.push(['', '', 'Tax & Charges', shippingDetail.taxCharges]);
     if (shippingDetail.discount.available==true){
-      body.push(['Dicount Code', shippingDetail.discount.code, 'Discount', shippingDetail.discount.price]);
+      body.push(['Dicount Code', shippingDetail.discount.code, 'Discount', shippingDetail.discount.discount]);
     }
     body.push(['', '', 'Grand Total', shippingDetail.grandTotal]);
     this.getBase64ImageFromUrl('./assets/icon.png')

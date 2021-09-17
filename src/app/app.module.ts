@@ -36,7 +36,6 @@ import { SmallProductCardComponent } from './components/small-product-card/small
 import { BlogCardComponent } from './components/blog-card/blog-card.component';
 import { AccordionComponent } from './Components/accordion/accordion.component';
 import { HomeComponent } from './customerPanel/home/home.component';
-import { SetupComponent } from './customerPanel/setup/setup.component';
 import { ProfileComponent } from './customerPanel/profile/profile.component';
 import { FeedbackComponent } from './customerPanel/feedback/feedback.component';
 import { WishlistComponent } from './customerPanel/wishlist/wishlist.component';
@@ -166,7 +165,6 @@ import { enterAnimation } from './animations/routeAnimations';
     SmallProductCardComponent,
     BlogCardComponent,
     AccordionComponent,
-    SetupComponent,
     ProfileComponent,
     FeedbackComponent,
     WishlistComponent,

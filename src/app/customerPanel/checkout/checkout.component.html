@@ -134,6 +134,9 @@
                   <ion-checkbox [checked]="false" formControlName="santaCredit" (ionChange)="setCashback($event)"></ion-checkbox>
                   <ion-label>&nbsp;&nbsp;&nbsp;Use Your {{santaCoins}} Santa Credit for <strong>&#x20B9;{{this.santaCoins}}</strong> off.</ion-label>
                 </ion-item>
+                <ion-button (click)="presentInvoice()" expand="block" fill="clear" shape="round">
+                  Download Invoice
+                </ion-button>
                 <div align="center">
                   <button type="submit" [disabled]="!form.valid">
                     <div *ngIf="processingPayment">

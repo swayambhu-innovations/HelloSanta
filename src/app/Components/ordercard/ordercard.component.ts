@@ -15,6 +15,7 @@ export class OrdercardComponent implements OnInit {
   @Input() orderdate:string = "22/06/2021"
   @Input() shipmentstage:string = "ArtWork Product";
   @Input() liveOrders:any;
+  @Input() customWidth:string = undefined;
   constructor(public authService: AuthService,public afs: AngularFirestore) { }
   ngOnInit() {
     console.log(this.liveOrders)
