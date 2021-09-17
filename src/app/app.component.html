@@ -7,5 +7,5 @@
             <p>Please verify your email</p>
         </div>
     </div>
-    <ion-router-outlet #outlet="outlet" [ngStyle]="{'top': (!this.authService.isEmailVerified && !this.authService.isNumberVerified) ? '80px' : '30px' }"></ion-router-outlet>
+    <ion-router-outlet #outlet="outlet" [ngStyle]="{'top': (!this.authService.isEmailVerified && !this.authService.isNumberVerified && authService.isJustLoggedIn) ? '80px' : '30px' }"></ion-router-outlet>
 </ion-app> 
