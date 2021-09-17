@@ -49,13 +49,15 @@ export class AppComponent implements OnInit{
           }
         }, {
           text: 'Report Bug',
+         
           handler: (alertData) => {
+            let date = (new Date()).toDateString();
             let data = {
+              date:date,
               message:alertData.name1,
               url:window.location.href,
-              time:new Date().getTime(),
               clientInfo:window.navigator.userAgent,
-              user:this.authService.userId,
+              user:this.authService.userId || '',
               logs:this.dataProvider.logs,
               screenWidth:screen.width,
               screenHeight:screen.height,
@@ -83,8 +85,12 @@ export class AppComponent implements OnInit{
               hardwareConcurrency:navigator.hardwareConcurrency,
               maxTouchPoints:navigator.maxTouchPoints,
               doNotTrack:navigator.doNotTrack,
+              solved:false,
             }
-            this.afs.collection('bugs').add(data);
+            console.log(data);
+            this.afs.collection('bugs').add(data).then((docRef:any) => {
+              this.afs.collection('bugs').doc(docRef.id).set({bugId:docRef.id},{ merge: true})
+            });
           }
         }
       ]
