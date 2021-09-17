@@ -70,7 +70,7 @@
     <button class="uk-offcanvas-close" type="button">
       <ion-icon name="close"></ion-icon>
     </button>
-    <ul>
+    <ul class="uk-offcanvas-close">
       <li *ngIf="!this.authService.isJustLoggedIn"><a routerLink="/login">Login</a></li>
       <li *ngIf="this.authService.getCurrenAccessLevel == 'Vendor'"><a routerLink="/VendorPanel/Dashboard">Vendor Panel</a>
       </li>
@@ -86,7 +86,7 @@
       <li><a routerLink="/termsandconditions">Terms&conditions</a></li>
       <li><a routerLink="/refund">Refundandreturn</a></li>
     </ul>
-    <div class="bottomAvatar">
+    <div class="bottomAvatar uk-offcanvas-close">
       <ion-row>
         <button *ngIf="authService.isJustLoggedIn">
           <ion-avatar>
