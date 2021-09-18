@@ -10,8 +10,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ionic build --prod && firebase deploy --only hosting",
-    "fullDeploy": "ionic build --prod && firebase deploy"
+    "deploy": "ionic build --prod --aot && firebase deploy --only hosting",
+    "fullDeploy": "ionic build --prod --aot && firebase deploy"
   },
   "private": true,
   "dependencies": {
