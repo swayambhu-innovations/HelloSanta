@@ -29,7 +29,7 @@ export class OrdersComponent implements OnInit {
         order['products']=productsData;
         this.liveOrders.push(order);
       });
-      console.log(this.liveOrders);
+      // console.log(this.liveOrders);
     })
   }
 

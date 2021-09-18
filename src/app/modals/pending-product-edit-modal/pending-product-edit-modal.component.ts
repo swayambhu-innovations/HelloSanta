@@ -58,7 +58,7 @@ export class PendingProductEditModalComponent implements OnInit {
   ]);
   isLoading: boolean = false;
   customTypeChanged(value, item) {
-    console.log(value);
+    // console.log(value);
   }
   toggleChange(value) {
     this.dataProvider.showOverlay = value;
@@ -105,7 +105,7 @@ export class PendingProductEditModalComponent implements OnInit {
     }
   }
   uploadFile(file, fileName) {
-    console.log('Starting file upload', fileName);
+    // console.log('Starting file upload', fileName);
     const fileRef = this.storage.ref(fileName);
     const task = this.storage.upload(fileName, file);
     return task.snapshotChanges().pipe(
@@ -121,7 +121,7 @@ export class PendingProductEditModalComponent implements OnInit {
     return list;
   }
   fileChange(event) {
-    console.log(event);
+    // console.log(event);
     let fileList: FileList = event.target.files;
     return fileList[0];
   }
@@ -139,7 +139,7 @@ export class PendingProductEditModalComponent implements OnInit {
       for (let i = 0; i < +val; i++) {
         let fileEv = this.prodImagesEvents['productImage' + i];
         if (fileEv) {
-          console.log('Image Exists at', fileEv);
+          // console.log('Image Exists at', fileEv);
           fileEv = this.fileChange(fileEv);
           this.dataProvider.overlayStatus =
             'Uploading file ' + fileEv.name.toString() + '...';
@@ -227,13 +227,13 @@ export class PendingProductEditModalComponent implements OnInit {
 
   ngOnInit() {
     this.form.disable();
-    console.log('podid',this.productId)
+    // console.log('podid',this.productId)
     this.afs
       .collection<any>('pendingProducts')
       .doc(this.productId)
       .valueChanges()
       .subscribe(async (value) => {
-        console.log('value', value);
+        // console.log('value', value);
         this.form.get('productName').setValue(value.productName);
         this.form.get('productDescription').setValue(value.productDescription);
         this.form.get('shortDescription').setValue(value.shortDescription);
@@ -254,7 +254,7 @@ export class PendingProductEditModalComponent implements OnInit {
               ) as HTMLImageElement
             ).src = image.image
           } catch (e) {
-            console.log("error on prodImages",e);
+            // console.log("error on prodImages",e);
           }
         }
       });

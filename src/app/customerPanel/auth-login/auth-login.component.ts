@@ -163,14 +163,14 @@ export class AuthLoginComponent implements OnInit {
       .then((result) => {
         this.windowRef.confirmationResult = result;
         this.timeleft = 3;
-        console.log('time left', this.timeleft);
+        // console.log('time left', this.timeleft);
         var downloadTimer = setInterval((dt) => {
           if (this.timeleft <= 0) {
             clearInterval(downloadTimer);
           }
           this.timeleft -= 1;
           this.resendProgress = this.timeleft / 60;
-          console.log(this.timeleft, this.resendProgress);
+          // console.log(this.timeleft, this.resendProgress);
         }, 1000);
       })
       .catch((error) => this.authService.presentToast(error.message,5000));

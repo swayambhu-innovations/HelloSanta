@@ -44,14 +44,14 @@ export class ProductComponent implements OnInit {
     await popover.present();
 
     const { role } = await popover.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
+    // console.log('onDidDismiss resolved with role', role);
   }
   removeProduct(){}
   deleteItem(){
-    console.log("deleting");
+    // console.log("deleting");
     const productRef: AngularFirestoreDocument<any> = this.afs.doc(`products/${this.id}`);
     productRef.delete();
-    console.log("deleted");
+    // console.log("deleted");
   }
   editItem(){
     this.presentModal()

@@ -115,7 +115,7 @@ export class InvoiceService {
         this.doc.save('a4.pdf');
       })
       .catch((error) => {
-        console.log('Error occured', error);
+        // console.log('Error occured', error);
       });
   }
 

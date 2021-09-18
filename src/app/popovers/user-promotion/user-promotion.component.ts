@@ -10,15 +10,15 @@ export class UserPromotionComponent implements OnInit {
   @Input() userid:string;
   constructor(private inventoryService:InventoryService) { }
   promoteToVendor(){
-    console.log("Userid",this.userid)
+    // console.log("Userid",this.userid)
     this.inventoryService.promoteTo('Vendor',this.userid);
   }
   promoteToCustomer(){
-    console.log("Userid",this.userid)
+    // console.log("Userid",this.userid)
     this.inventoryService.promoteTo('Customer',this.userid);
   }
   promoteToAdmin(){
-    console.log("Userid",this.userid)
+    // console.log("Userid",this.userid)
     this.inventoryService.promoteTo('Admin',this.userid);
   }
   ngOnInit() {}

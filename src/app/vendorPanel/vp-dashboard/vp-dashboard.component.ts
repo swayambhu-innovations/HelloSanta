@@ -29,7 +29,7 @@ export class VPDashboardComponent implements OnInit {
       .ref.get()
       .then((data) => {
         data.forEach((user: any) => {
-          console.log(user.data());
+          // console.log(user.data());
           this.afs
             .collection('users')
             .doc(user.data().uid)
@@ -37,7 +37,7 @@ export class VPDashboardComponent implements OnInit {
             .ref.get()
             .then((ordersData) => {
               ordersData.forEach((order: any) => {
-                console.log('userOrder', order.data());
+                // console.log('userOrder', order.data());
                 let found = false;
                 let products = [];
                 order.data().products.forEach((product) => {

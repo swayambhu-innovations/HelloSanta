@@ -55,7 +55,7 @@ export class AccountComponent implements OnInit {
       this.country=value.country;
       this.type=value.access.accessLevel;
       this.dob=(new Date(value.dob)).toDateString();
-      console.log(this.dob,value.dob)
+      // console.log(this.dob,value.dob)
       this.emailVerified=value.emailVerified;
       this.gender=value.gender;
       if (value.isReferrer){

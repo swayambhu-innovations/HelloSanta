@@ -30,7 +30,7 @@ export class APDashboardComponent implements OnInit {
         })
         this.liveOrders.push({products:productsData,shippingDetail:order.shippingDetail})
       });
-      console.log(this.liveOrders);
+      // console.log(this.liveOrders);
     })
   }
 }

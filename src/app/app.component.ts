@@ -45,7 +45,7 @@ export class AppComponent implements OnInit{
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel');
+            // console.log('Confirm Cancel');
           }
         }, {
           text: 'Report Bug',
@@ -70,24 +70,24 @@ export class AppComponent implements OnInit{
               referrer:document.referrer,
               historyLength:history.length,
               title:document.title,
-              browserName:window.navigator.appName,
-              browserVersion:navigator.appVersion,
-              platform:navigator.platform,
+              browserName:window.navigator.userAgent,
+              browserVersion:"none",
+              platform:"none",
               userLanguage:navigator.language,
               userAgent:navigator.userAgent,
               cookieEnabled:navigator.cookieEnabled,
               onLine:navigator.onLine,
-              javaEnabled:navigator.javaEnabled(),
-              product:navigator.product,
-              productSub:navigator.productSub,
-              vendor:navigator.vendor,
-              vendorSub:navigator.vendorSub,
+              javaEnabled:"none",
+              product:"none",
+              productSub:"none",
+              vendor:"none",
+              vendorSub:"none",
               hardwareConcurrency:navigator.hardwareConcurrency,
               maxTouchPoints:navigator.maxTouchPoints,
               doNotTrack:navigator.doNotTrack,
               solved:false,
             }
-            console.log(data);
+            // console.log(data);
             this.afs.collection('bugs').add(data).then((docRef:any) => {
               this.afs.collection('bugs').doc(docRef.id).set({bugId:docRef.id},{ merge: true})
             });

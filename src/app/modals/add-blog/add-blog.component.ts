@@ -61,7 +61,7 @@ export class AddBlogComponent implements OnInit {
   blogPublish: FormControl = new FormControl(false);
   mainBlog: FormControl = new FormControl(false);
   uploadFile(file, fileName) {
-    console.log('Starting file upload', fileName);
+    // console.log('Starting file upload', fileName);
     const fileRef = this.storage.ref(fileName);
     const task = this.storage.upload(fileName, file);
     return task.snapshotChanges().pipe(
@@ -90,7 +90,7 @@ export class AddBlogComponent implements OnInit {
     this.isLoading=true;
     this.dataProvider.overlayStatus="Uploading blog image ...";
     let file= this.getFileFromEvent(this.imageEvent);
-    console.log(file)
+    // console.log(file)
     let blogName = this.form.get('blogName')!.value.replaceAll(" ","");
     let fileName=`blogImages/${blogName}/`+ blogName + file.name;
 
@@ -109,7 +109,7 @@ export class AddBlogComponent implements OnInit {
         lastEdit:[],
       }
       this.dataProvider.overlayStatus="Uploading data to database...";
-      console.log(data);
+      // console.log(data);
       this.inventoryService.addBlog(data);
       this.isLoading=false;
       this.form.enable()

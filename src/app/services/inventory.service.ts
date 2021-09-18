@@ -43,13 +43,13 @@ export class InventoryService {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel');
+            // console.log('Confirm Cancel');
           },
         },
         {
           text: 'Ok',
           handler: (alertData) => {
-            console.log(alertData.ProductId);
+            // console.log(alertData.ProductId);
             this.alertData = alertData.ProductId;
           },
         },
@@ -165,7 +165,7 @@ export class InventoryService {
     return statement;
   }
   addToRecommendations(data) {
-    console.log(data);
+    // console.log(data);
     const productRef: AngularFirestoreDocument<any> = this.afs.doc(
       `specificSelectedProducts/products`
     );
@@ -199,7 +199,7 @@ export class InventoryService {
     let statement = productRef.update({
       wishlist: firebase.firestore.FieldValue.arrayRemove(data),
     });
-    console.log("removed statement",statement);
+    // console.log("removed statement",statement);
     return statement;
   }
   editPendingProduct(productID, data) {
@@ -217,7 +217,7 @@ export class InventoryService {
     return statement;
   }
   publishItem(id) {
-    console.log('Fired pubilsh,', id);
+    // console.log('Fired pubilsh,', id);
     this.afs
       .doc(`pendingProducts/${id}`)
       .valueChanges()
@@ -249,7 +249,7 @@ export class InventoryService {
             .collection('products')
             .valueChanges()
             .subscribe((value) => {
-              console.log('data=> ', value);
+              // console.log('data=> ', value);
             });
         });
       });

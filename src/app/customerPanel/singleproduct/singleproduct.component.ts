@@ -71,10 +71,6 @@ export class SingleproductComponent implements OnInit {
         productId: this.productId,
         productName: this.productData.productName,
       });
-      console.log(
-        Object.keys(this.extrasData).length,
-        this.productData.extraData.length
-      );
       if (
         Object.keys(this.extrasData).length == this.productData.extraData.length
       ) {
@@ -110,7 +106,7 @@ export class SingleproductComponent implements OnInit {
           quantity: this.quantity,
         };
         this.inventoryService.addToCart(cartItem);
-        console.log('addToCart');
+        // console.log('addToCart');
       } else {
         this.authService.presentToast('Please select all the extras options.');
       }
@@ -123,7 +119,7 @@ export class SingleproductComponent implements OnInit {
     return Math.ceil(x / 5) * 5;
   }
   comparePriceListing(object1, Object2) {
-    // console.log('compare price',object1, Object2);
+    // // console.log('compare price',object1, Object2);
     let isTrue = true;
     for (let i of Object.keys(object1)) {
       if (i == 'isRelative') {
@@ -133,11 +129,11 @@ export class SingleproductComponent implements OnInit {
         isTrue = false;
       }
     }
-    // console.log('isTrue',isTrue);
+    // // console.log('isTrue',isTrue);
     return isTrue;
   }
   calculatePrice() {
-    // console.log("calculatePrice",this.extrasData);
+    // // console.log("calculatePrice",this.extrasData);
     // let addonPrice:number = 0;
     this.productPrice = 0;
     for (
@@ -151,7 +147,7 @@ export class SingleproductComponent implements OnInit {
       for (let i of Object.keys(this.extrasData)) {
         if (this.extrasData[i].isRelative) {
           relativeCounter++;
-          // console.log(val,"isPossible")
+          // // console.log(val,"isPossible")
           if (val.isPossible == true) {
             val.permutations.forEach((perm) => {
               if (this.comparePriceListing(perm, this.extrasData[i])) {
@@ -159,7 +155,7 @@ export class SingleproductComponent implements OnInit {
               }
             });
           } else {
-            // console.log("not possible", this.productPrice);
+            // // console.log("not possible", this.productPrice);
             this.productPrice = undefined;
           }
         }
@@ -173,7 +169,7 @@ export class SingleproductComponent implements OnInit {
         vldCounter = 0;
         break;
       }
-      // console.log("calculatePrice", this.productPrice);
+      // // console.log("calculatePrice", this.productPrice);
     }
     let quantity = 1;
     let faceCounts = 0;
@@ -208,13 +204,13 @@ export class SingleproductComponent implements OnInit {
     }
   }
   updateData(event, relative, sectionTitle) {
-    // console.log(event);
+    // // console.log(event);
     if (typeof event.detail.value == 'object') {
-      console.log('updater ', event, relative, sectionTitle);
+      // console.log('updater ', event, relative, sectionTitle);
       event.detail.value['isRelative'] = relative || false;
       this.extrasData[sectionTitle] = event.detail.value;
-      console.log(this.extrasData);
-      console.log(this.extrasData);
+      // console.log(this.extrasData);
+      // console.log(this.extrasData);
       let relatives = [];
       if (relative) {
         let msgString = '';
@@ -227,7 +223,7 @@ export class SingleproductComponent implements OnInit {
         });
         let checked = [];
         relatives.forEach((val) => {
-          // console.log("rela",val,sectionTitle)
+          // // console.log("rela",val,sectionTitle)
           if (
             !relatives.includes(this.extrasData[val.sectionTitle]) &&
             !checked.includes(val.sectionTitle)
@@ -262,7 +258,7 @@ export class SingleproductComponent implements OnInit {
     });
     await popover.present();
     const { role } = await popover.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
+    // console.log('onDidDismiss resolved with role', role);
   }
   ngOnInit() {
     if (this.authService.isJustLoggedIn){

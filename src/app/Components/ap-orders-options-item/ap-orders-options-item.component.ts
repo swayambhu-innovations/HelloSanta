@@ -36,7 +36,7 @@ export class ApOrdersOptionsItemComponent implements OnInit {
     await popover.present();
 
     const { role } = await popover.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
+    // console.log('onDidDismiss resolved with role', role);
   }
   async presentContinueAlert() {
     const alert = await this.alertController.create({
@@ -62,16 +62,16 @@ export class ApOrdersOptionsItemComponent implements OnInit {
   async rejectOrder(){
     let res = await this.presentContinueAlert();
     if (res=='continue'){
-      console.log('continue')
-      console.log('shipment id',[this.moreInfo.shipment_id])  //shipment id
+      // console.log('continue')
+      // console.log('shipment id',[this.moreInfo.shipment_id])  //shipment id
       this.paymentService.cancelOrderShipment({ids:[this.moreInfo.order_id]}).subscribe((value:any)=>{
-        console.log('cancel order shipment',value)
+        // console.log('cancel order shipment',value)
         this.authService.presentToast(JSON.parse(value.body).message);
       },(error)=>{
         this.authService.presentToast('Something went wrong. Error:'+error.message)
       })
     } else {
-      console.log('cancel')
+      // console.log('cancel')
     }
   }
   ngOnInit() {}

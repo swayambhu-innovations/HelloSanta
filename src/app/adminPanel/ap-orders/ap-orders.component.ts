@@ -61,7 +61,7 @@ export class APOrdersComponent implements OnInit {
             });
           }
         });
-        console.log(this.liveOrders);
+        // console.log(this.liveOrders);
       });
   }
 }

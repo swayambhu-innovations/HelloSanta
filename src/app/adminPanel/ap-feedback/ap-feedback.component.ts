@@ -28,7 +28,7 @@ export class APFeedbackComponent implements OnInit {
   ngOnInit() {
     this.inventoryService.getHelpDocuments().then((data:any) => {
      data.forEach((doc:any) => {
-       console.log(doc.id, " => ", doc.data());
+       // console.log(doc.id, " => ", doc.data());
        if (this.feedbacks==undefined){this.feedbacks=[]}
        doc.data()['id']=doc.id;
        this.feedbacks.push(doc.data());

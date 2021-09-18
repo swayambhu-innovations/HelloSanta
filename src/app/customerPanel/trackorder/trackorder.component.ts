@@ -76,29 +76,23 @@ export class TrackorderComponent implements OnInit {
   ngOnInit() {
     const shipmentID = this.shippingId || this.dataProvider.shippingData;
     if (shipmentID !== undefined) {
-      console.log('shipment function triggered ');
+      // console.log('shipment function triggered ');
       this.paymentService
         .checkShipmentDetail(shipmentID)
         .subscribe((res: any) => {
-          console.log('check',res)
+          // console.log('check',res)
           this.shipmentOrderData = res.data;
-          console.log(this.shipmentOrderData);
+          // console.log(this.shipmentOrderData);
           this.inventoryService
             .getOrder()
             .get()
             .then((order: any) => {
-              console.log(order);
+              // console.log(order);
               order.forEach((orderItem: any) => {
-                console.log(
-                  'orderids',
-                  orderItem.data(),
-                  orderItem.data().shipment_id,
-                  shipmentID
-                );
                 if (orderItem.data().shipment_id == shipmentID) {
                   this.orderData = orderItem.data();
                   this.orderConfirmed = orderItem.data().orderConfirmed;
-                  console.log('orderData', this.orderData);
+                  // console.log('orderData', this.orderData);
                 }
               });
               // this.orderConfirmed = order.data().orderConfirmed;
@@ -108,7 +102,7 @@ export class TrackorderComponent implements OnInit {
       this.authService.presentToast(
         'Page expired please go back to home and reinitiate this page'
       );
-      console.log(this.shippingId, shipmentID);
+      // console.log(this.shippingId, shipmentID);
     }
   }
 }

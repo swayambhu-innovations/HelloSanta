@@ -29,9 +29,9 @@ export class AddReferralComponent implements OnInit {
       newUSerPoint: this.form.get('newUserPoints')!.value,
       oldUserPoint: this.form.get('oldUserPoints')!.value,
     }
-    console.log("Triggered")
+    // console.log("Triggered")
     this.inventoryService.addReferral(data,this.form.get('vendor')!.value,);
-    console.log("Confirmed")
+    // console.log("Confirmed")
   }
   ngOnInit() {
     this.afs.collection('users').valueChanges().subscribe((users:any) => {

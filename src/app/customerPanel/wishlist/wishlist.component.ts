@@ -23,14 +23,14 @@ export class WishlistComponent implements OnInit {
           let unknown=0
           this.wishlist.forEach((elem:any) => {
             if (proddata.productId==elem) {
-              console.log("already exists");
+              // console.log("already exists");
               unknown++;
             }
           })
           if (unknown==0) {
             this.wishlist.push(proddata);
           }
-          console.log("wishlist",this.wishlist);
+          // console.log("wishlist",this.wishlist);
         })
       })
     });

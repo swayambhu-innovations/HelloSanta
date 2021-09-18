@@ -59,9 +59,9 @@ export class CustomproductComponent implements OnInit {
     this.productCategory.setValue(event.detail.value);
   }
   async submitProduct(){
-    console.log("submit product")
+    // console.log("submit product")
     let res = await this.alertsModals.presentContinueAlert();
-    console.log(res);
+    // console.log(res);
     if (res=='continue'){
       let data = {
         fullName: this.fullName.value,

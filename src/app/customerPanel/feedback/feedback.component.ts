@@ -48,7 +48,7 @@ export class FeedbackComponent implements OnInit {
           if (this.orderId == doc.data().orderId){
             this.orderData = doc.data()
             this.shipment_id = doc.data().shipment_id
-            console.log(this.orderData)
+            // console.log(this.orderData)
           }
         })
       })
@@ -58,13 +58,13 @@ export class FeedbackComponent implements OnInit {
     }
   }
   log(event) {
-    console.log(event);
+    // console.log(event);
   }
   submitFeedback(){
-    console.log('submitFeedback');
-    console.log(this.moreInfo.value);
-    console.log(this.StarCount.value)
-    console.log(this.values)
+    // console.log('submitFeedback');
+    // console.log(this.moreInfo.value);
+    // console.log(this.StarCount.value)
+    // console.log(this.values)
     let feedback = {
       stars:this.StarCount.value,
       moreInfo:this.moreInfo.value,
@@ -86,7 +86,7 @@ export class FeedbackComponent implements OnInit {
   onRate(event) {
     this.values={};
     this.refreshRating=false;
-    console.log('value', event.newValue);
+    // console.log('value', event.newValue);
     this.rating = event.newValue;
     this.StarCount.setValue(event.newValue)
     if (this.rating == 1) {

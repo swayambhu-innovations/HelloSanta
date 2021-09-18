@@ -37,7 +37,7 @@ export class WideProductCardComponent implements OnInit,OnChanges  {
     if (image.target.files[0].size < 500000){
       this.dataProvider.data=this.identifier;
       const a:any = {productId:this.productId,image:image.target.files[0],refData:this.identifier}
-      console.log("Event logging just before emitting the event from function changeImage(event)",this.identifier)
+      // console.log("Event logging just before emitting the event from function changeImage(event)",this.identifier)
       this.addImage.emit(a);
       this.authService.presentToast("Image added successfully")
     } else {
@@ -56,9 +56,9 @@ export class WideProductCardComponent implements OnInit,OnChanges  {
     this.changeQuantity.emit({quantity:this.quantity,productId:this.productId,ref:this.identifier});
   }
   ngOnInit(){
-    console.log('Event value emitted from ngOnInit()',this.identifier)
+    // console.log('Event value emitted from ngOnInit()',this.identifier)
   } 
   ngOnChanges(){
-    console.log('Event value emitted from OnChanges() from child component',this.identifier)
+    // console.log('Event value emitted from OnChanges() from child component',this.identifier)
   }
 }

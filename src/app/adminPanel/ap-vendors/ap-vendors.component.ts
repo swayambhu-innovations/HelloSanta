@@ -19,7 +19,7 @@ export class APVendorsComponent implements OnInit {
           this.vendors.push(user);
           this.visible=true;
         }
-        console.log(user.access.accessLevel);
+        // console.log(user.access.accessLevel);
       }
     );
     })

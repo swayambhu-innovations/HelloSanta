@@ -27,7 +27,7 @@ export class AddSocialAccountComponent implements OnInit {
       type: this.type.value,
       url: this.socialMediaLink.value,
     }
-    console.log(data);
+    // console.log(data);
     this.inventoryService.addSocialMediaLink(data);
     this.popoverController.dismiss();
   }

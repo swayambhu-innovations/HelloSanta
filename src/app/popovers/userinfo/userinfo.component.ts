@@ -15,7 +15,7 @@ export class UserinfoComponent implements OnInit {
     this.inventoryService.getUserInfo().ref.get().then((value:any)=>{
       if (value.exists){
         this.totalCoin = value.data().totalCashback;
-        console.log(this.totalCoin,"totalCoin");
+        // console.log(this.totalCoin,"totalCoin");
       }
     })
   }

@@ -37,10 +37,10 @@ export class VPProductsComponent implements OnInit {
   }
   
   deleteItem(id){
-    console.log("deleting");
+    // console.log("deleting");
     const productRef: AngularFirestoreDocument<any> = this.afs.doc(`pendingProducts/${id}`);
     productRef.delete();
-    console.log("deleted");
+    // console.log("deleted");
   }
   
   editItem(){

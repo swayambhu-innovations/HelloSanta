@@ -25,13 +25,13 @@ export class InvoiceDetailComponent implements OnInit {
     // const doc = new jsPDF();
     // const pdfTable = this.pdfTable.nativeElement;
     // var html = htmlToPdfmake(pdfTable.innerHTML,{imagesByReference:true});
-    // console.log(html);
+    // // console.log(html);
     // const documentDefinition = { content: html.content,images:html.images };
     // pdfMake.createPdf(documentDefinition).download();
 
     // html2canvas(document.getElementById('invoiceData')).then((canvas) => {
     //   var data = canvas.toDataURL();
-    //   console.log(data);
+    //   // console.log(data);
     //   var docDefinition = {
     //     content: [
     //       {

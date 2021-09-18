@@ -14,7 +14,7 @@ export class SortModalComponent implements OnInit {
   filters= {};
   addPriceOption(data){
     if (data.detail.checked){
-      this.selectedSort.includes(data.detail.value) ? console.log() : this.selectedSort.push(data.detail.value)
+      this.selectedSort.includes(data.detail.value) ?  console.log() : this.selectedSort.push(data.detail.value)
     } else {
       this.selectedSort.splice(this.selectedSort.indexOf(data.detail.value,1))  
     }

@@ -12,8 +12,8 @@ import { AnimationController, Animation } from '@ionic/angular';
 export const enterAnimation = (baseEl: HTMLElement, opts?: any): Animation => {
   const duration = 1000;
 
-  console.log('baseEl:', baseEl);
-  console.log('opts:', opts);
+  // console.log('baseEl:', baseEl);
+  // console.log('opts:', opts);
 
   const animationCtrl = new AnimationController();
   if (opts.direction == 'forward') {

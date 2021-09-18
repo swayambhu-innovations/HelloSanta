@@ -200,8 +200,8 @@ export class AuthSignUpComponent implements OnInit {
     });
   }
   logCaptcha() {
-    // console.log(this.windowRef.recaptchaVerifier.verify());
-    console.log(this.dob.value);
+    // // console.log(this.windowRef.recaptchaVerifier.verify());
+    // console.log(this.dob.value);
   }
   fileChange(event) {
     if (event.target.files && event.target.files[0]) {
@@ -213,7 +213,7 @@ export class AuthSignUpComponent implements OnInit {
     }
     let fileList: FileList = event.target.files;
     this.file = fileList[0];
-    console.log(this.file);
+    // console.log(this.file);
   }
   async emailLogin() {
     (this.signUpData['password'] = this.password.value), this.slides.slideTo(2);
@@ -224,7 +224,7 @@ export class AuthSignUpComponent implements OnInit {
     this.stepThree.disable(); // disable the stepOne if it
     let dob = new Date(this.dob.value);
     if (this.signUpData.type == 'email') {
-      console.log(this.signUpData, this.name.value, this.file, dob);
+      // console.log(this.signUpData, this.name.value, this.file, dob);
       await this.authService.SignUp(
         this.signUpData.email,
         this.signUpData.password,
@@ -286,14 +286,14 @@ export class AuthSignUpComponent implements OnInit {
       .then((result) => {
         this.windowRef.confirmationResult = result;
         this.timeleft = 60;
-        console.log('time left', this.timeleft);
+        // console.log('time left', this.timeleft);
         var downloadTimer = setInterval((dt) => {
           if (this.timeleft <= 0) {
             clearInterval(downloadTimer);
           }
           this.timeleft -= 1;
           this.resendProgress = this.timeleft / 60;
-          console.log(this.timeleft, this.resendProgress);
+          // console.log(this.timeleft, this.resendProgress);
         }, 1000);
       })
       .catch((error) => this.authService.presentToast(error.message,5000));

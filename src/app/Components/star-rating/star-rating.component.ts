@@ -23,7 +23,7 @@ export class StarRatingComponent implements OnInit {
   
   countStar(star) {
     this.value = star;
-    console.log('Value of star', star);
+    // console.log('Value of star', star);
     this.rate.emit({newValue:star});
   }
   ngOnInit() {}

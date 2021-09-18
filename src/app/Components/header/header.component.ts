@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit {
               .then((doc: any) => {
                 if (doc.exists) {
                   doc = doc.data();
-                  // console.log("doc item.finalPrice",item);
+                  // // console.log("doc item.finalPrice",item);
                   doc['finalPrice']=item.price;
                   doc['quantity']=item.quantity;
                   this.cartItems.push(doc);
@@ -63,7 +63,7 @@ export class HeaderComponent implements OnInit {
               });
           });
         } else {
-          // console.log('no user data');
+          // // console.log('no user data');
         }
       });
     }

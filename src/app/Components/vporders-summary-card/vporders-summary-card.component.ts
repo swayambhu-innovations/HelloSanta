@@ -13,7 +13,7 @@ export class VPOrdersSummaryCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.items,this.price,this.description,this.purchaseDate);
+    // console.log(this.items,this.price,this.description,this.purchaseDate);
   }
 
 }

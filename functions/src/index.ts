@@ -27,11 +27,11 @@ let transporter = nodemailer.createTransport({
 });
 
 exports.sendMail = functions.https.onCall((data: any, context: any) => {
-  if (context.app == undefined) {
-    throw new functions.https.HttpsError(
-        'failed-precondition',
-        'The function must be called from an App Check verified app.')
-  }
+  // if (context.app == undefined) {
+  //   throw new functions.https.HttpsError(
+  //       'failed-precondition',
+  //       'The function must be called from an App Check verified app.')
+  // }
 
   if (!context.auth) {
     throw new functions.https.HttpsError(
@@ -46,9 +46,9 @@ exports.sendMail = functions.https.onCall((data: any, context: any) => {
     html: data.content,
   };
   return transporter.sendMail(mailOptions, (erro: any, info: any) => {
-    // console.log(info);
+    // // console.log(info);
     if (erro) {
-      console.log(erro);
+      // console.log(erro);
       throw new functions.https.HttpsError(
         'failed-mailsend',
         'Cannot send mail, some error occured'
@@ -94,7 +94,7 @@ exports.capturePayments = functions.https.onRequest((req: any, res: any) => {
 
 exports.shipOrder = functions.https.onRequest((req: any, res: any) => {
   return cors(req, res, () => {
-    console.log('request body', req.body, typeof req.body);
+    // console.log('request body', req.body, typeof req.body);
     let date = new Date();
     let orderDate =
       date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
@@ -133,13 +133,13 @@ exports.shipOrder = functions.https.onRequest((req: any, res: any) => {
         password: 'Poiuy@09876',
       }),
     };
-    console.log('shiprocket data', shiprocketBody);
+    // console.log('shiprocket data', shiprocketBody);
     request(options, function (error: any, authResponse: any) {
       if (error) throw new Error(error);
       let response = JSON.parse(authResponse.body);
-      console.log('authApi', response, typeof response.body);
+      // console.log('authApi', response, typeof response.body);
       let authApiKey = response.token;
-      console.log('authApiKey', authApiKey);
+      // console.log('authApiKey', authApiKey);
       let shipoptions = {
         method: 'POST',
         url: 'https://apiv2.shiprocket.in/v1/external/orders/create/adhoc',
@@ -151,7 +151,7 @@ exports.shipOrder = functions.https.onRequest((req: any, res: any) => {
       };
       request(shipoptions, function (error: any, shipResponse: any) {
         if (error) throw new Error(error);
-        console.log(shipResponse.body);
+        // console.log(shipResponse.body);
         let shipResponseBody = JSON.parse(shipResponse.body);
         shipResponseBody['orderDate'] = orderDate;
         shipResponse
@@ -168,11 +168,11 @@ exports.shipOrder = functions.https.onRequest((req: any, res: any) => {
 
 exports.checkOrderShipment = functions.https.onCall(
   async (data: any, context: any) => {
-    if (context.app == undefined) {
-      throw new functions.https.HttpsError(
-          'failed-precondition',
-          'The function must be called from an App Check verified app.')
-    }
+    // if (context.app == undefined) {
+    //   throw new functions.https.HttpsError(
+    //       'failed-precondition',
+    //       'The function must be called from an App Check verified app.')
+    // }
   
     if (!context.auth) {
       throw new functions.https.HttpsError(
@@ -192,7 +192,7 @@ exports.checkOrderShipment = functions.https.onCall(
       },
     })
       .then((res: any) => {
-        console.log('authKeys', res.data.token);
+        // console.log('authKeys', res.data.token);
         return Axios({
           method: 'GET',
           url:
@@ -203,12 +203,12 @@ exports.checkOrderShipment = functions.https.onCall(
             Authorization: 'Bearer ' + res.data.token,
           },
         }).then((trackRes: any) => {
-          console.log('trackRes', trackRes.data);
+          // console.log('trackRes', trackRes.data);
           return { data: trackRes.data };
         });
       })
       .catch((err: any) => {
-        console.log('error', err);
+        // console.log('error', err);
         throw new functions.https.HttpsError(
           'An Error occured',
           'An error occured when checking shipment. Refresh the page or contact Hello Santa support team'
@@ -235,7 +235,7 @@ exports.cancelOrderShipment = functions.https.onRequest(
       request(authOptions, function (error: any, authResponse: any) {
         if (error) throw new Error(error);
         let response = JSON.parse(authResponse.body);
-        console.log('authApi', response, req.body.ids, typeof req.body.ids);
+        // console.log('authApi', response, req.body.ids, typeof req.body.ids);
         let options = {
           method: 'POST',
           url: 'https://apiv2.shiprocket.in/v1/external/orders/cancel',
@@ -249,7 +249,7 @@ exports.cancelOrderShipment = functions.https.onRequest(
         };
         request(options, function (error: any, response: any) {
           if (error) throw new Error(error);
-          console.log('response', response);
+          // console.log('response', response);
           response
             ? res.status(200).send({
                 res: response,

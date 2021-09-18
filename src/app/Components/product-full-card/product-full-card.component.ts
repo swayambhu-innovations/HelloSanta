@@ -36,12 +36,12 @@ export class ProductFullCardComponent implements OnInit {
   addToWishlist(){
     this.card.el.classList.add('uk-animation-shake');
     if (this.has()){
-      console.log("Already in wishlist removing it")
+      // console.log("Already in wishlist removing it")
       this.inventoryService.removeFromWishlist(this.productId);
       this.wishlist.splice(this.wishlist.indexOf(this.productId),1);
       this.authService.presentToast("Removed from wishlist");
     } else {
-      console.log("Adding to wishlist")
+      // console.log("Adding to wishlist")
       this.inventoryService.addToWishlist(this.productId);
       this.wishlist.push(this.productId);
       this.authService.presentToast("Added to wishlist");

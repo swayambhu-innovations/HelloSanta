@@ -18,6 +18,6 @@ export class OrdercardComponent implements OnInit {
   @Input() customWidth:string = undefined;
   constructor(public authService: AuthService,public afs: AngularFirestore) { }
   ngOnInit() {
-    console.log(this.liveOrders)
+    // console.log(this.liveOrders)
   }
 }

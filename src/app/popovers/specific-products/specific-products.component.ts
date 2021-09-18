@@ -28,7 +28,7 @@ export class SpecificProductsComponent implements OnInit {
     let data = {
       productId: this.productId,
     }
-    console.log(data);
+    // console.log(data);
     this.inventoryService.addToSantasChoice(data);
     this.authService.presentToast("Added to the santas choice");
   }

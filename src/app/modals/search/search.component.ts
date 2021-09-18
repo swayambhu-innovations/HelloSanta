@@ -17,7 +17,7 @@ export class SearchComponent implements OnInit {
   ngOnInit() {}
   search(event){
     this.results=[];
-    console.log('Searching',event)
+    // console.log('Searching',event)
     let keyword = event.detail.value;
     if (/\S/.test(keyword)){
       this.searchable=true;

@@ -97,7 +97,7 @@ export class AuthService {
                   })
                 );
               } else {
-                console.log('Now access level found for level ', level);
+                // console.log('Now access level found for level ', level);
               }
             }
           });
@@ -120,7 +120,7 @@ export class AuthService {
       userName.toString() +
       '.' +
       file.name.split('.').pop().toString();
-    console.log('Starting file upload', filePath);
+    // console.log('Starting file upload', filePath);
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
     this.uploadPercent = task.percentageChanges();
@@ -145,7 +145,7 @@ export class AuthService {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result: any) => {
-        console.log(result);
+        // console.log(result);
         this.ngZone.run(() => {
           this.presentToast('Sign In successful');
           this.homeDataProvider.showOverlay = false;
@@ -165,22 +165,6 @@ export class AuthService {
     var currentAccess: access = {
       accessLevel: 'Customer',
     };
-    console.log({
-      uid: user.uid,
-      email: user.email || '',
-      phoneNumber: user.phone_number || '',
-      displayName: name || '',
-      photoURL: './assets/profileDefault.png',
-      emailVerified: user.emailVerified || '',
-      isAdmin: false,
-      firstLogin: today
-        .toLocaleDateString('en-US', AuthService.dateOptions)
-        .toString(),
-      data: user.data || [],
-      post: 'Customer',
-      presentToday: this.formatPresentToday(true),
-      access: currentAccess,
-    })
     localStorage.setItem(
       'localItem',
       JSON.stringify({
@@ -213,15 +197,15 @@ export class AuthService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then(async (result: any) => {
-        console.log('Starting email verification');
+        // console.log('Starting email verification');
         this.SendVerificationMail();
         this.presentToast('Completing your registration');
-        console.log('Download URl', this.downloadURL);
-        console.log('Starting file upload ');
-        console.log('Image file',photo);
+        // console.log('Download URl', this.downloadURL);
+        // console.log('Starting file upload ');
+        // console.log('Image file',photo);
         if (photo != undefined) {
           this.uploadFile(photo, result.user.uid).subscribe((imageUrl) => {
-            console.log('Completed the imageurl ', imageUrl);
+            // console.log('Completed the imageurl ', imageUrl);
             this.SetUserData({
               user: result.user,
               displayName: name,
@@ -251,7 +235,7 @@ export class AuthService {
                 access: currentAccess,
               })
             );
-            console.log('Completed the setUser data');
+            // console.log('Completed the setUser data');
             this.router.navigate(['']);
           });
         } else {
@@ -285,13 +269,13 @@ export class AuthService {
               access: currentAccess,
             })
           );
-          console.log('Completed the setUser data');
+          // console.log('Completed the setUser data');
           this.router.navigate(['']);
         }
       })
       .catch((error: any) => {
         this.presentToast(error.message);
-        console.log(error.message);
+        // console.log(error.message);
       });
   }
 
@@ -323,7 +307,7 @@ export class AuthService {
   }
   get isNumberVerified(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    // console.log('USer keys',Object.keys(user),user.phoneNumber,user.phoneNumber!=undefined);
+    // // console.log('USer keys',Object.keys(user),user.phoneNumber,user.phoneNumber!=undefined);
     return user.phoneNumber!=undefined ? true : false;
   }
   get isEmailVerified() {
@@ -350,15 +334,15 @@ export class AuthService {
     return user !== null && user.email !== undefined ? true : false;
   }
   isUserAdmin() {
-    console.log('IS admin fired', this.userId);
+    // console.log('IS admin fired', this.userId);
     this.afs
       .collection('users')
       .doc(this.userId)
       .valueChanges()
       .subscribe((value) => {
-        console.log(value);
+        // console.log(value);
       });
-    console.log('-Ended-');
+    // console.log('-Ended-');
   }
   isAdmin(): string {
     const user = JSON.parse(localStorage.getItem('localitem') || '{}');
@@ -432,7 +416,7 @@ export class AuthService {
                     }
                   });
 
-                console.log(date);
+                // console.log(date);
               } else {
                 this.presentToast(
                   "Oops we don't know your birthday or your gender."
@@ -454,13 +438,13 @@ export class AuthService {
             this.presentToast('Authorisation Successful');
             this.router.navigate(['']);
             this.homeDataProvider.showOverlay = false;
-            console.log('Auth successful');
+            // console.log('Auth successful');
           })
           .catch((error: any) => {
             this.presentToast(error);
             this.homeDataProvider.showOverlay = false;
           });
-        console.log(result.user);
+        // console.log(result.user);
       })
       .catch((error: any) => {
         this.presentToast(error);
@@ -504,13 +488,13 @@ export class AuthService {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
-    // console.log("SetUSerData",user,displayName,photo)
+    // // console.log("SetUSerData",user,displayName,photo)
     var currentAccess: access = {
       accessLevel: 'Customer',
     };
     let today = new Date();
     if (displayName != undefined || photo != undefined) {
-      console.log('Set data true');
+      // console.log('Set data true');
       var userData: User = {
         uid: user.uid,
         email: user.email || '',
@@ -538,7 +522,7 @@ export class AuthService {
         wishlist: user.wishlist || [],
       };
     } else {
-      console.log('Set data false');
+      // console.log('Set data false');
       var userData: User = {
         uid: user.uid,
         email: user.email || '',

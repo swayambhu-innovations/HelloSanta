@@ -37,7 +37,7 @@ export class UserReferralComponent implements OnInit {
     document.execCommand('copy');
   }
   referralState(value) {
-    console.log(value, 'value');
+    // console.log(value, 'value');
     this.authService.presentToast('Changes saved');
     if (value.detail.checked) {
       this.inventoryService.optInreferral();
@@ -64,7 +64,7 @@ export class UserReferralComponent implements OnInit {
             this.coins=users.totalCashback;
             this.loading = true;
             this.users = snapshot.filter((val) => {
-              console.log(val.uid, 'val.id');
+              // console.log(val.uid, 'val.id');
               if (this.referredIds.includes(val.uid)) {
                 return val;
               }

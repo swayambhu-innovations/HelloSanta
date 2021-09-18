@@ -39,14 +39,9 @@ export class ShopComponent implements OnInit {
       },
     });
     modal.onDidDismiss().then((data: any) => {
-      console.log('homies', data);
+      // console.log('homies', data);
       this.modalFilterSelectedSubcategory = data.data.subcategory;
       this.modalFilterSelectedCategory = data.data.category;
-      console.log(
-        'modal filter on event',
-        this.modalFilterSelectedCategory,
-        this.modalFilterSelectedSubcategory
-      );
       // this.addFilter(data.data.category,'category')
       this.allDigitalProds = [];
       this.copyArray.forEach((item) => {
@@ -69,7 +64,7 @@ export class ShopComponent implements OnInit {
       }
     });
     modal.onDidDismiss().then((data: any) => {
-      console.log('prices', data.data.prices);
+      // console.log('prices', data.data.prices);
       this.modalFilterPrice = data.data.prices;
       if (this.allDigitalProds.length == 0) {this.allDigitalProds = this.copyArray}
       this.modalFilterPrice.forEach((item) => {
@@ -81,7 +76,7 @@ export class ShopComponent implements OnInit {
   showFilterModal() {
     let data: any = this.presentFilter();
 
-    console.log('present filter ', data);
+    // console.log('present filter ', data);
   }
   allDigitalProds: any;
   copyArray = [];
@@ -97,14 +92,14 @@ export class ShopComponent implements OnInit {
     }
   }
   addFilter(val, type) {
-    console.log(val);
+    // console.log(val);
     if (val.detail.checked) {
       val.detail['type'] = type;
       this.filters[val.detail.value] = val.detail;
     } else {
       delete this.filters[val.detail.value];
     }
-    console.log(this.filters);
+    // console.log(this.filters);
     this.allDigitalProds = [];
     this.copyArray.forEach((item) => {
       this.allDigitalProds.push(item);
@@ -183,7 +178,7 @@ export class ShopComponent implements OnInit {
       .collection('products')
       .valueChanges()
       .subscribe((proddata) => {
-        console.log('products data digital', proddata);
+        // console.log('products data digital', proddata);
         this.allDigitalProds=proddata;
       });
     this.afs

@@ -34,7 +34,7 @@ export class APProductsComponent implements OnInit {
   }
   addProducts() {
     this.presentModal();
-    console.log('add products');
+    // console.log('add products');
   }
   async presentEditProductModal(id) {
     const modal = await this.modalController.create({
@@ -57,13 +57,13 @@ export class APProductsComponent implements OnInit {
     });
     await popover.present();
     const { role } = await popover.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
+    // console.log('onDidDismiss resolved with role', role);
   }
   deleteItem(id){
-    console.log("deleting");
+    // console.log("deleting");
     const productRef: AngularFirestoreDocument<any> = this.afs.doc(`products/${id}`);
     productRef.delete();
-    console.log("deleted");
+    // console.log("deleted");
   }
   editItem(){
     this.presentModal()
@@ -79,7 +79,7 @@ export class APProductsComponent implements OnInit {
         if (this.allProds.length > 0){
           this.visible=true;
         }
-        console.log(this.allProds);
+        // console.log(this.allProds);
       });
   }
 }

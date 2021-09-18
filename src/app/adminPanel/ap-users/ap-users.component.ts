@@ -12,7 +12,7 @@ export class APUsersComponent implements OnInit {
 
   ngOnInit() {
     this.inventoryService.getAllUsers().subscribe((value)=>{
-      console.log(value)
+      // console.log(value)
       this.users=value;
     })
   }

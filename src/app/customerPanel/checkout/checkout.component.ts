@@ -125,10 +125,10 @@ export class CheckoutComponent implements OnInit {
   couponData:any={available:false};
   searchCoupon(event){
     this.searchingCoupon=true;
-    console.log("coupon",event); 
+    // console.log("coupon",event); 
     let defined =false;
     this.coupons.forEach((coupon)=>{
-      console.log("Checking coupon",event.detail.value.toLowerCase()==coupon.code.toLowerCase())
+      // console.log("Checking coupon",event.detail.value.toLowerCase()==coupon.code.toLowerCase())
       if (event.detail.value.toLowerCase()==coupon.code.toLowerCase()){
         if (this.dataProvider.checkOutdata.length>=coupon.minimumProducts){
           if (this.grandTotal>=coupon.minimumPrice){
@@ -140,7 +140,7 @@ export class CheckoutComponent implements OnInit {
               title:coupon.name,
             }
             this.discount=coupon.cost;
-            console.log("Coupon Found") 
+            // console.log("Coupon Found") 
           }
         }
       }
@@ -154,12 +154,12 @@ export class CheckoutComponent implements OnInit {
     this.searchingCoupon=false;
   }
   log(data) {
-    // console.log(data);
+    // // console.log(data);
   }
   addImage(event) {
-    console.log('Event recieved by the addImage(event) eventHandler function', event,this.imageRequired);
+    // console.log('Event recieved by the addImage(event) eventHandler function', event,this.imageRequired);
     let allValid = true;
-    // console.log('imageRequiredLEngth', this.imageRequired,event,this.dataProvider.data);
+    // // console.log('imageRequiredLEngth', this.imageRequired,event,this.dataProvider.data);
     this.imageRequired.forEach((data, index) => {
       if (data.ref == event.refData) {
         this.imageRequired[index].imageReference = event.image;
@@ -169,7 +169,7 @@ export class CheckoutComponent implements OnInit {
       }
     });
     this.imagesValid = allValid;
-    // console.log('imageRequired', this.imageRequired);
+    // // console.log('imageRequired', this.imageRequired);
   }
   presentInvoice() {
     // let detail = {
@@ -246,21 +246,21 @@ export class CheckoutComponent implements OnInit {
     if (this.dataProvider.checkOutdata) {
       this.dataCopy = this.dataProvider.checkOutdata;
       this.dataProvider.checkOutdata.forEach((prod) => {
-        // console.log('prod from checkoutdata', prod);
+        // // console.log('prod from checkoutdata', prod);
         var docRef = this.afs.collection('products').ref.doc(prod.productData);
         docRef.get().then((data) => {
           if (data.exists) {
-            // console.log('Document data:', data);
+            // // console.log('Document data:', data);
             let dat: any = data.data();
             if (dat.imageReference) {
               this.imagesValid = false;
-              // console.log('identifier >>>',prod.identifier);
+              // // console.log('identifier >>>',prod.identifier);
               this.imageRequired.push({
                 productId: dat.productId,
                 ref: prod.identifier,
                 imageReference: undefined,
               });
-              // console.log('imageRequired', this.imageRequired,this.imageRequired.length);
+              // // console.log('imageRequired', this.imageRequired,this.imageRequired.length);
             }
             this.orderItems.push({
               name: dat.productName,
@@ -268,7 +268,7 @@ export class CheckoutComponent implements OnInit {
               units: 1,
               selling_price: prod.price - this.offerFlat,
             });
-            // console.log('identifier >>>',prod.identifier);
+            // // console.log('identifier >>>',prod.identifier);
             dat['finalPrice'] = prod.price;
             dat['selections'] = prod.extrasData;
             dat['quantity'] = prod.quantity;
@@ -284,10 +284,10 @@ export class CheckoutComponent implements OnInit {
               }
             }
             dat['config'] = config;
-            // console.log('dat data dt',dat);
+            // // console.log('dat data dt',dat);
             this.orders.push(dat);
           } else {
-            // console.log('No such document!');
+            // // console.log('No such document!');
           }
         });
       });
@@ -296,7 +296,7 @@ export class CheckoutComponent implements OnInit {
         offers.forEach((offer) => {
           this.coupons.push(offer.data());
         })
-        console.log('coupons', this.coupons);
+        // console.log('coupons', this.coupons);
       })
     } else {
       this.authService.presentToast('Oh Ohh! Checkout expired &#x1F605;');
@@ -305,7 +305,7 @@ export class CheckoutComponent implements OnInit {
   }
   uploadFile(file, userName) {
     const filePath = ('referenceImage/' +`${userName}/` + userName.toString() + file.name);
-    console.log('Starting file upload', filePath);
+    // console.log('Starting file upload', filePath);
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
     return task.snapshotChanges().pipe(
@@ -314,13 +314,13 @@ export class CheckoutComponent implements OnInit {
     );
   }
   async proceedToPay($event) {
-    console.log('imagereq',this.imageRequired)
-    console.log('imageVald',this.imagesValid)
+    // console.log('imagereq',this.imageRequired)
+    // console.log('imageVald',this.imagesValid)
     if (this.imagesValid) {
       // this.dataProvider.showOverlay = true;
       this.processingPayment = true;
       this.payableAmount = this.grandTotal * 100;
-      console.log('payable amount', this.payableAmount);
+      // console.log('payable amount', this.payableAmount);
       this.initiatePaymentModal($event);
       this.analytics.logEvent('Checkout');
     } else {
@@ -338,10 +338,6 @@ export class CheckoutComponent implements OnInit {
 
     this.paymentService.createOrder(orderDetails).subscribe(
       (order) => {
-        console.log(
-          'TCL: CheckoutComponent -> initiatePaymentModal -> order',
-          order
-        );
         var rzp1 = new this.WindowRef.Razorpay(
           this.preparePaymentDetails(order)
         );
@@ -350,10 +346,6 @@ export class CheckoutComponent implements OnInit {
         event.preventDefault();
       },
       (error) => {
-        console.log(
-          'TCL: CheckoutComponent -> initiatePaymentModal -> error',
-          error
-        );
         this.authService.presentToast(error.message);
         this.processingPayment = false;
       }
@@ -398,7 +390,7 @@ export class CheckoutComponent implements OnInit {
           }
           this.paymentResponse = res;
           this.changeRef.detectChanges();
-          console.log('success response', this.paymentResponse);
+          // console.log('success response', this.paymentResponse);
           const shippingDetail = {
             order_id: `Order#${
               Math.floor(Math.random() * 5123435345 * 43) + 10
@@ -420,12 +412,12 @@ export class CheckoutComponent implements OnInit {
             weight: 1,
             breadth: 1,
           };
-          console.log('shippingDetail', shippingDetail);
+          // console.log('shippingDetail', shippingDetail);
           this.paymentService.shipOrder(shippingDetail).subscribe(
             (res: any) => {
               
               this.authService.presentToast('Payment Successful &#x1F60A;');
-              console.log('shipping Confirmed Detail', res);
+              // console.log('shipping Confirmed Detail', res);
               let currentOrder = {
                 shippingDetail: res.body,
                 products: this.orders,
@@ -467,13 +459,13 @@ export class CheckoutComponent implements OnInit {
                   '\nPlease contact hello santa, to complete your order',
                 7000
               );
-              console.log('Error occured while completing shipment');
+              // console.log('Error occured while completing shipment');
             }
           );
         },
         (error) => {
           this.paymentResponse = error;
-          console.log('failed response', this.paymentResponse);
+          // console.log('failed response', this.paymentResponse);
         }
       );
   }

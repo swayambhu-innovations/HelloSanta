@@ -9,7 +9,7 @@ export class MailServiceService {
 
   constructor(private http: HttpClient,private firebaseFunction:AngularFireFunctions,) { }
   sendMail(body,subject,mail){
-    console.log(body,subject,mail,"triggered mail service");
+    // console.log(body,subject,mail,"triggered mail service");
     return this.firebaseFunction.httpsCallable('sendMail')({subject:subject,content:body, email:mail})
     // return this.http.post(environment.cloudFunctions.sendMail, {subject:subject,content:body, email:mail});
   }

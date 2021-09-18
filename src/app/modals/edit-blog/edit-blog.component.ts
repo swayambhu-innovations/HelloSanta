@@ -63,7 +63,7 @@ export class EditBlogComponent implements OnInit {
   blogImage: FormControl = new FormControl('', []);
   blogPublish: FormControl = new FormControl('');
   uploadFile(file, fileName) {
-    console.log('Starting file upload', fileName);
+    // console.log('Starting file upload', fileName);
     const fileRef = this.storage.ref(fileName);
     const task = this.storage.upload(fileName, file);
     this.imageChanged = true;
@@ -96,7 +96,7 @@ export class EditBlogComponent implements OnInit {
     let date = new Date();
     if (this.imageChanged) {
       let file = this.getFileFromEvent(this.imageEvent);
-      console.log(file);
+      // console.log(file);
       let blogName = this.form.get('blogName')!.value.replaceAll(' ', '');
       let fileName = `blogImages/${blogName}/` + blogName + file.name;
 
@@ -113,7 +113,7 @@ export class EditBlogComponent implements OnInit {
           lastEdit: [date.toLocaleDateString()],
         };
         this.dataProvider.overlayStatus = 'Uploading data to database...';
-        console.log(data);
+        // console.log(data);
         this.inventoryService.editBlog(data, this.blogId);
         this.isLoading = false;
         this.form.enable();

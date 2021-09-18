@@ -21,7 +21,7 @@ export class BlogComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("blogiD",this.blogId)
+    // console.log("blogiD",this.blogId)
     this.afs.collection('blog').doc(this.blogId).valueChanges().subscribe((doc:any) => {
       this.blogimg = doc.blogImage;
       this.blogdate = doc.blogDate;

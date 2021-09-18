@@ -43,9 +43,9 @@ export class AddOfferComponent implements OnInit {
       minimumPrice: this.form.get('minimumPrice')!.value,
       minimumProducts: this.form.get('minimumProducts')!.value,
     }
-    console.log("Triggered")
+    // console.log("Triggered")
     this.inventoryService.addOffer(data);
-    console.log("Confirmed")
+    // console.log("Confirmed")
   }
   ngOnInit() {}
 }

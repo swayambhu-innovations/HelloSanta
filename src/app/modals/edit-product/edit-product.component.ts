@@ -84,14 +84,14 @@ export class EditProductComponent implements OnInit {
   isLoading: boolean = false;
   changeCategoryType(value, main, type) {
     this.mainCategorySelected[main] = [];
-    console.log(this.mainCategorySelected);
+    // console.log(this.mainCategorySelected);
   }
   addTocategory(event, index, type) {
     this.mainCategorySelected[type][index] = event.detail.value;
-    console.log(this.mainCategorySelected);
+    // console.log(this.mainCategorySelected);
   }
   customTypeChanged(value, item) {
-    console.log(value);
+    // console.log(value);
   }
   toggleChange(value) {
     this.dataProvider.showOverlay = value;
@@ -135,7 +135,7 @@ export class EditProductComponent implements OnInit {
     }
   }
   uploadFile(file, fileName) {
-    console.log('Starting file upload', fileName);
+    // console.log('Starting file upload', fileName);
     const fileRef = this.storage.ref(fileName);
     const task = this.storage.upload(fileName, file);
     return task.snapshotChanges().pipe(
@@ -151,7 +151,7 @@ export class EditProductComponent implements OnInit {
     return list;
   }
   fileChange(event) {
-    console.log(event);
+    // console.log(event);
     let fileList: FileList = event.target.files;
     return fileList[0];
   }
@@ -169,7 +169,7 @@ export class EditProductComponent implements OnInit {
       ) {
         let value = this.basicDetail.get('productName')!.value.replace(' ', '_');
         let x = document.getElementById('mainProdImage') as HTMLInputElement;
-        console.log("prodImagesEvents",this.prodImagesEvents);
+        // console.log("prodImagesEvents",this.prodImagesEvents);
         this.progressType="determinate"
         for (let imgc = 0; imgc < +x.value; imgc++) {
           this.progressValue+=1/(+x.value*2);
@@ -179,7 +179,7 @@ export class EditProductComponent implements OnInit {
             `products/${value}/image_${imgc}_${fileEv.name}`
           ).toPromise();
           this.progressValue+=1/(+x.value*2);
-          console.log(imgFile);
+          // console.log(imgFile);
           prodList.push({
             image: imgFile,
           });
@@ -200,7 +200,7 @@ export class EditProductComponent implements OnInit {
           totalSales:0,
           totalCancels:0,
         };
-        console.log(data);
+        // console.log(data);
         this.basicProductDetails=data;
       } else {
         this.basicDetail.enable();
@@ -261,7 +261,7 @@ export class EditProductComponent implements OnInit {
     this.selectedVendors = event.detail.value;
   }
   async customisationSubmit(stepper: MatStepper) {
-    console.log("matStepper",stepper);
+    // console.log("matStepper",stepper);
     let data = [];
     let relativeData = [];
     let customs = this.customisationsForm.get('customisationsCount').value;
@@ -443,20 +443,20 @@ export class EditProductComponent implements OnInit {
       }
     }
     if (!error){
-      console.log(data,relativeData);
+      // console.log(data,relativeData);
       let dts = [];
       for (let adp of relativeData) {
         dts.push(adp.values);
       }
-      console.log("values",dts);
+      // console.log("values",dts);
       if (dts.length>0){
         dts = this.cartProd(dts);
       }
-      console.log("permutations",dts)
+      // console.log("permutations",dts)
       this.permutations=dts;
       this.customisations=[];
       this.addons =JSON.parse(JSON.stringify(data));
-      console.log("addons",this.addons);
+      // console.log("addons",this.addons);
       // this.customisations.push(data);
       // this.customisations.push(relativeData);
       relativeData.forEach((value)=>{
@@ -490,15 +490,15 @@ export class EditProductComponent implements OnInit {
     return addTo([], paramArray);
   }
   submitPrices(stepper: MatStepper){
-    console.log("submitPrices triggered");
+    // console.log("submitPrices triggered");
     this.progressType="indeterminate"
     let length = this.permutations.length;
-    console.log("copying array")
+    // console.log("copying array")
     this.finalData = JSON.parse(JSON.stringify(this.permutations));
-    console.log("array copied")
+    // console.log("array copied")
     for (let i = 0; i < length; i++) {
       let isPossible = (document.getElementById('isPossible'+ i.toString()) as HTMLInputElement).checked;
-      console.log("isPossible: ",isPossible);
+      // console.log("isPossible: ",isPossible);
       if (isPossible) {
         let data = this.permutations[i];
         this.finalData[i]={};
@@ -509,7 +509,7 @@ export class EditProductComponent implements OnInit {
         this.finalData[i]['configBreadth'] = (document.getElementById('Breadth' + i.toString()) as HTMLInputElement).value;
         this.finalData[i]['configWeight'] = (document.getElementById('Weight' + i.toString()) as HTMLInputElement).value;
         this.finalData[i]['permutations'] = data;
-        console.log("data got")
+        // console.log("data got")
       } else {
         this.finalData[i]={};
         this.finalData[i]['isPossible'] = false;
@@ -539,24 +539,24 @@ export class EditProductComponent implements OnInit {
         }
       }
     }
-    console.log("customisations",this.customisations);
-    console.log("finalData: ",this.finalData);
-    console.log("checkin validity")
+    // console.log("customisations",this.customisations);
+    // console.log("finalData: ",this.finalData);
+    // console.log("checkin validity")
     if(this.finalData!=undefined){
       this.basicProductDetails['permutations']=this.finalData;
       this.basicProductDetails['extraData']=this.customisations;
       this.inventory.editProduct(this.productId,this.basicProductDetails);
       this.modalController.dismiss()
-      console.log(this.basicProductDetails);
+      // console.log(this.basicProductDetails);
       this.authService.presentToast('Product added successfully',5000);
     }
     this.progressType="determinate"
     this.showProgress=false;
   }
   increaseValue(){
-    console.log("increase value fired")
+    // console.log("increase value fired")
     if (+this.customisationsCount.value < 10 && +this.customisationsCount.value >= 1){
-      console.log("increase value true")
+      // console.log("increase value true")
       this.customisationsCount.setValue(+this.customisationsCount.value + 1);
     }
   }
@@ -603,10 +603,10 @@ export class EditProductComponent implements OnInit {
       this.selectedSubcategories=data.data().productSubcategory;
       this.selectedVendors=data.data().vendorId;
       this.productData = data.data();
-      console.log("product data",this.productData,this.selectedVendors);
+      // console.log("product data",this.productData,this.selectedVendors);
       let imgCount = 0;
       this.imagesNumList = data.data().productImages.length;
-      console.log("images num list",this.imagesNumList);
+      // console.log("images num list",this.imagesNumList);
       // (document.getElementById('mainProdImage') as HTMLInputElement).value = data.data().productImages.length;
       await this.delay(1000);
       for (let i of data.data().productImages){
@@ -636,7 +636,7 @@ export class EditProductComponent implements OnInit {
             name: doc.data().displayName,
           });
         });
-        console.log(this.allVendors);
+        // console.log(this.allVendors);
       });
   }
 }

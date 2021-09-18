@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
   userEmail: string;
   changeField(event, type) {
     if (type == 'firstName') {
-      console.log(event.target.value);
+      // console.log(event.target.value);
       this.afs
         .collection('users')
         .doc(this.authService.userId)
@@ -79,9 +79,9 @@ export class ProfileComponent implements OnInit {
         )
         .subscribe((url) => {
           this.downloadURL = url;
-          console.log('User Download', this.downloadURL);
+          // console.log('User Download', this.downloadURL);
           this.dataProvider.showOverlay = false;
-          console.log('UserPhoto', this.authService.getUserPhoto());
+          // console.log('UserPhoto', this.authService.getUserPhoto());
           if (
             this.authService.getUserPhoto().split('.')[1] != 'googleusercontent'
           ) {

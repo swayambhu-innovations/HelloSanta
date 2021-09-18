@@ -91,14 +91,14 @@ export class CalenderComponent {
     });
   }
   setEventType(event){
-    console.log(event);
+    // console.log(event);
     this.eventType.setValue(event.detail.value);
   }
   changeMode(mode) {
      this.calendar.mode = mode;
   }
   log(data){
-    console.log(data);
+    // console.log(data);
   }
   onCurrentDateChanged(event: Date) {
     var today = new Date();
@@ -107,29 +107,10 @@ export class CalenderComponent {
     this.isToday = today.getTime() === event.getTime();
   }
   onTimeSelected(ev) {
-    console.log(
-      'Selected time: ' +
-        ev.selectedTime +
-        ', hasEvents: ' +
-        (ev.events !== undefined && ev.events.length !== 0) +
-        ', disabled: ' +
-        ev.disabled
-    );
   }
 
-  onViewTitleChanged(title) {
-    this.viewTitle = title;
-  }
-  onEventSelected(event) {
-    console.log(
-      'Event selected:' +
-        event.startTime +
-        '-' +
-        event.endTime +
-        ',' +
-        event.title
-    );
-  }
+  onViewTitleChanged(title) {this.viewTitle = title;}
+  onEventSelected(event) {}
   swiper = new Swiper('.swiper-wrapper', {
     // Optional parameters
     direction: 'vertical',
@@ -153,7 +134,7 @@ export class CalenderComponent {
   });
   
   setCheckValue(comp) {
-    console.log('setCheckValue', comp);
+    // console.log('setCheckValue', comp);
     this.allDay.setValue(comp.detail.checked);
   }
   removeEvent(data) {
@@ -161,7 +142,7 @@ export class CalenderComponent {
   }
 
   addEvent() {
-    // console.log(this.allDay);
+    // // console.log(this.allDay);
     let endDate = new Date(this.endDate.value);
     let startDate = new Date(this.startDate.value);
     let data = {
@@ -178,7 +159,7 @@ export class CalenderComponent {
   }
 
   ngOnInit() {
-    // console.log(this.createRandomEvents());
+    // // console.log(this.createRandomEvents());
     
     this.inventoryService
       .getUserEvents()
@@ -195,9 +176,9 @@ export class CalenderComponent {
             allDay: event.allDay,
           }
           this.calendarEvents.push(ev);
-          console.log("cevents",this.calendarEvents);
+          // console.log("cevents",this.calendarEvents);
         });
-        console.log(this.events);
+        // console.log(this.events);
       });
   }
 }

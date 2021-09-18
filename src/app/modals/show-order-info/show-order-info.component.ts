@@ -10,7 +10,7 @@ export class ShowOrderInfoComponent implements OnInit {
   constructor() { }
   genData(dt):any{
     let ordereredPair=[];
-    console.log('dt',dt)
+    // console.log('dt',dt)
     for (let i of Object.keys(dt)){
       if (dt[i].type=='textSel'){
         ordereredPair.push({title:dt[i].sectionTitle,value:dt[i].title});
@@ -25,7 +25,7 @@ export class ShowOrderInfoComponent implements OnInit {
     return ordereredPair;
   }
   ngOnInit() {
-    console.log('orderdata',this.order)
+    // console.log('orderdata',this.order)
   }
 
 }
