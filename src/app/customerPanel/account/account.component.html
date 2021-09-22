@@ -18,15 +18,15 @@
         <div>
           <p><strong>Country: </strong>{{country}}</p>
           <p><strong>DOB: </strong>{{dob}}</p>
-          <p><strong>Email Verified: </strong>{{emailVerified}}</p>
+          <p><strong>Email Verified: </strong>{{emailVerified ? 'Yes' : 'No'}}</p>
           <p><strong>Gender: </strong>{{gender}}</p>
-          <p *ngIf="isReferrer"><strong>Referral: </strong>{{isReferrer}}</p>
+          <p *ngIf="isReferrer"><strong>Referral Code: </strong>{{isReferrer}}</p>
           <p><strong>Mobile Number: </strong>{{mobileNumber}}</p>
         </div>
         <ion-list>
           <ion-item *ngFor="let item of socialAccounts" [href]="item.url" target="_blank">
             <ion-icon style="color: rgb(85, 85, 85);"slot="start" [name]="item.type"></ion-icon>
-            <ion-label color="primary">&nbsp;&nbsp;{{item.url}}</ion-label>
+            <!-- <ion-label color="primary">&nbsp;&nbsp;{{item.url}}</ion-label> -->
             <button (click)="inventoryService.removeSocialMediaLink(item)">
               <ion-icon class="trash" name="trash"></ion-icon>
             </button>

@@ -76,12 +76,14 @@ export class FeedbackComponent implements OnInit {
     }
     if (this.orderId){
       this.inventoryService.addProductFeedback(this.orderId,feedback)
+      this.router.navigateByUrl(
+        'trackorder?shippingId=' +this.trackOrder.toString()
+      );
     } else {
       this.inventoryService.addWebsiteFeedback(feedback)
+      this.router.navigate([''])
     }
-    this.router.navigateByUrl(
-      'trackorder?shippingId=' +this.trackOrder.toString()
-    );
+    
   }
   onRate(event) {
     this.values={};

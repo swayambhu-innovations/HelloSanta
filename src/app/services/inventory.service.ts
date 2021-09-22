@@ -405,18 +405,21 @@ export class InventoryService {
       .collection('users')
       .doc(this.authService.userId)
       .collection('orders')
-      .add(data)
-      .then((docRef) => {
-        this.afs
-          .collection('users')
-          .doc(this.authService.userId)
-          .collection('orders')
-          .doc(docRef.id)
-          .update({ orderId: docRef.id });
-      });
+      .doc(data.orderId)
+      .set(data);
   }
   deleteOrder(orderId){
     this.afs.collection('users').doc(this.authService.userId).collection('orders').doc(orderId).delete()
+  }
+  
+  clearCart() {
+    console.log('clear cart');
+    this.afs.collection('users').doc(this.authService.userId).collection('cart').get().subscribe((doc) => {
+      doc.forEach((elm) => {
+        console.log("deleting",elm.data());
+        elm.ref.delete();
+      });
+    })
   }
   updateUserData(data) {
     return this.afs

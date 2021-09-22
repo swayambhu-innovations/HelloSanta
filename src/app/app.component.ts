@@ -4,13 +4,11 @@ import { AlertController, IonRouterOutlet } from '@ionic/angular';
 import { DataProvider } from './providers/data.provider';
 import { AuthService } from './services/auth.service';
 import { RouterOutlet } from '@angular/router'
-import { fader } from './animations/routeAnimations';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
-  animations: [fader],
 })
 export class AppComponent implements OnInit{
   public appPages = [

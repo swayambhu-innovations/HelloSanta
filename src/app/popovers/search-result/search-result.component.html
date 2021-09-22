@@ -4,13 +4,22 @@
     <h3 class="uk-text-center">Searching {{keyword}}...</h3>
   </div>
   <ion-list *ngIf="results">
-    <ion-item button *ngFor="let result of results" [href]="result.href">
+    <ion-item button *ngFor="let result of results" [href]="result.item.href">
       <ion-thumbnail>
-        <img loading="lazy" [src]="result.image" />
+        <img loading="lazy" [src]="result.item.type == 'Product' ? result.item.image[0].image : result.item.blogImage" />
       </ion-thumbnail>
-      <ion-label>{{result.text}}</ion-label>
+      <ion-label>&nbsp;&nbsp;{{result.item.text}}</ion-label>
+      <ion-chip [color]="result.item.type == 'Product' ? 'success' : 'primary' " mode="ios" outline="true">
+        <ion-label>{{result.item.type}}</ion-label>
+      </ion-chip>
     </ion-item>
     <ion-col *ngIf="results.length==0" class="uk-text-center">
+      <ion-item button routerLink="/shop">
+        <ion-thumbnail>
+          <img src="/assets/shopThumbnail.jpg" />
+        </ion-thumbnail>
+        <ion-label>Checkout our shop for full range of products</ion-label>
+      </ion-item>
       <p class="uk-text-center">No Results Found</p><br>
       <img loading="lazy" src="./assets/NotFound.gif" alt="Floating empty boxes">
     </ion-col>

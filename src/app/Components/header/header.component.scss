@@ -30,7 +30,7 @@
   margin-left: 2%;
   margin-right: 2%;
 }
-.search > input{
+.search > ion-input{
   width:40vw;
   // max-width: 60vw
   background-color: #fdfaf2;
@@ -39,9 +39,9 @@
   padding:5px;
   outline: none;
 }
-.search > input:active{
-  border:2px solid var(--ion-color-primary);
-}
+// .search > ion-input{
+//   border:2px solid var(--ion-color-primary);
+// }
 .search > button > ion-icon{
   font-size:20px;
   margin-right: 5px;

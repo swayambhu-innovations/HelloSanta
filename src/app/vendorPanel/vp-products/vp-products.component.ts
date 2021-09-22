@@ -35,14 +35,7 @@ export class VPProductsComponent implements OnInit {
     });
     return await modal.present();
   }
-  
-  deleteItem(id){
-    // console.log("deleting");
-    const productRef: AngularFirestoreDocument<any> = this.afs.doc(`pendingProducts/${id}`);
-    productRef.delete();
-    // console.log("deleted");
-  }
-  
+
   editItem(){
     this.presentModal()
   }

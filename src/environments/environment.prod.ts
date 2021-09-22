@@ -10,12 +10,12 @@ export const environment = {
     measurementId: "G-TDXHZX38YT"
   },
   cloudFunctions : {
-    createOrder: ' https://us-central1-hellosanta-fc366.cloudfunctions.net/createOrder',
-    capturePayment: ' https://us-central1-hellosanta-fc366.cloudfunctions.net/capturePayments',
+    createOrder: 'https://us-central1-hellosanta-fc366.cloudfunctions.net/createOrder',
+    capturePayment: 'https://us-central1-hellosanta-fc366.cloudfunctions.net/capturePayments',
     shipOrder:'https://us-central1-hellosanta-fc366.cloudfunctions.net/shipOrder',
-    checkOrderShipment:' https://us-central1-hellosanta-fc366.cloudfunctions.net/checkOrderShipment',
-    cancelOrderShipment:' https://us-central1-hellosanta-fc366.cloudfunctions.net/cancelOrderShipment',
-    sendMail: ' https://us-central1-hellosanta-fc366.cloudfunctions.net/sendMail',
+    checkOrderShipment:'https://us-central1-hellosanta-fc366.cloudfunctions.net/checkOrderShipment',
+    cancelOrderShipment:'https://us-central1-hellosanta-fc366.cloudfunctions.net/cancelOrderShipment',
+    sendMail: 'https://us-central1-hellosanta-fc366.cloudfunctions.net/sendMail',
   },
   RAZORPAY_KEY_ID: 'rzp_test_1GPCwB7UYA1pfl'
 };

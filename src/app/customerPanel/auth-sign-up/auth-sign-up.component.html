@@ -50,6 +50,10 @@
                       <ion-icon slot="end" [name]="passwordType ? 'eye-off' : 'eye'"></ion-icon>
                     </button>
                   </ion-item>
+                  <ion-item lines="none" button (click)="logCaptcha(password.value.length)" >
+                    <ion-icon slot="start" [color]="password.value.length > 10 ? 'success' : 'danger' " [name]="password.value.length > 10 ? 'checkmark-circle' : 'close-circle'"></ion-icon>
+                    <p style="font-size:12px">Minimum 10 characters for password</p>
+                  </ion-item>
                   <button [disabled]="!stepTwo.valid" [ngClass]="!stepTwo.valid ? 'disabled' : ''" class="submitButton" type="submit">Continue</button>
                 </form>
               </ion-slide>
@@ -72,7 +76,7 @@
               <button class="ssolink" href="#" (click)="authService.GoogleAuth()">
                 <ion-icon name="logo-google"></ion-icon>
               </button>
-              <button class="ssolink" href="#">
+              <button class="ssolink" href="#" (click)="authService.FacebookAuth()">
                 <ion-icon name="logo-facebook"></ion-icon>
               </button>
               <button class="ssolink" href="#" hidden>

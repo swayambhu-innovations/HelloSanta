@@ -81,7 +81,7 @@ export class AuthSignUpComponent implements OnInit {
   slideOpts = {
     initialSlide: 0,
     speed: 400,
-    allowTouchMove: false,
+    allowTouchMove: true,
     on: {
       beforeInit() {
         const swiper = this;
@@ -199,9 +199,10 @@ export class AuthSignUpComponent implements OnInit {
       return 'dismissed';
     });
   }
-  logCaptcha() {
+  logCaptcha(data) {
     // // console.log(this.windowRef.recaptchaVerifier.verify());
     // console.log(this.dob.value);
+    console.log(data)
   }
   fileChange(event) {
     if (event.target.files && event.target.files[0]) {

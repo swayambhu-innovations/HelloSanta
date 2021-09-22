@@ -35,7 +35,6 @@ export class CalenderComponent {
   periodicType: FormControl = new FormControl('', [Validators.required]);
   startDate: FormControl = new FormControl('', [Validators.required]);
   endDate: FormControl = new FormControl('', [Validators.required]);
-  eventType: FormControl = new FormControl('birthday', [Validators.required]);
   viewTitle;
   isToday: boolean;
   calendar = {
@@ -86,13 +85,8 @@ export class CalenderComponent {
       allDay: this.allDay,
       startDate: this.startDate,
       endDate: this.endDate,
-      eventType: this.eventType,
       periodicType: this.periodicType,
     });
-  }
-  setEventType(event){
-    // console.log(event);
-    this.eventType.setValue(event.detail.value);
   }
   changeMode(mode) {
      this.calendar.mode = mode;
@@ -150,7 +144,6 @@ export class CalenderComponent {
       allDay: true,
       startDate: startDate.toDateString(),
       endDate: endDate.toDateString(),
-      type:this.eventType.value,
       mailSend: false,
       periodicType: this.periodicType.value,
     };

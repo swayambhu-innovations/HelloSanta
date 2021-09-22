@@ -27,7 +27,45 @@ import { last, switchMap } from 'rxjs/operators';
 export class CheckoutComponent implements OnInit {
   screenwidth = window.innerWidth;
   dataCopy;
-  searchingCoupon:boolean=false;
+  searchingCoupon: boolean = false;
+  states = [
+    'Andhra Pradesh',
+    'Arunachal Pradesh',
+    'Assam',
+    'Bihar',
+    'Chhattisgarh',
+    'Goa',
+    'Gujarat',
+    'Haryana',
+    'Himachal Pradesh',
+    'Jammu and Kashmir',
+    'Jharkhand',
+    'Karnataka',
+    'Kerala',
+    'Madhya Pradesh',
+    'Maharashtra',
+    'Manipur',
+    'Meghalaya',
+    'Mizoram',
+    'Nagaland',
+    'Odisha',
+    'Punjab',
+    'Rajasthan',
+    'Sikkim',
+    'Tamil Nadu',
+    'Telangana',
+    'Tripura',
+    'Uttarakhand',
+    'Uttar Pradesh',
+    'West Bengal',
+    'Andaman and Nicobar Islands',
+    'Chandigarh',
+    'Dadra and Nagar Haveli',
+    'Daman and Diu',
+    'Delhi',
+    'Lakshadweep',
+    'Puducherry',
+  ];
   constructor(
     private afs: AngularFirestore,
     public dataProvider: DataProvider,
@@ -40,7 +78,7 @@ export class CheckoutComponent implements OnInit {
     private storage: AngularFireStorage,
     private analytics: AngularFireAnalytics,
     public modalController: ModalController,
-    private invoiceService: InvoiceService,
+    private invoiceService: InvoiceService
   ) {
     this.form = this.formbuilder.group({
       firstName: this.firstName,
@@ -51,7 +89,6 @@ export class CheckoutComponent implements OnInit {
       city: this.city,
       pincode: this.pincode,
       state: this.state,
-      country: this.country,
       message: this.message,
       santaCredit: this.santaCredit,
     });
@@ -59,17 +96,16 @@ export class CheckoutComponent implements OnInit {
   form: FormGroup;
   firstName: FormControl = new FormControl('', [
     Validators.required,
-    Validators.minLength(5),
+    Validators.minLength(2),
     Validators.pattern('[a-zA-Z ]*'),
   ]);
   lastName: FormControl = new FormControl('', [
     Validators.required,
-    Validators.minLength(5),
+    Validators.minLength(2),
     Validators.pattern('[a-zA-Z ]*'),
   ]);
   email: FormControl = new FormControl('', [
     Validators.required,
-    Validators.minLength(5),
     Validators.email,
   ]);
   phoneNumber: FormControl = new FormControl('', [
@@ -80,30 +116,27 @@ export class CheckoutComponent implements OnInit {
   ]);
   addressLine1: FormControl = new FormControl('', [
     Validators.required,
-    Validators.minLength(5),
+    Validators.minLength(1),
   ]);
   city: FormControl = new FormControl('', [
     Validators.required,
-    Validators.minLength(5),
+    Validators.minLength(1),
     Validators.pattern('[a-zA-Z ]*'),
   ]);
   pincode: FormControl = new FormControl('', [
     Validators.required,
     Validators.pattern('[0-9]*'),
+    Validators.minLength(6),
+    Validators.maxLength(6),
   ]);
   state: FormControl = new FormControl('', [
     Validators.required,
-    Validators.minLength(5),
-    Validators.pattern('[a-zA-Z ]*'),
-  ]);
-  country: FormControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(5),
+    Validators.minLength(1),
     Validators.pattern('[a-zA-Z ]*'),
   ]);
   santaCredit: FormControl = new FormControl(false, [Validators.required]);
   message: FormControl = new FormControl('', [
-    Validators.minLength(10),
+    Validators.minLength(1),
     Validators.maxLength(100),
   ]);
   orders = [];
@@ -118,43 +151,40 @@ export class CheckoutComponent implements OnInit {
   santaCoins: number = 0;
   imageRequired: any = [];
   imagesValid: boolean = false;
-  coupons:any=[]
-  discount:number=0;
+  coupons: any = [];
+  discount: number = 0;
   totalTax: number = 0;
   subTotal: number = 0;
-  couponData:any={available:false};
-  searchCoupon(event){
-    this.searchingCoupon=true;
-    // console.log("coupon",event); 
-    let defined =false;
-    this.coupons.forEach((coupon)=>{
+  couponData: any = { available: false };
+  searchCoupon(event) {
+    this.searchingCoupon = true;
+    // console.log("coupon",event);
+    let defined = false;
+    this.coupons.forEach((coupon) => {
       // console.log("Checking coupon",event.detail.value.toLowerCase()==coupon.code.toLowerCase())
-      if (event.detail.value.toLowerCase()==coupon.code.toLowerCase()){
-        if (this.dataProvider.checkOutdata.length>=coupon.minimumProducts){
-          if (this.grandTotal>=coupon.minimumPrice){
-            defined=true;
+      if (event.detail.value.toLowerCase() == coupon.code.toLowerCase()) {
+        if (this.dataProvider.checkOutdata.length >= coupon.minimumProducts) {
+          if (this.grandTotal >= coupon.minimumPrice) {
+            defined = true;
             this.couponData = {
-              available:true,
-              code:coupon.code,
-              discount:coupon.cost,
-              title:coupon.name,
-            }
-            this.discount=coupon.cost;
-            // console.log("Coupon Found") 
+              available: true,
+              code: coupon.code,
+              discount: coupon.cost,
+              title: coupon.name,
+            };
+            this.discount = coupon.cost;
+            // console.log("Coupon Found")
           }
         }
       }
-    })
-    if (!defined){
+    });
+    if (!defined) {
       this.couponData = {
-        available:false,
-      }
-      this.discount=0;
+        available: false,
+      };
+      this.discount = 0;
     }
-    this.searchingCoupon=false;
-  }
-  log(data) {
-    // // console.log(data);
+    this.searchingCoupon = false;
   }
   addImage(event) {
     // console.log('Event recieved by the addImage(event) eventHandler function', event,this.imageRequired);
@@ -186,31 +216,31 @@ export class CheckoutComponent implements OnInit {
     //   taxCharges:(this.grandTotal/100)*15,
     // }
     let detail = {
-      name:this.firstName.value+' '+this.lastName.value,
+      name: this.firstName.value + ' ' + this.lastName.value,
       address: this.addressLine1.value,
       city: this.city.value,
       state: this.state.value,
-      country: this.country.value,
+      country: 'India',
       pincode: this.pincode.value,
       mobile: this.phoneNumber.value,
       email: this.email.value,
-      discount:this.couponData,
-      subTotal:this.grandTotal-this.totalTax,
-      grandTotal:this.grandTotal,
-      taxCharges:this.totalTax,
-    }
-    this.invoiceService.createInvoice(this.orders,detail);
+      discount: this.couponData,
+      subTotal: this.grandTotal - this.totalTax,
+      grandTotal: this.grandTotal,
+      taxCharges: this.totalTax,
+    };
+    this.invoiceService.createInvoice(this.orders, detail);
   }
 
   get grandTotal(): number {
     var total = 0;
-    this.totalTax=0;
-    this.subTotal=0;
+    this.totalTax = 0;
+    this.subTotal = 0;
     this.dataCopy.forEach((order) => {
       total += order.price * order.quantity;
-      this.totalTax+=((total/100)*15)
+      this.totalTax += (total / 100) * 15;
     });
-    return ((total - this.offerFlat ) - this.discount);
+    return total - this.offerFlat - this.discount;
   }
   get grandHeight(): number {
     var total = 0;
@@ -227,14 +257,15 @@ export class CheckoutComponent implements OnInit {
     }
   }
   makeid(length) {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var result = '';
+    var characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
+    for (var i = 0; i < length; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
-  } 
+  }
   ngOnInit() {
     this.dataProvider.showOverlay = false;
     this.inventoryService
@@ -264,7 +295,7 @@ export class CheckoutComponent implements OnInit {
             }
             this.orderItems.push({
               name: dat.productName,
-              sku: prod.productData+this.makeid(7).toString(),
+              sku: prod.productData + this.makeid(7).toString(),
               units: 1,
               selling_price: prod.price - this.offerFlat,
             });
@@ -272,15 +303,18 @@ export class CheckoutComponent implements OnInit {
             dat['finalPrice'] = prod.price;
             dat['selections'] = prod.extrasData;
             dat['quantity'] = prod.quantity;
-            dat['ref']=prod.identifier;
-            dat['cartId']=prod.cartId;
-            let config = []
+            dat['ref'] = prod.identifier;
+            dat['cartId'] = prod.cartId;
+            let config = [];
             for (let key of Object.keys(dat.selections)) {
               let selection = dat.selections[key];
-              if (selection.type == 'textSel' || selection.type == 'imgSel'){
-                config.push({title:selection.sectionTitle,value:selection.title});
-              } else if (selection.type == 'faceCount'){
-                config.push({title:'Faces',value:selection.faces});
+              if (selection.type == 'textSel' || selection.type == 'imgSel') {
+                config.push({
+                  title: selection.sectionTitle,
+                  value: selection.title,
+                });
+              } else if (selection.type == 'faceCount') {
+                config.push({ title: 'Faces', value: selection.faces });
               }
             }
             dat['config'] = config;
@@ -292,19 +326,23 @@ export class CheckoutComponent implements OnInit {
         });
       });
       this.WindowRef = this.paymentService.WindowRef;
-      this.afs.collection('offers').ref.get().then((offers) => {
-        offers.forEach((offer) => {
-          this.coupons.push(offer.data());
-        })
-        // console.log('coupons', this.coupons);
-      })
+      this.afs
+        .collection('offers')
+        .ref.get()
+        .then((offers) => {
+          offers.forEach((offer) => {
+            this.coupons.push(offer.data());
+          });
+          // console.log('coupons', this.coupons);
+        });
     } else {
       this.authService.presentToast('Oh Ohh! Checkout expired &#x1F605;');
       this.router.navigate(['']);
     }
   }
   uploadFile(file, userName) {
-    const filePath = ('referenceImage/' +`${userName}/` + userName.toString() + file.name);
+    const filePath =
+      'referenceImage/' + `${userName}/` + userName.toString() + file.name;
     // console.log('Starting file upload', filePath);
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
@@ -317,14 +355,16 @@ export class CheckoutComponent implements OnInit {
     // console.log('imagereq',this.imageRequired)
     // console.log('imageVald',this.imagesValid)
     if (this.imagesValid) {
-      // this.dataProvider.showOverlay = true;
+      this.dataProvider.showOverlay = true;
       this.processingPayment = true;
       this.payableAmount = this.grandTotal * 100;
       // console.log('payable amount', this.payableAmount);
       this.initiatePaymentModal($event);
       this.analytics.logEvent('Checkout');
     } else {
-      this.authService.presentToast('Please add all images by pressing Choose a file on every product.');
+      this.authService.presentToast(
+        'Please add all images by pressing Choose a file on every product.'
+      );
     }
   }
 
@@ -360,7 +400,7 @@ export class CheckoutComponent implements OnInit {
       name: 'Pay',
       currency: order.currency,
       order_id: order.id, //This is a sample Order ID. Create an Order using Orders API. (https://razorpay.com/docs/payment-gateway/orders/integration/#step-1-create-an-order). Refer the Checkout form table given below
-      image: 'https://angular.io/assets/images/logos/angular/angular.png',
+      image: 'https://hellosanta.in/assets/icon.png',
       handler: function (response) {
         ref.handlePayment(response);
       },
@@ -369,7 +409,7 @@ export class CheckoutComponent implements OnInit {
           this.form.get('firstName')!.value.toString() +
           this.form.get('lastName')!.value.toString(),
         email: this.form.get('email')!.value,
-        contact: this.form.get('phoneNumber')!.value,
+        contact: '+91'+this.form.get('phoneNumber')!.value,
       },
       theme: {
         color: '#2874f0',
@@ -400,7 +440,7 @@ export class CheckoutComponent implements OnInit {
             billing_city: this.form.get('city')!.value,
             billing_pincode: this.form.get('pincode')!.value,
             billing_state: this.form.get('state')!.value,
-            billing_country: this.form.get('country')!.value,
+            billing_country: 'India',
             billing_email: this.form.get('email')!.value,
             billing_phone: this.form.get('phoneNumber')!.value,
             billing_address: this.form.get('addressLine1')!.value,
@@ -415,42 +455,61 @@ export class CheckoutComponent implements OnInit {
           // console.log('shippingDetail', shippingDetail);
           this.paymentService.shipOrder(shippingDetail).subscribe(
             (res: any) => {
-              
               this.authService.presentToast('Payment Successful &#x1F60A;');
-              // console.log('shipping Confirmed Detail', res);
-              let currentOrder = {
-                shippingDetail: res.body,
-                products: this.orders,
-                orderStage: 'live',
-                orderId: res.body.order_id,
-                shipment_id: res.body.shipment_id,
-                orderConfirmed: false,
-                grandTotal:this.grandTotal,
-                orderMessage: this.message.value || '',
-              };
-              this.inventoryService.addUserOrder(currentOrder);
-
               let detail = {
-                name:shippingDetail.billing_customer_name,
-                address: shippingDetail.billing_address,
-                city: shippingDetail.billing_city,
-                state: shippingDetail.billing_state,
-                country: shippingDetail.billing_country,
-                pincode: shippingDetail.billing_pincode,
-                mobile: shippingDetail.billing_phone,
-                email: shippingDetail.billing_email,
-                discount:{available:true,code:'offerCode',price:120},
-                grandTotal:this.grandTotal,
-                taxCharges:(this.grandTotal/100)*15,
+                name: this.firstName.value + ' ' + this.lastName.value,
+                address: this.addressLine1.value,
+                city: this.city.value,
+                state: this.state.value,
+                country: 'India',
+                pincode: this.pincode.value,
+                mobile: this.phoneNumber.value,
+                email: this.email.value,
+                discount: this.couponData,
+                subTotal: this.grandTotal - this.totalTax,
+                grandTotal: this.grandTotal,
+                taxCharges: this.totalTax,
+              };
+              this.invoiceService.createInvoice(this.orders, detail);
+              console.log('shipping Confirmed Detail', res);
+              if (res.res.statusCode==200){
+                let currentOrder = {
+                  shippingDetail: res.body,
+                  products: this.orders,
+                  orderStage: 'live',
+                  orderId: res.body.order_id,
+                  shipment_id: res.body.shipment_id,
+                  orderConfirmed: false,
+                  grandTotal: this.grandTotal,
+                  orderMessage: this.message.value || '',
+                };
+                console.log('currentOrder', currentOrder);
+                this.inventoryService.addUserOrder(currentOrder);
+                let detail = {
+                  name: shippingDetail.billing_customer_name,
+                  address: shippingDetail.billing_address,
+                  city: shippingDetail.billing_city,
+                  state: shippingDetail.billing_state,
+                  country: shippingDetail.billing_country,
+                  pincode: shippingDetail.billing_pincode,
+                  mobile: shippingDetail.billing_phone,
+                  email: shippingDetail.billing_email,
+                  discount: { available: true, code: 'offerCode', price: 120 },
+                  grandTotal: this.grandTotal,
+                  taxCharges: (this.grandTotal / 100) * 15,
+                };
+                this.dataProvider.shippingData =
+                  currentOrder.shippingDetail.shipment_id.toString();
+                alert(this.dataProvider.data.type);
+                if (this.dataProvider.data.type=="cart"){
+                  this.inventoryService.clearCart();
+                }
+                this.authService.presentToast('Order Placed Successfully ');
+                this.router.navigateByUrl('feedback?trackId=' +res.body.shipment_id.toString()+"&orderId="+res.body.order_id);
+              } else {
+                console.log('error response', res);
+                this.authService.presentToast(res.body.error.message);
               }
-              
-              this.dataProvider.shippingData =
-                currentOrder.shippingDetail.shipment_id.toString();
-              this.authService.presentToast('Order Placed Successfully ');
-              this.router.navigateByUrl(
-                'trackorder?shippingId=' +
-                  currentOrder.shippingDetail.shipment_id.toString()
-              );
             },
             (error) => {
               this.paymentResponse = error;

@@ -48,6 +48,9 @@ ion-split-pane{
     top:var(--header-height);
     z-index: 1;
 }
+ion-split-pane[contentId="main-content"]{
+    margin-top:50px;
+  }
 ion-menu-toggle >ion-item{
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;

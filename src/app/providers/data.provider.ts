@@ -5,6 +5,7 @@ export class DataProvider {
     public signUpButton:boolean=false;
     public verifyEmail:boolean=false;
     public showOverlay:boolean=false;
+    public reloadPage:boolean=false;
     public accessLevel:number=-1;
     public overlayStatus:string = "Loading...";
     public checkOutdata:any;

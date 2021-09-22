@@ -27,8 +27,8 @@ export class ProfileComponent implements OnInit {
   userName: string;
   userEmail: string;
   changeField(event, type) {
+    console.log(event.target.value);
     if (type == 'firstName') {
-      // console.log(event.target.value);
       this.afs
         .collection('users')
         .doc(this.authService.userId)
@@ -38,7 +38,7 @@ export class ProfileComponent implements OnInit {
       this.afs
         .collection('users')
         .doc(this.authService.userId)
-        .set({ dob: (new Date(event.target.value.toString())).toDateString() }, { merge: true });
+        .set({ dob: event.target.value}, { merge: true });
       this.authService.presentToast('Your date of birth has been changed');
     } else if (type == 'mobile') {
       this.afs

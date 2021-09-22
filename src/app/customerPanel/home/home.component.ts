@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { DataProvider } from 'src/app/providers/data.provider';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class HomeComponent implements OnInit {
   screenwidth = window.innerWidth;
-  constructor(public afs: AngularFirestore) {}
+  constructor(public afs: AngularFirestore,private dataProvider: DataProvider) {}
   allHandmadeProds = [];
   allDigitalProds = [];
   allRecommendedProds = [];
@@ -35,6 +36,10 @@ export class HomeComponent implements OnInit {
     return array;
   }
   ngOnInit() {
+    if (this.dataProvider.reloadPage){
+      this.dataProvider.reloadPage = false;
+      window.location.reload();
+    }
     this.afs
       .collection('products')
       .valueChanges()

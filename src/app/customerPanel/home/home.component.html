@@ -171,7 +171,7 @@
             </ion-button>
           </ion-row>
           <div class="product-row2" class="uk-slider-container" *ngIf="recommendedSelection==0">
-            <ul class="uk-slider-items " uk-slider="autoplay: true" uk-scrollspy="target: > li; cls: uk-animation-slide-top; delay: 100">
+            <ul class="uk-slider-items " uk-slider="autoplay: true" uk-scrollspy="target: > li; cls: uk-animation-slide-top; delay: 0">
               <li *ngFor="let product of allRecommendedProds">
                 <app-product-full-card [img]="product.productImages" [productTitle]="product.productName"
                   [productDescription]="product.productDescription" [price]="product.productPrice"
@@ -182,7 +182,7 @@
             </ul>
           </div>
           <div class="product-row2" class="uk-slider-container" *ngIf="recommendedSelection==1">
-            <ul class="uk-slider-items" uk-slider="autoplay: true" uk-scrollspy="target: > li; cls: uk-animation-slide-top; delay: 100">
+            <ul class="uk-slider-items" uk-slider="autoplay: true" uk-scrollspy="target: > li; cls: uk-animation-slide-top; delay: 0">
               <li *ngFor="let product of allSantasChoiceProds">
                 <app-product-full-card [img]="product.productImages" [productTitle]="product.productName"
                   [productDescription]="product.productDescription" [price]="product.productPrice"
@@ -193,7 +193,7 @@
             </ul>
           </div>
           <div class="product-row2" class="uk-slider-container" *ngIf="recommendedSelection==2">
-            <ul class="uk-slider-items" uk-slider="autoplay: true" uk-scrollspy="target: > li; cls: uk-animation-slide-top; delay: 100">
+            <ul class="uk-slider-items" uk-slider="autoplay: true" uk-scrollspy="target: > li; cls: uk-animation-slide-top; delay: 0">
               <li *ngFor="let product of allFeaturedProds">
                 <app-product-full-card [img]="product.productImages" [productTitle]="product.productName"
                   [productDescription]="product.productDescription" [price]="product.productPrice"

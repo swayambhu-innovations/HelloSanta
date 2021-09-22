@@ -76,6 +76,7 @@ export class SingleproductComponent implements OnInit {
       ) {
         this.dataProvider.showOverlay = true;
         // alert('Add to cart product price' + this.productPrice.toString());
+        this.dataProvider.data = {"type":"buynow"}
         this.dataProvider.checkOutdata = [
           {
             productData: this.productData.productId,

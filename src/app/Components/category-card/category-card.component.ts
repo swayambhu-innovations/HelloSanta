@@ -31,7 +31,7 @@ export class CategoryCardComponent implements OnInit {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
   async addToWishlist(){
-    this.card.el.classList.add('uk-animation-shake');
+    this.card.el.classList.add('uk-animation-scale-down');
     if (this.has()){
       // console.log("Already in wishlist removing it")
       this.inventoryService.removeFromWishlist(this.productId);
@@ -44,7 +44,7 @@ export class CategoryCardComponent implements OnInit {
       this.authService.presentToast("Added to wishlist");
     }
     await this.delay(1000);
-    this.card.el.classList.remove('uk-animation-shake')
+    this.card.el.classList.remove('uk-animation-scale-down')
   }
   ngOnInit(){
 

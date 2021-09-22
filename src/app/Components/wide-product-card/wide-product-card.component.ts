@@ -34,14 +34,17 @@ export class WideProductCardComponent implements OnInit,OnChanges  {
   @Output() removeEvent: EventEmitter<any> = new EventEmitter();
   constructor(public inventoryService: InventoryService,private authService: AuthService,private dataProvider: DataProvider) { }
   changeImage(image){
-    if (image.target.files[0].size < 500000){
+    // console.log(image);
+    if (image.target.files[0].size < 500000 && (image.target.files[0].type=="image/png" || image.target.files[0].type=="image/jpeg")) { 
       this.dataProvider.data=this.identifier;
       const a:any = {productId:this.productId,image:image.target.files[0],refData:this.identifier}
       // console.log("Event logging just before emitting the event from function changeImage(event)",this.identifier)
       this.addImage.emit(a);
       this.authService.presentToast("Image added successfully")
     } else {
-      this.authService.presentToast("Image size should be less than 500kb",3000)
+      image.target.files = undefined;
+      image.target.value = '';
+      this.authService.presentToast("Image size should be less than 500kb and be a valid JPEG/PNG",3000)
     }
   }
   removeFromWishlist(){

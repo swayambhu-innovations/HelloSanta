@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
   categories;
   coins: number = 0;
   async presentSearch(event){
+    console.log('presentSearch',event);
     const modal = await this.modalController.create({
       component: SearchComponent,
       cssClass: 'searchModal',
@@ -84,11 +85,15 @@ export class HeaderComponent implements OnInit {
     const { role } = await popover.onDidDismiss();
   }
   async presentSearchResult(ev: any) {
+    console.log('presentSearch',ev);
     const popover = await this.popoverController.create({
       component: SearchResultComponent,
       event: ev,
       translucent: true,
       cssClass: 'searchResult',
+      showBackdrop:false,
+      // backdropDismiss:false,
+      // keyboardClose:true,
       componentProps: {
         keyword: ev.target.value,
       },

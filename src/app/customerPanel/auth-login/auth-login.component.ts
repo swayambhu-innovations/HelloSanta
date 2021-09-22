@@ -41,7 +41,6 @@ export class AuthLoginComponent implements OnInit {
   ]);
   password: FormControl = new FormControl('', [
     Validators.required,
-    Validators.minLength(10),
   ]);
   otp: FormControl = new FormControl('', [Validators.required]);
   slideOpts = {
@@ -181,6 +180,9 @@ export class AuthLoginComponent implements OnInit {
     this.dataProvider.showOverlay = false;
     alert(this.dataProvider.data)
     if (this.dataProvider.data=="error"){this.stepTwo.enable();}
+  }
+  sendResetEmail(){
+    this.authService.sendResetEmail(this.email.value);
   }
   verifyLoginCode() {
     this.dataProvider.showOverlay = true;

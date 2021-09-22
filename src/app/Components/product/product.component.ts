@@ -49,8 +49,7 @@ export class ProductComponent implements OnInit {
   removeProduct(){}
   deleteItem(){
     // console.log("deleting");
-    const productRef: AngularFirestoreDocument<any> = this.afs.doc(`products/${this.id}`);
-    productRef.delete();
+    this.afs.doc(`products/${this.id}`).ref.delete();
     // console.log("deleted");
   }
   editItem(){

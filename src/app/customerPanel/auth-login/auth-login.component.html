@@ -9,10 +9,10 @@
               <a href="http://hellosanta.in/" rel="dofollow"><img loading="lazy" src="assets/logo.png"></a>
               <span class="padding-bottom--15">Log-in to your account</span>
               <ion-slides mode="md" pager="false" [options]="slideOpts" scrollbar="false" #slides>
-                <ion-slide >
+                <ion-slide>
                   <form [formGroup]="stepOne" action="">
                     <input class="input" type="text" name="email" autocomplete="email"
-                      placeholder="Email Or Phone Number" inputmode="text" required #email formControlName="email">
+                      placeholder="Email Or Phone Number (No Country Code)" inputmode="text" required #email formControlName="email">
                     <div id="recaptcha-container"></div>
                     <br>
                     <button [disabled]="!stepOne.valid" [hidden]="!stepOne.valid" [ngClass]="!stepOne.valid ? 'disabled' : ''"
@@ -56,6 +56,7 @@
                         <ion-icon slot="end" [name]="passwordType ? 'eye-off' : 'eye'"></ion-icon>
                       </button>
                     </ion-item>
+                    <a style="margin: 10px 0px;display:block;" *ngIf="emailType" (click)="sendResetEmail()">Forgot Password</a>
                     <button [disabled]="!stepTwo.valid" [ngClass]="!stepTwo.valid ? 'disabled' : ''"
                     class="button" type="submit">Continue</button>
                   </form>

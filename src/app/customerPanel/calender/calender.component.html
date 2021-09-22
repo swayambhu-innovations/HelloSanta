@@ -6,11 +6,6 @@
       <form [formGroup]="eventForm" (ngSubmit)="addEvent()">
         <ion-item>
           <ion-input type="text" formControlName="eventTitle" placeholder="Event Name" #eventName></ion-input>
-          <ion-select value="birthday" multiple="false" (ionChange)="setEventType($event)" formControlName="eventType"
-            placeholder="Type" #eventType>
-            <ion-select-option value="birthday">Birthday</ion-select-option>
-            <ion-select-option value="Anniversary">Anneversary</ion-select-option>
-          </ion-select>
           <ion-item>
             <ion-label>Repeat</ion-label>
             <ion-select value="yearly" multiple="false" placeholder="Repeat interval" formControlName="periodicType">
@@ -37,9 +32,6 @@
           <ion-label>{{event.title}}</ion-label>
           <ion-badge color="primary" mode="ios" *ngIf="event.periodicType=='yearly'">Yearly</ion-badge>
           <ion-badge color="primary" mode="ios" *ngIf="event.periodicType=='monthly'">Monthly</ion-badge>
-          <ion-chip color="secondary" mode="md" outline="false">
-            <ion-label>{{event.type}}</ion-label>
-          </ion-chip>
           <ion-chip color="primary" mode="md" outline="true">
             <ion-label>{{event.startDate}}</ion-label>
           </ion-chip>
@@ -55,11 +47,6 @@
     <ion-card *ngIf="screenwidth<1024">
       <form [formGroup]="eventForm" (ngSubmit)="addEvent()">
         <ion-input type="text" formControlName="eventTitle" placeholder="Event Name" #eventName></ion-input>
-        <ion-select value="birthday" multiple="false" (ionChange)="setEventType($event)" formControlName="eventType"
-          placeholder="Type" #eventType>
-          <ion-select-option value="birthday">Birthday</ion-select-option>
-          <ion-select-option value="Anniversary">Anneversary</ion-select-option>
-        </ion-select>
         <ion-item class="item">
           <ion-label>All Day</ion-label>&nbsp;&nbsp;
           <ion-checkbox id="allValueDay" (ionChange)="setCheckValue($event)" formControlName="allDay"></ion-checkbox>
@@ -85,9 +72,6 @@
           </ion-card-header>
           <ion-chip color="primary" mode="ios" *ngIf="event.allDay">All Day</ion-chip>
               <ion-chip color="primary" mode="ios" *ngIf="!event.allDay">Specific</ion-chip>
-              <ion-chip color="secondary" mode="md" outline="false">
-                <ion-label>{{event.type}}</ion-label>
-              </ion-chip><br>
             <div>
               <ion-chip color="primary" mode="md" outline="true">
                 {{event.startDate}}

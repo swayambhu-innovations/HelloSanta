@@ -45,12 +45,13 @@ export class AuthService {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
+        // console.log("User data",user)
         this.afs
           .collection('users')
           .doc(user.uid)
           .valueChanges()
           .subscribe((value: any) => {
-            localStorage.setItem('localUserData', JSON.stringify(value));
+            if (value){localStorage.setItem('localUserData', JSON.stringify(value));}
           });
         // alert("This is data user "+JSON.stringify(user));
         this.afs
@@ -132,7 +133,15 @@ export class AuthService {
   userFireDataReturn() {
     return this.userFireData;
   }
-
+  sendResetEmail(email){
+    this.afAuth.sendPasswordResetEmail(email)
+    .then(() => {
+      this.presentToast('Verification email sent to the address '+email,5000);
+    })
+    .catch(error => {
+      this.presentToast(error.message || error,5000);
+    })
+  }
   async presentToast(message, duration?) {
     const toast = await this.toastController.create({
       message: message,
@@ -149,8 +158,10 @@ export class AuthService {
         this.ngZone.run(() => {
           this.presentToast('Sign In successful');
           this.homeDataProvider.showOverlay = false;
+          this.homeDataProvider.reloadPage = true;
           this.router.navigate(['']);
         });
+        this.homeDataProvider.reloadPage = true;
         this.router.navigate(['']);
       })
       .catch((error: any) => {
@@ -236,6 +247,7 @@ export class AuthService {
               })
             );
             // console.log('Completed the setUser data');
+            this.homeDataProvider.reloadPage = true;
             this.router.navigate(['']);
           });
         } else {
@@ -270,6 +282,7 @@ export class AuthService {
             })
           );
           // console.log('Completed the setUser data');
+          this.homeDataProvider.reloadPage = true;
           this.router.navigate(['']);
         }
       })
@@ -354,7 +367,12 @@ export class AuthService {
     provider.addScope('https://www.googleapis.com/auth/user.gender.read');
     return this.AuthLogin(provider);
   }
-
+  FacebookAuth(){
+    let provider = new firebase.auth.FacebookAuthProvider();
+    let data = this.AuthLogin(provider)
+    console.log(data);
+    return data;
+  }
   getUserData() {
     return JSON.parse(localStorage.getItem('user') || '{}');
   }
@@ -376,8 +394,13 @@ export class AuthService {
 
   getUserPhoto() {
     const user = JSON.parse(localStorage.getItem('localUserData') || '{}');
-    let photo = user !== null && user.photoURL !== '' ? user.photoURL : '';
-    return photo;
+    if (user.photoURL){
+      return user.photoURL;
+    } else if (user.photo){
+      return user.photo;
+    } else {
+      return ''
+    }
   }
   getCurrentWishlist() {
     return JSON.parse(localStorage.getItem('localUserData') || '{}').wishlist;
@@ -385,9 +408,12 @@ export class AuthService {
   // Auth logic to run auth providers
   AuthLogin(provider: any) {
     this.homeDataProvider.showOverlay = true;
-    return this.afAuth
+    console.log('Provider', provider);
+    if (provider.providerId=="google.com"){
+      return this.afAuth
       .signInWithPopup(provider)
       .then((result: any) => {
+        console.log("Success",result)
         fetch(
           `https://people.googleapis.com/v1/people/${result.additionalUserInfo.profile.id}?personFields=birthdays,genders&access_token=${result.credential.accessToken}`
         )
@@ -415,7 +441,6 @@ export class AuthService {
                       });
                     }
                   });
-
                 // console.log(date);
               } else {
                 this.presentToast(
@@ -435,21 +460,57 @@ export class AuthService {
               }
             });
             // window.alert("Auhtorisation successful ");
-            this.presentToast('Authorisation Successful');
+            this.presentToast('Welcome to Hello Santa');
+            this.homeDataProvider.reloadPage = true;
             this.router.navigate(['']);
             this.homeDataProvider.showOverlay = false;
             // console.log('Auth successful');
           })
           .catch((error: any) => {
-            this.presentToast(error);
+            this.presentToast(error.message || error);
             this.homeDataProvider.showOverlay = false;
           });
         // console.log(result.user);
       })
       .catch((error: any) => {
-        this.presentToast(error);
+        this.presentToast(error.message || error);
         this.homeDataProvider.showOverlay = false;
       });
+    } else if (provider.providerId=="facebook.com") {
+      return this.afAuth
+      .signInWithPopup(provider)
+      .then(async (result: any) => {
+        console.log(result,"result facebook")
+        this.presentToast(
+          "Oops we don't know your birthday or your gender. You can add them later."
+        );
+        await this.afs
+          .collection('users')
+          .doc(result.additionalUserInfo.profile.id)
+          .ref.get()
+          .then((doc) => {
+            if (!doc.exists) {
+              let data = {
+                uid:result.additionalUserInfo.profile.id,
+                displayName:result.additionalUserInfo.profile.name,
+                photo:result.additionalUserInfo.profile.picture.data.url,
+                emailVerified:true,
+                email:result.additionalUserInfo.profile.email,
+              }
+              this.SetUserData({
+                user: data,
+              });
+            }
+          });
+        this.homeDataProvider.reloadPage = true;
+        this.router.navigate(['']);
+        this.homeDataProvider.showOverlay = false;
+      })
+      .catch((error: any) => {
+        this.presentToast(error.message || error);
+        this.homeDataProvider.showOverlay = false;
+      });
+    }
   }
 
   formatPresentToday(val: boolean): string {
@@ -485,6 +546,7 @@ export class AuthService {
     phoneNumber,
     referralCode,
   }: NamedParameters) {
+    console.log('SetUserData', user);
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
@@ -499,10 +561,11 @@ export class AuthService {
         uid: user.uid,
         email: user.email || '',
         phoneNumber: phoneNumber || '',
-        displayName: displayName || '',
-        photoURL: photo || './assets/profileDefault.png',
+        displayName: user.name || displayName || '',
+        photoURL: user.photo || photo || './assets/profileDefault.png',
         emailVerified: user.emailVerified || false,
         isAdmin: false,
+        haveReferred:false,
         firstLogin: today
           .toLocaleDateString('en-US', AuthService.dateOptions)
           .toString(),
@@ -510,7 +573,7 @@ export class AuthService {
         access: currentAccess,
         isReferrer: user.isRefferrer || false,
         currentOrder: user.currentOrder || [],
-        dob: user.dob || dob || undefined,
+        dob: user.dob || dob || today.toDateString(),
         friends: user.friends || [],
         orders: user.orders || [],
         referred: user.referred || [],
@@ -530,6 +593,7 @@ export class AuthService {
         photoURL: user.photoURL || './assets/profileDefault.png',
         emailVerified: user.emailVerified || false,
         isAdmin: false,
+        haveReferred:false,
         firstLogin: today
           .toLocaleDateString('en-US', AuthService.dateOptions)
           .toString(),
@@ -538,7 +602,7 @@ export class AuthService {
         access: currentAccess,
         isReferrer: user.isRefferrer || false,
         currentOrder: user.currentOrder || [],
-        dob: user.dob || dob,
+        dob: user.dob || dob || today.toDateString(),
         friends: user.friends || [],
         orders: user.orders || [],
         referred: user.referred || [],
@@ -550,6 +614,7 @@ export class AuthService {
         wishlist: user.wishlist || [],
       };
     }
+    console.log("userData",userData);
     userRef.set(userData, {
       merge: true,
     });
@@ -559,18 +624,20 @@ export class AuthService {
         .valueChanges()
         .subscribe((result: any) => {
           result.forEach((val: any) => {
-            if (referralCode == val.referralCode) {
+            if (referralCode == val.referralCode && val.haveReferred == false) {
               this.afs
                 .collection('users')
                 .doc(val.uid)
-                .update({
+                .set({
                   totalCashback: firebase.firestore.FieldValue.increment(10),
-                });
+                  haveReferred: true,
+                },{merge:true});
             }
           });
         });
     }
-    this.presentToast('Successfully added user');
+    this.presentToast('Welcome &#128512; to Hello Santa');
+    this.homeDataProvider.reloadPage = true;
     this.router.navigate(['']);
   }
 

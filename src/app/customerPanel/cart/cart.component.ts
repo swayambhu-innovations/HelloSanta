@@ -106,6 +106,7 @@ export class CartComponent implements OnInit {
   moveToCheckout() {
     this.dataProvider.showOverlay = true;
     // // console.log('checkout items', this.checkoutItems);
+    this.dataProvider.data = {"type":"cart"}
     this.dataProvider.checkOutdata = this.checkoutItems;
     this.router.navigate(['checkout']);
   }

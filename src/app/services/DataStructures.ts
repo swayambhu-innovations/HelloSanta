@@ -27,6 +27,7 @@ export interface User {
     referred:[],
     referrer:{},
     referral:{},
+    haveReferred:boolean,
     totalOrders:number,
     totalCashback:number,
     orders:[],

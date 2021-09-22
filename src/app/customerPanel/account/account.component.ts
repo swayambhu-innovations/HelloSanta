@@ -42,7 +42,8 @@ export class AccountComponent implements OnInit {
     return await popover.present();
   }
   ngOnInit() {
-    this.afs.collection('users').doc(this.authService.userId).valueChanges().subscribe((value:any)=>{
+    this.afs.collection('users').doc(this.authService.userId).ref.get().then((value:any)=>{
+      value = value.data();
       this.userName=value.displayName;
       this.userEmail=value.email;
       this.userImage=value.photoURL;
@@ -54,7 +55,8 @@ export class AccountComponent implements OnInit {
       this.socialAccounts=value.socialMedia;
       this.country=value.country;
       this.type=value.access.accessLevel;
-      this.dob=(new Date(value.dob)).toDateString();
+      console.log(value.dob.toDate());
+      this.dob=(new Date(value.dob)).toDateString()  == "Invalid Date" ? value.dob.toDate().toDateString()  : (new Date(value.dob)).toDateString();
       // console.log(this.dob,value.dob)
       this.emailVerified=value.emailVerified;
       this.gender=value.gender;

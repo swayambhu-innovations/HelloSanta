@@ -6,7 +6,9 @@
     <ion-title>Searchbar</ion-title>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar (ionChange)="search($event)"></ion-searchbar>
+    <ion-input type="search" placeholder=" Search Anything..." [autofocus]="true" clearInput="true" debounce="500"
+        enterkeyhint="search" inputmode="search" [minlength]="4" name="search" id="searchInput"
+        (ionChange)="search($event)"></ion-input> 
   </ion-toolbar>
 </ion-header>
 <ion-content *ngIf="results">
@@ -18,17 +20,22 @@
     <h3 class="uk-text-center">Search Anything</h3>
   </div>
   <ion-list *ngIf="results && searchable">
-    <ion-item button *ngFor="let result of results" [href]="result.href">
+    <ion-item button *ngFor="let result of results" [href]="result.item.href">
       <ion-thumbnail>
-        <img loading="lazy" [src]="result.image" />
+        <img loading="lazy" [src]="result.item.type == 'Product' ? result.item.image[0].image : result.item.blogImage" />
       </ion-thumbnail>
-      <ion-col>
-        <ion-label>{{result.text}}</ion-label>
-        <ion-chip *ngIf="result.type=='blog'" outline="true" color="primary">Blog Post</ion-chip>
-        <ion-chip *ngIf="result.type=='product'" outline="true" color="secondary">Product</ion-chip>
-      </ion-col>
+      <ion-label>&nbsp;&nbsp;{{result.item.text}}</ion-label>
+      <ion-chip [color]="result.item.type == 'Product' ? 'success' : 'primary' " mode="ios" outline="true">
+        <ion-label>{{result.item.type}}</ion-label>
+      </ion-chip>
     </ion-item>
     <ion-col *ngIf="results.length==0" class="uk-text-center">
+      <ion-item button routerLink="/shop">
+        <ion-thumbnail>
+          <img src="/assets/shopThumbnail.jpg" />
+        </ion-thumbnail>
+        <ion-label>Checkout our shop for full range of products</ion-label>
+      </ion-item>
       <p class="uk-text-center">No Results Found</p><br>
       <img loading="lazy" src="./assets/NotFound.gif" alt="Floating empty boxes">
     </ion-col>

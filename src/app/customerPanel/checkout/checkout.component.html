@@ -73,21 +73,21 @@
                 </ion-item>
                 <ion-item>
                   <ion-label position="floating">
-                    Your Phone number
+                    Your Phone number (Country Code Already Added "+91" )
                   </ion-label>
                   <ion-input type="integer" placeholder="Enter Your Phone number" formControlName="phoneNumber"
                     required></ion-input>
                 </ion-item>
                 <ion-item>
                   <ion-label position="floating">
-                    delivery address(including house number)
+                    Delivery Address(including house number)
                   </ion-label>
                   <ion-input type="text" placeholder="delivery address(including house number)"
                     formControlName="addressLine1" required></ion-input>
                 </ion-item>
                 <ion-item>
                   <ion-label position="floating">
-                    city
+                    City
                   </ion-label>
                   <ion-input type="text" placeholder="enter your city" required formControlName="city">
                   </ion-input>
@@ -100,18 +100,14 @@
                   </ion-input>
                 </ion-item>
                 <ion-item>
-                  <ion-label position="floating">
-                    State
-                  </ion-label>
-                  <ion-input type="text" placeholder="Enter Your State" required formControlName="state">
-                  </ion-input>
+                  <ion-label>State</ion-label>
+                  <ion-select multiple="false" placeholder="Select State" required formControlName="state">
+                    <ion-select-option [value]="state" *ngFor="let state of states">{{state}}</ion-select-option>
+                  </ion-select>
                 </ion-item>
                 <ion-item>
-                  <ion-label position="floating">
-                    Country
-                  </ion-label>
-                  <ion-input type="text" placeholder="Enter Your country" required formControlName="country">
-                  </ion-input>
+                  <ion-label>Country</ion-label>
+                  <ion-label><strong>INDIA</strong></ion-label>
                 </ion-item>
                 <ion-item>
                   <ion-label>Apply Coupon Code</ion-label>
@@ -123,7 +119,7 @@
                   <ion-spinner name="crescent" *ngIf="searchingCoupon"></ion-spinner>
                 </ion-item>
                 <ion-item>
-                  <input type="checkbox" #checkbox (change)="log(checkbox)">
+                  <input type="checkbox" #checkbox>
                   <ion-label>&nbsp;&nbsp;&nbsp;Add a message</ion-label>
                 </ion-item>
                 <ion-item *ngIf="checkbox.checked">
@@ -134,9 +130,6 @@
                   <ion-checkbox [checked]="false" formControlName="santaCredit" (ionChange)="setCashback($event)"></ion-checkbox>
                   <ion-label>&nbsp;&nbsp;&nbsp;Use Your {{santaCoins}} Santa Credit for <strong>&#x20B9;{{this.santaCoins}}</strong> off.</ion-label>
                 </ion-item>
-                <ion-button (click)="presentInvoice()" expand="block" fill="clear" shape="round">
-                  Download Invoice
-                </ion-button>
                 <div align="center">
                   <button type="submit" [disabled]="!form.valid">
                     <div *ngIf="processingPayment">

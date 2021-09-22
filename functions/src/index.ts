@@ -27,11 +27,6 @@ let transporter = nodemailer.createTransport({
 });
 
 exports.sendMail = functions.https.onCall((data: any, context: any) => {
-  // if (context.app == undefined) {
-  //   throw new functions.https.HttpsError(
-  //       'failed-precondition',
-  //       'The function must be called from an App Check verified app.')
-  // }
 
   if (!context.auth) {
     throw new functions.https.HttpsError(
@@ -46,9 +41,7 @@ exports.sendMail = functions.https.onCall((data: any, context: any) => {
     html: data.content,
   };
   return transporter.sendMail(mailOptions, (erro: any, info: any) => {
-    // // console.log(info);
     if (erro) {
-      // console.log(erro);
       throw new functions.https.HttpsError(
         'failed-mailsend',
         'Cannot send mail, some error occured'
