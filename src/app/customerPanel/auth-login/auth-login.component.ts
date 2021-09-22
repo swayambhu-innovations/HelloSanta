@@ -184,6 +184,10 @@ export class AuthLoginComponent implements OnInit {
   sendResetEmail(){
     this.authService.sendResetEmail(this.email.value);
   }
+  reEnterData(){
+    this.slides.slideTo(0);
+    this.stepOne.enable();
+  }
   verifyLoginCode() {
     this.dataProvider.showOverlay = true;
     this.windowRef.confirmationResult

@@ -635,10 +635,12 @@ export class PendingProductModalComponent implements OnInit {
           if (this.allVendors == undefined) {
             this.allVendors = [];
           }
-          this.allVendors.push({
-            id: doc.id,
-            name: doc.data().displayName,
-          });
+          if (doc.data().access.accessLevel == 'Vendor') {
+            this.allVendors.push({
+              id: doc.id,
+              name: doc.data().displayName,
+            });
+          }
         });
         // console.log(this.allVendors);
       });

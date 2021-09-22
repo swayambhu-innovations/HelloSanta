@@ -202,7 +202,7 @@ export class AuthSignUpComponent implements OnInit {
   logCaptcha(data) {
     // // console.log(this.windowRef.recaptchaVerifier.verify());
     // console.log(this.dob.value);
-    console.log(data)
+    console.log(data);
   }
   fileChange(event) {
     if (event.target.files && event.target.files[0]) {
@@ -218,6 +218,10 @@ export class AuthSignUpComponent implements OnInit {
   }
   async emailLogin() {
     (this.signUpData['password'] = this.password.value), this.slides.slideTo(2);
+  }
+  reEnterData() {
+    this.slides.slideTo(0);
+    this.stepOne.enable();
   }
   async finalSubmit() {
     this.stepOne.disable();
@@ -246,28 +250,36 @@ export class AuthSignUpComponent implements OnInit {
     }
   }
   onSubmit() {
-    this.stepOne.disable();
-    if (this.re.test(this.email.value)) {
-      this.signUpData['type'] = 'email';
-      (this.signUpData['email'] = this.email.value), this.slides.slideTo(1);
-      this.stepTwo.removeControl('otp');
+    if (this.stepOne.valid) {
+      this.stepOne.disable();
+      if (this.re.test(this.email.value)) {
+        this.signUpData['type'] = 'email';
+        (this.signUpData['email'] = this.email.value), this.slides.slideTo(1);
+        this.stepTwo.removeControl('otp');
+      } else {
+        this.emailType = false;
+        this.slides.slideTo(1);
+        this.stepTwo.removeControl('password');
+        this.sendLoginCode();
+      }
     } else {
-      this.emailType = false;
-      this.slides.slideTo(1);
-      this.stepTwo.removeControl('password');
-      this.sendLoginCode();
+      this.authService.presentToast('Please fill the field correctly.');
+      this.stepOne.enable();
     }
   }
 
   ngOnInit() {
     this.dataProvider.showOverlay = false;
     this.windowRef = this.authService.windowRef;
-    this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('submitSignup',{
-      'size':'invisible',
-      'callback':(result) => {
-        this.onSubmit()
+    this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+      'submitSignup',
+      {
+        size: 'invisible',
+        callback: (result) => {
+          this.onSubmit();
+        },
       }
-    });
+    );
     this.windowRef.recaptchaVerifier.render();
   }
   submitStepTwo() {
@@ -297,7 +309,7 @@ export class AuthSignUpComponent implements OnInit {
           // console.log(this.timeleft, this.resendProgress);
         }, 1000);
       })
-      .catch((error) => this.authService.presentToast(error.message,5000));
+      .catch((error) => this.authService.presentToast(error.message, 5000));
   }
   verifyLoginCode() {
     this.windowRef.confirmationResult

@@ -9,11 +9,11 @@
             <span class="padding-bottom--15" style="text-align:center;">Create your account</span>
             <ion-slides mode="md" pager="false" [options]="slideOpts" scrollbar="false" #slides>
               <ion-slide >
-                <form [formGroup]="stepOne" action="">
+                <form [formGroup]="stepOne" action="" (ngSubmit)="onSubmit()">
                   <input class="input" type="text" name="email" autocomplete="email"
                     placeholder="Email Or Phone Number" inputmode="text" required #email formControlName="email">
-                  <button [disabled]="!stepOne.valid" [hidden]="!stepOne.valid" [ngClass]="!stepOne.valid ? 'disabled' : ''"
-              class="submitButton" id="submitSignup" type="submit">Continue</button>
+                  <!-- <p>{{stepOne.valid}}</p> -->
+                  <button [hidden]="!stepOne.valid" [disabled]="!stepOne.valid" class="submitButton" id="submitSignup" type="submit">Continue</button>
                 </form>
               </ion-slide>
               <ion-slide>
@@ -21,6 +21,7 @@
                   <div *ngIf="!emailType">
                     <ion-title>OTP Sent to your number {{this.email.value}}</ion-title>
                     <br>
+                    <a (click)="reEnterData()" >Re-Enter Your Phone No.</a>
                     <div *ngIf="windowRef.confirmationResult">
                       <hr>
                       <ion-item class="input" lines="none">
@@ -43,6 +44,7 @@
                     </ion-item>
                     <br>
                   </div>
+                  <a (click)="reEnterData()" *ngIf="emailType">Re-Enter Your Email</a>
                   <ion-item class="input" lines="none" *ngIf="emailType">
                     <input [type]="passwordType ? 'password' : 'text'" autocomplete="password" placeholder="Password"
                       inputmode="text" required #password formControlName="password">
