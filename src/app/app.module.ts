@@ -237,7 +237,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     BrowserModule,
     ReactiveFormsModule,
     IonicModule.forRoot({
-      navAnimation:enterAnimation
+      navAnimation:enterAnimation,
     }),
     AppRoutingModule,
     AngularFireStorageModule,

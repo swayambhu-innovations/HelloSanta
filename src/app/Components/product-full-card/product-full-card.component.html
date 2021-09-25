@@ -1,5 +1,5 @@
 <ion-card class="order-card">
-  <ion-card class="order-details" routerLink="../product" [queryParams]="{productId:this.productId}">
+  <ion-card class="order-details" [routerLink]="['../product']" routerLinkActive="inactive" [queryParams]="{productId:this.productId}">
     <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
       <img loading="lazy" [src]="img[0].image" alt="">
       <img loading="lazy" class="uk-transition-scale-up uk-position-cover" [src]="img[1].image" alt="">
