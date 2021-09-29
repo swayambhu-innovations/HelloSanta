@@ -33,6 +33,7 @@ export class PendingProductsComponent implements OnInit {
       });
     this.afs.collection('customProducts').valueChanges().subscribe((proddata) => {
       this.customProds=[];
+      console.log(proddata);
       proddata.forEach((prod) => {
         this.customProds.push(prod);
       })

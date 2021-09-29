@@ -16,8 +16,8 @@
                                 (click)="setImage(item.image)" class="product-images-list-item" [alt]="item.imageName"
                                 *ngFor="let item of productData.productImages">
                         </div>
-                        <lib-ngx-image-zoom [thumbImage]="selectedImage" [lensWidth]="200" [lensHeight]="200"
-                            zoomMode="hover" [scrollStepSize]="50" [enableScrollZoom]="true" [enableLens]="true"
+                        <lib-ngx-image-zoom [thumbImage]="selectedImage" [fullImage]="selectedImage" [lensWidth]="200" [lensHeight]="200"
+                            zoomMode="hover" [scrollStepSize]="0.1" [enableScrollZoom]="true" [enableLens]="true"
                             alt="Product Image Description" id="product-image-preview"></lib-ngx-image-zoom>
                     </div>
                     <div id="product-images" *ngIf="screenwidth < 800">

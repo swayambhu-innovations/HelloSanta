@@ -125,7 +125,6 @@ import { NotFound404Component } from './customerPanel/not-found404/not-found404.
 import { USE_EMULATOR as FUNCTIONS_EMULATOR } from '@angular/fire/functions';
 import { AboutusComponent } from './customerPanel/aboutus/aboutus.component';
 import { StarRatingComponent } from './Components/star-rating/star-rating.component';
-import { SwiperModule } from 'swiper/angular';
 import { enterAnimation } from './animations/routeAnimations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -237,7 +236,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     BrowserModule,
     ReactiveFormsModule,
     IonicModule.forRoot({
-      navAnimation:enterAnimation
+      navAnimation:enterAnimation,
     }),
     AppRoutingModule,
     AngularFireStorageModule,
@@ -253,7 +252,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     AngularFireAnalyticsModule,
     NgxImageZoomModule,
     NgCalendarModule,
-    SwiperModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable

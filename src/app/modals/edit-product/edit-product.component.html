@@ -12,11 +12,11 @@
       <ion-input type="number" required="true" placeholder="Total product images." id="mainProdImage"
         [value]="imagesNumList" min=2 max=10 #mainImgCount></ion-input>
     </ion-item>
-    <ion-card *ngFor="let prodImg of genList(mainImgCount.value)">
+    <ion-card *ngFor="let prodImg of genList(mainImgCount.value);let i = index" [attr.data-index]="i" >
       <img loading="lazy" id="productImage{{prodImg}}">
       <br>
       <ion-input type="file" required="true" accept="image/png, image/jpeg"
-        (change)="loadProdImage($event,'productImage'+prodImg.toString())"></ion-input>
+        (change)="loadProdImage($event,'productImage'+prodImg.toString(),i)"></ion-input>
     </ion-card>
     <ion-item>
       <ion-label position="floating">Product Name</ion-label>
@@ -24,7 +24,7 @@
     </ion-item>
     <ion-item>
       <ion-label position="floating">Product description</ion-label>
-      <ion-textarea placeholder="Product Description" required="true" spellcheck formControlName="productDescription">
+      <ion-textarea placeholder="Product Description" auto-grow="true" required="true" spellcheck formControlName="productDescription">
       </ion-textarea>
     </ion-item>
     <ion-item>
@@ -56,7 +56,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Vendor Id</ion-label>
-      <ion-select multiple="true" placeholder="Select Vendors" [value]="[allVendors[0].id]"
+      <ion-select multiple="true" placeholder="Select Vendors" [value]="selectedVendors"
         (ionChange)="addToVendors($event)">
         <ion-select-option [value]="vendor.id" *ngFor="let vendor of allVendors">
           {{vendor.name}}
@@ -75,7 +75,7 @@
         Check Form
       </ion-button>
       <ion-button type="submit" [disabled]="isLoading || !basicDetail.valid">
-        Next
+        Submit
       </ion-button>
     </ion-row>
   </form>

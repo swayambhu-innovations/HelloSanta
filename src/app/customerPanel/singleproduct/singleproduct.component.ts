@@ -48,7 +48,12 @@ export class SingleproductComponent implements OnInit {
     public popoverController: PopoverController
   ) {
     this.activatedRoute.queryParams.subscribe((params) => {
+      dataProvider.showOverlay= true
       this.productId = params['productId'];
+      this.ngOnInit();
+      window.scrollTo(0, 0);
+      document.body.scrollTop = 0;
+      try { document.getElementById('product-details').scrollIntoView()} catch(e) {}
     });
   }
 
@@ -296,6 +301,7 @@ export class SingleproductComponent implements OnInit {
             this.extrasData[d.sectionTitle] = d.values[0];
           }
         }
+        this.dataProvider.showOverlay= false;
       });
     this.afs
       .collection('products')

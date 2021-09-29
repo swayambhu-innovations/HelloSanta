@@ -210,11 +210,7 @@ export class InventoryService {
     return statement;
   }
   editProduct(productID, data) {
-    const productRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `products/${productID}`
-    );
-    let statement = productRef.update(data);
-    return statement;
+    this.afs.collection('products').doc(productID).update(data);
   }
   publishItem(id) {
     // console.log('Fired pubilsh,', id);
