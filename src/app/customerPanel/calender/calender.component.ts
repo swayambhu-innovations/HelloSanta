@@ -12,7 +12,7 @@ import {
   ModalController,
   NavController,
 } from '@ionic/angular';
-import SwiperCore, { Swiper } from 'swiper';
+
 
 import { CalendarMode, IEvent, Step } from 'ionic2-calendar/calendar';
 import { InventoryService } from 'src/app/services/inventory.service';
@@ -105,27 +105,27 @@ export class CalenderComponent {
 
   onViewTitleChanged(title) {this.viewTitle = title;}
   onEventSelected(event) {}
-  swiper = new Swiper('.swiper-wrapper', {
-    // Optional parameters
-    direction: 'vertical',
-    loop: true,
-    effect:'fade',
-    // If we need pagination
-    pagination: {
-      el: '.swiper-pagination',
-    },
+  // swiper = new Swiper('.swiper-wrapper', {
+  //   // Optional parameters
+  //   direction: 'vertical',
+  //   loop: true,
+  //   effect:'fade',
+  //   // If we need pagination
+  //   pagination: {
+  //     el: '.swiper-pagination',
+  //   },
   
-    // Navigation arrows
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
+  //   // Navigation arrows
+  //   navigation: {
+  //     nextEl: '.swiper-button-next',
+  //     prevEl: '.swiper-button-prev',
+  //   },
   
-    // And if we need scrollbar
-    scrollbar: {
-      el: '.swiper-scrollbar',
-    },
-  });
+  //   // And if we need scrollbar
+  //   scrollbar: {
+  //     el: '.swiper-scrollbar',
+  //   },
+  // });
   
   setCheckValue(comp) {
     // console.log('setCheckValue', comp);

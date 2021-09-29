@@ -319,32 +319,57 @@ export class AuthService {
       });
   }
   get isNumberVerified(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
-    // // console.log('USer keys',Object.keys(user),user.phoneNumber,user.phoneNumber!=undefined);
-    return user.phoneNumber!=undefined ? true : false;
+    if (this.isJustLoggedIn) {
+      const user = JSON.parse(localStorage.getItem('user'));
+      return user.phoneNumber!=undefined ? true : false;
+    } else {
+      return false;
+    }
   }
   get isEmailVerified() {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    return user.emailVerified;
+    if (this.isJustLoggedIn) {
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      return user.emailVerified;
+    } else {
+      return false;
+    }
   }
   get userId(): string {
-    let a = JSON.parse(localStorage.getItem('user') || '{}').uid;
-    this.afAuth.currentUser.finally().then((value) => {
-      a = value;
-    });
-    return a;
+    if (localStorage.getItem('user')){
+      let a = JSON.parse(localStorage.getItem('user') || '{}').uid;
+      this.afAuth.currentUser.finally().then((value) => {
+        a = value;
+      });
+      return a;
+    } else {
+      return "Anonymous"
+    }
+    
   }
   get userDob(): Date {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    return user.dob;
+    if (this.isJustLoggedIn) {
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      return user.dob;
+    } else {
+      return new Date();
+    }
+    
   }
   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    return user !== null && user.emailVerified !== false ? true : false;
+    if (localStorage.getItem('user')){
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      return user !== null && user.emailVerified !== false ? true : false;
+    } else {
+      false
+    }
   }
   get isJustLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    return user !== null && user.email !== undefined ? true : false;
+    if (localStorage.getItem('user')){
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      return user !== null && user.email !== undefined ? true : false;
+    } else {
+      false
+    }
   }
   isUserAdmin() {
     // console.log('IS admin fired', this.userId);
@@ -358,8 +383,12 @@ export class AuthService {
     // console.log('-Ended-');
   }
   isAdmin(): string {
-    const user = JSON.parse(localStorage.getItem('localitem') || '{}');
-    return user.post.toString();
+    if (localStorage.getItem('localitem')){
+      const user = JSON.parse(localStorage.getItem('localitem') || '{}');
+      return user.post.toString();
+    } else {
+      return "Customer"
+    }
   }
   GoogleAuth() {
     let provider = new firebase.auth.GoogleAuthProvider();
@@ -378,8 +407,12 @@ export class AuthService {
   }
 
   getUserEmail() {
-    const user = JSON.parse(localStorage.getItem('localUserData') || '{}');
-    return user !== null && user.email !== false ? user.email : '';
+    if (localStorage.getItem('localUserData')){
+      const user = JSON.parse(localStorage.getItem('localUserData') || '{}');
+      return user !== null && user.email !== false ? user.email : '';
+    } else {
+      return ''
+    }
   }
   get windowRef() {
     return window;
@@ -393,17 +426,23 @@ export class AuthService {
   }
 
   getUserPhoto() {
-    const user = JSON.parse(localStorage.getItem('localUserData') || '{}');
-    if (user.photoURL){
-      return user.photoURL;
-    } else if (user.photo){
-      return user.photo;
+    if (this.isJustLoggedIn){
+      const user = JSON.parse(localStorage.getItem('localUserData') || '{}');
+      if (user.photoURL){
+        return user.photoURL;
+      } else if (user.photo){
+        return user.photo;
+      } else {
+        return ''
+      }
     } else {
       return ''
     }
   }
   getCurrentWishlist() {
-    return JSON.parse(localStorage.getItem('localUserData') || '{}').wishlist;
+    if (this.isJustLoggedIn){
+      return JSON.parse(localStorage.getItem('localUserData') || '{}').wishlist;
+    }
   }
   // Auth logic to run auth providers
   AuthLogin(provider: any) {

@@ -28,6 +28,7 @@ export class EditProductComponent implements OnInit {
   progressValue:number=0.0;
   progressType: string = 'indeterminate';
   basicProductDetails:any;
+  imagesList:any[] = [];
   customSelections = {};
   prodImagesEvents = {};
   allSubCategories = [];
@@ -124,18 +125,24 @@ export class EditProductComponent implements OnInit {
       this.customSelections[count] = this.fileChange(event);
     }
   }
-  loadProdImage(event, count) {
+  loadProdImage(event, count,index) {
     var image = document.getElementById(count) as HTMLImageElement;
     if (event.target.files[0].size > 500000) {
       this.authService.presentToast('File is greater than 500 KB');
       event.target.value = '';
     } else {
       image.src = URL.createObjectURL(event.target.files[0]);
-      this.prodImagesEvents[count] = this.fileChange(event);
+      // this.prodImagesEvents[count] = this.fileChange(event);
+      let data = {
+        image:this.fileChange(event),
+        index:index,
+        type:'event',
+      }
+      this.imagesList[index] =data
     }
   }
   uploadFile(file, fileName) {
-    // console.log('Starting file upload', fileName);
+    console.log('Starting file upload', fileName);
     const fileRef = this.storage.ref(fileName);
     const task = this.storage.upload(fileName, file);
     return task.snapshotChanges().pipe(
@@ -157,7 +164,6 @@ export class EditProductComponent implements OnInit {
   }
   async addBasicDetailProduct() {
     this.progressType="indeterminate"
-    let prodList = [];
     let res = await this.presentContinueAlert();
     if (res == 'continue') {
       this.basicDetail.disable();
@@ -167,40 +173,55 @@ export class EditProductComponent implements OnInit {
         this.formCategories.length >= 1 &&
         this.formSubcategories.length >= 1
       ) {
-        let value = this.basicDetail.get('productName')!.value.replace(' ', '_');
-        let x = document.getElementById('mainProdImage') as HTMLInputElement;
-        // console.log("prodImagesEvents",this.prodImagesEvents);
+        console.log('imagesList',this.imagesList);
         this.progressType="determinate"
-        for (let imgc = 0; imgc < +x.value; imgc++) {
-          this.progressValue+=1/(+x.value*2);
-          let fileEv = this.prodImagesEvents['productImage' + imgc.toString()]
-          const imgFile = await this.uploadFile(
-            fileEv,
-            `products/${value}/image_${imgc}_${fileEv.name}`
-          ).toPromise();
-          this.progressValue+=1/(+x.value*2);
-          // console.log(imgFile);
-          prodList.push({
-            image: imgFile,
-          });
-        }
+        // await this.imagesList.forEach(async (element,index) => {
+        //   if(element.type=='event'){
+        //     let url = await this.uploadFile(element.image,`products/${this.productName.value}/image_${index}_${element.image.name}`).toPromise();
+        //     console.log(url);
+        //     this.imagesList[index]={
+        //       image:await url,
+        //       index:index,
+        //       type:'url',
+        //     }
+        //   }
+        // })
+        let imagesData = []
+        await Promise.all(this.imagesList.map(async (element,index) => {
+          if(element.type=='event'){
+            let url = await this.uploadFile(element.image,`products/${this.productName.value}/image_${index}_${element.image.name}`).toPromise();
+            // this.imagesList[index]={
+            //   image:url,
+            //   index:index,
+            //   type:'url',
+            // }
+            imagesData.push({image:url})
+            console.log("PostUrl",url);
+          } else {
+            imagesData.push({image:element.image})
+            console.log("PreUrl",element.image);
+          }
+        }))
         this.authService.presentToast('Images uploaded',4000);
+        // this.imagesList.forEach(element => {
+        //   console.log(element);
+        //   imagesData.push({image:element.image})
+        // })
+        console.log(imagesData);
         let data = {
-          productName: this.basicDetail.get('productName')!.value,
-          productDescription: this.basicDetail.get('productDescription')!.value,
-          shortDescription: this.basicDetail.get('shortDescription')!.value,
-          seoDescription: this.basicDetail.get('seoDescription')!.value,
-          productPrice: this.basicDetail.get('productPrice')!.value,
-          productCategory: this.formCategories,
-          productSubcategory: this.formSubcategories,
-          vendorId: this.selectedVendors,
-          totalStock: this.basicDetail.get('totalStock')!.value,
-          productImages: await prodList,
-          comments:[],
-          totalSales:0,
-          totalCancels:0,
+          productName:this.productName.value,
+          productPrice:this.productPrice.value,
+          productDescription:this.productDescription.value,
+          shortDescription:this.shortDescription.value,
+          seoDescription:this.seoDescription.value,
+          productCategory:this.formCategories,
+          productSubcategory:this.formSubcategories,
+          vendorId:this.selectedVendors,
+          totalStock:this.totalStock.value,
+          productImages:await imagesData,
         };
-        // console.log(data);
+        console.log(data);
+        this.inventory.editProduct(this.productId,data)
         this.basicProductDetails=data;
       } else {
         this.basicDetail.enable();
@@ -260,216 +281,6 @@ export class EditProductComponent implements OnInit {
   addToVendors(event) {
     this.selectedVendors = event.detail.value;
   }
-  async customisationSubmit(stepper: MatStepper) {
-    // console.log("matStepper",stepper);
-    let data = [];
-    let relativeData = [];
-    let customs = this.customisationsForm.get('customisationsCount').value;
-    let error = false;
-    let errorMesage = ""
-    stepper.next();
-    for (let i = 0; i < customs; i++) {
-      try {
-        let type = (
-          document.getElementById('radio' + i.toString()) as HTMLInputElement
-        ).value;
-        this.progressValue=0;
-        if (type == 'imgSel') {
-          let optionsCount = (
-            document.getElementById(
-              'imgInput' + i.toString()
-            ) as HTMLInputElement
-          ).value;
-          let sectionTitle = (
-            document.getElementById(
-              'sectionImgTitle' + i.toString()
-            ) as HTMLInputElement
-          ).value;
-          let isRelative = (
-            document.getElementById(
-              'imgCheck' + i.toString()
-            ) as HTMLInputElement
-          ).checked;
-          if (+optionsCount > 0) {
-            let options = [];
-            let value = this.basicDetail.get('productName')!.value.replace(' ', '_');
-            for (let imgCount = 0; imgCount < +optionsCount; imgCount++) {
-              let imageTitle = (
-                document.getElementById(
-                  'imgTitle' + i.toString() + imgCount.toString()
-                ) as HTMLInputElement
-              ).value;
-              let image =
-                this.customSelections[
-                  'image' + i.toString() + imgCount.toString()
-                ];
-              this.progressValue+=1/(+optionsCount*2);
-              let imageUrl = await this.uploadFile(
-                image,
-                  `products/${value}/ExtraOptions/${imageTitle.replace(' ','_')}/image_${imgCount}_${image.name}`
-                ).toPromise();
-              this.progressValue+=1/(+optionsCount*2);
-              options.push({
-                image: imageUrl,
-                title: imageTitle,
-                sectionTitle: sectionTitle,
-              });
-              this.authService.presentToast('All customisations images are uploaded successfully',4000);
-            }
-            if (isRelative) {
-              relativeData.push({
-                type: type,
-                values: options,
-                sectionTitle: sectionTitle,
-                isRelative: isRelative,
-              });
-            } else {
-              data.push({
-                type: type,
-                values: options,
-                sectionTitle: sectionTitle,
-                isRelative: isRelative,
-              });
-            }
-          }
-        } else if (type == 'textSel') {
-          let optionsCount = (
-            document.getElementById(
-              'textInput' + i.toString()
-            ) as HTMLInputElement
-          ).value;
-          let sectionTitle = (
-            document.getElementById(
-              'sectionTextTitle' + i.toString()
-            ) as HTMLInputElement
-          ).value;
-          let isRelative = (
-            document.getElementById(
-              'textCheck' + i.toString()
-            ) as HTMLInputElement
-          ).checked;
-          if (+optionsCount > 0) {
-            let options = [];
-            for (let imgCount = 0; imgCount < +optionsCount; imgCount++) {
-              let textTitle = (
-                document.getElementById(
-                  'textSelTitle' + i.toString() + imgCount.toString()
-                ) as HTMLInputElement
-              ).value;
-              options.push({
-                title: textTitle,
-                sectionTitle: sectionTitle,
-              });
-            }
-            if (isRelative) {
-              relativeData.push({
-                type: type,
-                values: options,
-                sectionTitle: sectionTitle,
-                isRelative: isRelative,
-              });
-            } else {
-              data.push({
-                type: type,
-                values: options,
-                sectionTitle: sectionTitle,
-                isRelative: isRelative,
-              });
-            }
-          }
-        } else if (type == 'quantitySel') {
-          let quantityMax = (
-            document.getElementById(
-              'quantityMax' + i.toString()
-            ) as HTMLInputElement
-          ).value;
-          let sectionTitle = (
-            document.getElementById(
-              'sectionNumTitle' + i.toString()
-            ) as HTMLInputElement
-          ).value;
-          data.push({
-            type: type,
-            quantityMax: quantityMax,
-            sectionTitle: sectionTitle,
-            isRelative: false,
-          });
-        } else if (type == 'extraInfo') {
-          let optionsCount = (
-            document.getElementById(
-              'extraInput' + i.toString()
-            ) as HTMLInputElement
-          ).value;
-          let sectionTitle = (
-            document.getElementById(
-              'sectionExtraTitle' + i.toString()
-            ) as HTMLInputElement
-          ).value;
-          if (+optionsCount > 0) {
-            let options = [];
-            for (let imgCount = 0; imgCount < +optionsCount; imgCount++) {
-              let textTitle = (
-                document.getElementById(
-                  'extraSel' + i.toString() + imgCount.toString()
-                ) as HTMLInputElement
-              ).value;
-              options.push({
-                title: textTitle,
-                sectionTitle: sectionTitle,
-              });
-            }
-            data.push({
-              type: type,
-              values: options,
-              sectionTitle: sectionTitle,
-              isRelative: false,
-            });
-          }
-        } else if (type == 'faceCount') {
-          let maximumFaces = (
-            document.getElementById(
-              'faceInputMaximum' + i.toString()
-            ) as HTMLInputElement
-          ).value;
-          data.push({
-            type: type,
-            maximumFaces: maximumFaces,
-            isRelative: false,
-          });
-        } 
-      } catch (e) {
-        error = true;
-        errorMesage=e;
-      }
-    }
-    if (!error){
-      // console.log(data,relativeData);
-      let dts = [];
-      for (let adp of relativeData) {
-        dts.push(adp.values);
-      }
-      // console.log("values",dts);
-      if (dts.length>0){
-        dts = this.cartProd(dts);
-      }
-      // console.log("permutations",dts)
-      this.permutations=dts;
-      this.customisations=[];
-      this.addons =JSON.parse(JSON.stringify(data));
-      // console.log("addons",this.addons);
-      // this.customisations.push(data);
-      // this.customisations.push(relativeData);
-      relativeData.forEach((value)=>{
-        this.customisations.push(value);
-      })
-      data.forEach((value)=>{
-        this.customisations.push(value);
-      })
-    } else {
-      this.authService.presentToast('There is an error with customisation fields',5000);
-      console.error(errorMesage)
-    }
-  }
   cartProd(paramArray) {
     function addTo(curr, args) {
       var i, copy, 
@@ -488,70 +299,6 @@ export class EditProductComponent implements OnInit {
       return result;
     }
     return addTo([], paramArray);
-  }
-  submitPrices(stepper: MatStepper){
-    // console.log("submitPrices triggered");
-    this.progressType="indeterminate"
-    let length = this.permutations.length;
-    // console.log("copying array")
-    this.finalData = JSON.parse(JSON.stringify(this.permutations));
-    // console.log("array copied")
-    for (let i = 0; i < length; i++) {
-      let isPossible = (document.getElementById('isPossible'+ i.toString()) as HTMLInputElement).checked;
-      // console.log("isPossible: ",isPossible);
-      if (isPossible) {
-        let data = this.permutations[i];
-        this.finalData[i]={};
-        this.finalData[i]['isPossible'] = true;
-        this.finalData[i]['price'] = (document.getElementById('price' + i.toString()) as HTMLInputElement).value;
-        this.finalData[i]['configLength'] = (document.getElementById('Length' + i.toString()) as HTMLInputElement).value;
-        this.finalData[i]['configWidth'] = (document.getElementById('Width' + i.toString()) as HTMLInputElement).value;
-        this.finalData[i]['configBreadth'] = (document.getElementById('Breadth' + i.toString()) as HTMLInputElement).value;
-        this.finalData[i]['configWeight'] = (document.getElementById('Weight' + i.toString()) as HTMLInputElement).value;
-        this.finalData[i]['permutations'] = data;
-        // console.log("data got")
-      } else {
-        this.finalData[i]={};
-        this.finalData[i]['isPossible'] = false;
-      }
-    }
-    for (let i=0; i < this.addons.length;i++){
-      let values= [];
-      for (let j=0; j < this.addons[i].values.length;j++){
-        let data = {
-          sectionTitle: this.addons[i].values[j].sectionTitle,
-          title: this.addons[i].values[j].title,
-          price:(document.getElementById('addonPrice'+i.toString()+j.toString()) as HTMLInputElement).value,
-          length:(document.getElementById('addonLength'+i.toString()+j.toString()) as HTMLInputElement).value,
-          width:(document.getElementById('addonWidth'+i.toString()+j.toString()) as HTMLInputElement).value,
-          breadth:(document.getElementById('addonBreadth'+i.toString()+j.toString()) as HTMLInputElement).value,
-          weight:(document.getElementById('addonWeight'+i.toString()+j.toString()) as HTMLInputElement).value,
-        }
-        values.push(data);
-      }
-      for (let customCount=0;customCount<this.customisations.length;customCount++){
-        if (this.customisations[customCount].sectionTitle==this.addons[i].sectionTitle && this.customisations[customCount].type==this.addons[i].type){
-          this.customisations[customCount]={
-            type:this.addons[i].type,
-            sectionTitle:this.addons[i].sectionTitle,
-            values:values,
-            isRelative:this.addons[i].isRelative}
-        }
-      }
-    }
-    // console.log("customisations",this.customisations);
-    // console.log("finalData: ",this.finalData);
-    // console.log("checkin validity")
-    if(this.finalData!=undefined){
-      this.basicProductDetails['permutations']=this.finalData;
-      this.basicProductDetails['extraData']=this.customisations;
-      this.inventory.editProduct(this.productId,this.basicProductDetails);
-      this.modalController.dismiss()
-      // console.log(this.basicProductDetails);
-      this.authService.presentToast('Product added successfully',5000);
-    }
-    this.progressType="determinate"
-    this.showProgress=false;
   }
   increaseValue(){
     // console.log("increase value fired")
@@ -601,8 +348,15 @@ export class EditProductComponent implements OnInit {
       this.totalStock.setValue(data.data().totalStock);
       this.selectedCategories=data.data().productCategory;
       this.selectedSubcategories=data.data().productSubcategory;
+      this.formCategories=data.data().productCategory;
+      this.formSubcategories=data.data().productSubcategory;
       this.selectedVendors=data.data().vendorId;
       this.productData = data.data();
+      data.data().productImages.forEach((element,index) => {
+        element['type']="url";
+        element['index']=index;
+        this.imagesList.push(element);
+      })
       // console.log("product data",this.productData,this.selectedVendors);
       let imgCount = 0;
       this.imagesNumList = data.data().productImages.length;
@@ -610,6 +364,7 @@ export class EditProductComponent implements OnInit {
       // (document.getElementById('mainProdImage') as HTMLInputElement).value = data.data().productImages.length;
       await this.delay(1000);
       for (let i of data.data().productImages){
+
         (document.getElementById('productImage'+imgCount) as HTMLImageElement).src = i.image
         imgCount++;
       }
