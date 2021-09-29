@@ -288,6 +288,7 @@ export class SingleproductComponent implements OnInit {
       .ref.get()
       .then((value: any) => {
         value = value.data();
+        this.analytics.logEvent(value.productName);
         this.productData = value;
         this.productPrice = 0;
         this.displayPrice = value.productPrice;
