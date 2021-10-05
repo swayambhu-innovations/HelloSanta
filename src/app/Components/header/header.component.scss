@@ -17,7 +17,7 @@
 }
 
 .logo{
-  width:300px;
+  width:270px;
   height:auto;
   margin-left: 80px;
 }
@@ -34,7 +34,7 @@
   width:40vw;
   // max-width: 60vw
   background-color: #fdfaf2;
-  height:50px;
+  height:40px;
   border-radius:10px;
   padding:5px;
   outline: none;
@@ -43,8 +43,8 @@
 //   border:2px solid var(--ion-color-primary);
 // }
 .search > button > ion-icon{
-  font-size:20px;
-  margin-right: 5px;
+  font-size:18px;
+  margin-right: 2px;
   vertical-align: middle;
   margin-left: 20px;
   background: var(--ion-color-primary);
@@ -60,7 +60,7 @@
 .headButtons{
   display:flex;
   justify-content: space-around;
-  width:300px;
+  width:250px;
   margin-right: 80px;
 }
 .headButtons > button{
@@ -71,7 +71,7 @@
 .onlyIcon{
   background:var(--ion-color-primary);
   border-radius:25px;
-  padding:10px;
+  padding:7.5px;
 }
 .headButtons > button > ion-icon{
   font-size:30px;
@@ -102,7 +102,19 @@ div > ul{
   justify-items: center;
   background-color: #fdfaf2;
 }
+.uk-offcanvas-bar > ul{
+  position: relative;
+  z-index:1;
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+  height:50px;
+  padding:10px;
 
+  margin-bottom:0px !important;
+  justify-items: center;
+  background-color: #ffffff;
+}
 .dog{
 height: 250px;
   background-color: #fdfaf2;
@@ -151,14 +163,14 @@ justify-content: flex-start;
 
 }
 .uk-offcanvas-bar > ul > li{
-  width:100%;
+  width:90%;
   display:flex;
   justify-content: space-around;
-  font-size: 20px;
+  font-size: 15px;
   background-color: #9668FF;
   margin-bottom: 20px;
-  height:50px;
-padding: 6px;
+  height:35px;
+padding: 5px;
   text-align: center;
   color:white;
   border-top-right-radius: 20px;
@@ -166,7 +178,7 @@ padding: 6px;
   box-shadow: 10px 5px 20px rgba(0,0,0,0.2);
 }
 .uk-offcanvas-bar > ul > li > a{
-  margin-top:10px;
+  margin-top:4px;
   position: relative;
 }
 .bottomAvatar{
@@ -175,6 +187,12 @@ padding: 6px;
   margin-bottom: 10%;
   left:20px;
   width:70%;
+}
+.sidelink{
+  position: relative !important;
+  z-index: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
 }
 .bottomAvatar > ion-row{
   align-items: center;

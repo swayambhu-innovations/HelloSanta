@@ -2,14 +2,14 @@
   margin: 0 auto;
   min-width: 978px;
   max-width: 1920px;
-zoom: 80%;
+
 }
 .inner-box {
-  height: 500px;
+  height: 400px;
   font-family: Poppins;
   text-align: center;
   padding: 50px;
-  width: 67.5%;
+  width: 60%;
   margin: 2.5% auto;
   background: rgba(255, 255, 255, 0.7);
   box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
@@ -54,10 +54,10 @@ button {
 .handmade {
   font-family: Poppins;
   text-align: center;
-  margin-top: 60px;
-  padding: 50px;
+  margin-top: 100px;
+  padding: 10px;
   font-weight: bold;
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: white;
 }
 .inner-box88 {
@@ -120,7 +120,7 @@ button {
   padding-top: 10px;
   padding-bottom: 20px;
   font-weight: bold;
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: var(--ion-color-primary);
 }
 
@@ -148,7 +148,7 @@ button {
   flex-wrap: nowrap;
   // flex-direction: row;
   overflow-y: auto;
-  padding:20px;
+  padding:10px;
   justify-content:space-evenly;
 }
 
@@ -165,7 +165,7 @@ button {
   font-family: Poppins;
   text-align: center;
   font-weight: bolder;
-  font-size: 3rem;
+  font-size: 2rem;
   color: #6d5de3;
   padding-top: 5%;
   padding-bottom: 2%;
@@ -173,14 +173,14 @@ button {
 .boxline1 {
   background-color: #6d5de3;
   width: 100%;
-  height: 5px;
+  height: 2.5px;
   margin: auto;
 }
 .boxtext2 {
   font-family: Poppins;
   text-align: center;
   font-weight: bolder;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   color: #ada2ff;
   padding-top: 3%;
 }
@@ -188,7 +188,7 @@ button {
   font-family: Poppins;
   text-align: center;
   font-weight: bold;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   color: #ada2ff;
   padding-bottom: 3%;
 }
@@ -205,21 +205,27 @@ button {
   border: none !important;
   color: white;
   margin: 3%;
-  padding: 20px;
+  padding: 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 25px;
+  font-size: 20px;
   cursor: pointer;
 }
+.boxbutton:hover{
+  background-color: wheat;
+}
+.boxbutton >a:hover{
+  color:rgb(68, 68, 68);
+} 
 
 .digital {
   font-family: Poppins;
   text-align: center;
-  margin-top: 60px;
-  padding: 50px;
+  margin-top: 150px;
+  padding: 20px;
   font-weight: bold;
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: #7e6dff;
 }
 
@@ -239,7 +245,7 @@ button {
   padding-top: 60px;
   padding-bottom: 5px;
   font-weight: bold;
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 .products {
@@ -249,7 +255,7 @@ button {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 20px;
+  font-size: 15px;
   cursor: pointer;
 }
 
@@ -293,7 +299,7 @@ a {
 }
 
 .promobox {
-  width: 90vw;
+  width: 85vw;
   margin: 0 auto;
   border-radius: 15px;
 }
@@ -310,8 +316,8 @@ a {
   position: relative;
   left: 50%;
   transform: translateX(-32%);
-  font-size: 3.5rem;
-  padding: 0px 20px;
+  font-size: 3rem;
+  padding: 0px 40px;
   margin: 40px 0px;
 }
 .wrapper .static-txt {
@@ -322,7 +328,7 @@ a {
   color: black;
 }
 .wrapper .dynamic-txts {
-  margin-left: 15px;
+  margin-left: 5px;
   height: 90px;
   line-height: 90px;
   overflow: hidden;
@@ -348,14 +354,14 @@ a {
   color: var(--ion-color-primary);
   font-weight: bold;
   position: relative;
-  margin: 5px 0;
+  margin: 10px 0;
   line-height: 90px;
 }
 .dynamic-txts li span::after {
   content: "";
   position: absolute;
   left: 0;
-  height: 100%;
+  height: 90px;
   width: 100%;
   background: white;
   border-left: 2px solid var(--ion-color-primary);
@@ -364,7 +370,7 @@ a {
 @keyframes typing {
   40%,
   60% {
-    left: calc(100% + 30px);
+    left: calc(100% + 40px);
   }
   100% {
     left: 0;
@@ -427,7 +433,7 @@ a {
     margin: 0 auto;
     min-width: 300px;
     max-width: 800px;
-    zoom: 100%;
+    
   }
   .digital {
     font-size: 1.2rem;

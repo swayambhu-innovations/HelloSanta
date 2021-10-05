@@ -72,23 +72,28 @@
     <button class="uk-offcanvas-close" type="button">
       <ion-icon name="close"></ion-icon>
     </button>
-    <ul class="uk-offcanvas-close">
-      <li *ngIf="!this.authService.isJustLoggedIn"><a routerLink="/login">Login</a></li>
-      <li *ngIf="this.authService.getCurrenAccessLevel == 'Vendor'"><a routerLink="/VendorPanel/Dashboard">Vendor
+    <ul>
+      <li  class="uk-offcanvas-close sidelink"*ngIf="!this.authService.isJustLoggedIn"><a routerLink="/login">Login</a></li>
+      <li  class="uk-offcanvas-close sidelink"*ngIf="this.authService.getCurrenAccessLevel == 'Vendor'"><a routerLink="/VendorPanel/Dashboard">Vendor
           Panel</a>
       </li>
-      <li *ngIf="this.authService.getCurrenAccessLevel == 'Admin'"><a routerLink="/AdminPanel/Dashboard">Admin Panel</a>
+      <li  class="uk-offcanvas-close sidelink"*ngIf="this.authService.getCurrenAccessLevel == 'Admin'"><a routerLink="/AdminPanel/Dashboard">Admin Panel</a>
       </li>
-      <li *ngIf="this.authService.isJustLoggedIn"><a routerLink="/account">Account</a></li>
-      <li *ngIf="this.authService.isJustLoggedIn"><a routerLink="/orders">Your Orders</a></li>
-      <li *ngIf="this.authService.isJustLoggedIn"><a routerLink="/buyagain">Buyagain</a></li>
-      <li *ngIf="this.authService.isJustLoggedIn"><a routerLink="/calendar">Calendar</a></li>
-      <li><a routerLink="/aboutus">About us</a></li>
-      <li><a routerLink="/help">Contact Us</a></li>
-      <li><a routerLink="/disclaimer">Disclaimer</a></li>
-      <li><a routerLink="/privacypolicy">Privacypolicy</a></li>
-      <li><a routerLink="/termsandconditions">Terms&conditions</a></li>
-      <li><a routerLink="/refund">Refundandreturn</a></li>
+      <li  class="uk-offcanvas-close sidelink"*ngIf="this.authService.isJustLoggedIn"><a routerLink="/account">Account</a></li>
+      <li  class="uk-offcanvas-close sidelink"*ngIf="this.authService.isJustLoggedIn"><a routerLink="/orders">Your Orders</a></li>
+      <li><a>Shop</a></li>
+      <div uk-dropdown="mode: click" class="dog">
+        <ul class="uk-nav uk-dropdown-nav " style="display:block">
+          <li  class="uk-offcanvas-close sidelink"><a routerLink="/specificProducts" [queryParams]="{category:category}"
+              *ngFor="let category of categories">{{category}}</a></li>
+        </ul>
+      </div>
+      <li  class="uk-offcanvas-close sidelink"*ngIf="this.authService.isJustLoggedIn"><a routerLink="/buyagain">Buyagain</a></li>
+      <li  class="uk-offcanvas-close sidelink"*ngIf="this.authService.isJustLoggedIn"><a routerLink="/calendar">Calendar</a></li>
+      <li  class="uk-offcanvas-close sidelink"><a routerLink="/aboutus">About us</a></li>
+      <li class="uk-offcanvas-close sidelink"><a routerLink="/help">Contact Us</a></li>
+      <li class="uk-offcanvas-close sidelink"><a routerLink="/termsandconditions">Terms & Conditions</a></li>
+
     </ul>
     <div class="bottomAvatar uk-offcanvas-close">
       <ion-row>

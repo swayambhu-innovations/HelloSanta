@@ -1,10 +1,13 @@
 .category-card, .category-img {
   border-radius: 10px;
 }
-
+.category-img{
+  height: 175px;
+}
 .category-card {
   background-color: #ffffff;
-  width: 225px;
+  width: 200px;
+  height: 300px;
   margin: 0em 0.75em;
   
 }
@@ -13,12 +16,12 @@
   color: #FFAB00;
   padding-right: 0.5em;
   padding-left: 0.5em;
-  padding-bottom: 0.5em;
+  padding-top: 0.5em;
 }
 
 .category-title {
   font-family: 'Poppins';
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   text-align: center;
   color: #7a7a7a;
 }
@@ -27,15 +30,15 @@
   justify-content: space-between;
   align-items: center;
   font-family: 'Poppins';
-  font-size: 1.25rem;
-  padding-left:20px;
-  padding-right:20px;
+  font-size: 1rem;
+  padding-left:10px;
+  padding-right:10px;
 }
 
 .order-price {
   font-family: 'Poppins';
-  font-size: 1rem;
-  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  margin-top: 0.2rem;
   margin-right: 0.2em;
   color: #5AC179;
 }

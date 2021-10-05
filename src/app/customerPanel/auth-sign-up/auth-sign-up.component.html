@@ -1,6 +1,6 @@
 <ion-content [ngStyle]="{'filter': (dataProvider.showOverlay) ? 'blur(10px)' : 'blur(0px)' }">
   <div class="home">
-    <img loading="lazy" src="../../assets/loginn-05.jpg" class="bg">
+    <img loading="lazy" src="../../assets/login-04.jpg" class="bg">
     <div class="login-root">
       <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
         <div class="formbg-outer uk-position-center-right">
@@ -66,7 +66,7 @@
                   <input class="input" type="text" placeholder="referralCode" name="referCode" formControlName="referralCode">
                   <ion-item class="input">
                     <ion-label>Date Of Birth</ion-label>
-                    <ion-datetime display-format="DD.MM.YYYY" formControlName="dob"></ion-datetime>
+                    <ion-input type="date" display-format="DD.MM.YYYY" formControlName="dob"></ion-input>
                   </ion-item>
                   <!-- <ion-label>{{stepThree.errors}}</ion-label> -->
                   <button [disabled]="!stepThree.valid" [ngClass]="!stepThree.valid ? 'disabled' : ''" class="submitButton" type="submit">Continue</button>
