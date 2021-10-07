@@ -5,6 +5,7 @@ import { ModalController } from '@ionic/angular';
 import { FilterModalComponent } from 'src/app/modals/filter-modal/filter-modal.component';
 import { SortModalComponent } from 'src/app/modals/sort-modal/sort-modal.component';
 import { DataProvider } from 'src/app/providers/data.provider';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-category-products',
@@ -17,12 +18,17 @@ export class CategoryProductsComponent implements OnInit {
   subcategory: any;
   modalFilterSelectedCategory: any;
   modalFilterSelectedSubcategory: any;
-  modalFilterPrice:any;
+  modalFilterPrice: any;
   window = window.innerWidth;
+  allDigitalProds: any;
+  copyArray = [];
+  categories = [];
+  subcategories = [];
+  filters = {};
   constructor(
     public modalController: ModalController,
     private afs: AngularFirestore,
-    private dataProvider: DataProvider,
+    private authService: AuthService,
     private activatedRoute: ActivatedRoute
   ) {
     this.activatedRoute.queryParams.subscribe((params) => {
@@ -31,28 +37,73 @@ export class CategoryProductsComponent implements OnInit {
     });
   }
   async presentFilter() {
+    console.log(this.modalFilterSelectedCategory);
     const modal = await this.modalController.create({
       component: FilterModalComponent,
       componentProps: {
         selectedCategories: this.modalFilterSelectedCategory || [],
         selectedSubcategories: this.modalFilterSelectedSubcategory || [],
+        modalFilterPrice: this.modalFilterPrice || [],
       },
     });
     modal.onDidDismiss().then((data: any) => {
-      // console.log('homies', data);
-      this.modalFilterSelectedSubcategory = data.data.subcategory;
-      this.modalFilterSelectedCategory = data.data.category;
-      // this.addFilter(data.data.category,'category')
+      console.log(data.data);
+      this.modalFilterSelectedCategory = data.data.category.category;
+      this.modalFilterSelectedSubcategory = data.data.category.subcategory;
+      this.modalFilterPrice = data.data.prices;
       this.allDigitalProds = [];
-      this.copyArray.forEach((item) => {
-        this.allDigitalProds.push(item);
+      data.data.category.subcategory.forEach((item) => {
+        this.copyArray.forEach((item2) => {
+          if (item2.productSubcategory.includes(item.detail.value)) {
+            this.allDigitalProds.push(item2);
+          }
+        });
       });
-      this.modalFilterSelectedCategory.forEach((item) => {
-        this.allDigitalProds = this.categoryChange(item, this.copyArray);
+      data.data.category.category.forEach((item) => {
+        this.copyArray.forEach((item2) => {
+          if (item2.productCategory.includes(item.detail.value)) {
+            this.allDigitalProds.push(item2);
+          }
+        });
       });
-      this.modalFilterSelectedSubcategory.forEach((item) => {
-        this.allDigitalProds = this.subCategoryChange(item, this.copyArray);
-      });
+      
+      var categorized = JSON.parse(JSON.stringify(this.allDigitalProds));
+      console.log('Length on prices',data.data.prices.length)
+      if (data.data.prices.length > 0) {
+        data.data.prices.forEach((item) => {
+          this.copyArray.forEach((item2) => {
+            if (item.detail.value == '500-1000') {
+              if (item2.productPrice <= 1000 && item2.productPrice >= 500) {
+                this.allDigitalProds.push(item2);
+              }
+              console.log(
+                item2.productPrice <= 1000 && item2.productPrice >= 500
+              );
+            } else if (item.detail.value == '1000-5000') {
+              if (item2.productPrice < 5000 && item2.productPrice > 1000) {
+                this.allDigitalProds.push(item2);
+              }
+            } else if (item.detail.value == '5000-10000') {
+              if (item2.productPrice < 10000 && item2.productPrice > 5000) {
+                this.allDigitalProds.push(item2);
+              }
+            } else if (item.detail.value == 'Above10000') {
+              if (item2.productPrice > 10000) {
+                this.allDigitalProds.push(item2);
+              }
+            }
+          });
+        });
+      } else {
+        if (categorized.length > 0) {
+          this.allDigitalProds = categorized;
+        } else {
+          this.allDigitalProds = this.copyArray;
+        }
+      }
+      this.authService.presentToast('Filters applied');
+      console.log('Filter applied');
+      // console.log(this.allDigitalProds,this.allDigitalProds.length);
     });
     return await modal.present();
   }
@@ -61,28 +112,26 @@ export class CategoryProductsComponent implements OnInit {
       component: SortModalComponent,
       componentProps: {
         selectedSort: this.modalFilterPrice || [],
-      }
+      },
     });
     modal.onDidDismiss().then((data: any) => {
-      // console.log('prices', data.data.prices);
-      this.modalFilterPrice = data.data.prices;
-      if (this.allDigitalProds.length == 0) {this.allDigitalProds = this.copyArray}
-      this.modalFilterPrice.forEach((item) => {
-        this.allDigitalProds = this.priceChange(item, this.allDigitalProds);
-      })
+      console.log(data.data);
+      if (data.data.sortMethod.detail.value == 'LH') {
+        console.log('Low TO High')
+        this.allDigitalProds.sort((a, b) => {
+          return a.productPrice - b.productPrice;
+        });
+      } else if (data.data.sortMethod.detail.value == 'HL') {
+        console.log('High TO Low')
+        this.allDigitalProds.sort((a, b) => {
+          return b.productPrice - a.productPrice;
+        });
+      }
+      console.log(this.allDigitalProds);
     });
     return await modal.present();
   }
-  showFilterModal() {
-    let data: any = this.presentFilter();
 
-    // console.log('present filter ', data);
-  }
-  allDigitalProds: any;
-  copyArray = [];
-  categories = [];
-  subcategories = [];
-  filters = {};
   resetFilter() {
     this.filters = {};
     this.allDigitalProds = this.copyArray;
@@ -100,10 +149,11 @@ export class CategoryProductsComponent implements OnInit {
       delete this.filters[val.detail.value];
     }
     // console.log(this.filters);
-    this.allDigitalProds = [];
-    this.copyArray.forEach((item) => {
-      this.allDigitalProds.push(item);
-    });
+    this.allDigitalProds = JSON.parse(JSON.stringify(this.copyArray));
+    // this.copyArray.forEach((item) => {
+    //   this.allDigitalProds.push(item);
+    // });
+    console.log('Filters', this.filters);
     for (let i in this.filters) {
       if (this.filters[i].type == 'subcategory') {
         this.allDigitalProds = this.subCategoryChange(i, this.copyArray);

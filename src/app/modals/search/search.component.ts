@@ -35,6 +35,7 @@ export class SearchComponent implements OnInit {
       'productCategory',
       'productDescription',
       'text',
+      'type',
       'productPrice',
       'productSubcategory',
       'seoDescription',
@@ -86,16 +87,19 @@ export class SearchComponent implements OnInit {
               this.items.push(data);
             });
           });
-      }); 
-    this.fuse = new Fuse(this.items, this.options);
+          console.log(this.items);
+          this.fuse = new Fuse(this.items, this.options);
+      });
   }
-  search(event) {
+  async search(event) {
     this.results = [];
-    
-    // console.log('Searching',event)
-    let keyword = event.detail.value;
-    if (/\S/.test(keyword)) {
+    console.log('Searching',event)
+    this.keyword = event.detail.value;
+    await this.fuse;
+    if (/\S/.test(this.keyword)) {
       this.results = this.fuse.search(this.keyword);
+      console.log('Results',this.results);
+      this.searchable = true;
     } else {
       this.searchable = false;
     }

@@ -8,6 +8,30 @@
     <ion-title>Filter</ion-title>
   </ion-toolbar>
   <h3 style="color: tomato; text-align: center; font-weight: bold">
+    Price Options
+  </h3>
+  <ion-list class="list">
+    <ion-list class="list">
+      <ion-item class="listoptions">
+        <ion-checkbox slot="start" [checked]="includesPrice('500-1000')" value="500-1000" mode="ios" (ionChange)="addPriceOption($event)"></ion-checkbox>
+        <ion-label>500-1000</ion-label>
+      </ion-item>
+      <ion-item class="listoptions">
+        <ion-checkbox slot="start" [checked]="includesPrice('1000-5000')" value="1000-5000" mode="ios" (ionChange)="addPriceOption($event)"></ion-checkbox>
+        <ion-label>1000-5000</ion-label>
+      </ion-item>
+      <ion-item class="listoptions">
+        <ion-checkbox slot="start" [checked]="includesPrice('5000-10000')" value="5000-10000" mode="ios" (ionChange)="addPriceOption($event)"></ion-checkbox>
+        <ion-label>5000-10000</ion-label>
+      </ion-item>
+      <ion-item class="listoptions">
+        <ion-checkbox slot="start" [checked]="includesPrice('Above10000')" value="Above10000" mode="ios" (ionChange)="addPriceOption($event)"></ion-checkbox>
+        <ion-label>Above 10000</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-list>
+  <hr class="uk-divider-icon">
+  <h3 style="color: tomato; text-align: center; font-weight: bold">
     Category Filter
   </h3>
   <ion-list class="list">
@@ -18,11 +42,13 @@
         mode="ios"
         slot="start"
         color="primary"
-        [checked]="selectedCategories.includes(category)"
+        [name]="category"
+        [checked]="includesCategory(category)"
         [value]="category"
       ></ion-checkbox>
     </ion-item>
   </ion-list>
+  <hr class="uk-divider-icon">
   <h3 style="color: tomato; text-align: center; font-weight: bold">
     Subcategory Filter
   </h3>
@@ -34,7 +60,8 @@
         mode="ios"
         (ionChange)="addSubcategory($event)"
         slot="start"
-        [checked]="selectedSubcategories.includes(subcategory)"
+        [name]="subcategory"
+        [checked]="includesSubcategory(subcategory)"
         color="primary"
         [value]="subcategory"
       ></ion-checkbox>

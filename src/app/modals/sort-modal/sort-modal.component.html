@@ -1,30 +1,17 @@
 <ion-content>
-  <ion-toolbar>
-    <ion-buttons slot="start" >
-      <button (click)="modalController.dismiss({prices:this.selectedSort})">
-        <ion-icon name="arrow-back"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-title>Price</ion-title>
-  </ion-toolbar>
-<ion-list class="list">
-  <ion-list class="list">
-    <ion-item class="listoptions">
-      <ion-checkbox slot="start" [checked]="selectedSort.includes('500-1000')" value="500-1000" mode="ios" (ionChange)="addPriceOption($event)"></ion-checkbox>
-      <ion-label>500-1000</ion-label>
-    </ion-item>
-    <ion-item class="listoptions">
-      <ion-checkbox slot="start" [checked]="selectedSort.includes('1000-5000')" value="1000-5000" mode="ios" (ionChange)="addPriceOption($event)"></ion-checkbox>
-      <ion-label>1000-5000</ion-label>
-    </ion-item>
-    <ion-item class="listoptions">
-      <ion-checkbox slot="start" [checked]="selectedSort.includes('5000-10000')" value="5000-10000" mode="ios" (ionChange)="addPriceOption($event)"></ion-checkbox>
-      <ion-label>5000-10000</ion-label>
-    </ion-item>
-    <ion-item class="listoptions">
-      <ion-checkbox slot="start" [checked]="selectedSort.includes('Above10000')" value="Above10000" mode="ios" (ionChange)="addPriceOption($event)"></ion-checkbox>
-      <ion-label>Above 10000</ion-label>
-    </ion-item>
+  <ion-list>
+    <ion-radio-group name="sortMethod" value="LW" (ionChange)="modalController.dismiss({sortMethod:$event})">
+      <ion-list-header>
+        <ion-label>Sorty By:</ion-label>
+      </ion-list-header>
+      <ion-item class="listoptions">
+        <ion-label>Price Low-High</ion-label>
+        <ion-radio value="LH"></ion-radio>
+      </ion-item>
+      <ion-item class="listoptions">
+        <ion-label>Price High-Low</ion-label>
+        <ion-radio value="HL"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
   </ion-list>
-</ion-list>
 </ion-content>
