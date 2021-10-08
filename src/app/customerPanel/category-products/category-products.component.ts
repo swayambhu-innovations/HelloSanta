@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './category-products.component.html',
   styleUrls: ['./category-products.component.scss'],
 })
-export class CategoryProductsComponent implements OnInit {
+export class CategoryProductsComponent{
   screenwidth = window.innerWidth;
   category: any;
   subcategory: any;
@@ -25,6 +25,7 @@ export class CategoryProductsComponent implements OnInit {
   categories = [];
   subcategories = [];
   filters = {};
+  reloaded:boolean = false;
   constructor(
     public modalController: ModalController,
     private afs: AngularFirestore,
@@ -32,8 +33,12 @@ export class CategoryProductsComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.activatedRoute.queryParams.subscribe((params) => {
+      this.reloaded = true;
       this.category = params['category'];
+      this.reloaded = false;
       this.subcategory = params['subcategory'];
+      this.ngOnInit();
+      this.reloaded = true;
     });
   }
   async presentFilter() {

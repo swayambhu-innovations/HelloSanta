@@ -14,6 +14,7 @@ export class CategoryCardComponent implements OnInit {
   @Input() subcategory:string;
   @Input() productId:string;
   @Input() price:string;
+  imageLoaded :boolean = false;
   wishlist:any=this.authService.getCurrentWishlist();
   hover:boolean=false;
   @ViewChild('icon') card: any;
@@ -26,6 +27,9 @@ export class CategoryCardComponent implements OnInit {
       }
     })
     return found;
+  }
+  imageLoad(){
+    this.imageLoaded=true
   }
   delay(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));

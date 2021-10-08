@@ -3,6 +3,7 @@
 }
 .category-img{
   height: 175px;
+  width:200px;
 }
 .category-card {
   background-color: #ffffff;
@@ -66,7 +67,12 @@ ion-card{
 ion-card:hover{
   transform: scale(1.05);
 }
-
+ion-spinner{
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 @media only screen and (max-width: 1024px) {
   .category-card {
     margin-top: 0.75em ;

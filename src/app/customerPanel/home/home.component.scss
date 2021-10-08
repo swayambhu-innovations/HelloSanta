@@ -343,6 +343,12 @@ a {
   top: 0;
   animation: slide 12s steps(4) infinite;
 }
+ion-spinner{
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 @keyframes slide {
   100% {
     top: -360px;
