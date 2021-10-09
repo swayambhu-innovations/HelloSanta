@@ -24,13 +24,13 @@
           <p><strong>Mobile Number: </strong>{{mobileNumber}}</p>
         </div>
         <ion-list>
-          <ion-item *ngFor="let item of socialAccounts" [href]="item.url" target="_blank">
-            <ion-icon style="color: rgb(85, 85, 85);"slot="start" [name]="item.type"></ion-icon>
+          <ion-button *ngFor="let item of socialAccounts" [href]="item.url" target="_blank">
+            <ion-icon style="color: #ffffff;margin: 10px;"slot="start" [name]="item.type"></ion-icon>
             <!-- <ion-label color="primary">&nbsp;&nbsp;{{item.url}}</ion-label> -->
             <button (click)="inventoryService.removeSocialMediaLink(item)">
               <ion-icon class="trash" name="trash"></ion-icon>
             </button>
-          </ion-item>
+          </ion-button>
         </ion-list>
         <div id="statistic-cards">
           <div class="statistic-card" id="total-orders-card">
