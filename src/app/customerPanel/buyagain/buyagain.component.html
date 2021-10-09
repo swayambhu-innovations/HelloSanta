@@ -4,7 +4,7 @@
   <div id="container">
     <app-sidenav activeLinkID="your-orders" *ngIf="screenwidth>1020"></app-sidenav>
     <section id="orders-container">
-      <h2 id="your-cart-title">Your Orders</h2>
+      <h2 id="your-cart-title">Buy Again</h2>
       <div *ngIf="!loading">
         <div class="product-row" *ngIf="liveOrders">
           <div class="product-row" *ngFor="let product of liveOrders">
