@@ -6,7 +6,7 @@
   z-index: 1;
 }
 .title {
-  font-size: 3em;
+  font-size: 2em;
   text-align: center;
 }
 ion-card {
@@ -14,6 +14,7 @@ ion-card {
   border-radius: 20px;
   margin: 80px auto;
   width: fit-content;
+  font-size: 0.5em;
 }
 ion-icon {
   margin-left: 5px;
@@ -38,6 +39,7 @@ ion-content > div {
   --highlight-color-focused: transparent;
   --highlight-color-valid: transparent;
   --highlight-color-invalid: transparent;
+  font-size: 0.9rem;
 }
 ion-list > ion-card{
   padding:10px;

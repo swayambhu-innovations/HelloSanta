@@ -129,9 +129,19 @@ app-sidenav {
   justify-content: space-evenly;
   align-items: flex-start;
 }
+ion-list{
+  display: flex;
+}
+ion-button{
+  --background : #675ce0;
+  --padding-end:20px;
+  --padding-start:20px;
+  margin: 0% 3%;
+}
 ion-icon[name="trash"] {
-  color: #ff6584;
-  font-size: 1.5rem;
+  color: #ffffff;
+  font-size: 1.2rem;
+  margin: 10px;
 }
 
 @media only screen and (max-width: 1024px) {
