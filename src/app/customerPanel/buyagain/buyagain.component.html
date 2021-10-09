@@ -14,9 +14,6 @@
           </div>
         </div>
       </div>
-      <div *ngIf="loading">
-        <ion-spinner name="crescent"></ion-spinner>
-      </div>
       <img loading="lazy" src="./assets/NotFound.gif" alt="" *ngIf="liveOrders.length<=0 || liveOrders==undefined">
     </section>
     <app-sidenav activeLinkID="your-orders" *ngIf="screenwidth<1024"></app-sidenav>

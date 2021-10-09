@@ -7,8 +7,8 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent implements OnInit {
-
-  constructor(public authService:AuthService) { }
+  routerLocation:string = window.location.pathname;
+  constructor(public authService:AuthService) {}
 
   ngOnInit() {}
 

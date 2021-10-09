@@ -191,7 +191,7 @@
                 </app-product-full-card>
               </li>
             </ul>
-            <ion-spinner name="crescent" *ngIf="allRecommendedProds.length==0"></ion-spinner>
+            <ion-spinner style="margin:20px;" name="crescent" *ngIf="allRecommendedProds.length==0 || allRecommendedProds==undefined"></ion-spinner>
           </div>
           <div class="product-row2" class="uk-slider-container" *ngIf="recommendedSelection==1">
             <ul class="uk-slider-items" uk-slider="autoplay: true" uk-scrollspy="target: > li; cls: uk-animation-slide-top; delay: 0">

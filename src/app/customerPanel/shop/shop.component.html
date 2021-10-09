@@ -1,11 +1,11 @@
 <ion-content>
   <app-header></app-header>
   <div class="home">
-    <img loading="lazy" src="./assets/Artboardshop.png" *ngIf="category!='Handmade' && category!='Digital' && window >= 1024" class="headerImage">
-    <img loading="lazy" src="./assets/shopMobile.png" *ngIf="category!='Digital' && category!='Digital' && window < 1024" class="headerImage">
+    <img loading="lazy" src="./assets/Artboardshop.png" *ngIf="window >= 1024" class="headerImage">
+    <img loading="lazy" src="./assets/shopMobile.png" *ngIf="window < 1024" class="headerImage">
     <hr class="uk-divider-icon">
   <ion-toolbar *ngIf="screenwidth<1024">
-    <ion-button (click)="showFilterModal()" expand="full" fill="clear" slot="start">
+    <ion-button (click)="presentFilter()" expand="full" fill="clear" slot="start">
       Filter&nbsp;&nbsp;&nbsp;<ion-icon name="filter-circle"></ion-icon>
     </ion-button>
     <ion-button (click)="presentsort()" expand="full" fill="clear" slot="end">
@@ -67,7 +67,7 @@
             [productTitle]="product.productName" [productDescription]="product.seoDescription"
             [price]="product.productPrice" [productId]="product.productId"></app-product-full-card>
           <div *ngIf="allDigitalProds.length==0">
-            <p>Nothing to show</p>
+            <p style="font-size:30px;margin:50px;">Nothing to show</p>
           </div>
         </div>
         <ion-spinner *ngIf="allDigitalProds==undefined" color="primary"></ion-spinner>

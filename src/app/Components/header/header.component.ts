@@ -56,15 +56,20 @@ export class HeaderComponent implements OnInit {
               .then((doc: any) => {
                 if (doc.exists) {
                   doc = doc.data();
-                  // // console.log("doc item.finalPrice",item);
                   doc['finalPrice']=item.price;
                   doc['quantity']=item.quantity;
-                  this.cartItems.push(doc);
+                  var found = false;
+                  this.cartItems.forEach((cartItem: any) => {
+                    if (cartItem.productId == doc.productId) {
+                      found = true;
+                    }
+                  });
+                  if (!found) {
+                    this.cartItems.push(doc);
+                  }
                 }
               });
           });
-        } else {
-          // // console.log('no user data');
         }
       });
     }

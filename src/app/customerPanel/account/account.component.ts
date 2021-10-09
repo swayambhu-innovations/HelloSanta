@@ -42,8 +42,7 @@ export class AccountComponent implements OnInit {
     return await popover.present();
   }
   ngOnInit() {
-    this.afs.collection('users').doc(this.authService.userId).ref.get().then((value:any)=>{
-      value = value.data();
+    this.afs.collection('users').doc(this.authService.userId).valueChanges().subscribe((value:any)=>{
       this.userName=value.displayName;
       this.userEmail=value.email;
       this.userImage=value.photoURL;
