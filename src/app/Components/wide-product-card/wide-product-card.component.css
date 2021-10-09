@@ -10,7 +10,7 @@
   align-items: flex-start;
   justify-content: space-between;
   margin: auto;
-  width: 80%;
+  width: 85%;
 }
 ion-item > button {
   border-radius: 10px;
@@ -19,7 +19,7 @@ ion-item > button {
   color: white;
 }
 ion-item > button > ion-icon {
-  font-size: 15px;
+  font-size: 10px;
 }
 ion-item > ion-label {
   text-align: center;
@@ -58,14 +58,14 @@ ion-item > ion-label {
 .chosen-config {
   color: #6d5de3;
   padding: 1em;
-  font-size: 1.5em;
+  font-size: 1em;
   line-height: 1.5;
 }
 .config {
   font-size: 0.8em;
 }
 .order-price-and-btns {
-  margin: 1em;
+  margin: 0.5em;
   display: block;
 }
 
@@ -98,6 +98,10 @@ ion-item > ion-label {
   background-color: #e5f3ff;
   color: #6ab9ff;
   border: 2px solid #6ab9ff;
+}
+
+.order-choose-img{
+font-size: 0.7rem;
 }
 ion-button {
   --background: transparent;

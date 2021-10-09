@@ -9,7 +9,7 @@
   font-family: Poppins;
   text-align: center;
   font-weight: bolder;
-  font-size: 35px;
+  font-size: 30px;
   color: #6d5de3;
   padding-top: 5%;
 }
@@ -18,23 +18,24 @@
   font-family: Poppins;
   text-align: center;
   font-weight: bolder;
-  font-size: 35px;
+  font-size: 25px;
   color: #6d5de3;
-  padding-top: 3%;
+  padding-top: 5%;
 }
 .text3 {
   font-family: Poppins;
   text-align: center;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 15px;
   color: #ada2ff;
+  padding-top: 3%;
 }
 
 .text4 {
   font-family: Poppins;
   text-align: center;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 25px;
   color: #ada2ff;
   padding-top: 3%;
 }
@@ -55,7 +56,7 @@
 }
 
 .line7 {
-  background-color: #6d5de3;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
   width: 90%;
   height: 5px;
   margin: auto;
@@ -66,7 +67,7 @@
   font-family: Poppins;
   text-align: left;
   font-size: 20px;
-  margin: 2% 20% 0% 20%;
+  margin: 2% 20%;
   background: rgba(255, 255, 255, 0.7);
   box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
   border-radius: 25px;
@@ -75,17 +76,17 @@
 
 .inner-box2 {
   height: auto;
-  width: 60%;
+  width: 45%;
   font-family: Poppins;
   text-align: left;
-  font-size: 20px;
-  margin: 0% 20% 0% 20%;
-  padding: 50px;
-  padding-left: 15%;
+  font-size: 15px;
+  margin: 0% 27.5%;
+  padding: 25px;
+  padding-left: 7.5%;
+  line-height: 2;
   background: rgba(255, 255, 255, 0.7);
   box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
   border-radius: 25px;
-  border: 5px solid #9081ff;
 }
 
 .inner-box3 {
@@ -106,8 +107,9 @@
   font-family: Poppins;
   text-align: center;
   font-weight: bolder;
-  font-size: 3rem;
-  line-height: 1.5;
+  font-size: 2rem;
+  margin: 5% 0%;
+  line-height: 3;
   color: #6d5de3;
 }
 #subject {
@@ -127,23 +129,23 @@
 }
 
 .insta {
-  width: 500px;
-  height: auto;
-}
-.whatsapp {
-  width: 400px;
-  height: auto;
-}
-.linkedin {
   width: 350px;
   height: auto;
 }
-.facebook {
+.whatsapp {
   width: 300px;
   height: auto;
 }
+.linkedin {
+  width: 250px;
+  height: auto;
+}
+.facebook {
+  width: 200px;
+  height: auto;
+}
 .twitter {
-  width: 300px;
+  width: 250px;
   height: auto;
 }
 ion-card {
@@ -257,7 +259,9 @@ ion-textarea {
     font-family: Poppins;
     text-align: center;
     font-weight: bolder;
-    font-size: 15px;
+    font-size: 20px;
+    padding-left: 2.5em;
+    padding-right: 2.5em;
     color: #6d5de3;
     padding-top: 5%;
   }
@@ -266,9 +270,9 @@ ion-textarea {
     font-family: Poppins;
     text-align: center;
     font-weight: bolder;
-    font-size: 12px;
+    font-size: 15px;
     color: #6d5de3;
-    padding-top: 5%;
+    padding-top: 8%;
   }
   .text3 {
     font-family: Poppins;
@@ -276,13 +280,14 @@ ion-textarea {
     font-weight: bold;
     font-size: 15px;
     color: #ada2ff;
+    padding-top: 5%;
   }
 
   .text4 {
     font-family: Poppins;
     text-align: center;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 18px;
     color: #ada2ff;
     padding-top: 5%;
   }
@@ -291,7 +296,7 @@ ion-textarea {
     font-family: Poppins;
     text-align: center;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 18px;
     color: #ada2ff;
   }
   ion-button{

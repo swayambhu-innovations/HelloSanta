@@ -11,7 +11,7 @@
       <ion-button *ngIf="showActions" class="order-view"
         routerLink="../product" [queryParams]="{productId:productId}">View
         Product</ion-button>
-        <ion-item button lines="none" *ngIf="showImageInput">
+        <ion-item button lines="none" *ngIf="showImageInput" class="order-choose-img">
           <ion-label>Reference Photo</ion-label>
           <input type="file" name="file" max="1" accept="image/png,image/jpeg" (change)="changeImage($event)" id="file"/>
         </ion-item>
