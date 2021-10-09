@@ -32,9 +32,22 @@
           "assets/dist/uikit-icons.min.js",
           "https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css",
           "assets/dist/uikit.min.css",
-          "assets/dist/uikit.min.js"
+          "assets/dist/uikit.min.js",
+          "https://firebasestorage.googleapis.com/v0/b/*"
         ]
       }
     }
-  ]
+  ],
+  "dataGroups": [{
+    "name": "api-freshness",
+    "urls": [
+      "https://firebasestorage.googleapis.com/v0/b/hellosanta-fc366.appspot.com/"
+    ],
+    "cacheConfig": {
+      "maxSize": 100,
+      "maxAge": "180d",
+      "timeout": "10s",
+      "strategy": "freshness"
+    }
+  }]
 }

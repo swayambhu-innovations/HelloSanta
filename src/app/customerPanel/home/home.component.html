@@ -59,12 +59,15 @@
         <section id="orders-container1">
           <h1 class="handmade"><a routerLink="/shop">Our <span style="color: #F3F692">Beloved</span> Range of <span
                 style="color: #F3F692">Handmade</span> Products</a></h1>
-          <div class="product-row">
+          <div class="product-row" *ngIf="allHandmadeProds.length > 0">
             <app-category-card *ngFor="let othercategory of allHandmadeProds" [img]="othercategory.productImages"
               [categoryTitle]="othercategory.productName" [price]="othercategory.productPrice"
               [category]="othercategory.productCategory" [subcategory]="othercategory.productSubcategory"
               [productId]="othercategory.productId">
             </app-category-card>
+          </div>
+          <div class="product-row" *ngIf="allHandmadeProds.length == 0 || allHandmadeProds == undefined">
+            <ion-spinner name="crescent" color="white"></ion-spinner>
           </div>
         </section>
       </div>
@@ -73,10 +76,20 @@
       <h1 class="handmade2">Gifts that Everyone Likes</h1>
       <div class="uk-position-center uk-panel" id="category">
         <section id="orders-container-small">
-          <div class="product-row-small" >
+          <!-- <div class="product-row-small" >
             <app-category-card *ngFor="let othercategory of allHandmadeProds" [img]="othercategory.productImages"
               [categoryTitle]="othercategory.productName" [price]="othercategory.productPrice" [category]="othercategory.productCategory" [subcategory]="othercategory.productSubcategory" [productId]="othercategory.productId">
             </app-category-card>
+          </div> -->
+          <div class="product-row-small" *ngIf="allHandmadeProds.length > 0">
+            <app-category-card *ngFor="let othercategory of allHandmadeProds" [img]="othercategory.productImages"
+              [categoryTitle]="othercategory.productName" [price]="othercategory.productPrice"
+              [category]="othercategory.productCategory" [subcategory]="othercategory.productSubcategory"
+              [productId]="othercategory.productId">
+            </app-category-card>
+          </div>
+          <div class="product-row-small" *ngIf="allHandmadeProds.length == 0 || allHandmadeProds == undefined">
+            <ion-spinner name="crescent" class="uk-align-center uk-text-center" color="white"></ion-spinner>
           </div>
         </section>
       </div>
@@ -178,6 +191,7 @@
                 </app-product-full-card>
               </li>
             </ul>
+            <ion-spinner name="crescent" *ngIf="allRecommendedProds.length==0"></ion-spinner>
           </div>
           <div class="product-row2" class="uk-slider-container" *ngIf="recommendedSelection==1">
             <ul class="uk-slider-items" uk-slider="autoplay: true" uk-scrollspy="target: > li; cls: uk-animation-slide-top; delay: 0">

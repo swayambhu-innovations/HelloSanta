@@ -2,7 +2,9 @@
 .blog-card, .blog-img {
   border-radius: 20px;
 }
-
+.blog-img{
+  height:200px;
+}
 .blog-card {
   width: 250px;
   margin: 1em 0.5em;
@@ -28,7 +30,12 @@
 a{
   color: white;
 }
-
+ion-spinner{
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 @media only screen and (max-width: 1024px) {
   .blog-card {
     width: 160px;
@@ -37,7 +44,9 @@ a{
   .blog-details {
     padding: 1em;
   }
-
+  .blog-img {
+    height: 100px;
+  }
   .blog-title {
     font-size: 1rem;
     margin-top: 0%;

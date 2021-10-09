@@ -1,6 +1,10 @@
 <ion-card routerLink="../blog" [queryParams]="{id:blogId}" class="blog-card">
   <img loading="lazy" [src]="blogimg"
-       alt="{{blogTitle}}" class="blog-img">
+       alt="{{blogTitle}}" class="blog-img" *ngIf="imageLoaded">
+  <div class="blog-img" *ngIf="!imageLoaded">
+    <img [src]="blogimg" alt="{{blogTitle}}" hidden (load)="imageLoaded=true">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
   <div class="blog-details">
     <h4 class="blog-title">{{blogTitle}}</h4>
     <p class="blog-description">{{blogDescription}}</p>
