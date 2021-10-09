@@ -13,12 +13,13 @@
   }
 
 #container {
-    width: 95%;
+    width: 90%;
     margin: 4em auto;
 }
 
 #container2 {
-  width: 95%;
+  width: 90%;
+  height: auto;
   margin: 3em auto;
   display: flex;
   justify-content: space-between;
@@ -80,7 +81,7 @@ ion-item > ion-label {
     width: 50%;
     display: flex;
     margin-right: 1em;
-    padding:20px;
+    padding:10px;
 }
 
 #product-images-list {
@@ -112,7 +113,7 @@ ion-item > ion-label {
 
 #product-name {
     color: #6D5CE5;
-    font-size: 2rem;
+    font-size: 1.25rem;
     font-family: 'Poppins';
     line-height: 1.25em;
 }
@@ -141,7 +142,7 @@ ion-item > ion-label {
 }
 #product-price{
     color: #5AC179;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 700;
     margin: 1em 0;
     text-align: left;
@@ -160,12 +161,12 @@ ion-item > ion-label {
     overflow-y: visible;
 }
 .product-filter {
-    padding: 1em;
+    padding: 0.5em;
     border-radius: 50px;
     font-family: 'Poppins';
     width: 23%;
     color: #6D5CE5;
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: 700;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border: none;
@@ -196,9 +197,9 @@ ion-item > ion-label {
 
 .product-action-button {
     color: #fff;
-    padding: .5em 1em;
+    padding: .5em 0.75em;
     font-family: 'Poppins';
-    font-size: 1.5rem;
+    font-size: 1rem;
     margin: 0 .5em;
     border-radius: 25px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -207,9 +208,9 @@ ion-item > ion-label {
 .headingproducts{
     font-family: Poppins;
     text-align: center;
-    padding: 80px;
+    padding: 40px;
     font-weight: bold;
-    font-size: 3rem;
+    font-size: 2.5rem;
 }
 
 #product-buy-now {
@@ -224,11 +225,11 @@ button[disabled]{
 }
 #product-description {
   height: auto;
-  width: 90vw;
+  width: 85vw;
   font-family: Poppins;
   text-align: left;
-  font-size: 20px;
-  margin:2.5%;
+  font-size: 15px;
+  margin:2.5% auto;
   padding: 50px;
   background: rgba(255, 255, 255, .7);
   box-shadow: #9081ff3b 10px 20px 30px 0px;
@@ -257,10 +258,10 @@ font-size: 15px;
 text-align: center;
 }
 .title{
-    font-size: 50px; text-align: center; margin: auto;
+    font-size: 30px; text-align: center; margin: auto;
 }
 .title1{
-    font-size: 25px; text-align: center; margin: auto;color: rgb(0, 0, 0);
+    font-size: 20px; text-align: center; margin: auto;color: rgb(0, 0, 0);
 }
 #product-description > img{
     width:500px;
@@ -280,7 +281,7 @@ text-align: center;
     box-shadow: #9081ff3b 7px 12px 40px 10px;
 }
 #product-description-title, #similar-products-title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: #6D5CE5;
     text-align: center;
     font-family: 'Poppins';
@@ -307,7 +308,7 @@ text-align: center;
 }
 
 .similar-product-price {
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: #6D5CE5;
     font-weight: 700;
     margin: 1em 0;
@@ -345,7 +346,7 @@ ion-spinner{
     justify-content: center;
     align-items: center;
     width:100px;
-    height:150px;
+    height:130px;
     padding: 5px;
     text-align:center;
     margin-left: 10px;
