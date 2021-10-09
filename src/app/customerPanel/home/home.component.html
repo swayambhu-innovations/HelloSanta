@@ -182,7 +182,7 @@
             </ion-button>
           </ion-row>
           <div class="product-row2" class="uk-slider-container" *ngIf="recommendedSelection==0">
-            <ul class="uk-slider-items " uk-slider="autoplay: true" >
+            <ul class="uk-slider-items uk-animation-fade" uk-slider="autoplay: true" >
               <li *ngFor="let product of allRecommendedProds">
                 <app-product-full-card [img]="product.productImages" [productTitle]="product.productName"
                   [productDescription]="product.productDescription" [price]="product.productPrice"
@@ -194,7 +194,7 @@
             <ion-spinner style="margin:20px;" name="crescent" *ngIf="allRecommendedProds.length==0 || allRecommendedProds==undefined"></ion-spinner>
           </div>
           <div class="product-row2" class="uk-slider-container" *ngIf="recommendedSelection==1">
-            <ul class="uk-slider-items" uk-slider="autoplay: true" >
+            <ul class="uk-slider-items uk-animation-fade" uk-slider="autoplay: true" >
               <li *ngFor="let product of allSantasChoiceProds">
                 <app-product-full-card [img]="product.productImages" [productTitle]="product.productName"
                   [productDescription]="product.productDescription" [price]="product.productPrice"
@@ -205,7 +205,7 @@
             </ul>
           </div>
           <div class="product-row2" class="uk-slider-container" *ngIf="recommendedSelection==2">
-            <ul class="uk-slider-items" uk-slider="autoplay: true" >
+            <ul class="uk-slider-items uk-animation-fade" uk-slider="autoplay: true" >
               <li *ngFor="let product of allFeaturedProds">
                 <app-product-full-card [img]="product.productImages" [productTitle]="product.productName"
                   [productDescription]="product.productDescription" [price]="product.productPrice"
