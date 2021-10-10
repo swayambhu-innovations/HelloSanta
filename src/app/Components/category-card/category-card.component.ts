@@ -15,17 +15,21 @@ export class CategoryCardComponent implements OnInit {
   @Input() productId:string;
   @Input() price:string;
   imageLoaded :boolean = false;
-  wishlist:any=this.authService.getCurrentWishlist();
+  wishlist:any=this.authService.getCurrentWishlist() || [];
   hover:boolean=false;
   @ViewChild('icon') card: any;
   constructor(public authService: AuthService,private inventoryService: InventoryService) { }
   has(){
     let found = false;
-    this.wishlist.forEach((item)=>{
-      if(item == this.productId){
-        found = true;
+    if (this.wishlist){
+      if (this.wishlist.length > 0){
+        this.wishlist.forEach((item)=>{
+          if(item == this.productId){
+            found = true;
+          }
+        })
       }
-    })
+    }
     return found;
   }
   imageLoad(){

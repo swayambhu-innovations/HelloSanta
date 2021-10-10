@@ -23,11 +23,15 @@ export class ProductFullCardComponent implements OnInit {
   @ViewChild('icon') card: any;
   has(){
     let found = false;
-    this.wishlist.forEach((item)=>{
-      if(item == this.productId){
-        found = true;
+    if (this.wishlist){
+      if (this.wishlist.length > 0){
+        this.wishlist.forEach((item)=>{
+          if(item == this.productId){
+            found = true;
+          }
+        })
       }
-    })
+    }
     return found;
   }
   delay(ms: number) {

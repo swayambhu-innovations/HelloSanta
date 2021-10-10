@@ -99,6 +99,16 @@ export class SingleproductComponent implements OnInit {
       this.router.navigate(['login']);
     }
   }
+  makeid(length) {
+    var result = '';
+    var characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
   addToCart() {
     if (this.authService.isJustLoggedIn){
       this.analytics.logEvent('addToCart');
@@ -107,6 +117,7 @@ export class SingleproductComponent implements OnInit {
       ) {
         let cartItem = {
           productData: this.productData.productId,
+          sku:this.makeid(7).toString(),
           extrasData: this.extrasData,
           price: this.productPrice,
           quantity: this.quantity,

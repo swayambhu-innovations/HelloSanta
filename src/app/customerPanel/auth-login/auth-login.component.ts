@@ -46,7 +46,7 @@ export class AuthLoginComponent implements OnInit {
   slideOpts = {
     initialSlide: 0,
     speed: 400,
-    allowTouchMove: true,
+    allowTouchMove: false,
     on: {
       beforeInit() {
         const swiper = this;

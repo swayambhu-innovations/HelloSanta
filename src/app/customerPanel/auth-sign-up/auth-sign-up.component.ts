@@ -81,7 +81,7 @@ export class AuthSignUpComponent implements OnInit {
   slideOpts = {
     initialSlide: 0,
     speed: 400,
-    allowTouchMove: true,
+    allowTouchMove: false,
     on: {
       beforeInit() {
         const swiper = this;
@@ -235,9 +235,10 @@ export class AuthSignUpComponent implements OnInit {
         this.signUpData.password,
         this.name.value,
         this.file,
-        dob
+        dob,
+        this.referralCode.value
       );
-      this.router.navigate(['']);
+      // this.router.navigate(['']);
     } else if (this.signUpData.type == 'otp') {
       this.authService.SignUpWithNumber(
         this.signUpData.email,
@@ -246,7 +247,7 @@ export class AuthSignUpComponent implements OnInit {
         dob,
         this.referralCode.value
       );
-      this.router.navigate(['']);
+      // this.router.navigate(['']);
     }
   }
   onSubmit() {

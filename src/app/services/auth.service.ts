@@ -51,9 +51,10 @@ export class AuthService {
           .doc(user.uid)
           .valueChanges()
           .subscribe((value: any) => {
-            if (value){localStorage.setItem('localUserData', JSON.stringify(value));}
+            if (value) {
+              localStorage.setItem('localUserData', JSON.stringify(value));
+            }
           });
-        // alert("This is data user "+JSON.stringify(user));
         this.afs
           .doc(`users/${this.userData.uid}`)
           .valueChanges()
@@ -133,14 +134,18 @@ export class AuthService {
   userFireDataReturn() {
     return this.userFireData;
   }
-  sendResetEmail(email){
-    this.afAuth.sendPasswordResetEmail(email)
-    .then(() => {
-      this.presentToast('Verification email sent to the address '+email,5000);
-    })
-    .catch(error => {
-      this.presentToast(error.message || error,5000);
-    })
+  sendResetEmail(email) {
+    this.afAuth
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        this.presentToast(
+          'Verification email sent to the address ' + email,
+          5000
+        );
+      })
+      .catch((error) => {
+        this.presentToast(error.message || error, 5000);
+      });
   }
   async presentToast(message, duration?) {
     const toast = await this.toastController.create({
@@ -159,43 +164,40 @@ export class AuthService {
           this.presentToast('Sign In successful');
           this.homeDataProvider.showOverlay = false;
           this.homeDataProvider.reloadPage = true;
-          this.router.navigate(['']);
+          if (this.homeDataProvider.redirectURL != '') {
+            this.router.navigate([this.homeDataProvider.redirectURL]);
+            this.homeDataProvider.redirectURL = '';
+          } else {
+            this.homeDataProvider.redirectURL = '';
+            this.router.navigate(['']);
+          }
         });
-        this.homeDataProvider.reloadPage = true;
-        this.router.navigate(['']);
+        if (this.homeDataProvider.redirectURL != '') {
+          this.router.navigate([this.homeDataProvider.redirectURL]);
+          this.homeDataProvider.redirectURL = '';
+        } else {
+          this.homeDataProvider.reloadPage = true;
+          this.homeDataProvider.redirectURL = '';
+          this.router.navigate(['']);
+        }
       })
       .catch((error: any) => {
         this.presentToast('An error occured ' + error.toString(), 5000);
+        this.homeDataProvider.reloadPage = true;
         this.homeDataProvider.showOverlay = false;
-        this.homeDataProvider.data = "error"
+        this.homeDataProvider.data = 'error';
       });
   }
   // Sign up with email/password
-  SignUpWithNumber(number,user, name, dob, referralCode) {
-    let today = new Date();
-    var currentAccess: access = {
-      accessLevel: 'Customer',
-    };
-    localStorage.setItem(
-      'localItem',
-      JSON.stringify({
-        uid: user.uid,
-        email: user.email || '',
-        phoneNumber: user.phone_number || '',
-        displayName: name || '',
-        photoURL: './assets/profileDefault.png',
-        emailVerified: user.emailVerified || '',
-        isAdmin: false,
-        firstLogin: today
-          .toLocaleDateString('en-US', AuthService.dateOptions)
-          .toString(),
-        data: user.data || [],
-        post: 'Customer',
-        presentToday: this.formatPresentToday(true),
-        access: currentAccess,
-      })
-    );
-      this.SetUserData({user:user,displayName:name,phoneNumber:number,dob:dob,referralCode:referralCode});
+  SignUpWithNumber(number, user, name, dob, referralCode) {
+    this.SetUserData({
+      user: user,
+      displayName: name,
+      phoneNumber: number,
+      dob: dob,
+      referralCode: referralCode,
+      type: 'PHONENUMBER',
+    });
   }
   SignUp(
     email: string,
@@ -208,83 +210,26 @@ export class AuthService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then(async (result: any) => {
-        // console.log('Starting email verification');
         this.SendVerificationMail();
         this.presentToast('Completing your registration');
-        // console.log('Download URl', this.downloadURL);
-        // console.log('Starting file upload ');
-        // console.log('Image file',photo);
-        if (photo != undefined) {
-          this.uploadFile(photo, result.user.uid).subscribe((imageUrl) => {
-            // console.log('Completed the imageurl ', imageUrl);
-            this.SetUserData({
-              user: result.user,
-              displayName: name,
-              photo: imageUrl,
-              dob: dob,
-              referralCode: referralCode,
-            });
-            let today = new Date();
-            var currentAccess: access = {
-              accessLevel: 'Customer',
-            };
-            localStorage.setItem(
-              'localItem',
-              JSON.stringify({
-                uid: result.user.uid,
-                email: result.user.email || '',
-                displayName: name || '',
-                photoURL: imageUrl || '',
-                emailVerified: result.user.emailVerified,
-                isAdmin: false,
-                firstLogin: today
-                  .toLocaleDateString('en-US', AuthService.dateOptions)
-                  .toString(),
-                data: result.user.data || [],
-                post: 'Customer',
-                presentToday: this.formatPresentToday(true),
-                access: currentAccess,
-              })
-            );
-            // console.log('Completed the setUser data');
-            this.homeDataProvider.reloadPage = true;
-            this.router.navigate(['']);
-          });
-        } else {
-          let imageUrl = './assets/profileDefault.png';
+        let imageUrl = './assets/profileDefault.png';
           this.SetUserData({
             user: result.user,
             displayName: name,
             photo: imageUrl,
             dob: dob,
             referralCode: referralCode,
+            type: 'EMAIL',
           });
-          let today = new Date();
-          var currentAccess: access = {
-            accessLevel: 'Customer',
-          };
-          localStorage.setItem(
-            'localItem',
-            JSON.stringify({
-              uid: result.user.uid,
-              email: result.user.email || '',
-              displayName: name || '',
-              photoURL: imageUrl || '',
-              emailVerified: result.user.emailVerified,
-              isAdmin: false,
-              firstLogin: today
-                .toLocaleDateString('en-US', AuthService.dateOptions)
-                .toString(),
-              data: result.user.data || [],
-              post: 'Customer',
-              presentToday: this.formatPresentToday(true),
-              access: currentAccess,
-            })
-          );
           // console.log('Completed the setUser data');
-          this.homeDataProvider.reloadPage = true;
-          this.router.navigate(['']);
-        }
+          if (this.homeDataProvider.redirectURL != '') {
+            this.router.navigate([this.homeDataProvider.redirectURL]);
+            this.homeDataProvider.redirectURL = '';
+          } else {
+            this.homeDataProvider.reloadPage = true;
+            this.homeDataProvider.redirectURL = '';
+            this.router.navigate(['']);
+          }
       })
       .catch((error: any) => {
         this.presentToast(error.message);
@@ -321,7 +266,7 @@ export class AuthService {
   get isNumberVerified(): boolean {
     if (this.isJustLoggedIn) {
       const user = JSON.parse(localStorage.getItem('user'));
-      return user.phoneNumber!=undefined ? true : false;
+      return user.phoneNumber != undefined ? true : false;
     } else {
       return false;
     }
@@ -335,16 +280,15 @@ export class AuthService {
     }
   }
   get userId(): string {
-    if (localStorage.getItem('user')){
+    if (localStorage.getItem('user')) {
       let a = JSON.parse(localStorage.getItem('user') || '{}').uid;
       this.afAuth.currentUser.finally().then((value) => {
         a = value;
       });
       return a;
     } else {
-      return "Anonymous"
+      return 'Anonymous';
     }
-    
   }
   get userDob(): Date {
     if (this.isJustLoggedIn) {
@@ -353,22 +297,21 @@ export class AuthService {
     } else {
       return new Date();
     }
-    
   }
   get isLoggedIn(): boolean {
-    if (localStorage.getItem('user')){
+    if (localStorage.getItem('user')) {
       const user = JSON.parse(localStorage.getItem('user') || '{}');
       return user !== null && user.emailVerified !== false ? true : false;
     } else {
-      false
+      false;
     }
   }
   get isJustLoggedIn(): boolean {
-    if (localStorage.getItem('user')){
+    if (localStorage.getItem('user')) {
       const user = JSON.parse(localStorage.getItem('user') || '{}');
       return user !== null && user.email !== undefined ? true : false;
     } else {
-      false
+      false;
     }
   }
   isUserAdmin() {
@@ -383,11 +326,11 @@ export class AuthService {
     // console.log('-Ended-');
   }
   isAdmin(): string {
-    if (localStorage.getItem('localitem')){
+    if (localStorage.getItem('localitem')) {
       const user = JSON.parse(localStorage.getItem('localitem') || '{}');
       return user.post.toString();
     } else {
-      return "Customer"
+      return 'Customer';
     }
   }
   GoogleAuth() {
@@ -396,9 +339,9 @@ export class AuthService {
     provider.addScope('https://www.googleapis.com/auth/user.gender.read');
     return this.AuthLogin(provider);
   }
-  FacebookAuth(){
+  FacebookAuth() {
     let provider = new firebase.auth.FacebookAuthProvider();
-    let data = this.AuthLogin(provider)
+    let data = this.AuthLogin(provider);
     console.log(data);
     return data;
   }
@@ -407,11 +350,11 @@ export class AuthService {
   }
 
   getUserEmail() {
-    if (localStorage.getItem('localUserData')){
+    if (localStorage.getItem('localUserData')) {
       const user = JSON.parse(localStorage.getItem('localUserData') || '{}');
       return user !== null && user.email !== false ? user.email : '';
     } else {
-      return ''
+      return '';
     }
   }
   get windowRef() {
@@ -426,21 +369,21 @@ export class AuthService {
   }
 
   getUserPhoto() {
-    if (this.isJustLoggedIn){
+    if (this.isJustLoggedIn) {
       const user = JSON.parse(localStorage.getItem('localUserData') || '{}');
-      if (user.photoURL){
+      if (user.photoURL) {
         return user.photoURL;
-      } else if (user.photo){
+      } else if (user.photo) {
         return user.photo;
       } else {
-        return ''
+        return '';
       }
     } else {
-      return ''
+      return '';
     }
   }
   getCurrentWishlist() {
-    if (this.isJustLoggedIn){
+    if (this.isJustLoggedIn) {
       return JSON.parse(localStorage.getItem('localUserData') || '{}').wishlist;
     }
   }
@@ -448,107 +391,121 @@ export class AuthService {
   AuthLogin(provider: any) {
     this.homeDataProvider.showOverlay = true;
     console.log('Provider', provider);
-    if (provider.providerId=="google.com"){
+    if (provider.providerId == 'google.com') {
       return this.afAuth
-      .signInWithPopup(provider)
-      .then((result: any) => {
-        console.log("Success",result)
-        fetch(
-          `https://people.googleapis.com/v1/people/${result.additionalUserInfo.profile.id}?personFields=birthdays,genders&access_token=${result.credential.accessToken}`
-        )
-          .then((response) => {
-            response.json().then(async (value) => {
-              if (value.birthdays != undefined) {
-                var date = new Date(
-                  (
-                    value.birthdays[0].date.year +
-                    '-' +
-                    value.birthdays[0].date.month +
-                    '-' +
-                    value.birthdays[0].date.day
-                  ).toString()
-                );
-                await this.afs
-                  .collection('users')
-                  .doc(result.user.uid)
-                  .ref.get()
-                  .then((doc) => {
-                    if (!doc.exists) {
-                      this.SetUserData({
-                        user: result.user,
-                        dob: date,
-                      });
-                    }
-                  });
-                // console.log(date);
+        .signInWithPopup(provider)
+        .then((result: any) => {
+          console.log('Success', result);
+          fetch(
+            `https://people.googleapis.com/v1/people/${result.additionalUserInfo.profile.id}?personFields=birthdays,genders&access_token=${result.credential.accessToken}`
+          )
+            .then((response) => {
+              response.json().then(async (value) => {
+                if (value.birthdays != undefined) {
+                  var date = new Date(
+                    (
+                      value.birthdays[0].date.year +
+                      '-' +
+                      value.birthdays[0].date.month +
+                      '-' +
+                      value.birthdays[0].date.day
+                    ).toString()
+                  );
+                  await this.afs
+                    .collection('users')
+                    .doc(result.user.uid)
+                    .ref.get()
+                    .then((doc) => {
+                      if (!doc.exists) {
+                        this.SetUserData({
+                          user: result.user,
+                          dob: date,
+                          type: 'PROVIDER',
+                        });
+                      }
+                    });
+                  // console.log(date);
+                } else {
+                  this.presentToast(
+                    "Oops we don't know your birthday or your gender."
+                  );
+                  await this.afs
+                    .collection('users')
+                    .doc(result.user.uid)
+                    .ref.get()
+                    .then((doc) => {
+                      if (!doc.exists) {
+                        this.SetUserData({
+                          user: result.user,
+                          type: 'PROVIDER',
+                        });
+                      }
+                    });
+                }
+              });
+              this.presentToast('Welcome to Hello Santa');
+              if (this.homeDataProvider.redirectURL != '') {
+                this.router.navigate([this.homeDataProvider.redirectURL]);
+                this.homeDataProvider.redirectURL = '';
               } else {
-                this.presentToast(
-                  "Oops we don't know your birthday or your gender."
-                );
-                await this.afs
-                  .collection('users')
-                  .doc(result.user.uid)
-                  .ref.get()
-                  .then((doc) => {
-                    if (!doc.exists) {
-                      this.SetUserData({
-                        user: result.user,
-                      });
-                    }
-                  });
+                this.homeDataProvider.reloadPage = true;
+                this.homeDataProvider.redirectURL = '';
+                this.router.navigate(['']);
+              }
+              this.homeDataProvider.showOverlay = false;
+              // console.log('Auth successful');
+            })
+            .catch((error: any) => {
+              this.presentToast(error.message || error);
+              this.homeDataProvider.showOverlay = false;
+            });
+          // console.log(result.user);
+        })
+        .catch((error: any) => {
+          this.presentToast(error.message || error);
+          this.homeDataProvider.showOverlay = false;
+        });
+    } else if (provider.providerId == 'facebook.com') {
+      return this.afAuth
+        .signInWithPopup(provider)
+        .then(async (result: any) => {
+          console.log(result, 'result facebook');
+          this.presentToast(
+            "Oops we don't know your birthday or your gender. You can add them later."
+          );
+          await this.afs
+            .collection('users')
+            .doc(result.additionalUserInfo.profile.id)
+            .ref.get()
+            .then((doc) => {
+              if (!doc.exists) {
+                let data = {
+                  uid: result.additionalUserInfo.profile.id,
+                  displayName: result.additionalUserInfo.profile.name,
+                  photo: result.additionalUserInfo.profile.picture.data.url,
+                  emailVerified: true,
+                  email: result.additionalUserInfo.profile.email,
+                };
+                this.SetUserData({
+                  user: data,
+                  type: 'PROVIDER',
+                });
               }
             });
-            // window.alert("Auhtorisation successful ");
-            this.presentToast('Welcome to Hello Santa');
+          if (this.homeDataProvider.redirectURL != '') {
+            this.router.navigate([this.homeDataProvider.redirectURL]);
+            this.homeDataProvider.redirectURL = '';
+          } else {
             this.homeDataProvider.reloadPage = true;
+            this.homeDataProvider.redirectURL = '';
             this.router.navigate(['']);
-            this.homeDataProvider.showOverlay = false;
-            // console.log('Auth successful');
-          })
-          .catch((error: any) => {
-            this.presentToast(error.message || error);
-            this.homeDataProvider.showOverlay = false;
-          });
-        // console.log(result.user);
-      })
-      .catch((error: any) => {
-        this.presentToast(error.message || error);
-        this.homeDataProvider.showOverlay = false;
-      });
-    } else if (provider.providerId=="facebook.com") {
-      return this.afAuth
-      .signInWithPopup(provider)
-      .then(async (result: any) => {
-        console.log(result,"result facebook")
-        this.presentToast(
-          "Oops we don't know your birthday or your gender. You can add them later."
-        );
-        await this.afs
-          .collection('users')
-          .doc(result.additionalUserInfo.profile.id)
-          .ref.get()
-          .then((doc) => {
-            if (!doc.exists) {
-              let data = {
-                uid:result.additionalUserInfo.profile.id,
-                displayName:result.additionalUserInfo.profile.name,
-                photo:result.additionalUserInfo.profile.picture.data.url,
-                emailVerified:true,
-                email:result.additionalUserInfo.profile.email,
-              }
-              this.SetUserData({
-                user: data,
-              });
-            }
-          });
-        this.homeDataProvider.reloadPage = true;
-        this.router.navigate(['']);
-        this.homeDataProvider.showOverlay = false;
-      })
-      .catch((error: any) => {
-        this.presentToast(error.message || error);
-        this.homeDataProvider.showOverlay = false;
-      });
+          }
+          this.homeDataProvider.showOverlay = false;
+        })
+        .catch((error: any) => {
+          this.presentToast(error.message || error);
+          this.homeDataProvider.showOverlay = false;
+        });
     }
   }
 
@@ -577,34 +534,32 @@ export class AuthService {
       return 'Customer';
     }
   }
-  SetUserData({
+  async SetUserData({
     user,
     displayName,
     photo,
     dob,
     phoneNumber,
     referralCode,
+    type,
   }: NamedParameters) {
     console.log('SetUserData', user);
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${user.uid}`
-    );
-    // // console.log("SetUSerData",user,displayName,photo)
+    //console.log("SetUSerData",user,displayName,photo)
     var currentAccess: access = {
       accessLevel: 'Customer',
     };
     let today = new Date();
-    if (displayName != undefined || photo != undefined) {
+    if (type == 'EMAIL') {
       // console.log('Set data true');
       var userData: User = {
         uid: user.uid,
-        email: user.email || '',
+        email: user.email,
         phoneNumber: phoneNumber || '',
         displayName: user.name || displayName || '',
         photoURL: user.photo || photo || './assets/profileDefault.png',
         emailVerified: user.emailVerified || false,
         isAdmin: false,
-        haveReferred:false,
+        haveReferred: false,
         firstLogin: today
           .toLocaleDateString('en-US', AuthService.dateOptions)
           .toString(),
@@ -623,21 +578,50 @@ export class AuthService {
         totalSalesPoints: user.totalSales || 0,
         wishlist: user.wishlist || [],
       };
-    } else {
-      // console.log('Set data false');
+    } else if (type == 'PHONENUMBER') {
+      // console.log('Set data true');
       var userData: User = {
         uid: user.uid,
         email: user.email || '',
-        displayName: user.displayName || '',
-        photoURL: user.photoURL || './assets/profileDefault.png',
+        phoneNumber: phoneNumber,
+        displayName: user.name || displayName || '',
+        photoURL: user.photo || photo || './assets/profileDefault.png',
         emailVerified: user.emailVerified || false,
         isAdmin: false,
-        haveReferred:false,
+        haveReferred: false,
         firstLogin: today
           .toLocaleDateString('en-US', AuthService.dateOptions)
           .toString(),
         data: user.data || [],
+        access: currentAccess,
+        isReferrer: user.isRefferrer || false,
+        currentOrder: user.currentOrder || [],
+        dob: user.dob || dob || today.toDateString(),
+        friends: user.friends || [],
+        orders: user.orders || [],
+        referred: user.referred || [],
+        referrer: user.refferrer || [],
+        referral: user.referral || {},
+        totalCashback: 51,
+        totalOrders: user.totalOrders || 0,
+        totalSalesPoints: user.totalSales || 0,
+        wishlist: user.wishlist || [],
+      };
+    } else if (type == 'PROVIDER') {
+      // console.log('Set data true');
+      var userData: User = {
+        uid: user.uid,
+        email: user.email,
         phoneNumber: phoneNumber || '',
+        displayName: user.name || displayName || '',
+        photoURL: user.photo || photo || './assets/profileDefault.png',
+        emailVerified: user.emailVerified || false,
+        isAdmin: false,
+        haveReferred: false,
+        firstLogin: today
+          .toLocaleDateString('en-US', AuthService.dateOptions)
+          .toString(),
+        data: user.data || [],
         access: currentAccess,
         isReferrer: user.isRefferrer || false,
         currentOrder: user.currentOrder || [],
@@ -653,10 +637,12 @@ export class AuthService {
         wishlist: user.wishlist || [],
       };
     }
-    console.log("userData",userData);
-    userRef.set(userData, {
-      merge: true,
-    });
+    console.log('userData', userData);
+    localStorage.setItem('localItem', JSON.stringify(userData));
+    await this.afs
+      .collection('users')
+      .doc(user.uid)
+      .set(userData);
     if (referralCode != undefined) {
       this.afs
         .collection('users')
@@ -667,21 +653,23 @@ export class AuthService {
               this.afs
                 .collection('users')
                 .doc(val.uid)
-                .set({
-                  totalCashback: firebase.firestore.FieldValue.increment(10),
-                  haveReferred: true,
-                },{merge:true});
+                .set(
+                  {
+                    totalCashback: firebase.firestore.FieldValue.increment(10),
+                    haveReferred: true,
+                  },
+                  { merge: true }
+                );
             }
           });
         });
     }
     this.presentToast('Welcome &#128512; to Hello Santa');
     this.homeDataProvider.reloadPage = true;
-    this.router.navigate(['']);
+    // this.router.navigate(['']);
   }
 
   SignOut() {
-    // window.alert("Signing Out")
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
       localStorage.removeItem('localUserData');
@@ -697,4 +685,5 @@ interface NamedParameters {
   dob?: Date;
   referralCode?: string;
   phoneNumber?: string;
+  type: 'EMAIL' | 'PROVIDER' | 'PHONENUMBER';
 }

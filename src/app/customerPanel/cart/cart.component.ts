@@ -20,11 +20,8 @@ export class CartComponent implements OnInit {
   cartItems = [];
   checkoutItems = [];
   quantityChanged(event) {
-    // // console.log('event', event);
     this.checkoutItems.forEach((item: any, index: number) => {
-      // // console.log('item', item, event);
       if (item.identifier === event.ref) {
-        // // console.log('item xyz', item);
         this.checkoutItems[index].quantity = event.quantity;
         this.afs
           .collection('users')
@@ -36,20 +33,16 @@ export class CartComponent implements OnInit {
     });
   }
   removecartItem(event) {
-    // // console.log('event', event);
     this.afs
       .collection('users')
       .doc(this.authService.userId)
       .collection('cart')
       .ref.get()
       .then((doc: any) => {
-        // // console.log('undeifned data', doc);
         doc.forEach((item: any) => {
-          // // console.log('doc', item.data());
           if (item.data().identifier === event.ref) {
             item.ref.delete();
             this.authService.presentToast('Item removed from cart');
-            // // console.log('deleting item', item);
           }
         });
       });
@@ -65,7 +58,6 @@ export class CartComponent implements OnInit {
           this.cartItems = [];
           doc.forEach((item: any) => {
             this.checkoutItems.push(item);
-            // // console.log('item', item);
             this.afs
               .collection('products')
               .doc(item.productData)
@@ -76,7 +68,6 @@ export class CartComponent implements OnInit {
                   prod['finalPrice'] = item.price;
                   prod['quantity'] = item.quantity;
                   prod['identifier'] = item.identifier;
-                  // // console.log('item',item.extrasData)
                   let config = [];
                   for (let key of Object.keys(item.extrasData)){
                     let selection=item.extrasData[key];
@@ -92,20 +83,19 @@ export class CartComponent implements OnInit {
                       config.push({ title: 'Faces', value: selection.faces });
                     }
                   }
+                  config = config.sort((a, b) => {
+                    return a.title.localeCompare(b.title);
+                  });
                   prod['config'] = config;
-                  // // console.log('prod', prod);
                   this.cartItems.push(prod);
                 }
               });
           });
-        } else {
-          // // console.log('no user data');
         }
       });
   }
   moveToCheckout() {
     this.dataProvider.showOverlay = true;
-    // // console.log('checkout items', this.checkoutItems);
     this.dataProvider.data = {"type":"cart"}
     this.dataProvider.checkOutdata = this.checkoutItems;
     this.router.navigate(['checkout']);

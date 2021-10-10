@@ -25,7 +25,11 @@ export class HeaderComponent implements OnInit {
     private inventoryService: InventoryService,
     private modalController: ModalController,
     public invoiceService: InvoiceService,
-  ) {}
+  ) {
+    if (this.dataProvider.reloadPage){
+      this.ngOnInit();
+    }
+  }
   cartItems = [];
   categories;
   coins: number = 0;
@@ -53,19 +57,20 @@ export class HeaderComponent implements OnInit {
               .collection('products')
               .doc(item.productData)
               .ref.get()
-              .then((doc: any) => {
-                if (doc.exists) {
-                  doc = doc.data();
-                  doc['finalPrice']=item.price;
-                  doc['quantity']=item.quantity;
+              .then((productDoc: any) => {
+                if (productDoc.exists) {
+                  productDoc = productDoc.data();
+                  productDoc['finalPrice']=item.price;
+                  productDoc['quantity']=item.quantity;
+                  productDoc['sku']=item.sku;
                   var found = false;
                   this.cartItems.forEach((cartItem: any) => {
-                    if (cartItem.productId == doc.productId) {
+                    if (cartItem.sku == item.sku) {
                       found = true;
                     }
                   });
                   if (!found) {
-                    this.cartItems.push(doc);
+                    this.cartItems.push(productDoc);
                   }
                 }
               });

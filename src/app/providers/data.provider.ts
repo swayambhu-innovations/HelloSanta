@@ -11,6 +11,7 @@ export class DataProvider {
     public checkOutdata:any;
     public shippingData:any;
     public filter:any;
+    public redirectURL:string = "";
     public logs:any= [];
     public constructor() { }
 }

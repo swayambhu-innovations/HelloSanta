@@ -9,7 +9,17 @@ import { DataProvider } from 'src/app/providers/data.provider';
 })
 export class HomeComponent implements OnInit {
   screenwidth = window.innerWidth;
-  constructor(public afs: AngularFirestore,private dataProvider: DataProvider) {}
+  constructor(
+    public afs: AngularFirestore,
+    private dataProvider: DataProvider
+  ) {
+    if (this.dataProvider.reloadPage) {
+      this.dataProvider.reloadPage = false;
+      alert('Reloading Page')
+      window.location.reload();
+      this.ngOnInit();
+    }
+  }
   allHandmadeProds = [];
   allDigitalProds = [];
   allRecommendedProds = [];
@@ -36,10 +46,6 @@ export class HomeComponent implements OnInit {
     return array;
   }
   ngOnInit() {
-    if (this.dataProvider.reloadPage){
-      this.dataProvider.reloadPage = false;
-      window.location.reload();
-    }
     this.afs
       .collection('products')
       .valueChanges()
