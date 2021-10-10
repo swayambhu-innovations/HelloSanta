@@ -19,8 +19,10 @@ export class LoginGuard implements CanActivate {
         return false
       }
       return true;
-    }
-    this.dataProvider.redirectURL = window.location.pathname;
+    } 
+    this.dataProvider.redirectURL = window.location.pathname+window.location.search;
+    console.log('login guard',this.dataProvider.redirectURL);
+    alert('REDIRECT URL FOUND'+this.dataProvider.redirectURL);
     this.router.navigate(['/login'])
     return false;
   }

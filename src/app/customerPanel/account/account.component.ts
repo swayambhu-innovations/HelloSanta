@@ -58,7 +58,7 @@ export class AccountComponent implements OnInit {
       this.dob=(new Date(value.dob)).toDateString()  == "Invalid Date" ? value.dob.toDate().toDateString()  : (new Date(value.dob)).toDateString();
       // console.log(this.dob,value.dob)
       this.emailVerified=value.emailVerified;
-      this.gender=value.gender;
+      this.gender=value.gender || 'N/A';
       if (value.isReferrer){
         this.isReferrer=value.referralCode;
       }

@@ -198,7 +198,19 @@ export class AuthLoginComponent implements OnInit {
           (this.signUpData['user'] = result.user),
           this.afs.collection('users').doc(result.user.uid).ref.get().then((doc:any) => {
             if (doc.exists){
-              this.router.navigate(['']);
+              if (this.dataProvider.redirectURL!=""){
+                alert('Redirect url found '+this.dataProvider.redirectURL);
+                var url = this.dataProvider.redirectURL.split('?')
+                if (url.length>1){
+                  let params = this.dataProvider.getUrlParameter(url[1])
+                  this.router.navigate([url[0]],{queryParams:params})
+                } else {
+                  this.router.navigate([url[0]])
+                }
+                this.dataProvider.redirectURL = "";
+              } else {
+                this.router.navigate(['']);
+              }
               this.authService.presentToast('Sign In successful');
               this.dataProvider.showOverlay = false;
             } else {

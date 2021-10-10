@@ -165,19 +165,28 @@ export class AuthService {
           this.homeDataProvider.showOverlay = false;
           this.homeDataProvider.reloadPage = true;
           if (this.homeDataProvider.redirectURL != '') {
-            this.router.navigate([this.homeDataProvider.redirectURL]);
+            var url = this.homeDataProvider.redirectURL.split('?');
+            if (url.length > 1) {
+              let params = this.homeDataProvider.getUrlParameter(url[1]);
+              this.router.navigate([url[0]], { queryParams: params });
+            } else {
+              this.router.navigate([url[0]]);
+            }
             this.homeDataProvider.redirectURL = '';
           } else {
-            this.homeDataProvider.redirectURL = '';
             this.router.navigate(['']);
           }
         });
         if (this.homeDataProvider.redirectURL != '') {
-          this.router.navigate([this.homeDataProvider.redirectURL]);
+          var url = this.homeDataProvider.redirectURL.split('?');
+          if (url.length > 1) {
+            let params = this.homeDataProvider.getUrlParameter(url[1]);
+            this.router.navigate([url[0]], { queryParams: params });
+          } else {
+            this.router.navigate([url[0]]);
+          }
           this.homeDataProvider.redirectURL = '';
         } else {
-          this.homeDataProvider.reloadPage = true;
-          this.homeDataProvider.redirectURL = '';
           this.router.navigate(['']);
         }
       })
@@ -213,23 +222,27 @@ export class AuthService {
         this.SendVerificationMail();
         this.presentToast('Completing your registration');
         let imageUrl = './assets/profileDefault.png';
-          this.SetUserData({
-            user: result.user,
-            displayName: name,
-            photo: imageUrl,
-            dob: dob,
-            referralCode: referralCode,
-            type: 'EMAIL',
-          });
-          // console.log('Completed the setUser data');
-          if (this.homeDataProvider.redirectURL != '') {
-            this.router.navigate([this.homeDataProvider.redirectURL]);
-            this.homeDataProvider.redirectURL = '';
+        this.SetUserData({
+          user: result.user,
+          displayName: name,
+          photo: imageUrl,
+          dob: dob,
+          referralCode: referralCode,
+          type: 'EMAIL',
+        });
+        // console.log('Completed the setUser data');
+        if (this.homeDataProvider.redirectURL != '') {
+          var url = this.homeDataProvider.redirectURL.split('?');
+          if (url.length > 1) {
+            let params = this.homeDataProvider.getUrlParameter(url[1]);
+            this.router.navigate([url[0]], { queryParams: params });
           } else {
-            this.homeDataProvider.reloadPage = true;
-            this.homeDataProvider.redirectURL = '';
-            this.router.navigate(['']);
+            this.router.navigate([url[0]]);
           }
+          this.homeDataProvider.redirectURL = '';
+        } else {
+          this.router.navigate(['']);
+        }
       })
       .catch((error: any) => {
         this.presentToast(error.message);
@@ -445,11 +458,15 @@ export class AuthService {
               });
               this.presentToast('Welcome to Hello Santa');
               if (this.homeDataProvider.redirectURL != '') {
-                this.router.navigate([this.homeDataProvider.redirectURL]);
+                var url = this.homeDataProvider.redirectURL.split('?');
+                if (url.length > 1) {
+                  let params = this.homeDataProvider.getUrlParameter(url[1]);
+                  this.router.navigate([url[0]], { queryParams: params });
+                } else {
+                  this.router.navigate([url[0]]);
+                }
                 this.homeDataProvider.redirectURL = '';
               } else {
-                this.homeDataProvider.reloadPage = true;
-                this.homeDataProvider.redirectURL = '';
                 this.router.navigate(['']);
               }
               this.homeDataProvider.showOverlay = false;
@@ -493,11 +510,15 @@ export class AuthService {
               }
             });
           if (this.homeDataProvider.redirectURL != '') {
-            this.router.navigate([this.homeDataProvider.redirectURL]);
+            var url = this.homeDataProvider.redirectURL.split('?');
+            if (url.length > 1) {
+              let params = this.homeDataProvider.getUrlParameter(url[1]);
+              this.router.navigate([url[0]], { queryParams: params });
+            } else {
+              this.router.navigate([url[0]]);
+            }
             this.homeDataProvider.redirectURL = '';
           } else {
-            this.homeDataProvider.reloadPage = true;
-            this.homeDataProvider.redirectURL = '';
             this.router.navigate(['']);
           }
           this.homeDataProvider.showOverlay = false;
@@ -639,10 +660,7 @@ export class AuthService {
     }
     console.log('userData', userData);
     localStorage.setItem('localItem', JSON.stringify(userData));
-    await this.afs
-      .collection('users')
-      .doc(user.uid)
-      .set(userData);
+    await this.afs.collection('users').doc(user.uid).set(userData);
     if (referralCode != undefined) {
       this.afs
         .collection('users')

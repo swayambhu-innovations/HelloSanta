@@ -32,7 +32,6 @@ export class ShopComponent implements OnInit {
   ) {
   }
   async presentFilter() {
-    console.log(this.modalFilterSelectedCategory);
     const modal = await this.modalController.create({
       component: FilterModalComponent,
       componentProps: {
@@ -42,48 +41,45 @@ export class ShopComponent implements OnInit {
       },
     });
     modal.onDidDismiss().then((data: any) => {
-      console.log(data.data);
       this.modalFilterSelectedCategory = data.data.category.category;
       this.modalFilterSelectedSubcategory = data.data.category.subcategory;
       this.modalFilterPrice = data.data.prices;
       this.allDigitalProds = [];
       data.data.category.subcategory.forEach((item) => {
         this.copyArray.forEach((item2) => {
-          if (item2.productSubcategory.includes(item.detail.value)) {
+          if (item2.productSubcategory.includes(item.detail.value) && this.preExist(item2.productId) == false) {
             this.allDigitalProds.push(item2);
+            console.log("Adding an item",item2,this.preExist(item2.productId));
           }
         });
       });
       data.data.category.category.forEach((item) => {
         this.copyArray.forEach((item2) => {
-          if (item2.productCategory.includes(item.detail.value)) {
+          if (item2.productCategory.includes(item.detail.value) && this.preExist(item2.productId) == false) {
             this.allDigitalProds.push(item2);
+            console.log("Adding an item",item2,this.preExist(item2.productId));
           }
         });
       });
       
       var categorized = JSON.parse(JSON.stringify(this.allDigitalProds));
-      console.log('Length on prices',data.data.prices.length)
       if (data.data.prices.length > 0) {
         data.data.prices.forEach((item) => {
           this.copyArray.forEach((item2) => {
             if (item.detail.value == '500-1000') {
-              if (item2.productPrice <= 1000 && item2.productPrice >= 500) {
+              if (item2.productPrice <= 1000 && item2.productPrice >= 500 && this.preExist(item2.productId) == false) {
                 this.allDigitalProds.push(item2);
               }
-              console.log(
-                item2.productPrice <= 1000 && item2.productPrice >= 500
-              );
             } else if (item.detail.value == '1000-5000') {
-              if (item2.productPrice < 5000 && item2.productPrice > 1000) {
+              if (item2.productPrice < 5000 && item2.productPrice > 1000 && this.preExist(item2.productId) == false) {
                 this.allDigitalProds.push(item2);
               }
             } else if (item.detail.value == '5000-10000') {
-              if (item2.productPrice < 10000 && item2.productPrice > 5000) {
+              if (item2.productPrice < 10000 && item2.productPrice > 5000 && this.preExist(item2.productId) == false) {
                 this.allDigitalProds.push(item2);
               }
             } else if (item.detail.value == 'Above10000') {
-              if (item2.productPrice > 10000) {
+              if (item2.productPrice > 10000 && this.preExist(item2.productId) == false) {
                 this.allDigitalProds.push(item2);
               }
             }
@@ -102,6 +98,15 @@ export class ShopComponent implements OnInit {
     });
     return await modal.present();
   }
+  preExist(productID){
+    let result = false;
+      this.allDigitalProds.forEach((item)=>{
+        if (item.productId == productID){
+          result = true;
+        }
+      })
+      return result;
+  }
   async presentsort() {
     const modal = await this.modalController.create({
       component: SortModalComponent,
@@ -110,19 +115,15 @@ export class ShopComponent implements OnInit {
       },
     });
     modal.onDidDismiss().then((data: any) => {
-      console.log(data.data);
       if (data.data.sortMethod.detail.value == 'LH') {
-        console.log('Low TO High')
         this.allDigitalProds.sort((a, b) => {
           return a.productPrice - b.productPrice;
         });
       } else if (data.data.sortMethod.detail.value == 'HL') {
-        console.log('High TO Low')
         this.allDigitalProds.sort((a, b) => {
           return b.productPrice - a.productPrice;
         });
       }
-      console.log(this.allDigitalProds);
     });
     return await modal.present();
   }

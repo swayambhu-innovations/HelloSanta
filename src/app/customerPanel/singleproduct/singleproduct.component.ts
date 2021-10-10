@@ -71,32 +71,34 @@ export class SingleproductComponent implements OnInit {
     return randomList;
   }
   buyNow() {
-    if (this.authService.isJustLoggedIn){
-      this.analytics.logEvent('buyNow', {
-        productId: this.productId,
-        productName: this.productData.productName,
-      });
-      if (
-        Object.keys(this.extrasData).length == this.productData.extraData.length
-      ) {
-        this.dataProvider.showOverlay = true;
-        // alert('Add to cart product price' + this.productPrice.toString());
-        this.dataProvider.data = {"type":"buynow"}
-        this.dataProvider.checkOutdata = [
-          {
-            productData: this.productData.productId,
-            extrasData: this.extrasData,
-            price: this.productPrice,
-            quantity: this.quantity,
-          },
-        ];
-        this.router.navigate(['checkout']);
-      } else {
-        this.authService.presentToast('Please select all the extras options.');
-      }
+    // if (this.authService.isJustLoggedIn){
+      
+    // } else {
+    //   this.dataProvider.redirectURL = window.location.pathname+window.location.search;
+    //   this.authService.presentToast('Please login to continue.');
+    //   this.router.navigate(['login']);
+    // }
+    this.analytics.logEvent('buyNow', {
+      productId: this.productId,
+      productName: this.productData.productName,
+    });
+    if (
+      Object.keys(this.extrasData).length == this.productData.extraData.length
+    ) {
+      this.dataProvider.showOverlay = true;
+      // alert('Add to cart product price' + this.productPrice.toString());
+      this.dataProvider.data = {"type":"buynow"}
+      this.dataProvider.checkOutdata = [
+        {
+          productData: this.productData.productId,
+          extrasData: this.extrasData,
+          price: this.productPrice,
+          quantity: this.quantity,
+        },
+      ];
+      this.router.navigate(['checkout']);
     } else {
-      this.authService.presentToast('Please login to continue.');
-      this.router.navigate(['login']);
+      this.authService.presentToast('Please select all the extras options.');
     }
   }
   makeid(length) {
