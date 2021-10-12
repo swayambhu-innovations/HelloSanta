@@ -53,12 +53,12 @@ export class EditProductComponent implements OnInit {
   productDescription: FormControl = new FormControl('', [
     Validators.required,
     Validators.minLength(200),
-    Validators.maxLength(1000),
+    Validators.maxLength(4000),
   ]);
   shortDescription: FormControl = new FormControl('', [
     Validators.required,
     Validators.minLength(30),
-    Validators.maxLength(200),
+    Validators.maxLength(400),
   ]);
   seoDescription: FormControl = new FormControl('', [
     Validators.required,
