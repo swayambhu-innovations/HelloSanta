@@ -6,7 +6,7 @@
     </div>
     <div>
       <button (click)="showOfferModal()">Create Offer</button>
-      <button (click)="manageOffers=!manageOffers">Manage Offers</button>
+      <button (click)="toggleManage()">{{manageOffers ? 'Hide Delete Buttons' : 'Show Delete Buttons'}}</button>
     </div>
   </div>
   <ion-row>
@@ -34,6 +34,9 @@
             </td>
             <td>
               <ion-label><ion-label *ngIf="offer.type=='flat'">&#8377;</ion-label>{{offer.cost}}<ion-label *ngIf="offer.type=='percent'">%</ion-label></ion-label>
+              <button *ngIf="manageOffers" (click)="deleteOffer(offer.offerId,offer.name)">
+                <ion-icon color="danger" name="trash"></ion-icon>
+              </button>
             </td>
           </tr>
         </tbody>

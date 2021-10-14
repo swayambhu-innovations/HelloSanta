@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 @Injectable()
 export class DataProvider {
     public data: any;
@@ -22,5 +23,25 @@ export class DataProvider {
         }
         return data;
     }
-    public constructor() { }
+    async presentContinueAlert(msg) {
+        const alert = await this.alertController.create({
+          header: 'Alert',
+          subHeader: 'Are you sure to continue.',
+          message:msg,
+          buttons: [
+            {
+              text: 'Cancel',
+              role: 'cancel',
+            },
+            {
+              text: 'Continue',
+              role: 'continue',
+            },
+          ],
+        });
+        await alert.present();
+        const { role } = await alert.onDidDismiss();
+        return role;
+      }
+    public constructor(public alertController: AlertController) { }
 }

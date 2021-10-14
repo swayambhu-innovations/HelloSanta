@@ -5,6 +5,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
 import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
@@ -13,7 +14,7 @@ import { InventoryService } from 'src/app/services/inventory.service';
   styleUrls: ['./add-offer.component.scss'],
 })
 export class AddOfferComponent implements OnInit {
-  constructor(private formbuilder: FormBuilder,public inventoryService: InventoryService) {
+  constructor(private formbuilder: FormBuilder,public inventoryService: InventoryService,private modalController: ModalController) {
     this.form = this.formbuilder.group({
       offerName:this.offerName,
       offerType:this.offerType,
@@ -21,6 +22,7 @@ export class AddOfferComponent implements OnInit {
       offerCode:this.offerCode,
       minimumPrice:this.minimumPrice,
       minimumProducts:this.minimumProducts,
+      maximumDiscount:this.maximumDiscount,
     });
   }
   form: FormGroup;
@@ -34,6 +36,7 @@ export class AddOfferComponent implements OnInit {
   offerCode: FormControl = new FormControl('', [Validators.required,Validators.pattern('[a-zA-Z0-9]*')]);
   minimumPrice: FormControl = new FormControl('', [Validators.required]);
   minimumProducts: FormControl = new FormControl('', [Validators.required])
+  maximumDiscount: FormControl = new FormControl('', [Validators.required]);
   publishOffer(){
     let data ={
       name: this.form.get('offerName')!.value,
@@ -42,10 +45,12 @@ export class AddOfferComponent implements OnInit {
       code: this.form.get('offerCode')!.value,
       minimumPrice: this.form.get('minimumPrice')!.value,
       minimumProducts: this.form.get('minimumProducts')!.value,
+      maximumDiscount: this.form.get('maximumDiscount')!.value,
     }
     // console.log("Triggered")
     this.inventoryService.addOffer(data);
     // console.log("Confirmed")
+    this.modalController.dismiss();
   }
   ngOnInit() {}
 }

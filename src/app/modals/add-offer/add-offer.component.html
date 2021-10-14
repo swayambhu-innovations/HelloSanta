@@ -27,7 +27,7 @@
         </ion-item>
         <ion-item>
           <ion-label>Offer Cost</ion-label>
-          <ion-input type="number" placeholder="Offer Cost" required formControlName="offerCost"></ion-input>
+          <ion-input type="number" placeholder="Offer Cost INR / %" required formControlName="offerCost"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Offer Code</ion-label>
@@ -40,6 +40,14 @@
         <ion-item>
           <ion-label>Minimum Products</ion-label>
           <ion-input type="number" placeholder="Minimum Products" required formControlName="minimumProducts"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="offerType.value == 'flat'">
+          <ion-label>Maximum Discount</ion-label>
+          <ion-input type="number" [value]="offerCost.value" placeholder="Maximum Discount" required formControlName="maximumDiscount"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="offerType.value == 'percent'">
+          <ion-label>Maximum Discount</ion-label>
+          <ion-input type="number" [value]="20*offerCost.value" placeholder="Maximum Discount" required formControlName="maximumDiscount"></ion-input>
         </ion-item>
       </ion-list>
       <ion-button expand="full" fill="solid" shape="solid" type="submit">
