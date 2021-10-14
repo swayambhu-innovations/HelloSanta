@@ -490,7 +490,7 @@ export class AddProductModalComponent implements OnInit {
       this.permutations = dts;
       this.customisations = [];
       this.addons = JSON.parse(JSON.stringify(data));
-      // console.log('addons', this.addons);
+      console.log('addons', this.addons);
       // this.customisations.push(data);
       // this.customisations.push(relativeData);
       relativeData.forEach((value) => {
@@ -625,6 +625,7 @@ export class AddProductModalComponent implements OnInit {
     // console.log('customisations', this.customisations);
     // console.log('finalData: ', this.finalData);
     // console.log('checkin validity');
+
     if (this.finalData != undefined) {
       if (this.basicProductDetails==undefined){this.basicProductDetails={}}
       this.basicProductDetails['permutations'] = this.finalData;
@@ -635,6 +636,7 @@ export class AddProductModalComponent implements OnInit {
       // console.log(this.basicProductDetails);
       this.authService.presentToast('Product added successfully', 5000);
     }
+    
     this.progressType = 'determinate';
     this.showProgress = false;
   }

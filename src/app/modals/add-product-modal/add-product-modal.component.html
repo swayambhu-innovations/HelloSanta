@@ -276,8 +276,8 @@
             </ion-item>
           </ion-card-content>
         </ion-card>
-        <ion-card *ngFor="let value of addons let i = index" [attr.data-index]="i">
-          <div *ngIf="value=='textSel' || value=='imgSel'">
+        <ion-card *ngFor="let value of addons; let i = index" [attr.data-index]="i">
+          <div *ngIf="value.type=='textSel' || value.type=='imgSel'">
             <div *ngFor="let item of value.values let j = index" [attr.data-index]="j">
               <ion-chip color="primary" mode="ios" outline="true">
                 <ion-label>{{item.title}}</ion-label>
