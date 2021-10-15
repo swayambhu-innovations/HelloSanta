@@ -45,7 +45,6 @@ export class AddProductModalComponent implements OnInit {
   productName: FormControl = new FormControl('', [
     Validators.required,
     Validators.minLength(5),
-    Validators.pattern('[a-zA-Z ]*'),
   ]);
   productDescription: FormControl = new FormControl('', [
     Validators.required,
@@ -572,6 +571,7 @@ export class AddProductModalComponent implements OnInit {
           let data = {
             sectionTitle: this.addons[i].values[j].sectionTitle,
             title: this.addons[i].values[j].title,
+            type: this.addons[i].type,
             price: (
               document.getElementById(
                 'addonPrice' + i.toString() + j.toString()

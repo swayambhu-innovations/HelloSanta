@@ -185,7 +185,7 @@
             <ul class="uk-slider-items uk-animation-fade" uk-slider="autoplay: true" >
               <li *ngFor="let product of allRecommendedProds">
                 <app-product-full-card [img]="product.productImages" [productTitle]="product.productName"
-                  [productDescription]="product.productDescription" [price]="product.productPrice"
+                  [productDescription]="product.shortDescription" [price]="product.productPrice"
                   [category]="product.productCategory" [subcategory]="product.productSubcategory"
                   [productId]="product.productId" class="uk-animation-slide-top">
                 </app-product-full-card>
@@ -197,7 +197,7 @@
             <ul class="uk-slider-items uk-animation-fade" uk-slider="autoplay: true" >
               <li *ngFor="let product of allSantasChoiceProds">
                 <app-product-full-card [img]="product.productImages" [productTitle]="product.productName"
-                  [productDescription]="product.productDescription" [price]="product.productPrice"
+                  [productDescription]="product.shortDescription" [price]="product.productPrice"
                   [category]="product.productCategory" [subcategory]="product.productSubcategory"
                   [productId]="product.productId">
                 </app-product-full-card>
@@ -208,7 +208,7 @@
             <ul class="uk-slider-items uk-animation-fade" uk-slider="autoplay: true" >
               <li *ngFor="let product of allFeaturedProds">
                 <app-product-full-card [img]="product.productImages" [productTitle]="product.productName"
-                  [productDescription]="product.productDescription" [price]="product.productPrice"
+                  [productDescription]="product.shortDescription" [price]="product.productPrice"
                   [category]="product.productCategory" [subcategory]="product.productSubcategory"
                   [productId]="product.productId">
                 </app-product-full-card>

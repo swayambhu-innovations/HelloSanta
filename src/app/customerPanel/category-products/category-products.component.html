@@ -28,8 +28,8 @@
         <br>
         <ion-list class="list">
           <ion-item class="listoptions">
-            <ion-checkbox slot="start" value="500-1000" mode="ios" (ionChange)="addFilter($event,'price')"></ion-checkbox>
-            <ion-label>500-1000</ion-label>
+            <ion-checkbox slot="start" value="100-1000" mode="ios" (ionChange)="addFilter($event,'price')"></ion-checkbox>
+            <ion-label>100-1000</ion-label>
           </ion-item>
           <ion-item class="listoptions">
             <ion-checkbox slot="start" value="1000-5000" mode="ios" (ionChange)="addFilter($event,'price')"></ion-checkbox>
@@ -73,7 +73,7 @@
             [productTitle]="product.productName" [productDescription]="product.seoDescription"
             [price]="product.productPrice" [productId]="product.productId"></app-product-full-card>
           <div *ngIf="allDigitalProds.length==0">
-            <p>Nothing to show</p>
+            <p>Nothing to show. Found {{allDigitalProds.length}} products.</p>
           </div>
         </div>
         <ion-spinner *ngIf="allDigitalProds==undefined" color="primary"></ion-spinner>
