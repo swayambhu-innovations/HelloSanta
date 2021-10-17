@@ -48,15 +48,21 @@ export class SingleproductComponent implements OnInit {
     public popoverController: PopoverController
   ) {
     this.activatedRoute.queryParams.subscribe((params) => {
-      dataProvider.showOverlay= true
+      dataProvider.showOverlay = true;
       this.productId = params['productId'];
       this.ngOnInit();
       window.scrollTo(0, 0);
       document.body.scrollTop = 0;
-      try { document.getElementById('product-details').scrollIntoView()} catch(e) {}
+      try {
+        document.getElementById('product-details').scrollIntoView();
+      } catch (e) {}
     });
   }
-
+  round(n) {
+    let a = parseInt((n/10).toString(), 10) * 10;
+    let b = a + 10;
+    return n - a > b - n ? b : a;
+  }
   setImage(item) {
     this.selectedImage = item;
     (
@@ -71,13 +77,6 @@ export class SingleproductComponent implements OnInit {
     return randomList;
   }
   buyNow() {
-    // if (this.authService.isJustLoggedIn){
-      
-    // } else {
-    //   this.dataProvider.redirectURL = window.location.pathname+window.location.search;
-    //   this.authService.presentToast('Please login to continue.');
-    //   this.router.navigate(['login']);
-    // }
     this.analytics.logEvent('buyNow', {
       productId: this.productId,
       productName: this.productData.productName,
@@ -87,7 +86,7 @@ export class SingleproductComponent implements OnInit {
     ) {
       this.dataProvider.showOverlay = true;
       // alert('Add to cart product price' + this.productPrice.toString());
-      this.dataProvider.data = {"type":"buynow"}
+      this.dataProvider.data = { type: 'buynow' };
       this.dataProvider.checkOutdata = [
         {
           productData: this.productData.productId,
@@ -112,14 +111,14 @@ export class SingleproductComponent implements OnInit {
     return result;
   }
   addToCart() {
-    if (this.authService.isJustLoggedIn){
+    if (this.authService.isJustLoggedIn) {
       this.analytics.logEvent('addToCart');
       if (
         Object.keys(this.extrasData).length == this.productData.extraData.length
       ) {
         let cartItem = {
           productData: this.productData.productId,
-          sku:this.makeid(7).toString(),
+          sku: this.makeid(7).toString(),
           extrasData: this.extrasData,
           price: this.productPrice,
           quantity: this.quantity,
@@ -192,6 +191,7 @@ export class SingleproductComponent implements OnInit {
     }
     let quantity = 1;
     let faceCounts = 0;
+    // console.log('ExtrasData', this.extrasData);
     if (this.productPrice != undefined && this.productPrice != 0) {
       for (let i of Object.keys(this.extrasData)) {
         if (this.extrasData[i].isRelative == false) {
@@ -209,10 +209,19 @@ export class SingleproductComponent implements OnInit {
       }
       let facesExtraPrices = 0;
       if (faceCounts > 1) {
-        facesExtraPrices = (+this.productPrice / 100) * (75 * faceCounts);
+        // console.log(
+        //   'faceCounts',
+        //   this.productPrice,
+        //   +this.productPrice / 100,
+        //   70 * (faceCounts - 1),
+        //   faceCounts
+        // );
+        facesExtraPrices = (+this.productPrice / 100) * (70 * (faceCounts - 1));
+        // console.log('facesExtraPrices', facesExtraPrices);
       }
       this.quantity = quantity;
-      this.productPrice = (+this.productPrice + facesExtraPrices);
+      // console.log('Product Price', +this.productPrice + facesExtraPrices);
+      this.productPrice = this.round(+this.productPrice + facesExtraPrices);
       // let gstPrice = ((quantifiedPrice/100)*18);
       // let platformPrice = ((quantifiedPrice+gstPrice)/100)*3;
     } else {
@@ -280,20 +289,20 @@ export class SingleproductComponent implements OnInit {
     // console.log('onDidDismiss resolved with role', role);
   }
   ngOnInit() {
-    if (this.authService.isJustLoggedIn){
+    if (this.authService.isJustLoggedIn) {
       this.inventoryService
-      .getUserOrders()
-      .ref.get()
-      .then((doc: any) => {
-        doc.forEach((ord: any) => {
-          ord = ord.data();
-          ord.products.forEach((prod: any) => {
-            if (prod.productId == this.productId) {
-              this.purchasedProduct = true;
-            }
+        .getUserOrders()
+        .ref.get()
+        .then((doc: any) => {
+          doc.forEach((ord: any) => {
+            ord = ord.data();
+            ord.products.forEach((prod: any) => {
+              if (prod.productId == this.productId) {
+                this.purchasedProduct = true;
+              }
+            });
           });
         });
-      });
     }
     this.afs
       .collection('products')
@@ -315,7 +324,7 @@ export class SingleproductComponent implements OnInit {
             this.extrasData[d.sectionTitle] = d.values[0];
           }
         }
-        this.dataProvider.showOverlay= false;
+        this.dataProvider.showOverlay = false;
       });
     this.afs
       .collection('products')
