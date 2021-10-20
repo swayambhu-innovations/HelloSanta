@@ -129,7 +129,9 @@ td[class*='monthview-selected']{
     background-color: var(--ion-color-primary) !important;
 }
 
-
+._orientationRight_ecee.wrap_61a7{
+    margin-bottom: 70px !important;
+}
 @media screen and (max-width: 500px){
     .addProductModal .modal-wrapper{
         --width:100vw;

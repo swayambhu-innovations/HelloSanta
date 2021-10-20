@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, OnChanges, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ModalController } from '@ionic/angular';
-import { InvoiceDetailComponent } from 'src/app/modals/invoice-detail/invoice-detail.component';
 import {
   FormBuilder,
   FormControl,
@@ -14,11 +13,11 @@ import { AuthService } from 'src/app/services/auth.service';
 import { InventoryService } from 'src/app/services/inventory.service';
 import { PaymentService } from 'src/app/services/payment.service';
 import { environment } from 'src/environments/environment';
-import firebase from 'firebase/app';
 import { AngularFireAnalytics } from '@angular/fire/analytics';
 import { InvoiceService } from 'src/app/services/invoice.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { last, switchMap } from 'rxjs/operators';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -78,7 +77,8 @@ export class CheckoutComponent implements OnInit {
     private storage: AngularFireStorage,
     private analytics: AngularFireAnalytics,
     public modalController: ModalController,
-    private invoiceService: InvoiceService
+    private invoiceService: InvoiceService,
+    private location: Location
   ) {
     this.form = this.formbuilder.group({
       firstName: this.firstName,
@@ -137,7 +137,7 @@ export class CheckoutComponent implements OnInit {
   santaCredit: FormControl = new FormControl(false, [Validators.required]);
   message: FormControl = new FormControl('', [
     Validators.minLength(1),
-    Validators.maxLength(100),
+    Validators.maxLength(2000),
   ]);
   orders = [];
   objectKeys = Object.keys;
@@ -156,6 +156,16 @@ export class CheckoutComponent implements OnInit {
   totalTax: number = 0;
   subTotal: number = 0;
   couponData: any = { available: false };
+  maxiumumDiscountReached: boolean = false;
+  log(data) {
+    console.log(data);
+  }
+  couponCodeChanged(event) {
+    if (event.checked == false) {
+      this.couponData.available = false;
+      this.couponData = {};
+    }
+  }
   searchCoupon(event) {
     this.searchingCoupon = true;
     // console.log("coupon",event);
@@ -170,7 +180,9 @@ export class CheckoutComponent implements OnInit {
               available: true,
               code: coupon.code,
               discount: coupon.cost,
+              type: coupon.type,
               title: coupon.name,
+              maximumDiscount: coupon.maximumDiscount,
             };
             this.discount = coupon.cost;
             // console.log("Coupon Found")
@@ -187,9 +199,7 @@ export class CheckoutComponent implements OnInit {
     this.searchingCoupon = false;
   }
   addImage(event) {
-    // console.log('Event recieved by the addImage(event) eventHandler function', event,this.imageRequired);
     let allValid = true;
-    // // console.log('imageRequiredLEngth', this.imageRequired,event,this.dataProvider.data);
     this.imageRequired.forEach((data, index) => {
       if (data.ref == event.refData) {
         this.imageRequired[index].imageReference = event.image;
@@ -199,22 +209,8 @@ export class CheckoutComponent implements OnInit {
       }
     });
     this.imagesValid = allValid;
-    // // console.log('imageRequired', this.imageRequired);
   }
   presentInvoice() {
-    // let detail = {
-    //   name:shippingDetail.billing_customer_name,
-    //   address: shippingDetail.billing_address,
-    //   city: shippingDetail.billing_city,
-    //   state: shippingDetail.billing_state,
-    //   country: shippingDetail.billing_country,
-    //   pincode: shippingDetail.billing_pincode,
-    //   mobile: shippingDetail.billing_phone,
-    //   email: shippingDetail.billing_email,
-    //   discount:{available:true,code:'offerCode',price:120},
-    //   grandTotal:this.grandTotal,
-    //   taxCharges:(this.grandTotal/100)*15,
-    // }
     let detail = {
       name: this.firstName.value + ' ' + this.lastName.value,
       address: this.addressLine1.value,
@@ -233,21 +229,35 @@ export class CheckoutComponent implements OnInit {
   }
 
   get grandTotal(): number {
-    var total = 0;
-    this.totalTax = 0;
-    this.subTotal = 0;
-    this.dataCopy.forEach((order) => {
-      total += order.price * order.quantity;
-      this.totalTax += (total / 100) * 15;
-    });
-    return total - this.offerFlat - this.discount;
-  }
-  get grandHeight(): number {
-    var total = 0;
-    this.orders.forEach((order) => {
-      total += order.finalPrice;
-    });
-    return total;
+    if (this.dataCopy) {
+      if (this.dataCopy.length > 0) {
+        var total = 0;
+        var offer = 0;
+        this.totalTax = 0;
+        this.subTotal = 0;
+        this.dataCopy.forEach((order) => {
+          total += order.price * order.quantity;
+          this.totalTax += (total / 100) * 15;
+        });
+        if (this.couponData.available) {
+          if (this.couponData.type == 'percent') {
+            offer = ((total / 100) * this.couponData.discount);
+          } else {
+            offer = (this.couponData.discount);
+          }
+          if (offer > this.couponData.maximumDiscount) {
+            this.maxiumumDiscountReached = true;
+            offer = this.couponData.maximumDiscount;
+          }
+        }
+        offer = offer + this.offerFlat;
+        return total-offer;
+      } else {
+        return 0;
+      }
+    } else {
+      return 0;
+    }
   }
   setCashback(event) {
     if (event.detail.checked) {
@@ -267,83 +277,91 @@ export class CheckoutComponent implements OnInit {
     return result;
   }
   ngOnInit() {
-    this.dataProvider.showOverlay = false;
-    this.inventoryService
-      .getUserInfo()
-      .ref.get()
-      .then((user: any) => {
-        this.santaCoins = user.data().totalCashback;
-      });
-    if (this.dataProvider.checkOutdata) {
-      this.dataCopy = this.dataProvider.checkOutdata;
-      this.dataProvider.checkOutdata.forEach((prod) => {
-        // // console.log('prod from checkoutdata', prod);
-        var docRef = this.afs.collection('products').ref.doc(prod.productData);
-        docRef.get().then((data) => {
-          if (data.exists) {
-            // // console.log('Document data:', data);
-            let dat: any = data.data();
-            if (dat.imageReference) {
-              this.imagesValid = false;
-              // // console.log('identifier >>>',prod.identifier);
-              this.imageRequired.push({
-                productId: dat.productId,
-                ref: prod.identifier,
-                imageReference: undefined,
-              });
-              // // console.log('imageRequired', this.imageRequired,this.imageRequired.length);
-            }
-            this.orderItems.push({
-              name: dat.productName,
-              sku: prod.productData + this.makeid(7).toString(),
-              units: 1,
-              selling_price: prod.price - this.offerFlat,
-            });
-            // // console.log('identifier >>>',prod.identifier);
-            dat['finalPrice'] = prod.price;
-            dat['selections'] = prod.extrasData;
-            dat['quantity'] = prod.quantity;
-            dat['ref'] = prod.identifier;
-            dat['cartId'] = prod.cartId;
-            let config = [];
-            for (let key of Object.keys(dat.selections)) {
-              let selection = dat.selections[key];
-              if (selection.type == 'textSel' || selection.type == 'imgSel') {
-                config.push({
-                  title: selection.sectionTitle,
-                  value: selection.title,
-                });
-              } else if (selection.type == 'faceCount') {
-                config.push({ title: 'Faces', value: selection.faces });
-              }
-            }
-            dat['config'] = config;
-            // // console.log('dat data dt',dat);
-            this.orders.push(dat);
-          } else {
-            // // console.log('No such document!');
-          }
-        });
-      });
-      this.WindowRef = this.paymentService.WindowRef;
-      this.afs
-        .collection('offers')
-        .ref.get()
-        .then((offers) => {
-          offers.forEach((offer) => {
-            this.coupons.push(offer.data());
-          });
-          // console.log('coupons', this.coupons);
-        });
-    } else {
-      this.authService.presentToast('Oh Ohh! Checkout expired &#x1F605;');
+    if (this.dataProvider.checkOutdata <= 0) {
       this.router.navigate(['']);
+    } else {
+      this.dataProvider.showOverlay = false;
+      this.inventoryService
+        .getUserInfo()
+        .ref.get()
+        .then((user: any) => {
+          this.santaCoins = user.data().totalCashback;
+        });
+      if (this.dataProvider.checkOutdata) {
+        this.dataCopy = this.dataProvider.checkOutdata;
+        if (this.dataCopy != undefined && this.dataCopy != []) {
+          this.dataProvider.checkOutdata.forEach((prod) => {
+            var docRef = this.afs
+              .collection('products')
+              .ref.doc(prod.productData);
+            docRef.get().then((data) => {
+              if (data.exists) {
+                let dat: any = data.data();
+                if (dat.imageReference) {
+                  this.imagesValid = false;
+                  this.imageRequired.push({
+                    productId: dat.productId,
+                    ref: prod.identifier,
+                    imageReference: undefined,
+                  });
+                }
+                this.orderItems.push({
+                  name: dat.productName,
+                  sku: prod.productData + this.makeid(7).toString(),
+                  units: 1,
+                  selling_price: prod.price - this.offerFlat,
+                });
+                dat['finalPrice'] = prod.price;
+                dat['selections'] = prod.extrasData;
+                dat['quantity'] = prod.quantity;
+                dat['ref'] = prod.identifier;
+                let config = [];
+                for (let key of Object.keys(dat.selections)) {
+                  let selection = dat.selections[key];
+                  if (
+                    selection.type == 'textSel' ||
+                    selection.type == 'imgSel'
+                  ) {
+                    config.push({
+                      title: selection.sectionTitle,
+                      value: selection.title,
+                    });
+                  } else if (selection.type == 'faceCount') {
+                    config.push({ title: 'Faces', value: selection.faces });
+                  }
+                }
+                dat['config'] = config;
+                this.orders.push(dat);
+              } else {
+                this.authService.presentToast(
+                  'Product not found on our databases. Please retry'
+                );
+                this.router.navigate(['']);
+              }
+            });
+          });
+          this.WindowRef = this.paymentService.WindowRef;
+          this.afs
+            .collection('offers')
+            .ref.get()
+            .then((offers) => {
+              offers.forEach((offer) => {
+                this.coupons.push(offer.data());
+              });
+            });
+        } else {
+          this.authService.presentToast('Something is wrong. Please retry.');
+          this.router.navigate(['']);
+        }
+      } else {
+        this.authService.presentToast('Oh Ohh! Checkout expired &#x1F605;');
+        this.router.navigate(['']);
+      }
     }
   }
   uploadFile(file, userName) {
     const filePath =
       'referenceImage/' + `${userName}/` + userName.toString() + file.name;
-    // console.log('Starting file upload', filePath);
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
     return task.snapshotChanges().pipe(
@@ -352,9 +370,7 @@ export class CheckoutComponent implements OnInit {
     );
   }
   async proceedToPay($event) {
-    // console.log('imagereq',this.imageRequired)
-    // console.log('imageVald',this.imagesValid)
-    if (this.imagesValid) {
+    if (this.imagesValid || this.imageRequired.length == 0) {
       this.dataProvider.showOverlay = true;
       this.processingPayment = true;
       this.payableAmount = this.grandTotal * 100;
@@ -409,7 +425,7 @@ export class CheckoutComponent implements OnInit {
           this.form.get('firstName')!.value.toString() +
           this.form.get('lastName')!.value.toString(),
         email: this.form.get('email')!.value,
-        contact: '+91'+this.form.get('phoneNumber')!.value,
+        contact: '+91' + this.form.get('phoneNumber')!.value,
       },
       theme: {
         color: '#2874f0',
@@ -472,7 +488,7 @@ export class CheckoutComponent implements OnInit {
               };
               this.invoiceService.createInvoice(this.orders, detail);
               console.log('shipping Confirmed Detail', res);
-              if (res.res.statusCode==200){
+              if (res.res.statusCode == 200) {
                 let currentOrder = {
                   shippingDetail: res.body,
                   products: this.orders,
@@ -485,27 +501,19 @@ export class CheckoutComponent implements OnInit {
                 };
                 console.log('currentOrder', currentOrder);
                 this.inventoryService.addUserOrder(currentOrder);
-                let detail = {
-                  name: shippingDetail.billing_customer_name,
-                  address: shippingDetail.billing_address,
-                  city: shippingDetail.billing_city,
-                  state: shippingDetail.billing_state,
-                  country: shippingDetail.billing_country,
-                  pincode: shippingDetail.billing_pincode,
-                  mobile: shippingDetail.billing_phone,
-                  email: shippingDetail.billing_email,
-                  discount: { available: true, code: 'offerCode', price: 120 },
-                  grandTotal: this.grandTotal,
-                  taxCharges: (this.grandTotal / 100) * 15,
-                };
+                this.presentInvoice();
                 this.dataProvider.shippingData =
                   currentOrder.shippingDetail.shipment_id.toString();
-                alert(this.dataProvider.data.type);
-                if (this.dataProvider.data.type=="cart"){
+                if (this.dataProvider.data.type == 'cart') {
                   this.inventoryService.clearCart();
                 }
                 this.authService.presentToast('Order Placed Successfully ');
-                this.router.navigateByUrl('feedback?trackId=' +res.body.shipment_id.toString()+"&orderId="+res.body.order_id);
+                this.router.navigateByUrl(
+                  'feedback?trackId=' +
+                    res.body.shipment_id.toString() +
+                    '&orderId=' +
+                    res.body.order_id
+                );
               } else {
                 console.log('error response', res);
                 this.authService.presentToast(res.body.error.message);

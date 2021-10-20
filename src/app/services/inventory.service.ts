@@ -397,12 +397,15 @@ export class InventoryService {
   }
   completeReferral(referrerUid, referredUid, code) {}
   addUserOrder(data) {
+    console.log("DATA ID",data,data.orderId);
     this.afs
       .collection('users')
       .doc(this.authService.userId)
       .collection('orders')
-      .doc(data.orderId)
-      .set(data);
+      .doc(data.orderId.toString())
+      .set(data)
+      .then(() => {console.log('added')})
+      .catch((error) => {console.error('error occured',error)});
   }
   deleteOrder(orderId){
     this.afs.collection('users').doc(this.authService.userId).collection('orders').doc(orderId).delete()

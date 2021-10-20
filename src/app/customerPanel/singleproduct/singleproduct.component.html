@@ -135,8 +135,8 @@
                 </div>
             </section>
             <section id="product-description">
-                <ion-item *ngIf="authService.isJustLoggedIn"class="title">
-                    <ion-title class="title1">Ratings</ion-title>
+                <ion-item *ngIf="authService.isJustLoggedIn" class="title ratingTitle">
+                    <p class="title1">Ratings</p>
                     <ion-button *ngIf="purchasedProduct" (click)="addComment($event)" size="medium" fill="outline">
                         Add Review
                     </ion-button>

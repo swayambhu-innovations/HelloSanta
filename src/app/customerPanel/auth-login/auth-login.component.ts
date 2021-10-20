@@ -199,7 +199,6 @@ export class AuthLoginComponent implements OnInit {
           this.afs.collection('users').doc(result.user.uid).ref.get().then((doc:any) => {
             if (doc.exists){
               if (this.dataProvider.redirectURL!=""){
-                alert('Redirect url found '+this.dataProvider.redirectURL);
                 var url = this.dataProvider.redirectURL.split('?')
                 if (url.length>1){
                   let params = this.dataProvider.getUrlParameter(url[1])

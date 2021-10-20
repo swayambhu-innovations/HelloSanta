@@ -17,5 +17,5 @@ export const environment = {
     cancelOrderShipment:'https://us-central1-hellosanta-fc366.cloudfunctions.net/cancelOrderShipment',
     sendMail: 'https://us-central1-hellosanta-fc366.cloudfunctions.net/sendMail',
   },
-  RAZORPAY_KEY_ID: 'rzp_test_1GPCwB7UYA1pfl'
+  RAZORPAY_KEY_ID: 'rzp_live_UT3qw06LZGINZD'
 };

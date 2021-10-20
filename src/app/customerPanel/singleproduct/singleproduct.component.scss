@@ -229,7 +229,7 @@ button[disabled]{
   font-family: Poppins;
   text-align: left;
   font-size: 15px;
-  margin:2.5% auto;
+  margin:2.5%;
   padding: 50px;
   background: rgba(255, 255, 255, .7);
   box-shadow: #9081ff3b 10px 20px 30px 0px;
@@ -262,6 +262,9 @@ text-align: center;
 }
 .title1{
     font-size: 20px; text-align: center; margin: auto;color: rgb(0, 0, 0);
+}
+.ratingTitle{
+    width:100%;
 }
 #product-description > img{
     width:500px;

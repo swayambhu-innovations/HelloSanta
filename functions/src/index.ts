@@ -1,8 +1,8 @@
 const functions = require('firebase-functions');
 const Razorpay = require('razorpay');
 const nodemailer = require('nodemailer');
-let key_id = 'rzp_test_1GPCwB7UYA1pfl';
-let key_secret = '3v5jh3ZOsERttf0ZGE1gbmNj';
+let key_id = 'rzp_live_UT3qw06LZGINZD';
+let key_secret = 'Wc8CX4UCfuWetgIMonBqwquh';
 let request = require('request');
 const Axios = require('axios');
 const cors = require('cors')({ origin: true });
@@ -95,7 +95,7 @@ exports.shipOrder = functions.https.onRequest((req: any, res: any) => {
     let shiprocketBody = {
       order_id: compliedRes.order_id,
       order_date: orderDate,
-      pickup_location: 'Primary',
+      pickup_location: 'Temp1',
       company_name: 'Hello Santa',
       billing_customer_name: compliedRes.billing_customer_name,
       billing_last_name: compliedRes.billing_last_name,
@@ -142,6 +142,7 @@ exports.shipOrder = functions.https.onRequest((req: any, res: any) => {
         },
         body: JSON.stringify(shiprocketBody),
       };
+      console.log('shipoptions', shipoptions);
       request(shipoptions, function (error: any, shipResponse: any) {
         if (error) throw new Error(error);
         // console.log(shipResponse.body);

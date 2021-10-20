@@ -89,6 +89,7 @@ export class SingleproductComponent implements OnInit {
       this.dataProvider.data = { type: 'buynow' };
       this.dataProvider.checkOutdata = [
         {
+          identifier:(Math.random().toString().replace('.',''))+this.productId,
           productData: this.productData.productId,
           extrasData: this.extrasData,
           price: this.productPrice,

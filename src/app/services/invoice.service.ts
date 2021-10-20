@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import { UserOptions } from 'jspdf-autotable';
+import { AuthService } from './auth.service';
 interface jsPDFWithPlugin extends jsPDF {
   autoTable: (options: UserOptions) => jsPDF;
 }
@@ -112,12 +113,13 @@ export class InvoiceService {
           body: body,
         });
 
-        this.doc.save('a4.pdf');
+        this.doc.save('Reciept'+shippingDetail.name+(new Date().toLocaleDateString())+'.pdf');
+        this.authService.presentToast('Your reciept is downloaded.')
       })
       .catch((error) => {
         // console.log('Error occured', error);
       });
   }
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 }

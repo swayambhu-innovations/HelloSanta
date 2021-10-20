@@ -33,7 +33,9 @@
                   <td></td>
                   <td></td>
                   <td>Offers & Discount</td>
-                  <td> -{{offerFlat+discount}}</td>
+                  <td *ngIf="couponData.type=='percent' && offerFlat > 0"> -{{offerFlat}} and {{discount}}%</td>
+                  <td *ngIf="couponData.type=='percent' && offerFlat <= 0"> -{{discount}}%</td>
+                  <td *ngIf="couponData.type=='flat'"> -{{offerFlat+discount}}</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -111,15 +113,20 @@
                 </ion-item>
                 <ion-item>
                   <ion-label>Apply Coupon Code</ion-label>
-                  <ion-checkbox #couponCode></ion-checkbox>
+                  <ion-checkbox #couponCode (ionChange)="couponCodeChanged(couponCode)"></ion-checkbox>
                 </ion-item>
                 <ion-item *ngIf="couponCode.checked">
                   <ion-input type="text" placeholder="Coupon Code" (ionChange)="searchCoupon($event)" [debounce]="500"></ion-input>
-                  <ion-label color="success" *ngIf="couponData.available">Applied {{couponData.title}} Offer</ion-label>
                   <ion-spinner name="crescent" *ngIf="searchingCoupon"></ion-spinner>
                 </ion-item>
+                <ion-item *ngIf="couponData.available">
+                  <ion-label color="success">Applied {{couponData.title}} Offer</ion-label>
+                </ion-item>
+                <ion-item *ngIf="maxiumumDiscountReached">
+                  <ion-label color="primary"> Maximum discount applied of {{couponData.maximumDiscount}}</ion-label>
+                </ion-item>
                 <ion-item>
-                  <input type="checkbox" #checkbox>
+                  <ion-checkbox type="checkbox" #checkbox (ionChange)="log(checkbox.checked)"></ion-checkbox>
                   <ion-label>&nbsp;&nbsp;&nbsp;Add a message</ion-label>
                 </ion-item>
                 <ion-item *ngIf="checkbox.checked">
