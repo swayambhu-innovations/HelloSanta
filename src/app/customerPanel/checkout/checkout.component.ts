@@ -172,20 +172,52 @@ export class CheckoutComponent implements OnInit {
     let defined = false;
     this.coupons.forEach((coupon) => {
       // console.log("Checking coupon",event.detail.value.toLowerCase()==coupon.code.toLowerCase())
-      if (event.detail.value.toLowerCase() == coupon.code.toLowerCase()) {
-        if (this.dataProvider.checkOutdata.length >= coupon.minimumProducts) {
-          if (this.grandTotal >= coupon.minimumPrice) {
-            defined = true;
-            this.couponData = {
-              available: true,
-              code: coupon.code,
-              discount: coupon.cost,
-              type: coupon.type,
-              title: coupon.name,
-              maximumDiscount: coupon.maximumDiscount,
-            };
-            this.discount = coupon.cost;
-            // console.log("Coupon Found")
+      console.log(coupon);
+      if (event.detail.value.toLowerCase() == coupon.data.code.toLowerCase()) {
+        if (this.dataProvider.checkOutdata.length >= coupon.data.minimumProducts) {
+          if (this.grandTotal >= coupon.data.minimumPrice) {
+            if (coupon.data.usage == 'single'){
+              if (coupon.data.usageCounter==0){
+                defined = true;
+                this.couponData = {
+                  available: true,
+                  code: coupon.data.code,
+                  discount: coupon.data.cost,
+                  type: coupon.data.type,
+                  title: coupon.data.name,
+                  offerId: coupon.data.offerId,
+                  maximumDiscount: coupon.data.maximumDiscount,
+                };
+                this.discount = coupon.data.cost;
+              }
+            }
+            else if (coupon.data.usage=='infinite'){
+              defined = true;
+              this.couponData = {
+                available: true,
+                code: coupon.data.code,
+                discount: coupon.data.cost,
+                type: coupon.data.type,
+                title: coupon.data.name,
+                offerId: coupon.data.offerId,
+                maximumDiscount: coupon.data.maximumDiscount,
+              };
+              this.discount = coupon.data.cost;
+            } else if (typeof coupon.data.usage === 'number'){
+              if (coupon.data.usageCounter <= coupon.data.usage){
+                defined = true;
+                this.couponData = {
+                  available: true,
+                  code: coupon.data.code,
+                  discount: coupon.data.cost,
+                  type: coupon.data.type,
+                  title: coupon.data.name,
+                  offerId: coupon.data.offerId,
+                  maximumDiscount: coupon.data.maximumDiscount,
+                };
+                this.discount = coupon.data.cost;
+              }
+            }
           }
         }
       }
@@ -346,7 +378,7 @@ export class CheckoutComponent implements OnInit {
             .ref.get()
             .then((offers) => {
               offers.forEach((offer) => {
-                this.coupons.push(offer.data());
+                this.coupons.push({offerID:offer.id,data:offer.data()});
               });
             });
         } else {
@@ -472,6 +504,9 @@ export class CheckoutComponent implements OnInit {
           this.paymentService.shipOrder(shippingDetail).subscribe(
             (res: any) => {
               this.authService.presentToast('Payment Successful &#x1F60A;');
+              if (this.couponData.available){
+                this.inventoryService.increaseOfferUsageCount(this.couponData.offerId);
+              }
               let detail = {
                 name: this.firstName.value + ' ' + this.lastName.value,
                 address: this.addressLine1.value,

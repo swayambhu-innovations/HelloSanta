@@ -51,13 +51,9 @@ export class CustomproductComponent implements OnInit {
     Validators.minLength(5),
     Validators.pattern('[a-zA-Z ]*'),
   ]);
-  productCategoryValue;
-  productCategory:FormControl = new FormControl('painting', [Validators.required,]);
+  productCategory:FormControl = new FormControl('', [Validators.required,]);
   customProductDescription: FormControl = new FormControl('', [Validators.required,]);
   customPrice: FormControl = new FormControl('', [Validators.required,]);
-  setCategoryValue(event){
-    this.productCategory.setValue(event.detail.value);
-  }
   async submitProduct(){
     // console.log("submit product")
     let res = await this.alertsModals.presentContinueAlert();

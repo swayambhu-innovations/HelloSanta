@@ -7,6 +7,8 @@ import {
 import { ModalController, PopoverController } from '@ionic/angular';
 import { EditProductComponent } from 'src/app/modals/edit-product/edit-product.component';
 import { SpecificProductsComponent } from 'src/app/popovers/specific-products/specific-products.component';
+import { AlertsModalService } from 'src/app/services/alerts-modal.service';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -21,7 +23,7 @@ export class ProductComponent implements OnInit {
   @Input() totalSales:string="";
   @Input() id:string="";
   textlength:number=200;
-  constructor(public afs: AngularFirestore,public modalController: ModalController,public popoverController: PopoverController) { }
+  constructor(public afs: AngularFirestore,private authService : AuthService,public modalController: ModalController,public popoverController: PopoverController, public alertsModals: AlertsModalService) { }
   async presentModal() {
     const modal = await this.modalController.create({
       component: EditProductComponent,
@@ -47,10 +49,26 @@ export class ProductComponent implements OnInit {
     // console.log('onDidDismiss resolved with role', role);
   }
   removeProduct(){}
-  deleteItem(){
+  async deleteItem(){
     // console.log("deleting");
-    this.afs.doc(`products/${this.id}`).ref.delete();
-    // console.log("deleted");
+    const role = await this.alertsModals.presentCustomAlert(
+      "Alert","Deleting product",
+      'Are you sure you wan to delete '+this.name + ' product from your databases.',
+      [{
+        text:'Yes, Delete Product',
+        role:'yes'
+      },{
+        text:'Cancel',
+        role:'cancel'
+      }]
+      )
+      console.log("Role",role);
+    if (role=="yes"){
+      this.afs.collection("products").doc(this.id).delete();
+      this.authService.presentToast("Product deleted successfully");
+    }else{
+      this.authService.presentToast("Product not deleted");
+    }
   }
   editItem(){
     this.presentModal()

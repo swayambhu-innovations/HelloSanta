@@ -58,6 +58,9 @@ export class SingleproductComponent implements OnInit {
       } catch (e) {}
     });
   }
+  changed(){
+    console.log('');
+  }
   round(n) {
     let a = parseInt((n/10).toString(), 10) * 10;
     let b = a + 10;
@@ -152,8 +155,6 @@ export class SingleproductComponent implements OnInit {
     return isTrue;
   }
   calculatePrice() {
-    // // console.log("calculatePrice",this.extrasData);
-    // let addonPrice:number = 0;
     this.productPrice = 0;
     for (
       let valIndex = 0;
@@ -166,7 +167,6 @@ export class SingleproductComponent implements OnInit {
       for (let i of Object.keys(this.extrasData)) {
         if (this.extrasData[i].isRelative) {
           relativeCounter++;
-          // // console.log(val,"isPossible")
           if (val.isPossible == true) {
             val.permutations.forEach((perm) => {
               if (this.comparePriceListing(perm, this.extrasData[i])) {
@@ -174,7 +174,6 @@ export class SingleproductComponent implements OnInit {
               }
             });
           } else {
-            // // console.log("not possible", this.productPrice);
             this.productPrice = undefined;
           }
         }
@@ -188,7 +187,6 @@ export class SingleproductComponent implements OnInit {
         vldCounter = 0;
         break;
       }
-      // // console.log("calculatePrice", this.productPrice);
     }
     let quantity = 1;
     let faceCounts = 0;
@@ -226,16 +224,26 @@ export class SingleproductComponent implements OnInit {
       // let gstPrice = ((quantifiedPrice/100)*18);
       // let platformPrice = ((quantifiedPrice+gstPrice)/100)*3;
     } else {
-      this.productPrice = undefined;
-      this.authService.presentToast(
-        'Please select all options then you can select addons'
-      );
+      if (this.productData.permutations.length == 0) {
+        for (let price of Object.keys(this.extrasData)) {
+          if (this.extrasData[price].isRelative) {
+            continue;
+          }
+          console.log('Adding price',this.extrasData[price].price,price)
+          this.productPrice += +this.extrasData[price].price;
+        }
+      }else {
+        this.productPrice = undefined;
+        this.authService.presentToast(
+          'Please select all options then you can select addons'
+        );
+      }
     }
   }
   updateData(event, relative, sectionTitle) {
-    // // console.log(event);
+    // console.log(event,typeof event.detail.value);
     if (typeof event.detail.value == 'object') {
-      // console.log('updater ', event, relative, sectionTitle);
+      console.log('updater ', event, relative, sectionTitle);
       event.detail.value['isRelative'] = relative || false;
       this.extrasData[sectionTitle] = event.detail.value;
       // console.log(this.extrasData);

@@ -320,6 +320,14 @@ export class InventoryService {
       });
     this.authService.presentToast('Offer added');
   }
+  increaseOfferUsageCount(offerId) {
+    const offerRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `offers/${offerId}`
+    );
+    offerRef.update({
+      usageCounter: firebase.firestore.FieldValue.increment(1),
+    });
+  }
   addReferral(offer, uid) {
     this.afs.collection('users').doc(uid).update({});
     this.authService.presentToast('Offer added');

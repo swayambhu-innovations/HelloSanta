@@ -11,19 +11,32 @@
           <ion-input type="text" formControlName="offerName"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-radio-group name="offerType" value="flat" formControlName="offerType">
-            <ion-list-header>
-              <ion-label>Offer Type</ion-label>
-            </ion-list-header>
-            <ion-item>
-              <ion-label>Flat Cut</ion-label>
-              <ion-radio value="flat"></ion-radio>
-            </ion-item>
-            <ion-item>
-              <ion-label>Percent Cut</ion-label>
-              <ion-radio value="percent"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
+          <ion-label>Offer Type</ion-label>
+          <ion-row>
+            <ion-button (click)="offerType = 'flat'" color="primary" [fill]="offerType == 'flat' ? 'solid' : 'outline'" >
+              Flat Cut
+            </ion-button>
+            <ion-button (click)="offerType='percent'" color="primary" [fill]="offerType == 'percent' ? 'solid' : 'outline'">
+              Percent Cut
+            </ion-button>
+          </ion-row>
+        </ion-item>
+        <ion-item>
+          <ion-label>Usage</ion-label>
+          <ion-col>
+            <ion-row>
+              <ion-button (click)="usage = 'single'" color="primary" [fill]="usage == 'single' ? 'solid' : 'outline'" >
+                Single Time
+              </ion-button>
+              <ion-button (click)="usage = 0" color="primary" [fill]="isNumber(usage) ? 'solid' : 'outline'">
+                Finite Time
+              </ion-button>
+              <ion-button (click)="usage='infinite'" color="primary" [fill]="usage == 'infinite' ? 'solid' : 'outline'">
+                Infinite Time
+              </ion-button>
+            </ion-row>
+            <ion-input type="number" (ionChange)="changeUsage(event.value)" placeholder="Usage Count" *ngIf="isNumber(usage)" #event></ion-input>
+          </ion-col>
         </ion-item>
         <ion-item>
           <ion-label>Offer Cost</ion-label>
@@ -41,11 +54,11 @@
           <ion-label>Minimum Products</ion-label>
           <ion-input type="number" placeholder="Minimum Products" required formControlName="minimumProducts"></ion-input>
         </ion-item>
-        <ion-item *ngIf="offerType.value == 'flat'">
+        <ion-item *ngIf="offerType == 'flat'">
           <ion-label>Maximum Discount</ion-label>
           <ion-input type="number" [value]="offerCost.value" placeholder="Maximum Discount" required formControlName="maximumDiscount"></ion-input>
         </ion-item>
-        <ion-item *ngIf="offerType.value == 'percent'">
+        <ion-item *ngIf="offerType== 'percent'">
           <ion-label>Maximum Discount</ion-label>
           <ion-input type="number" [value]="20*offerCost.value" placeholder="Maximum Discount" required formControlName="maximumDiscount"></ion-input>
         </ion-item>

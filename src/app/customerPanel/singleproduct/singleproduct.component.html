@@ -97,12 +97,14 @@
                                 </ion-radio-group>
                             </ion-row>
                             <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='imgSel'">
-                                <ion-card class="selectionChoiceCard" *ngFor="let single of item.values"
-                                    id="selImg{{single.imageTitle}}{{item.sectionTitle}}">
-                                    <img loading="lazy" [src]="single.image" />
-                                    <ion-label class="uk-align-center uk-text-center">{{single.imageTitle}}</ion-label>
-                                    <ion-radio [value]="single"></ion-radio>
-                                </ion-card>
+                                <ion-radio-group [name]="item.sectionTitle" [value]="extrasData[item.sectionTitle]"
+                                 required (ionChange)="updateData($event,item.isRelative,item.sectionTitle)">
+                                    <ion-card class="selectionChoiceCard" *ngFor="let single of item.values">
+                                        <img loading="lazy" [src]="single.image" />
+                                        <ion-label class="uk-align-center uk-text-center" *ngIf="single.imageTitle">{{single.imageTitle}}</ion-label>
+                                        <ion-radio [value]="single" mode="md" ></ion-radio>
+                                    </ion-card>
+                                </ion-radio-group>
                             </ion-row>
                             <ion-row *ngIf="item.sectionTitle == selectedExtraTitle && item.type=='faceCount'">
                                 <ion-radio-group [name]="item.sectionTitle" [value]="extrasData[item.sectionTitle]"

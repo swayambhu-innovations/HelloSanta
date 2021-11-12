@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -24,124 +24,129 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
-*{
-    font-family: 'Poppins', sans-serif;
+* {
+  font-family: "Poppins", sans-serif;
 }
 
-html, body {
-    overflow-x: hidden;
-    width: 100%;
-    height: 100%; /* set height to 100% of viewport*/
-    -webkit-tap-highlight-color: transparent;
-    --ion-font-family: 'Poppins', sans-serif;
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%; /* set height to 100% of viewport*/
+  -webkit-tap-highlight-color: transparent;
+  --ion-font-family: "Poppins", sans-serif;
 }
-a{text-decoration: none;}
-a:hover{
-    text-decoration: none;
-    color: var(--ion-color-primary);
+a {
+  text-decoration: none;
 }
-.star::before{
-    content: url('/assets/star.svg') !important;
+a:hover {
+  text-decoration: none;
+  color: var(--ion-color-primary);
 }
-.simpleCenter{
-    margin:0 auto;
+.star::before {
+  content: url("/assets/star.svg") !important;
 }
-.center{
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+.simpleCenter {
+  margin: 0 auto;
 }
-.grecaptcha-badge{
-    right:-260px !important;
-    bottom:-70px !important;
+.center {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
-button{
-    background:transparent;
-    margin: 0%;
-    padding:0%;
+.grecaptcha-badge {
+  right: -260px !important;
+  bottom: -70px !important;
+}
+button {
+  background: transparent;
+  margin: 0%;
+  padding: 0%;
 }
 
-input{
-    border:none;
+input {
+  border: none;
 }
-input:focus{
-    border: none;
+input:focus {
+  border: none;
 }
-.uk-offcanvas-overlay::before{
-    background-color: rgba(0, 0, 0, 0.52) !important;
+.uk-offcanvas-overlay::before {
+  background-color: rgba(0, 0, 0, 0.52) !important;
 }
-.searchResult .popover-content{
-    width:770px;
+.searchResult .popover-content {
+  width: 770px;
 }
-.ap-ship-popover .popover-content{
-    width:300px;
+.ap-ship-popover .popover-content {
+  width: 300px;
 }
-.order-info .popover-content{
-    width:fit-content;
+.order-info .popover-content {
+  width: fit-content;
 }
-.cartlist .popover-content{
-    width:fit-content;
+.cartlist .popover-content {
+  width: fit-content;
 }
-.commentBox .popover-content{
-    width:400px;
-    padding: 20px;
+.commentBox .popover-content {
+  width: 400px;
+  padding: 20px;
 }
-.addSocialMediaLinks .popover-content{
-    width:400px;
+.addSocialMediaLinks .popover-content {
+  width: 400px;
 }
-.addProductModal .modal-wrapper{
-    --width:60vw;
+.addProductModal .modal-wrapper {
+  --width: 60vw;
 }
-.addEditProductModal .modal-wrapper{
-    --width:60vw;
+.addEditProductModal .modal-wrapper {
+  --width: 60vw;
 }
 
 #product-image-preview > .ngxImageZoomContainer {
-    width: 500px !important;
-    height: 500px !important;
+  width: 500px !important;
+  height: 500px !important;
 }
-.ngxImageZoomLensEnabled{
-    border: 2px dashed #9e91ff !important;
+.ngxImageZoomLensEnabled {
+  border: 2px dashed #9e91ff !important;
 }
-.monthview-datetable{
-    width:90vw;
-    border: 2px solid var(--ion-color-primary);
+.monthview-datetable {
+  width: 90vw;
+  border: 2px solid var(--ion-color-primary);
 }
 monthview > div > ion-slides {
-    box-shadow: 5px 10px 20px rgba(218, 161, 255, 0.5);
+  box-shadow: 5px 10px 20px rgba(218, 161, 255, 0.5);
 }
-ion-list[class*="event-detail-container"]{
-    border: none !important;
+ion-list[class*="event-detail-container"] {
+  border: none !important;
 }
-td[class*="monthview-current"]{
-    background-color: #cac3ff !important;
-    border:2px dashed #9e91ff !important;
-    color:white;
+td[class*="monthview-current"] {
+  background-color: #cac3ff !important;
+  border: 2px dashed #9e91ff !important;
+  color: white;
 }
-td [class*="text-muted"]{
-    background-color: var(--ion-color-primary);
+td [class*="text-muted"] {
+  background-color: var(--ion-color-primary);
 }
-td[class*='monthview-primary-with-event']{
-    background-color: var(--ion-color-primary-tint) !important;
-}
-
-td[class*='monthview-selected']{
-    background-color: var(--ion-color-primary) !important;
+td[class*="monthview-primary-with-event"] {
+  background-color: var(--ion-color-primary-tint) !important;
 }
 
-body > jdiv > jdiv > jdiv  {
+td[class*="monthview-selected"] {
+  background-color: var(--ion-color-primary) !important;
+}
+
+@media screen and (max-width: 500px) {
+  .addProductModal .modal-wrapper {
+    --width: 100vw;
+  }
+  #product-image-preview {
+    display: none;
+  }
+  .searchResult .popover-content {
+    position: absolute;
+    left: 0px;
+    width: 100vw;
+  }
+}
+@media screen and (max-width: 400px) {
+  body > jdiv > jdiv > jdiv {
     margin-bottom: 70px !important;
-}
-@media screen and (max-width: 500px){
-    .addProductModal .modal-wrapper{
-        --width:100vw;
-    }
-    #product-image-preview  {
-        display:none;
-    }
-    .searchResult .popover-content{
-        position: absolute;
-        left: 0px;
-        width:100vw;
-    }
+  }
 }

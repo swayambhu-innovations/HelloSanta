@@ -79,23 +79,24 @@ export class ProfileComponent implements OnInit {
         )
         .subscribe((url) => {
           this.downloadURL = url;
-          // console.log('User Download', this.downloadURL);
-          this.dataProvider.showOverlay = false;
-          // console.log('UserPhoto', this.authService.getUserPhoto());
-          if (
-            this.authService.getUserPhoto().split('.')[1] != 'googleusercontent'
-          ) {
-            this.storage.storage
-              .refFromURL(this.authService.getUserPhoto())
-              .delete();
+          console.log('User Download', this.downloadURL);
+          console.log('UserPhoto', this.authService.getUserPhoto());
+          if (!this.authService.getUserPhoto().includes('./assets/')) {
+            console.log('UserPhoto', this.downloadURL);
+            if (
+              this.authService.getUserPhoto().split('.')[1] != 'googleusercontent'
+            ) {
+              this.storage.storage
+                .refFromURL(this.authService.getUserPhoto())
+                .delete();
+            }
           }
           this.afs
-            .collection('users')
-            .doc(this.authService.userId)
-            .update({ photoURL: this.downloadURL });
-          this.authService.presentToast(
-            'Your profile picture has been changed'
-          );
+              .collection('users')
+              .doc(this.authService.userId)
+              .update({ photoURL: this.downloadURL });
+            this.authService.presentToast('Your profile picture has been changed');
+            this.dataProvider.showOverlay = false;
         });
     } else {
       this.dataProvider.showOverlay = false;

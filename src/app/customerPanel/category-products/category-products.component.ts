@@ -37,6 +37,7 @@ export class CategoryProductsComponent {
       this.category = params['category'];
       this.reloaded = false;
       this.subcategory = params['subcategory'];
+      this.allDigitalProds = [];
       this.ngOnInit();
       this.reloaded = true;
     });

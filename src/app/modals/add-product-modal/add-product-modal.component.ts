@@ -322,6 +322,7 @@ export class AddProductModalComponent implements OnInit {
                 title: imageTitle,
                 sectionTitle: sectionTitle,
               });
+              console.log(options);
               this.authService.presentToast(
                 'All customisations images are uploaded successfully',
                 4000
@@ -343,6 +344,7 @@ export class AddProductModalComponent implements OnInit {
               });
             }
           }
+          console.log(data,relativeData);
         } else if (type == 'textSel') {
           let optionsCount = (
             document.getElementById(
@@ -572,6 +574,7 @@ export class AddProductModalComponent implements OnInit {
             sectionTitle: this.addons[i].values[j].sectionTitle,
             title: this.addons[i].values[j].title,
             type: this.addons[i].type,
+            image: this.addons[i].values[j].image ? this.addons[i].values[j].image : '',
             price: (
               document.getElementById(
                 'addonPrice' + i.toString() + j.toString()

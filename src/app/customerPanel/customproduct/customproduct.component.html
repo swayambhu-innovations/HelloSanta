@@ -10,14 +10,9 @@
         <h2>Your Product Idea Detail</h2>
         <ion-item>
           <ion-label position="floating">
-            Select Category
+            Provide Product Name
           </ion-label>
-          <ion-select formControlName="productCategory" (ionChange)="setCategoryValue($event)" value="painting" okText="Okay" cancelText="Dismiss">
-            <ion-select-option value="painting">Painting</ion-select-option>
-            <ion-select-option value="digital">Digital Art</ion-select-option>
-            <ion-select-option value="black">Black</ion-select-option>
-            <ion-select-option value="red">Red</ion-select-option>
-          </ion-select>
+          <ion-input type="text" placeholder="Your Product Name" value="" formControlName="productCategory"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Your Product description</ion-label>

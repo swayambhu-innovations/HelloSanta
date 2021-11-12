@@ -30,6 +30,17 @@ export class AlertsModalService {
     const { role } = await alert.onDidDismiss();
     return role;
   }
+  async presentCustomAlert(header,subHeader,message,buttons) {
+    const alert = await this.alertController.create({
+      header: header,
+      subHeader: subHeader,
+      message: message,
+      buttons: buttons,
+    });
+    await alert.present();
+    const { role } = await alert.onDidDismiss();
+    return role;
+  }
   async showOrderInfo(data) {
     const popover = await this.popoverController.create({
       component: ShowOrderInfoComponent,

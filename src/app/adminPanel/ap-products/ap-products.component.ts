@@ -7,6 +7,8 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { AddCategoriesComponent } from 'src/app/modals/add-categories/add-categories.component';
 import { SpecificProductsComponent } from 'src/app/popovers/specific-products/specific-products.component';
 import { EditProductComponent } from 'src/app/modals/edit-product/edit-product.component';
+import { AlertsModalService } from 'src/app/services/alerts-modal.service';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-ap-products',
   templateUrl: './ap-products.component.html',
@@ -17,7 +19,9 @@ export class APProductsComponent implements OnInit {
     public modalController: ModalController,
     public inventoryService: InventoryService,
     public afs: AngularFirestore,
-    public popoverController: PopoverController
+    public popoverController: PopoverController,
+    public alertsModals: AlertsModalService,
+    public authService: AuthService,
   ) {}
   async presentModal() {
     const modal = await this.modalController.create({
@@ -59,10 +63,28 @@ export class APProductsComponent implements OnInit {
     const { role } = await popover.onDidDismiss();
     // console.log('onDidDismiss resolved with role', role);
   }
-  deleteItem(id){
+  async deleteItem(id,name){
     // console.log("deleting");
-    const productRef: AngularFirestoreDocument<any> = this.afs.doc(`products/${id}`);
-    productRef.delete();
+    const role = await this.alertsModals.presentCustomAlert(
+      "Alert","Deleting product",
+      'Are you sure you wan to delete '+name + ' product from your databases.',
+      [{
+        text:'Yes, Delete Product',
+        role:'yes'
+      },{
+        text:'Cancel',
+        role:'cancel'
+      }]
+      )
+      console.log("Role",role);
+    if (role=="yes"){
+      this.afs.collection("products").doc(id).delete();
+      this.authService.presentToast("Product deleted successfully");
+    }else{
+      this.authService.presentToast("Product not deleted");
+    }
+    // const productRef: AngularFirestoreDocument<any> = this.afs.doc(`products/${id}`);
+    // productRef.delete();
     // console.log("deleted");
   }
   editItem(){

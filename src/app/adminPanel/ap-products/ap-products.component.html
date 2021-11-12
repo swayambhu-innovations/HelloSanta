@@ -41,7 +41,7 @@
         <ion-chip color="primary">
           <ion-label><strong>Price:&nbsp;</strong>&#8377;&nbsp;{{item.productPrice}}</ion-label>
         </ion-chip>
-        <button slot="end" (click)="deleteItem(item.productId)">
+        <button slot="end" (click)="deleteItem(item.productId,item.productName)">
           <ion-icon name="trash"></ion-icon>
         </button>
         <button slot="end" disabled (click)="presentEditProductModal(item.productId)">

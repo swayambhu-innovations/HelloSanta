@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { InventoryService } from 'src/app/services/inventory.service';
 
@@ -7,16 +7,14 @@ import { InventoryService } from 'src/app/services/inventory.service';
   templateUrl: './product-full-card.component.html',
   styleUrls: ['./product-full-card.component.css']
 })
-export class ProductFullCardComponent implements OnInit {
-  @Input() img:any =  [{image:"https://source.unsplash.com/650x940"},{image:"https://source.unsplash.com/650x940"}];
+export class ProductFullCardComponent implements OnChanges {
+  @Input() img:any;
   @Input() productTitle:string = "ArtWork Product"
   @Input() productDescription:string = "Lorem ipsum dolor sit amet, consectetur\n" +
     "                  adipiscing elit. Curabitur cursus tincidunt\n" +
-    "                  commodo. Nunc justo nisi, vestibulum."
-  @Input() price:string = "2300"
-  @Input() category:string;
-  @Input() subcategory:string;
-  @Input() productId:string
+    "                  commodo. Nunc justo nisi, vestibulum.";
+  @Input() price:string = "2300";
+  @Input() productId:string;
   wishlist:any=this.authService.getCurrentWishlist();
   constructor(public inventoryService: InventoryService, public authService:AuthService) { }
   textlength=70;
@@ -52,7 +50,9 @@ export class ProductFullCardComponent implements OnInit {
     }
     this.card.el.classList.add('uk-animation-scale-down');
   }
-  ngOnInit(): void {
+  ngOnChanges(): void {
+    console.log('Changes occuring')
+    console.log(this.img,this.productTitle,this.productDescription,this.price,this.productId)
     if ( this.productDescription.length>=this.textlength){
       this.productDescription =  this.productDescription.substring(0,this.textlength) +"...";
     }

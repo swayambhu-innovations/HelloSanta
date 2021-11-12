@@ -2,12 +2,12 @@
   <app-header></app-header>
   <div class="home">
   <div *ngIf="reloaded">
-    <img loading="lazy" src="./assets/Artboarddigital.png" *ngIf="category=='Digital' && window >= 1024" class="headerImage">
-  <img loading="lazy" src="./assets/Artboardhand.png" *ngIf="category=='Handmade' && window >= 1024" class="headerImage">
-  <img loading="lazy" src="./assets/digitalMobile.png" *ngIf="category=='Digital' && window < 1024" class="headerImage">
-  <img loading="lazy" src="./assets/handmadeMobile.png" *ngIf="category=='Handmade' && window < 1024" class="headerImage">
-  <img loading="lazy" src="./assets/Artboardshop.png" *ngIf="category!='Handmade' && category!='Digital' && window >= 1024" class="headerImage">
-  <img loading="lazy" src="./assets/shopMobile.png" *ngIf="category!='Handmade' && category!='Digital' && window < 1024" class="headerImage">
+    <img loading="lazy" src="./assets/Artboarddigital.png" *ngIf="category=='Digital Artworks' && window >= 1024" class="headerImage">
+    <img loading="lazy" src="./assets/Artboardhand.png" *ngIf="category=='Handmade Artworks' && window >= 1024" class="headerImage">
+    <img loading="lazy" src="./assets/digitalMobile.png" *ngIf="category=='Digital Artworks' && window < 1024" class="headerImage">
+    <img loading="lazy" src="./assets/handmadeMobile.png" *ngIf="category=='Handmade' && window < 1024" class="headerImage">
+    <img loading="lazy" src="./assets/Artboardshop.png" *ngIf="category!='Handmade Artworks' && category!='Digital Artworks' && window >= 1024" class="headerImage">
+    <img loading="lazy" src="./assets/shopMobile.png" *ngIf="category!='Handmade Artworks' && category!='Digital Artworks' && window < 1024" class="headerImage">
   </div>
   <hr class="uk-divider-icon">
   <ion-toolbar *ngIf="screenwidth<1024">
