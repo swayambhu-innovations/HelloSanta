@@ -158,6 +158,7 @@ export class AddProductModalComponent implements OnInit {
     let prodList = [];
     let res = await this.presentContinueAlert();
     if (res == 'continue') {
+      // console.log('adding beasic details');
       this.basicDetail.disable();
       this.isLoading = true;
       this.showProgress = true;
@@ -635,7 +636,7 @@ export class AddProductModalComponent implements OnInit {
       this.basicProductDetails['extraData'] = this.customisations;
       // console.log('basicProductDetails', this.basicProductDetails);
       this.inventory.addProduct(this.basicProductDetails);
-      this.modalController.dismiss();
+      // this.modalController.dismiss();
       // console.log(this.basicProductDetails);
       this.authService.presentToast('Product added successfully', 5000);
     }

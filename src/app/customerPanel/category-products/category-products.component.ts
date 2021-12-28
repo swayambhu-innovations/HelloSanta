@@ -182,13 +182,17 @@ export class CategoryProductsComponent {
     });
     return await modal.present();
   }
-  resetFilter() {
+  resetFilter(notify:boolean=true) {
+    this.allDigitalProds =[];
+    this.filters = {};
     this.reset();
     this.reset();
+    if (notify){this.authService.presentToast('Filters reset');}
   }
   reset() {
     // this.allDigitalProds = JSON.parse(JSON.stringify(this.copyArray));
     this.allDigitalProds =[];
+    this.filters = {};
     this.copyArray.forEach((item) => {
       let found = false;
       this.allDigitalProds.forEach((item2) => {
@@ -200,12 +204,6 @@ export class CategoryProductsComponent {
         this.allDigitalProds.push(item);
       }
     });
-    // this.allDigitalProds = [];
-    // this.ngOnInit();
-    console.log('LEN', this.allDigitalProds.length);
-    this.filters = {};
-    console.log(this.copyArray);
-    console.log(this.allDigitalProds);
     const el = document.getElementsByTagName('ion-checkbox');
     for (let l = 0; l < el.length; l++) {
       (el[l] as HTMLIonCheckboxElement).checked = false;
@@ -214,6 +212,10 @@ export class CategoryProductsComponent {
   }
   addFilter(val, type) {
     // console.log(val);
+    if (this.allDigitalProds.length == 0) {
+      this.resetFilter(false);
+      return
+    }
     if (val.detail.checked) {
       val.detail['type'] = type;
       this.filters[val.detail.value] = val.detail;
@@ -269,6 +271,9 @@ export class CategoryProductsComponent {
           }
         });
       }
+    }
+    if (Object.keys(this.filters).length === 0){
+      this.resetFilter();
     }
   }
   subCategoryChange(value, array) {

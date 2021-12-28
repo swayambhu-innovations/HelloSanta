@@ -51,8 +51,8 @@ export class ProductFullCardComponent implements OnChanges {
     this.card.el.classList.add('uk-animation-scale-down');
   }
   ngOnChanges(): void {
-    console.log('Changes occuring')
-    console.log(this.img,this.productTitle,this.productDescription,this.price,this.productId)
+    // console.log('Changes occuring')
+    // console.log(this.img,this.productTitle,this.productDescription,this.price,this.productId)
     if ( this.productDescription.length>=this.textlength){
       this.productDescription =  this.productDescription.substring(0,this.textlength) +"...";
     }

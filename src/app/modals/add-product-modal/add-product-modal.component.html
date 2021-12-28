@@ -17,7 +17,7 @@
         <ion-card *ngFor="let prodImg of genList(mainImgCount.value)">
           <img loading="lazy" id="productImage{{prodImg}}">
           <br>
-          <ion-input type="file" required="true" accept="image/png, image/jpeg"
+          <ion-input type="file" [required]="true" accept="image/png, image/jpeg"
             (change)="loadProdImage($event,'productImage'+prodImg.toString())"></ion-input>
         </ion-card>
         <ion-item>

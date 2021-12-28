@@ -170,9 +170,12 @@ export class ShopComponent implements OnInit {
     });
     return await modal.present();
   }
-  resetFilter() {
+  resetFilter(notify:boolean=true) {
+    this.allDigitalProds =[];
+    this.filters = {};
     this.reset();
     this.reset();
+    if (notify){this.authService.presentToast('Filters reset');}
   }
   reset() {
     // this.allDigitalProds = JSON.parse(JSON.stringify(this.copyArray));
@@ -198,10 +201,13 @@ export class ShopComponent implements OnInit {
     for (let l = 0; l < el.length; l++) {
       (el[l] as HTMLIonCheckboxElement).checked = false;
     }
-    this.authService.presentToast('Filters reset');
   }
   addFilter(val, type) {
     // console.log(val);
+    if (this.allDigitalProds.length == 0) {
+      this.resetFilter(false);
+      return
+    }
     if (val.detail.checked) {
       val.detail['type'] = type;
       this.filters[val.detail.value] = val.detail;
@@ -257,6 +263,9 @@ export class ShopComponent implements OnInit {
           }
         });
       }
+    }
+    if (Object.keys(this.filters).length === 0){
+      this.resetFilter();
     }
   }
   subCategoryChange(value, array) {

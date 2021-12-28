@@ -48,7 +48,6 @@ export class EditProductComponent implements OnInit {
   productName: FormControl = new FormControl('', [
     Validators.required,
     Validators.minLength(5),
-    Validators.pattern('[a-zA-Z ]*'),
   ]);
   productDescription: FormControl = new FormControl('', [
     Validators.required,
@@ -66,10 +65,6 @@ export class EditProductComponent implements OnInit {
     Validators.maxLength(160),
   ]);
   productPrice: FormControl = new FormControl('', [Validators.required]);
-  vendorId: FormControl = new FormControl('', [
-    Validators.required,
-    Validators.pattern('[a-zA-Z0-9]*'),
-  ]);
   totalStock: FormControl = new FormControl('', [
     Validators.required,
     Validators.min(5),

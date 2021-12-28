@@ -33,7 +33,7 @@
             matBadgeOverlap="false">
             <ion-icon name="wallet"></ion-icon>
           </span>
-          <ion-icon *ngIf="coins <= 0 || coins==undefined" name="wallet"></ion-icon>
+          <ion-icon *ngIf="coins <= 0 || coins===undefined" name="wallet"></ion-icon>
         </button>
       </a>
       <ion-button routerLink="../login/" *ngIf="!authService.isJustLoggedIn">
@@ -60,9 +60,9 @@
       <li *ngIf="this.authService.isJustLoggedIn"><a routerLink="/wishlist">Wishlist</a></li>
       <li><a routerLink="/help/">Contact</a></li>
       <li><a routerLink="/bloghome/">Blog</a></li>
-      <li *ngIf="this.authService.getCurrenAccessLevel == 'Admin'"><a routerLink="/AdminPanel/Dashboard">Admin Panel</a>
+      <li *ngIf="this.authService.getCurrenAccessLevel === 'Admin'"><a routerLink="/AdminPanel/Dashboard">Admin Panel</a>
       </li>
-      <li *ngIf="this.authService.getCurrenAccessLevel == 'Vendor'"><a routerLink="/VendorPanel/Dashboard">Vendor
+      <li *ngIf="this.authService.getCurrenAccessLevel === 'Vendor'"><a routerLink="/VendorPanel/Dashboard">Vendor
           Panel</a></li>
     </ul>
   </div>
@@ -74,10 +74,10 @@
     </button>
     <ul>
       <li  class="uk-offcanvas-close sidelink"*ngIf="!this.authService.isJustLoggedIn"><a routerLink="/login">Login</a></li>
-      <li  class="uk-offcanvas-close sidelink"*ngIf="this.authService.getCurrenAccessLevel == 'Vendor'"><a routerLink="/VendorPanel/Dashboard">Vendor
+      <li  class="uk-offcanvas-close sidelink"*ngIf="this.authService.getCurrenAccessLevel === 'Vendor'"><a routerLink="/VendorPanel/Dashboard">Vendor
           Panel</a>
       </li>
-      <li  class="uk-offcanvas-close sidelink"*ngIf="this.authService.getCurrenAccessLevel == 'Admin'"><a routerLink="/AdminPanel/Dashboard">Admin Panel</a>
+      <li  class="uk-offcanvas-close sidelink"*ngIf="this.authService.getCurrenAccessLevel === 'Admin'"><a routerLink="/AdminPanel/Dashboard">Admin Panel</a>
       </li>
       <li  class="uk-offcanvas-close sidelink"*ngIf="this.authService.isJustLoggedIn"><a routerLink="/account">Account</a></li>
       <li  class="uk-offcanvas-close sidelink"*ngIf="this.authService.isJustLoggedIn"><a routerLink="/orders">Your Orders</a></li>
