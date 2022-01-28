@@ -28,7 +28,7 @@
     "@angular/service-worker": "^12.2.6",
     "@ionic/angular": "^5.8.4",
     "@lottiefiles/lottie-player": "^1.4.1",
-    "firebase": "^8.10.0",
+    "firebase": "^9.6.5",
     "fuse.js": "^6.4.6",
     "ionic2-calendar": "^0.6.9",
     "jspdf": "^2.4.0",
